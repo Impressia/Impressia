@@ -7,22 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F8341F90295C636C009C8EE6 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8341F8F295C636C009C8EE6 /* UIImage.swift */; };
+		F8341F92295C63BB009C8EE6 /* ImageStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8341F91295C63BB009C8EE6 /* ImageStatus.swift */; };
 		F88C246C295C37B80006098B /* VernissageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C246B295C37B80006098B /* VernissageApp.swift */; };
-		F88C246E295C37B80006098B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C246D295C37B80006098B /* ContentView.swift */; };
+		F88C246E295C37B80006098B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C246D295C37B80006098B /* MainView.swift */; };
 		F88C2470295C37BB0006098B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F88C246F295C37BB0006098B /* Assets.xcassets */; };
 		F88C2473295C37BB0006098B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F88C2472295C37BB0006098B /* Preview Assets.xcassets */; };
 		F88C2475295C37BB0006098B /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C2474295C37BB0006098B /* Persistence.swift */; };
 		F88C2478295C37BB0006098B /* Vernissage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F88C2476295C37BB0006098B /* Vernissage.xcdatamodeld */; };
+		F88C2480295C38400006098B /* MastodonSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F88C247F295C38400006098B /* MastodonSwift */; };
+		F88C2482295C3A4F0006098B /* ImageDetailsModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C2481295C3A4F0006098B /* ImageDetailsModalView.swift */; };
+		F88C2484295C3A870006098B /* DismissButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C2483295C3A870006098B /* DismissButtonView.swift */; };
+		F88C2486295C48030006098B /* HTMLFotmattedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C2485295C48030006098B /* HTMLFotmattedText.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F8341F8F295C636C009C8EE6 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		F8341F91295C63BB009C8EE6 /* ImageStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStatus.swift; sourceTree = "<group>"; };
 		F88C2468295C37B80006098B /* Vernissage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vernissage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F88C246B295C37B80006098B /* VernissageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VernissageApp.swift; sourceTree = "<group>"; };
-		F88C246D295C37B80006098B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F88C246D295C37B80006098B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		F88C246F295C37BB0006098B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F88C2472295C37BB0006098B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F88C2474295C37BB0006098B /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		F88C2477295C37BB0006098B /* Vernissage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vernissage.xcdatamodel; sourceTree = "<group>"; };
+		F88C2481295C3A4F0006098B /* ImageDetailsModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailsModalView.swift; sourceTree = "<group>"; };
+		F88C2483295C3A870006098B /* DismissButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissButtonView.swift; sourceTree = "<group>"; };
+		F88C2485295C48030006098B /* HTMLFotmattedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLFotmattedText.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,12 +41,55 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F88C2480295C38400006098B /* MastodonSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F8341F93295C63E2009C8EE6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F88C2483295C3A870006098B /* DismissButtonView.swift */,
+				F88C2481295C3A4F0006098B /* ImageDetailsModalView.swift */,
+				F88C246D295C37B80006098B /* MainView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F8341F94295C63FE009C8EE6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F8341F8F295C636C009C8EE6 /* UIImage.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F8341F95295C640C009C8EE6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F8341F91295C63BB009C8EE6 /* ImageStatus.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F8341F96295C6427009C8EE6 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				F88C2474295C37BB0006098B /* Persistence.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		F8341F97295C6434009C8EE6 /* Formatters */ = {
+			isa = PBXGroup;
+			children = (
+				F88C2485295C48030006098B /* HTMLFotmattedText.swift */,
+			);
+			path = Formatters;
+			sourceTree = "<group>";
+		};
 		F88C245F295C37B80006098B = {
 			isa = PBXGroup;
 			children = (
@@ -55,10 +109,13 @@
 		F88C246A295C37B80006098B /* Vernissage */ = {
 			isa = PBXGroup;
 			children = (
+				F8341F97295C6434009C8EE6 /* Formatters */,
+				F8341F96295C6427009C8EE6 /* CoreData */,
+				F8341F95295C640C009C8EE6 /* Models */,
+				F8341F94295C63FE009C8EE6 /* Extensions */,
+				F8341F93295C63E2009C8EE6 /* Views */,
 				F88C246B295C37B80006098B /* VernissageApp.swift */,
-				F88C246D295C37B80006098B /* ContentView.swift */,
 				F88C246F295C37BB0006098B /* Assets.xcassets */,
-				F88C2474295C37BB0006098B /* Persistence.swift */,
 				F88C2476295C37BB0006098B /* Vernissage.xcdatamodeld */,
 				F88C2471295C37BB0006098B /* Preview Content */,
 			);
@@ -89,6 +146,9 @@
 			dependencies = (
 			);
 			name = Vernissage;
+			packageProductDependencies = (
+				F88C247F295C38400006098B /* MastodonSwift */,
+			);
 			productName = Vernissage;
 			productReference = F88C2468295C37B80006098B /* Vernissage.app */;
 			productType = "com.apple.product-type.application";
@@ -117,6 +177,9 @@
 				Base,
 			);
 			mainGroup = F88C245F295C37B80006098B;
+			packageReferences = (
+				F88C247E295C38400006098B /* XCRemoteSwiftPackageReference "Mastodon" */,
+			);
 			productRefGroup = F88C2469295C37B80006098B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -144,8 +207,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F88C2475295C37BB0006098B /* Persistence.swift in Sources */,
-				F88C246E295C37B80006098B /* ContentView.swift in Sources */,
+				F8341F92295C63BB009C8EE6 /* ImageStatus.swift in Sources */,
+				F8341F90295C636C009C8EE6 /* UIImage.swift in Sources */,
+				F88C2484295C3A870006098B /* DismissButtonView.swift in Sources */,
+				F88C246E295C37B80006098B /* MainView.swift in Sources */,
 				F88C2478295C37BB0006098B /* Vernissage.xcdatamodeld in Sources */,
+				F88C2482295C3A4F0006098B /* ImageDetailsModalView.swift in Sources */,
+				F88C2486295C48030006098B /* HTMLFotmattedText.swift in Sources */,
 				F88C246C295C37B80006098B /* VernissageApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +351,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -312,6 +381,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -347,6 +417,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F88C247E295C38400006098B /* XCRemoteSwiftPackageReference "Mastodon" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swiftodon/Mastodon.swift";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F88C247F295C38400006098B /* MastodonSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F88C247E295C38400006098B /* XCRemoteSwiftPackageReference "Mastodon" */;
+			productName = MastodonSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		F88C2476295C37BB0006098B /* Vernissage.xcdatamodeld */ = {
