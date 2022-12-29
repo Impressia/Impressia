@@ -18,27 +18,117 @@ struct MainView: View {
     private var items: FetchedResults<Item>
 
     @State private var statuses: [Status] = []
+    @State private var account: Account?
     @State private var images: [ImageStatus] = []
-    @State private var showDetails: Bool = false
     @State private var current: ImageStatus? = nil
+    @State private var navBarTitle: String = "Home feed"
+    
+    private static let initialColumns = 1
+    @State private var gridColumns = Array(repeating: GridItem(.flexible()), count: initialColumns)
     
     var body: some View {
-        ScrollView {
-            ForEach(images) { item in
-                Image(uiImage: item.image)
-                    .resizable().aspectRatio(contentMode: .fit)
-                    .onTapGesture {
-                        current = item
-                        showDetails.toggle()
+        ZStack {
+            ScrollView {
+                LazyVGrid(columns: gridColumns) {
+                    ForEach(images) { item in
+                        NavigationLink(destination: DetailsView(current: item)) {
+                            Image(uiImage: item.image)
+                                .resizable().aspectRatio(contentMode: .fit)
+                        }
                     }
-                    .fullScreenCover(item: $current) { item in
-                        ImageDetailsModalView(current: item)
+                }
+            }
+            
+            VStack(alignment:.trailing) {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "plus")
+                            .font(.body)
+                            .padding(16)
+                            .foregroundColor(.white)
+                            .background(.ultraThinMaterial, in: Circle())   
                     }
+                }
+            }.padding()
+
+        }.refreshable {
+            do {
+                try await loadData()
+            } catch {
+                print("Error", error)
             }
         }
-        .foregroundColor(Color.black)
-        .background(Color.black)
-        .edgesIgnoringSafeArea(.all)
+        .navigationBarTitle(navBarTitle)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Menu {
+                    Button {
+                        navBarTitle = "Home feed"
+                    } label: {
+                        HStack {
+                            Text("Home feed")
+                            Image(systemName: "house")
+                        }
+                    }
+                    
+                    Button {
+                        navBarTitle = "Local feed"
+                    } label: {
+                        HStack {
+                            Text("Local feed")
+                            Image(systemName: "text.redaction")
+                        }
+                    }
+
+                    Button {
+                        navBarTitle = "Global feed"
+                    } label: {
+                        HStack {
+                            Text("Global feed")
+                            Image(systemName: "globe.europe.africa")
+                        }
+                    }
+                    
+                    Button {
+                        navBarTitle = "Notifications"
+                    } label: {
+                        HStack {
+                            Text("Notifications")
+                            Image(systemName: "bell.badge")
+                        }
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                }
+            }
+            
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    // Open settings view.
+                } label: {
+                    if let avatarUrl = self.account?.avatar {
+                        AsyncImage(url: avatarUrl) { image in
+                            image
+                                .resizable()
+                                .clipShape(Circle())
+                                .shadow(radius: 10)
+                                .aspectRatio(contentMode: .fit)
+                        } placeholder: {
+                            Image(systemName: "person.circle")
+                        }
+                        .frame(height: 25)
+                        .frame(width: 25)
+                    } else {
+                        Image(systemName: "person.circle")
+                    }
+                }
+            }
+        }
         .task {
             do {
                 try await loadData()
@@ -55,7 +145,8 @@ struct MainView: View {
             .getAuthenticated(token: accessToken)
         
         self.statuses = try await client.getHomeTimeline()
-         
+        self.account = try await client.verifyCredentials()
+        
         var imagesCache: [ImageStatus] = []
         for item in self.statuses {
             let imageStatus = try await self.fetchImage(status: item, accessToken: accessToken)

@@ -49,7 +49,7 @@ struct HTMLFormattedText: UIViewRepresentable {
 
         let linkAttributes = [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16),
-            NSAttributedString.Key.foregroundColor: UIColor(Color("linkColor"))
+            NSAttributedString.Key.foregroundColor: UIColor(Color("AccentColor"))
         ]
       
         if let attributedString = try? NSMutableAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) {
