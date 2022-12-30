@@ -9,12 +9,13 @@ import SwiftUI
 @main
 struct VernissageApp: App {
     let persistenceController = PersistenceController.shared
-
+    
     var body: some Scene {
         WindowGroup {
             NavigationStack {
                 MainView()
                     .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                    .environmentObject(ApplicationState.shared)
             }
             .navigationViewStyle(.stack)
         }

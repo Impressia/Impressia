@@ -86,6 +86,7 @@ struct DetailsView: View {
                 .padding(8)
             }
         }
+        .navigationBarTitle("Details")
     }
 }
 

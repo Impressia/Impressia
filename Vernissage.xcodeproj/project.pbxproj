@@ -20,6 +20,15 @@
 		F88C2480295C38400006098B /* MastodonSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F88C247F295C38400006098B /* MastodonSwift */; };
 		F88C2482295C3A4F0006098B /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C2481295C3A4F0006098B /* DetailsView.swift */; };
 		F88C2486295C48030006098B /* HTMLFotmattedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C2485295C48030006098B /* HTMLFotmattedText.swift */; };
+		F88FAD21295F3944009B20C9 /* HomeFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD20295F3944009B20C9 /* HomeFeedView.swift */; };
+		F88FAD23295F3FC4009B20C9 /* LocalFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD22295F3FC4009B20C9 /* LocalFeedView.swift */; };
+		F88FAD25295F3FF7009B20C9 /* FederatedFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD24295F3FF7009B20C9 /* FederatedFeedView.swift */; };
+		F88FAD27295F400E009B20C9 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD26295F400E009B20C9 /* NotificationsView.swift */; };
+		F88FAD2A295F43B8009B20C9 /* AccountData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD28295F43B8009B20C9 /* AccountData+CoreDataClass.swift */; };
+		F88FAD2B295F43B8009B20C9 /* AccountData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD29295F43B8009B20C9 /* AccountData+CoreDataProperties.swift */; };
+		F88FAD2D295F4AD7009B20C9 /* ApplicationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD2C295F4AD7009B20C9 /* ApplicationState.swift */; };
+		F88FAD2F295F4D3C009B20C9 /* AccountData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD2E295F4D3C009B20C9 /* AccountData+CoreDataProperties.swift */; };
+		F88FAD32295F5029009B20C9 /* RemoteFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD31295F5029009B20C9 /* RemoteFileService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +45,15 @@
 		F88C2477295C37BB0006098B /* Vernissage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vernissage.xcdatamodel; sourceTree = "<group>"; };
 		F88C2481295C3A4F0006098B /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		F88C2485295C48030006098B /* HTMLFotmattedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLFotmattedText.swift; sourceTree = "<group>"; };
+		F88FAD20295F3944009B20C9 /* HomeFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedView.swift; sourceTree = "<group>"; };
+		F88FAD22295F3FC4009B20C9 /* LocalFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFeedView.swift; sourceTree = "<group>"; };
+		F88FAD24295F3FF7009B20C9 /* FederatedFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FederatedFeedView.swift; sourceTree = "<group>"; };
+		F88FAD26295F400E009B20C9 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
+		F88FAD28295F43B8009B20C9 /* AccountData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F88FAD29295F43B8009B20C9 /* AccountData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F88FAD2C295F4AD7009B20C9 /* ApplicationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationState.swift; sourceTree = "<group>"; };
+		F88FAD2E295F4D3C009B20C9 /* AccountData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AccountData+CoreDataProperties.swift"; path = "Vernissage/CoreData/AccountData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F88FAD31295F5029009B20C9 /* RemoteFileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFileService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +73,10 @@
 			children = (
 				F88C2481295C3A4F0006098B /* DetailsView.swift */,
 				F88C246D295C37B80006098B /* MainView.swift */,
+				F88FAD20295F3944009B20C9 /* HomeFeedView.swift */,
+				F88FAD22295F3FC4009B20C9 /* LocalFeedView.swift */,
+				F88FAD24295F3FF7009B20C9 /* FederatedFeedView.swift */,
+				F88FAD26295F400E009B20C9 /* NotificationsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -71,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				F8341F91295C63BB009C8EE6 /* ImageStatus.swift */,
+				F88FAD2C295F4AD7009B20C9 /* ApplicationState.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -78,6 +101,8 @@
 		F8341F96295C6427009C8EE6 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				F88FAD28295F43B8009B20C9 /* AccountData+CoreDataClass.swift */,
+				F88FAD29295F43B8009B20C9 /* AccountData+CoreDataProperties.swift */,
 				F88C2474295C37BB0006098B /* Persistence.swift */,
 			);
 			path = CoreData;
@@ -103,6 +128,7 @@
 		F88C245F295C37B80006098B = {
 			isa = PBXGroup;
 			children = (
+				F88FAD2E295F4D3C009B20C9 /* AccountData+CoreDataProperties.swift */,
 				F88C246A295C37B80006098B /* Vernissage */,
 				F88C2469295C37B80006098B /* Products */,
 			);
@@ -119,6 +145,7 @@
 		F88C246A295C37B80006098B /* Vernissage */ = {
 			isa = PBXGroup;
 			children = (
+				F88FAD30295F5010009B20C9 /* Services */,
 				F83901A2295D863B00456AE2 /* Widgets */,
 				F8341F97295C6434009C8EE6 /* Formatters */,
 				F8341F96295C6427009C8EE6 /* CoreData */,
@@ -139,6 +166,14 @@
 				F88C2472295C37BB0006098B /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F88FAD30295F5010009B20C9 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F88FAD31295F5029009B20C9 /* RemoteFileService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,7 +252,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F88FAD23295F3FC4009B20C9 /* LocalFeedView.swift in Sources */,
+				F88FAD2B295F43B8009B20C9 /* AccountData+CoreDataProperties.swift in Sources */,
+				F88FAD21295F3944009B20C9 /* HomeFeedView.swift in Sources */,
+				F88FAD2F295F4D3C009B20C9 /* AccountData+CoreDataProperties.swift in Sources */,
 				F88C2475295C37BB0006098B /* Persistence.swift in Sources */,
+				F88FAD2A295F43B8009B20C9 /* AccountData+CoreDataClass.swift in Sources */,
 				F8341F92295C63BB009C8EE6 /* ImageStatus.swift in Sources */,
 				F83901A6295D8EC000456AE2 /* LabelIconView.swift in Sources */,
 				F8341F90295C636C009C8EE6 /* UIImage.swift in Sources */,
@@ -227,6 +267,10 @@
 				F88C2486295C48030006098B /* HTMLFotmattedText.swift in Sources */,
 				F88C246C295C37B80006098B /* VernissageApp.swift in Sources */,
 				F83901A4295D864D00456AE2 /* TagView.swift in Sources */,
+				F88FAD25295F3FF7009B20C9 /* FederatedFeedView.swift in Sources */,
+				F88FAD32295F5029009B20C9 /* RemoteFileService.swift in Sources */,
+				F88FAD27295F400E009B20C9 /* NotificationsView.swift in Sources */,
+				F88FAD2D295F4AD7009B20C9 /* ApplicationState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

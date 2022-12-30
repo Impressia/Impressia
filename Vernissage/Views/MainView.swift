@@ -12,122 +12,35 @@ import MastodonSwift
 struct MainView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
+    @EnvironmentObject var applicationState: ApplicationState
 
-    @State private var statuses: [Status] = []
-    @State private var account: Account?
-    @State private var images: [ImageStatus] = []
-    @State private var current: ImageStatus? = nil
-    @State private var navBarTitle: String = "Home feed"
-    
-    private static let initialColumns = 1
-    @State private var gridColumns = Array(repeating: GridItem(.flexible()), count: initialColumns)
-    
-    var body: some View {
-        ZStack {
-            ScrollView {
-                LazyVGrid(columns: gridColumns) {
-                    ForEach(images) { item in
-                        NavigationLink(destination: DetailsView(current: item)) {
-                            Image(uiImage: item.image)
-                                .resizable().aspectRatio(contentMode: .fit)
-                        }
-                    }
-                }
-            }
-            
-            VStack(alignment:.trailing) {
-                Spacer()
-                HStack {
-                    Spacer()
-                    Button {
-                        
-                    } label: {
-                        Image(systemName: "plus")
-                            .font(.body)
-                            .padding(16)
-                            .foregroundColor(.white)
-                            .background(.ultraThinMaterial, in: Circle())   
-                    }
-                }
-            }.padding()
-
-        }.refreshable {
-            do {
-                try await loadData()
-            } catch {
-                print("Error", error)
+    @State private var navBarTitle: String = "Home"
+    @State private var viewMode: ViewMode = .home {
+        didSet {
+            switch viewMode {
+            case .home:
+                self.navBarTitle = "Home"
+            case .local:
+                self.navBarTitle = "Local"
+            case .federated:
+                self.navBarTitle = "Federated"
+            case .notifications:
+                self.navBarTitle = "Notifications"
             }
         }
+    }
+    
+    private enum ViewMode {
+        case home, local, federated, notifications
+    }
+    
+    var body: some View {
+        self.getMainView()
         .navigationBarTitle(navBarTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Menu {
-                    Button {
-                        navBarTitle = "Home feed"
-                    } label: {
-                        HStack {
-                            Text("Home feed")
-                            Image(systemName: "house")
-                        }
-                    }
-                    
-                    Button {
-                        navBarTitle = "Local feed"
-                    } label: {
-                        HStack {
-                            Text("Local feed")
-                            Image(systemName: "text.redaction")
-                        }
-                    }
-
-                    Button {
-                        navBarTitle = "Global feed"
-                    } label: {
-                        HStack {
-                            Text("Global feed")
-                            Image(systemName: "globe.europe.africa")
-                        }
-                    }
-                    
-                    Button {
-                        navBarTitle = "Notifications"
-                    } label: {
-                        HStack {
-                            Text("Notifications")
-                            Image(systemName: "bell.badge")
-                        }
-                    }
-                } label: {
-                    Image(systemName: "ellipsis.circle")
-                }
-            }
-            
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    // Open settings view.
-                } label: {
-                    if let avatarUrl = self.account?.avatar {
-                        AsyncImage(url: avatarUrl) { image in
-                            image
-                                .resizable()
-                                .clipShape(Circle())
-                                .shadow(radius: 10)
-                                .aspectRatio(contentMode: .fit)
-                        } placeholder: {
-                            Image(systemName: "person.circle")
-                        }
-                        .frame(height: 25)
-                        .frame(width: 25)
-                    } else {
-                        Image(systemName: "person.circle")
-                    }
-                }
-            }
+            self.getLeadingToolbar()
+            self.getPrincipalToolbar()
         }
         .task {
             do {
@@ -138,57 +51,148 @@ struct MainView: View {
         }
     }
     
+    @ViewBuilder
+    private func getMainView() -> some View {
+        switch self.viewMode {
+        case .home:
+            HomeFeedView()
+        case .local:
+            LocalFeedView()
+        case .federated:
+            FederatedFeedView()
+        case .notifications:
+            NotificationsView()
+        }
+    }
+    
+    @ToolbarContentBuilder
+    private func getPrincipalToolbar() -> some ToolbarContent {
+        ToolbarItem(placement: .principal) {
+            Menu {
+                Button {
+                    viewMode = .home
+                } label: {
+                    HStack {
+                        Text("Home")
+                        Image(systemName: "house")
+                    }
+                }
+                
+                Button {
+                    viewMode = .local
+                } label: {
+                    HStack {
+                        Text("Local")
+                        Image(systemName: "text.redaction")
+                    }
+                }
+
+                Button {
+                    viewMode = .federated
+                } label: {
+                    HStack {
+                        Text("Global")
+                        Image(systemName: "globe.europe.africa")
+                    }
+                }
+                
+                Button {
+                    viewMode = .notifications
+                } label: {
+                    HStack {
+                        Text("Notifications")
+                        Image(systemName: "bell.badge")
+                    }
+                }
+            } label: {
+                HStack {
+                    Text(navBarTitle)
+                        .font(.headline)
+                    Image(systemName: "chevron.down")
+                        .font(.subheadline)
+                }
+                .frame(width: 150)
+                .foregroundColor(Color.white)
+            }
+        }
+    }
+    
+    @ToolbarContentBuilder
+    private func getLeadingToolbar() -> some ToolbarContent {
+        ToolbarItem(placement: .navigationBarLeading) {
+            Button {
+                // Open settings view.
+            } label: {
+                if let avatarData = self.applicationState.accountData?.avatarData, let uiImage = UIImage(data: avatarData) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .clipShape(Circle())
+                        .shadow(radius: 10)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 32)
+                        .frame(width: 32)
+                } else {
+                    Image(systemName: "person.circle")
+                }
+            }
+        }
+    }
+    
     private func loadData() async throws {
+        
+        // Set account data from database.
+        let accountDataFromDb = self.getAccountData()
+        if let accountDataFromDb {
+            self.applicationState.accountData = accountDataFromDb
+            return
+        }
+        
+        // Retrieve account data from API.
         let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI2MTQwOCIsImp0aSI6IjZjMDg4N2ZlZThjZjBmZjQ1N2RjZDQ5MTU2YjE2NzYyYmQ2MDQ1NDQ1MmEwYzEyMzVmNDA3YjY2YjFhYjU3ZjBjMTY2YjFmZmIyNjJlZDg2IiwiaWF0IjoxNjcyMDU5MDYwLjI3NDgyMSwibmJmIjoxNjcyMDU5MDYwLjI3NDgyNCwiZXhwIjoxNzAzNTk1MDYwLjI1MzM1Nywic3ViIjoiNjc4MjMiLCJzY29wZXMiOlsicmVhZCIsIndyaXRlIiwiZm9sbG93Il19.kGvg3lW8lF1X1mOTdgGgoXNyzwUIJz5hz5RJKK_WiSoBWDQNadhZDty7XMNF0IAPjxOSi6UaIx2av7_eH_65aNlKFw89bkm8bT_zFQW2V0KbADJ-NmE6X0B_NgU2CNoF5IPn6bhCFHCKMtV6MWAQ_db6DT-LXaGemMY3QimcJzCqQuXI_1ouiZ235T297uEPNTrLwtLq-x_UoO-wx254LStBalDIGDVHAa4by9IT-mvu-QXz7k8pH2NHKoX-9Ql_Y3G9RJJNqoOmWMU45Dyo2HaJKKEb1tkeJ9tA3LIYgbwnEbG2PJ7CE8CXxtakiCIflJZpzzOmq1jXLAsCJ1mHnc77o7NfMaB_hY-f8PEI6d2ttOdH8bNlreF2avznNAIVHg_bf-yv_4wKUCUe0QZMG_yWqOwOk6lyruvboSGKuI5RnYsJbXBoJTGMLON6jVmtiKPbHy-9jNcfFgShAc3D5kTO-8Avj9_RquqEh1TQF_S4ljmganxKzMihyMDLK1OVcXzCFO6FKlCw7YKvbfJk1Qrn9kPBrVDM5jzIyXAmqRd1ivcE9nAdYb2l7KnxW_pi31uT0IdJMpTkZrUQSDMyEnj0HgV6Yd5BDlLG6Cnk8GXATTcU-a1pgE13OtWsCpD2cZQm-tOsFHWBDvY-BA0RtTvQAyEUxRIP9NjHe8rSR90"
         
         let client = MastodonClient(baseURL: URL(string: "https://pixelfed.social")!)
             .getAuthenticated(token: accessToken)
         
-        self.statuses = try await client.getHomeTimeline()
-        self.account = try await client.verifyCredentials()
+        // Get account information from server.
+        let account = try await client.verifyCredentials()
         
-        var imagesCache: [ImageStatus] = []
-        for item in self.statuses {
-            let imageStatus = try await self.fetchImage(status: item, accessToken: accessToken)
-
-            if let imageStatus {
-                imagesCache.append(imageStatus)
-            }
+        // Create account object in database.
+        let accountData = AccountData(context: viewContext)
+        accountData.id = account.id
+        accountData.username = account.username
+        accountData.acct = account.acct
+        accountData.displayName = account.displayName
+        accountData.note = account.note
+        accountData.url = account.url
+        accountData.avatar = account.avatar
+        accountData.header = account.header
+        accountData.locked = account.locked
+        accountData.createdAt = account.createdAt
+        accountData.followersCount = Int32(account.followersCount)
+        accountData.followingCount = Int32(account.followingCount)
+        accountData.statusesCount = Int32(account.statusesCount)
+        accountData.accessToken = accessToken
+        
+        // Download avatar image.
+        if let avatarUrl = account.avatar {
+            let avatarData = try await RemoteFileService.shared.fetchData(url: avatarUrl)
+            accountData.avatarData = avatarData
         }
         
-        self.images = imagesCache
+        // Save account data in database and in application state.
+        try self.viewContext.save()
+        self.applicationState.accountData = accountData
     }
     
-    public func fetchImage(status: Status, accessToken: String) async throws -> ImageStatus? {
-        guard let url = status.mediaAttachments.first?.url, let id = status.mediaAttachments.first?.id else {
-            return nil
-        }
-        
-        let urlRequest = URLRequest(url: url)
-        
-        // Fetching data.
-        let (data, response) = try await URLSession.shared.data(for: urlRequest)
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-            return nil
-        }
+    private func getAccountData() -> AccountData? {
+        let fetchRequest: NSFetchRequest<AccountData> = AccountData.fetchRequest()
 
-        // Decoding JSON.
-        let image = UIImage(data: data)
-        guard let image = image else {
+        do {
+            return try self.viewContext.fetch(fetchRequest).first
+        }
+        catch {
             return nil
         }
-        
-        /*
-        var exif = image.getExifData()
-        if let dict = exif as? [String: AnyObject] {
-            dict.keys.map { key in
-                print(key)
-                print(dict[key])
-            }
-        }
-        */
-        
-        return ImageStatus(id: id,image: image, status: status)
     }
 }
 
