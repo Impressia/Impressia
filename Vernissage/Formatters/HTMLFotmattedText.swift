@@ -3,7 +3,6 @@
 //  Copyright © 2022 Marcin Czachurski and the repository contributors.
 //  Licensed under the MIT License.
 //
-    
 
 import UIKit
 import SwiftUI
@@ -38,7 +37,7 @@ struct HTMLFormattedText: UIViewRepresentable {
     }
 
     private func converHTML(text: String) -> NSAttributedString?{
-        guard let data = text.data(using: .utf8) else {
+        guard let data = text.data(using: .utf16) else {
             return nil
         }
       

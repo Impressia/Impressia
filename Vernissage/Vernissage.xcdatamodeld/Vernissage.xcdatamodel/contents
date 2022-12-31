@@ -5,6 +5,9 @@
         <attribute name="acct" attributeType="String"/>
         <attribute name="avatar" optional="YES" attributeType="URI"/>
         <attribute name="avatarData" optional="YES" attributeType="Binary"/>
+        <attribute name="clientId" attributeType="String"/>
+        <attribute name="clientSecret" attributeType="String"/>
+        <attribute name="clientVapidKey" attributeType="String"/>
         <attribute name="createdAt" attributeType="String"/>
         <attribute name="displayName" optional="YES" attributeType="String"/>
         <attribute name="followersCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
@@ -13,8 +16,12 @@
         <attribute name="id" attributeType="String"/>
         <attribute name="locked" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="note" optional="YES" attributeType="String"/>
+        <attribute name="serverUrl" attributeType="URI"/>
         <attribute name="statusesCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="url" optional="YES" attributeType="URI"/>
         <attribute name="username" attributeType="String"/>
+    </entity>
+    <entity name="ApplicationSettings" representedClassName="ApplicationSettings" syncable="YES">
+        <attribute name="currentAccount" optional="YES" attributeType="String"/>
     </entity>
 </model>

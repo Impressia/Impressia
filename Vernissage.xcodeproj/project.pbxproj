@@ -11,13 +11,20 @@
 		F8341F92295C63BB009C8EE6 /* ImageStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8341F91295C63BB009C8EE6 /* ImageStatus.swift */; };
 		F83901A4295D864D00456AE2 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83901A3295D864D00456AE2 /* TagView.swift */; };
 		F83901A6295D8EC000456AE2 /* LabelIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83901A5295D8EC000456AE2 /* LabelIconView.swift */; };
+		F866F6A0296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F69E296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift */; };
+		F866F6A1296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F69F296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift */; };
+		F866F6A329604161002E8F88 /* AccountDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F6A229604161002E8F88 /* AccountDataHandler.swift */; };
+		F866F6A529604194002E8F88 /* ApplicationSettingsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F6A429604194002E8F88 /* ApplicationSettingsHandler.swift */; };
+		F866F6A729604629002E8F88 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F6A629604629002E8F88 /* SignInView.swift */; };
+		F866F6AA29605AFA002E8F88 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F6A929605AFA002E8F88 /* SceneDelegate.swift */; };
+		F866F6AE29606367002E8F88 /* ApplicationViewMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F6AD29606367002E8F88 /* ApplicationViewMode.swift */; };
+		F866F6B729608467002E8F88 /* MastodonSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F866F6B629608467002E8F88 /* MastodonSwift */; };
 		F88C246C295C37B80006098B /* VernissageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C246B295C37B80006098B /* VernissageApp.swift */; };
 		F88C246E295C37B80006098B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C246D295C37B80006098B /* MainView.swift */; };
 		F88C2470295C37BB0006098B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F88C246F295C37BB0006098B /* Assets.xcassets */; };
 		F88C2473295C37BB0006098B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F88C2472295C37BB0006098B /* Preview Assets.xcassets */; };
-		F88C2475295C37BB0006098B /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C2474295C37BB0006098B /* Persistence.swift */; };
+		F88C2475295C37BB0006098B /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C2474295C37BB0006098B /* CoreDataHandler.swift */; };
 		F88C2478295C37BB0006098B /* Vernissage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F88C2476295C37BB0006098B /* Vernissage.xcdatamodeld */; };
-		F88C2480295C38400006098B /* MastodonSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F88C247F295C38400006098B /* MastodonSwift */; };
 		F88C2482295C3A4F0006098B /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C2481295C3A4F0006098B /* DetailsView.swift */; };
 		F88C2486295C48030006098B /* HTMLFotmattedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C2485295C48030006098B /* HTMLFotmattedText.swift */; };
 		F88FAD21295F3944009B20C9 /* HomeFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD20295F3944009B20C9 /* HomeFeedView.swift */; };
@@ -27,7 +34,6 @@
 		F88FAD2A295F43B8009B20C9 /* AccountData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD28295F43B8009B20C9 /* AccountData+CoreDataClass.swift */; };
 		F88FAD2B295F43B8009B20C9 /* AccountData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD29295F43B8009B20C9 /* AccountData+CoreDataProperties.swift */; };
 		F88FAD2D295F4AD7009B20C9 /* ApplicationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD2C295F4AD7009B20C9 /* ApplicationState.swift */; };
-		F88FAD2F295F4D3C009B20C9 /* AccountData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD2E295F4D3C009B20C9 /* AccountData+CoreDataProperties.swift */; };
 		F88FAD32295F5029009B20C9 /* RemoteFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD31295F5029009B20C9 /* RemoteFileService.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,12 +42,20 @@
 		F8341F91295C63BB009C8EE6 /* ImageStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStatus.swift; sourceTree = "<group>"; };
 		F83901A3295D864D00456AE2 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		F83901A5295D8EC000456AE2 /* LabelIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelIconView.swift; sourceTree = "<group>"; };
+		F866F69E296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplicationSettings+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F866F69F296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplicationSettings+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F866F6A229604161002E8F88 /* AccountDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDataHandler.swift; sourceTree = "<group>"; };
+		F866F6A429604194002E8F88 /* ApplicationSettingsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationSettingsHandler.swift; sourceTree = "<group>"; };
+		F866F6A629604629002E8F88 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		F866F6A829604FFF002E8F88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F866F6A929605AFA002E8F88 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		F866F6AD29606367002E8F88 /* ApplicationViewMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationViewMode.swift; sourceTree = "<group>"; };
 		F88C2468295C37B80006098B /* Vernissage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vernissage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F88C246B295C37B80006098B /* VernissageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VernissageApp.swift; sourceTree = "<group>"; };
 		F88C246D295C37B80006098B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		F88C246F295C37BB0006098B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F88C2472295C37BB0006098B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		F88C2474295C37BB0006098B /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		F88C2474295C37BB0006098B /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
 		F88C2477295C37BB0006098B /* Vernissage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vernissage.xcdatamodel; sourceTree = "<group>"; };
 		F88C2481295C3A4F0006098B /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		F88C2485295C48030006098B /* HTMLFotmattedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLFotmattedText.swift; sourceTree = "<group>"; };
@@ -52,7 +66,6 @@
 		F88FAD28295F43B8009B20C9 /* AccountData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F88FAD29295F43B8009B20C9 /* AccountData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F88FAD2C295F4AD7009B20C9 /* ApplicationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationState.swift; sourceTree = "<group>"; };
-		F88FAD2E295F4D3C009B20C9 /* AccountData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AccountData+CoreDataProperties.swift"; path = "Vernissage/CoreData/AccountData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F88FAD31295F5029009B20C9 /* RemoteFileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFileService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F88C2480295C38400006098B /* MastodonSwift in Frameworks */,
+				F866F6B729608467002E8F88 /* MastodonSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +90,7 @@
 				F88FAD22295F3FC4009B20C9 /* LocalFeedView.swift */,
 				F88FAD24295F3FF7009B20C9 /* FederatedFeedView.swift */,
 				F88FAD26295F400E009B20C9 /* NotificationsView.swift */,
+				F866F6A629604629002E8F88 /* SignInView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -94,6 +108,7 @@
 			children = (
 				F8341F91295C63BB009C8EE6 /* ImageStatus.swift */,
 				F88FAD2C295F4AD7009B20C9 /* ApplicationState.swift */,
+				F866F6AD29606367002E8F88 /* ApplicationViewMode.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -101,9 +116,13 @@
 		F8341F96295C6427009C8EE6 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				F866F69E296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift */,
+				F866F69F296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift */,
 				F88FAD28295F43B8009B20C9 /* AccountData+CoreDataClass.swift */,
 				F88FAD29295F43B8009B20C9 /* AccountData+CoreDataProperties.swift */,
-				F88C2474295C37BB0006098B /* Persistence.swift */,
+				F88C2474295C37BB0006098B /* CoreDataHandler.swift */,
+				F866F6A229604161002E8F88 /* AccountDataHandler.swift */,
+				F866F6A429604194002E8F88 /* ApplicationSettingsHandler.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -128,7 +147,6 @@
 		F88C245F295C37B80006098B = {
 			isa = PBXGroup;
 			children = (
-				F88FAD2E295F4D3C009B20C9 /* AccountData+CoreDataProperties.swift */,
 				F88C246A295C37B80006098B /* Vernissage */,
 				F88C2469295C37B80006098B /* Products */,
 			);
@@ -145,6 +163,7 @@
 		F88C246A295C37B80006098B /* Vernissage */ = {
 			isa = PBXGroup;
 			children = (
+				F866F6A829604FFF002E8F88 /* Info.plist */,
 				F88FAD30295F5010009B20C9 /* Services */,
 				F83901A2295D863B00456AE2 /* Widgets */,
 				F8341F97295C6434009C8EE6 /* Formatters */,
@@ -153,6 +172,7 @@
 				F8341F94295C63FE009C8EE6 /* Extensions */,
 				F8341F93295C63E2009C8EE6 /* Views */,
 				F88C246B295C37B80006098B /* VernissageApp.swift */,
+				F866F6A929605AFA002E8F88 /* SceneDelegate.swift */,
 				F88C246F295C37BB0006098B /* Assets.xcassets */,
 				F88C2476295C37BB0006098B /* Vernissage.xcdatamodeld */,
 				F88C2471295C37BB0006098B /* Preview Content */,
@@ -193,7 +213,7 @@
 			);
 			name = Vernissage;
 			packageProductDependencies = (
-				F88C247F295C38400006098B /* MastodonSwift */,
+				F866F6B629608467002E8F88 /* MastodonSwift */,
 			);
 			productName = Vernissage;
 			productReference = F88C2468295C37B80006098B /* Vernissage.app */;
@@ -224,7 +244,7 @@
 			);
 			mainGroup = F88C245F295C37B80006098B;
 			packageReferences = (
-				F88C247E295C38400006098B /* XCRemoteSwiftPackageReference "Mastodon" */,
+				F866F6B529608467002E8F88 /* XCRemoteSwiftPackageReference "Mastodon" */,
 			);
 			productRefGroup = F88C2469295C37B80006098B /* Products */;
 			projectDirPath = "";
@@ -252,11 +272,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F866F6A0296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift in Sources */,
 				F88FAD23295F3FC4009B20C9 /* LocalFeedView.swift in Sources */,
 				F88FAD2B295F43B8009B20C9 /* AccountData+CoreDataProperties.swift in Sources */,
 				F88FAD21295F3944009B20C9 /* HomeFeedView.swift in Sources */,
-				F88FAD2F295F4D3C009B20C9 /* AccountData+CoreDataProperties.swift in Sources */,
-				F88C2475295C37BB0006098B /* Persistence.swift in Sources */,
+				F88C2475295C37BB0006098B /* CoreDataHandler.swift in Sources */,
 				F88FAD2A295F43B8009B20C9 /* AccountData+CoreDataClass.swift in Sources */,
 				F8341F92295C63BB009C8EE6 /* ImageStatus.swift in Sources */,
 				F83901A6295D8EC000456AE2 /* LabelIconView.swift in Sources */,
@@ -264,13 +284,19 @@
 				F88C246E295C37B80006098B /* MainView.swift in Sources */,
 				F88C2478295C37BB0006098B /* Vernissage.xcdatamodeld in Sources */,
 				F88C2482295C3A4F0006098B /* DetailsView.swift in Sources */,
+				F866F6A329604161002E8F88 /* AccountDataHandler.swift in Sources */,
 				F88C2486295C48030006098B /* HTMLFotmattedText.swift in Sources */,
+				F866F6A529604194002E8F88 /* ApplicationSettingsHandler.swift in Sources */,
+				F866F6A729604629002E8F88 /* SignInView.swift in Sources */,
 				F88C246C295C37B80006098B /* VernissageApp.swift in Sources */,
 				F83901A4295D864D00456AE2 /* TagView.swift in Sources */,
 				F88FAD25295F3FF7009B20C9 /* FederatedFeedView.swift in Sources */,
 				F88FAD32295F5029009B20C9 /* RemoteFileService.swift in Sources */,
 				F88FAD27295F400E009B20C9 /* NotificationsView.swift in Sources */,
 				F88FAD2D295F4AD7009B20C9 /* ApplicationState.swift in Sources */,
+				F866F6A1296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift in Sources */,
+				F866F6AE29606367002E8F88 /* ApplicationViewMode.swift in Sources */,
+				F866F6AA29605AFA002E8F88 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,6 +428,7 @@
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Vernissage/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -432,6 +459,7 @@
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Vernissage/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -475,9 +503,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		F88C247E295C38400006098B /* XCRemoteSwiftPackageReference "Mastodon" */ = {
+		F866F6B529608467002E8F88 /* XCRemoteSwiftPackageReference "Mastodon" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Swiftodon/Mastodon.swift";
+			repositoryURL = "https://github.com/mczachurski/Mastodon.swift";
 			requirement = {
 				branch = main;
 				kind = branch;
@@ -486,9 +514,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		F88C247F295C38400006098B /* MastodonSwift */ = {
+		F866F6B629608467002E8F88 /* MastodonSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F88C247E295C38400006098B /* XCRemoteSwiftPackageReference "Mastodon" */;
+			package = F866F6B529608467002E8F88 /* XCRemoteSwiftPackageReference "Mastodon" */;
 			productName = MastodonSwift;
 		};
 /* End XCSwiftPackageProductDependency section */

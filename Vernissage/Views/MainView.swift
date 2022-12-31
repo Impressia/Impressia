@@ -11,22 +11,12 @@ import MastodonSwift
 
 struct MainView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
     @EnvironmentObject var applicationState: ApplicationState
 
     @State private var navBarTitle: String = "Home"
     @State private var viewMode: ViewMode = .home {
         didSet {
-            switch viewMode {
-            case .home:
-                self.navBarTitle = "Home"
-            case .local:
-                self.navBarTitle = "Local"
-            case .federated:
-                self.navBarTitle = "Federated"
-            case .notifications:
-                self.navBarTitle = "Notifications"
-            }
+            self.navBarTitle = self.getViewTitle(viewMode: viewMode)
         }
     }
     
@@ -41,13 +31,6 @@ struct MainView: View {
         .toolbar {
             self.getLeadingToolbar()
             self.getPrincipalToolbar()
-        }
-        .task {
-            do {
-                try await loadData()
-            } catch {
-                print("Error", error)
-            }
         }
     }
     
@@ -73,7 +56,7 @@ struct MainView: View {
                     viewMode = .home
                 } label: {
                     HStack {
-                        Text("Home")
+                        Text(self.getViewTitle(viewMode: .home))
                         Image(systemName: "house")
                     }
                 }
@@ -82,7 +65,7 @@ struct MainView: View {
                     viewMode = .local
                 } label: {
                     HStack {
-                        Text("Local")
+                        Text(self.getViewTitle(viewMode: .local))
                         Image(systemName: "text.redaction")
                     }
                 }
@@ -91,7 +74,7 @@ struct MainView: View {
                     viewMode = .federated
                 } label: {
                     HStack {
-                        Text("Global")
+                        Text(self.getViewTitle(viewMode: .federated))
                         Image(systemName: "globe.europe.africa")
                     }
                 }
@@ -100,7 +83,7 @@ struct MainView: View {
                     viewMode = .notifications
                 } label: {
                     HStack {
-                        Text("Notifications")
+                        Text(self.getViewTitle(viewMode: .notifications))
                         Image(systemName: "bell.badge")
                     }
                 }
@@ -112,7 +95,7 @@ struct MainView: View {
                         .font(.subheadline)
                 }
                 .frame(width: 150)
-                .foregroundColor(Color.white)
+                .foregroundColor(Color("mainTextColor"))
             }
         }
     }
@@ -127,71 +110,27 @@ struct MainView: View {
                     Image(uiImage: uiImage)
                         .resizable()
                         .clipShape(Circle())
-                        .shadow(radius: 10)
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 32)
-                        .frame(width: 32)
+                        .frame(width: 32.0, height: 32.0)
                 } else {
                     Image(systemName: "person.circle")
+                        .resizable()
+                        .frame(width: 32.0, height: 32.0)
+                        .foregroundColor(Color("mainTextColor"))
                 }
             }
         }
     }
     
-    private func loadData() async throws {
-        
-        // Set account data from database.
-        let accountDataFromDb = self.getAccountData()
-        if let accountDataFromDb {
-            self.applicationState.accountData = accountDataFromDb
-            return
-        }
-        
-        // Retrieve account data from API.
-        let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI2MTQwOCIsImp0aSI6IjZjMDg4N2ZlZThjZjBmZjQ1N2RjZDQ5MTU2YjE2NzYyYmQ2MDQ1NDQ1MmEwYzEyMzVmNDA3YjY2YjFhYjU3ZjBjMTY2YjFmZmIyNjJlZDg2IiwiaWF0IjoxNjcyMDU5MDYwLjI3NDgyMSwibmJmIjoxNjcyMDU5MDYwLjI3NDgyNCwiZXhwIjoxNzAzNTk1MDYwLjI1MzM1Nywic3ViIjoiNjc4MjMiLCJzY29wZXMiOlsicmVhZCIsIndyaXRlIiwiZm9sbG93Il19.kGvg3lW8lF1X1mOTdgGgoXNyzwUIJz5hz5RJKK_WiSoBWDQNadhZDty7XMNF0IAPjxOSi6UaIx2av7_eH_65aNlKFw89bkm8bT_zFQW2V0KbADJ-NmE6X0B_NgU2CNoF5IPn6bhCFHCKMtV6MWAQ_db6DT-LXaGemMY3QimcJzCqQuXI_1ouiZ235T297uEPNTrLwtLq-x_UoO-wx254LStBalDIGDVHAa4by9IT-mvu-QXz7k8pH2NHKoX-9Ql_Y3G9RJJNqoOmWMU45Dyo2HaJKKEb1tkeJ9tA3LIYgbwnEbG2PJ7CE8CXxtakiCIflJZpzzOmq1jXLAsCJ1mHnc77o7NfMaB_hY-f8PEI6d2ttOdH8bNlreF2avznNAIVHg_bf-yv_4wKUCUe0QZMG_yWqOwOk6lyruvboSGKuI5RnYsJbXBoJTGMLON6jVmtiKPbHy-9jNcfFgShAc3D5kTO-8Avj9_RquqEh1TQF_S4ljmganxKzMihyMDLK1OVcXzCFO6FKlCw7YKvbfJk1Qrn9kPBrVDM5jzIyXAmqRd1ivcE9nAdYb2l7KnxW_pi31uT0IdJMpTkZrUQSDMyEnj0HgV6Yd5BDlLG6Cnk8GXATTcU-a1pgE13OtWsCpD2cZQm-tOsFHWBDvY-BA0RtTvQAyEUxRIP9NjHe8rSR90"
-        
-        let client = MastodonClient(baseURL: URL(string: "https://pixelfed.social")!)
-            .getAuthenticated(token: accessToken)
-        
-        // Get account information from server.
-        let account = try await client.verifyCredentials()
-        
-        // Create account object in database.
-        let accountData = AccountData(context: viewContext)
-        accountData.id = account.id
-        accountData.username = account.username
-        accountData.acct = account.acct
-        accountData.displayName = account.displayName
-        accountData.note = account.note
-        accountData.url = account.url
-        accountData.avatar = account.avatar
-        accountData.header = account.header
-        accountData.locked = account.locked
-        accountData.createdAt = account.createdAt
-        accountData.followersCount = Int32(account.followersCount)
-        accountData.followingCount = Int32(account.followingCount)
-        accountData.statusesCount = Int32(account.statusesCount)
-        accountData.accessToken = accessToken
-        
-        // Download avatar image.
-        if let avatarUrl = account.avatar {
-            let avatarData = try await RemoteFileService.shared.fetchData(url: avatarUrl)
-            accountData.avatarData = avatarData
-        }
-        
-        // Save account data in database and in application state.
-        try self.viewContext.save()
-        self.applicationState.accountData = accountData
-    }
-    
-    private func getAccountData() -> AccountData? {
-        let fetchRequest: NSFetchRequest<AccountData> = AccountData.fetchRequest()
-
-        do {
-            return try self.viewContext.fetch(fetchRequest).first
-        }
-        catch {
-            return nil
+    private func getViewTitle(viewMode: ViewMode) -> String {
+        switch viewMode {
+        case .home:
+            return "Home"
+        case .local:
+            return "Local"
+        case .federated:
+            return "Federated"
+        case .notifications:
+            return "Notifications"
         }
     }
 }
@@ -199,6 +138,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        MainView().environment(\.managedObjectContext, CoreDataHandler.preview.container.viewContext)
     }
 }

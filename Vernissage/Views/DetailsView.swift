@@ -24,14 +24,13 @@ struct DetailsView: View {
                             image
                                 .resizable()
                                 .clipShape(Circle())
-                                .shadow(radius: 10)
                                 .aspectRatio(contentMode: .fit)
                         } placeholder: {
                             Image(systemName: "person.circle")
                                 .resizable()
+                                .foregroundColor(Color("mainTextColor"))
                         }
-                        .frame(height: 48)
-                        .frame(width: 48)
+                        .frame(width: 48.0, height: 48.0)
                         
                         VStack (alignment: .leading) {
                             Text(current.status.account?.displayName ?? current.status.account?.username ?? "")

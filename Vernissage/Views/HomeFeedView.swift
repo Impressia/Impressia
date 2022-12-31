@@ -10,6 +10,7 @@ import MastodonSwift
 import UIKit
 
 struct HomeFeedView: View {
+    @EnvironmentObject var applicationState: ApplicationState
     
     @State private var statuses: [Status] = []
     @State private var images: [ImageStatus] = []
@@ -61,24 +62,22 @@ struct HomeFeedView: View {
         }
         .task {
             do {
-                defer {
-                    self.showLoading = false
-                }
-                
                 self.showLoading = true
                 try await loadData()
+                self.showLoading = false
             } catch {
+                self.showLoading = false
                 print("Error", error)
             }
         }
     }
     
     private func loadData() async throws {
-        let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI2MTQwOCIsImp0aSI6IjZjMDg4N2ZlZThjZjBmZjQ1N2RjZDQ5MTU2YjE2NzYyYmQ2MDQ1NDQ1MmEwYzEyMzVmNDA3YjY2YjFhYjU3ZjBjMTY2YjFmZmIyNjJlZDg2IiwiaWF0IjoxNjcyMDU5MDYwLjI3NDgyMSwibmJmIjoxNjcyMDU5MDYwLjI3NDgyNCwiZXhwIjoxNzAzNTk1MDYwLjI1MzM1Nywic3ViIjoiNjc4MjMiLCJzY29wZXMiOlsicmVhZCIsIndyaXRlIiwiZm9sbG93Il19.kGvg3lW8lF1X1mOTdgGgoXNyzwUIJz5hz5RJKK_WiSoBWDQNadhZDty7XMNF0IAPjxOSi6UaIx2av7_eH_65aNlKFw89bkm8bT_zFQW2V0KbADJ-NmE6X0B_NgU2CNoF5IPn6bhCFHCKMtV6MWAQ_db6DT-LXaGemMY3QimcJzCqQuXI_1ouiZ235T297uEPNTrLwtLq-x_UoO-wx254LStBalDIGDVHAa4by9IT-mvu-QXz7k8pH2NHKoX-9Ql_Y3G9RJJNqoOmWMU45Dyo2HaJKKEb1tkeJ9tA3LIYgbwnEbG2PJ7CE8CXxtakiCIflJZpzzOmq1jXLAsCJ1mHnc77o7NfMaB_hY-f8PEI6d2ttOdH8bNlreF2avznNAIVHg_bf-yv_4wKUCUe0QZMG_yWqOwOk6lyruvboSGKuI5RnYsJbXBoJTGMLON6jVmtiKPbHy-9jNcfFgShAc3D5kTO-8Avj9_RquqEh1TQF_S4ljmganxKzMihyMDLK1OVcXzCFO6FKlCw7YKvbfJk1Qrn9kPBrVDM5jzIyXAmqRd1ivcE9nAdYb2l7KnxW_pi31uT0IdJMpTkZrUQSDMyEnj0HgV6Yd5BDlLG6Cnk8GXATTcU-a1pgE13OtWsCpD2cZQm-tOsFHWBDvY-BA0RtTvQAyEUxRIP9NjHe8rSR90"
-        
-        let client = MastodonClient(baseURL: URL(string: "https://pixelfed.social")!)
-            .getAuthenticated(token: accessToken)
-        
+        guard let accessData = self.applicationState.accountData, let accessToken = accessData.accessToken else {
+            return
+        }
+                
+        let client = MastodonClient(baseURL: accessData.serverUrl).getAuthenticated(token: accessToken)
         self.statuses = try await client.getHomeTimeline(limit: 40)
         
         var imagesCache: [ImageStatus] = []
