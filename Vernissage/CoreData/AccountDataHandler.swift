@@ -18,6 +18,23 @@ class AccountDataHandler {
             return []
         }
     }
+    
+    func getCurrentAccountData() -> AccountData? {
+        let accounts = self.getAccountsData()
+        
+        let applicationSettingsHandler = ApplicationSettingsHandler()
+        let defaultSettings = applicationSettingsHandler.getDefaultSettings()
+        
+        let currentAccount = accounts.first { accountData in
+            accountData.id == defaultSettings.currentAccount
+        }
+        
+        if let currentAccount {
+            return currentAccount
+        }
+        
+        return accounts.first
+    }
 
     func createAccountDataEntity() -> AccountData {
         let context = CoreDataHandler.shared.container.viewContext

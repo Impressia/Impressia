@@ -9,18 +9,20 @@ import MastodonSwift
 
 struct DetailsView: View {
     @Environment(\.dismiss) private var dismiss
-    @State public var current: ImageStatus
+    @State public var statusData: StatusData
     
     var body: some View {
         ScrollView {
             VStack (alignment: .leading) {
-                Image(uiImage: current.image)
-                    .resizable().aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: .infinity)
+                if let attachmentData = statusData.attachmentRelation?.first(where: { elemet in true}) as? AttachmentData {
+                    Image(uiImage: UIImage(data: attachmentData.data)!)
+                        .resizable().aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: .infinity)
+                }
                 
                 VStack(alignment: .leading) {
                     HStack (alignment: .center) {
-                        AsyncImage(url: current.status.account?.avatar) { image in
+                        AsyncImage(url: statusData.accountAvatar) { image in
                             image
                                 .resizable()
                                 .clipShape(Circle())
@@ -33,16 +35,16 @@ struct DetailsView: View {
                         .frame(width: 48.0, height: 48.0)
                         
                         VStack (alignment: .leading) {
-                            Text(current.status.account?.displayName ?? current.status.account?.username ?? "")
+                            Text(statusData.accountDisplayName ?? statusData.accountUsername)
                                 .foregroundColor(Color("displayNameColor"))
-                            Text("@\(current.status.account?.username ?? "unknown")")
+                            Text("@\(statusData.accountUsername)")
                                 .foregroundColor(Color("lightGrayColor"))
                                 .font(.footnote)
                         }
                         .padding(.leading, 8)
                     }
                     
-                    HTMLFormattedText(current.status.content)
+                    HTMLFormattedText(statusData.content)
                     
                     VStack (alignment: .leading) {
                         LabelIconView(iconName: "camera", value: "SONY ILCE-7M3")
@@ -57,8 +59,8 @@ struct DetailsView: View {
                             // Favorite
                         } content: {
                             HStack {
-                                Image(systemName: current.status.favourited ? "heart.fill" : "heart")
-                                Text("\(current.status.favouritesCount) likes")
+                                Image(systemName: statusData.favourited ? "heart.fill" : "heart")
+                                Text("\(statusData.favouritesCount) likes")
                             }
                         }
                         
@@ -66,8 +68,8 @@ struct DetailsView: View {
                             // Reboost
                         } content: {
                             HStack {
-                                Image(systemName: current.status.reblogged ? "arrowshape.turn.up.forward.fill" : "arrowshape.turn.up.forward")
-                                Text("\(current.status.reblogsCount) boosts")
+                                Image(systemName: statusData.reblogged ? "arrowshape.turn.up.forward.fill" : "arrowshape.turn.up.forward")
+                                Text("\(statusData.reblogsCount) boosts")
                             }
                         }
                         
@@ -76,7 +78,7 @@ struct DetailsView: View {
                         TagView {
                             // Bookmark
                         } content: {
-                            Image(systemName: current.status.bookmarked ? "bookmark.fill" : "bookmark")
+                            Image(systemName: statusData.bookmarked ? "bookmark.fill" : "bookmark")
                         }
                     }
                     .font(.subheadline)

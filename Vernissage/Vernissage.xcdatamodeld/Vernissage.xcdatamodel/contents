@@ -24,4 +24,42 @@
     <entity name="ApplicationSettings" representedClassName="ApplicationSettings" syncable="YES">
         <attribute name="currentAccount" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="AttachmentData" representedClassName="AttachmentData" syncable="YES">
+        <attribute name="blurhash" optional="YES" attributeType="String"/>
+        <attribute name="data" attributeType="Binary"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="previewUrl" optional="YES" attributeType="URI"/>
+        <attribute name="remoteUrl" optional="YES" attributeType="URI"/>
+        <attribute name="statusId" attributeType="String"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <attribute name="type" attributeType="String"/>
+        <attribute name="url" attributeType="URI"/>
+        <relationship name="statusRelation" maxCount="1" deletionRule="Cascade" destinationEntity="StatusData" inverseName="attachmentRelation" inverseEntity="StatusData"/>
+    </entity>
+    <entity name="StatusData" representedClassName="StatusData" syncable="YES">
+        <attribute name="accountAvatar" optional="YES" attributeType="URI"/>
+        <attribute name="accountDisplayName" optional="YES" attributeType="String"/>
+        <attribute name="accountId" attributeType="String"/>
+        <attribute name="accountUsername" optional="YES" attributeType="String"/>
+        <attribute name="applicationName" optional="YES" attributeType="String"/>
+        <attribute name="applicationWebsite" optional="YES" attributeType="URI"/>
+        <attribute name="bookmarked" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="content" attributeType="String"/>
+        <attribute name="createdAt" attributeType="String"/>
+        <attribute name="favourited" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="favouritesCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="inReplyToAccount" optional="YES" attributeType="String"/>
+        <attribute name="inReplyToId" optional="YES" attributeType="String"/>
+        <attribute name="muted" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="pinned" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="reblogged" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="reblogsCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="sensitive" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="spoilerText" optional="YES" attributeType="String"/>
+        <attribute name="uri" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="URI"/>
+        <attribute name="visibility" attributeType="String"/>
+        <relationship name="attachmentRelation" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AttachmentData" inverseName="statusRelation" inverseEntity="AttachmentData"/>
+    </entity>
 </model>

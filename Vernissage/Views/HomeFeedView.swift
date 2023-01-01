@@ -10,23 +10,26 @@ import MastodonSwift
 import UIKit
 
 struct HomeFeedView: View {
+    @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var applicationState: ApplicationState
     
-    @State private var statuses: [Status] = []
-    @State private var images: [ImageStatus] = []
     @State private var showLoading = false
     
     private static let initialColumns = 1
     @State private var gridColumns = Array(repeating: GridItem(.flexible()), count: initialColumns)
     
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.id, order: .reverse)]) var dbStatuses: FetchedResults<StatusData>
+    
     var body: some View {
         ZStack {
             ScrollView {
                 LazyVGrid(columns: gridColumns) {
-                    ForEach(images) { item in
-                        NavigationLink(destination: DetailsView(current: item)) {
-                            Image(uiImage: item.image)
-                                .resizable().aspectRatio(contentMode: .fit)
+                    ForEach(dbStatuses) { item in
+                        NavigationLink(destination: DetailsView(statusData: item)) {
+                            if let attachmenData = item.attachmentRelation?.first(where: { element in true }) as? AttachmentData {
+                                Image(uiImage: UIImage(data: attachmenData.data)!)
+                                    .resizable().aspectRatio(contentMode: .fit)
+                            }
                         }
                     }
                 }
@@ -62,9 +65,11 @@ struct HomeFeedView: View {
         }
         .task {
             do {
-                self.showLoading = true
-                try await loadData()
-                self.showLoading = false
+                if self.dbStatuses.isEmpty {
+                    self.showLoading = true
+                    try await loadData()
+                    self.showLoading = false
+                }
             } catch {
                 self.showLoading = false
                 print("Error", error)
@@ -77,46 +82,88 @@ struct HomeFeedView: View {
             return
         }
                 
-        let client = MastodonClient(baseURL: accessData.serverUrl).getAuthenticated(token: accessToken)
-        self.statuses = try await client.getHomeTimeline(limit: 40)
+        // Get maximimum downloaded stauts id.
+        let attachmentDataHandler = AttachmentDataHandler()
+        let statusDataHandler = StatusDataHandler()
+        let lastStatus = statusDataHandler.getMaximumStatus()
         
-        var imagesCache: [ImageStatus] = []
-        for item in self.statuses {
-            let imageStatus = try await self.fetchImage(status: item)
+        // Retrieve statuses from API.
+        let client = MastodonClient(baseURL: accessData.serverUrl).getAuthenticated(token: accessToken)
+        let statuses = try await client.getHomeTimeline(minId: lastStatus?.id, limit: 40)
+        
+        // Download status images and save it into database.
+        for status in statuses {
+            
+            // Save status data in database.
+            let statusDataEntity = statusDataHandler.createStatusDataEntity()
+            statusDataEntity.accountAvatar = status.account?.avatar
+            statusDataEntity.accountDisplayName = status.account?.displayName
+            statusDataEntity.accountId = status.account!.id
+            statusDataEntity.accountUsername = status.account!.username
+            statusDataEntity.applicationName = status.application?.name
+            statusDataEntity.applicationWebsite = status.application?.website
+            statusDataEntity.bookmarked = status.bookmarked
+            statusDataEntity.content = status.content
+            statusDataEntity.createdAt = status.createdAt
+            statusDataEntity.favourited = status.favourited
+            statusDataEntity.favouritesCount = Int32(status.favouritesCount)
+            statusDataEntity.id = status.id
+            statusDataEntity.inReplyToAccount = status.inReplyToAccount
+            statusDataEntity.inReplyToId = status.inReplyToId
+            statusDataEntity.muted = status.muted
+            statusDataEntity.pinned = status.pinned
+            statusDataEntity.reblogged = status.reblogged
+            statusDataEntity.reblogsCount = Int32(status.reblogsCount)
+            statusDataEntity.sensitive = status.sensitive
+            statusDataEntity.spoilerText = status.spoilerText
+            statusDataEntity.uri = status.uri
+            statusDataEntity.url = status.url
+            statusDataEntity.visibility = status.visibility.rawValue
+                        
+            for attachment in status.mediaAttachments {
+                let imageData = try await self.fetchImage(attachment: attachment)
+                
+                guard let imageData = imageData else {
+                    continue
+                }
+                
+                /*
+                var exif = image.getExifData()
+                if let dict = exif as? [String: AnyObject] {
+                    dict.keys.map { key in
+                        print(key)
+                        print(dict[key])
+                    }
+                }
+                */
+                
+                // Save attachment in database.
+                let attachmentData = attachmentDataHandler.createAttachmnentDataEntity()
+                attachmentData.id = attachment.id
+                attachmentData.url = attachment.url
+                attachmentData.blurhash = attachment.blurhash
+                attachmentData.previewUrl = attachment.previewUrl
+                attachmentData.remoteUrl = attachment.remoteUrl
+                attachmentData.text = attachment.description
+                attachmentData.type = attachment.type.rawValue
+                
+                attachmentData.statusId = statusDataEntity.id
+                attachmentData.data = imageData
 
-            if let imageStatus {
-                imagesCache.append(imageStatus)
+                attachmentData.statusRelation = statusDataEntity
+                statusDataEntity.addToAttachmentRelation(attachmentData)
             }
         }
         
-        self.images = imagesCache
+        try self.viewContext.save()
     }
     
-    public func fetchImage(status: Status) async throws -> ImageStatus? {
-        guard let url = status.mediaAttachments.first?.url, let id = status.mediaAttachments.first?.id else {
+    public func fetchImage(attachment: Attachment) async throws -> Data? {
+        guard let data = try await RemoteFileService.shared.fetchData(url: attachment.url) else {
             return nil
         }
         
-        guard let data = try await RemoteFileService.shared.fetchData(url: url) else {
-            return nil
-        }
-        
-        let image = UIImage(data: data)
-        guard let image = image else {
-            return nil
-        }
-        
-        /*
-        var exif = image.getExifData()
-        if let dict = exif as? [String: AnyObject] {
-            dict.keys.map { key in
-                print(key)
-                print(dict[key])
-            }
-        }
-        */
-        
-        return ImageStatus(id: id,image: image, status: status)
+        return data
     }
 }
 

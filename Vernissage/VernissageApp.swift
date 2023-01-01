@@ -36,16 +36,17 @@ struct VernissageApp: SwiftUI.App {
             }
             .task {
                 let accountDataHandler = AccountDataHandler()
-                let accounts = accountDataHandler.getAccountsData()
+                let currentAccount = accountDataHandler.getCurrentAccountData()
                 
                 // When we dont have even one account stored in database then we have to ask user to enter server and sign in.
-                guard let accountData = accounts.first, let accessToken = accountData.accessToken else {
+                guard let accountData = currentAccount, let accessToken = accountData.accessToken else {
                     self.applicationViewMode = .signIn
                     return
                 }
                 
                 // When we have at least one account then we have to verify access token.
                 let client = MastodonClient(baseURL: accountData.serverUrl).getAuthenticated(token: accessToken)
+
                 do {
                     let account = try await client.verifyCredentials()
                     try await self.updateAccount(accountData: accountData, account: account)
@@ -116,6 +117,11 @@ struct VernissageApp: SwiftUI.App {
                 print("Avatar has not been downloaded")
             }
         }
+        
+        // We have to be sure that account id is saved as default account.
+        let applicationSettingsHandler = ApplicationSettingsHandler()
+        let defaultSettings = applicationSettingsHandler.getDefaultSettings()
+        defaultSettings.currentAccount = accountData.id
         
         // Save account data in database and in application state.
         try self.coreDataHandler.container.viewContext.save()

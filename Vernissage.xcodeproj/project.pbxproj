@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F80048032961850500E6868A /* AttachmentData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80047FF2961850500E6868A /* AttachmentData+CoreDataClass.swift */; };
+		F80048042961850500E6868A /* AttachmentData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048002961850500E6868A /* AttachmentData+CoreDataProperties.swift */; };
+		F80048052961850500E6868A /* StatusData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048012961850500E6868A /* StatusData+CoreDataClass.swift */; };
+		F80048062961850500E6868A /* StatusData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048022961850500E6868A /* StatusData+CoreDataProperties.swift */; };
+		F80048082961E6DE00E6868A /* StatusDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048072961E6DE00E6868A /* StatusDataHandler.swift */; };
+		F800480A2961EA1900E6868A /* AttachmentDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048092961EA1900E6868A /* AttachmentDataHandler.swift */; };
 		F8341F90295C636C009C8EE6 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8341F8F295C636C009C8EE6 /* UIImage.swift */; };
 		F8341F92295C63BB009C8EE6 /* ImageStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8341F91295C63BB009C8EE6 /* ImageStatus.swift */; };
 		F83901A4295D864D00456AE2 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83901A3295D864D00456AE2 /* TagView.swift */; };
@@ -38,6 +44,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F80047FF2961850500E6868A /* AttachmentData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttachmentData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F80048002961850500E6868A /* AttachmentData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttachmentData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F80048012961850500E6868A /* StatusData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F80048022961850500E6868A /* StatusData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F80048072961E6DE00E6868A /* StatusDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusDataHandler.swift; sourceTree = "<group>"; };
+		F80048092961EA1900E6868A /* AttachmentDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentDataHandler.swift; sourceTree = "<group>"; };
 		F8341F8F295C636C009C8EE6 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		F8341F91295C63BB009C8EE6 /* ImageStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStatus.swift; sourceTree = "<group>"; };
 		F83901A3295D864D00456AE2 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
@@ -116,6 +128,10 @@
 		F8341F96295C6427009C8EE6 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				F80047FF2961850500E6868A /* AttachmentData+CoreDataClass.swift */,
+				F80048002961850500E6868A /* AttachmentData+CoreDataProperties.swift */,
+				F80048012961850500E6868A /* StatusData+CoreDataClass.swift */,
+				F80048022961850500E6868A /* StatusData+CoreDataProperties.swift */,
 				F866F69E296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift */,
 				F866F69F296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift */,
 				F88FAD28295F43B8009B20C9 /* AccountData+CoreDataClass.swift */,
@@ -123,6 +139,8 @@
 				F88C2474295C37BB0006098B /* CoreDataHandler.swift */,
 				F866F6A229604161002E8F88 /* AccountDataHandler.swift */,
 				F866F6A429604194002E8F88 /* ApplicationSettingsHandler.swift */,
+				F80048072961E6DE00E6868A /* StatusDataHandler.swift */,
+				F80048092961EA1900E6868A /* AttachmentDataHandler.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -272,14 +290,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F80048082961E6DE00E6868A /* StatusDataHandler.swift in Sources */,
 				F866F6A0296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift in Sources */,
 				F88FAD23295F3FC4009B20C9 /* LocalFeedView.swift in Sources */,
 				F88FAD2B295F43B8009B20C9 /* AccountData+CoreDataProperties.swift in Sources */,
+				F80048062961850500E6868A /* StatusData+CoreDataProperties.swift in Sources */,
 				F88FAD21295F3944009B20C9 /* HomeFeedView.swift in Sources */,
 				F88C2475295C37BB0006098B /* CoreDataHandler.swift in Sources */,
 				F88FAD2A295F43B8009B20C9 /* AccountData+CoreDataClass.swift in Sources */,
 				F8341F92295C63BB009C8EE6 /* ImageStatus.swift in Sources */,
+				F80048052961850500E6868A /* StatusData+CoreDataClass.swift in Sources */,
+				F80048042961850500E6868A /* AttachmentData+CoreDataProperties.swift in Sources */,
 				F83901A6295D8EC000456AE2 /* LabelIconView.swift in Sources */,
+				F800480A2961EA1900E6868A /* AttachmentDataHandler.swift in Sources */,
+				F80048032961850500E6868A /* AttachmentData+CoreDataClass.swift in Sources */,
 				F8341F90295C636C009C8EE6 /* UIImage.swift in Sources */,
 				F88C246E295C37B80006098B /* MainView.swift in Sources */,
 				F88C2478295C37BB0006098B /* Vernissage.xcdatamodeld in Sources */,
