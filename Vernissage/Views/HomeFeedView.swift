@@ -8,6 +8,7 @@
 import SwiftUI
 import MastodonSwift
 import UIKit
+import CoreData
 
 struct HomeFeedView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -26,12 +27,44 @@ struct HomeFeedView: View {
                 LazyVGrid(columns: gridColumns) {
                     ForEach(dbStatuses) { item in
                         NavigationLink(destination: DetailsView(statusData: item)) {
-                            if let attachmenData = item.attachmentRelation?.first(where: { element in true }) as? AttachmentData {
-                                Image(uiImage: UIImage(data: attachmenData.data)!)
-                                    .resizable().aspectRatio(contentMode: .fit)
+                            if let attachmenData = item.attachmentRelation?.first(where: { element in true }) as? AttachmentData,
+                               let uiImage = UIImage(data: attachmenData.data) {
+                                
+                                ZStack {
+                                    Image(uiImage: uiImage)
+                                        .resizable().aspectRatio(contentMode: .fit)
+                                    if let count = item.attachmentRelation?.count, count > 1 {
+                                        VStack(alignment:.trailing) {
+                                            Spacer()
+                                            HStack {
+                                                Spacer()
+                                                Text("1 / \(count)")
+                                                    .padding(.horizontal, 6)
+                                                    .padding(.vertical, 3)
+                                                    .font(.caption2)
+                                                    .foregroundColor(.black)
+                                                    .background(.ultraThinMaterial, in: Capsule())
+                                            }
+                                        }.padding()
+                                    }
+                                }
+                            } else {
+                                Text("Error")
                             }
                         }
                     }
+                    
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                        .onAppear {
+                            Task {
+                                do {
+                                    try await onBottomOfList()
+                                } catch {
+                                    print("Error", error)
+                                }
+                            }
+                        }
                 }
             }
             
@@ -58,7 +91,7 @@ struct HomeFeedView: View {
         }
         .refreshable {
             do {
-                try await loadData()
+                try await onTopOfList()
             } catch {
                 print("Error", error)
             }
@@ -67,7 +100,7 @@ struct HomeFeedView: View {
             do {
                 if self.dbStatuses.isEmpty {
                     self.showLoading = true
-                    try await loadData()
+                    try await onTopOfList()
                     self.showLoading = false
                 }
             } catch {
@@ -77,25 +110,54 @@ struct HomeFeedView: View {
         }
     }
     
-    private func loadData() async throws {
+    private func onBottomOfList() async throws {
+        // Load data from API and operate on CoreData on background context.
+        let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
+
+        // Get maximimum downloaded stauts id.
+        let statusDataHandler = StatusDataHandler()
+        let oldestStatus = statusDataHandler.getMinimumtatus(viewContext: backgroundContext)
+        
+        guard let oldestStatus = oldestStatus else {
+            return
+        }
+        
+        try await self.loadData(on: backgroundContext, maxId: oldestStatus.id)
+    }
+
+    private func onTopOfList() async throws {
+        // Load data from API and operate on CoreData on background context.
+        let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
+
+        // Get maximimum downloaded stauts id.
+        let statusDataHandler = StatusDataHandler()
+        let newestStatus = statusDataHandler.getMaximumStatus(viewContext: backgroundContext)
+        
+        guard let newestStatus = newestStatus else {
+            return
+        }
+        
+        try await self.loadData(on: backgroundContext, minId: newestStatus.id)
+    }
+    
+    private func loadData(on backgroundContext: NSManagedObjectContext, minId: String? = nil, maxId: String? = nil) async throws {
         guard let accessData = self.applicationState.accountData, let accessToken = accessData.accessToken else {
             return
         }
-                
+        
         // Get maximimum downloaded stauts id.
         let attachmentDataHandler = AttachmentDataHandler()
         let statusDataHandler = StatusDataHandler()
-        let lastStatus = statusDataHandler.getMaximumStatus()
         
         // Retrieve statuses from API.
         let client = MastodonClient(baseURL: accessData.serverUrl).getAuthenticated(token: accessToken)
-        let statuses = try await client.getHomeTimeline(minId: lastStatus?.id, limit: 40)
+        let statuses = try await client.getHomeTimeline(maxId: maxId, minId: minId, limit: 40)
         
         // Download status images and save it into database.
         for status in statuses {
             
             // Save status data in database.
-            let statusDataEntity = statusDataHandler.createStatusDataEntity()
+            let statusDataEntity = statusDataHandler.createStatusDataEntity(viewContext: backgroundContext)
             statusDataEntity.accountAvatar = status.account?.avatar
             statusDataEntity.accountDisplayName = status.account?.displayName
             statusDataEntity.accountId = status.account!.id
@@ -119,7 +181,7 @@ struct HomeFeedView: View {
             statusDataEntity.uri = status.uri
             statusDataEntity.url = status.url
             statusDataEntity.visibility = status.visibility.rawValue
-                        
+            
             for attachment in status.mediaAttachments {
                 let imageData = try await self.fetchImage(attachment: attachment)
                 
@@ -128,17 +190,17 @@ struct HomeFeedView: View {
                 }
                 
                 /*
-                var exif = image.getExifData()
-                if let dict = exif as? [String: AnyObject] {
-                    dict.keys.map { key in
-                        print(key)
-                        print(dict[key])
-                    }
-                }
-                */
+                 var exif = image.getExifData()
+                 if let dict = exif as? [String: AnyObject] {
+                 dict.keys.map { key in
+                 print(key)
+                 print(dict[key])
+                 }
+                 }
+                 */
                 
                 // Save attachment in database.
-                let attachmentData = attachmentDataHandler.createAttachmnentDataEntity()
+                let attachmentData = attachmentDataHandler.createAttachmnentDataEntity(viewContext: backgroundContext)
                 attachmentData.id = attachment.id
                 attachmentData.url = attachment.url
                 attachmentData.blurhash = attachment.blurhash
@@ -149,13 +211,13 @@ struct HomeFeedView: View {
                 
                 attachmentData.statusId = statusDataEntity.id
                 attachmentData.data = imageData
-
+                
                 attachmentData.statusRelation = statusDataEntity
                 statusDataEntity.addToAttachmentRelation(attachmentData)
             }
         }
         
-        try self.viewContext.save()
+        try backgroundContext.save()
     }
     
     public func fetchImage(attachment: Attachment) async throws -> Data? {

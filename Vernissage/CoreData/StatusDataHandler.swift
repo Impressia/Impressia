@@ -6,6 +6,7 @@
     
 
 import Foundation
+import CoreData
 
 class StatusDataHandler {
     func getStatusesData() -> [StatusData] {
@@ -19,8 +20,8 @@ class StatusDataHandler {
         }
     }
     
-    func getMaximumStatus() -> StatusData? {
-        let context = CoreDataHandler.shared.container.viewContext
+    func getMaximumStatus(viewContext: NSManagedObjectContext? = nil) -> StatusData? {
+        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
         let fetchRequest = StatusData.fetchRequest()
 
         fetchRequest.fetchLimit = 1
@@ -34,8 +35,23 @@ class StatusDataHandler {
         }
     }
     
-    func createStatusDataEntity() -> StatusData {
-        let context = CoreDataHandler.shared.container.viewContext
+    func getMinimumtatus(viewContext: NSManagedObjectContext? = nil) -> StatusData? {
+        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
+        let fetchRequest = StatusData.fetchRequest()
+
+        fetchRequest.fetchLimit = 1
+        let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        do {
+            let statuses = try context.fetch(fetchRequest)
+            return statuses.first
+        } catch {
+            return nil
+        }
+    }
+    
+    func createStatusDataEntity(viewContext: NSManagedObjectContext? = nil) -> StatusData {
+        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
         return StatusData(context: context)
     }
 }

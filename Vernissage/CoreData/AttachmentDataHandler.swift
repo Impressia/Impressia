@@ -6,6 +6,7 @@
     
 
 import Foundation
+import CoreData
 
 class AttachmentDataHandler {
     func getAttachmentsData() -> [AttachmentData] {
@@ -19,8 +20,8 @@ class AttachmentDataHandler {
         }
     }
     
-    func createAttachmnentDataEntity() -> AttachmentData {
-        let context = CoreDataHandler.shared.container.viewContext
+    func createAttachmnentDataEntity(viewContext: NSManagedObjectContext? = nil) -> AttachmentData {
+        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
         return AttachmentData(context: context)
     }
 }

@@ -35,6 +35,10 @@ public class  CoreDataHandler {
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
     
+    public func newBackgroundContext() -> NSManagedObjectContext {
+        self.container.newBackgroundContext()
+    }
+    
     public func save() {
         let context = self.container.viewContext
         if context.hasChanges {
