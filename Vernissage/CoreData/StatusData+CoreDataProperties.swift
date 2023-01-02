@@ -39,8 +39,7 @@ extension StatusData {
     @NSManaged public var uri: String?
     @NSManaged public var url: URL?
     @NSManaged public var visibility: String
-    @NSManaged public var attachmentRelation: NSSet?
-
+    @NSManaged public var attachmentRelation: Set<AttachmentData>?
 }
 
 // MARK: Generated accessors for attachmentRelation
@@ -62,4 +61,10 @@ extension StatusData {
 
 extension StatusData : Identifiable {
 
+}
+
+extension StatusData {
+    func attachments() -> [AttachmentData] {
+        return Array(self.attachmentRelation ?? [])
+    }
 }

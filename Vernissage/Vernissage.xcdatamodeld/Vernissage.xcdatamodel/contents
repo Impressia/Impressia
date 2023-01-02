@@ -26,7 +26,7 @@
     </entity>
     <entity name="AttachmentData" representedClassName="AttachmentData" syncable="YES">
         <attribute name="blurhash" optional="YES" attributeType="String"/>
-        <attribute name="data" attributeType="Binary"/>
+        <attribute name="data" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="id" attributeType="String"/>
         <attribute name="previewUrl" optional="YES" attributeType="URI"/>
         <attribute name="remoteUrl" optional="YES" attributeType="URI"/>

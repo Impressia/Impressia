@@ -3,7 +3,6 @@
 //  Copyright © 2022 Marcin Czachurski and the repository contributors.
 //  Licensed under the MIT License.
 //
-    
 
 import SwiftUI
 import MastodonSwift
@@ -25,14 +24,16 @@ struct HomeFeedView: View {
         ZStack {
             ScrollView {
                 LazyVGrid(columns: gridColumns) {
-                    ForEach(dbStatuses) { item in
+                    ForEach(dbStatuses, id: \.self) { item in
                         NavigationLink(destination: DetailsView(statusData: item)) {
-                            if let attachmenData = item.attachmentRelation?.first(where: { element in true }) as? AttachmentData,
+                            if let attachmenData = item.attachmentRelation?.first,
                                let uiImage = UIImage(data: attachmenData.data) {
                                 
                                 ZStack {
                                     Image(uiImage: uiImage)
-                                        .resizable().aspectRatio(contentMode: .fit)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+
                                     if let count = item.attachmentRelation?.count, count > 1 {
                                         VStack(alignment:.trailing) {
                                             Spacer()
@@ -67,22 +68,6 @@ struct HomeFeedView: View {
                         }
                 }
             }
-            
-            VStack(alignment:.trailing) {
-                Spacer()
-                HStack {
-                    Spacer()
-                    Button {
-                        
-                    } label: {
-                        Image(systemName: "plus")
-                            .font(.body)
-                            .padding(16)
-                            .foregroundColor(.white)
-                            .background(.ultraThinMaterial, in: Circle())
-                    }
-                }
-            }.padding()
             
             if showLoading {
                 ProgressView()

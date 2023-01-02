@@ -6,19 +6,28 @@
 
 import SwiftUI
 import MastodonSwift
+import AVFoundation
 
 struct DetailsView: View {
     @Environment(\.dismiss) private var dismiss
+
     @State public var statusData: StatusData
+    @State private var height: Double = 0.0
     
     var body: some View {
         ScrollView {
             VStack (alignment: .leading) {
-                if let attachmentData = statusData.attachmentRelation?.first(where: { elemet in true}) as? AttachmentData {
-                    Image(uiImage: UIImage(data: attachmentData.data)!)
-                        .resizable().aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: .infinity)
+                TabView {
+                    ForEach(statusData.attachments(), id: \.self) { attachment in
+                        if let image = UIImage(data: attachment.data) {
+                            Image(uiImage: image)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                        }
+                    }
                 }
+                .frame(height: CGFloat(self.height))
+                .tabViewStyle(PageTabViewStyle())
                 
                 VStack(alignment: .leading) {
                     HStack (alignment: .center) {
@@ -88,6 +97,26 @@ struct DetailsView: View {
             }
         }
         .navigationBarTitle("Details")
+        .onAppear {
+            self.calculateImageHeight()
+        }
+    }
+    
+    private func calculateImageHeight() {
+        var imageHeight = 0.0
+        var imageWidth = 0.0
+        
+        for item in statusData.attachments() {
+            if let image = UIImage(data: item.data) {
+                if image.size.height > imageHeight {
+                    imageHeight = image.size.height
+                    imageWidth = image.size.width
+                }
+            }
+        }
+        
+        let divider = imageWidth / UIScreen.main.bounds.size.width
+        self.height = imageHeight / divider
     }
 }
 
