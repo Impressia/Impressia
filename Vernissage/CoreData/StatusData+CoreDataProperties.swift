@@ -62,9 +62,3 @@ extension StatusData {
 extension StatusData : Identifiable {
 
 }
-
-extension StatusData {
-    func attachments() -> [AttachmentData] {
-        return Array(self.attachmentRelation ?? [])
-    }
-}

@@ -5,9 +5,6 @@
 //
 
 import SwiftUI
-import MastodonSwift
-import UIKit
-import CoreData
 
 struct HomeFeedView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -25,33 +22,10 @@ struct HomeFeedView: View {
             ScrollView {
                 LazyVGrid(columns: gridColumns) {
                     ForEach(dbStatuses, id: \.self) { item in
-                        NavigationLink(destination: DetailsView(statusData: item)) {
-                            if let attachmenData = item.attachmentRelation?.first,
-                               let uiImage = UIImage(data: attachmenData.data) {
-                                
-                                ZStack {
-                                    Image(uiImage: uiImage)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-
-                                    if let count = item.attachmentRelation?.count, count > 1 {
-                                        VStack(alignment:.trailing) {
-                                            Spacer()
-                                            HStack {
-                                                Spacer()
-                                                Text("1 / \(count)")
-                                                    .padding(.horizontal, 6)
-                                                    .padding(.vertical, 3)
-                                                    .font(.caption2)
-                                                    .foregroundColor(.black)
-                                                    .background(.ultraThinMaterial, in: Capsule())
-                                            }
-                                        }.padding()
-                                    }
-                                }
-                            } else {
-                                Text("Error")
-                            }
+                        NavigationLink(destination:
+                                        DetailsView(statusData: item)
+                                            .environmentObject(applicationState)) {
+                            ImageRow(attachments: item.attachments())
                         }
                     }
                     
@@ -60,7 +34,9 @@ struct HomeFeedView: View {
                         .onAppear {
                             Task {
                                 do {
-                                    try await onBottomOfList()
+                                    if let accountData = self.applicationState.accountData {
+                                        try await TimelineService.shared.onBottomOfList(for: accountData)
+                                    }
                                 } catch {
                                     print("Error", error)
                                 }
@@ -76,7 +52,9 @@ struct HomeFeedView: View {
         }
         .refreshable {
             do {
-                try await onTopOfList()
+                if let accountData = self.applicationState.accountData {
+                    try await TimelineService.shared.onTopOfList(for: accountData)
+                }
             } catch {
                 print("Error", error)
             }
@@ -85,7 +63,9 @@ struct HomeFeedView: View {
             do {
                 if self.dbStatuses.isEmpty {
                     self.showLoading = true
-                    try await onTopOfList()
+                    if let accountData = self.applicationState.accountData {
+                        try await TimelineService.shared.onTopOfList(for: accountData)
+                    }
                     self.showLoading = false
                 }
             } catch {
@@ -93,124 +73,6 @@ struct HomeFeedView: View {
                 print("Error", error)
             }
         }
-    }
-    
-    private func onBottomOfList() async throws {
-        // Load data from API and operate on CoreData on background context.
-        let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
-
-        // Get maximimum downloaded stauts id.
-        let statusDataHandler = StatusDataHandler()
-        let oldestStatus = statusDataHandler.getMinimumtatus(viewContext: backgroundContext)
-        
-        guard let oldestStatus = oldestStatus else {
-            return
-        }
-        
-        try await self.loadData(on: backgroundContext, maxId: oldestStatus.id)
-    }
-
-    private func onTopOfList() async throws {
-        // Load data from API and operate on CoreData on background context.
-        let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
-
-        // Get maximimum downloaded stauts id.
-        let statusDataHandler = StatusDataHandler()
-        let newestStatus = statusDataHandler.getMaximumStatus(viewContext: backgroundContext)
-        
-        guard let newestStatus = newestStatus else {
-            return
-        }
-        
-        try await self.loadData(on: backgroundContext, minId: newestStatus.id)
-    }
-    
-    private func loadData(on backgroundContext: NSManagedObjectContext, minId: String? = nil, maxId: String? = nil) async throws {
-        guard let accessData = self.applicationState.accountData, let accessToken = accessData.accessToken else {
-            return
-        }
-        
-        // Get maximimum downloaded stauts id.
-        let attachmentDataHandler = AttachmentDataHandler()
-        let statusDataHandler = StatusDataHandler()
-        
-        // Retrieve statuses from API.
-        let client = MastodonClient(baseURL: accessData.serverUrl).getAuthenticated(token: accessToken)
-        let statuses = try await client.getHomeTimeline(maxId: maxId, minId: minId, limit: 40)
-        
-        // Download status images and save it into database.
-        for status in statuses {
-            
-            // Save status data in database.
-            let statusDataEntity = statusDataHandler.createStatusDataEntity(viewContext: backgroundContext)
-            statusDataEntity.accountAvatar = status.account?.avatar
-            statusDataEntity.accountDisplayName = status.account?.displayName
-            statusDataEntity.accountId = status.account!.id
-            statusDataEntity.accountUsername = status.account!.username
-            statusDataEntity.applicationName = status.application?.name
-            statusDataEntity.applicationWebsite = status.application?.website
-            statusDataEntity.bookmarked = status.bookmarked
-            statusDataEntity.content = status.content
-            statusDataEntity.createdAt = status.createdAt
-            statusDataEntity.favourited = status.favourited
-            statusDataEntity.favouritesCount = Int32(status.favouritesCount)
-            statusDataEntity.id = status.id
-            statusDataEntity.inReplyToAccount = status.inReplyToAccount
-            statusDataEntity.inReplyToId = status.inReplyToId
-            statusDataEntity.muted = status.muted
-            statusDataEntity.pinned = status.pinned
-            statusDataEntity.reblogged = status.reblogged
-            statusDataEntity.reblogsCount = Int32(status.reblogsCount)
-            statusDataEntity.sensitive = status.sensitive
-            statusDataEntity.spoilerText = status.spoilerText
-            statusDataEntity.uri = status.uri
-            statusDataEntity.url = status.url
-            statusDataEntity.visibility = status.visibility.rawValue
-            
-            for attachment in status.mediaAttachments {
-                let imageData = try await self.fetchImage(attachment: attachment)
-                
-                guard let imageData = imageData else {
-                    continue
-                }
-                
-                /*
-                 var exif = image.getExifData()
-                 if let dict = exif as? [String: AnyObject] {
-                 dict.keys.map { key in
-                 print(key)
-                 print(dict[key])
-                 }
-                 }
-                 */
-                
-                // Save attachment in database.
-                let attachmentData = attachmentDataHandler.createAttachmnentDataEntity(viewContext: backgroundContext)
-                attachmentData.id = attachment.id
-                attachmentData.url = attachment.url
-                attachmentData.blurhash = attachment.blurhash
-                attachmentData.previewUrl = attachment.previewUrl
-                attachmentData.remoteUrl = attachment.remoteUrl
-                attachmentData.text = attachment.description
-                attachmentData.type = attachment.type.rawValue
-                
-                attachmentData.statusId = statusDataEntity.id
-                attachmentData.data = imageData
-                
-                attachmentData.statusRelation = statusDataEntity
-                statusDataEntity.addToAttachmentRelation(attachmentData)
-            }
-        }
-        
-        try backgroundContext.save()
-    }
-    
-    public func fetchImage(attachment: Attachment) async throws -> Data? {
-        guard let data = try await RemoteFileService.shared.fetchData(url: attachment.url) else {
-            return nil
-        }
-        
-        return data
     }
 }
 

@@ -11,13 +11,17 @@ struct HTMLFormattedText: UIViewRepresentable {
 
     let text: String
     private let textView = UITextView()
+    private let fontSize: Int
+    private let width: Int
 
-    init(_ content: String) {
+    init(_ content: String, withFontSize fontSize: Int = 16, andWidth width: Int? = nil) {
         self.text = content
+        self.fontSize = fontSize
+        self.width = width ?? Int(UIScreen.main.bounds.width) - 16
     }
 
     func makeUIView(context: UIViewRepresentableContext<Self>) -> UITextView {
-        textView.widthAnchor.constraint(equalToConstant:UIScreen.main.bounds.width - 16).isActive = true
+        textView.widthAnchor.constraint(equalToConstant: CGFloat(self.width)).isActive = true
         textView.isSelectable = false
         textView.isUserInteractionEnabled = false
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -42,12 +46,12 @@ struct HTMLFormattedText: UIViewRepresentable {
         }
       
         let largeAttributes = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16),
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: CGFloat(self.fontSize)),
             NSAttributedString.Key.foregroundColor: UIColor(Color("mainTextColor"))
         ]
 
         let linkAttributes = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16),
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: CGFloat(self.fontSize)),
             NSAttributedString.Key.foregroundColor: UIColor(Color("AccentColor"))
         ]
       

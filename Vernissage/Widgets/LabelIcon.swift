@@ -3,11 +3,10 @@
 //  Copyright © 2022 Marcin Czachurski and the repository contributors.
 //  Licensed under the MIT License.
 //
-    
 
 import SwiftUI
 
-struct LabelIconView: View {
+struct LabelIcon: View {
     let iconName: String
     let value: String
     
@@ -24,6 +23,6 @@ struct LabelIconView: View {
 
 struct LabelIconView_Previews: PreviewProvider {
     static var previews: some View {
-        LabelIconView(iconName: "camera", value: "Sony A7")
+        LabelIcon(iconName: "camera", value: "Sony A7")
     }
 }

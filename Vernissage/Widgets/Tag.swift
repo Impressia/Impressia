@@ -3,11 +3,10 @@
 //  Copyright © 2022 Marcin Czachurski and the repository contributors.
 //  Licensed under the MIT License.
 //
-    
 
 import SwiftUI
 
-struct TagView<Content: View>: View {
+struct Tag<Content: View>: View {
     let content: Content
     let action: () -> Void
 
@@ -31,7 +30,7 @@ struct TagView<Content: View>: View {
 
 struct TagView_Previews: PreviewProvider {
     static var previews: some View {
-        TagView {
+        Tag {
             
         } content: {
             HStack {
