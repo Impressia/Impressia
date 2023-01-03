@@ -34,6 +34,7 @@ extension StatusData {
     @NSManaged public var pinned: Bool
     @NSManaged public var reblogged: Bool
     @NSManaged public var reblogsCount: Int32
+    @NSManaged public var repliesCount: Int32
     @NSManaged public var sensitive: Bool
     @NSManaged public var spoilerText: String?
     @NSManaged public var uri: String?

@@ -33,12 +33,8 @@ public class TimelineService {
         // Get maximimum downloaded stauts id.
         let statusDataHandler = StatusDataHandler()
         let newestStatus = statusDataHandler.getMaximumStatus(viewContext: backgroundContext)
-        
-        guard let newestStatus = newestStatus else {
-            return
-        }
-        
-        try await self.loadData(for: accountData, on: backgroundContext, minId: newestStatus.id)
+                
+        try await self.loadData(for: accountData, on: backgroundContext, minId: newestStatus?.id)
     }
     
     public func getComments(for statusId: String, and accountData: AccountData) async throws -> Context {
@@ -82,6 +78,7 @@ public class TimelineService {
             statusDataEntity.pinned = status.pinned
             statusDataEntity.reblogged = status.reblogged
             statusDataEntity.reblogsCount = Int32(status.reblogsCount)
+            statusDataEntity.repliesCount = Int32(status.repliesCount)
             statusDataEntity.sensitive = status.sensitive
             statusDataEntity.spoilerText = status.spoilerText
             statusDataEntity.uri = status.uri

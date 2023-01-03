@@ -34,6 +34,10 @@ struct DetailsView: View {
                         Text(statusData.createdAt.toDate(.isoDateTimeMilliSec) ?? Date(), style: .relative)
                             .padding(.horizontal, -4)
                         Text("ago")
+                        if let applicationName = statusData.applicationName {
+                            Text("via \(applicationName)")
+                                .padding(.horizontal, -4)
+                        }
                     }
                     .foregroundColor(Color("lightGrayColor"))
                     .font(.footnote)
@@ -42,7 +46,21 @@ struct DetailsView: View {
                 }
                 .padding(8)
                 
-                CommentsSection(statusId: statusData.id)
+                if statusData.repliesCount > 0 {
+                    HStack (alignment: .center) {
+                        Image(systemName: "message")
+                            .padding(.leading, 8)
+                            .padding(.vertical, 8)
+                        Text("\(statusData.repliesCount) replies")
+                        Spacer()
+                    }
+                    .font(.footnote)
+                    .frame(maxWidth: .infinity)
+                    .background(Color("mainTextColor").opacity(0.05))
+                    .foregroundColor(Color("lightGrayColor"))
+                    
+                    CommentsSection(statusId: statusData.id)
+                }
             }
         }
         .navigationBarTitle("Details")

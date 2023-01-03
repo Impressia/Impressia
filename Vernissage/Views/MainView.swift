@@ -79,6 +79,8 @@ struct MainView: View {
                     }
                 }
                 
+                Divider()
+                
                 Button {
                     viewMode = .notifications
                 } label: {
@@ -103,8 +105,29 @@ struct MainView: View {
     @ToolbarContentBuilder
     private func getLeadingToolbar() -> some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
-            Button {
-                // Open settings view.
+            Menu {
+                
+                Button {
+                    // Switch accounts...
+                } label: {
+                    HStack {
+                        Text(self.applicationState.accountData?.displayName ?? self.applicationState.accountData?.username ?? "")
+                        Image(systemName: "person.circle.fill")
+                            .resizable()
+                            .foregroundColor(Color("mainTextColor"))
+                    }
+                }
+
+                Divider()
+                
+                Button {
+                    // Open settings...
+                } label: {
+                    HStack {
+                        Text("Settings")
+                        Image(systemName: "gear")
+                    }
+                }
             } label: {
                 if let avatarData = self.applicationState.accountData?.avatarData, let uiImage = UIImage(data: avatarData) {
                     Image(uiImage: uiImage)
