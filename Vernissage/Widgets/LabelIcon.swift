@@ -11,13 +11,13 @@ struct LabelIcon: View {
     let value: String
     
     var body: some View {
-        HStack {
+        HStack(alignment: .center) {
             Image(systemName: iconName)
-                .frame(width: 36)
+                .frame(width: 30, alignment: .leading)
             Text(value)
                 .font(.footnote)
         }
-        .padding(.vertical, 4)
+        .padding(.vertical, 2)
     }
 }
 

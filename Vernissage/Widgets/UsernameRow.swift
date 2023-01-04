@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct UsernameRow: View {
-    @State public var statusData: StatusData
+    @ObservedObject public var statusData: StatusData
 
     var body: some View {
         HStack (alignment: .center) {
@@ -19,15 +19,15 @@ struct UsernameRow: View {
             } placeholder: {
                 Image(systemName: "person.circle")
                     .resizable()
-                    .foregroundColor(Color("mainTextColor"))
+                    .foregroundColor(Color("MainTextColor"))
             }
             .frame(width: 48.0, height: 48.0)
             
             VStack (alignment: .leading) {
                 Text(statusData.accountDisplayName ?? statusData.accountUsername)
-                    .foregroundColor(Color("displayNameColor"))
+                    .foregroundColor(Color("DisplayNameColor"))
                 Text("@\(statusData.accountUsername)")
-                    .foregroundColor(Color("lightGrayColor"))
+                    .foregroundColor(Color("LightGrayColor"))
                     .font(.footnote)
             }
             .padding(.leading, 8)

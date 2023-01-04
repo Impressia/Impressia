@@ -97,7 +97,7 @@ struct MainView: View {
                         .font(.subheadline)
                 }
                 .frame(width: 150)
-                .foregroundColor(Color("mainTextColor"))
+                .foregroundColor(Color("MainTextColor"))
             }
         }
     }
@@ -114,7 +114,7 @@ struct MainView: View {
                         Text(self.applicationState.accountData?.displayName ?? self.applicationState.accountData?.username ?? "")
                         Image(systemName: "person.circle.fill")
                             .resizable()
-                            .foregroundColor(Color("mainTextColor"))
+                            .foregroundColor(Color("MainTextColor"))
                     }
                 }
 
@@ -138,7 +138,7 @@ struct MainView: View {
                     Image(systemName: "person.circle")
                         .resizable()
                         .frame(width: 32.0, height: 32.0)
-                        .foregroundColor(Color("mainTextColor"))
+                        .foregroundColor(Color("MainTextColor"))
                 }
             }
         }

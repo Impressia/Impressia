@@ -12,8 +12,8 @@ struct CommentsSection: View {
 
     @State public var statusId: String
     @State public var withDivider = true
-    @State private var context: Context?    
-
+    @State private var context: Context?
+    
     private let contentWidth = Int(UIScreen.main.bounds.width) - 50
     
     var body: some View {
@@ -29,42 +29,87 @@ struct CommentsSection: View {
                         } placeholder: {
                             Image(systemName: "person.circle")
                                 .resizable()
-                                .foregroundColor(Color("mainTextColor"))
+                                .foregroundColor(Color("MainTextColor"))
                         }
                         .frame(width: 32.0, height: 32.0)
                         
                         VStack (alignment: .leading) {
                             HStack (alignment: .top) {
                                 Text(status.account?.displayName ?? status.account?.username ?? "")
-                                    .foregroundColor(Color("displayNameColor"))
+                                    .foregroundColor(Color("DisplayNameColor"))
                                     .font(.footnote)
                                     .fontWeight(.bold)
                                 Text("@\(status.account?.username ?? "")")
-                                    .foregroundColor(Color("lightGrayColor"))
+                                    .foregroundColor(Color("LightGrayColor"))
                                     .font(.footnote)
+                                
+                                Spacer()
+                                
+                                Text(status.createdAt.toRelative(.isoDateTimeMilliSec))
+                                    .foregroundColor(Color("LightGrayColor").opacity(0.5))
+                                    .font(.footnote)
+
+                                /*
+                                Image(systemName: "message")
+                                    .foregroundColor(Color.accentColor)
+                                Image(systemName: "hand.thumbsup")
+                                    .foregroundColor(Color.accentColor)
+                                 */
                             }
                             .padding(.bottom, -10)
                             
+  
+                            
                             HTMLFormattedText(status.content, withFontSize: 14, andWidth: contentWidth)
                                 .padding(.leading, -4)
+                            
+                            if status.mediaAttachments.count > 0 {
+                                LazyVGrid(columns: Array(repeating: .init(.flexible()), count: status.mediaAttachments.count == 1 ? 1 : 2), alignment: .center, spacing: 4) {
+                                    ForEach(status.mediaAttachments, id: \.id) { attachment in
+                                        AsyncImage(url: status.mediaAttachments[0].url) { image in
+                                            image
+                                                .resizable()
+                                                .scaledToFill()
+                                                .frame(minWidth: 0, maxWidth: .infinity)
+                                                .frame(height: status.mediaAttachments.count == 1 ? 200 : 100)
+                                                .cornerRadius(10)
+                                                .shadow(color: Color("MainTextColor").opacity(0.3), radius: 2)
+                                        } placeholder: {
+                                            Image(systemName: "photo")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(minWidth: 0, maxWidth: .infinity)
+                                                .frame(height: status.mediaAttachments.count == 1 ? 200 : 100)
+                                                .foregroundColor(Color("MainTextColor"))
+                                                .opacity(0.05)
+                                        }
+                                    }
+                                }
+                                .padding(.bottom, 8)
+                            }
                         }
                     }
                     .padding(.horizontal, 8)
+                    .padding(.bottom, 8)
+
                     
                     CommentsSection(statusId: status.id, withDivider: false)
                     
                     if withDivider {
                         Rectangle()
                             .size(width: UIScreen.main.bounds.width, height: 4)
-                            .fill(Color("mainTextColor"))
-                            .opacity(0.05)
+                            .fill(Color("MainTextColor"))
+                            .opacity(0.1)
                     }
                 }
             }
-        }.task {
+        }
+        .task {
             do {
                 if let accountData = applicationState.accountData {
-                    self.context = try await TimelineService.shared.getComments(for: statusId, and: accountData)
+                    self.context = try await TimelineService.shared.getComments(
+                        for: statusId,
+                        and: accountData)
                 }
             } catch {
                 print("Error \(error.localizedDescription)")

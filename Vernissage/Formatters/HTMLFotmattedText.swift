@@ -26,6 +26,7 @@ struct HTMLFormattedText: UIViewRepresentable {
         textView.isUserInteractionEnabled = false
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isScrollEnabled = false
+        textView.backgroundColor = UIColor(Color.clear)
 
         return textView
     }
@@ -47,12 +48,12 @@ struct HTMLFormattedText: UIViewRepresentable {
       
         let largeAttributes = [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: CGFloat(self.fontSize)),
-            NSAttributedString.Key.foregroundColor: UIColor(Color("mainTextColor"))
+            NSAttributedString.Key.foregroundColor: UIColor(Color("MainTextColor"))
         ]
 
         let linkAttributes = [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: CGFloat(self.fontSize)),
-            NSAttributedString.Key.foregroundColor: UIColor(Color("AccentColor"))
+            NSAttributedString.Key.foregroundColor: UIColor(Color.accentColor)
         ]
       
         if let attributedString = try? NSMutableAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) {

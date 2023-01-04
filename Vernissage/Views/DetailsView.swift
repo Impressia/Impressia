@@ -9,7 +9,8 @@ import MastodonSwift
 import AVFoundation
 
 struct DetailsView: View {
-    @State public var statusData: StatusData
+    @EnvironmentObject var applicationState: ApplicationState
+    @ObservedObject public var statusData: StatusData
     
     var body: some View {
         ScrollView {
@@ -18,6 +19,7 @@ struct DetailsView: View {
 
                 VStack(alignment: .leading) {
                     UsernameRow(statusData: statusData)
+
                     HTMLFormattedText(statusData.content)
                         .padding(.leading, -4)
                     
@@ -27,44 +29,44 @@ struct DetailsView: View {
                         LabelIcon(iconName: "timelapse", value: "24.0 mm, f/1.8, 1/640s, ISO 100")
                         LabelIcon(iconName: "calendar", value: "2 Oct 2022")
                     }
-                    .foregroundColor(Color("lightGrayColor"))
+                    .foregroundColor(Color("LightGrayColor"))
                     
                     HStack {
                         Text("Uploaded")
-                        Text(statusData.createdAt.toDate(.isoDateTimeMilliSec) ?? Date(), style: .relative)
+                        Text(statusData.createdAt.toRelative(.isoDateTimeMilliSec))
                             .padding(.horizontal, -4)
-                        Text("ago")
                         if let applicationName = statusData.applicationName {
                             Text("via \(applicationName)")
-                                .padding(.horizontal, -4)
                         }
                     }
-                    .foregroundColor(Color("lightGrayColor"))
+                    .foregroundColor(Color("LightGrayColor"))
                     .font(.footnote)
                     
                     InteractionRow(statusData: statusData)
+                        .padding(8)
                 }
                 .padding(8)
                 
-                if statusData.repliesCount > 0 {
-                    HStack (alignment: .center) {
-                        Image(systemName: "message")
-                            .padding(.leading, 8)
-                            .padding(.vertical, 8)
-                        Text("\(statusData.repliesCount) replies")
-                        Spacer()
-                    }
-                    .font(.footnote)
-                    .frame(maxWidth: .infinity)
-                    .background(Color("mainTextColor").opacity(0.05))
-                    .foregroundColor(Color("lightGrayColor"))
-                    
-                    CommentsSection(statusId: statusData.id)
-                }
+                Rectangle()
+                    .size(width: UIScreen.main.bounds.width, height: 4)
+                    .fill(Color("MainTextColor"))
+                    .opacity(0.1)
+                
+                CommentsSection(statusId: statusData.id)
             }
         }
         .navigationBarTitle("Details")
         .onAppear {
+            Task {
+                do {
+                    if let accountData = self.applicationState.accountData {
+                        let timelineService = TimelineService()
+                        _ = try await timelineService.updateStatus(statusData: self.statusData, and: accountData)
+                    }
+                } catch {
+                    print("Error \(error.localizedDescription)")
+                }
+            }
         }
     }
 }
