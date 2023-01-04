@@ -60,10 +60,17 @@ extension CoreDataHandler {
     public static var preview: CoreDataHandler = {
         let result = CoreDataHandler(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = AccountData(context: viewContext)
-            newItem.id = "123"
-        }
+        
+        let statusData = StatusData(context: viewContext)
+        statusData.id = "516272295308651148"
+        statusData.uri = "https://pixelfed.social/p/z428/516272295308651148"
+        statusData.url = URL(string: "https://pixelfed.social/p/z428/516272295308651148")
+        statusData.content = "4: Along the way.<br />\n<a href=\"https://pixelfed.social/discover/tags/outerworld?src=hash\" title=\"#outerworld\" class=\"u-url hashtag\" rel=\"external nofollow noopener\">#outerworld</a> <a href=\"https://pixelfed.social/discover/tags/pixelfed365?src=hash\" title=\"#pixelfed365\" class=\"u-url hashtag\" rel=\"external nofollow noopener\">#pixelfed365</a> <a href=\"https://pixelfed.social/discover/tags/dresden?src=hash\" title=\"#dresden\" class=\"u-url hashtag\" rel=\"external nofollow noopener\">#dresden</a> <a href=\"https://pixelfed.social/discover/tags/photography?src=hash\" title=\"#photography\" class=\"u-url hashtag\" rel=\"external nofollow noopener\">#photography</a> <a href=\"https://pixelfed.social/discover/tags/smartphonephotography?src=hash\" title=\"#smartphonephotography\" class=\"u-url hashtag\" rel=\"external nofollow noopener\">#smartphonephotography</a> <a href=\"https://pixelfed.social/discover/tags/afternoons?src=hash\" title=\"#afternoons\" class=\"u-url hashtag\" rel=\"external nofollow noopener\">#afternoons</a> <a href=\"https://pixelfed.social/discover/tags/grey?src=hash\" title=\"#grey\" class=\"u-url hashtag\" rel=\"external nofollow noopener\">#grey</a>"
+        statusData.reblogsCount = 12
+        statusData.createdAt = "2023-01-04T15:21:47.000Z"
+        statusData.visibility = "public"
+        statusData.applicationName = "web"
+        
         do {
             try viewContext.save()
         } catch {
@@ -75,3 +82,20 @@ extension CoreDataHandler {
         return result
     }()
 }
+
+public struct PreviewData {
+    static func getStatus() -> StatusData {
+        let statusData = StatusData()
+        statusData.id = "516272295308651148"
+        statusData.uri = "https://pixelfed.social/p/z428/516272295308651148"
+        statusData.url = URL(string: "https://pixelfed.social/p/z428/516272295308651148")
+        statusData.content = "4: Along the way.<br />\n<a href=\"https://pixelfed.social/discover/tags/outerworld?src=hash\" title=\"#outerworld\" class=\"u-url hashtag\" rel=\"external nofollow noopener\">#outerworld</a> <a href=\"https://pixelfed.social/discover/tags/pixelfed365?src=hash\" title=\"#pixelfed365\" class=\"u-url hashtag\" rel=\"external nofollow noopener\">#pixelfed365</a> <a href=\"https://pixelfed.social/discover/tags/dresden?src=hash\" title=\"#dresden\" class=\"u-url hashtag\" rel=\"external nofollow noopener\">#dresden</a> <a href=\"https://pixelfed.social/discover/tags/photography?src=hash\" title=\"#photography\" class=\"u-url hashtag\" rel=\"external nofollow noopener\">#photography</a> <a href=\"https://pixelfed.social/discover/tags/smartphonephotography?src=hash\" title=\"#smartphonephotography\" class=\"u-url hashtag\" rel=\"external nofollow noopener\">#smartphonephotography</a> <a href=\"https://pixelfed.social/discover/tags/afternoons?src=hash\" title=\"#afternoons\" class=\"u-url hashtag\" rel=\"external nofollow noopener\">#afternoons</a> <a href=\"https://pixelfed.social/discover/tags/grey?src=hash\" title=\"#grey\" class=\"u-url hashtag\" rel=\"external nofollow noopener\">#grey</a>"
+        statusData.reblogsCount = 12
+        statusData.createdAt = "2023-01-04T15:21:47.000Z"
+        statusData.visibility = "public"
+        statusData.applicationName = "web"
+        
+        return statusData
+    }
+}
+

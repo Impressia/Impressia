@@ -27,7 +27,7 @@ struct InteractionRow: View {
                 // Reboost
             } label: {
                 HStack(alignment: .center) {
-                    Image(systemName: statusData.reblogged ? "arrowshape.turn.up.forward.fill" : "arrowshape.turn.up.forward")
+                    Image(systemName: statusData.reblogged ? "paperplane.fill" : "paperplane")
                     Text("\(statusData.reblogsCount)")
                         .font(.caption)
                 }
@@ -69,6 +69,7 @@ struct InteractionRow: View {
 
 struct InteractionRow_Previews: PreviewProvider {
     static var previews: some View {
-        InteractionRow(statusData: StatusData())
+        InteractionRow(statusData: PreviewData.getStatus())
+            .previewLayout(.fixed(width: 300, height: 70))
     }
 }

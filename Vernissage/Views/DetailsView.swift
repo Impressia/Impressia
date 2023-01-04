@@ -18,7 +18,13 @@ struct DetailsView: View {
                 ImagesCarousel(attachments: statusData.attachments())
 
                 VStack(alignment: .leading) {
-                    UsernameRow(statusData: statusData)
+                    NavigationLink(destination: UserProfileView(
+                        accountId: statusData.accountId,
+                        accountDisplayName: statusData.accountDisplayName,
+                        accountUserName: statusData.accountUsername)
+                        .environmentObject(applicationState)) {
+                            UsernameRow(statusData: statusData)
+                        }
 
                     HTMLFormattedText(statusData.content)
                         .padding(.leading, -4)

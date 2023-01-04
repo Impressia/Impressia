@@ -21,17 +21,26 @@ struct CommentsSection: View {
             if let context = context {
                 ForEach(context.descendants, id: \.id) { status in
                     HStack (alignment: .top) {
-                        AsyncImage(url: status.account?.avatar) { image in
-                            image
-                                .resizable()
-                                .clipShape(Circle())
-                                .aspectRatio(contentMode: .fit)
-                        } placeholder: {
-                            Image(systemName: "person.circle")
-                                .resizable()
-                                .foregroundColor(Color("MainTextColor"))
+                        
+                        if let account = status.account {
+                            NavigationLink(destination: UserProfileView(
+                                accountId: account.id,
+                                accountDisplayName: account.displayName,
+                                accountUserName: account.username)
+                                .environmentObject(applicationState)) {
+                                    AsyncImage(url: account.avatar) { image in
+                                        image
+                                            .resizable()
+                                            .clipShape(Circle())
+                                            .aspectRatio(contentMode: .fit)
+                                    } placeholder: {
+                                        Image(systemName: "person.circle")
+                                            .resizable()
+                                            .foregroundColor(Color("MainTextColor"))
+                                    }
+                                    .frame(width: 32.0, height: 32.0)
+                                }
                         }
-                        .frame(width: 32.0, height: 32.0)
                         
                         VStack (alignment: .leading) {
                             HStack (alignment: .top) {
@@ -48,19 +57,10 @@ struct CommentsSection: View {
                                 Text(status.createdAt.toRelative(.isoDateTimeMilliSec))
                                     .foregroundColor(Color("LightGrayColor").opacity(0.5))
                                     .font(.footnote)
-
-                                /*
-                                Image(systemName: "message")
-                                    .foregroundColor(Color.accentColor)
-                                Image(systemName: "hand.thumbsup")
-                                    .foregroundColor(Color.accentColor)
-                                 */
                             }
-                            .padding(.bottom, -10)
-                            
-  
                             
                             HTMLFormattedText(status.content, withFontSize: 14, andWidth: contentWidth)
+                                .padding(.top, -10)
                                 .padding(.leading, -4)
                             
                             if status.mediaAttachments.count > 0 {
