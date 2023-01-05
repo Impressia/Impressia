@@ -40,6 +40,9 @@
 		F85D498329642FAC00751DF7 /* AttachmentData+Comperable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D498229642FAC00751DF7 /* AttachmentData+Comperable.swift */; };
 		F85D49852964301800751DF7 /* StatusData+Attachments.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D49842964301800751DF7 /* StatusData+Attachments.swift */; };
 		F85D49872964334100751DF7 /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D49862964334100751DF7 /* String+Date.swift */; };
+		F85DBF8F296732E20069BF89 /* FollowersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85DBF8E296732E20069BF89 /* FollowersView.swift */; };
+		F85DBF912967385F0069BF89 /* FollowingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85DBF902967385F0069BF89 /* FollowingView.swift */; };
+		F85DBF93296760790069BF89 /* CacheAvatarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85DBF92296760790069BF89 /* CacheAvatarService.swift */; };
 		F866F6A0296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F69E296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift */; };
 		F866F6A1296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F69F296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift */; };
 		F866F6A329604161002E8F88 /* AccountDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F6A229604161002E8F88 /* AccountDataHandler.swift */; };
@@ -100,6 +103,9 @@
 		F85D498229642FAC00751DF7 /* AttachmentData+Comperable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttachmentData+Comperable.swift"; sourceTree = "<group>"; };
 		F85D49842964301800751DF7 /* StatusData+Attachments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusData+Attachments.swift"; sourceTree = "<group>"; };
 		F85D49862964334100751DF7 /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
+		F85DBF8E296732E20069BF89 /* FollowersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersView.swift; sourceTree = "<group>"; };
+		F85DBF902967385F0069BF89 /* FollowingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingView.swift; sourceTree = "<group>"; };
+		F85DBF92296760790069BF89 /* CacheAvatarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheAvatarService.swift; sourceTree = "<group>"; };
 		F866F69E296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplicationSettings+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F866F69F296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplicationSettings+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F866F6A229604161002E8F88 /* AccountDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDataHandler.swift; sourceTree = "<group>"; };
@@ -164,6 +170,8 @@
 				F88FAD26295F400E009B20C9 /* NotificationsView.swift */,
 				F866F6A629604629002E8F88 /* SignInView.swift */,
 				F8A93D7D2965FD89001D8331 /* UserProfileView.swift */,
+				F85DBF8E296732E20069BF89 /* FollowersView.swift */,
+				F85DBF902967385F0069BF89 /* FollowingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -293,6 +301,7 @@
 				F8A93D7F2965FED4001D8331 /* AccountService.swift */,
 				F8210DE02966D0C4001D9973 /* StatusService.swift */,
 				F8210DEB2966F30C001D9973 /* UserFeedbackService.swift */,
+				F85DBF92296760790069BF89 /* CacheAvatarService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -383,6 +392,7 @@
 				F866F6A0296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift in Sources */,
 				F8210DEA2966E4F9001D9973 /* AnimatePlaceholderModifier.swift in Sources */,
 				F8210DE52966E160001D9973 /* Color+SystemColors.swift in Sources */,
+				F85DBF93296760790069BF89 /* CacheAvatarService.swift in Sources */,
 				F88FAD23295F3FC4009B20C9 /* LocalFeedView.swift in Sources */,
 				F88FAD2B295F43B8009B20C9 /* AccountData+CoreDataProperties.swift in Sources */,
 				F85D4975296407F100751DF7 /* TimelineService.swift in Sources */,
@@ -391,6 +401,7 @@
 				F88C2475295C37BB0006098B /* CoreDataHandler.swift in Sources */,
 				F88FAD2A295F43B8009B20C9 /* AccountData+CoreDataClass.swift in Sources */,
 				F8210DE12966D0C4001D9973 /* StatusService.swift in Sources */,
+				F85DBF8F296732E20069BF89 /* FollowersView.swift in Sources */,
 				F8A93D822965FF5D001D8331 /* MastodonClientAuthenticated+Account.swift in Sources */,
 				F85D49872964334100751DF7 /* String+Date.swift in Sources */,
 				F8341F92295C63BB009C8EE6 /* ImageStatus.swift in Sources */,
@@ -402,6 +413,7 @@
 				F80048052961850500E6868A /* StatusData+CoreDataClass.swift in Sources */,
 				F80048042961850500E6868A /* AttachmentData+CoreDataProperties.swift in Sources */,
 				F83901A6295D8EC000456AE2 /* LabelIcon.swift in Sources */,
+				F85DBF912967385F0069BF89 /* FollowingView.swift in Sources */,
 				F800480A2961EA1900E6868A /* AttachmentDataHandler.swift in Sources */,
 				F80048032961850500E6868A /* AttachmentData+CoreDataClass.swift in Sources */,
 				F8341F90295C636C009C8EE6 /* UIImage+Exif.swift in Sources */,

@@ -21,7 +21,7 @@ struct MainView: View {
     }
     
     private enum ViewMode {
-        case home, local, federated, notifications
+        case home, local, federated, profile, notifications
     }
     
     var body: some View {
@@ -43,6 +43,12 @@ struct MainView: View {
             LocalFeedView()
         case .federated:
             FederatedFeedView()
+        case .profile:
+            if let accountData = self.applicationState.accountData {
+                UserProfileView(accountId: accountData.id,
+                                accountDisplayName: accountData.displayName,
+                                accountUserName: accountData.username)
+            }
         case .notifications:
             NotificationsView()
         }
@@ -80,6 +86,15 @@ struct MainView: View {
                 }
                 
                 Divider()
+
+                Button {
+                    viewMode = .profile
+                } label: {
+                    HStack {
+                        Text(self.getViewTitle(viewMode: .profile))
+                        Image(systemName: "person")
+                    }
+                }
                 
                 Button {
                     viewMode = .notifications
@@ -152,6 +167,8 @@ struct MainView: View {
             return "Local"
         case .federated:
             return "Federated"
+        case .profile:
+            return "Profile"
         case .notifications:
             return "Notifications"
         }

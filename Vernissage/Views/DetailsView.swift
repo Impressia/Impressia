@@ -26,7 +26,9 @@ struct DetailsView: View {
                             accountDisplayName: statusData.accountDisplayName,
                             accountUserName: statusData.accountUsername)
                             .environmentObject(applicationState)) {
-                                UsernameRow(statusData: statusData)
+                                UsernameRow(accountAvatar: statusData.accountAvatar,
+                                            accountDisplayName: statusData.accountDisplayName,
+                                            accountUsername: statusData.accountUsername)
                             }
                         
                         HTMLFormattedText(statusData.content)
@@ -38,6 +40,7 @@ struct DetailsView: View {
                             LabelIcon(iconName: "timelapse", value: "24.0 mm, f/1.8, 1/640s, ISO 100")
                             LabelIcon(iconName: "calendar", value: "2 Oct 2022")
                         }
+                        .padding(.bottom, 2)
                         .foregroundColor(Color.lightGrayColor)
                         
                         HStack {
@@ -55,12 +58,7 @@ struct DetailsView: View {
                             .padding(8)
                     }
                     .padding(8)
-                    
-                    Rectangle()
-                        .size(width: UIScreen.main.bounds.width, height: 4)
-                        .fill(Color.mainTextColor)
-                        .opacity(0.1)
-                    
+                                        
                     CommentsSection(statusId: statusData.id)
                 }
             } else {
@@ -69,22 +67,10 @@ struct DetailsView: View {
                         .fill(Color.placeholderText)
                         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
                         
-                    HStack (alignment: .center) {
-                        Circle()
-                            .fill(Color.placeholderText)
-                            .frame(width: 48.0, height: 48.0)
-                        
-                        VStack (alignment: .leading) {
-                            Text("Verylong Displayname")
-                                .foregroundColor(Color.mainTextColor)
-                            Text("@username")
-                                .foregroundColor(Color.lightGrayColor)
-                                .font(.footnote)
-                        }
-                        .padding(.leading, 8)
-                    }.padding(8)
-                    
                     VStack(alignment: .leading) {
+                        UsernameRow(accountDisplayName: "Verylong Displayname",
+                                    accountUsername: "@username")
+                        
                         Text("Lorem ispum text something")
                             .foregroundColor(Color.lightGrayColor)
                             .font(.footnote)

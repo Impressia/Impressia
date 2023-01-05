@@ -20,6 +20,14 @@ struct CommentsSection: View {
         VStack {
             if let context = context {
                 ForEach(context.descendants, id: \.id) { status in
+                    
+                    if withDivider {
+                        Rectangle()
+                            .size(width: UIScreen.main.bounds.width, height: 4)
+                            .fill(Color.mainTextColor)
+                            .opacity(0.1)
+                    }
+                    
                     HStack (alignment: .top) {
                         
                         if let account = status.account {
@@ -92,15 +100,7 @@ struct CommentsSection: View {
                     .padding(.horizontal, 8)
                     .padding(.bottom, 8)
 
-                    
                     CommentsSection(statusId: status.id, withDivider: false)
-                    
-                    if withDivider {
-                        Rectangle()
-                            .size(width: UIScreen.main.bounds.width, height: 4)
-                            .fill(Color.mainTextColor)
-                            .opacity(0.1)
-                    }
                 }
             }
         }

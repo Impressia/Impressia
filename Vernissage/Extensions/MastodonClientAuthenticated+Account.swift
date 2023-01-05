@@ -52,4 +52,26 @@ extension MastodonClientAuthenticated {
         let (data, _) = try await urlSession.data(for: request)        
         return try JSONDecoder().decode(Relationship.self, from: data)
     }
+    
+    func getFollowers(for accountId: String, page: Int = 1) async throws -> [Account] {
+        let request = try Self.request(
+            for: baseURL,
+            target: Mastodon.Account.followers(accountId, nil, nil, nil, nil, page),
+            withBearerToken: token
+        )
+        
+        let (data, _) = try await urlSession.data(for: request)
+        return try JSONDecoder().decode([Account].self, from: data)
+    }
+    
+    func getFollowing(for accountId: String, page: Int = 1) async throws -> [Account] {
+        let request = try Self.request(
+            for: baseURL,
+            target: Mastodon.Account.following(accountId, nil, nil, nil, nil, page),
+            withBearerToken: token
+        )
+        
+        let (data, _) = try await urlSession.data(for: request)
+        return try JSONDecoder().decode([Account].self, from: data)
+    }
 }

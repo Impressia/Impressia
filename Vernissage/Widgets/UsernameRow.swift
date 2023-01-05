@@ -5,28 +5,43 @@
 //
 
 import SwiftUI
+import NukeUI
 
 struct UsernameRow: View {
-    @ObservedObject public var statusData: StatusData
+    @State public var accountAvatar: URL?
+    @State public var accountDisplayName: String?
+    @State public var accountUsername: String
+    @State public var cachedAvatar: UIImage?
 
     var body: some View {
         HStack (alignment: .center) {
-            AsyncImage(url: statusData.accountAvatar) { image in
-                image
+            if let cachedAvatar {
+                Image(uiImage: cachedAvatar)
                     .resizable()
                     .clipShape(Circle())
                     .aspectRatio(contentMode: .fit)
-            } placeholder: {
-                Image(systemName: "person.circle")
-                    .resizable()
-                    .foregroundColor(Color.mainTextColor)
+                    .frame(width: 48.0, height: 48.0)
             }
-            .frame(width: 48.0, height: 48.0)
+            else {
+                AsyncImage(url: accountAvatar) { image in
+                    image
+                        .resizable()
+                        .clipShape(Circle())
+                        .aspectRatio(contentMode: .fit)
+                } placeholder: {
+                    Image(systemName: "person.circle")
+                        .resizable()
+                        .clipShape(Circle())
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundColor(Color.mainTextColor)
+                }
+                .frame(width: 48.0, height: 48.0)
+            }
             
             VStack (alignment: .leading) {
-                Text(statusData.accountDisplayName ?? statusData.accountUsername)
+                Text(accountDisplayName ?? accountUsername)
                     .foregroundColor(Color.mainTextColor)
-                Text("@\(statusData.accountUsername)")
+                Text("@\(accountUsername)")
                     .foregroundColor(Color.lightGrayColor)
                     .font(.footnote)
             }
@@ -37,6 +52,6 @@ struct UsernameRow: View {
 
 struct UsernameRow_Previews: PreviewProvider {
     static var previews: some View {
-        UsernameRow(statusData: StatusData())
+        UsernameRow(accountUsername: "")
     }
 }

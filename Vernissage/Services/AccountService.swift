@@ -46,4 +46,22 @@ public class AccountService {
         let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
         return try await client.follow(for: accountId)
     }
+    
+    public func getFollowers(forAccountId accountId: String, andContext accountData: AccountData?, page: Int) async throws -> [Account] {
+        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+            return []
+        }
+        
+        let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
+        return try await client.getFollowers(for: accountId, page: page)
+    }
+    
+    public func getFollowing(forAccountId accountId: String, andContext accountData: AccountData?, page: Int) async throws -> [Account] {
+        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+            return []
+        }
+        
+        let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
+        return try await client.getFollowing(for: accountId, page: page)
+    }
 }

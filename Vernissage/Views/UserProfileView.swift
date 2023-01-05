@@ -48,62 +48,73 @@ struct UserProfileView: View {
                         
                         Spacer()
                         
-                        VStack(alignment: .center) {
-                            Text("\(account.followersCount)")
-                                .font(.title3)
-                            Text("Followers")
-                                .font(.subheadline)
-                                .opacity(0.6)
-                        }
+                        NavigationLink(destination: FollowersView(accountId: account.id)
+                            .environmentObject(applicationState)
+                        ) {
+                            VStack(alignment: .center) {
+                                Text("\(account.followersCount)")
+                                    .font(.title3)
+                                Text("Followers")
+                                    .font(.subheadline)
+                                    .opacity(0.6)
+                            }
+                        }.foregroundColor(Color.mainTextColor)
                         
                         Spacer()
                         
-                        VStack(alignment: .center) {
-                            Text("\(account.followingCount)")
-                                .font(.title3)
-                            Text("Following")
-                                .font(.subheadline)
-                                .opacity(0.6)
-                        }
+                        NavigationLink(destination: FollowingView(accountId: account.id)
+                            .environmentObject(applicationState)
+                        ) {
+                            VStack(alignment: .center) {
+                                Text("\(account.followingCount)")
+                                    .font(.title3)
+                                Text("Following")
+                                    .font(.subheadline)
+                                    .opacity(0.6)
+                            }
+                        }.foregroundColor(Color.mainTextColor)
                     }
                     
                     HStack (alignment: .center) {
-                        Text(account.displayName ?? account.username)
-                            .foregroundColor(Color.mainTextColor)
-                            .font(.footnote)
-                            .fontWeight(.bold)
-                        Text("@\(account.username)")
-                            .foregroundColor(Color.lightGrayColor)
-                            .font(.footnote)
+                        VStack(alignment: .leading) {
+                            Text(account.displayName ?? account.username)
+                                .foregroundColor(Color.mainTextColor)
+                                .font(.footnote)
+                                .fontWeight(.bold)
+                            Text("@\(account.username)")
+                                .foregroundColor(Color.lightGrayColor)
+                                .font(.footnote)
+                        }
                         
                         Spacer()
                         
-                        Button {
-                            Task {
-                                do {
-                                    if let relationship = try await AccountService.shared.follow(
-                                        forAccountId: self.accountId,
-                                        andContext: self.applicationState.accountData
-                                    ) {
-                                        UserFeedbackService.shared.send()
-                                        self.relationship = relationship
+                        if self.applicationState.accountData?.id != self.accountId {
+                            Button {
+                                Task {
+                                    do {
+                                        if let relationship = try await AccountService.shared.follow(
+                                            forAccountId: self.accountId,
+                                            andContext: self.applicationState.accountData
+                                        ) {
+                                            UserFeedbackService.shared.send()
+                                            self.relationship = relationship
+                                        }
+                                    } catch {
+                                        print("Error \(error.localizedDescription)")
                                     }
-                                } catch {
-                                    print("Error \(error.localizedDescription)")
+                                }
+                            } label: {
+                                HStack {
+                                    Image(systemName: relationship?.following == true ? "person.badge.minus" : "person.badge.plus")
+                                    Text(relationship?.following == true ? "Unfollow" : (relationship?.followedBy == true ? "Follow back" : "Follow"))
                                 }
                             }
-                        } label: {
-                            HStack {
-                                Image(systemName: relationship?.following == true ? "person.badge.minus" : "person.badge.plus")
-                                Text(relationship?.following == true ? "Unfollow" : (relationship?.followedBy == true ? "Follow back" : "Follow"))
-                            }
+                            .buttonStyle(.borderedProminent)
+                            .tint(relationship?.following == true ? Color.dangerColor : .accentColor)
                         }
-                        .buttonStyle(.borderedProminent)
-                        .tint(relationship?.following == true ? Color.dangerColor : .accentColor)
-                        
                     }
                     
-                    if let note = account.note {
+                    if let note = account.note, !note.isEmpty {
                         HTMLFormattedText(note, withFontSize: 14, andWidth: Int(UIScreen.main.bounds.width) - 16)
                             .padding(.top, -10)
                             .padding(.leading, -4)

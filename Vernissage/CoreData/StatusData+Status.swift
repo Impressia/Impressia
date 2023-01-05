@@ -14,7 +14,7 @@ extension StatusData {
         self.accountAvatar = status.account?.avatar
         self.accountDisplayName = status.account?.displayName
         self.accountId = status.account!.id
-        self.accountUsername = status.account!.username
+        self.accountUsername = status.account!.acct
         self.applicationName = status.application?.name
         self.applicationWebsite = status.application?.website
         self.bookmarked = status.bookmarked
