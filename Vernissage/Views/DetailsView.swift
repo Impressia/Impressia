@@ -68,25 +68,38 @@ struct DetailsView: View {
                     Rectangle()
                         .fill(Color.placeholderText)
                         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
-                        .redacted(reason: .placeholder)
+                        
                     HStack (alignment: .center) {
                         Circle()
                             .fill(Color.placeholderText)
                             .frame(width: 48.0, height: 48.0)
-                            .redacted(reason: .placeholder)
                         
                         VStack (alignment: .leading) {
                             Text("Verylong Displayname")
                                 .foregroundColor(Color.mainTextColor)
-                                .redacted(reason: .placeholder)
                             Text("@username")
                                 .foregroundColor(Color.lightGrayColor)
                                 .font(.footnote)
-                                .redacted(reason: .placeholder)
                         }
                         .padding(.leading, 8)
                     }.padding(8)
+                    
+                    VStack(alignment: .leading) {
+                        Text("Lorem ispum text something")
+                            .foregroundColor(Color.lightGrayColor)
+                            .font(.footnote)
+                        Text("Lorem ispum text something sdf sdfsdf sdfdsfsdfsdf")
+                            .foregroundColor(Color.lightGrayColor)
+                            .font(.footnote)
+                        
+                        LabelIcon(iconName: "camera", value: "SONY ILCE-7M3")
+                        LabelIcon(iconName: "camera.aperture", value: "Viltrox 24mm F1.8 E")
+                        LabelIcon(iconName: "timelapse", value: "24.0 mm, f/1.8, 1/640s, ISO 100")
+                        LabelIcon(iconName: "calendar", value: "2 Oct 2022")
+                    }.padding(8)
                 }
+                .redacted(reason: .placeholder)
+                .animatePlaceholder(isLoading: .constant(true))
             }
         }
         .navigationBarTitle("Details")
