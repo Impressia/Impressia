@@ -41,4 +41,15 @@ extension MastodonClientAuthenticated {
         let (data, _) = try await urlSession.data(for: request)
         return try JSONDecoder().decode([Status].self, from: data)
     }
+    
+    func follow(for accountId: String) async throws -> Relationship {
+        let request = try Self.request(
+            for: baseURL,
+            target: Mastodon.Account.follow(accountId),
+            withBearerToken: token
+        )
+        
+        let (data, _) = try await urlSession.data(for: request)        
+        return try JSONDecoder().decode(Relationship.self, from: data)
+    }
 }

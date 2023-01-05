@@ -37,4 +37,13 @@ public class AccountService {
         let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
         return try await client.getStatuses(for: accountId)
     }
+    
+    public func follow(forAccountId accountId: String, andContext accountData: AccountData?) async throws -> Relationship? {
+        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+            return nil
+        }
+        
+        let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
+        return try await client.follow(for: accountId)
+    }
 }

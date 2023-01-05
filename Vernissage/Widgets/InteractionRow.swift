@@ -7,12 +7,14 @@
 import SwiftUI
 
 struct InteractionRow: View {
+    @EnvironmentObject var applicationState: ApplicationState
     @ObservedObject public var statusData: StatusData
 
     var body: some View {
         HStack (alignment: .top) {
             Button {
                 // TODO: Reply.
+                UserFeedbackService.shared.send()
             } label: {
                 HStack(alignment: .center) {
                     Image(systemName: "message")
@@ -24,7 +26,24 @@ struct InteractionRow: View {
             Spacer()
             
             Button {
-                // TODO: Reboost.
+                Task {
+                    do {
+                        let status = self.statusData.reblogged
+                            ? try await StatusService.shared.unboost(statusId: self.statusData.id, accountData: self.applicationState.accountData)
+                            : try await StatusService.shared.boost(statusId: self.statusData.id, accountData: self.applicationState.accountData)
+
+                        if let status {
+                            self.statusData.reblogsCount = status.reblogsCount == self.statusData.reblogsCount
+                                ? Int32(status.reblogsCount + 1)
+                                : Int32(status.reblogsCount)
+
+                            self.statusData.reblogged = status.reblogged
+                            UserFeedbackService.shared.send()
+                        }
+                    } catch {
+                        print("Error \(error.localizedDescription)")
+                    }
+                }
             } label: {
                 HStack(alignment: .center) {
                     Image(systemName: statusData.reblogged ? "paperplane.fill" : "paperplane")
@@ -36,7 +55,24 @@ struct InteractionRow: View {
             Spacer()
             
             Button {
-                // TODO: Favorite.
+                Task {
+                    do {
+                        let status = self.statusData.favourited
+                            ? try await StatusService.shared.unfavourite(statusId: self.statusData.id, accountData: self.applicationState.accountData)
+                            : try await StatusService.shared.favourite(statusId: self.statusData.id, accountData: self.applicationState.accountData)
+
+                        if let status {
+                            self.statusData.favouritesCount = status.favouritesCount == self.statusData.favouritesCount
+                                ? Int32(status.favouritesCount + 1)
+                                : Int32(status.favouritesCount)
+
+                            self.statusData.favourited = status.favourited
+                            UserFeedbackService.shared.send()
+                        }
+                    } catch {
+                        print("Error \(error.localizedDescription)")
+                    }
+                }
             } label: {
                 HStack(alignment: .center) {
                     Image(systemName: statusData.favourited ? "hand.thumbsup.fill" : "hand.thumbsup")
@@ -48,7 +84,18 @@ struct InteractionRow: View {
             Spacer()
             
             Button {
-                // TODO: Bookmark.
+                Task {
+                    do {
+                        let status = self.statusData.bookmarked
+                            ? try await StatusService.shared.unbookmark(statusId: self.statusData.id, accountData: self.applicationState.accountData)
+                            : try await StatusService.shared.bookmark(statusId: self.statusData.id, accountData: self.applicationState.accountData)
+
+                        self.statusData.bookmarked.toggle()
+                        UserFeedbackService.shared.send()
+                    } catch {
+                        print("Error \(error.localizedDescription)")
+                    }
+                }
             } label: {
                 Image(systemName: statusData.bookmarked ? "bookmark.fill" : "bookmark")
             }
@@ -57,6 +104,7 @@ struct InteractionRow: View {
             
             Button {
                 // TODO: Share.
+                UserFeedbackService.shared.send()
             } label: {
                 Image(systemName: "square.and.arrow.up")
             }

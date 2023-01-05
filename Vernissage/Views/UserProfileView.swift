@@ -79,7 +79,19 @@ struct UserProfileView: View {
                         Spacer()
                         
                         Button {
-                            // TODO: Folllow/Unfollow.
+                            Task {
+                                do {
+                                    if let relationship = try await AccountService.shared.follow(
+                                        forAccountId: self.accountId,
+                                        andContext: self.applicationState.accountData
+                                    ) {
+                                        UserFeedbackService.shared.send()
+                                        self.relationship = relationship
+                                    }
+                                } catch {
+                                    print("Error \(error.localizedDescription)")
+                                }
+                            }
                         } label: {
                             HStack {
                                 Image(systemName: relationship?.following == true ? "person.badge.minus" : "person.badge.plus")
