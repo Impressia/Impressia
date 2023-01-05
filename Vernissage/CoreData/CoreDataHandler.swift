@@ -7,11 +7,12 @@
 
 import CoreData
 
-public class  CoreDataHandler {
+public class CoreDataHandler {
     public static let shared = CoreDataHandler()
+
     public let container: NSPersistentContainer
 
-    init(inMemory: Bool = false) {
+    private init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "Vernissage")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
@@ -54,6 +55,12 @@ public class  CoreDataHandler {
             }
         }
     }
+}
+
+extension CoreDataHandler {
+    public static var memory: CoreDataHandler = {
+        CoreDataHandler(inMemory: true)
+    }()
 }
 
 extension CoreDataHandler {

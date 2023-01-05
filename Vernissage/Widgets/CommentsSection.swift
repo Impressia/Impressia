@@ -36,7 +36,7 @@ struct CommentsSection: View {
                                     } placeholder: {
                                         Image(systemName: "person.circle")
                                             .resizable()
-                                            .foregroundColor(Color("MainTextColor"))
+                                            .foregroundColor(Color.mainTextColor)
                                     }
                                     .frame(width: 32.0, height: 32.0)
                                 }
@@ -45,17 +45,17 @@ struct CommentsSection: View {
                         VStack (alignment: .leading) {
                             HStack (alignment: .top) {
                                 Text(status.account?.displayName ?? status.account?.username ?? "")
-                                    .foregroundColor(Color("DisplayNameColor"))
+                                    .foregroundColor(Color.mainTextColor)
                                     .font(.footnote)
                                     .fontWeight(.bold)
                                 Text("@\(status.account?.username ?? "")")
-                                    .foregroundColor(Color("LightGrayColor"))
+                                    .foregroundColor(Color.lightGrayColor)
                                     .font(.footnote)
                                 
                                 Spacer()
                                 
                                 Text(status.createdAt.toRelative(.isoDateTimeMilliSec))
-                                    .foregroundColor(Color("LightGrayColor").opacity(0.5))
+                                    .foregroundColor(Color.lightGrayColor.opacity(0.5))
                                     .font(.footnote)
                             }
                             
@@ -73,14 +73,14 @@ struct CommentsSection: View {
                                                 .frame(minWidth: 0, maxWidth: .infinity)
                                                 .frame(height: status.mediaAttachments.count == 1 ? 200 : 100)
                                                 .cornerRadius(10)
-                                                .shadow(color: Color("MainTextColor").opacity(0.3), radius: 2)
+                                                .shadow(color: Color.mainTextColor.opacity(0.3), radius: 2)
                                         } placeholder: {
                                             Image(systemName: "photo")
                                                 .resizable()
                                                 .scaledToFit()
                                                 .frame(minWidth: 0, maxWidth: .infinity)
                                                 .frame(height: status.mediaAttachments.count == 1 ? 200 : 100)
-                                                .foregroundColor(Color("MainTextColor"))
+                                                .foregroundColor(Color.mainTextColor)
                                                 .opacity(0.05)
                                         }
                                     }
@@ -98,7 +98,7 @@ struct CommentsSection: View {
                     if withDivider {
                         Rectangle()
                             .size(width: UIScreen.main.bounds.width, height: 4)
-                            .fill(Color("MainTextColor"))
+                            .fill(Color.mainTextColor)
                             .opacity(0.1)
                     }
                 }

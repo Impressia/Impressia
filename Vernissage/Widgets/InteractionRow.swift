@@ -12,7 +12,7 @@ struct InteractionRow: View {
     var body: some View {
         HStack (alignment: .top) {
             Button {
-                // Reply
+                // TODO: Reply.
             } label: {
                 HStack(alignment: .center) {
                     Image(systemName: "message")
@@ -24,7 +24,7 @@ struct InteractionRow: View {
             Spacer()
             
             Button {
-                // Reboost
+                // TODO: Reboost.
             } label: {
                 HStack(alignment: .center) {
                     Image(systemName: statusData.reblogged ? "paperplane.fill" : "paperplane")
@@ -36,7 +36,7 @@ struct InteractionRow: View {
             Spacer()
             
             Button {
-                // Favorite
+                // TODO: Favorite.
             } label: {
                 HStack(alignment: .center) {
                     Image(systemName: statusData.favourited ? "hand.thumbsup.fill" : "hand.thumbsup")
@@ -48,7 +48,7 @@ struct InteractionRow: View {
             Spacer()
             
             Button {
-                // Bookmark
+                // TODO: Bookmark.
             } label: {
                 Image(systemName: statusData.bookmarked ? "bookmark.fill" : "bookmark")
             }
@@ -56,7 +56,7 @@ struct InteractionRow: View {
             Spacer()
             
             Button {
-                // Share
+                // TODO: Share.
             } label: {
                 Image(systemName: "square.and.arrow.up")
             }

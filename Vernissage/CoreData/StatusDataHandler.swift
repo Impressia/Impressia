@@ -7,8 +7,12 @@
 
 import Foundation
 import CoreData
+import MastodonSwift
 
 class StatusDataHandler {
+    public static let shared = StatusDataHandler()
+    private init() { }
+    
     func getStatusesData() -> [StatusData] {
         let context = CoreDataHandler.shared.container.viewContext
         let fetchRequest = StatusData.fetchRequest()
@@ -17,6 +21,21 @@ class StatusDataHandler {
         } catch {
             print("Error during fetching accounts")
             return []
+        }
+    }
+    
+    func getStatusData(statusId: String) -> StatusData? {
+        let context = CoreDataHandler.shared.container.viewContext
+        let fetchRequest = StatusData.fetchRequest()
+        
+        fetchRequest.fetchLimit = 1
+        fetchRequest.predicate = NSPredicate(format: "id = %@", statusId)
+        
+        do {
+            return try context.fetch(fetchRequest).first
+        } catch {
+            print("Error during fetching accounts")
+            return nil
         }
     }
     

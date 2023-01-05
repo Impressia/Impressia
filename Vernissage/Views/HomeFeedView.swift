@@ -22,9 +22,8 @@ struct HomeFeedView: View {
             ScrollView {
                 LazyVGrid(columns: gridColumns) {
                     ForEach(dbStatuses, id: \.self) { item in
-                        NavigationLink(destination:
-                                        DetailsView(statusData: item)
-                                            .environmentObject(applicationState)) {
+                        NavigationLink(destination: DetailsView(statusId: item.id)
+                            .environmentObject(applicationState)) {
                             ImageRow(attachments: item.attachments())
                         }
                     }

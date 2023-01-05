@@ -9,6 +9,7 @@ import Foundation
 
 public class RemoteFileService {
     public static let shared = RemoteFileService()
+    private init() { }
     
     public func fetchData(url: URL) async throws -> Data? {
         let urlRequest = URLRequest(url: url)

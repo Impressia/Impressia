@@ -13,6 +13,16 @@
 		F80048062961850500E6868A /* StatusData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048022961850500E6868A /* StatusData+CoreDataProperties.swift */; };
 		F80048082961E6DE00E6868A /* StatusDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048072961E6DE00E6868A /* StatusDataHandler.swift */; };
 		F800480A2961EA1900E6868A /* AttachmentDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048092961EA1900E6868A /* AttachmentDataHandler.swift */; };
+		F8210DCF2966B600001D9973 /* ImageRowAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8210DCE2966B600001D9973 /* ImageRowAsync.swift */; };
+		F8210DD52966BB7E001D9973 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = F8210DD42966BB7E001D9973 /* Nuke */; };
+		F8210DD72966BB7E001D9973 /* NukeExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = F8210DD62966BB7E001D9973 /* NukeExtensions */; };
+		F8210DD92966BB7E001D9973 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = F8210DD82966BB7E001D9973 /* NukeUI */; };
+		F8210DDD2966CF17001D9973 /* StatusData+Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8210DDC2966CF17001D9973 /* StatusData+Status.swift */; };
+		F8210DDF2966CFC7001D9973 /* AttachmentData+Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8210DDE2966CFC7001D9973 /* AttachmentData+Attachment.swift */; };
+		F8210DE12966D0C4001D9973 /* StatusService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8210DE02966D0C4001D9973 /* StatusService.swift */; };
+		F8210DE32966D256001D9973 /* Status+StatusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8210DE22966D256001D9973 /* Status+StatusData.swift */; };
+		F8210DE52966E160001D9973 /* Color+SystemColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8210DE42966E160001D9973 /* Color+SystemColors.swift */; };
+		F8210DE72966E1D1001D9973 /* Color+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8210DE62966E1D1001D9973 /* Color+Assets.swift */; };
 		F8341F90295C636C009C8EE6 /* UIImage+Exif.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8341F8F295C636C009C8EE6 /* UIImage+Exif.swift */; };
 		F8341F92295C63BB009C8EE6 /* ImageStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8341F91295C63BB009C8EE6 /* ImageStatus.swift */; };
 		F83901A6295D8EC000456AE2 /* LabelIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83901A5295D8EC000456AE2 /* LabelIcon.swift */; };
@@ -64,6 +74,13 @@
 		F80048022961850500E6868A /* StatusData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F80048072961E6DE00E6868A /* StatusDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusDataHandler.swift; sourceTree = "<group>"; };
 		F80048092961EA1900E6868A /* AttachmentDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentDataHandler.swift; sourceTree = "<group>"; };
+		F8210DCE2966B600001D9973 /* ImageRowAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRowAsync.swift; sourceTree = "<group>"; };
+		F8210DDC2966CF17001D9973 /* StatusData+Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusData+Status.swift"; sourceTree = "<group>"; };
+		F8210DDE2966CFC7001D9973 /* AttachmentData+Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttachmentData+Attachment.swift"; sourceTree = "<group>"; };
+		F8210DE02966D0C4001D9973 /* StatusService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusService.swift; sourceTree = "<group>"; };
+		F8210DE22966D256001D9973 /* Status+StatusData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Status+StatusData.swift"; sourceTree = "<group>"; };
+		F8210DE42966E160001D9973 /* Color+SystemColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+SystemColors.swift"; sourceTree = "<group>"; };
+		F8210DE62966E1D1001D9973 /* Color+Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Assets.swift"; sourceTree = "<group>"; };
 		F8341F8F295C636C009C8EE6 /* UIImage+Exif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Exif.swift"; sourceTree = "<group>"; };
 		F8341F91295C63BB009C8EE6 /* ImageStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStatus.swift; sourceTree = "<group>"; };
 		F83901A5295D8EC000456AE2 /* LabelIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelIcon.swift; sourceTree = "<group>"; };
@@ -115,6 +132,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F866F6B729608467002E8F88 /* MastodonSwift in Frameworks */,
+				F8210DD52966BB7E001D9973 /* Nuke in Frameworks */,
+				F8210DD72966BB7E001D9973 /* NukeExtensions in Frameworks */,
+				F8210DD92966BB7E001D9973 /* NukeUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +163,9 @@
 				F85D4980296417F700751DF7 /* MastodonClientAuthenticated+Context.swift */,
 				F8A93D812965FF5D001D8331 /* MastodonClientAuthenticated+Account.swift */,
 				F85D49862964334100751DF7 /* String+Date.swift */,
+				F8210DE22966D256001D9973 /* Status+StatusData.swift */,
+				F8210DE42966E160001D9973 /* Color+SystemColors.swift */,
+				F8210DE62966E1D1001D9973 /* Color+Assets.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -163,9 +186,11 @@
 				F80047FF2961850500E6868A /* AttachmentData+CoreDataClass.swift */,
 				F80048002961850500E6868A /* AttachmentData+CoreDataProperties.swift */,
 				F85D498229642FAC00751DF7 /* AttachmentData+Comperable.swift */,
+				F8210DDE2966CFC7001D9973 /* AttachmentData+Attachment.swift */,
 				F80048012961850500E6868A /* StatusData+CoreDataClass.swift */,
 				F80048022961850500E6868A /* StatusData+CoreDataProperties.swift */,
 				F85D49842964301800751DF7 /* StatusData+Attachments.swift */,
+				F8210DDC2966CF17001D9973 /* StatusData+Status.swift */,
 				F866F69E296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift */,
 				F866F69F296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift */,
 				F88FAD28295F43B8009B20C9 /* AccountData+CoreDataClass.swift */,
@@ -193,6 +218,7 @@
 				F83901A5295D8EC000456AE2 /* LabelIcon.swift */,
 				F85D4972296406E700751DF7 /* BottomRight.swift */,
 				F85D497629640A5200751DF7 /* ImageRow.swift */,
+				F8210DCE2966B600001D9973 /* ImageRowAsync.swift */,
 				F85D497829640B9D00751DF7 /* ImagesCarousel.swift */,
 				F85D497A29640C8200751DF7 /* UsernameRow.swift */,
 				F85D497C29640D5900751DF7 /* InteractionRow.swift */,
@@ -252,6 +278,7 @@
 				F85D4970296402DC00751DF7 /* AuthorizationService.swift */,
 				F85D4974296407F100751DF7 /* TimelineService.swift */,
 				F8A93D7F2965FED4001D8331 /* AccountService.swift */,
+				F8210DE02966D0C4001D9973 /* StatusService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -274,6 +301,9 @@
 			name = Vernissage;
 			packageProductDependencies = (
 				F866F6B629608467002E8F88 /* MastodonSwift */,
+				F8210DD42966BB7E001D9973 /* Nuke */,
+				F8210DD62966BB7E001D9973 /* NukeExtensions */,
+				F8210DD82966BB7E001D9973 /* NukeUI */,
 			);
 			productName = Vernissage;
 			productReference = F88C2468295C37B80006098B /* Vernissage.app */;
@@ -305,6 +335,7 @@
 			mainGroup = F88C245F295C37B80006098B;
 			packageReferences = (
 				F866F6B529608467002E8F88 /* XCRemoteSwiftPackageReference "Mastodon" */,
+				F8210DD32966BB7E001D9973 /* XCRemoteSwiftPackageReference "Nuke" */,
 			);
 			productRefGroup = F88C2469295C37B80006098B /* Products */;
 			projectDirPath = "";
@@ -333,8 +364,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F85D497729640A5200751DF7 /* ImageRow.swift in Sources */,
+				F8210DDF2966CFC7001D9973 /* AttachmentData+Attachment.swift in Sources */,
 				F80048082961E6DE00E6868A /* StatusDataHandler.swift in Sources */,
 				F866F6A0296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift in Sources */,
+				F8210DE52966E160001D9973 /* Color+SystemColors.swift in Sources */,
 				F88FAD23295F3FC4009B20C9 /* LocalFeedView.swift in Sources */,
 				F88FAD2B295F43B8009B20C9 /* AccountData+CoreDataProperties.swift in Sources */,
 				F85D4975296407F100751DF7 /* TimelineService.swift in Sources */,
@@ -342,9 +375,12 @@
 				F88FAD21295F3944009B20C9 /* HomeFeedView.swift in Sources */,
 				F88C2475295C37BB0006098B /* CoreDataHandler.swift in Sources */,
 				F88FAD2A295F43B8009B20C9 /* AccountData+CoreDataClass.swift in Sources */,
+				F8210DE12966D0C4001D9973 /* StatusService.swift in Sources */,
 				F8A93D822965FF5D001D8331 /* MastodonClientAuthenticated+Account.swift in Sources */,
 				F85D49872964334100751DF7 /* String+Date.swift in Sources */,
 				F8341F92295C63BB009C8EE6 /* ImageStatus.swift in Sources */,
+				F8210DDD2966CF17001D9973 /* StatusData+Status.swift in Sources */,
+				F8210DCF2966B600001D9973 /* ImageRowAsync.swift in Sources */,
 				F85D498329642FAC00751DF7 /* AttachmentData+Comperable.swift in Sources */,
 				F85D497B29640C8200751DF7 /* UsernameRow.swift in Sources */,
 				F85D497929640B9D00751DF7 /* ImagesCarousel.swift in Sources */,
@@ -363,7 +399,9 @@
 				F85D497F296416C800751DF7 /* CommentsSection.swift in Sources */,
 				F88C2486295C48030006098B /* HTMLFotmattedText.swift in Sources */,
 				F866F6A529604194002E8F88 /* ApplicationSettingsHandler.swift in Sources */,
+				F8210DE32966D256001D9973 /* Status+StatusData.swift in Sources */,
 				F85D49852964301800751DF7 /* StatusData+Attachments.swift in Sources */,
+				F8210DE72966E1D1001D9973 /* Color+Assets.swift in Sources */,
 				F85D497D29640D5900751DF7 /* InteractionRow.swift in Sources */,
 				F866F6A729604629002E8F88 /* SignInView.swift in Sources */,
 				F88C246C295C37B80006098B /* VernissageApp.swift in Sources */,
@@ -583,6 +621,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F8210DD32966BB7E001D9973 /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		F866F6B529608467002E8F88 /* XCRemoteSwiftPackageReference "Mastodon" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mczachurski/Mastodon.swift";
@@ -594,6 +640,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F8210DD42966BB7E001D9973 /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F8210DD32966BB7E001D9973 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		F8210DD62966BB7E001D9973 /* NukeExtensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F8210DD32966BB7E001D9973 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeExtensions;
+		};
+		F8210DD82966BB7E001D9973 /* NukeUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F8210DD32966BB7E001D9973 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeUI;
+		};
 		F866F6B629608467002E8F88 /* MastodonSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F866F6B529608467002E8F88 /* XCRemoteSwiftPackageReference "Mastodon" */;

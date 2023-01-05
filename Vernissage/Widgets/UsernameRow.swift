@@ -19,15 +19,15 @@ struct UsernameRow: View {
             } placeholder: {
                 Image(systemName: "person.circle")
                     .resizable()
-                    .foregroundColor(Color("MainTextColor"))
+                    .foregroundColor(Color.mainTextColor)
             }
             .frame(width: 48.0, height: 48.0)
             
             VStack (alignment: .leading) {
                 Text(statusData.accountDisplayName ?? statusData.accountUsername)
-                    .foregroundColor(Color("DisplayNameColor"))
+                    .foregroundColor(Color.mainTextColor)
                 Text("@\(statusData.accountUsername)")
-                    .foregroundColor(Color("LightGrayColor"))
+                    .foregroundColor(Color.lightGrayColor)
                     .font(.footnote)
             }
             .padding(.leading, 8)

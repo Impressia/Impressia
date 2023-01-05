@@ -8,6 +8,9 @@
 import Foundation
 
 class AccountDataHandler {
+    public static let shared = AccountDataHandler()
+    private init() { }
+    
     func getAccountsData() -> [AccountData] {
         let context = CoreDataHandler.shared.container.viewContext
         let fetchRequest = AccountData.fetchRequest()
@@ -21,9 +24,7 @@ class AccountDataHandler {
     
     func getCurrentAccountData() -> AccountData? {
         let accounts = self.getAccountsData()
-        
-        let applicationSettingsHandler = ApplicationSettingsHandler()
-        let defaultSettings = applicationSettingsHandler.getDefaultSettings()
+        let defaultSettings = ApplicationSettingsHandler.shared.getDefaultSettings()
         
         let currentAccount = accounts.first { accountData in
             accountData.id == defaultSettings.currentAccount

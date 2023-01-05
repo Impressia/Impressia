@@ -29,8 +29,6 @@ struct ImageRow: View {
                     }.padding()
                 }
             }
-        } else {
-            Text("Error")
         }
     }
 }

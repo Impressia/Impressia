@@ -20,6 +20,7 @@ struct VernissageApp: App {
             NavigationStack {
                 switch applicationViewMode {
                 case .loading:
+                    // TODO: Loading splashscreen.
                     Text("Loading")
                 case .signIn:
                     SignInView { viewMode in
@@ -43,6 +44,9 @@ struct VernissageApp: App {
                     self.applicationState.accountData = accountData
                     self.applicationViewMode = .mainView
                 })
+                
+                URLCache.shared.memoryCapacity = 10_000_000 // ~10 MB memory space
+                URLCache.shared.diskCapacity = 1_000_000_000 // ~1GB disk cache space
             }
             .navigationViewStyle(.stack)
         }

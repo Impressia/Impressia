@@ -9,6 +9,7 @@ import MastodonSwift
 
 public class AccountService {
     public static let shared = AccountService()
+    private init() { }
     
     public func getAccount(withId accountId: String, and accountData: AccountData?) async throws -> Account? {
         guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
@@ -17,5 +18,23 @@ public class AccountService {
 
         let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
         return try await client.getAccount(for: accountId)
+    }
+    
+    public func getRelationship(withId accountId: String, forUser accountData: AccountData?) async throws -> Relationship? {
+        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+            return nil
+        }
+        
+        let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
+        return try await client.getRelationship(for: accountId)
+    }
+    
+    public func getStatuses(forAccountId accountId: String, andContext accountData: AccountData?) async throws -> [Status] {
+        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+            return []
+        }
+        
+        let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
+        return try await client.getStatuses(for: accountId)
     }
 }

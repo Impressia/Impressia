@@ -9,10 +9,10 @@ import MastodonSwift
 
 public class AuthorizationService {
     public static let shared = AuthorizationService()
+    private init() { }
     
     public func verifyAccount(_ result: @escaping (AccountData?) -> Void) async {
-        let accountDataHandler = AccountDataHandler()
-        let currentAccount = accountDataHandler.getCurrentAccountData()
+        let currentAccount = AccountDataHandler.shared.getCurrentAccountData()
         
         // When we dont have even one account stored in database then we have to ask user to enter server and sign in.
         guard let accountData = currentAccount, let accessToken = accountData.accessToken else {
@@ -65,8 +65,7 @@ public class AuthorizationService {
         let account = try await authenticatedClient.verifyCredentials()
         
         // Create account object in database.
-        let accountDataHandler = AccountDataHandler()
-        let accountData = accountDataHandler.createAccountDataEntity()
+        let accountData = AccountDataHandler.shared.createAccountDataEntity()
 
         accountData.id = account.id
         accountData.username = account.username
@@ -100,8 +99,7 @@ public class AuthorizationService {
         }
         
         // Set newly created account as current.
-        let applicationSettingsHandler = ApplicationSettingsHandler()
-        let defaultSettings = applicationSettingsHandler.getDefaultSettings()
+        let defaultSettings = ApplicationSettingsHandler.shared.getDefaultSettings()
         defaultSettings.currentAccount = accountData.id
         
         // Save account data in database and in application state.
@@ -158,8 +156,7 @@ public class AuthorizationService {
         }
         
         // We have to be sure that account id is saved as default account.
-        let applicationSettingsHandler = ApplicationSettingsHandler()
-        let defaultSettings = applicationSettingsHandler.getDefaultSettings()
+        let defaultSettings = ApplicationSettingsHandler.shared.getDefaultSettings()
         defaultSettings.currentAccount = accountData.id
         
         // Save account data in database and in application state.

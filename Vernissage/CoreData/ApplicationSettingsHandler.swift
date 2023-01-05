@@ -8,6 +8,9 @@
 import Foundation
 
 class ApplicationSettingsHandler {
+    public static let shared = ApplicationSettingsHandler()
+    private init() { }
+    
     func getDefaultSettings() -> ApplicationSettings {
         var settingsList: [ApplicationSettings] = []
 

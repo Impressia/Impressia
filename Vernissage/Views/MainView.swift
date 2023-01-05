@@ -97,7 +97,7 @@ struct MainView: View {
                         .font(.subheadline)
                 }
                 .frame(width: 150)
-                .foregroundColor(Color("MainTextColor"))
+                .foregroundColor(Color.mainTextColor)
             }
         }
     }
@@ -108,20 +108,20 @@ struct MainView: View {
             Menu {
                 
                 Button {
-                    // Switch accounts...
+                    // TODO: Switch accounts.
                 } label: {
                     HStack {
                         Text(self.applicationState.accountData?.displayName ?? self.applicationState.accountData?.username ?? "")
                         Image(systemName: "person.circle.fill")
                             .resizable()
-                            .foregroundColor(Color("MainTextColor"))
+                            .foregroundColor(Color.mainTextColor)
                     }
                 }
 
                 Divider()
                 
                 Button {
-                    // Open settings...
+                    // TODO: Open settings.
                 } label: {
                     HStack {
                         Text("Settings")
@@ -138,7 +138,7 @@ struct MainView: View {
                     Image(systemName: "person.circle")
                         .resizable()
                         .frame(width: 32.0, height: 32.0)
-                        .foregroundColor(Color("MainTextColor"))
+                        .foregroundColor(Color.mainTextColor)
                 }
             }
         }

@@ -9,6 +9,9 @@ import Foundation
 import CoreData
 
 class AttachmentDataHandler {
+    public static let shared = AttachmentDataHandler()
+    private init() { }
+
     func getAttachmentsData() -> [AttachmentData] {
         let context = CoreDataHandler.shared.container.viewContext
         let fetchRequest = AttachmentData.fetchRequest()

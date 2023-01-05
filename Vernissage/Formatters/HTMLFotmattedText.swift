@@ -48,7 +48,7 @@ struct HTMLFormattedText: UIViewRepresentable {
       
         let largeAttributes = [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: CGFloat(self.fontSize)),
-            NSAttributedString.Key.foregroundColor: UIColor(Color("MainTextColor"))
+            NSAttributedString.Key.foregroundColor: UIColor(Color.mainTextColor)
         ]
 
         let linkAttributes = [
