@@ -47,7 +47,7 @@ struct MainView: View {
             if let accountData = self.applicationState.accountData {
                 UserProfileView(accountId: accountData.id,
                                 accountDisplayName: accountData.displayName,
-                                accountUserName: accountData.username)
+                                accountUserName: accountData.acct)
             }
         case .notifications:
             NotificationsView()
@@ -112,7 +112,7 @@ struct MainView: View {
                         .font(.subheadline)
                 }
                 .frame(width: 150)
-                .foregroundColor(Color.mainTextColor)
+                .foregroundColor(.mainTextColor)
             }
         }
     }
@@ -126,10 +126,10 @@ struct MainView: View {
                     // TODO: Switch accounts.
                 } label: {
                     HStack {
-                        Text(self.applicationState.accountData?.displayName ?? self.applicationState.accountData?.username ?? "")
+                        Text(self.applicationState.accountData?.displayName ?? self.applicationState.accountData?.acct ?? "")
                         Image(systemName: "person.circle.fill")
                             .resizable()
-                            .foregroundColor(Color.mainTextColor)
+                            .foregroundColor(.mainTextColor)
                     }
                 }
 
@@ -153,7 +153,7 @@ struct MainView: View {
                     Image(systemName: "person.circle")
                         .resizable()
                         .frame(width: 32.0, height: 32.0)
-                        .foregroundColor(Color.mainTextColor)
+                        .foregroundColor(.mainTextColor)
                 }
             }
         }

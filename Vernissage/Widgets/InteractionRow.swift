@@ -9,12 +9,12 @@ import SwiftUI
 struct InteractionRow: View {
     @EnvironmentObject var applicationState: ApplicationState
     @ObservedObject public var statusData: StatusData
-
+    
     var body: some View {
         HStack (alignment: .top) {
             Button {
                 // TODO: Reply.
-                UserFeedbackService.shared.send()
+                HapticService.shared.touch()
             } label: {
                 HStack(alignment: .center) {
                     Image(systemName: "message")
@@ -27,6 +27,8 @@ struct InteractionRow: View {
             
             Button {
                 Task {
+                    HapticService.shared.touch()
+
                     do {
                         let status = self.statusData.reblogged
                             ? try await StatusService.shared.unboost(statusId: self.statusData.id, accountData: self.applicationState.accountData)
@@ -38,7 +40,6 @@ struct InteractionRow: View {
                                 : Int32(status.reblogsCount)
 
                             self.statusData.reblogged = status.reblogged
-                            UserFeedbackService.shared.send()
                         }
                     } catch {
                         print("Error \(error.localizedDescription)")
@@ -56,6 +57,8 @@ struct InteractionRow: View {
             
             Button {
                 Task {
+                    HapticService.shared.touch()
+
                     do {
                         let status = self.statusData.favourited
                             ? try await StatusService.shared.unfavourite(statusId: self.statusData.id, accountData: self.applicationState.accountData)
@@ -67,7 +70,6 @@ struct InteractionRow: View {
                                 : Int32(status.favouritesCount)
 
                             self.statusData.favourited = status.favourited
-                            UserFeedbackService.shared.send()
                         }
                     } catch {
                         print("Error \(error.localizedDescription)")
@@ -85,13 +87,14 @@ struct InteractionRow: View {
             
             Button {
                 Task {
+                    HapticService.shared.touch()
+                    
                     do {
-                        let status = self.statusData.bookmarked
+                        _ = self.statusData.bookmarked
                             ? try await StatusService.shared.unbookmark(statusId: self.statusData.id, accountData: self.applicationState.accountData)
                             : try await StatusService.shared.bookmark(statusId: self.statusData.id, accountData: self.applicationState.accountData)
 
                         self.statusData.bookmarked.toggle()
-                        UserFeedbackService.shared.send()
                     } catch {
                         print("Error \(error.localizedDescription)")
                     }
@@ -104,14 +107,14 @@ struct InteractionRow: View {
             
             Button {
                 // TODO: Share.
-                UserFeedbackService.shared.send()
+                HapticService.shared.touch()
             } label: {
                 Image(systemName: "square.and.arrow.up")
             }
         }
         .font(.title3)
         .fontWeight(.semibold)
-        .foregroundColor(Color.accentColor)
+        .foregroundColor(.accentColor)
     }
 }
 

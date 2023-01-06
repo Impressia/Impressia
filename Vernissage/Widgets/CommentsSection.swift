@@ -34,7 +34,7 @@ struct CommentsSection: View {
                             NavigationLink(destination: UserProfileView(
                                 accountId: account.id,
                                 accountDisplayName: account.displayName,
-                                accountUserName: account.username)
+                                accountUserName: account.acct)
                                 .environmentObject(applicationState)) {
                                     AsyncImage(url: account.avatar) { image in
                                         image
@@ -44,7 +44,7 @@ struct CommentsSection: View {
                                     } placeholder: {
                                         Image(systemName: "person.circle")
                                             .resizable()
-                                            .foregroundColor(Color.mainTextColor)
+                                            .foregroundColor(.mainTextColor)
                                     }
                                     .frame(width: 32.0, height: 32.0)
                                 }
@@ -52,23 +52,20 @@ struct CommentsSection: View {
                         
                         VStack (alignment: .leading) {
                             HStack (alignment: .top) {
-                                Text(status.account?.displayName ?? status.account?.username ?? "")
-                                    .foregroundColor(Color.mainTextColor)
+                                Text(status.account?.displayName ?? status.account?.acct ?? "")
+                                    .foregroundColor(.mainTextColor)
                                     .font(.footnote)
                                     .fontWeight(.bold)
-                                Text("@\(status.account?.username ?? "")")
-                                    .foregroundColor(Color.lightGrayColor)
-                                    .font(.footnote)
                                 
                                 Spacer()
                                 
                                 Text(status.createdAt.toRelative(.isoDateTimeMilliSec))
-                                    .foregroundColor(Color.lightGrayColor.opacity(0.5))
+                                    .foregroundColor(.lightGrayColor.opacity(0.5))
                                     .font(.footnote)
                             }
                             
                             HTMLFormattedText(status.content, withFontSize: 14, andWidth: contentWidth)
-                                .padding(.top, -10)
+                                .padding(.top, -16)
                                 .padding(.leading, -4)
                             
                             if status.mediaAttachments.count > 0 {
@@ -81,14 +78,14 @@ struct CommentsSection: View {
                                                 .frame(minWidth: 0, maxWidth: .infinity)
                                                 .frame(height: status.mediaAttachments.count == 1 ? 200 : 100)
                                                 .cornerRadius(10)
-                                                .shadow(color: Color.mainTextColor.opacity(0.3), radius: 2)
+                                                .shadow(color: .mainTextColor.opacity(0.3), radius: 2)
                                         } placeholder: {
                                             Image(systemName: "photo")
                                                 .resizable()
                                                 .scaledToFit()
                                                 .frame(minWidth: 0, maxWidth: .infinity)
                                                 .frame(height: status.mediaAttachments.count == 1 ? 200 : 100)
-                                                .foregroundColor(Color.mainTextColor)
+                                                .foregroundColor(.mainTextColor)
                                                 .opacity(0.05)
                                         }
                                     }

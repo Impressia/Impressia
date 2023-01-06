@@ -8,7 +8,7 @@ import SwiftUI
 import MastodonSwift
 import AVFoundation
 
-struct DetailsView: View {
+struct StatusView: View {
     @EnvironmentObject var applicationState: ApplicationState
     @State var statusId: String
 
@@ -41,7 +41,7 @@ struct DetailsView: View {
                             LabelIcon(iconName: "calendar", value: "2 Oct 2022")
                         }
                         .padding(.bottom, 2)
-                        .foregroundColor(Color.lightGrayColor)
+                        .foregroundColor(.lightGrayColor)
                         
                         HStack {
                             Text("Uploaded")
@@ -51,7 +51,7 @@ struct DetailsView: View {
                                 Text("via \(applicationName)")
                             }
                         }
-                        .foregroundColor(Color.lightGrayColor)
+                        .foregroundColor(.lightGrayColor)
                         .font(.footnote)
                         
                         InteractionRow(statusData: statusData)
@@ -72,10 +72,10 @@ struct DetailsView: View {
                                     accountUsername: "@username")
                         
                         Text("Lorem ispum text something")
-                            .foregroundColor(Color.lightGrayColor)
+                            .foregroundColor(.lightGrayColor)
                             .font(.footnote)
                         Text("Lorem ispum text something sdf sdfsdf sdfdsfsdfsdf")
-                            .foregroundColor(Color.lightGrayColor)
+                            .foregroundColor(.lightGrayColor)
                             .font(.footnote)
                         
                         LabelIcon(iconName: "camera", value: "SONY ILCE-7M3")
@@ -114,8 +114,8 @@ struct DetailsView: View {
     }
 }
 
-struct DetailsView_Previews: PreviewProvider {
+struct StatusView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailsView(statusId: "123")
+        StatusView(statusId: "123")
     }
 }

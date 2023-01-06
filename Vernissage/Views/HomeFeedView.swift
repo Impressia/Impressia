@@ -22,14 +22,13 @@ struct HomeFeedView: View {
             ScrollView {
                 LazyVGrid(columns: gridColumns) {
                     ForEach(dbStatuses, id: \.self) { item in
-                        NavigationLink(destination: DetailsView(statusId: item.id)
+                        NavigationLink(destination: StatusView(statusId: item.id)
                             .environmentObject(applicationState)) {
                             ImageRow(attachments: item.attachments())
                         }
                     }
                     
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle())
+                    LoadingIndicator()
                         .onAppear {
                             Task {
                                 do {
@@ -45,8 +44,7 @@ struct HomeFeedView: View {
             }
             
             if showLoading {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle())
+                LoadingIndicator()
             }
         }
         .refreshable {

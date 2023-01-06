@@ -8,13 +8,15 @@ import SwiftUI
 import MastodonSwift
 
 struct UserProfileView: View {
-    @EnvironmentObject var applicationState: ApplicationState
+    @EnvironmentObject private var applicationState: ApplicationState
+    
     @State public var accountId: String
     @State public var accountDisplayName: String?
     @State public var accountUserName: String
     @State private var account: Account? = nil
     @State private var relationship: Relationship? = nil
     @State private var statuses: [Status] = []
+    @State private var isDuringRelationshipAction = false
     
     private static let initialColumns = 1
     @State private var gridColumns = Array(repeating: GridItem(.flexible()), count: initialColumns)
@@ -24,17 +26,7 @@ struct UserProfileView: View {
             if let account = self.account {
                 VStack(alignment: .leading) {
                     HStack(alignment: .center) {
-                        AsyncImage(url: account.avatar) { image in
-                            image
-                                .resizable()
-                                .clipShape(Circle())
-                                .aspectRatio(contentMode: .fit)
-                        } placeholder: {
-                            Image(systemName: "person.circle")
-                                .resizable()
-                                .foregroundColor(Color.mainTextColor)
-                        }
-                        .frame(width: 96.0, height: 96.0)
+                        UserAvatar(accountAvatar: account.avatar, width: 96, height: 96)
                         
                         Spacer()
                         
@@ -58,7 +50,7 @@ struct UserProfileView: View {
                                     .font(.subheadline)
                                     .opacity(0.6)
                             }
-                        }.foregroundColor(Color.mainTextColor)
+                        }.foregroundColor(.mainTextColor)
                         
                         Spacer()
                         
@@ -72,17 +64,17 @@ struct UserProfileView: View {
                                     .font(.subheadline)
                                     .opacity(0.6)
                             }
-                        }.foregroundColor(Color.mainTextColor)
+                        }.foregroundColor(.mainTextColor)
                     }
                     
                     HStack (alignment: .center) {
                         VStack(alignment: .leading) {
-                            Text(account.displayName ?? account.username)
-                                .foregroundColor(Color.mainTextColor)
+                            Text(account.displayName ?? account.acct)
+                                .foregroundColor(.mainTextColor)
                                 .font(.footnote)
                                 .fontWeight(.bold)
-                            Text("@\(account.username)")
-                                .foregroundColor(Color.lightGrayColor)
+                            Text("@\(account.acct)")
+                                .foregroundColor(.lightGrayColor)
                                 .font(.footnote)
                         }
                         
@@ -91,12 +83,17 @@ struct UserProfileView: View {
                         if self.applicationState.accountData?.id != self.accountId {
                             Button {
                                 Task {
+                                    Task { @MainActor in
+                                        self.isDuringRelationshipAction = false
+                                    }
+
+                                    HapticService.shared.touch()
+                                    self.isDuringRelationshipAction = true
                                     do {
                                         if let relationship = try await AccountService.shared.follow(
                                             forAccountId: self.accountId,
                                             andContext: self.applicationState.accountData
                                         ) {
-                                            UserFeedbackService.shared.send()
                                             self.relationship = relationship
                                         }
                                     } catch {
@@ -104,13 +101,18 @@ struct UserProfileView: View {
                                     }
                                 }
                             } label: {
-                                HStack {
-                                    Image(systemName: relationship?.following == true ? "person.badge.minus" : "person.badge.plus")
-                                    Text(relationship?.following == true ? "Unfollow" : (relationship?.followedBy == true ? "Follow back" : "Follow"))
+                                if isDuringRelationshipAction {
+                                    LoadingIndicator()
+                                } else {
+                                    HStack {
+                                        Image(systemName: relationship?.following == true ? "person.badge.minus" : "person.badge.plus")
+                                        Text(relationship?.following == true ? "Unfollow" : (relationship?.followedBy == true ? "Follow back" : "Follow"))
+                                    }
                                 }
                             }
+                            .disabled(isDuringRelationshipAction)
                             .buttonStyle(.borderedProminent)
-                            .tint(relationship?.following == true ? Color.dangerColor : .accentColor)
+                            .tint(relationship?.following == true ? .dangerColor : .accentColor)
                         }
                     }
                     
@@ -121,7 +123,7 @@ struct UserProfileView: View {
                     }
                     
                     Text("Joined \(account.createdAt.toRelative(.isoDateTimeMilliSec))")
-                        .foregroundColor(Color.lightGrayColor.opacity(0.5))
+                        .foregroundColor(.lightGrayColor.opacity(0.5))
                         .font(.footnote)
                     
                 }
@@ -129,7 +131,7 @@ struct UserProfileView: View {
                 
                 LazyVGrid(columns: gridColumns) {
                     ForEach(self.statuses, id: \.id) { item in
-                        NavigationLink(destination: DetailsView(statusId: item.id)
+                        NavigationLink(destination: StatusView(statusId: item.id)
                             .environmentObject(applicationState)) {
                                 ImageRowAsync(attachments: item.mediaAttachments)
                             }
@@ -137,8 +139,7 @@ struct UserProfileView: View {
                 }
                 
             } else {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle())
+                LoadingIndicator()
             }
         }
         .navigationBarTitle(self.accountDisplayName ?? self.accountUserName)
@@ -147,7 +148,8 @@ struct UserProfileView: View {
                 do {
                     async let relationshipTask = AccountService.shared.getRelationship(withId: self.accountId, forUser: self.applicationState.accountData)
                     async let accountTask = AccountService.shared.getAccount(withId: self.accountId, and: self.applicationState.accountData)
-
+                    
+                    // Wait for download account and relationships.
                     (self.relationship, self.account) = try await (relationshipTask, accountTask)
                     
                     self.statuses = try await AccountService.shared.getStatuses(forAccountId: self.accountId, andContext: self.applicationState.accountData)

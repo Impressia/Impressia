@@ -15,34 +15,16 @@ struct UsernameRow: View {
 
     var body: some View {
         HStack (alignment: .center) {
-            if let cachedAvatar {
-                Image(uiImage: cachedAvatar)
-                    .resizable()
-                    .clipShape(Circle())
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 48.0, height: 48.0)
-            }
-            else {
-                AsyncImage(url: accountAvatar) { image in
-                    image
-                        .resizable()
-                        .clipShape(Circle())
-                        .aspectRatio(contentMode: .fit)
-                } placeholder: {
-                    Image(systemName: "person.circle")
-                        .resizable()
-                        .clipShape(Circle())
-                        .aspectRatio(contentMode: .fit)
-                        .foregroundColor(Color.mainTextColor)
-                }
-                .frame(width: 48.0, height: 48.0)
-            }
+            UserAvatar(accountAvatar: accountAvatar,
+                       cachedAvatar: cachedAvatar,
+                       width: 48,
+                       height: 48)
             
             VStack (alignment: .leading) {
                 Text(accountDisplayName ?? accountUsername)
-                    .foregroundColor(Color.mainTextColor)
+                    .foregroundColor(.mainTextColor)
                 Text("@\(accountUsername)")
-                    .foregroundColor(Color.lightGrayColor)
+                    .foregroundColor(.lightGrayColor)
                     .font(.footnote)
             }
             .padding(.leading, 8)
@@ -52,6 +34,7 @@ struct UsernameRow: View {
 
 struct UsernameRow_Previews: PreviewProvider {
     static var previews: some View {
-        UsernameRow(accountUsername: "")
+        UsernameRow(accountDisplayName: "John Doe", accountUsername: "johndoe@mastodon.xx")
+            .previewLayout(.fixed(width: 320, height: 64))
     }
 }

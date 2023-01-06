@@ -13,10 +13,25 @@ public class CacheAvatarService {
     private init() { }
     
     private var cache: Dictionary<String, UIImage> = [:]
-    
+        
     func addImage(for id: String, data: Data) {
         if let uiImage = UIImage(data: data) {
             self.cache[id] = uiImage
+        }
+    }
+    
+    func downloadImage(for accountId: String?, avatarUrl: URL?) async {
+        guard let accountId, let avatarUrl else {
+            return
+        }
+        
+        do {
+            let avatarData = try await RemoteFileService.shared.fetchData(url: avatarUrl)
+            if let avatarData {
+                CacheAvatarService.shared.addImage(for: accountId, data: avatarData)
+            }
+        } catch {
+            print("Error \(error.localizedDescription)")
         }
     }
     

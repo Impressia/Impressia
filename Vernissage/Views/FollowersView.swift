@@ -14,25 +14,27 @@ struct FollowersView: View {
     @State private var accounts: [Account] = []
     @State private var page = 1
     @State private var allItemsLoaded = false
+    @State private var firstLoadFinished = false
     
     var body: some View {
-        List(accounts, id: \.id) { account in
-            NavigationLink(destination: UserProfileView(
-                accountId: account.id,
-                accountDisplayName: account.displayName,
-                accountUserName: account.acct)
-                .environmentObject(applicationState)) {
-                    UsernameRow(accountAvatar: account.avatar,
-                                accountDisplayName: account.displayName,
-                                accountUsername: account.acct,
-                                cachedAvatar: CacheAvatarService.shared.getImage(for: account.id))
-                }
-
-            if allItemsLoaded == false && accounts.last?.id == account.id {
+        List {
+            ForEach(accounts, id: \.id) { account in
+                NavigationLink(destination: UserProfileView(
+                    accountId: account.id,
+                    accountDisplayName: account.displayName,
+                    accountUserName: account.acct)
+                    .environmentObject(applicationState)) {
+                        UsernameRow(accountAvatar: account.avatar,
+                                    accountDisplayName: account.displayName,
+                                    accountUsername: account.acct,
+                                    cachedAvatar: CacheAvatarService.shared.getImage(for: account.id))
+                    }
+            }
+            
+            if allItemsLoaded == false && firstLoadFinished {
                 HStack(alignment: .center) {
                     Spacer()
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle())
+                    LoadingIndicator()
                         .onAppear {
                             Task {
                                 self.page = self.page + 1
@@ -41,6 +43,10 @@ struct FollowersView: View {
                         }
                     Spacer()
                 }
+            }
+        }.overlay {
+            if firstLoadFinished == false {
+                LoadingIndicator()
             }
         }
         .navigationBarTitle("Followers")
@@ -51,6 +57,7 @@ struct FollowersView: View {
             }
             
             await self.loadAccounts(page: self.page)
+            self.firstLoadFinished = true
         }
     }
     
@@ -66,23 +73,18 @@ struct FollowersView: View {
                 return
             }
             
-            for account in accountsFromApi {
-                guard let avatarUrl = account.avatar else {
-                    continue
-                }
-
-                do {
-                    if let avatarData = try await RemoteFileService.shared.fetchData(url: avatarUrl) {
-                        CacheAvatarService.shared.addImage(for: account.id, data: avatarData)
-                    }
-                } catch {
-                    print("Error \(error.localizedDescription)")
-                }
-            }
-            
+            await self.downloadAvatars(accounts: accountsFromApi)
             self.accounts.append(contentsOf: accountsFromApi)
         } catch {
             print("Error \(error.localizedDescription)")
+        }
+    }
+    
+    func downloadAvatars(accounts: [Account]) async {
+        await withTaskGroup(of: Void.self) { group in
+            for account in accounts {
+                group.addTask { await CacheAvatarService.shared.downloadImage(for: account.id, avatarUrl: account.avatar) }
+            }
         }
     }
 }

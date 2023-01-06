@@ -49,6 +49,12 @@ struct VernissageApp: App {
                 URLCache.shared.diskCapacity = 1_000_000_000 // ~1GB disk cache space
             }
             .navigationViewStyle(.stack)
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+                try? HapticService.shared.start()
+            }
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
+                HapticService.shared.stop()
+            }
         }
     }
 }

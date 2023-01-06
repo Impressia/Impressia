@@ -9,7 +9,8 @@ import Foundation
 
 public class ApplicationState: ObservableObject {
     public static let shared = ApplicationState()
-
+    private init() { }
+    
     @Published var accountData: AccountData?
 }
 
