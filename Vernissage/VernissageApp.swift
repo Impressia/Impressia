@@ -20,8 +20,7 @@ struct VernissageApp: App {
             NavigationStack {
                 switch applicationViewMode {
                 case .loading:
-                    // TODO: Loading splashscreen.
-                    Text("Loading")
+                    LoadingView()
                 case .signIn:
                     SignInView { viewMode in
                         applicationViewMode = viewMode
