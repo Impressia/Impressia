@@ -9,9 +9,13 @@ import SwiftUI
 
 struct LoadingIndicator: View {
     var body: some View {
-        ProgressView()
-            .progressViewStyle(CircularProgressViewStyle())
-            .tint(.mainTextColor)
+        ProgressView {
+            Text("Loading...")
+                .foregroundColor(.mainTextColor)
+                .font(.caption2)
+        }
+        .progressViewStyle(CircularProgressViewStyle())
+        .tint(.mainTextColor)
     }
 }
 

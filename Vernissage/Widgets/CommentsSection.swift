@@ -14,6 +14,8 @@ struct CommentsSection: View {
     @State public var withDivider = true
     @State private var context: Context?
     
+    var onNewStatus: (_ context: Status) -> Void?
+
     private let contentWidth = Int(UIScreen.main.bounds.width) - 50
     
     var body: some View {
@@ -52,20 +54,40 @@ struct CommentsSection: View {
                         
                         VStack (alignment: .leading) {
                             HStack (alignment: .top) {
-                                Text(status.account?.displayName ?? status.account?.acct ?? "")
+                                Text(status.account?.displayName ?? status.account?.acct ?? status.account?.username ?? "")
                                     .foregroundColor(.mainTextColor)
                                     .font(.footnote)
                                     .fontWeight(.bold)
                                 
                                 Spacer()
+
+                                Button {
+                                    HapticService.shared.touch()
+                                    onNewStatus(status)
+                                } label: {
+                                    Image(systemName: "message")
+                                        .foregroundColor(.lightGrayColor)
+                                        .font(.footnote)
+                                }
+                                .padding(.trailing, 8)
+                                
+                                Button {
+                                    HapticService.shared.touch()
+                                    // TODO: favorite
+                                } label: {
+                                    Image(systemName: status.favourited ? "hand.thumbsup.fill" : "hand.thumbsup")
+                                        .foregroundColor(.lightGrayColor)
+                                        .font(.footnote)
+                                }
+                                .padding(.trailing, 8)
                                 
                                 Text(status.createdAt.toRelative(.isoDateTimeMilliSec))
-                                    .foregroundColor(.lightGrayColor.opacity(0.5))
+                                    .foregroundColor(.lightGrayColor)
                                     .font(.footnote)
                             }
                             
                             HTMLFormattedText(status.content, withFontSize: 14, andWidth: contentWidth)
-                                .padding(.top, -16)
+                                .padding(.top, -10)
                                 .padding(.leading, -4)
                             
                             if status.mediaAttachments.count > 0 {
@@ -97,7 +119,9 @@ struct CommentsSection: View {
                     .padding(.horizontal, 8)
                     .padding(.bottom, 8)
 
-                    CommentsSection(statusId: status.id, withDivider: false)
+                    CommentsSection(statusId: status.id, withDivider: false)  { context in
+                        onNewStatus(context)
+                    }
                 }
             }
         }
@@ -117,6 +141,6 @@ struct CommentsSection: View {
 
 struct CommentsSection_Previews: PreviewProvider {
     static var previews: some View {
-        CommentsSection(statusId: "", withDivider: true)
+        CommentsSection(statusId: "", withDivider: true) { context in }
     }
 }

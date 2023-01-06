@@ -50,6 +50,8 @@
 		F866F6AA29605AFA002E8F88 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F6A929605AFA002E8F88 /* SceneDelegate.swift */; };
 		F866F6AE29606367002E8F88 /* ApplicationViewMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F6AD29606367002E8F88 /* ApplicationViewMode.swift */; };
 		F866F6B729608467002E8F88 /* MastodonSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F866F6B629608467002E8F88 /* MastodonSwift */; };
+		F88ABD9229686F1C004EF61E /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88ABD9129686F1C004EF61E /* MemoryCache.swift */; };
+		F88ABD9429687CA4004EF61E /* ComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88ABD9329687CA4004EF61E /* ComposeView.swift */; };
 		F88C246C295C37B80006098B /* VernissageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C246B295C37B80006098B /* VernissageApp.swift */; };
 		F88C246E295C37B80006098B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C246D295C37B80006098B /* MainView.swift */; };
 		F88C2470295C37BB0006098B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F88C246F295C37BB0006098B /* Assets.xcassets */; };
@@ -116,6 +118,9 @@
 		F866F6A829604FFF002E8F88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F866F6A929605AFA002E8F88 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F866F6AD29606367002E8F88 /* ApplicationViewMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationViewMode.swift; sourceTree = "<group>"; };
+		F88ABD9129686F1C004EF61E /* MemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
+		F88ABD9329687CA4004EF61E /* ComposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeView.swift; sourceTree = "<group>"; };
+		F88ABD9529687D4D004EF61E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F88C2468295C37B80006098B /* Vernissage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vernissage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F88C246B295C37B80006098B /* VernissageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VernissageApp.swift; sourceTree = "<group>"; };
 		F88C246D295C37B80006098B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -179,6 +184,7 @@
 				F85DBF8E296732E20069BF89 /* FollowersView.swift */,
 				F85DBF902967385F0069BF89 /* FollowingView.swift */,
 				F897978E29684BCB00B22335 /* LoadingView.swift */,
+				F88ABD9329687CA4004EF61E /* ComposeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -256,9 +262,18 @@
 			path = Widgets;
 			sourceTree = "<group>";
 		};
+		F88ABD9029686F00004EF61E /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				F88ABD9129686F1C004EF61E /* MemoryCache.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
 		F88C245F295C37B80006098B = {
 			isa = PBXGroup;
 			children = (
+				F88ABD9529687D4D004EF61E /* README.md */,
 				F88C246A295C37B80006098B /* Vernissage */,
 				F88C2469295C37B80006098B /* Products */,
 			);
@@ -276,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				F866F6A829604FFF002E8F88 /* Info.plist */,
+				F88ABD9029686F00004EF61E /* Cache */,
 				F897978B2968367E00B22335 /* Haptics */,
 				F8210DE82966E4D8001D9973 /* Modifiers */,
 				F88FAD30295F5010009B20C9 /* Services */,
@@ -446,9 +462,11 @@
 				F85D497F296416C800751DF7 /* CommentsSection.swift in Sources */,
 				F88C2486295C48030006098B /* HTMLFotmattedText.swift in Sources */,
 				F866F6A529604194002E8F88 /* ApplicationSettingsHandler.swift in Sources */,
+				F88ABD9229686F1C004EF61E /* MemoryCache.swift in Sources */,
 				F8210DE32966D256001D9973 /* Status+StatusData.swift in Sources */,
 				F85D49852964301800751DF7 /* StatusData+Attachments.swift in Sources */,
 				F8210DE72966E1D1001D9973 /* Color+Assets.swift in Sources */,
+				F88ABD9429687CA4004EF61E /* ComposeView.swift in Sources */,
 				F85D497D29640D5900751DF7 /* InteractionRow.swift in Sources */,
 				F866F6A729604629002E8F88 /* SignInView.swift in Sources */,
 				F88C246C295C37B80006098B /* VernissageApp.swift in Sources */,

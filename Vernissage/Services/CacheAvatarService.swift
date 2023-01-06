@@ -12,16 +12,20 @@ public class CacheAvatarService {
     public static let shared = CacheAvatarService()
     private init() { }
     
-    private var cache: Dictionary<String, UIImage> = [:]
+    private var memoryChartData = MemoryCache<String, UIImage>(entryLifetime: 5 * 60)
         
     func addImage(for id: String, data: Data) {
         if let uiImage = UIImage(data: data) {
-            self.cache[id] = uiImage
+            self.memoryChartData[id] = uiImage
         }
     }
     
     func downloadImage(for accountId: String?, avatarUrl: URL?) async {
         guard let accountId, let avatarUrl else {
+            return
+        }
+        
+        if memoryChartData[accountId] != nil {
             return
         }
         
@@ -36,6 +40,6 @@ public class CacheAvatarService {
     }
     
     func getImage(for id: String) -> UIImage? {
-        return self.cache[id]
+        return self.memoryChartData[id]
     }
 }

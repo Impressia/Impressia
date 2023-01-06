@@ -12,6 +12,7 @@ struct StatusView: View {
     @EnvironmentObject var applicationState: ApplicationState
     @State var statusId: String
 
+    @State private var showCompose = false
     @State private var statusData: StatusData?
     
     var body: some View {
@@ -54,12 +55,16 @@ struct StatusView: View {
                         .foregroundColor(.lightGrayColor)
                         .font(.footnote)
                         
-                        InteractionRow(statusData: statusData)
-                            .padding(8)
+                        InteractionRow(statusData: statusData) { context in
+                            self.showCompose.toggle()
+                        }
+                        .padding(8)
                     }
                     .padding(8)
                                         
-                    CommentsSection(statusId: statusData.id)
+                    CommentsSection(statusId: statusData.id) { context in
+                        self.showCompose.toggle()
+                    }
                 }
             } else {
                 VStack (alignment: .leading) {
@@ -89,6 +94,9 @@ struct StatusView: View {
             }
         }
         .navigationBarTitle("Details")
+        .sheet(isPresented: $showCompose, content: {
+            ComposeView()
+        })
         .onAppear {
             Task {
                 do {

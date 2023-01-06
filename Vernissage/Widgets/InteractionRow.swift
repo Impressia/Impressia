@@ -10,11 +10,13 @@ struct InteractionRow: View {
     @EnvironmentObject var applicationState: ApplicationState
     @ObservedObject public var statusData: StatusData
     
+    var onNewStatus: (_ context: StatusData) -> Void?
+    
     var body: some View {
         HStack (alignment: .top) {
             Button {
-                // TODO: Reply.
                 HapticService.shared.touch()
+                onNewStatus(statusData)
             } label: {
                 HStack(alignment: .center) {
                     Image(systemName: "message")
@@ -120,7 +122,7 @@ struct InteractionRow: View {
 
 struct InteractionRow_Previews: PreviewProvider {
     static var previews: some View {
-        InteractionRow(statusData: PreviewData.getStatus())
+        InteractionRow(statusData: PreviewData.getStatus()) { context in }
             .previewLayout(.fixed(width: 300, height: 70))
     }
 }

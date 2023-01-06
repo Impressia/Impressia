@@ -31,18 +31,15 @@ struct FollowersView: View {
                     }
             }
             
-            if allItemsLoaded == false && firstLoadFinished {
-                HStack(alignment: .center) {
-                    Spacer()
-                    LoadingIndicator()
-                        .onAppear {
-                            Task {
-                                self.page = self.page + 1
-                                await self.loadAccounts(page: self.page)
-                            }
+            if allItemsLoaded == false && firstLoadFinished == true {
+                LoadingIndicator()
+                    .onAppear {
+                        Task {
+                            self.page = self.page + 1
+                            await self.loadAccounts(page: self.page)
                         }
-                    Spacer()
-                }
+                    }
+                    .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
             }
         }.overlay {
             if firstLoadFinished == false {
@@ -68,7 +65,7 @@ struct FollowersView: View {
                 andContext: self.applicationState.accountData,
                 page: page)
             
-            if accountsFromApi.isEmpty {
+            if accountsFromApi.isEmpty || accountsFromApi.count < 10 {
                 self.allItemsLoaded = true
                 return
             }
