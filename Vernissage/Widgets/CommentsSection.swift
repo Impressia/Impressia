@@ -27,7 +27,7 @@ struct CommentsSection: View {
                         Rectangle()
                             .size(width: UIScreen.main.bounds.width, height: 4)
                             .fill(Color.mainTextColor)
-                            .opacity(0.1)
+                            .opacity(0.2)
                     }
                     
                     HStack (alignment: .top) {
@@ -60,26 +60,6 @@ struct CommentsSection: View {
                                     .fontWeight(.bold)
                                 
                                 Spacer()
-
-                                Button {
-                                    HapticService.shared.touch()
-                                    onNewStatus(status)
-                                } label: {
-                                    Image(systemName: "message")
-                                        .foregroundColor(.lightGrayColor)
-                                        .font(.footnote)
-                                }
-                                .padding(.trailing, 8)
-                                
-                                Button {
-                                    HapticService.shared.touch()
-                                    // TODO: favorite
-                                } label: {
-                                    Image(systemName: status.favourited ? "hand.thumbsup.fill" : "hand.thumbsup")
-                                        .foregroundColor(.lightGrayColor)
-                                        .font(.footnote)
-                                }
-                                .padding(.trailing, 8)
                                 
                                 Text(status.createdAt.toRelative(.isoDateTimeMilliSec))
                                     .foregroundColor(.lightGrayColor)
@@ -115,9 +95,36 @@ struct CommentsSection: View {
                                 .padding(.bottom, 8)
                             }
                         }
+                        .onTapGesture {
+                            withAnimation(.linear(duration: 0.3)) {
+                                if status.id == self.applicationState.showInteractionStatusId {
+                                    self.applicationState.showInteractionStatusId = ""
+                                } else {
+                                    self.applicationState.showInteractionStatusId = status.id
+                                }
+                            }
+                        }
                     }
                     .padding(.horizontal, 8)
                     .padding(.bottom, 8)
+                    
+                    if self.applicationState.showInteractionStatusId == status.id {
+                        VStack (alignment: .leading) {
+                            InteractionRow(statusId: status.id,
+                                           repliesCount: status.repliesCount,
+                                           reblogged: status.reblogged,
+                                           reblogsCount: status.reblogsCount,
+                                           favourited: status.favourited,
+                                           favouritesCount: status.favouritesCount,
+                                           bookmarked: status.bookmarked) {
+                                onNewStatus(status)
+                            }
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                        }
+                        .background(Color.mainTextColor.opacity(0.08))
+                        .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
+                    }
 
                     CommentsSection(statusId: status.id, withDivider: false)  { context in
                         onNewStatus(context)

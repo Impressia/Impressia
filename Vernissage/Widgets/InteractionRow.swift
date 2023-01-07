@@ -8,19 +8,25 @@ import SwiftUI
 
 struct InteractionRow: View {
     @EnvironmentObject var applicationState: ApplicationState
-    @ObservedObject public var statusData: StatusData
+    @State var statusId = ""
+    @State var repliesCount = 0
+    @State var reblogged = false
+    @State var reblogsCount = 0
+    @State var favourited = false
+    @State var favouritesCount = 0
+    @State var bookmarked = false
     
-    var onNewStatus: (_ context: StatusData) -> Void?
+    var onNewStatus: () -> Void?
     
     var body: some View {
         HStack (alignment: .top) {
             Button {
                 HapticService.shared.touch()
-                onNewStatus(statusData)
+                onNewStatus()
             } label: {
                 HStack(alignment: .center) {
                     Image(systemName: "message")
-                    Text("\(statusData.repliesCount)")
+                    Text("\(repliesCount)")
                         .font(.caption)
                 }
             }
@@ -32,16 +38,16 @@ struct InteractionRow: View {
                     HapticService.shared.touch()
 
                     do {
-                        let status = self.statusData.reblogged
-                            ? try await StatusService.shared.unboost(statusId: self.statusData.id, accountData: self.applicationState.accountData)
-                            : try await StatusService.shared.boost(statusId: self.statusData.id, accountData: self.applicationState.accountData)
+                        let status = self.reblogged
+                            ? try await StatusService.shared.unboost(statusId: self.statusId, accountData: self.applicationState.accountData)
+                            : try await StatusService.shared.boost(statusId: self.statusId, accountData: self.applicationState.accountData)
 
                         if let status {
-                            self.statusData.reblogsCount = status.reblogsCount == self.statusData.reblogsCount
-                                ? Int32(status.reblogsCount + 1)
-                                : Int32(status.reblogsCount)
+                            self.reblogsCount = status.reblogsCount == self.reblogsCount
+                                ? status.reblogsCount + 1
+                                : status.reblogsCount
 
-                            self.statusData.reblogged = status.reblogged
+                            self.reblogged = status.reblogged
                         }
                     } catch {
                         print("Error \(error.localizedDescription)")
@@ -49,8 +55,8 @@ struct InteractionRow: View {
                 }
             } label: {
                 HStack(alignment: .center) {
-                    Image(systemName: statusData.reblogged ? "paperplane.fill" : "paperplane")
-                    Text("\(statusData.reblogsCount)")
+                    Image(systemName: self.reblogged ? "paperplane.fill" : "paperplane")
+                    Text("\(self.reblogsCount)")
                         .font(.caption)
                 }
             }
@@ -62,16 +68,16 @@ struct InteractionRow: View {
                     HapticService.shared.touch()
 
                     do {
-                        let status = self.statusData.favourited
-                            ? try await StatusService.shared.unfavourite(statusId: self.statusData.id, accountData: self.applicationState.accountData)
-                            : try await StatusService.shared.favourite(statusId: self.statusData.id, accountData: self.applicationState.accountData)
+                        let status = self.favourited
+                            ? try await StatusService.shared.unfavourite(statusId: self.statusId, accountData: self.applicationState.accountData)
+                            : try await StatusService.shared.favourite(statusId: self.statusId, accountData: self.applicationState.accountData)
 
                         if let status {
-                            self.statusData.favouritesCount = status.favouritesCount == self.statusData.favouritesCount
-                                ? Int32(status.favouritesCount + 1)
-                                : Int32(status.favouritesCount)
+                            self.favouritesCount = status.favouritesCount == self.favouritesCount
+                                ? status.favouritesCount + 1
+                                : status.favouritesCount
 
-                            self.statusData.favourited = status.favourited
+                            self.favourited = status.favourited
                         }
                     } catch {
                         print("Error \(error.localizedDescription)")
@@ -79,8 +85,8 @@ struct InteractionRow: View {
                 }
             } label: {
                 HStack(alignment: .center) {
-                    Image(systemName: statusData.favourited ? "hand.thumbsup.fill" : "hand.thumbsup")
-                    Text("\(statusData.favouritesCount)")
+                    Image(systemName: self.favourited ? "hand.thumbsup.fill" : "hand.thumbsup")
+                    Text("\(self.favouritesCount)")
                         .font(.caption)
                 }
             }
@@ -92,17 +98,17 @@ struct InteractionRow: View {
                     HapticService.shared.touch()
                     
                     do {
-                        _ = self.statusData.bookmarked
-                            ? try await StatusService.shared.unbookmark(statusId: self.statusData.id, accountData: self.applicationState.accountData)
-                            : try await StatusService.shared.bookmark(statusId: self.statusData.id, accountData: self.applicationState.accountData)
+                        _ = self.bookmarked
+                            ? try await StatusService.shared.unbookmark(statusId: self.statusId, accountData: self.applicationState.accountData)
+                            : try await StatusService.shared.bookmark(statusId: self.statusId, accountData: self.applicationState.accountData)
 
-                        self.statusData.bookmarked.toggle()
+                        self.bookmarked.toggle()
                     } catch {
                         print("Error \(error.localizedDescription)")
                     }
                 }
             } label: {
-                Image(systemName: statusData.bookmarked ? "bookmark.fill" : "bookmark")
+                Image(systemName: self.bookmarked ? "bookmark.fill" : "bookmark")
             }
             
             Spacer()
@@ -122,7 +128,7 @@ struct InteractionRow: View {
 
 struct InteractionRow_Previews: PreviewProvider {
     static var previews: some View {
-        InteractionRow(statusData: PreviewData.getStatus()) { context in }
+        InteractionRow() { }
             .previewLayout(.fixed(width: 300, height: 70))
     }
 }

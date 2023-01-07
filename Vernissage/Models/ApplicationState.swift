@@ -12,6 +12,7 @@ public class ApplicationState: ObservableObject {
     private init() { }
     
     @Published var accountData: AccountData?
+    @Published var showInteractionStatusId = ""
 }
 
 extension ApplicationState {

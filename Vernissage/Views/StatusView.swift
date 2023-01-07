@@ -55,7 +55,13 @@ struct StatusView: View {
                         .foregroundColor(.lightGrayColor)
                         .font(.footnote)
                         
-                        InteractionRow(statusData: statusData) { context in
+                        InteractionRow(statusId: statusData.id,
+                                       repliesCount: Int(statusData.repliesCount),
+                                       reblogged: statusData.reblogged,
+                                       reblogsCount: Int(statusData.reblogsCount),
+                                       favourited: statusData.favourited,
+                                       favouritesCount: Int(statusData.favouritesCount),
+                                       bookmarked: statusData.bookmarked) {
                             self.showCompose.toggle()
                         }
                         .padding(8)
