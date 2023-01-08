@@ -71,30 +71,34 @@ struct CommentsSection: View {
                                     .padding(.top, -4)
                                     .padding(.leading, -4)
                                 
-//                                if status.mediaAttachments.count > 0 {
-//                                    LazyVGrid(columns: self.getColumns(status: status), alignment: .center, spacing: 4) {
-//                                        ForEach(status.mediaAttachments, id: \.id) { attachment in
-//                                            AsyncImage(url: status.mediaAttachments[0].url) { image in
-//                                                image
-//                                                    .resizable()
-//                                                    .scaledToFill()
-//                                                    .frame(minWidth: 0, maxWidth: .infinity)
-//                                                    .frame(height: status.mediaAttachments.count == 1 ? 200 : 100)
-//                                                    .cornerRadius(10)
-//                                                    .shadow(color: .mainTextColor.opacity(0.3), radius: 2)
-//                                            } placeholder: {
-//                                                Image(systemName: "photo")
-//                                                    .resizable()
-//                                                    .scaledToFit()
-//                                                    .frame(minWidth: 0, maxWidth: .infinity)
-//                                                    .frame(height: status.mediaAttachments.count == 1 ? 200 : 100)
-//                                                    .foregroundColor(.mainTextColor)
-//                                                    .opacity(0.05)
-//                                            }
-//                                        }
-//                                    }
-//                                    .padding(.bottom, 8)
-//                                }
+                                if status.mediaAttachments.count > 0 {
+                                    LazyVGrid(
+                                        columns: status.mediaAttachments.count == 1 ? [GridItem(.flexible())]: [GridItem(.flexible()), GridItem(.flexible())],
+                                        alignment: .center,
+                                        spacing: 4
+                                    ) {
+                                        ForEach(status.mediaAttachments, id: \.id) { attachment in
+                                            AsyncImage(url: attachment.url) { image in
+                                                image
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(minWidth: 0, maxWidth: .infinity)
+                                                    .frame(height: status.mediaAttachments.count == 1 ? 200 : 100)
+                                                    .cornerRadius(10)
+                                                    .shadow(color: .mainTextColor.opacity(0.3), radius: 2)
+                                            } placeholder: {
+                                                Image(systemName: "photo")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(minWidth: 0, maxWidth: .infinity)
+                                                    .frame(height: status.mediaAttachments.count == 1 ? 200 : 100)
+                                                    .foregroundColor(.mainTextColor)
+                                                    .opacity(0.05)
+                                            }
+                                        }
+                                    }
+                                    .padding(.bottom, 8)
+                                }
                             }
                             .onTapGesture {
                                 withAnimation(.linear(duration: 0.3)) {
@@ -150,10 +154,6 @@ struct CommentsSection: View {
     
     private func getUserName(status: Status) -> String {
         return status.account?.displayName ?? status.account?.acct ?? status.account?.username ?? ""
-    }
-    
-    private func getColumns(status: Status) -> [GridItem.Size] {
-        return Array(repeating: .flexible(), count: status.mediaAttachments.count == 1 ? 1 : 2)
     }
     
     private func getInteractionRowTextColor() -> Color {
