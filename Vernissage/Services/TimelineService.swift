@@ -91,13 +91,34 @@ public class TimelineService {
             
             // Save attachment in database.
             let attachmentData = statusData.attachments().first { item in item.id == attachment.id }
-            ?? AttachmentDataHandler.shared.createAttachmnentDataEntity(viewContext: backgroundContext)
+                ?? AttachmentDataHandler.shared.createAttachmnentDataEntity(viewContext: backgroundContext)
             
             attachmentData.copyFrom(attachment)
             attachmentData.statusId = statusData.id
             attachmentData.data = imageData
             
-            // TODO: read exif information
+            // Read exif information.
+            if let exifProperties = imageData.getExifData() {
+                if let make = exifProperties.getExifValue("Make"), let model = exifProperties.getExifValue("Model") {
+                    attachmentData.exifCamera = "\(make) \(model)"
+                }
+                
+                // "Lens" or "Lens Model"
+                if let lens = exifProperties.getExifValue("Lens") {
+                    attachmentData.exifLens = lens
+                }
+                
+                if let createData = exifProperties.getExifValue("CreateDate") {
+                    attachmentData.exifCreatedDate = createData
+                }
+                
+                if let focalLenIn35mmFilm = exifProperties.getExifValue("FocalLenIn35mmFilm"),
+                   let fNumber = exifProperties.getExifValue("FNumber")?.calculateExifNumber(),
+                   let exposureTime = exifProperties.getExifValue("ExposureTime"),
+                   let photographicSensitivity = exifProperties.getExifValue("PhotographicSensitivity") {
+                    attachmentData.exifExposure = "\(focalLenIn35mmFilm)mm, f/\(fNumber), \(exposureTime)s, ISO \(photographicSensitivity)"
+                }
+            }
             
             if attachmentData.isInserted {
                 attachmentData.statusRelation = statusData

@@ -8,16 +8,20 @@ import SwiftUI
 
 struct LabelIcon: View {
     let iconName: String
-    let value: String
+    let value: String?
     
     var body: some View {
-        HStack(alignment: .center) {
-            Image(systemName: iconName)
-                .frame(width: 30, alignment: .leading)
-            Text(value)
-                .font(.footnote)
+        if let value {
+            HStack(alignment: .center) {
+                Image(systemName: iconName)
+                    .frame(width: 30, alignment: .leading)
+                Text(value)
+                    .font(.footnote)
+            }
+            .padding(.vertical, 2)
+        } else {
+            EmptyView()
         }
-        .padding(.vertical, 2)
     }
 }
 

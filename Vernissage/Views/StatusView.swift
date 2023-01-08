@@ -15,11 +15,18 @@ struct StatusView: View {
     @State private var showCompose = false
     @State private var statusData: StatusData?
     
+    @State private var exifCamera: String?
+    @State private var exifExposure: String?
+    @State private var exifCreatedDate: String?
+    @State private var exifLens: String?
+    
     var body: some View {
         ScrollView {
             if let statusData = self.statusData {
-                VStack (alignment: .leading) {
-                    ImagesCarousel(attachments: statusData.attachments())
+                VStack (alignment: .leading) {                    
+                    ImagesCarousel(attachments: statusData.attachments()) { attachmentData in
+                        self.setAttachment(attachmentData)
+                    }
                     
                     VStack(alignment: .leading) {
                         NavigationLink(destination: UserProfileView(
@@ -36,10 +43,10 @@ struct StatusView: View {
                             .padding(.leading, -4)
                         
                         VStack (alignment: .leading) {
-                            LabelIcon(iconName: "camera", value: "SONY ILCE-7M3")
-                            LabelIcon(iconName: "camera.aperture", value: "Viltrox 24mm F1.8 E")
-                            LabelIcon(iconName: "timelapse", value: "24.0 mm, f/1.8, 1/640s, ISO 100")
-                            LabelIcon(iconName: "calendar", value: "2 Oct 2022")
+                            LabelIcon(iconName: "camera", value: self.exifCamera)
+                            LabelIcon(iconName: "camera.aperture", value: self.exifLens)
+                            LabelIcon(iconName: "timelapse", value: self.exifExposure)
+                            LabelIcon(iconName: "calendar", value: self.exifCreatedDate?.toDate(.isoDateTimeSec)?.formatted())
                         }
                         .padding(.bottom, 2)
                         .foregroundColor(.lightGrayColor)
@@ -126,6 +133,13 @@ struct StatusView: View {
                 }
             }
         }
+    }
+    
+    private func setAttachment(_ attachmentData: AttachmentData) {
+        exifCamera = attachmentData.exifCamera
+        exifExposure = attachmentData.exifExposure
+        exifCreatedDate = attachmentData.exifCreatedDate
+        exifLens = attachmentData.exifLens
     }
 }
 

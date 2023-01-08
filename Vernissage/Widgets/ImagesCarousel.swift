@@ -9,20 +9,30 @@ import SwiftUI
 struct ImagesCarousel: View {
     @State public var attachments: [AttachmentData]
     @State private var height: Double = 0.0
-
+    @State private var selectedAttachmentId = ""
+    
+    var onAttachmentChange: (_ attachmentData: AttachmentData) -> Void?
+    
     var body: some View {
-        TabView {
-            ForEach(attachments, id: \.self) { attachment in
+        TabView(selection: $selectedAttachmentId) {
+            ForEach(attachments, id: \.id) { attachment in
                 if let image = UIImage(data: attachment.data) {
                     Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
+                        .tag(attachment.id)
                 }
             }
         }
         .frame(height: CGFloat(self.height))
         .tabViewStyle(PageTabViewStyle())
+        .onChange(of: selectedAttachmentId, perform: { index in
+            if let attachment = attachments.first(where: { item in item.id == index }) {
+                onAttachmentChange(attachment)
+            }
+        })
         .onAppear {
+            self.selectedAttachmentId = self.attachments.first?.id ?? ""
             self.calculateImageHeight()
         }
     }
@@ -47,6 +57,8 @@ struct ImagesCarousel: View {
 
 struct ImagesCarousel_Previews: PreviewProvider {
     static var previews: some View {
-        ImagesCarousel(attachments: [])
+        ImagesCarousel(attachments: []) { attachmentData in
+            
+        }
     }
 }

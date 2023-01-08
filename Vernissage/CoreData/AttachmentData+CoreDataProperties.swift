@@ -3,12 +3,9 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the MIT License.
 //
-    
-//
 
 import Foundation
 import CoreData
-
 
 extension AttachmentData {
 
@@ -25,10 +22,13 @@ extension AttachmentData {
     @NSManaged public var text: String?
     @NSManaged public var type: String
     @NSManaged public var url: URL
+    @NSManaged public var exifCamera: String?
+    @NSManaged public var exifLens: String?
+    @NSManaged public var exifExposure: String?
+    @NSManaged public var exifCreatedDate: String?
     @NSManaged public var statusRelation: StatusData?
 
 }
 
 extension AttachmentData : Identifiable {
-
 }

@@ -48,7 +48,7 @@ public class AuthorizationService {
 
         // Create application (we will get clientId amd clientSecret).
         let oAuthApp = try await client.createApp(
-            named: "Photofed",
+            named: "Vernissage",
             redirectUri: "oauth-vernissage://oauth-callback/mastodon",
             scopes: Scopes(["read", "write", "follow", "push"]),
             website: baseUrl)

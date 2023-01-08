@@ -33,7 +33,7 @@ struct VernissageApp: App {
                         .environmentObject(applicationState)
                 }
             }
-            .task {
+            .task {                
                 await AuthorizationService.shared.verifyAccount({ accountData in
                     guard let accountData = accountData else {
                         self.applicationViewMode = .signIn
@@ -43,9 +43,6 @@ struct VernissageApp: App {
                     self.applicationState.accountData = accountData
                     self.applicationViewMode = .mainView
                 })
-                
-                URLCache.shared.memoryCapacity = 10_000_000 // ~10 MB memory space
-                URLCache.shared.diskCapacity = 1_000_000_000 // ~1GB disk cache space
             }
             .navigationViewStyle(.stack)
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in

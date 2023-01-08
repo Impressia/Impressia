@@ -24,7 +24,7 @@
 		F8210DE52966E160001D9973 /* Color+SystemColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8210DE42966E160001D9973 /* Color+SystemColors.swift */; };
 		F8210DE72966E1D1001D9973 /* Color+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8210DE62966E1D1001D9973 /* Color+Assets.swift */; };
 		F8210DEA2966E4F9001D9973 /* AnimatePlaceholderModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8210DE92966E4F9001D9973 /* AnimatePlaceholderModifier.swift */; };
-		F8341F90295C636C009C8EE6 /* UIImage+Exif.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8341F8F295C636C009C8EE6 /* UIImage+Exif.swift */; };
+		F8341F90295C636C009C8EE6 /* Data+Exif.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8341F8F295C636C009C8EE6 /* Data+Exif.swift */; };
 		F8341F92295C63BB009C8EE6 /* ImageStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8341F91295C63BB009C8EE6 /* ImageStatus.swift */; };
 		F83901A6295D8EC000456AE2 /* LabelIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83901A5295D8EC000456AE2 /* LabelIcon.swift */; };
 		F85D4971296402DC00751DF7 /* AuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D4970296402DC00751DF7 /* AuthorizationService.swift */; };
@@ -75,6 +75,8 @@
 		F8A93D7E2965FD89001D8331 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A93D7D2965FD89001D8331 /* UserProfileView.swift */; };
 		F8A93D802965FED4001D8331 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A93D7F2965FED4001D8331 /* AccountService.swift */; };
 		F8A93D822965FF5D001D8331 /* MastodonClientAuthenticated+Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A93D812965FF5D001D8331 /* MastodonClientAuthenticated+Account.swift */; };
+		F8C14392296AF0B3001FE31D /* String+Exif.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C14391296AF0B3001FE31D /* String+Exif.swift */; };
+		F8C14394296AF21B001FE31D /* Double+Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C14393296AF21B001FE31D /* Double+Round.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,7 +94,7 @@
 		F8210DE42966E160001D9973 /* Color+SystemColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+SystemColors.swift"; sourceTree = "<group>"; };
 		F8210DE62966E1D1001D9973 /* Color+Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Assets.swift"; sourceTree = "<group>"; };
 		F8210DE92966E4F9001D9973 /* AnimatePlaceholderModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatePlaceholderModifier.swift; sourceTree = "<group>"; };
-		F8341F8F295C636C009C8EE6 /* UIImage+Exif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Exif.swift"; sourceTree = "<group>"; };
+		F8341F8F295C636C009C8EE6 /* Data+Exif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Exif.swift"; sourceTree = "<group>"; };
 		F8341F91295C63BB009C8EE6 /* ImageStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStatus.swift; sourceTree = "<group>"; };
 		F83901A5295D8EC000456AE2 /* LabelIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelIcon.swift; sourceTree = "<group>"; };
 		F85D4970296402DC00751DF7 /* AuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationService.swift; sourceTree = "<group>"; };
@@ -145,6 +147,8 @@
 		F8A93D7D2965FD89001D8331 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		F8A93D7F2965FED4001D8331 /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
 		F8A93D812965FF5D001D8331 /* MastodonClientAuthenticated+Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MastodonClientAuthenticated+Account.swift"; sourceTree = "<group>"; };
+		F8C14391296AF0B3001FE31D /* String+Exif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Exif.swift"; sourceTree = "<group>"; };
+		F8C14393296AF21B001FE31D /* Double+Round.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Round.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,13 +196,15 @@
 		F8341F94295C63FE009C8EE6 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				F8341F8F295C636C009C8EE6 /* UIImage+Exif.swift */,
+				F8341F8F295C636C009C8EE6 /* Data+Exif.swift */,
 				F85D4980296417F700751DF7 /* MastodonClientAuthenticated+Context.swift */,
 				F8A93D812965FF5D001D8331 /* MastodonClientAuthenticated+Account.swift */,
 				F85D49862964334100751DF7 /* String+Date.swift */,
+				F8C14391296AF0B3001FE31D /* String+Exif.swift */,
 				F8210DE22966D256001D9973 /* Status+StatusData.swift */,
 				F8210DE42966E160001D9973 /* Color+SystemColors.swift */,
 				F8210DE62966E1D1001D9973 /* Color+Assets.swift */,
+				F8C14393296AF21B001FE31D /* Double+Round.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -452,7 +458,7 @@
 				F800480A2961EA1900E6868A /* AttachmentDataHandler.swift in Sources */,
 				F80048032961850500E6868A /* AttachmentData+CoreDataClass.swift in Sources */,
 				F897978D2968369600B22335 /* HapticService.swift in Sources */,
-				F8341F90295C636C009C8EE6 /* UIImage+Exif.swift in Sources */,
+				F8341F90295C636C009C8EE6 /* Data+Exif.swift in Sources */,
 				F8A93D7E2965FD89001D8331 /* UserProfileView.swift in Sources */,
 				F85D4981296417F700751DF7 /* MastodonClientAuthenticated+Context.swift in Sources */,
 				F88C246E295C37B80006098B /* MainView.swift in Sources */,
@@ -469,6 +475,7 @@
 				F88ABD9429687CA4004EF61E /* ComposeView.swift in Sources */,
 				F85D497D29640D5900751DF7 /* InteractionRow.swift in Sources */,
 				F866F6A729604629002E8F88 /* SignInView.swift in Sources */,
+				F8C14392296AF0B3001FE31D /* String+Exif.swift in Sources */,
 				F88C246C295C37B80006098B /* VernissageApp.swift in Sources */,
 				F85D4971296402DC00751DF7 /* AuthorizationService.swift in Sources */,
 				F88FAD25295F3FF7009B20C9 /* FederatedFeedView.swift in Sources */,
@@ -477,6 +484,7 @@
 				F897978F29684BCB00B22335 /* LoadingView.swift in Sources */,
 				F88FAD2D295F4AD7009B20C9 /* ApplicationState.swift in Sources */,
 				F866F6A1296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift in Sources */,
+				F8C14394296AF21B001FE31D /* Double+Round.swift in Sources */,
 				F866F6AE29606367002E8F88 /* ApplicationViewMode.swift in Sources */,
 				F8A93D802965FED4001D8331 /* AccountService.swift in Sources */,
 				F866F6AA29605AFA002E8F88 /* SceneDelegate.swift in Sources */,

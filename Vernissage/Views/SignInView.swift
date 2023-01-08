@@ -30,8 +30,10 @@ struct SignInView: View {
                 Button("Go") {
                     Task {
                         try await AuthorizationService.shared.signIn(serverAddress: serverAddress, { accountData in
-                            self.applicationState.accountData = accountData
-                            onSignInStateChenge(.mainView)
+                            DispatchQueue.main.async {
+                                self.applicationState.accountData = accountData
+                                onSignInStateChenge(.mainView)
+                            }
                         })
                     }
                 }

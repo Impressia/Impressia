@@ -27,6 +27,10 @@
     <entity name="AttachmentData" representedClassName="AttachmentData" syncable="YES">
         <attribute name="blurhash" optional="YES" attributeType="String"/>
         <attribute name="data" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="exifCamera" optional="YES" attributeType="String"/>
+        <attribute name="exifCreatedDate" optional="YES" attributeType="String"/>
+        <attribute name="exifExposure" optional="YES" attributeType="String"/>
+        <attribute name="exifLens" optional="YES" attributeType="String"/>
         <attribute name="id" attributeType="String"/>
         <attribute name="previewUrl" optional="YES" attributeType="URI"/>
         <attribute name="remoteUrl" optional="YES" attributeType="URI"/>
