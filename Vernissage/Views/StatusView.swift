@@ -24,9 +24,11 @@ struct StatusView: View {
         ScrollView {
             if let statusData = self.statusData {
                 VStack (alignment: .leading) {                    
-                    ImagesCarousel(attachments: statusData.attachments()) { attachmentData in
-                        self.setAttachment(attachmentData)
-                    }
+                    ImagesCarousel(attachments: statusData.attachments(),
+                                   exifCamera: $exifCamera,
+                                   exifExposure: $exifExposure,
+                                   exifCreatedDate: $exifCreatedDate,
+                                   exifLens: $exifLens)
                     
                     VStack(alignment: .leading) {
                         NavigationLink(destination: UserProfileView(

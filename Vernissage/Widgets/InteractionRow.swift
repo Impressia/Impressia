@@ -16,13 +16,13 @@ struct InteractionRow: View {
     @State var favouritesCount = 0
     @State var bookmarked = false
     
-    var onNewStatus: () -> Void?
+    var onNewStatus: (() -> Void)?
     
     var body: some View {
         HStack (alignment: .top) {
             Button {
                 HapticService.shared.touch()
-                onNewStatus()
+                onNewStatus?()
             } label: {
                 HStack(alignment: .center) {
                     Image(systemName: "message")
@@ -127,7 +127,7 @@ struct InteractionRow: View {
 
 struct InteractionRow_Previews: PreviewProvider {
     static var previews: some View {
-        InteractionRow() { }
+        InteractionRow()
             .previewLayout(.fixed(width: 300, height: 70))
     }
 }

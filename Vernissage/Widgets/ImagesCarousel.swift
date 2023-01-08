@@ -11,10 +11,13 @@ struct ImagesCarousel: View {
     @State private var height: Double = 0.0
     @State private var selectedAttachmentId = ""
     
-    var onAttachmentChange: (_ attachmentData: AttachmentData) -> Void?
+    @Binding public var exifCamera: String?
+    @Binding public var exifExposure: String?
+    @Binding public var exifCreatedDate: String?
+    @Binding public var exifLens: String?
     
     var body: some View {
-        TabView(selection: $selectedAttachmentId) {
+        TabView() {
             ForEach(attachments, id: \.id) { attachment in
                 if let image = UIImage(data: attachment.data) {
                     Image(uiImage: image)
@@ -28,7 +31,10 @@ struct ImagesCarousel: View {
         .tabViewStyle(PageTabViewStyle())
         .onChange(of: selectedAttachmentId, perform: { index in
             if let attachment = attachments.first(where: { item in item.id == index }) {
-                onAttachmentChange(attachment)
+                self.exifCamera = attachment.exifCamera
+                self.exifExposure = attachment.exifExposure
+                self.exifCreatedDate = attachment.exifCreatedDate
+                self.exifLens = attachment.exifLens
             }
         })
         .onAppear {
@@ -57,8 +63,7 @@ struct ImagesCarousel: View {
 
 struct ImagesCarousel_Previews: PreviewProvider {
     static var previews: some View {
-        ImagesCarousel(attachments: []) { attachmentData in
-            
-        }
+        ImagesCarousel(attachments: [], exifCamera: .constant(""), exifExposure: .constant(""), exifCreatedDate: .constant(""), exifLens: .constant(""))
+        // ImagesCarousel(attachments: [])
     }
 }

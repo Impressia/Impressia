@@ -15,7 +15,7 @@ struct CommentsSection: View {
     @State public var withDivider = true
     @State private var context: Context?
     
-    var onNewStatus: (_ context: Status) -> Void?
+    var onNewStatus: ((_ context: Status) -> Void)?
 
     private let contentWidth = Int(UIScreen.main.bounds.width) - 50
     
@@ -122,7 +122,7 @@ struct CommentsSection: View {
                                                favourited: status.favourited,
                                                favouritesCount: status.favouritesCount,
                                                bookmarked: status.bookmarked) {
-                                    onNewStatus(status)
+                                    self.onNewStatus?(status)
                                 }
                                 .foregroundColor(self.getInteractionRowTextColor())
                                 .padding(.horizontal, 16)
@@ -133,7 +133,7 @@ struct CommentsSection: View {
                         }
                         
                         CommentsSection(statusId: status.id, withDivider: false)  { context in
-                            onNewStatus(context)
+                            self.onNewStatus?(context)
                         }
                     }
                 }
@@ -167,6 +167,6 @@ struct CommentsSection: View {
 
 struct CommentsSection_Previews: PreviewProvider {
     static var previews: some View {
-        CommentsSection(statusId: "", withDivider: true) { context in }
+        CommentsSection(statusId: "", withDivider: true)
     }
 }

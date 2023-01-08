@@ -12,7 +12,7 @@ struct SignInView: View {
 
     @State private var serverAddress: String = ""
     
-    var onSignInStateChenge: (_ applicationViewMode: ApplicationViewMode) -> Void?
+    var onSignInStateChenge: ((_ applicationViewMode: ApplicationViewMode) -> Void)?
     
     var body: some View {
         VStack {
@@ -32,7 +32,7 @@ struct SignInView: View {
                         try await AuthorizationService.shared.signIn(serverAddress: serverAddress, { accountData in
                             DispatchQueue.main.async {
                                 self.applicationState.accountData = accountData
-                                onSignInStateChenge(.mainView)
+                                onSignInStateChenge?(.mainView)
                             }
                         })
                     }
@@ -47,6 +47,6 @@ struct SignInView: View {
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView { applicationViewMode in }
+        SignInView()
     }
 }
