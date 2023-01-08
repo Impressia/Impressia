@@ -15,7 +15,11 @@ extension MastodonClientAuthenticated {
             withBearerToken: token
         )
         
-        let (data, _) = try await urlSession.data(for: request)
+        let (data, response) = try await urlSession.data(for: request)
+        guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
+            throw NetworkError.notSuccessResponse(response)
+        }
+        
         return try JSONDecoder().decode(Account.self, from: data)
     }
     
@@ -26,7 +30,11 @@ extension MastodonClientAuthenticated {
             withBearerToken: token
         )
         
-        let (data, _) = try await urlSession.data(for: request)
+        let (data, response) = try await urlSession.data(for: request)
+        guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
+            throw NetworkError.notSuccessResponse(response)
+        }
+        
         let relationships = try JSONDecoder().decode([Relationship].self, from: data)
         return relationships.first
     }
@@ -38,7 +46,11 @@ extension MastodonClientAuthenticated {
             withBearerToken: token
         )
         
-        let (data, _) = try await urlSession.data(for: request)
+        let (data, response) = try await urlSession.data(for: request)
+        guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
+            throw NetworkError.notSuccessResponse(response)
+        }
+        
         return try JSONDecoder().decode([Status].self, from: data)
     }
     
@@ -49,7 +61,11 @@ extension MastodonClientAuthenticated {
             withBearerToken: token
         )
         
-        let (data, _) = try await urlSession.data(for: request)        
+        let (data, response) = try await urlSession.data(for: request)
+        guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
+            throw NetworkError.notSuccessResponse(response)
+        }
+               
         return try JSONDecoder().decode(Relationship.self, from: data)
     }
     
@@ -60,7 +76,11 @@ extension MastodonClientAuthenticated {
             withBearerToken: token
         )
         
-        let (data, _) = try await urlSession.data(for: request)
+        let (data, response) = try await urlSession.data(for: request)
+        guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
+            throw NetworkError.notSuccessResponse(response)
+        }
+        
         return try JSONDecoder().decode([Account].self, from: data)
     }
     
@@ -71,7 +91,11 @@ extension MastodonClientAuthenticated {
             withBearerToken: token
         )
         
-        let (data, _) = try await urlSession.data(for: request)
+        let (data, response) = try await urlSession.data(for: request)
+        guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
+            throw NetworkError.notSuccessResponse(response)
+        }
+        
         return try JSONDecoder().decode([Account].self, from: data)
     }
 }

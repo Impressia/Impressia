@@ -19,7 +19,7 @@ class StatusDataHandler {
         do {
             return try context.fetch(fetchRequest)
         } catch {
-            print("Error during fetching accounts")
+            print("Error during fetching statuses (getStatusesData)")
             return []
         }
     }
@@ -34,7 +34,7 @@ class StatusDataHandler {
         do {
             return try context.fetch(fetchRequest).first
         } catch {
-            print("Error during fetching accounts")
+            print("Error during fetching status (getStatusData)")
             return nil
         }
     }
@@ -50,6 +50,7 @@ class StatusDataHandler {
             let statuses = try context.fetch(fetchRequest)
             return statuses.first
         } catch {
+            print("Error during fetching maximum status (getMaximumStatus)")
             return nil
         }
     }
@@ -65,6 +66,7 @@ class StatusDataHandler {
             let statuses = try context.fetch(fetchRequest)
             return statuses.first
         } catch {
+            print("Error during fetching minimum status (getMinimumtatus)")
             return nil
         }
     }

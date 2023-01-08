@@ -15,7 +15,11 @@ extension MastodonClientAuthenticated {
             withBearerToken: token
         )
         
-        let (data, _) = try await urlSession.data(for: request)
+        let (data, response) = try await urlSession.data(for: request)
+        guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
+            throw NetworkError.notSuccessResponse(response)
+        }
+        
         return try JSONDecoder().decode(Context.self, from: data)
     }
 }

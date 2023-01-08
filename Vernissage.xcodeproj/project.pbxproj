@@ -77,6 +77,8 @@
 		F8A93D822965FF5D001D8331 /* MastodonClientAuthenticated+Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A93D812965FF5D001D8331 /* MastodonClientAuthenticated+Account.swift */; };
 		F8C14392296AF0B3001FE31D /* String+Exif.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C14391296AF0B3001FE31D /* String+Exif.swift */; };
 		F8C14394296AF21B001FE31D /* Double+Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C14393296AF21B001FE31D /* Double+Round.swift */; };
+		F8C14398296B208A001FE31D /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C14397296B208A001FE31D /* HTTPStatusCode.swift */; };
+		F8C1439B296B227C001FE31D /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C1439A296B227C001FE31D /* NetworkError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -149,6 +151,8 @@
 		F8A93D812965FF5D001D8331 /* MastodonClientAuthenticated+Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MastodonClientAuthenticated+Account.swift"; sourceTree = "<group>"; };
 		F8C14391296AF0B3001FE31D /* String+Exif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Exif.swift"; sourceTree = "<group>"; };
 		F8C14393296AF21B001FE31D /* Double+Round.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Round.swift"; sourceTree = "<group>"; };
+		F8C14397296B208A001FE31D /* HTTPStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
+		F8C1439A296B227C001FE31D /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,9 +216,11 @@
 		F8341F95295C640C009C8EE6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F8C14399296B2150001FE31D /* Errors */,
 				F8341F91295C63BB009C8EE6 /* ImageStatus.swift */,
 				F88FAD2C295F4AD7009B20C9 /* ApplicationState.swift */,
 				F866F6AD29606367002E8F88 /* ApplicationViewMode.swift */,
+				F8C14397296B208A001FE31D /* HTTPStatusCode.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -345,6 +351,14 @@
 			path = Haptics;
 			sourceTree = "<group>";
 		};
+		F8C14399296B2150001FE31D /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				F8C1439A296B227C001FE31D /* NetworkError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -434,6 +448,7 @@
 				F8210DE52966E160001D9973 /* Color+SystemColors.swift in Sources */,
 				F85DBF93296760790069BF89 /* CacheAvatarService.swift in Sources */,
 				F88FAD23295F3FC4009B20C9 /* LocalFeedView.swift in Sources */,
+				F8C1439B296B227C001FE31D /* NetworkError.swift in Sources */,
 				F88FAD2B295F43B8009B20C9 /* AccountData+CoreDataProperties.swift in Sources */,
 				F85D4975296407F100751DF7 /* TimelineService.swift in Sources */,
 				F80048062961850500E6868A /* StatusData+CoreDataProperties.swift in Sources */,
@@ -470,6 +485,7 @@
 				F866F6A529604194002E8F88 /* ApplicationSettingsHandler.swift in Sources */,
 				F88ABD9229686F1C004EF61E /* MemoryCache.swift in Sources */,
 				F8210DE32966D256001D9973 /* Status+StatusData.swift in Sources */,
+				F8C14398296B208A001FE31D /* HTTPStatusCode.swift in Sources */,
 				F85D49852964301800751DF7 /* StatusData+Attachments.swift in Sources */,
 				F8210DE72966E1D1001D9973 /* Color+Assets.swift in Sources */,
 				F88ABD9429687CA4004EF61E /* ComposeView.swift in Sources */,

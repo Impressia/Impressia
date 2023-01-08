@@ -18,7 +18,7 @@ class AttachmentDataHandler {
         do {
             return try context.fetch(fetchRequest)
         } catch {
-            print("Error during fetching accounts")
+            print("Error during fetching attachmens (getAttachmentsData)")
             return []
         }
     }

@@ -16,8 +16,8 @@ public class RemoteFileService {
         
         // Fetching data.
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-            return nil
+        guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
+            throw NetworkError.notSuccessResponse(response)
         }
         
         return data
