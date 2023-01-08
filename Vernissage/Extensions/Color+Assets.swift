@@ -12,4 +12,6 @@ extension Color {
     static let dangerColor = Color("DangerColor")
     static let lightGrayColor = Color("LightGrayColor")
     static let mainTextColor = Color("MainTextColor")
+    static let selectedRowColor = Color("SelectedRowColor")
+    
 }

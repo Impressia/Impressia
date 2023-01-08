@@ -64,6 +64,7 @@ struct StatusView: View {
                                        bookmarked: statusData.bookmarked) {
                             self.showCompose.toggle()
                         }
+                        .foregroundColor(.accentColor)
                         .padding(8)
                     }
                     .padding(8)

@@ -8,6 +8,7 @@ import SwiftUI
 import MastodonSwift
 
 struct CommentsSection: View {
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var applicationState: ApplicationState
 
     @State public var statusId: String
@@ -19,115 +20,117 @@ struct CommentsSection: View {
     private let contentWidth = Int(UIScreen.main.bounds.width) - 50
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading, spacing: 0) {
             if let context = context {
                 ForEach(context.descendants, id: \.id) { status in
-                    
-                    if withDivider {
-                        Rectangle()
-                            .size(width: UIScreen.main.bounds.width, height: 4)
-                            .fill(Color.mainTextColor)
-                            .opacity(0.2)
-                    }
-                    
-                    HStack (alignment: .top) {
-                        
-                        if let account = status.account {
-                            NavigationLink(destination: UserProfileView(
-                                accountId: account.id,
-                                accountDisplayName: account.displayName,
-                                accountUserName: account.acct)
-                                .environmentObject(applicationState)) {
-                                    AsyncImage(url: account.avatar) { image in
-                                        image
-                                            .resizable()
-                                            .clipShape(Circle())
-                                            .aspectRatio(contentMode: .fit)
-                                    } placeholder: {
-                                        Image(systemName: "person.circle")
-                                            .resizable()
-                                            .foregroundColor(.mainTextColor)
-                                    }
-                                    .frame(width: 32.0, height: 32.0)
-                                }
+                    VStack(alignment: .leading, spacing: 0) {
+
+                        if withDivider {
+                            Divider()
+                                .foregroundColor(.mainTextColor)
+                                .padding(0)
                         }
-                        
-                        VStack (alignment: .leading) {
-                            HStack (alignment: .top) {
-                                Text(status.account?.displayName ?? status.account?.acct ?? status.account?.username ?? "")
-                                    .foregroundColor(.mainTextColor)
-                                    .font(.footnote)
-                                    .fontWeight(.bold)
-                                
-                                Spacer()
-                                
-                                Text(status.createdAt.toRelative(.isoDateTimeMilliSec))
-                                    .foregroundColor(.lightGrayColor)
-                                    .font(.footnote)
-                            }
+                                                
+                        HStack (alignment: .top) {
                             
-                            HTMLFormattedText(status.content, withFontSize: 14, andWidth: contentWidth)
-                                .padding(.top, -10)
-                                .padding(.leading, -4)
-                            
-                            if status.mediaAttachments.count > 0 {
-                                LazyVGrid(columns: Array(repeating: .init(.flexible()), count: status.mediaAttachments.count == 1 ? 1 : 2), alignment: .center, spacing: 4) {
-                                    ForEach(status.mediaAttachments, id: \.id) { attachment in
-                                        AsyncImage(url: status.mediaAttachments[0].url) { image in
+                            if let account = status.account {
+                                NavigationLink(destination: UserProfileView(
+                                    accountId: account.id,
+                                    accountDisplayName: account.displayName,
+                                    accountUserName: account.acct)
+                                    .environmentObject(applicationState)) {
+                                        AsyncImage(url: account.avatar) { image in
                                             image
                                                 .resizable()
-                                                .scaledToFill()
-                                                .frame(minWidth: 0, maxWidth: .infinity)
-                                                .frame(height: status.mediaAttachments.count == 1 ? 200 : 100)
-                                                .cornerRadius(10)
-                                                .shadow(color: .mainTextColor.opacity(0.3), radius: 2)
+                                                .clipShape(Circle())
+                                                .aspectRatio(contentMode: .fit)
                                         } placeholder: {
-                                            Image(systemName: "photo")
+                                            Image(systemName: "person.circle")
                                                 .resizable()
-                                                .scaledToFit()
-                                                .frame(minWidth: 0, maxWidth: .infinity)
-                                                .frame(height: status.mediaAttachments.count == 1 ? 200 : 100)
                                                 .foregroundColor(.mainTextColor)
-                                                .opacity(0.05)
                                         }
+                                        .frame(width: 32.0, height: 32.0)
+                                    }
+                            }
+                            
+                            VStack (alignment: .leading, spacing: 0) {
+                                HStack (alignment: .top) {
+                                    Text(self.getUserName(status: status))
+                                        .foregroundColor(.mainTextColor)
+                                        .font(.footnote)
+                                        .fontWeight(.bold)
+                                    
+                                    Spacer()
+                                    
+                                    Text(status.createdAt.toRelative(.isoDateTimeMilliSec))
+                                        .foregroundColor(.lightGrayColor)
+                                        .font(.footnote)
+                                }
+                                
+                                HTMLFormattedText(status.content, withFontSize: 14, andWidth: contentWidth)
+                                    .padding(.top, -4)
+                                    .padding(.leading, -4)
+                                
+//                                if status.mediaAttachments.count > 0 {
+//                                    LazyVGrid(columns: self.getColumns(status: status), alignment: .center, spacing: 4) {
+//                                        ForEach(status.mediaAttachments, id: \.id) { attachment in
+//                                            AsyncImage(url: status.mediaAttachments[0].url) { image in
+//                                                image
+//                                                    .resizable()
+//                                                    .scaledToFill()
+//                                                    .frame(minWidth: 0, maxWidth: .infinity)
+//                                                    .frame(height: status.mediaAttachments.count == 1 ? 200 : 100)
+//                                                    .cornerRadius(10)
+//                                                    .shadow(color: .mainTextColor.opacity(0.3), radius: 2)
+//                                            } placeholder: {
+//                                                Image(systemName: "photo")
+//                                                    .resizable()
+//                                                    .scaledToFit()
+//                                                    .frame(minWidth: 0, maxWidth: .infinity)
+//                                                    .frame(height: status.mediaAttachments.count == 1 ? 200 : 100)
+//                                                    .foregroundColor(.mainTextColor)
+//                                                    .opacity(0.05)
+//                                            }
+//                                        }
+//                                    }
+//                                    .padding(.bottom, 8)
+//                                }
+                            }
+                            .onTapGesture {
+                                withAnimation(.linear(duration: 0.3)) {
+                                    if status.id == self.applicationState.showInteractionStatusId {
+                                        self.applicationState.showInteractionStatusId = ""
+                                    } else {
+                                        self.applicationState.showInteractionStatusId = status.id
                                     }
                                 }
-                                .padding(.bottom, 8)
                             }
                         }
-                        .onTapGesture {
-                            withAnimation(.linear(duration: 0.3)) {
-                                if status.id == self.applicationState.showInteractionStatusId {
-                                    self.applicationState.showInteractionStatusId = ""
-                                } else {
-                                    self.applicationState.showInteractionStatusId = status.id
+                        .padding(8)
+                        .background(self.getSelectedRowColor(status: status))
+                        
+                        if self.applicationState.showInteractionStatusId == status.id {
+                            VStack (alignment: .leading, spacing: 0) {
+                                InteractionRow(statusId: status.id,
+                                               repliesCount: status.repliesCount,
+                                               reblogged: status.reblogged,
+                                               reblogsCount: status.reblogsCount,
+                                               favourited: status.favourited,
+                                               favouritesCount: status.favouritesCount,
+                                               bookmarked: status.bookmarked) {
+                                    onNewStatus(status)
                                 }
+                                .foregroundColor(self.getInteractionRowTextColor())
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 8)
                             }
+                            .background(Color.lightGrayColor.opacity(0.5))
+                            .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
                         }
-                    }
-                    .padding(.horizontal, 8)
-                    .padding(.bottom, 8)
-                    
-                    if self.applicationState.showInteractionStatusId == status.id {
-                        VStack (alignment: .leading) {
-                            InteractionRow(statusId: status.id,
-                                           repliesCount: status.repliesCount,
-                                           reblogged: status.reblogged,
-                                           reblogsCount: status.reblogsCount,
-                                           favourited: status.favourited,
-                                           favouritesCount: status.favouritesCount,
-                                           bookmarked: status.bookmarked) {
-                                onNewStatus(status)
-                            }
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 8)
+                        
+                        CommentsSection(statusId: status.id, withDivider: false)  { context in
+                            onNewStatus(context)
                         }
-                        .background(Color.mainTextColor.opacity(0.08))
-                        .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
-                    }
-
-                    CommentsSection(statusId: status.id, withDivider: false)  { context in
-                        onNewStatus(context)
                     }
                 }
             }
@@ -143,6 +146,22 @@ struct CommentsSection: View {
                 print("Error \(error.localizedDescription)")
             }
         }
+    }
+    
+    private func getUserName(status: Status) -> String {
+        return status.account?.displayName ?? status.account?.acct ?? status.account?.username ?? ""
+    }
+    
+    private func getColumns(status: Status) -> [GridItem.Size] {
+        return Array(repeating: .flexible(), count: status.mediaAttachments.count == 1 ? 1 : 2)
+    }
+    
+    private func getInteractionRowTextColor() -> Color {
+        return self.colorScheme == .dark ? Color.black : Color.white
+    }
+    
+    private func getSelectedRowColor(status: Status) -> Color {
+        return self.applicationState.showInteractionStatusId == status.id ? Color.selectedRowColor : Color.systemBackground
     }
 }
 

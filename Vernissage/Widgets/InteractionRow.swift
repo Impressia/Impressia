@@ -122,7 +122,6 @@ struct InteractionRow: View {
         }
         .font(.title3)
         .fontWeight(.semibold)
-        .foregroundColor(.accentColor)
     }
 }
 
