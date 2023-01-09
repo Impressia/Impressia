@@ -17,5 +17,13 @@ extension AttachmentData {
         self.remoteUrl = attachment.remoteUrl
         self.text = attachment.description
         self.type = attachment.type.rawValue
+        
+        if let width = (attachment.meta as? ImageMetadata)?.original?.width {
+            self.metaImageWidth = Int32(width)
+        }
+        
+        if let height = (attachment.meta as? ImageMetadata)?.original?.height {
+            self.metaImageHeight = Int32(height)
+        }
     }
 }

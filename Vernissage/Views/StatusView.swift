@@ -11,6 +11,9 @@ import AVFoundation
 struct StatusView: View {
     @EnvironmentObject var applicationState: ApplicationState
     @State var statusId: String
+    @State var imageBlurhash: String?
+    @State var imageWidth: Int32?
+    @State var imageHeight: Int32?
 
     @State private var showCompose = false
     @State private var statusData: StatusData?
@@ -84,10 +87,17 @@ struct StatusView: View {
                 }
             } else {
                 VStack (alignment: .leading) {
-                    Rectangle()
-                        .fill(Color.placeholderText)
-                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
-                        
+                    if let imageBlurhash, let uiImage = UIImage(blurHash: imageBlurhash, size: CGSize(width: 32, height: 32)) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .frame(width: UIScreen.main.bounds.width, height: self.getImageHeight())
+                    } else {
+                        Rectangle()
+                            .fill(Color.placeholderText)
+                            .frame(width: UIScreen.main.bounds.width, height: self.getImageHeight())
+                            .redacted(reason: .placeholder)
+                    }
+                    
                     VStack(alignment: .leading) {
                         UsernameRow(accountDisplayName: "Verylong Displayname",
                                     accountUsername: "@username")
@@ -103,10 +113,11 @@ struct StatusView: View {
                         LabelIcon(iconName: "camera.aperture", value: "Viltrox 24mm F1.8 E")
                         LabelIcon(iconName: "timelapse", value: "24.0 mm, f/1.8, 1/640s, ISO 100")
                         LabelIcon(iconName: "calendar", value: "2 Oct 2022")
-                    }.padding(8)
+                    }
+                    .padding(8)
+                    .redacted(reason: .placeholder)
+                    .animatePlaceholder(isLoading: .constant(true))
                 }
-                .redacted(reason: .placeholder)
-                .animatePlaceholder(isLoading: .constant(true))
             }
         }
         .navigationBarTitle("Details")
@@ -142,6 +153,19 @@ struct StatusView: View {
         exifExposure = attachmentData.exifExposure
         exifCreatedDate = attachmentData.exifCreatedDate
         exifLens = attachmentData.exifLens
+    }
+    
+    private func getImageHeight() -> Double {
+        if let imageHeight = self.imageHeight, let imageWidth = self.imageWidth, imageHeight > 0 && imageWidth > 0 {
+            return self.calculateHeight(width: Double(imageWidth), height: Double(imageHeight))
+        }
+        
+        return UIScreen.main.bounds.width * 0.75
+    }
+    
+    private func calculateHeight(width: Double, height: Double) -> CGFloat {
+        let divider = width / UIScreen.main.bounds.size.width
+        return height / divider
     }
 }
 

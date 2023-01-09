@@ -20,7 +20,10 @@ struct UserProfileStatuses: View {
         VStack(alignment: .center) {
             if firstLoadFinished == true {
                 ForEach(self.statuses, id: \.id) { item in
-                    NavigationLink(destination: StatusView(statusId: item.id)
+                    NavigationLink(destination: StatusView(statusId: item.id,
+                                                           imageBlurhash: item.mediaAttachments.first?.blurhash,
+                                                           imageWidth: item.getImageWidth(),
+                                                           imageHeight: item.getImageHeight())
                         .environmentObject(applicationState)) {
                             ImageRowAsync(attachments: item.mediaAttachments)
                         }

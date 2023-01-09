@@ -32,6 +32,8 @@
         <attribute name="exifExposure" optional="YES" attributeType="String"/>
         <attribute name="exifLens" optional="YES" attributeType="String"/>
         <attribute name="id" attributeType="String"/>
+        <attribute name="metaImageHeight" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="metaImageWidth" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="previewUrl" optional="YES" attributeType="URI"/>
         <attribute name="remoteUrl" optional="YES" attributeType="URI"/>
         <attribute name="statusId" attributeType="String"/>
