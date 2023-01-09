@@ -25,7 +25,7 @@ struct ImageRowAsync: View {
                         ZStack {
                             Rectangle()
                                 .fill(Color.placeholderText)
-                                .frame(width: self.imageWidth, height: self.imageHeight)
+                                .scaledToFill()
                             
                             VStack(alignment: .center) {
                                 Spacer()
@@ -34,6 +34,7 @@ struct ImageRowAsync: View {
                                 Spacer()
                             }
                         }
+                        .frame(width: self.imageWidth, height: self.imageHeight)
                     } else {
                         VStack(alignment: .center) {
                             if let blurhash = attachment.blurhash,
@@ -44,9 +45,10 @@ struct ImageRowAsync: View {
                             } else {
                                 Rectangle()
                                     .fill(Color.placeholderText)
-                                    .frame(width: self.imageWidth, height: self.imageHeight)
+                                    .scaledToFill()
                             }
                         }
+                        .frame(width: self.imageWidth, height: self.imageHeight)
                     }
                 }
                 .onSuccess { imageResponse in

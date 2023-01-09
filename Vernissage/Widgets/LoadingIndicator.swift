@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct LoadingIndicator: View {
+    @State var withText = true
+    
     var body: some View {
         ProgressView {
-            Text("Loading...")
-                .foregroundColor(.mainTextColor)
-                .font(.caption2)
+            if self.withText {
+                Text("Loading...")
+                    .foregroundColor(.mainTextColor)
+                    .font(.caption2)
+            }
         }
         .progressViewStyle(CircularProgressViewStyle())
         .tint(.mainTextColor)

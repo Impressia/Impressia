@@ -50,6 +50,8 @@
 		F866F6AA29605AFA002E8F88 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F6A929605AFA002E8F88 /* SceneDelegate.swift */; };
 		F866F6AE29606367002E8F88 /* ApplicationViewMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F6AD29606367002E8F88 /* ApplicationViewMode.swift */; };
 		F866F6B729608467002E8F88 /* MastodonSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F866F6B629608467002E8F88 /* MastodonSwift */; };
+		F86B7214296BFDCE00EE59EC /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7213296BFDCE00EE59EC /* UserProfileHeader.swift */; };
+		F86B7216296BFFDA00EE59EC /* UserProfileStatuses.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7215296BFFDA00EE59EC /* UserProfileStatuses.swift */; };
 		F88ABD9229686F1C004EF61E /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88ABD9129686F1C004EF61E /* MemoryCache.swift */; };
 		F88ABD9429687CA4004EF61E /* ComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88ABD9329687CA4004EF61E /* ComposeView.swift */; };
 		F88C246C295C37B80006098B /* VernissageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C246B295C37B80006098B /* VernissageApp.swift */; };
@@ -123,6 +125,8 @@
 		F866F6A829604FFF002E8F88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F866F6A929605AFA002E8F88 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F866F6AD29606367002E8F88 /* ApplicationViewMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationViewMode.swift; sourceTree = "<group>"; };
+		F86B7213296BFDCE00EE59EC /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
+		F86B7215296BFFDA00EE59EC /* UserProfileStatuses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileStatuses.swift; sourceTree = "<group>"; };
 		F88ABD9129686F1C004EF61E /* MemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
 		F88ABD9329687CA4004EF61E /* ComposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeView.swift; sourceTree = "<group>"; };
 		F88ABD9529687D4D004EF61E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -273,6 +277,8 @@
 				F85D497E296416C800751DF7 /* CommentsSection.swift */,
 				F897978729681B9C00B22335 /* UserAvatar.swift */,
 				F89797892968314A00B22335 /* LoadingIndicator.swift */,
+				F86B7213296BFDCE00EE59EC /* UserProfileHeader.swift */,
+				F86B7215296BFFDA00EE59EC /* UserProfileStatuses.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -493,6 +499,7 @@
 				F85D49852964301800751DF7 /* StatusData+Attachments.swift in Sources */,
 				F8210DE72966E1D1001D9973 /* Color+Assets.swift in Sources */,
 				F88ABD9429687CA4004EF61E /* ComposeView.swift in Sources */,
+				F86B7214296BFDCE00EE59EC /* UserProfileHeader.swift in Sources */,
 				F85D497D29640D5900751DF7 /* InteractionRow.swift in Sources */,
 				F866F6A729604629002E8F88 /* SignInView.swift in Sources */,
 				F8C14392296AF0B3001FE31D /* String+Exif.swift in Sources */,
@@ -501,6 +508,7 @@
 				F88FAD25295F3FF7009B20C9 /* FederatedFeedView.swift in Sources */,
 				F88FAD32295F5029009B20C9 /* RemoteFileService.swift in Sources */,
 				F88FAD27295F400E009B20C9 /* NotificationsView.swift in Sources */,
+				F86B7216296BFFDA00EE59EC /* UserProfileStatuses.swift in Sources */,
 				F897978F29684BCB00B22335 /* LoadingView.swift in Sources */,
 				F88FAD2D295F4AD7009B20C9 /* ApplicationState.swift in Sources */,
 				F866F6A1296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift in Sources */,
