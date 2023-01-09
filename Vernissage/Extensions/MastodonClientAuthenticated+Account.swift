@@ -39,10 +39,16 @@ extension MastodonClientAuthenticated {
         return relationships.first
     }
     
-    func getStatuses(for accountId: String) async throws -> [Status] {
+    func getStatuses(for accountId: String,
+                     onlyMedia: Bool = true,
+                     excludeReplies: Bool = true,
+                     maxId: String? = nil,
+                     sinceId: String? = nil,
+                     minId: String? = nil,
+                     limit: Int = 40) async throws -> [Status] {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Account.statuses(accountId, true, true),
+            target: Mastodon.Account.statuses(accountId, onlyMedia, excludeReplies, maxId, sinceId, minId, limit),
             withBearerToken: token
         )
         

@@ -50,11 +50,7 @@ struct ImageRowAsync: View {
                     }
                 }
                 .onSuccess { imageResponse in
-                    if heightWasPrecalculated == false {
-                        let imgHeight = imageResponse.image.size.height
-                        let imgWidth = imageResponse.image.size.width
-                        self.imageHeight = self.calculateHeight(width: imgWidth, height: imgHeight)
-                    }
+                    self.recalculateSizeOfDownloadedImage(imageResponse: imageResponse)
                 }
                 .frame(width: self.imageWidth, height: self.imageHeight)
                     
@@ -70,15 +66,28 @@ struct ImageRowAsync: View {
                 }
             }
             .onAppear {
-                if let firstAttachment = attachments.first,
-                   let imgHeight = (firstAttachment.meta as? ImageMetadata)?.original?.height,
-                   let imgWidth = (firstAttachment.meta as? ImageMetadata)?.original?.width {
-                    let calculatedHeight = self.calculateHeight(width: Double(imgWidth), height: Double(imgHeight))
-                    self.imageHeight = calculatedHeight <= 0 ?  UIScreen.main.bounds.width : calculatedHeight
-                } else {
-                    heightWasPrecalculated = false
-                }
+                self.recalculateSizeFromMetadata()
             }
+        }
+    }
+    
+    private func recalculateSizeOfDownloadedImage(imageResponse: ImageResponse) {
+        if heightWasPrecalculated == false {
+            let imgHeight = imageResponse.image.size.height
+            let imgWidth = imageResponse.image.size.width
+            let calculatedHeight = self.calculateHeight(width: imgWidth, height: imgHeight)
+            self.imageHeight = (calculatedHeight > 0 && calculatedHeight < .infinity) ? calculatedHeight : UIScreen.main.bounds.width
+        }
+    }
+    
+    private func recalculateSizeFromMetadata() {
+        if let firstAttachment = attachments.first,
+           let imgHeight = (firstAttachment.meta as? ImageMetadata)?.original?.height,
+           let imgWidth = (firstAttachment.meta as? ImageMetadata)?.original?.width {
+            let calculatedHeight = self.calculateHeight(width: Double(imgWidth), height: Double(imgHeight))
+            self.imageHeight = (calculatedHeight > 0 && calculatedHeight < .infinity) ? calculatedHeight : UIScreen.main.bounds.width
+        } else {
+            heightWasPrecalculated = false
         }
     }
     

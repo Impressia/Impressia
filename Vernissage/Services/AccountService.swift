@@ -29,13 +29,26 @@ public class AccountService {
         return try await client.getRelationship(for: accountId)
     }
     
-    public func getStatuses(forAccountId accountId: String, andContext accountData: AccountData?) async throws -> [Status] {
+    public func getStatuses(forAccountId accountId: String,
+                            andContext accountData: AccountData?,
+                            onlyMedia: Bool = true,
+                            excludeReplies: Bool = true,
+                            maxId: String? = nil,
+                            sinceId: String? = nil,
+                            minId: String? = nil,
+                            limit: Int = 40) async throws -> [Status] {
         guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
             return []
         }
         
         let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
-        return try await client.getStatuses(for: accountId)
+        return try await client.getStatuses(for: accountId,
+                                            onlyMedia: onlyMedia,
+                                            excludeReplies: excludeReplies,
+                                            maxId: maxId,
+                                            sinceId: sinceId,
+                                            minId: minId,
+                                            limit: limit)
     }
     
     public func follow(forAccountId accountId: String, andContext accountData: AccountData?) async throws -> Relationship? {

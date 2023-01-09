@@ -18,8 +18,8 @@ struct UserProfileView: View {
     @State private var statuses: [Status] = []
     @State private var isDuringRelationshipAction = false
     
-    private static let initialColumns = 1
-    @State private var gridColumns = Array(repeating: GridItem(.flexible()), count: initialColumns)
+    @State private var allItemsLoaded = false
+    @State private var firstLoadFinished = false
     
     var body: some View {
         ScrollView {
@@ -86,7 +86,7 @@ struct UserProfileView: View {
                                     Task { @MainActor in
                                         self.isDuringRelationshipAction = false
                                     }
-
+                                    
                                     HapticService.shared.touch()
                                     self.isDuringRelationshipAction = true
                                     do {
@@ -130,10 +130,28 @@ struct UserProfileView: View {
                 .padding()
                 
                 ForEach(self.statuses, id: \.id) { item in
-                    NavigationLink(destination: StatusView(statusId: item.id)
-                        .environmentObject(applicationState)) {
-                            ImageRowAsync(attachments: item.mediaAttachments)
-                        }
+                    VStack {
+                        NavigationLink(destination: StatusView(statusId: item.id)
+                            .environmentObject(applicationState)) {
+                                ImageRowAsync(attachments: item.mediaAttachments)
+                            }
+                    }
+                }
+                
+                LazyVStack {
+                    if allItemsLoaded == false && firstLoadFinished == true {
+                        LoadingIndicator()
+                            .onAppear {
+                                Task {
+                                    do {
+                                        try await self.loadMoreStatuses()
+                                    } catch {
+                                        print("Error \(error.localizedDescription)")
+                                    }
+                                }
+                            }
+                            .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                    }
                 }
                 
             } else {
@@ -144,17 +162,41 @@ struct UserProfileView: View {
         .onAppear {
             Task {
                 do {
-                    async let relationshipTask = AccountService.shared.getRelationship(withId: self.accountId, forUser: self.applicationState.accountData)
-                    async let accountTask = AccountService.shared.getAccount(withId: self.accountId, and: self.applicationState.accountData)
-                    
-                    // Wait for download account and relationships.
-                    (self.relationship, self.account) = try await (relationshipTask, accountTask)
-                    
-                    self.statuses = try await AccountService.shared.getStatuses(forAccountId: self.accountId, andContext: self.applicationState.accountData)
+                    try await self.loadData()
                 } catch {
                     print("Error \(error.localizedDescription)")
                 }
             }
+        }
+    }
+    
+    private func loadData() async throws {
+        async let relationshipTask = AccountService.shared.getRelationship(withId: self.accountId, forUser: self.applicationState.accountData)
+        async let accountTask = AccountService.shared.getAccount(withId: self.accountId, and: self.applicationState.accountData)
+        
+        // Wait for download account and relationships.
+        (self.relationship, self.account) = try await (relationshipTask, accountTask)
+        
+        self.statuses = try await AccountService.shared.getStatuses(forAccountId: self.accountId, andContext: self.applicationState.accountData)
+        self.firstLoadFinished = true
+        
+        if self.statuses.count < 40 {
+            self.allItemsLoaded = true
+        }
+    }
+        
+    private func loadMoreStatuses() async throws {
+        if let lastStatusId = self.statuses.last?.id {
+            let previousStatuses = try await AccountService.shared.getStatuses(
+                forAccountId: self.accountId,
+                andContext: self.applicationState.accountData,
+                maxId: lastStatusId)
+
+            if previousStatuses.count < 40 {
+                self.allItemsLoaded = true
+            }
+
+            self.statuses.append(contentsOf: previousStatuses)
         }
     }
 }
