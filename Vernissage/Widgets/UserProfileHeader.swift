@@ -11,8 +11,6 @@ struct UserProfileHeader: View {
     @EnvironmentObject private var applicationState: ApplicationState
     @State var account: Account
     @State var relationship: Relationship? = nil
-
-    @State private var isDuringRelationshipAction = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -72,45 +70,14 @@ struct UserProfileHeader: View {
                 Spacer()
                 
                 if self.applicationState.accountData?.id != self.account.id {
-                    Button {
-                        Task {
-                            defer {
-                                Task { @MainActor in
-                                    withAnimation {
-                                        self.isDuringRelationshipAction = false
-                                    }
-                                }
-                            }
-                            
-                            HapticService.shared.touch()
-                            withAnimation {
-                                self.isDuringRelationshipAction = true
-                            }
-                            
-                            do {
-                                if let relationship = try await AccountService.shared.follow(
-                                    forAccountId: self.account.id,
-                                    andContext: self.applicationState.accountData
-                                ) {
-                                    self.relationship = relationship
-                                }
-                            } catch {
-                                print("Error \(error.localizedDescription)")
-                            }
-                        }
+                    ActionButton {
+                        await onRelationshipButtonTap()
                     } label: {
-                        if isDuringRelationshipAction {
-                            LoadingIndicator(withText: false)
-                                .transition(.opacity)
-                        } else {
-                            HStack {
-                                Image(systemName: relationship?.following == true ? "person.badge.minus" : "person.badge.plus")
-                                Text(relationship?.following == true ? "Unfollow" : (relationship?.followedBy == true ? "Follow back" : "Follow"))
-                            }
-                            .transition(.opacity)
+                        HStack {
+                            Image(systemName: relationship?.following == true ? "person.badge.minus" : "person.badge.plus")
+                            Text(relationship?.following == true ? "Unfollow" : (relationship?.followedBy == true ? "Follow back" : "Follow"))
                         }
                     }
-                    .disabled(isDuringRelationshipAction)
                     .buttonStyle(.borderedProminent)
                     .tint(relationship?.following == true ? .dangerColor : .accentColor)
                 }
@@ -128,6 +95,28 @@ struct UserProfileHeader: View {
             
         }
         .padding()
+    }
+    
+    private func onRelationshipButtonTap() async {
+        do {
+            if self.relationship?.following == true {
+                if let relationship = try await AccountService.shared.unfollow(
+                    forAccountId: self.account.id,
+                    andContext: self.applicationState.accountData
+                ) {
+                    self.relationship = relationship
+                }
+            } else {
+                if let relationship = try await AccountService.shared.follow(
+                    forAccountId: self.account.id,
+                    andContext: self.applicationState.accountData
+                ) {
+                    self.relationship = relationship
+                }
+            }
+        } catch {
+            print("Error \(error.localizedDescription)")
+        }
     }
 }
 

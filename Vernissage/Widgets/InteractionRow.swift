@@ -15,13 +15,12 @@ struct InteractionRow: View {
     @State var favourited = false
     @State var favouritesCount = 0
     @State var bookmarked = false
-    
+        
     var onNewStatus: (() -> Void)?
     
     var body: some View {
         HStack (alignment: .top) {
-            Button {
-                HapticService.shared.touch()
+            ActionButton {
                 onNewStatus?()
             } label: {
                 HStack(alignment: .center) {
@@ -33,25 +32,21 @@ struct InteractionRow: View {
             
             Spacer()
             
-            Button {
-                Task {
-                    HapticService.shared.touch()
+            ActionButton {
+                do {
+                    let status = self.reblogged
+                        ? try await StatusService.shared.unboost(statusId: self.statusId, accountData: self.applicationState.accountData)
+                        : try await StatusService.shared.boost(statusId: self.statusId, accountData: self.applicationState.accountData)
 
-                    do {
-                        let status = self.reblogged
-                            ? try await StatusService.shared.unboost(statusId: self.statusId, accountData: self.applicationState.accountData)
-                            : try await StatusService.shared.boost(statusId: self.statusId, accountData: self.applicationState.accountData)
+                    if let status {
+                        self.reblogsCount = status.reblogsCount == self.reblogsCount
+                            ? status.reblogsCount + 1
+                            : status.reblogsCount
 
-                        if let status {
-                            self.reblogsCount = status.reblogsCount == self.reblogsCount
-                                ? status.reblogsCount + 1
-                                : status.reblogsCount
-
-                            self.reblogged = status.reblogged
-                        }
-                    } catch {
-                        print("Error \(error.localizedDescription)")
+                        self.reblogged = status.reblogged
                     }
+                } catch {
+                    print("Error \(error.localizedDescription)")
                 }
             } label: {
                 HStack(alignment: .center) {
@@ -63,25 +58,21 @@ struct InteractionRow: View {
             
             Spacer()
             
-            Button {
-                Task {
-                    HapticService.shared.touch()
+            ActionButton {
+                do {
+                    let status = self.favourited
+                        ? try await StatusService.shared.unfavourite(statusId: self.statusId, accountData: self.applicationState.accountData)
+                        : try await StatusService.shared.favourite(statusId: self.statusId, accountData: self.applicationState.accountData)
 
-                    do {
-                        let status = self.favourited
-                            ? try await StatusService.shared.unfavourite(statusId: self.statusId, accountData: self.applicationState.accountData)
-                            : try await StatusService.shared.favourite(statusId: self.statusId, accountData: self.applicationState.accountData)
+                    if let status {
+                        self.favouritesCount = status.favouritesCount == self.favouritesCount
+                            ? status.favouritesCount + 1
+                            : status.favouritesCount
 
-                        if let status {
-                            self.favouritesCount = status.favouritesCount == self.favouritesCount
-                                ? status.favouritesCount + 1
-                                : status.favouritesCount
-
-                            self.favourited = status.favourited
-                        }
-                    } catch {
-                        print("Error \(error.localizedDescription)")
+                        self.favourited = status.favourited
                     }
+                } catch {
+                    print("Error \(error.localizedDescription)")
                 }
             } label: {
                 HStack(alignment: .center) {
@@ -93,19 +84,15 @@ struct InteractionRow: View {
             
             Spacer()
             
-            Button {
-                Task {
-                    HapticService.shared.touch()
-                    
-                    do {
-                        _ = self.bookmarked
-                            ? try await StatusService.shared.unbookmark(statusId: self.statusId, accountData: self.applicationState.accountData)
-                            : try await StatusService.shared.bookmark(statusId: self.statusId, accountData: self.applicationState.accountData)
+            ActionButton {
+                do {
+                    _ = self.bookmarked
+                        ? try await StatusService.shared.unbookmark(statusId: self.statusId, accountData: self.applicationState.accountData)
+                        : try await StatusService.shared.bookmark(statusId: self.statusId, accountData: self.applicationState.accountData)
 
-                        self.bookmarked.toggle()
-                    } catch {
-                        print("Error \(error.localizedDescription)")
-                    }
+                    self.bookmarked.toggle()
+                } catch {
+                    print("Error \(error.localizedDescription)")
                 }
             } label: {
                 Image(systemName: self.bookmarked ? "bookmark.fill" : "bookmark")
@@ -113,9 +100,8 @@ struct InteractionRow: View {
             
             Spacer()
             
-            Button {
+            ActionButton {
                 // TODO: Share.
-                HapticService.shared.touch()
             } label: {
                 Image(systemName: "square.and.arrow.up")
             }

@@ -44,6 +44,16 @@ struct FollowersView: View {
         }.overlay {
             if firstLoadFinished == false {
                 LoadingIndicator()
+            } else {
+                if self.accounts.isEmpty {
+                    VStack {
+                        Image(systemName: "person.3.sequence")
+                            .font(.largeTitle)
+                            .padding(.bottom, 4)
+                        Text("Unfortunately, there is no one here.")
+                            .font(.title3)
+                    }.foregroundColor(.lightGrayColor)
+                }
             }
         }
         .navigationBarTitle("Followers")
