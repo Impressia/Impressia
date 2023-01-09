@@ -25,8 +25,10 @@ struct UserProfileStatuses: View {
                                                            imageWidth: item.getImageWidth(),
                                                            imageHeight: item.getImageHeight())
                         .environmentObject(applicationState)) {
-                            ImageRowAsync(attachments: item.mediaAttachments)
+                            ImageRowAsync(status: item)
                         }
+                        .buttonStyle(EmptyButtonStyle())
+                        
                 }
                 
                 LazyVStack {

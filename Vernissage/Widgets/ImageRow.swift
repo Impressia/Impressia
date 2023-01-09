@@ -7,18 +7,28 @@
 import SwiftUI
 
 struct ImageRow: View {
-    @State public var attachments: [AttachmentData]
-    
+    @State public var status: StatusData
+    @State private var showSensitive = false
+
     var body: some View {
-        if let attachmenData = attachments.first,
+        if let attachmenData = self.status.attachments().first,
            let uiImage = UIImage(data: attachmenData.data) {
             
             ZStack {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+                if self.status.sensitive {
+                    ContentWarning(blurhash: attachmenData.blurhash, spoilerText: self.status.spoilerText) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .transition(.opacity)
+                    }
+                } else {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                }
 
-                if let count = attachments.count, count > 1 {
+                if let count = self.status.attachments().count, count > 1 {
                     BottomRight {
                         Text("1 / \(count)")
                             .padding(.horizontal, 6)
@@ -35,6 +45,7 @@ struct ImageRow: View {
 
 struct ImageRow_Previews: PreviewProvider {
     static var previews: some View {
-        ImageRow(attachments: [])
+        Text("")
+        // ImageRow(status: [])
     }
 }

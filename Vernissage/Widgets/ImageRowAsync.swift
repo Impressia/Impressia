@@ -9,18 +9,24 @@ import MastodonSwift
 import NukeUI
 
 struct ImageRowAsync: View {
-    @State public var attachments: [Attachment]
+    @State public var status: Status
     @State private var imageHeight = UIScreen.main.bounds.width
     @State private var imageWidth = UIScreen.main.bounds.width
     @State private var heightWasPrecalculated = true
+    @State private var showSensitive = false
     
     var body: some View {
-        if let attachment = attachments.first {
+        if let attachment = status.mediaAttachments.first {
             ZStack {
-                
                 LazyImage(url: attachment.url) { state in
                     if let image = state.image {
-                        image
+                        if self.status.sensitive {
+                            ContentWarning(blurhash: attachment.blurhash, spoilerText: self.status.spoilerText) {
+                                image
+                            }
+                        } else {
+                            image
+                        }
                     } else if state.error != nil {
                         ZStack {
                             Rectangle()
@@ -37,14 +43,7 @@ struct ImageRowAsync: View {
                         .frame(width: self.imageWidth, height: self.imageHeight)
                     } else {
                         VStack(alignment: .center) {
-                            if let blurhash = attachment.blurhash,
-                               let uiImage = UIImage(blurHash: blurhash, size: CGSize(width: 32, height: 32)) {
-                                Image(uiImage: uiImage)
-                                    .resizable()
-                            } else {
-                                Rectangle()
-                                    .fill(Color.placeholderText)
-                            }
+                            BlurredImage(blurhash: attachment.blurhash)
                         }
                         .frame(width: self.imageWidth, height: self.imageHeight)
                     }
@@ -53,7 +52,7 @@ struct ImageRowAsync: View {
                     self.recalculateSizeOfDownloadedImage(imageResponse: imageResponse)
                 }
                     
-                if let count = attachments.count, count > 1 {
+                if let count = status.mediaAttachments.count, count > 1 {
                     BottomRight {
                         Text("1 / \(count)")
                             .padding(.horizontal, 6)
@@ -83,7 +82,7 @@ struct ImageRowAsync: View {
     }
     
     private func recalculateSizeFromMetadata() {
-        if let firstAttachment = attachments.first,
+        if let firstAttachment = self.status.mediaAttachments.first,
            let imgHeight = (firstAttachment.meta as? ImageMetadata)?.original?.height,
            let imgWidth = (firstAttachment.meta as? ImageMetadata)?.original?.width {
             let calculatedHeight = self.calculateHeight(width: Double(imgWidth), height: Double(imgHeight))
@@ -101,6 +100,7 @@ struct ImageRowAsync: View {
 
 struct ImageRowAsync_Previews: PreviewProvider {
     static var previews: some View {
-        ImageRow(attachments: [])
+        Text("")
+        // ImageRowAsync(status: Status())
     }
 }

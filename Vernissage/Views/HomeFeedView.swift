@@ -27,8 +27,9 @@ struct HomeFeedView: View {
                                                                imageWidth: item.attachments().first?.metaImageWidth,
                                                                imageHeight: item.attachments().first?.metaImageHeight)
                             .environmentObject(applicationState)) {
-                            ImageRow(attachments: item.attachments())
+                            ImageRow(status: item)
                         }
+                        .buttonStyle(EmptyButtonStyle())
                     }
                     
                     LoadingIndicator()

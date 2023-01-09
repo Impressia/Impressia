@@ -54,6 +54,9 @@
 		F86B7216296BFFDA00EE59EC /* UserProfileStatuses.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7215296BFFDA00EE59EC /* UserProfileStatuses.swift */; };
 		F86B7218296C27C100EE59EC /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7217296C27C100EE59EC /* ActionButton.swift */; };
 		F86B721C296C394000EE59EC /* Status+ImageSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B721B296C394000EE59EC /* Status+ImageSize.swift */; };
+		F86B721E296C458700EE59EC /* BlurredImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B721D296C458700EE59EC /* BlurredImage.swift */; };
+		F86B7221296C49A300EE59EC /* EmptyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7220296C49A300EE59EC /* EmptyButtonStyle.swift */; };
+		F86B7223296C4BF500EE59EC /* ContentWarning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7222296C4BF500EE59EC /* ContentWarning.swift */; };
 		F88ABD9229686F1C004EF61E /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88ABD9129686F1C004EF61E /* MemoryCache.swift */; };
 		F88ABD9429687CA4004EF61E /* ComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88ABD9329687CA4004EF61E /* ComposeView.swift */; };
 		F88C246C295C37B80006098B /* VernissageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C246B295C37B80006098B /* VernissageApp.swift */; };
@@ -131,6 +134,9 @@
 		F86B7215296BFFDA00EE59EC /* UserProfileStatuses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileStatuses.swift; sourceTree = "<group>"; };
 		F86B7217296C27C100EE59EC /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		F86B721B296C394000EE59EC /* Status+ImageSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Status+ImageSize.swift"; sourceTree = "<group>"; };
+		F86B721D296C458700EE59EC /* BlurredImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredImage.swift; sourceTree = "<group>"; };
+		F86B7220296C49A300EE59EC /* EmptyButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyButtonStyle.swift; sourceTree = "<group>"; };
+		F86B7222296C4BF500EE59EC /* ContentWarning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentWarning.swift; sourceTree = "<group>"; };
 		F88ABD9129686F1C004EF61E /* MemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
 		F88ABD9329687CA4004EF61E /* ComposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeView.swift; sourceTree = "<group>"; };
 		F88ABD9529687D4D004EF61E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -285,8 +291,18 @@
 				F86B7213296BFDCE00EE59EC /* UserProfileHeader.swift */,
 				F86B7215296BFFDA00EE59EC /* UserProfileStatuses.swift */,
 				F86B7217296C27C100EE59EC /* ActionButton.swift */,
+				F86B721D296C458700EE59EC /* BlurredImage.swift */,
+				F86B7222296C4BF500EE59EC /* ContentWarning.swift */,
 			);
 			path = Widgets;
+			sourceTree = "<group>";
+		};
+		F86B721F296C498B00EE59EC /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				F86B7220296C49A300EE59EC /* EmptyButtonStyle.swift */,
+			);
+			path = Styles;
 			sourceTree = "<group>";
 		};
 		F88ABD9029686F00004EF61E /* Cache */ = {
@@ -318,6 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				F866F6A829604FFF002E8F88 /* Info.plist */,
+				F86B721F296C498B00EE59EC /* Styles */,
 				F88ABD9029686F00004EF61E /* Cache */,
 				F897978B2968367E00B22335 /* Haptics */,
 				F8210DE82966E4D8001D9973 /* Modifiers */,
@@ -484,7 +501,9 @@
 				F85D497B29640C8200751DF7 /* UsernameRow.swift in Sources */,
 				F85D497929640B9D00751DF7 /* ImagesCarousel.swift in Sources */,
 				F80048052961850500E6868A /* StatusData+CoreDataClass.swift in Sources */,
+				F86B7221296C49A300EE59EC /* EmptyButtonStyle.swift in Sources */,
 				F80048042961850500E6868A /* AttachmentData+CoreDataProperties.swift in Sources */,
+				F86B7223296C4BF500EE59EC /* ContentWarning.swift in Sources */,
 				F83901A6295D8EC000456AE2 /* LabelIcon.swift in Sources */,
 				F85DBF912967385F0069BF89 /* FollowingView.swift in Sources */,
 				F800480A2961EA1900E6868A /* AttachmentDataHandler.swift in Sources */,
@@ -494,6 +513,7 @@
 				F8A93D7E2965FD89001D8331 /* UserProfileView.swift in Sources */,
 				F85D4981296417F700751DF7 /* MastodonClientAuthenticated+Context.swift in Sources */,
 				F88C246E295C37B80006098B /* MainView.swift in Sources */,
+				F86B721E296C458700EE59EC /* BlurredImage.swift in Sources */,
 				F88C2478295C37BB0006098B /* Vernissage.xcdatamodeld in Sources */,
 				F88C2482295C3A4F0006098B /* StatusView.swift in Sources */,
 				F866F6A329604161002E8F88 /* AccountDataHandler.swift in Sources */,
