@@ -10,7 +10,7 @@ import MastodonSwift
 struct UserProfileHeader: View {
     @EnvironmentObject private var applicationState: ApplicationState
     @State var account: Account
-    @State var relationship: Relationship
+    @State var relationship: Relationship? = nil
 
     @State private var isDuringRelationshipAction = false
     
@@ -104,15 +104,15 @@ struct UserProfileHeader: View {
                                 .transition(.opacity)
                         } else {
                             HStack {
-                                Image(systemName: relationship.following == true ? "person.badge.minus" : "person.badge.plus")
-                                Text(relationship.following == true ? "Unfollow" : (relationship.followedBy == true ? "Follow back" : "Follow"))
+                                Image(systemName: relationship?.following == true ? "person.badge.minus" : "person.badge.plus")
+                                Text(relationship?.following == true ? "Unfollow" : (relationship?.followedBy == true ? "Follow back" : "Follow"))
                             }
                             .transition(.opacity)
                         }
                     }
                     .disabled(isDuringRelationshipAction)
                     .buttonStyle(.borderedProminent)
-                    .tint(relationship.following == true ? .dangerColor : .accentColor)
+                    .tint(relationship?.following == true ? .dangerColor : .accentColor)
                 }
             }
             

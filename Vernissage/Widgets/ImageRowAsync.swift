@@ -41,11 +41,9 @@ struct ImageRowAsync: View {
                                let uiImage = UIImage(blurHash: blurhash, size: CGSize(width: 32, height: 32)) {
                                 Image(uiImage: uiImage)
                                     .resizable()
-                                    .scaledToFill()
                             } else {
                                 Rectangle()
                                     .fill(Color.placeholderText)
-                                    .scaledToFill()
                             }
                         }
                         .frame(width: self.imageWidth, height: self.imageHeight)
@@ -54,7 +52,6 @@ struct ImageRowAsync: View {
                 .onSuccess { imageResponse in
                     self.recalculateSizeOfDownloadedImage(imageResponse: imageResponse)
                 }
-                .frame(width: self.imageWidth, height: self.imageHeight)
                     
                 if let count = attachments.count, count > 1 {
                     BottomRight {
@@ -67,9 +64,12 @@ struct ImageRowAsync: View {
                     }.padding()
                 }
             }
+            .frame(width: self.imageWidth, height: self.imageHeight)
             .onAppear {
                 self.recalculateSizeFromMetadata()
             }
+        } else {
+            EmptyView()
         }
     }
     

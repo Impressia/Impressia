@@ -17,12 +17,16 @@ struct UserProfileView: View {
     @State private var relationship: Relationship? = nil
     
     var body: some View {
-        ScrollView {
-            if let account = self.account, let relationship = self.relationship {
-                UserProfileHeader(account: account, relationship: relationship)
-                UserProfileStatuses(accountId: account.id)
+        VStack {
+            if let account = self.account {
+                ScrollView {
+                    UserProfileHeader(account: account, relationship: relationship)
+                    UserProfileStatuses(accountId: account.id)
+                }
             } else {
+                Spacer()
                 LoadingIndicator()
+                Spacer()
             }
         }
         .navigationBarTitle(self.accountDisplayName ?? self.accountUserName)

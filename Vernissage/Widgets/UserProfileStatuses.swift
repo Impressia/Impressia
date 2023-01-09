@@ -17,7 +17,7 @@ struct UserProfileStatuses: View {
     @State private var statuses: [Status] = []
 
     var body: some View {
-        VStack {
+        VStack(alignment: .center) {
             if firstLoadFinished == true {
                 ForEach(self.statuses, id: \.id) { item in
                     NavigationLink(destination: StatusView(statusId: item.id)
