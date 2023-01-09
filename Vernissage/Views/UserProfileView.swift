@@ -129,13 +129,11 @@ struct UserProfileView: View {
                 }
                 .padding()
                 
-                LazyVGrid(columns: gridColumns) {
-                    ForEach(self.statuses, id: \.id) { item in
-                        NavigationLink(destination: StatusView(statusId: item.id)
-                            .environmentObject(applicationState)) {
-                                ImageRowAsync(attachments: item.mediaAttachments)
-                            }
-                    }
+                ForEach(self.statuses, id: \.id) { item in
+                    NavigationLink(destination: StatusView(statusId: item.id)
+                        .environmentObject(applicationState)) {
+                            ImageRowAsync(attachments: item.mediaAttachments)
+                        }
                 }
                 
             } else {
