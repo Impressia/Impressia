@@ -7,7 +7,7 @@
 
 import Foundation
 import CoreData
-import MastodonSwift
+import MastodonKit
 
 class StatusDataHandler {
     public static let shared = StatusDataHandler()

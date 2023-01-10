@@ -5,7 +5,7 @@
 //
     
 import SwiftUI
-import MastodonSwift
+import MastodonKit
 import NukeUI
 
 struct ImageRowAsync: View {

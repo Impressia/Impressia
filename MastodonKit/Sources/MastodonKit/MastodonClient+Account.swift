@@ -5,9 +5,8 @@
 //
     
 import Foundation
-import MastodonSwift
 
-extension MastodonClientAuthenticated {
+public extension MastodonClientAuthenticated {
     func getAccount(for accountId: String) async throws -> Account {
         let request = try Self.request(
             for: baseURL,

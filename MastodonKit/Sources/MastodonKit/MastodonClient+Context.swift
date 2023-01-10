@@ -5,9 +5,8 @@
 //
     
 import Foundation
-import MastodonSwift
 
-extension MastodonClientAuthenticated {
+public extension MastodonClientAuthenticated {
     func getContext(for statusId: String) async throws -> Context {
         let request = try Self.request(
             for: baseURL,

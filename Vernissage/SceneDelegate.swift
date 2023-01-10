@@ -5,7 +5,7 @@
 //
 
 import SwiftUI
-import MastodonSwift
+import MastodonKit
 import OAuthSwift
 
 class SceneDelegate: NSObject, UISceneDelegate {    

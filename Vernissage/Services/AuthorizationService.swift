@@ -5,7 +5,7 @@
 //
     
 import Foundation
-import MastodonSwift
+import MastodonKit
 
 public class AuthorizationService {
     public static let shared = AuthorizationService()

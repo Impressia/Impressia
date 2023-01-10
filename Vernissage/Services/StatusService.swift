@@ -5,7 +5,7 @@
 //
     
 import Foundation
-import MastodonSwift
+import MastodonKit
 
 public class StatusService {
     public static let shared = StatusService()

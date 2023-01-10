@@ -5,7 +5,7 @@
 //
     
 import Foundation
-import MastodonSwift
+import MastodonKit
 
 extension Status {
     func createStatusData() async throws -> StatusData {

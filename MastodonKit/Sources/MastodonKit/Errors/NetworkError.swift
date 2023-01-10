@@ -6,7 +6,7 @@
     
 import Foundation
 
-public enum NetworkError: Error {
+public enum NetworkError: Error {    
     case notSuccessResponse(URLResponse)
 }
 

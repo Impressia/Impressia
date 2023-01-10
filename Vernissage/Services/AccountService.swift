@@ -5,7 +5,7 @@
 //
 
 import Foundation
-import MastodonSwift
+import MastodonKit
 
 public class AccountService {
     public static let shared = AccountService()

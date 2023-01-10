@@ -7,7 +7,7 @@
 import SwiftUI
 import UIKit
 import CoreData
-import MastodonSwift
+import MastodonKit
 
 struct MainView: View {
     @Environment(\.managedObjectContext) private var viewContext

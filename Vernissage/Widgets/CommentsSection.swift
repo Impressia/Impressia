@@ -5,7 +5,7 @@
 //
 
 import SwiftUI
-import MastodonSwift
+import MastodonKit
 
 struct CommentsSection: View {
     @Environment(\.colorScheme) var colorScheme

@@ -4,8 +4,8 @@
 //  Licensed under the MIT License.
 //
     
-
 import Foundation
+import MastodonKit
 
 public class RemoteFileService {
     public static let shared = RemoteFileService()

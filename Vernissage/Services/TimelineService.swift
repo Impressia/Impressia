@@ -6,7 +6,7 @@
     
 import Foundation
 import CoreData
-import MastodonSwift
+import MastodonKit
 
 public class TimelineService {
     public static let shared = TimelineService()

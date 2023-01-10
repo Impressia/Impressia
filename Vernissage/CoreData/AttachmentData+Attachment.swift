@@ -6,7 +6,7 @@
     
 
 import Foundation
-import MastodonSwift
+import MastodonKit
 
 extension AttachmentData {
     func copyFrom(_ attachment: Attachment) {

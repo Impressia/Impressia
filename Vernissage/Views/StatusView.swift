@@ -5,7 +5,7 @@
 //
 
 import SwiftUI
-import MastodonSwift
+import MastodonKit
 import AVFoundation
 
 struct StatusView: View {

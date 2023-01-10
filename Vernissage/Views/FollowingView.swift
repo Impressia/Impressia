@@ -5,7 +5,7 @@
 //
     
 import SwiftUI
-import MastodonSwift
+import MastodonKit
 
 struct FollowingView: View {
     @EnvironmentObject var applicationState: ApplicationState
