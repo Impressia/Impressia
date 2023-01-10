@@ -35,12 +35,14 @@ public class StatusViewModel {
     public let mentions: [Mention]
     public let tags: [Tag]
     public let application: Application?
+    public let place: Place?
     
     public init(
         id: StatusId,
         content: Html,
         uri: String,
         account: Account,
+        application: Application,
         url: URL? = nil,
         inReplyToId: AccountId? = nil,
         inReplyToAccount: StatusId? = nil,
@@ -61,13 +63,14 @@ public class StatusViewModel {
         card: Card? = nil,
         mentions: [Mention] = [],
         tags: [Tag] = [],
-        application: Application
+        place: Place? = nil
     ) {
         self.id = id
         self.content = content
         self.uri = uri
         self.url = url
         self.account = account
+        self.application = application
         self.inReplyToId = inReplyToId
         self.inReplyToAccount = inReplyToAccount
         self.reblog = reblog
@@ -87,7 +90,7 @@ public class StatusViewModel {
         self.card = card
         self.mentions = mentions
         self.tags = tags
-        self.application = application
+        self.place = place
     }
     
     init(status: Status) {
@@ -115,6 +118,7 @@ public class StatusViewModel {
         self.mentions = status.mentions
         self.tags = status.tags
         self.application = status.application
+        self.place = status.place
         
         var mediaAttachments: [AttachmentViewModel] = []
         for item in status.mediaAttachments {

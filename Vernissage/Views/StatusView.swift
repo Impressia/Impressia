@@ -50,6 +50,10 @@ struct StatusView: View {
                             .padding(.leading, -4)
                         
                         VStack (alignment: .leading) {
+                            if let name = statusViewModel.place?.name, let country = statusViewModel.place?.country {
+                                LabelIcon(iconName: "mappin.and.ellipse", value: "\(name), \(country)")
+                            }
+                            
                             LabelIcon(iconName: "camera", value: self.exifCamera)
                             LabelIcon(iconName: "camera.aperture", value: self.exifLens)
                             LabelIcon(iconName: "timelapse", value: self.exifExposure)
@@ -107,6 +111,7 @@ struct StatusView: View {
                             .foregroundColor(.lightGrayColor)
                             .font(.footnote)
                         
+                        LabelIcon(iconName: "mappin.and.ellipse", value: "Wroclaw, Poland")
                         LabelIcon(iconName: "camera", value: "SONY ILCE-7M3")
                         LabelIcon(iconName: "camera.aperture", value: "Viltrox 24mm F1.8 E")
                         LabelIcon(iconName: "timelapse", value: "24.0 mm, f/1.8, 1/640s, ISO 100")
