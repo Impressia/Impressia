@@ -8,11 +8,17 @@ import SwiftUI
 import MastodonKit
 
 struct ComposeView: View {
+    enum FocusField: Hashable {
+        case content
+    }
+    
     @EnvironmentObject var applicationState: ApplicationState
     @Environment(\.dismiss) private var dismiss
     
-    @Binding var status: Status?
+    @Binding var statusViewModel: StatusViewModel?
     @State private var text = ""
+
+    @FocusState private var focusedField: FocusField?
     
     private let contentWidth = Int(UIScreen.main.bounds.width) - 50
     
@@ -31,14 +37,18 @@ struct ComposeView: View {
                         }
                         .padding(8)
                     }
-                    
+
                     TextField("Type what's on your mind", text: $text)
                         .padding(8)
-                    
-                    if let status = self.status {
+                        .focused($focusedField, equals: .content)
+                        .task {
+                            self.focusedField = .content
+                        }
+
+                    if let status = self.statusViewModel {
                         HStack (alignment: .top) {
 
-                            AsyncImage(url: status.account?.avatar) { image in
+                            AsyncImage(url: status.account.avatar) { image in
                                 image
                                     .resizable()
                                     .clipShape(Circle())
@@ -52,14 +62,14 @@ struct ComposeView: View {
 
                             VStack (alignment: .leading, spacing: 0) {
                                 HStack (alignment: .top) {
-                                    Text(self.getUserName(status: status))
+                                    Text(self.getUserName(statusViewModel: status))
                                         .foregroundColor(.mainTextColor)
                                         .font(.footnote)
                                         .fontWeight(.bold)
-                                    
+
                                     Spacer()
                                 }
-                                
+
                                 HTMLFormattedText(status.content, withFontSize: 14, andWidth: contentWidth)
                                     .padding(.top, -4)
                                     .padding(.leading, -4)
@@ -68,7 +78,7 @@ struct ComposeView: View {
                         .padding(8)
                         .background(Color.selectedRowColor)
                     }
-                    
+
                     Spacer()
                 }
             }
@@ -76,11 +86,15 @@ struct ComposeView: View {
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button {
-                        dismiss()
+                        Task {
+                            await self.publishStatus()
+                            dismiss()
+                        }
                     } label: {
                         Text("Publish")
                             .foregroundColor(.white)
                     }
+                    .disabled(self.text.isEmpty)
                     .buttonStyle(.borderedProminent)
                     .tint(.accentColor)
                 }
@@ -95,13 +109,24 @@ struct ComposeView: View {
         }
     }
     
-    private func getUserName(status: Status) -> String {
-        return status.account?.displayName ?? status.account?.acct ?? status.account?.username ?? ""
+    private func publishStatus() async {
+        do {
+            _ = try await StatusService.shared.new(
+                status: Mastodon.Statuses.Components(inReplyToId: self.statusViewModel?.id, text: self.text),
+                accountData: self.applicationState.accountData)
+        } catch {
+            print("Error \(error.localizedDescription)")
+        }
+    }
+    
+    private func getUserName(statusViewModel: StatusViewModel) -> String {
+        return self.statusViewModel?.account.displayName ?? self.statusViewModel?.account.acct ?? self.statusViewModel?.account.username ?? ""
     }
 }
 
 struct ComposeView_Previews: PreviewProvider {
     static var previews: some View {
-        ComposeView(status: .constant(Status(id: "", content: "", application: Application(name: ""))))
+        Text("")
+        // ComposeView(status: .constant(Status(id: "", content: "", application: Application(name: ""))))
     }
 }

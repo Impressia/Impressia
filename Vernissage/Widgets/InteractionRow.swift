@@ -10,7 +10,7 @@ import MastodonKit
 struct InteractionRow: View {
     @EnvironmentObject var applicationState: ApplicationState
     
-    @State var status: Status
+    @State var statusViewModel: StatusViewModel
     
     @State private var repliesCount = 0
     @State private var reblogged = false
@@ -38,8 +38,8 @@ struct InteractionRow: View {
             ActionButton {
                 do {
                     let status = self.reblogged
-                    ? try await StatusService.shared.unboost(statusId: self.status.id, accountData: self.applicationState.accountData)
-                    : try await StatusService.shared.boost(statusId: self.status.id, accountData: self.applicationState.accountData)
+                    ? try await StatusService.shared.unboost(statusId: self.statusViewModel.id, accountData: self.applicationState.accountData)
+                    : try await StatusService.shared.boost(statusId: self.statusViewModel.id, accountData: self.applicationState.accountData)
 
                     if let status {
                         self.reblogsCount = status.reblogsCount == self.reblogsCount
@@ -64,8 +64,8 @@ struct InteractionRow: View {
             ActionButton {
                 do {
                     let status = self.favourited
-                    ? try await StatusService.shared.unfavourite(statusId: self.status.id, accountData: self.applicationState.accountData)
-                    : try await StatusService.shared.favourite(statusId: self.status.id, accountData: self.applicationState.accountData)
+                    ? try await StatusService.shared.unfavourite(statusId: self.statusViewModel.id, accountData: self.applicationState.accountData)
+                    : try await StatusService.shared.favourite(statusId: self.statusViewModel.id, accountData: self.applicationState.accountData)
 
                     if let status {
                         self.favouritesCount = status.favouritesCount == self.favouritesCount
@@ -90,8 +90,8 @@ struct InteractionRow: View {
             ActionButton {
                 do {
                     _ = self.bookmarked
-                    ? try await StatusService.shared.unbookmark(statusId: self.status.id, accountData: self.applicationState.accountData)
-                    : try await StatusService.shared.bookmark(statusId: self.status.id, accountData: self.applicationState.accountData)
+                    ? try await StatusService.shared.unbookmark(statusId: self.statusViewModel.id, accountData: self.applicationState.accountData)
+                    : try await StatusService.shared.bookmark(statusId: self.statusViewModel.id, accountData: self.applicationState.accountData)
 
                     self.bookmarked.toggle()
                 } catch {
@@ -117,18 +117,19 @@ struct InteractionRow: View {
     }
     
     private func refreshCounters() {
-        self.repliesCount = self.status.repliesCount
-        self.reblogged = self.status.reblogged
-        self.reblogsCount = self.status.reblogsCount
-        self.favourited = self.status.favourited
-        self.favouritesCount = self.status.favouritesCount
-        self.bookmarked = self.status.bookmarked
+        self.repliesCount = self.statusViewModel.repliesCount
+        self.reblogged = self.statusViewModel.reblogged
+        self.reblogsCount = self.statusViewModel.reblogsCount
+        self.favourited = self.statusViewModel.favourited
+        self.favouritesCount = self.statusViewModel.favouritesCount
+        self.bookmarked = self.statusViewModel.bookmarked
     }
 }
 
 struct InteractionRow_Previews: PreviewProvider {
     static var previews: some View {
-        InteractionRow(status: Status(id: "", content: "", application: Application(name: "")))
-            .previewLayout(.fixed(width: 300, height: 70))
+        Text("")
+//        InteractionRow(status: Status(id: "", content: "", application: Application(name: "")))
+//            .previewLayout(.fixed(width: 300, height: 70))
     }
 }

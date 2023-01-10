@@ -9,19 +9,19 @@ import MastodonKit
 import NukeUI
 
 struct ImageRowAsync: View {
-    @State public var status: Status
+    @State public var statusViewModel: StatusViewModel
 
     @State private var imageHeight = UIScreen.main.bounds.width
     @State private var imageWidth = UIScreen.main.bounds.width
     @State private var heightWasPrecalculated = true
     
     var body: some View {
-        if let attachment = status.mediaAttachments.first {
+        if let attachment = statusViewModel.mediaAttachments.first {
             ZStack {
                 LazyImage(url: attachment.url) { state in
                     if let image = state.image {
-                        if self.status.sensitive {
-                            ContentWarning(blurhash: attachment.blurhash, spoilerText: self.status.spoilerText) {
+                        if self.statusViewModel.sensitive {
+                            ContentWarning(blurhash: attachment.blurhash, spoilerText: self.statusViewModel.spoilerText) {
                                 image
                             }
                         } else {
@@ -52,7 +52,7 @@ struct ImageRowAsync: View {
                     self.recalculateSizeOfDownloadedImage(imageResponse: imageResponse)
                 }
                     
-                if let count = status.mediaAttachments.count, count > 1 {
+                if let count = self.statusViewModel.mediaAttachments.count, count > 1 {
                     BottomRight {
                         Text("1 / \(count)")
                             .padding(.horizontal, 6)
@@ -82,7 +82,7 @@ struct ImageRowAsync: View {
     }
     
     private func recalculateSizeFromMetadata() {
-        if let firstAttachment = self.status.mediaAttachments.first,
+        if let firstAttachment = self.statusViewModel.mediaAttachments.first,
            let imgHeight = (firstAttachment.meta as? ImageMetadata)?.original?.height,
            let imgWidth = (firstAttachment.meta as? ImageMetadata)?.original?.width {
             let calculatedHeight = self.calculateHeight(width: Double(imgWidth), height: Double(imgHeight))

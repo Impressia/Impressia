@@ -142,7 +142,7 @@ public class TimelineService {
         }
     }
     
-    private func fetchAllImages(statuses: [Status]) async -> Dictionary<String, Data> {
+    public func fetchAllImages(statuses: [Status]) async -> Dictionary<String, Data> {
         var attachmentUrls: Dictionary<String, URL> = [:]
         
         statuses.forEach { status in

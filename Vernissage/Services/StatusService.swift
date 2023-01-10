@@ -64,4 +64,13 @@ public class StatusService {
         let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
         return try await client.unbookmark(statusId: statusId)
     }
+    
+    func new(status: Mastodon.Statuses.Components, accountData: AccountData?) async throws -> Status? {
+        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+            return nil
+        }
+        
+        let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
+        return try await client.new(statusComponents: status)
+    }
 }

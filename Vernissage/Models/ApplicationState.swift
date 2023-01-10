@@ -4,13 +4,13 @@
 //  Licensed under the MIT License.
 //
     
-
 import Foundation
+import MastodonKit
 
 public class ApplicationState: ObservableObject {
     public static let shared = ApplicationState()
     private init() { }
-    
+
     @Published var accountData: AccountData?
     @Published var showInteractionStatusId = ""
 }

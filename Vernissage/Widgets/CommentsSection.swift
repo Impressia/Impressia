@@ -15,12 +15,12 @@ struct CommentsSection: View {
     @State public var withDivider = true
     @State private var context: Context?
     
-    var onNewStatus: ((_ context: Status) -> Void)?
+    var onNewStatus: ((_ context: StatusViewModel) -> Void)?
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             if let context = context {
-                ForEach(context.descendants, id: \.id) { status in
+                ForEach(context.descendants.toStatusViewModel(), id: \.id) { statusViewModel in
                     VStack(alignment: .leading, spacing: 0) {
 
                         if withDivider {
@@ -29,12 +29,12 @@ struct CommentsSection: View {
                                 .padding(0)
                         }
                                                 
-                        CommentBody(status: status)
+                        CommentBody(statusViewModel: statusViewModel)
                         
-                        if self.applicationState.showInteractionStatusId == status.id {
+                        if self.applicationState.showInteractionStatusId == statusViewModel.id {
                             VStack (alignment: .leading, spacing: 0) {
-                                InteractionRow(status: status) {
-                                    self.onNewStatus?(status)
+                                InteractionRow(statusViewModel: statusViewModel) {
+                                    self.onNewStatus?(statusViewModel)
                                 }
                                 .foregroundColor(self.getInteractionRowTextColor())
                                 .padding(.horizontal, 16)
@@ -44,7 +44,7 @@ struct CommentsSection: View {
                             .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
                         }
                         
-                        CommentsSection(statusId: status.id, withDivider: false)  { context in
+                        CommentsSection(statusId: statusViewModel.id, withDivider: false)  { context in
                             self.onNewStatus?(context)
                         }
                     }

@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct ImagesCarousel: View {
-    @State public var attachments: [AttachmentData]
+    @State public var attachments: [AttachmentViewModel]
     @State private var height: Double = 0.0
     @State private var selectedAttachmentId = ""
     
@@ -19,7 +19,7 @@ struct ImagesCarousel: View {
     var body: some View {
         TabView() {
             ForEach(attachments, id: \.id) { attachment in
-                if let image = UIImage(data: attachment.data) {
+                if let data = attachment.data, let image = UIImage(data: data) {
                     Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
@@ -48,7 +48,7 @@ struct ImagesCarousel: View {
         var imageWidth = 0.0
         
         for item in attachments {
-            if let image = UIImage(data: item.data) {
+            if let data = item.data, let image = UIImage(data: data) {
                 if image.size.height > imageHeight {
                     imageHeight = image.size.height
                     imageWidth = image.size.width

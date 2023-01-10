@@ -14,18 +14,19 @@ struct UserProfileStatuses: View {
     @State private var allItemsLoaded = false
     @State private var firstLoadFinished = false
     
-    @State private var statuses: [Status] = []
+    @State private var statusViewModels: [StatusViewModel] = []
+    private let defaultLimit = 20
 
     var body: some View {
         VStack(alignment: .center) {
             if firstLoadFinished == true {
-                ForEach(self.statuses, id: \.id) { item in
+                ForEach(self.statusViewModels, id: \.id) { item in
                     NavigationLink(destination: StatusView(statusId: item.id,
                                                            imageBlurhash: item.mediaAttachments.first?.blurhash,
                                                            imageWidth: item.getImageWidth(),
                                                            imageHeight: item.getImageHeight())
                         .environmentObject(applicationState)) {
-                            ImageRowAsync(status: item)
+                            ImageRowAsync(statusViewModel: item)
                         }
                         .buttonStyle(EmptyButtonStyle())
                         
@@ -62,26 +63,42 @@ struct UserProfileStatuses: View {
     }
     
     private func loadStatuses() async throws {
-        self.statuses = try await AccountService.shared.getStatuses(forAccountId: self.accountId, andContext: self.applicationState.accountData)
-        self.firstLoadFinished = true
+        let statuses = try await AccountService.shared.getStatuses(
+            forAccountId: self.accountId,
+            andContext: self.applicationState.accountData,
+            limit: self.defaultLimit)
+        var inPlaceStatuses: [StatusViewModel] = []
+
+        for item in statuses {
+            inPlaceStatuses.append(StatusViewModel(status: item))
+        }
         
-        if self.statuses.count < 40 {
+        self.firstLoadFinished = true
+        self.statusViewModels.append(contentsOf: inPlaceStatuses)
+        
+        if statuses.count < self.defaultLimit {
             self.allItemsLoaded = true
         }
     }
         
     private func loadMoreStatuses() async throws {
-        if let lastStatusId = self.statuses.last?.id {
+        if let lastStatusId = self.statusViewModels.last?.id {
             let previousStatuses = try await AccountService.shared.getStatuses(
                 forAccountId: self.accountId,
                 andContext: self.applicationState.accountData,
-                maxId: lastStatusId)
+                maxId: lastStatusId,
+                limit: self.defaultLimit)
 
-            if previousStatuses.count < 40 {
+            if previousStatuses.count < self.defaultLimit {
                 self.allItemsLoaded = true
             }
-
-            self.statuses.append(contentsOf: previousStatuses)
+            
+            var inPlaceStatuses: [StatusViewModel] = []
+            for item in previousStatuses {
+                inPlaceStatuses.append(StatusViewModel(status: item))
+            }
+            
+            self.statusViewModels.append(contentsOf: inPlaceStatuses)
         }
     }
 }

@@ -11,10 +11,10 @@ extension StatusData {
     func copyFrom(_ status: Status) {
         self.id = status.id
         self.createdAt = status.createdAt
-        self.accountAvatar = status.account?.avatar
-        self.accountDisplayName = status.account?.displayName
-        self.accountId = status.account!.id
-        self.accountUsername = status.account!.acct
+        self.accountAvatar = status.account.avatar
+        self.accountDisplayName = status.account.displayName
+        self.accountId = status.account.id
+        self.accountUsername = status.account.acct
         self.applicationName = status.application?.name
         self.applicationWebsite = status.application?.website
         self.bookmarked = status.bookmarked

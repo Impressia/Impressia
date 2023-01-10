@@ -15,11 +15,10 @@ struct StatusView: View {
     @State var imageWidth: Int32?
     @State var imageHeight: Int32?
 
-    @State private var messageForStatus: Status?
+    @State private var messageForStatus: StatusViewModel?
     @State private var showCompose = false
     
-    @State private var statusData: StatusData?
-    @State private var status: Status?
+    @State private var statusViewModel: StatusViewModel?
     
     @State private var exifCamera: String?
     @State private var exifExposure: String?
@@ -28,9 +27,9 @@ struct StatusView: View {
     
     var body: some View {
         ScrollView {
-            if let statusData = self.statusData, let status = self.status {
+            if let statusViewModel = self.statusViewModel {
                 VStack (alignment: .leading) {                    
-                    ImagesCarousel(attachments: statusData.attachments(),
+                    ImagesCarousel(attachments: statusViewModel.mediaAttachments,
                                    exifCamera: $exifCamera,
                                    exifExposure: $exifExposure,
                                    exifCreatedDate: $exifCreatedDate,
@@ -38,16 +37,16 @@ struct StatusView: View {
                     
                     VStack(alignment: .leading) {
                         NavigationLink(destination: UserProfileView(
-                            accountId: statusData.accountId,
-                            accountDisplayName: statusData.accountDisplayName,
-                            accountUserName: statusData.accountUsername)
+                            accountId: statusViewModel.account.id,
+                            accountDisplayName: statusViewModel.account.displayName,
+                            accountUserName: statusViewModel.account.username)
                             .environmentObject(applicationState)) {
-                                UsernameRow(accountAvatar: statusData.accountAvatar,
-                                            accountDisplayName: statusData.accountDisplayName,
-                                            accountUsername: statusData.accountUsername)
+                                UsernameRow(accountAvatar: statusViewModel.account.avatar,
+                                            accountDisplayName: statusViewModel.account.displayName,
+                                            accountUsername: statusViewModel.account.username)
                             }
                         
-                        HTMLFormattedText(statusData.content)
+                        HTMLFormattedText(statusViewModel.content)
                             .padding(.leading, -4)
                         
                         VStack (alignment: .leading) {
@@ -61,17 +60,17 @@ struct StatusView: View {
                         
                         HStack {
                             Text("Uploaded")
-                            Text(statusData.createdAt.toRelative(.isoDateTimeMilliSec))
+                            Text(statusViewModel.createdAt.toRelative(.isoDateTimeMilliSec))
                                 .padding(.horizontal, -4)
-                            if let applicationName = statusData.applicationName {
+                            if let applicationName = statusViewModel.application?.name {
                                 Text("via \(applicationName)")
                             }
                         }
                         .foregroundColor(.lightGrayColor)
                         .font(.footnote)
                         
-                        InteractionRow(status: status) {
-                            self.messageForStatus = status
+                        InteractionRow(statusViewModel: statusViewModel) {
+                            self.messageForStatus = statusViewModel
                             self.showCompose.toggle()
                         }
                         .foregroundColor(.accentColor)
@@ -79,7 +78,7 @@ struct StatusView: View {
                     }
                     .padding(8)
                                         
-                    CommentsSection(statusId: statusData.id) { messageForStatus in
+                    CommentsSection(statusId: statusViewModel.id) { messageForStatus in
                         self.messageForStatus = messageForStatus
                         self.showCompose.toggle()
                     }
@@ -121,23 +120,31 @@ struct StatusView: View {
         }
         .navigationBarTitle("Details")
         .sheet(isPresented: $showCompose, content: {
-            ComposeView(status: $messageForStatus)
+            ComposeView(statusViewModel: $messageForStatus)
         })
         .onAppear {
             Task {
                 do {
                     // Get status from API.
-                    self.status = try await TimelineService.shared.getStatus(withId: self.statusId, and: self.applicationState.accountData)
-
-                    if let status {
+                    if let status = try await TimelineService.shared.getStatus(withId: self.statusId, and: self.applicationState.accountData) {
+                        let statusViewModel = StatusViewModel(status: status)
+                        
+                        // Download images and recalculate exif data.
+                        let allImages = await TimelineService.shared.fetchAllImages(statuses: [status])
+                        for attachment in statusViewModel.mediaAttachments {
+                            if let data = allImages[attachment.id] {
+                                attachment.set(data: data)
+                            }
+                        }
+                        
+                        self.statusViewModel = statusViewModel
+                        
                         // Get status from database.
                         let statusDataFromDatabase = StatusDataHandler.shared.getStatusData(statusId: self.statusId)
                         
                         // If we have status in database then we can update data.
                         if let statusDataFromDatabase {
-                            self.statusData = try await TimelineService.shared.updateStatus(statusDataFromDatabase, basedOn: status)
-                        } else {
-                            self.statusData = try await status.createStatusData()
+                            _ = try await TimelineService.shared.updateStatus(statusDataFromDatabase, basedOn: status)
                         }
                     }
                 } catch {

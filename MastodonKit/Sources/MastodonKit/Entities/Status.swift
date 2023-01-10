@@ -16,7 +16,7 @@ public class Status: Codable {
     
     public let uri: String?
     public let url: URL?
-    public let account: Account?
+    public let account: Account
     public let inReplyToId: AccountId?
     public let inReplyToAccount: StatusId?
     public let reblog: Status?
@@ -65,60 +65,6 @@ public class Status: Codable {
         case tags
         case application
     }
-    
-    public init(
-        id: StatusId,
-        content: Html,
-        uri: String? = nil,
-        url: URL? = nil,
-        account: Account? = nil,
-        inReplyToId: AccountId? = nil,
-        inReplyToAccount: StatusId? = nil,
-        reblog: Status? = nil,
-        createdAt: String? = nil,
-        reblogsCount: Int = 0,
-        favouritesCount: Int = 0,
-        repliesCount: Int = 0,
-        reblogged: Bool = false,
-        favourited: Bool = false,
-        sensitive: Bool = false,
-        bookmarked: Bool = false,
-        pinned: Bool = false,
-        muted: Bool = false,
-        spoilerText: String? = nil,
-        visibility: Visibility = .pub,
-        mediaAttachments: [Attachment] = [],
-        card: Card? = nil,
-        mentions: [Mention] = [],
-        tags: [Tag] = [],
-        application: Application
-    ) {
-        self.id = id
-        self.content = content
-        self.uri = uri
-        self.url = url
-        self.account = account
-        self.inReplyToId = inReplyToId
-        self.inReplyToAccount = inReplyToAccount
-        self.reblog = reblog
-        self.createdAt = createdAt ?? Date().formatted(.iso8601)
-        self.reblogsCount = reblogsCount
-        self.favouritesCount = favouritesCount
-        self.repliesCount = repliesCount
-        self.reblogged = reblogged
-        self.favourited = favourited
-        self.sensitive = sensitive
-        self.bookmarked = bookmarked
-        self.pinned = pinned
-        self.muted = muted
-        self.spoilerText = spoilerText
-        self.visibility = visibility
-        self.mediaAttachments = mediaAttachments
-        self.card = card
-        self.mentions = mentions
-        self.tags = tags
-        self.application = application
-    }
 
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -126,7 +72,7 @@ public class Status: Codable {
         self.id = try container.decode(StatusId.self, forKey: .id)
         self.uri = try container.decode(String.self, forKey: .uri)
         self.url = try? container.decode(URL.self, forKey: .url)
-        self.account = try? container.decode(Account.self, forKey: .account)
+        self.account = try container.decode(Account.self, forKey: .account)
         self.content = try container.decode(Html.self, forKey: .content)
         self.createdAt = try container.decode(String.self, forKey: .createdAt)
         self.inReplyToId = try? container.decode(AccountId.self, forKey: .inReplyToId)
@@ -158,9 +104,8 @@ public class Status: Codable {
         if let url {
             try container.encode(url, forKey: .url)
         }
-        if let account {
-            try container.encode(account, forKey: .account)
-        }
+        
+        try container.encode(account, forKey: .account)
         try container.encode(content, forKey: .content)
         try container.encode(createdAt, forKey: .createdAt)
         if let inReplyToId {
