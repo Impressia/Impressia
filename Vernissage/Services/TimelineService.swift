@@ -57,12 +57,26 @@ public class TimelineService {
                 
         // Retrieve statuses from API.
         let client = MastodonClient(baseURL: accountData.serverUrl).getAuthenticated(token: accessToken)
-        let statuses = try await client.getHomeTimeline(maxId: maxId, minId: minId, limit: 40)
+        let statuses = try await client.getHomeTimeline(maxId: maxId, minId: minId, limit: 20)
                 
+        // Download all images from server.
+        let attachmentsData = await self.fetchAllImages(statuses: statuses)
+        
         // Save status data in database.
         for status in statuses {
+            let contains = attachmentsData.contains { (key: String, value: Data) in
+                status.mediaAttachments.contains { attachment in
+                    attachment.id == key
+                }
+            }
+            
+            // We are adding status only when we have at least one image for status.
+            if contains == false {
+                continue
+            }
+            
             let statusData = StatusDataHandler.shared.createStatusDataEntity(viewContext: backgroundContext)
-            try await self.copy(from: status, to: statusData, on: backgroundContext)
+            try await self.copy(from: status, to: statusData, attachmentsData: attachmentsData, on: backgroundContext)
         }
         
         try backgroundContext.save()
@@ -72,20 +86,21 @@ public class TimelineService {
         // Load data from API and operate on CoreData on background context.
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
         
+        // Download all images from server.
+        let attachmentsData = await self.fetchAllImages(statuses: [status])
+        
         // Update status data in database.
-        try await self.copy(from: status, to: statusData, on: backgroundContext)
+        try await self.copy(from: status, to: statusData, attachmentsData: attachmentsData, on: backgroundContext)
         try backgroundContext.save()
         
         return statusData
     }
     
-    private func copy(from status: Status, to statusData: StatusData, on backgroundContext: NSManagedObjectContext) async throws {
+    private func copy(from status: Status, to statusData: StatusData, attachmentsData: Dictionary<String, Data>, on backgroundContext: NSManagedObjectContext) async throws {
         statusData.copyFrom(status)
         
         for attachment in status.mediaAttachments {
-            let imageData = try await self.fetchImage(attachment: attachment)
-            
-            guard let imageData = imageData else {
+            guard let imageData = attachmentsData[attachment.id] else {
                 continue
             }
             
@@ -127,8 +142,46 @@ public class TimelineService {
         }
     }
     
-    private func fetchImage(attachment: Attachment) async throws -> Data? {
-        guard let data = try await RemoteFileService.shared.fetchData(url: attachment.url) else {
+    private func fetchAllImages(statuses: [Status]) async -> Dictionary<String, Data> {
+        var attachmentUrls: Dictionary<String, URL> = [:]
+        
+        statuses.forEach { status in
+            status.mediaAttachments.forEach { attachment in
+                attachmentUrls[attachment.id] = attachment.url
+            }
+        }
+        
+        return await withTaskGroup(of: (String, Data?).self, returning: [String : Data].self) { taskGroup in            
+            for attachmentUrl in attachmentUrls {
+                taskGroup.addTask {
+                    do {
+                        if let imageData = try await self.fetchImage(attachmentUrl: attachmentUrl.value) {
+                            return (attachmentUrl.key, imageData)
+                        }
+                        
+                        return (attachmentUrl.key, nil)
+                    } catch {
+                        print("Error \(error.localizedDescription)")
+                        return (attachmentUrl.key, nil)
+                    }
+                }
+            }
+            
+            var childTaskResults = [String: Data]()
+            for await result in taskGroup {
+                guard let data = result.1 else {
+                    continue
+                }
+
+                childTaskResults[result.0] = data
+            }
+
+            return childTaskResults
+        }
+    }
+    
+    private func fetchImage(attachmentUrl: URL) async throws -> Data? {
+        guard let data = try await RemoteFileService.shared.fetchData(url: attachmentUrl) else {
             return nil
         }
         

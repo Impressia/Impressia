@@ -10,10 +10,10 @@ import NukeUI
 
 struct ImageRowAsync: View {
     @State public var status: Status
+
     @State private var imageHeight = UIScreen.main.bounds.width
     @State private var imageWidth = UIScreen.main.bounds.width
     @State private var heightWasPrecalculated = true
-    @State private var showSensitive = false
     
     var body: some View {
         if let attachment = status.mediaAttachments.first {
