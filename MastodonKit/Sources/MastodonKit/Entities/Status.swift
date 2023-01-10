@@ -10,14 +10,16 @@ public class Status: Codable {
         case priv = "private"
         case direct = "direct"
     }
+
     public let id: StatusId
-    public let uri: String
+    public let content: Html
+    
+    public let uri: String?
     public let url: URL?
     public let account: Account?
     public let inReplyToId: AccountId?
     public let inReplyToAccount: StatusId?
     public let reblog: Status?
-    public let content: Html
     public let createdAt: String
     public let reblogsCount: Int
     public let favouritesCount: Int
@@ -62,6 +64,60 @@ public class Status: Codable {
         case mentions
         case tags
         case application
+    }
+    
+    public init(
+        id: StatusId,
+        content: Html,
+        uri: String? = nil,
+        url: URL? = nil,
+        account: Account? = nil,
+        inReplyToId: AccountId? = nil,
+        inReplyToAccount: StatusId? = nil,
+        reblog: Status? = nil,
+        createdAt: String? = nil,
+        reblogsCount: Int = 0,
+        favouritesCount: Int = 0,
+        repliesCount: Int = 0,
+        reblogged: Bool = false,
+        favourited: Bool = false,
+        sensitive: Bool = false,
+        bookmarked: Bool = false,
+        pinned: Bool = false,
+        muted: Bool = false,
+        spoilerText: String? = nil,
+        visibility: Visibility = .pub,
+        mediaAttachments: [Attachment] = [],
+        card: Card? = nil,
+        mentions: [Mention] = [],
+        tags: [Tag] = [],
+        application: Application
+    ) {
+        self.id = id
+        self.content = content
+        self.uri = uri
+        self.url = url
+        self.account = account
+        self.inReplyToId = inReplyToId
+        self.inReplyToAccount = inReplyToAccount
+        self.reblog = reblog
+        self.createdAt = createdAt ?? Date().formatted(.iso8601)
+        self.reblogsCount = reblogsCount
+        self.favouritesCount = favouritesCount
+        self.repliesCount = repliesCount
+        self.reblogged = reblogged
+        self.favourited = favourited
+        self.sensitive = sensitive
+        self.bookmarked = bookmarked
+        self.pinned = pinned
+        self.muted = muted
+        self.spoilerText = spoilerText
+        self.visibility = visibility
+        self.mediaAttachments = mediaAttachments
+        self.card = card
+        self.mentions = mentions
+        self.tags = tags
+        self.application = application
     }
 
     public required init(from decoder: Decoder) throws {

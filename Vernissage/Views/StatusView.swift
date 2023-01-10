@@ -15,8 +15,11 @@ struct StatusView: View {
     @State var imageWidth: Int32?
     @State var imageHeight: Int32?
 
+    @State private var messageForStatus: Status?
     @State private var showCompose = false
+    
     @State private var statusData: StatusData?
+    @State private var status: Status?
     
     @State private var exifCamera: String?
     @State private var exifExposure: String?
@@ -25,7 +28,7 @@ struct StatusView: View {
     
     var body: some View {
         ScrollView {
-            if let statusData = self.statusData {
+            if let statusData = self.statusData, let status = self.status {
                 VStack (alignment: .leading) {                    
                     ImagesCarousel(attachments: statusData.attachments(),
                                    exifCamera: $exifCamera,
@@ -67,13 +70,8 @@ struct StatusView: View {
                         .foregroundColor(.lightGrayColor)
                         .font(.footnote)
                         
-                        InteractionRow(statusId: statusData.id,
-                                       repliesCount: Int(statusData.repliesCount),
-                                       reblogged: statusData.reblogged,
-                                       reblogsCount: Int(statusData.reblogsCount),
-                                       favourited: statusData.favourited,
-                                       favouritesCount: Int(statusData.favouritesCount),
-                                       bookmarked: statusData.bookmarked) {
+                        InteractionRow(status: status) {
+                            self.messageForStatus = status
                             self.showCompose.toggle()
                         }
                         .foregroundColor(.accentColor)
@@ -81,7 +79,8 @@ struct StatusView: View {
                     }
                     .padding(8)
                                         
-                    CommentsSection(statusId: statusData.id) { context in
+                    CommentsSection(statusId: statusData.id) { messageForStatus in
+                        self.messageForStatus = messageForStatus
                         self.showCompose.toggle()
                     }
                 }
@@ -122,13 +121,13 @@ struct StatusView: View {
         }
         .navigationBarTitle("Details")
         .sheet(isPresented: $showCompose, content: {
-            ComposeView()
+            ComposeView(status: $messageForStatus)
         })
         .onAppear {
             Task {
                 do {
                     // Get status from API.
-                    let status = try await TimelineService.shared.getStatus(withId: self.statusId, and: self.applicationState.accountData)
+                    self.status = try await TimelineService.shared.getStatus(withId: self.statusId, and: self.applicationState.accountData)
 
                     if let status {
                         // Get status from database.
