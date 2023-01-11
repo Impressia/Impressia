@@ -13,23 +13,15 @@ class StatusDataHandler {
     public static let shared = StatusDataHandler()
     private init() { }
     
-    func getStatusesData() -> [StatusData] {
-        let context = CoreDataHandler.shared.container.viewContext
-        let fetchRequest = StatusData.fetchRequest()
-        do {
-            return try context.fetch(fetchRequest)
-        } catch {
-            print("Error during fetching statuses (getStatusesData)")
-            return []
-        }
-    }
-    
-    func getStatusData(statusId: String) -> StatusData? {
+    func getStatusData(accountId: String, statusId: String) -> StatusData? {
         let context = CoreDataHandler.shared.container.viewContext
         let fetchRequest = StatusData.fetchRequest()
         
         fetchRequest.fetchLimit = 1
-        fetchRequest.predicate = NSPredicate(format: "id = %@", statusId)
+        let predicate1 = NSPredicate(format: "id = %@", statusId)
+        let predicate2 = NSPredicate(format: "pixelfedAccount.id = %@", accountId)
+        
+        fetchRequest.predicate = NSCompoundPredicate.init(type: .and, subpredicates: [predicate1,predicate2])
         
         do {
             return try context.fetch(fetchRequest).first
@@ -39,13 +31,16 @@ class StatusDataHandler {
         }
     }
     
-    func getMaximumStatus(viewContext: NSManagedObjectContext? = nil) -> StatusData? {
+    func getMaximumStatus(accountId: String, viewContext: NSManagedObjectContext? = nil) -> StatusData? {
         let context = viewContext ?? CoreDataHandler.shared.container.viewContext
         let fetchRequest = StatusData.fetchRequest()
 
         fetchRequest.fetchLimit = 1
+        
         let sortDescriptor = NSSortDescriptor(key: "id", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.predicate = NSPredicate(format: "pixelfedAccount.id = %@", accountId)
+        
         do {
             let statuses = try context.fetch(fetchRequest)
             return statuses.first
@@ -55,13 +50,16 @@ class StatusDataHandler {
         }
     }
     
-    func getMinimumtatus(viewContext: NSManagedObjectContext? = nil) -> StatusData? {
+    func getMinimumStatus(accountId: String, viewContext: NSManagedObjectContext? = nil) -> StatusData? {
         let context = viewContext ?? CoreDataHandler.shared.container.viewContext
         let fetchRequest = StatusData.fetchRequest()
 
         fetchRequest.fetchLimit = 1
+        
         let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.predicate = NSPredicate(format: "pixelfedAccount.id = %@", accountId)
+        
         do {
             let statuses = try context.fetch(fetchRequest)
             return statuses.first

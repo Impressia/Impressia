@@ -1,6 +1,6 @@
 //
 //  https://mczachurski.dev
-//  Copyright © 2022 Marcin Czachurski and the repository contributors.
+//  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the MIT License.
 //
     
@@ -20,6 +20,9 @@ extension AccountData {
     @NSManaged public var acct: String
     @NSManaged public var avatar: URL?
     @NSManaged public var avatarData: Data?
+    @NSManaged public var clientId: String
+    @NSManaged public var clientSecret: String
+    @NSManaged public var clientVapidKey: String
     @NSManaged public var createdAt: String
     @NSManaged public var displayName: String?
     @NSManaged public var followersCount: Int32
@@ -28,13 +31,28 @@ extension AccountData {
     @NSManaged public var id: String
     @NSManaged public var locked: Bool
     @NSManaged public var note: String?
+    @NSManaged public var serverUrl: URL
     @NSManaged public var statusesCount: Int32
     @NSManaged public var url: URL?
     @NSManaged public var username: String
-    @NSManaged public var clientId: String
-    @NSManaged public var clientSecret: String
-    @NSManaged public var clientVapidKey: String
-    @NSManaged public var serverUrl: URL
+    @NSManaged public var statuses: Set<StatusData>?
+
+}
+
+// MARK: Generated accessors for statuses
+extension AccountData {
+
+    @objc(addStatusesObject:)
+    @NSManaged public func addToStatuses(_ value: StatusData)
+
+    @objc(removeStatusesObject:)
+    @NSManaged public func removeFromStatuses(_ value: StatusData)
+
+    @objc(addStatuses:)
+    @NSManaged public func addToStatuses(_ values: NSSet)
+
+    @objc(removeStatuses:)
+    @NSManaged public func removeFromStatuses(_ values: NSSet)
 
 }
 

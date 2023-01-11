@@ -30,13 +30,11 @@ struct UserProfileView: View {
             }
         }
         .navigationBarTitle(self.accountDisplayName ?? self.accountUserName)
-        .onAppear {
-            Task {
-                do {
-                    try await self.loadData()
-                } catch {
-                    print("Error \(error.localizedDescription)")
-                }
+        .task {
+            do {
+                try await self.loadData()
+            } catch {
+                print("Error \(error.localizedDescription)")
             }
         }
     }

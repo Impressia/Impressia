@@ -9,6 +9,7 @@ import MastodonKit
 
 public class StatusViewModel {
 
+    public let uniqueId: UUID
     public let id: StatusId
     public let content: Html
     
@@ -65,6 +66,7 @@ public class StatusViewModel {
         tags: [Tag] = [],
         place: Place? = nil
     ) {
+        self.uniqueId = UUID()
         self.id = id
         self.content = content
         self.uri = uri
@@ -94,6 +96,7 @@ public class StatusViewModel {
     }
     
     init(status: Status) {
+        self.uniqueId = UUID()
         self.id = status.id
         self.content = status.content
         self.uri = status.uri

@@ -41,6 +41,8 @@ extension StatusData {
     @NSManaged public var url: URL?
     @NSManaged public var visibility: String
     @NSManaged public var attachmentRelation: Set<AttachmentData>?
+    @NSManaged public var pixelfedAccount: AccountData
+
 }
 
 // MARK: Generated accessors for attachmentRelation

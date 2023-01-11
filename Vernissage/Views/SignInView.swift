@@ -8,9 +8,11 @@ import SwiftUI
 
 struct SignInView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var applicationState: ApplicationState
 
     @State private var serverAddress: String = ""
+    
     
     var onSignInStateChenge: ((_ applicationViewMode: ApplicationViewMode) -> Void)?
     
@@ -33,6 +35,7 @@ struct SignInView: View {
                             DispatchQueue.main.async {
                                 self.applicationState.accountData = accountData
                                 onSignInStateChenge?(.mainView)
+                                dismiss()
                             }
                         })
                     }

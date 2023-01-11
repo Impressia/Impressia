@@ -13,12 +13,15 @@ struct MainView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var applicationState: ApplicationState
 
+    @State private var showSettings = false
     @State private var navBarTitle: String = "Home"
     @State private var viewMode: ViewMode = .home {
         didSet {
             self.navBarTitle = self.getViewTitle(viewMode: viewMode)
         }
     }
+    
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.acct, order: .forward)]) var dbAccounts: FetchedResults<AccountData>
     
     private enum ViewMode {
         case home, local, federated, profile, notifications
@@ -28,6 +31,9 @@ struct MainView: View {
         self.getMainView()
         .navigationBarTitle(navBarTitle)
         .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $showSettings, content: {
+            SettingsView()
+        })
         .toolbar {
             self.getLeadingToolbar()
             self.getPrincipalToolbar()
@@ -38,19 +44,24 @@ struct MainView: View {
     private func getMainView() -> some View {
         switch self.viewMode {
         case .home:
-            HomeFeedView()
+            HomeFeedView(accountId: applicationState.accountData?.id ?? "")
+                .id(applicationState.accountData?.id ?? "")
         case .local:
             LocalFeedView()
+                .id(applicationState.accountData?.id ?? "")
         case .federated:
             FederatedFeedView()
+                .id(applicationState.accountData?.id ?? "")
         case .profile:
             if let accountData = self.applicationState.accountData {
                 UserProfileView(accountId: accountData.id,
                                 accountDisplayName: accountData.displayName,
                                 accountUserName: accountData.acct)
+                    .id(applicationState.accountData?.id ?? "")
             }
         case .notifications:
             NotificationsView()
+                .id(applicationState.accountData?.id ?? "")
         }
     }
     
@@ -121,27 +132,24 @@ struct MainView: View {
     private func getLeadingToolbar() -> some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
             Menu {
-                
-                Button {
-                    // TODO: Switch accounts.
-                } label: {
-                    HStack {
-                        Text(self.applicationState.accountData?.displayName ?? self.applicationState.accountData?.acct ?? "")
-                        Image(systemName: "person.circle.fill")
-                            .resizable()
-                            .foregroundColor(.mainTextColor)
+                ForEach(self.dbAccounts) { account in
+                    Button {
+                        self.applicationState.accountData = account
+                    } label: {
+                        if self.applicationState.accountData?.id == account.id {
+                            Label(account.displayName ?? account.acct, systemImage: "checkmark")
+                        } else {
+                            Text(account.displayName ?? account.acct)
+                        }
                     }
                 }
 
                 Divider()
                 
                 Button {
-                    // TODO: Open settings.
+                    self.showSettings.toggle()
                 } label: {
-                    HStack {
-                        Text("Settings")
-                        Image(systemName: "gear")
-                    }
+                    Label("Settings", systemImage: "gear")
                 }
             } label: {
                 if let avatarData = self.applicationState.accountData?.avatarData, let uiImage = UIImage(data: avatarData) {

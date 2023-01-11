@@ -88,73 +88,37 @@ struct StatusView: View {
                     }
                 }
             } else {
-                VStack (alignment: .leading) {
-                    if let imageBlurhash, let uiImage = UIImage(blurHash: imageBlurhash, size: CGSize(width: 32, height: 32)) {
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .frame(width: UIScreen.main.bounds.width, height: self.getImageHeight())
-                    } else {
-                        Rectangle()
-                            .fill(Color.placeholderText)
-                            .frame(width: UIScreen.main.bounds.width, height: self.getImageHeight())
-                            .redacted(reason: .placeholder)
-                    }
-                    
-                    VStack(alignment: .leading) {
-                        UsernameRow(accountDisplayName: "Verylong Displayname",
-                                    accountUsername: "@username")
-                        
-                        Text("Lorem ispum text something")
-                            .foregroundColor(.lightGrayColor)
-                            .font(.footnote)
-                        Text("Lorem ispum text something sdf sdfsdf sdfdsfsdfsdf")
-                            .foregroundColor(.lightGrayColor)
-                            .font(.footnote)
-                        
-                        LabelIcon(iconName: "mappin.and.ellipse", value: "Wroclaw, Poland")
-                        LabelIcon(iconName: "camera", value: "SONY ILCE-7M3")
-                        LabelIcon(iconName: "camera.aperture", value: "Viltrox 24mm F1.8 E")
-                        LabelIcon(iconName: "timelapse", value: "24.0 mm, f/1.8, 1/640s, ISO 100")
-                        LabelIcon(iconName: "calendar", value: "2 Oct 2022")
-                    }
-                    .padding(8)
-                    .redacted(reason: .placeholder)
-                    .animatePlaceholder(isLoading: .constant(true))
-                }
+                StatusPlaceholder(imageHeight: self.getImageHeight(), imageBlurhash: self.imageBlurhash)
             }
         }
         .navigationBarTitle("Details")
         .sheet(isPresented: $showCompose, content: {
             ComposeView(statusViewModel: $messageForStatus)
         })
-        .onAppear {
-            Task {
-                do {
-                    // Get status from API.
-                    if let status = try await TimelineService.shared.getStatus(withId: self.statusId, and: self.applicationState.accountData) {
-                        let statusViewModel = StatusViewModel(status: status)
-                        
-                        // Download images and recalculate exif data.
-                        let allImages = await TimelineService.shared.fetchAllImages(statuses: [status])
-                        for attachment in statusViewModel.mediaAttachments {
-                            if let data = allImages[attachment.id] {
-                                attachment.set(data: data)
-                            }
-                        }
-                        
-                        self.statusViewModel = statusViewModel
-                        
-                        // Get status from database.
-                        let statusDataFromDatabase = StatusDataHandler.shared.getStatusData(statusId: self.statusId)
-                        
-                        // If we have status in database then we can update data.
-                        if let statusDataFromDatabase {
-                            _ = try await TimelineService.shared.updateStatus(statusDataFromDatabase, basedOn: status)
+        .task {
+            do {
+                // Get status from API.
+                if let status = try await TimelineService.shared.getStatus(withId: self.statusId, and: self.applicationState.accountData) {
+                    let statusViewModel = StatusViewModel(status: status)
+                    
+                    // Download images and recalculate exif data.
+                    let allImages = await TimelineService.shared.fetchAllImages(statuses: [status])
+                    for attachment in statusViewModel.mediaAttachments {
+                        if let data = allImages[attachment.id] {
+                            attachment.set(data: data)
                         }
                     }
-                } catch {
-                    print("Error \(error.localizedDescription)")
+                    
+                    self.statusViewModel = statusViewModel
+                    
+                    // If we have status in database then we can update data.
+                    if let accountData = self.applicationState.accountData,
+                       let statusDataFromDatabase = StatusDataHandler.shared.getStatusData(accountId: accountData.id, statusId: self.statusId) {
+                        _ = try await TimelineService.shared.updateStatus(statusDataFromDatabase, accountData: accountData, basedOn: status)
+                    }
                 }
+            } catch {
+                print("Error \(error.localizedDescription)")
             }
         }
     }

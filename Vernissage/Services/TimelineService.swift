@@ -8,32 +8,36 @@ import Foundation
 import CoreData
 import MastodonKit
 
+public enum DatabaseError: Error {
+    case cannotDownloadAccount
+}
+
 public class TimelineService {
     public static let shared = TimelineService()
     private init() { }
     
-    public func onBottomOfList(for accountData: AccountData) async throws {
+    public func onBottomOfList(for accountData: AccountData) async throws -> Int {
         // Load data from API and operate on CoreData on background context.
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
 
         // Get maximimum downloaded stauts id.
-        let oldestStatus = StatusDataHandler.shared.getMinimumtatus(viewContext: backgroundContext)
+        let oldestStatus = StatusDataHandler.shared.getMinimumStatus(accountId: accountData.id, viewContext: backgroundContext)
         
         guard let oldestStatus = oldestStatus else {
-            return
+            return 0
         }
         
-        try await self.loadData(for: accountData, on: backgroundContext, maxId: oldestStatus.id)
+        return try await self.loadData(for: accountData, on: backgroundContext, maxId: oldestStatus.id)
     }
 
-    public func onTopOfList(for accountData: AccountData) async throws {
+    public func onTopOfList(for accountData: AccountData) async throws -> Int {
         // Load data from API and operate on CoreData on background context.
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
 
         // Get maximimum downloaded stauts id.
-        let newestStatus = StatusDataHandler.shared.getMaximumStatus(viewContext: backgroundContext)
+        let newestStatus = StatusDataHandler.shared.getMaximumStatus(accountId: accountData.id, viewContext: backgroundContext)
                 
-        try await self.loadData(for: accountData, on: backgroundContext, minId: newestStatus?.id)
+        return try await self.loadData(for: accountData, on: backgroundContext, minId: newestStatus?.id)
     }
     
     public func getStatus(withId statusId: String, and accountData: AccountData?) async throws -> Status? {
@@ -50,9 +54,9 @@ public class TimelineService {
         return try await client.getContext(for: statusId)
     }
     
-    private func loadData(for accountData: AccountData, on backgroundContext: NSManagedObjectContext, minId: String? = nil, maxId: String? = nil) async throws {
+    private func loadData(for accountData: AccountData, on backgroundContext: NSManagedObjectContext, minId: String? = nil, maxId: String? = nil) async throws -> Int {
         guard let accessToken = accountData.accessToken else {
-            return
+            return 0
         }
                 
         // Retrieve statuses from API.
@@ -76,13 +80,22 @@ public class TimelineService {
             }
             
             let statusData = StatusDataHandler.shared.createStatusDataEntity(viewContext: backgroundContext)
+            
+            guard let dbAccount = AccountDataHandler.shared.getAccountData(accountId: accountData.id, viewContext: backgroundContext) else {
+                throw DatabaseError.cannotDownloadAccount
+            }
+            
+            statusData.pixelfedAccount = dbAccount
+            dbAccount.addToStatuses(statusData)
+            
             try await self.copy(from: status, to: statusData, attachmentsData: attachmentsData, on: backgroundContext)
         }
         
         try backgroundContext.save()
+        return statuses.count
     }
     
-    public func updateStatus(_ statusData: StatusData, basedOn status: Status) async throws -> StatusData? {
+    public func updateStatus(_ statusData: StatusData, accountData: AccountData, basedOn status: Status) async throws -> StatusData? {
         // Load data from API and operate on CoreData on background context.
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
         

@@ -6,13 +6,14 @@
     
 
 import Foundation
+import CoreData
 
 class AccountDataHandler {
     public static let shared = AccountDataHandler()
     private init() { }
     
-    func getAccountsData() -> [AccountData] {
-        let context = CoreDataHandler.shared.container.viewContext
+    func getAccountsData(viewContext: NSManagedObjectContext? = nil) -> [AccountData] {
+        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
         let fetchRequest = AccountData.fetchRequest()
         do {
             return try context.fetch(fetchRequest)
@@ -22,8 +23,8 @@ class AccountDataHandler {
         }
     }
     
-    func getCurrentAccountData() -> AccountData? {
-        let accounts = self.getAccountsData()
+    func getCurrentAccountData(viewContext: NSManagedObjectContext? = nil) -> AccountData? {
+        let accounts = self.getAccountsData(viewContext: viewContext)
         let defaultSettings = ApplicationSettingsHandler.shared.getDefaultSettings()
         
         let currentAccount = accounts.first { accountData in
@@ -37,6 +38,21 @@ class AccountDataHandler {
         return accounts.first
     }
 
+    func getAccountData(accountId: String, viewContext: NSManagedObjectContext? = nil) -> AccountData? {
+        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
+        let fetchRequest = AccountData.fetchRequest()
+        
+        fetchRequest.fetchLimit = 1
+        fetchRequest.predicate = NSPredicate(format: "id = %@", accountId)
+        
+        do {
+            return try context.fetch(fetchRequest).first
+        } catch {
+            print("Error during fetching status (getAccountData)")
+            return nil
+        }
+    }
+    
     func createAccountDataEntity() -> AccountData {
         let context = CoreDataHandler.shared.container.viewContext
         return AccountData(context: context)

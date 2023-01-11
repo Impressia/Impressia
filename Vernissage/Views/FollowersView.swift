@@ -33,11 +33,9 @@ struct FollowersView: View {
             
             if allItemsLoaded == false && firstLoadFinished == true {
                 LoadingIndicator()
-                    .onAppear {
-                        Task {
-                            self.page = self.page + 1
-                            await self.loadAccounts(page: self.page)
-                        }
+                    .task {
+                        self.page = self.page + 1
+                        await self.loadAccounts(page: self.page)
                     }
                     .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
             }

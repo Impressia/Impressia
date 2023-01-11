@@ -20,7 +20,7 @@ struct UserProfileStatuses: View {
     var body: some View {
         VStack(alignment: .center) {
             if firstLoadFinished == true {
-                ForEach(self.statusViewModels, id: \.id) { item in
+                ForEach(self.statusViewModels, id: \.uniqueId) { item in
                     NavigationLink(destination: StatusView(statusId: item.id,
                                                            imageBlurhash: item.mediaAttachments.first?.blurhash,
                                                            imageWidth: item.getImageWidth(),
@@ -35,13 +35,11 @@ struct UserProfileStatuses: View {
                 LazyVStack {
                     if allItemsLoaded == false && firstLoadFinished == true {
                         LoadingIndicator()
-                            .onAppear {
-                                Task {
-                                    do {
-                                        try await self.loadMoreStatuses()
-                                    } catch {
-                                        print("Error \(error.localizedDescription)")
-                                    }
+                            .task {
+                                do {
+                                    try await self.loadMoreStatuses()
+                                } catch {
+                                    print("Error \(error.localizedDescription)")
                                 }
                             }
                             .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
@@ -51,13 +49,11 @@ struct UserProfileStatuses: View {
             } else {
                 LoadingIndicator()
             }
-        }.onAppear {
-            Task {
-                do {
-                    try await self.loadStatuses()
-                } catch {
-                    print("Error \(error.localizedDescription)")
-                }
+        }.task {
+            do {
+                try await self.loadStatuses()
+            } catch {
+                print("Error \(error.localizedDescription)")
             }
         }
     }

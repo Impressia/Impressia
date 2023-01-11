@@ -10,51 +10,70 @@ struct HomeFeedView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var applicationState: ApplicationState
     
-    @State private var showLoading = false
+    @State private var firstLoadFinished = false
+    @State private var allItemsBottomLoaded = false
     
     private static let initialColumns = 1
     @State private var gridColumns = Array(repeating: GridItem(.flexible()), count: initialColumns)
+        
+    @FetchRequest var dbStatuses: FetchedResults<StatusData>
     
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.id, order: .reverse)]) var dbStatuses: FetchedResults<StatusData>
+    init(accountId: String) {
+        _dbStatuses = FetchRequest<StatusData>(
+            sortDescriptors: [SortDescriptor(\.id, order: .reverse)],
+            predicate: NSPredicate(format: "pixelfedAccount.id = %@", accountId))
+    }
     
     var body: some View {
-        ZStack {
-            ScrollView {
-                LazyVGrid(columns: gridColumns) {
-                    ForEach(dbStatuses, id: \.self) { item in
-                        NavigationLink(destination: StatusView(statusId: item.id,
-                                                               imageBlurhash: item.attachments().first?.blurhash,
-                                                               imageWidth: item.attachments().first?.metaImageWidth,
-                                                               imageHeight: item.attachments().first?.metaImageHeight)
-                            .environmentObject(applicationState)) {
-                            ImageRow(status: item)
-                        }
-                        .buttonStyle(EmptyButtonStyle())
+        ScrollView {
+            LazyVGrid(columns: gridColumns) {
+                ForEach(dbStatuses, id: \.self) { item in
+                    NavigationLink(destination: StatusView(statusId: item.id,
+                                                           imageBlurhash: item.attachments().first?.blurhash,
+                                                           imageWidth: item.attachments().first?.metaImageWidth,
+                                                           imageHeight: item.attachments().first?.metaImageHeight)
+                        .environmentObject(applicationState)) {
+                        ImageRow(status: item)
                     }
-                    
+                    .buttonStyle(EmptyButtonStyle())
+                }
+                
+                if allItemsBottomLoaded == false && firstLoadFinished == true {
                     LoadingIndicator()
-                        .onAppear {
-                            Task {
-                                do {
-                                    if let accountData = self.applicationState.accountData {
-                                        try await TimelineService.shared.onBottomOfList(for: accountData)
+                        .task {
+                            do {
+                                if let accountData = self.applicationState.accountData {
+                                    let newStatusesCount = try await TimelineService.shared.onBottomOfList(for: accountData)
+                                    if newStatusesCount == 0 {
+                                        allItemsBottomLoaded = true
                                     }
-                                } catch {
-                                    print("Error", error)
                                 }
+                            } catch {
+                                print("Error", error)
                             }
                         }
                 }
             }
-            
-            if showLoading {
+        }
+        .overlay(alignment: .center) {
+            if firstLoadFinished == false {
                 LoadingIndicator()
+            } else {
+                if self.dbStatuses.isEmpty {
+                    VStack {
+                        Image(systemName: "photo.on.rectangle.angled")
+                            .font(.largeTitle)
+                            .padding(.bottom, 4)
+                        Text("Unfortunately, there are no photos here.")
+                            .font(.title3)
+                    }.foregroundColor(.lightGrayColor)
+                }
             }
         }
         .refreshable {
             do {
                 if let accountData = self.applicationState.accountData {
-                    try await TimelineService.shared.onTopOfList(for: accountData)
+                    _ = try await TimelineService.shared.onTopOfList(for: accountData)
                 }
             } catch {
                 print("Error", error)
@@ -62,15 +81,20 @@ struct HomeFeedView: View {
         }
         .task {
             do {
-                if self.dbStatuses.isEmpty {
-                    self.showLoading = true
-                    if let accountData = self.applicationState.accountData {
-                        try await TimelineService.shared.onTopOfList(for: accountData)
+                defer {
+                    Task { @MainActor in
+                        self.firstLoadFinished = true
                     }
-                    self.showLoading = false
+                }
+
+                if self.dbStatuses.isEmpty == false {
+                    return
+                }
+
+                if let accountData = self.applicationState.accountData {
+                    _ = try await TimelineService.shared.onTopOfList(for: accountData)
                 }
             } catch {
-                self.showLoading = false
                 print("Error", error)
             }
         }
@@ -79,6 +103,6 @@ struct HomeFeedView: View {
 
 struct HomeFeedView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeFeedView()
+        HomeFeedView(accountId: "")
     }
 }
