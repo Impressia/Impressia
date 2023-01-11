@@ -8,17 +8,39 @@ import SwiftUI
 
 struct ImageRow: View {
     @State public var status: StatusData
+
+    @State private var imageHeight: Double
+    @State private var imageWidth: Double
     
-    @State private var imageHeight = UIScreen.main.bounds.width
-    @State private var imageWidth = UIScreen.main.bounds.width
+    private let uiImage:UIImage?
+    private let attachmentData: AttachmentData?
+    
+    init(statusData: StatusData) {
+        self.status = statusData
+        self.attachmentData = statusData.attachments().first
+        
+        if let attachmenData = self.attachmentData, let uiImage = UIImage(data: attachmenData.data) {
+            self.uiImage = uiImage
+            
+            let imgHeight = uiImage.size.height
+            let imgWidth = uiImage.size.width
+            let divider = imgWidth / UIScreen.main.bounds.size.width
+            let calculatedHeight = imgHeight / divider
+            
+            self.imageWidth = imgWidth
+            self.imageHeight = (calculatedHeight > 0 && calculatedHeight < .infinity) ? calculatedHeight : UIScreen.main.bounds.width
+        } else {
+            self.uiImage = nil
+            self.imageHeight = UIScreen.main.bounds.width
+            self.imageWidth = UIScreen.main.bounds.width
+        }
+    }
     
     var body: some View {
-        if let attachmenData = self.status.attachments().first,
-           let uiImage = UIImage(data: attachmenData.data) {
-            
+        if let uiImage, let attachmentData {
             ZStack {
                 if self.status.sensitive {
-                    ContentWarning(blurhash: attachmenData.blurhash, spoilerText: self.status.spoilerText) {
+                    ContentWarning(blurhash: attachmentData.blurhash, spoilerText: self.status.spoilerText) {
                         Image(uiImage: uiImage)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -42,22 +64,7 @@ struct ImageRow: View {
                 }
             }
             .frame(width: self.imageWidth, height: self.imageHeight)
-            .onAppear {
-                self.recalculateSizeOfDownloadedImage(uiImage: uiImage)
-            }
         }
-    }
-    
-    private func recalculateSizeOfDownloadedImage(uiImage: UIImage) {
-        let imgHeight = uiImage.size.height
-        let imgWidth = uiImage.size.width
-        let calculatedHeight = self.calculateHeight(width: imgWidth, height: imgHeight)
-        self.imageHeight = (calculatedHeight > 0 && calculatedHeight < .infinity) ? calculatedHeight : UIScreen.main.bounds.width
-    }
-    
-    private func calculateHeight(width: Double, height: Double) -> CGFloat {
-        let divider = width / UIScreen.main.bounds.size.width
-        return height / divider
     }
 }
 

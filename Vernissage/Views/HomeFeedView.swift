@@ -33,7 +33,7 @@ struct HomeFeedView: View {
                                                            imageWidth: item.attachments().first?.metaImageWidth,
                                                            imageHeight: item.attachments().first?.metaImageHeight)
                         .environmentObject(applicationState)) {
-                        ImageRow(status: item)
+                        ImageRow(statusData: item)
                     }
                     .buttonStyle(EmptyButtonStyle())
                 }
