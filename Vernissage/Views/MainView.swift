@@ -10,10 +10,19 @@ import CoreData
 import MastodonKit
 
 struct MainView: View {
+    enum Sheet: String, Identifiable {
+        case settings, compose
+        var id: String { rawValue }
+    }
+    
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var applicationState: ApplicationState
 
+    var onTintChange: ((TintColor) -> Void)?
+    
     @State private var showSettings = false
+    @State private var sheet: Sheet?
+    
     @State private var navBarTitle: String = "Home"
     @State private var viewMode: ViewMode = .home {
         didSet {
@@ -31,12 +40,20 @@ struct MainView: View {
         self.getMainView()
         .navigationBarTitle(navBarTitle)
         .navigationBarTitleDisplayMode(.inline)
-        .sheet(isPresented: $showSettings, content: {
-            SettingsView()
+        .sheet(item: $sheet, content: { item in
+            switch item {
+            case .settings:
+                SettingsView { color in
+                    self.onTintChange?(color)
+                }
+            case .compose:
+                ComposeView(statusViewModel: .constant(nil))
+            }
         })
         .toolbar {
             self.getLeadingToolbar()
             self.getPrincipalToolbar()
+            self.getTrailingToolbar()
         }
     }
     
@@ -148,7 +165,7 @@ struct MainView: View {
                 Divider()
                 
                 Button {
-                    self.showSettings.toggle()
+                    self.sheet = .settings
                 } label: {
                     Label("Settings", systemImage: "gear")
                 }
@@ -165,6 +182,19 @@ struct MainView: View {
                         .foregroundColor(.mainTextColor)
                 }
             }
+        }
+    }
+    
+    @ToolbarContentBuilder
+    private func getTrailingToolbar() -> some ToolbarContent {
+        ToolbarItem(placement: .navigationBarTrailing) {
+            Button {
+                self.sheet = .compose
+            } label: {
+                Image(systemName: "photo.stack")
+                    .tint(.mainTextColor)
+            }
+
         }
     }
     

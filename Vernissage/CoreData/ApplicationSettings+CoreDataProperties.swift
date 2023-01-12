@@ -1,6 +1,6 @@
 //
 //  https://mczachurski.dev
-//  Copyright © 2022 Marcin Czachurski and the repository contributors.
+//  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the MIT License.
 //
     
@@ -17,9 +17,6 @@ extension ApplicationSettings {
     }
 
     @NSManaged public var currentAccount: String?
-
-}
-
-extension ApplicationSettings : Identifiable {
+    @NSManaged public var tintColor: Int32
 
 }

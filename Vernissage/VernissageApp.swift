@@ -14,6 +14,7 @@ struct VernissageApp: App {
     let applicationState = ApplicationState.shared
     
     @State var applicationViewMode: ApplicationViewMode = .loading
+    @State var tintColor = ApplicationState.shared.tintColor.color()
     
     var body: some Scene {
         WindowGroup {
@@ -28,12 +29,21 @@ struct VernissageApp: App {
                     .environment(\.managedObjectContext, coreDataHandler.container.viewContext)
                     .environmentObject(applicationState)
                 case .mainView:
-                    MainView()
-                        .environment(\.managedObjectContext, coreDataHandler.container.viewContext)
-                        .environmentObject(applicationState)
+                    MainView { color in
+                        self.tintColor = color.color()
+                    }
+                    .environment(\.managedObjectContext, coreDataHandler.container.viewContext)
+                    .environmentObject(applicationState)
                 }
             }
-            .task {                
+            .tint(self.tintColor)
+            .task {
+                let defaultSettings = ApplicationSettingsHandler.shared.getDefaultSettings()
+                if let tintColor = TintColor(rawValue: Int(defaultSettings.tintColor)) {
+                    self.applicationState.tintColor = tintColor
+                    self.tintColor = tintColor.color()
+                }
+                
                 await AuthorizationService.shared.verifyAccount({ accountData in
                     guard let accountData = accountData else {
                         self.applicationViewMode = .signIn

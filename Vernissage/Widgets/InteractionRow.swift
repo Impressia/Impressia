@@ -110,7 +110,7 @@ struct InteractionRow: View {
             }
         }
         .font(.title3)
-        .fontWeight(.semibold)
+        .fontWeight(.bold)
         .onAppear {
             self.refreshCounters()
         }

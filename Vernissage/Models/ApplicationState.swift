@@ -5,6 +5,7 @@
 //
     
 import Foundation
+import SwiftUI
 import MastodonKit
 
 public class ApplicationState: ObservableObject {
@@ -12,6 +13,7 @@ public class ApplicationState: ObservableObject {
     private init() { }
 
     @Published var accountData: AccountData?
+    @Published var tintColor = TintColor.accentColor2
     @Published var showInteractionStatusId = ""
 }
 

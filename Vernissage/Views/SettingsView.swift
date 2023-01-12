@@ -11,6 +11,12 @@ struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     
     @State var accounts: [AccountData] = []
+    @State private var matchSystemTheme = true
+    
+    var onTintChange: ((TintColor) -> Void)?
+    
+    let accentColors1: [TintColor] = [.accentColor1, .accentColor2, .accentColor3, .accentColor4, .accentColor5]
+    let accentColors2: [TintColor] = [.accentColor6, .accentColor7, .accentColor8, .accentColor9, .accentColor10]
     
     var body: some View {
         NavigationView {
@@ -32,13 +38,75 @@ struct SettingsView: View {
                     }
                 }
 
-                Section("General") {
-                    Text("Accent")
+                Section("Theme") {
+                    Toggle("Match system", isOn: $matchSystemTheme)
+                        .toggleStyle(SwitchToggleStyle(tint: .accentColor))
+                    Text("Light")
+                    Text("Dark")
                 }
                 
-                Section("About") {
-                    Text("Website")
-                    Text("License")
+                Section("Accent") {
+                    VStack(alignment: .leading) {
+                        HStack(alignment: .center) {
+                            ForEach(accentColors1, id: \.self) { color in
+                                ZStack {
+                                    Circle()
+                                        .fill(color.color())
+                                        .frame(width: 36, height: 36)
+                                        .onTapGesture {
+                                            self.applicationState.tintColor = color
+                                            ApplicationSettingsHandler.shared.setDefaultTintColor(tintColor: color)
+                                            self.onTintChange?(color)
+                                        }
+                                    if color == self.applicationState.tintColor {
+                                        Image(systemName: "checkmark")
+                                            .tint(Color.mainTextColor)
+                                            .fontWeight(.bold)
+                                    }
+                                }
+                                
+                                if color != accentColors1.last {
+                                    Spacer()
+                                }
+                            }
+                        }
+                        .padding(.vertical, 8)
+                         
+                        HStack(alignment: .center) {
+                            ForEach(accentColors2, id: \.self) { color in
+                                ZStack {
+                                    Circle()
+                                        .fill(color.color())
+                                        .frame(width: 36, height: 36)
+                                        .onTapGesture {
+                                            self.applicationState.tintColor = color
+                                            ApplicationSettingsHandler.shared.setDefaultTintColor(tintColor: color)
+                                            self.onTintChange?(color)
+                                        }
+                                    if color == self.applicationState.tintColor {
+                                        Image(systemName: "checkmark")
+                                            .tint(Color.mainTextColor)
+                                            .fontWeight(.bold)
+                                    }
+                                }
+                                
+                                if color != accentColors2.last {
+                                    Spacer()
+                                }
+                            }
+                        }
+                        .padding(.vertical, 8)
+                    }
+                }
+                
+                Section("Other") {
+                    Text("Third party") // Link to dependeinces
+                    Text("Report a bug")
+                    Text("Follow me on Mastodon")
+                }
+                
+                Section() {
+                    Text("Version") // Link to dependeinces
                 }
             }
             .frame(alignment: .topLeading)

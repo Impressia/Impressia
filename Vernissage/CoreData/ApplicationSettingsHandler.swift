@@ -38,6 +38,12 @@ class ApplicationSettingsHandler {
         CoreDataHandler.shared.save()
     }
 
+    func setDefaultTintColor(tintColor: TintColor) {
+        let defaultSettings = self.getDefaultSettings()
+        defaultSettings.tintColor = Int32(tintColor.rawValue)
+        CoreDataHandler.shared.save()
+    }
+    
     private func createApplicationSettingsEntity() -> ApplicationSettings {
         let context = CoreDataHandler.shared.container.viewContext
         return ApplicationSettings(context: context)
