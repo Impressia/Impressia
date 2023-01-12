@@ -17,6 +17,7 @@ struct StatusView: View {
 
     @State private var messageForStatus: StatusViewModel?
     @State private var showCompose = false
+    @State private var firstLoadFinished = false
     
     @State private var statusViewModel: StatusViewModel?
     
@@ -97,6 +98,10 @@ struct StatusView: View {
         })
         .task {
             do {
+                guard firstLoadFinished == false else {
+                    return
+                }
+                
                 // Get status from API.
                 if let status = try await TimelineService.shared.getStatus(withId: self.statusId, and: self.applicationState.accountData) {
                     let statusViewModel = StatusViewModel(status: status)
@@ -110,6 +115,7 @@ struct StatusView: View {
                     }
                     
                     self.statusViewModel = statusViewModel
+                    self.firstLoadFinished = true
                     
                     // If we have status in database then we can update data.
                     if let accountData = self.applicationState.accountData,

@@ -15,6 +15,7 @@ struct UserProfileView: View {
     @State public var accountUserName: String
     @State private var account: Account? = nil
     @State private var relationship: Relationship? = nil
+    @State private var firstLoadFinished = false
     
     var body: some View {
         VStack {
@@ -40,10 +41,15 @@ struct UserProfileView: View {
     }
     
     private func loadData() async throws {
+        guard firstLoadFinished == false else {
+            return
+        }
+
         async let relationshipTask = AccountService.shared.getRelationship(withId: self.accountId, forUser: self.applicationState.accountData)
         async let accountTask = AccountService.shared.getAccount(withId: self.accountId, and: self.applicationState.accountData)
         
         // Wait for download account and relationships.
+        self.firstLoadFinished = true
         (self.relationship, self.account) = try await (relationshipTask, accountTask)
     }
 }

@@ -59,6 +59,10 @@ struct UserProfileStatuses: View {
     }
     
     private func loadStatuses() async throws {
+        guard firstLoadFinished == false else {
+            return
+        }
+        
         let statuses = try await AccountService.shared.getStatuses(
             forAccountId: self.accountId,
             andContext: self.applicationState.accountData,
