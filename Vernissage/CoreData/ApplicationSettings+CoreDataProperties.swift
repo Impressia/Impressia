@@ -3,12 +3,9 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the MIT License.
 //
-    
-//
 
 import Foundation
 import CoreData
-
 
 extension ApplicationSettings {
 
@@ -17,6 +14,11 @@ extension ApplicationSettings {
     }
 
     @NSManaged public var currentAccount: String?
+    @NSManaged public var theme: Int32
     @NSManaged public var tintColor: Int32
+
+}
+
+extension ApplicationSettings : Identifiable {
 
 }

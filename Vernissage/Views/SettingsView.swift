@@ -8,105 +8,46 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var applicationState: ApplicationState
+    @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) private var dismiss
     
-    @State var accounts: [AccountData] = []
-    @State private var matchSystemTheme = true
+    @State private var theme: ColorScheme?
+    @State private var appVersion: String?
     
     var onTintChange: ((TintColor) -> Void)?
-    
-    let accentColors1: [TintColor] = [.accentColor1, .accentColor2, .accentColor3, .accentColor4, .accentColor5]
-    let accentColors2: [TintColor] = [.accentColor6, .accentColor7, .accentColor8, .accentColor9, .accentColor10]
-    
+    var onThemeChange: ((Theme) -> Void)?
+        
     var body: some View {
         NavigationView {
             List {
-                Section("Accounts") {
-                    ForEach(self.accounts) { account in
-                        UsernameRow(accountAvatar: account.avatar,
-                                    accountDisplayName: account.displayName,
-                                    accountUsername: account.username,
-                                    cachedAvatar: CacheAvatarService.shared.getImage(for: account.id))
-                    }
-                    
-                    NavigationLink(destination: SignInView()) {
-                        HStack {
-                            Text("New account")
-                            Spacer()
-                            Image(systemName: "person.crop.circle.badge.plus")
-                        }
-                    }
-                }
-
-                Section("Theme") {
-                    Toggle("Match system", isOn: $matchSystemTheme)
-                        .toggleStyle(SwitchToggleStyle(tint: .accentColor))
-                    Text("Light")
-                    Text("Dark")
+                // Accounts.
+                AccountsSection()
+                
+                // Themes.
+                ThemeSection { theme in
+                    changeTheme(theme: theme)
                 }
                 
-                Section("Accent") {
-                    VStack(alignment: .leading) {
-                        HStack(alignment: .center) {
-                            ForEach(accentColors1, id: \.self) { color in
-                                ZStack {
-                                    Circle()
-                                        .fill(color.color())
-                                        .frame(width: 36, height: 36)
-                                        .onTapGesture {
-                                            self.applicationState.tintColor = color
-                                            ApplicationSettingsHandler.shared.setDefaultTintColor(tintColor: color)
-                                            self.onTintChange?(color)
-                                        }
-                                    if color == self.applicationState.tintColor {
-                                        Image(systemName: "checkmark")
-                                            .tint(Color.mainTextColor)
-                                            .fontWeight(.bold)
-                                    }
-                                }
-                                
-                                if color != accentColors1.last {
-                                    Spacer()
-                                }
-                            }
-                        }
-                        .padding(.vertical, 8)
-                         
-                        HStack(alignment: .center) {
-                            ForEach(accentColors2, id: \.self) { color in
-                                ZStack {
-                                    Circle()
-                                        .fill(color.color())
-                                        .frame(width: 36, height: 36)
-                                        .onTapGesture {
-                                            self.applicationState.tintColor = color
-                                            ApplicationSettingsHandler.shared.setDefaultTintColor(tintColor: color)
-                                            self.onTintChange?(color)
-                                        }
-                                    if color == self.applicationState.tintColor {
-                                        Image(systemName: "checkmark")
-                                            .tint(Color.mainTextColor)
-                                            .fontWeight(.bold)
-                                    }
-                                }
-                                
-                                if color != accentColors2.last {
-                                    Spacer()
-                                }
-                            }
-                        }
-                        .padding(.vertical, 8)
-                    }
+                // Accents.
+                AccentsSection { color in
+                    self.onTintChange?(color)
                 }
                 
+                // Other.
                 Section("Other") {
                     Text("Third party") // Link to dependeinces
                     Text("Report a bug")
                     Text("Follow me on Mastodon")
                 }
                 
+                // Version.
                 Section() {
-                    Text("Version") // Link to dependeinces
+                    HStack {
+                        Text("Version")
+                        Spacer()
+                        Text(appVersion ?? "")
+                            .foregroundColor(.accentColor)
+                    }
                 }
             }
             .frame(alignment: .topLeading)
@@ -118,10 +59,27 @@ struct SettingsView: View {
                 }
             }
             .task {
-                self.accounts = AccountDataHandler.shared.getAccountsData()
+                self.appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
             }
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification), perform: { _ in
+                self.theme = applicationState.theme.colorScheme() ?? self.getSystemColorScheme()
+            })
             .navigationBarTitle(Text("Settings"), displayMode: .inline)
+            .preferredColorScheme(self.theme)
         }
+    }
+        
+    private func changeTheme(theme: Theme) {
+        // Change theme of current modal screen (unformtunatelly it's not changed autmatically_
+        self.theme = theme.colorScheme() ?? self.getSystemColorScheme()
+        
+        self.applicationState.theme = theme
+        ApplicationSettingsHandler.shared.setDefaultTheme(theme: theme)
+        onThemeChange?(theme)
+    }
+    
+    func getSystemColorScheme() -> ColorScheme {
+        return UITraitCollection.current.userInterfaceStyle == .light ? .light : .dark
     }
 }
 

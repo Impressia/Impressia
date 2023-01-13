@@ -19,6 +19,7 @@ struct MainView: View {
     @EnvironmentObject var applicationState: ApplicationState
 
     var onTintChange: ((TintColor) -> Void)?
+    var onThemeChange: ((Theme) -> Void)?
     
     @State private var showSettings = false
     @State private var sheet: Sheet?
@@ -45,6 +46,8 @@ struct MainView: View {
             case .settings:
                 SettingsView { color in
                     self.onTintChange?(color)
+                } onThemeChange: { theme in
+                    self.onThemeChange?(theme)
                 }
             case .compose:
                 ComposeView(statusViewModel: .constant(nil))

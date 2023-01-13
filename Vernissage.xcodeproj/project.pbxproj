@@ -81,6 +81,10 @@
 		F89992CE296D92E7005994BF /* AttachmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89992CD296D92E7005994BF /* AttachmentViewModel.swift */; };
 		F89A46DC296EAACE0062125F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89A46DB296EAACE0062125F /* SettingsView.swift */; };
 		F89A46DE296EABA20062125F /* StatusPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89A46DD296EABA20062125F /* StatusPlaceholder.swift */; };
+		F89D6C3F29716E41001DA3D4 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C3E29716E41001DA3D4 /* Theme.swift */; };
+		F89D6C4229717FDC001DA3D4 /* AccountsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C4129717FDC001DA3D4 /* AccountsSection.swift */; };
+		F89D6C4429718092001DA3D4 /* AccentsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C4329718092001DA3D4 /* AccentsSection.swift */; };
+		F89D6C4629718193001DA3D4 /* ThemeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C4529718193001DA3D4 /* ThemeSection.swift */; };
 		F8A93D7E2965FD89001D8331 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A93D7D2965FD89001D8331 /* UserProfileView.swift */; };
 		F8A93D802965FED4001D8331 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A93D7F2965FED4001D8331 /* AccountService.swift */; };
 		F8C14392296AF0B3001FE31D /* String+Exif.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C14391296AF0B3001FE31D /* String+Exif.swift */; };
@@ -163,6 +167,11 @@
 		F89992CD296D92E7005994BF /* AttachmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentViewModel.swift; sourceTree = "<group>"; };
 		F89A46DB296EAACE0062125F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		F89A46DD296EABA20062125F /* StatusPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPlaceholder.swift; sourceTree = "<group>"; };
+		F89D6C3B29716DBC001DA3D4 /* Vernissage20230113-001.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage20230113-001.xcdatamodel"; sourceTree = "<group>"; };
+		F89D6C3E29716E41001DA3D4 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		F89D6C4129717FDC001DA3D4 /* AccountsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSection.swift; sourceTree = "<group>"; };
+		F89D6C4329718092001DA3D4 /* AccentsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentsSection.swift; sourceTree = "<group>"; };
+		F89D6C4529718193001DA3D4 /* ThemeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSection.swift; sourceTree = "<group>"; };
 		F8A93D7D2965FD89001D8331 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		F8A93D7F2965FED4001D8331 /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
 		F8AF2A61297073FE00D2DA3F /* Vernissage20230112-001.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage20230112-001.xcdatamodel"; sourceTree = "<group>"; };
@@ -234,6 +243,7 @@
 				F88FAD2C295F4AD7009B20C9 /* ApplicationState.swift */,
 				F866F6AD29606367002E8F88 /* ApplicationViewMode.swift */,
 				F8CC95CD2970761D00C9C2AC /* TintColor.swift */,
+				F89D6C3E29716E41001DA3D4 /* Theme.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -273,6 +283,7 @@
 		F83901A2295D863B00456AE2 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				F89D6C4029717FC0001DA3D4 /* SettingsView */,
 				F83901A5295D8EC000456AE2 /* LabelIcon.swift */,
 				F85D4972296406E700751DF7 /* BottomRight.swift */,
 				F85D497629640A5200751DF7 /* ImageRow.swift */,
@@ -399,6 +410,16 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		F89D6C4029717FC0001DA3D4 /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				F89D6C4129717FDC001DA3D4 /* AccountsSection.swift */,
+				F89D6C4329718092001DA3D4 /* AccentsSection.swift */,
+				F89D6C4529718193001DA3D4 /* ThemeSection.swift */,
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -480,6 +501,7 @@
 			files = (
 				F85D497729640A5200751DF7 /* ImageRow.swift in Sources */,
 				F8210DDF2966CFC7001D9973 /* AttachmentData+Attachment.swift in Sources */,
+				F89D6C4229717FDC001DA3D4 /* AccountsSection.swift in Sources */,
 				F80048082961E6DE00E6868A /* StatusDataHandler.swift in Sources */,
 				F866F6A0296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift in Sources */,
 				F8210DEA2966E4F9001D9973 /* AnimatePlaceholderModifier.swift in Sources */,
@@ -502,7 +524,9 @@
 				F8210DCF2966B600001D9973 /* ImageRowAsync.swift in Sources */,
 				F85D498329642FAC00751DF7 /* AttachmentData+Comperable.swift in Sources */,
 				F85D497B29640C8200751DF7 /* UsernameRow.swift in Sources */,
+				F89D6C4429718092001DA3D4 /* AccentsSection.swift in Sources */,
 				F85D497929640B9D00751DF7 /* ImagesCarousel.swift in Sources */,
+				F89D6C3F29716E41001DA3D4 /* Theme.swift in Sources */,
 				F8CC95CE2970761D00C9C2AC /* TintColor.swift in Sources */,
 				F89992CC296D9231005994BF /* StatusViewModel.swift in Sources */,
 				F80048052961850500E6868A /* StatusData+CoreDataClass.swift in Sources */,
@@ -523,6 +547,7 @@
 				F89A46DE296EABA20062125F /* StatusPlaceholder.swift in Sources */,
 				F88C2482295C3A4F0006098B /* StatusView.swift in Sources */,
 				F866F6A329604161002E8F88 /* AccountDataHandler.swift in Sources */,
+				F89D6C4629718193001DA3D4 /* ThemeSection.swift in Sources */,
 				F85D497F296416C800751DF7 /* CommentsSection.swift in Sources */,
 				F88C2486295C48030006098B /* HTMLFotmattedText.swift in Sources */,
 				F866F6A529604194002E8F88 /* ApplicationSettingsHandler.swift in Sources */,
@@ -799,10 +824,11 @@
 		F88C2476295C37BB0006098B /* Vernissage.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				F89D6C3B29716DBC001DA3D4 /* Vernissage20230113-001.xcdatamodel */,
 				F8AF2A61297073FE00D2DA3F /* Vernissage20230112-001.xcdatamodel */,
 				F88C2477295C37BB0006098B /* Vernissage.xcdatamodel */,
 			);
-			currentVersion = F8AF2A61297073FE00D2DA3F /* Vernissage20230112-001.xcdatamodel */;
+			currentVersion = F89D6C3B29716DBC001DA3D4 /* Vernissage20230113-001.xcdatamodel */;
 			path = Vernissage.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
