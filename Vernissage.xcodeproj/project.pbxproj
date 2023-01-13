@@ -75,6 +75,7 @@
 		F897978D2968369600B22335 /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F897978C2968369600B22335 /* HapticService.swift */; };
 		F897978F29684BCB00B22335 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F897978E29684BCB00B22335 /* LoadingView.swift */; };
 		F8984E4D296B648000A2610F /* UIImage+Blurhash.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8984E4C296B648000A2610F /* UIImage+Blurhash.swift */; };
+		F8996DEB2971D29D0043EEC6 /* View+Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8996DEA2971D29D0043EEC6 /* View+Transition.swift */; };
 		F89992C7296D3DF8005994BF /* MastodonKit in Frameworks */ = {isa = PBXBuildFile; productRef = F89992C6296D3DF8005994BF /* MastodonKit */; };
 		F89992C9296D6DC7005994BF /* CommentBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89992C8296D6DC7005994BF /* CommentBody.swift */; };
 		F89992CC296D9231005994BF /* StatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89992CB296D9231005994BF /* StatusViewModel.swift */; };
@@ -85,6 +86,8 @@
 		F89D6C4229717FDC001DA3D4 /* AccountsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C4129717FDC001DA3D4 /* AccountsSection.swift */; };
 		F89D6C4429718092001DA3D4 /* AccentsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C4329718092001DA3D4 /* AccentsSection.swift */; };
 		F89D6C4629718193001DA3D4 /* ThemeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C4529718193001DA3D4 /* ThemeSection.swift */; };
+		F89D6C4A297196FF001DA3D4 /* ImagesViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C49297196FF001DA3D4 /* ImagesViewer.swift */; };
+		F89D6C4C297197FE001DA3D4 /* ImageViewerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C4B297197FE001DA3D4 /* ImageViewerViewModel.swift */; };
 		F8A93D7E2965FD89001D8331 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A93D7D2965FD89001D8331 /* UserProfileView.swift */; };
 		F8A93D802965FED4001D8331 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A93D7F2965FED4001D8331 /* AccountService.swift */; };
 		F8C14392296AF0B3001FE31D /* String+Exif.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C14391296AF0B3001FE31D /* String+Exif.swift */; };
@@ -162,6 +165,7 @@
 		F897978C2968369600B22335 /* HapticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticService.swift; sourceTree = "<group>"; };
 		F897978E29684BCB00B22335 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		F8984E4C296B648000A2610F /* UIImage+Blurhash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Blurhash.swift"; sourceTree = "<group>"; };
+		F8996DEA2971D29D0043EEC6 /* View+Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Transition.swift"; sourceTree = "<group>"; };
 		F89992C8296D6DC7005994BF /* CommentBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentBody.swift; sourceTree = "<group>"; };
 		F89992CB296D9231005994BF /* StatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewModel.swift; sourceTree = "<group>"; };
 		F89992CD296D92E7005994BF /* AttachmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentViewModel.swift; sourceTree = "<group>"; };
@@ -172,6 +176,8 @@
 		F89D6C4129717FDC001DA3D4 /* AccountsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSection.swift; sourceTree = "<group>"; };
 		F89D6C4329718092001DA3D4 /* AccentsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentsSection.swift; sourceTree = "<group>"; };
 		F89D6C4529718193001DA3D4 /* ThemeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSection.swift; sourceTree = "<group>"; };
+		F89D6C49297196FF001DA3D4 /* ImagesViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesViewer.swift; sourceTree = "<group>"; };
+		F89D6C4B297197FE001DA3D4 /* ImageViewerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerViewModel.swift; sourceTree = "<group>"; };
 		F8A93D7D2965FD89001D8331 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		F8A93D7F2965FED4001D8331 /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
 		F8AF2A61297073FE00D2DA3F /* Vernissage20230112-001.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage20230112-001.xcdatamodel"; sourceTree = "<group>"; };
@@ -233,6 +239,7 @@
 				F8210DE62966E1D1001D9973 /* Color+Assets.swift */,
 				F8C14393296AF21B001FE31D /* Double+Round.swift */,
 				F8984E4C296B648000A2610F /* UIImage+Blurhash.swift */,
+				F8996DEA2971D29D0043EEC6 /* View+Transition.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -283,6 +290,8 @@
 		F83901A2295D863B00456AE2 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				F89D6C4829718868001DA3D4 /* StatusView */,
+				F89D6C4729718822001DA3D4 /* UserProfile */,
 				F89D6C4029717FC0001DA3D4 /* SettingsView */,
 				F83901A5295D8EC000456AE2 /* LabelIcon.swift */,
 				F85D4972296406E700751DF7 /* BottomRight.swift */,
@@ -291,16 +300,12 @@
 				F85D497829640B9D00751DF7 /* ImagesCarousel.swift */,
 				F85D497A29640C8200751DF7 /* UsernameRow.swift */,
 				F85D497C29640D5900751DF7 /* InteractionRow.swift */,
-				F85D497E296416C800751DF7 /* CommentsSection.swift */,
 				F897978729681B9C00B22335 /* UserAvatar.swift */,
 				F89797892968314A00B22335 /* LoadingIndicator.swift */,
-				F86B7213296BFDCE00EE59EC /* UserProfileHeader.swift */,
-				F86B7215296BFFDA00EE59EC /* UserProfileStatuses.swift */,
 				F86B7217296C27C100EE59EC /* ActionButton.swift */,
 				F86B721D296C458700EE59EC /* BlurredImage.swift */,
 				F86B7222296C4BF500EE59EC /* ContentWarning.swift */,
-				F89992C8296D6DC7005994BF /* CommentBody.swift */,
-				F89A46DD296EABA20062125F /* StatusPlaceholder.swift */,
+				F89D6C49297196FF001DA3D4 /* ImagesViewer.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -406,6 +411,7 @@
 			children = (
 				F89992CB296D9231005994BF /* StatusViewModel.swift */,
 				F89992CD296D92E7005994BF /* AttachmentViewModel.swift */,
+				F89D6C4B297197FE001DA3D4 /* ImageViewerViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -418,6 +424,25 @@
 				F89D6C4529718193001DA3D4 /* ThemeSection.swift */,
 			);
 			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		F89D6C4729718822001DA3D4 /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				F86B7213296BFDCE00EE59EC /* UserProfileHeader.swift */,
+				F86B7215296BFFDA00EE59EC /* UserProfileStatuses.swift */,
+			);
+			path = UserProfile;
+			sourceTree = "<group>";
+		};
+		F89D6C4829718868001DA3D4 /* StatusView */ = {
+			isa = PBXGroup;
+			children = (
+				F85D497E296416C800751DF7 /* CommentsSection.swift */,
+				F89992C8296D6DC7005994BF /* CommentBody.swift */,
+				F89A46DD296EABA20062125F /* StatusPlaceholder.swift */,
+			);
+			path = StatusView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -540,6 +565,7 @@
 				F80048032961850500E6868A /* AttachmentData+CoreDataClass.swift in Sources */,
 				F897978D2968369600B22335 /* HapticService.swift in Sources */,
 				F8341F90295C636C009C8EE6 /* Data+Exif.swift in Sources */,
+				F89D6C4A297196FF001DA3D4 /* ImagesViewer.swift in Sources */,
 				F8A93D7E2965FD89001D8331 /* UserProfileView.swift in Sources */,
 				F88C246E295C37B80006098B /* MainView.swift in Sources */,
 				F86B721E296C458700EE59EC /* BlurredImage.swift in Sources */,
@@ -547,6 +573,7 @@
 				F89A46DE296EABA20062125F /* StatusPlaceholder.swift in Sources */,
 				F88C2482295C3A4F0006098B /* StatusView.swift in Sources */,
 				F866F6A329604161002E8F88 /* AccountDataHandler.swift in Sources */,
+				F8996DEB2971D29D0043EEC6 /* View+Transition.swift in Sources */,
 				F89D6C4629718193001DA3D4 /* ThemeSection.swift in Sources */,
 				F85D497F296416C800751DF7 /* CommentsSection.swift in Sources */,
 				F88C2486295C48030006098B /* HTMLFotmattedText.swift in Sources */,
@@ -564,6 +591,7 @@
 				F88FAD25295F3FF7009B20C9 /* FederatedFeedView.swift in Sources */,
 				F88FAD32295F5029009B20C9 /* RemoteFileService.swift in Sources */,
 				F88FAD27295F400E009B20C9 /* NotificationsView.swift in Sources */,
+				F89D6C4C297197FE001DA3D4 /* ImageViewerViewModel.swift in Sources */,
 				F86B7216296BFFDA00EE59EC /* UserProfileStatuses.swift in Sources */,
 				F897978F29684BCB00B22335 /* LoadingView.swift in Sources */,
 				F89992C9296D6DC7005994BF /* CommentBody.swift in Sources */,

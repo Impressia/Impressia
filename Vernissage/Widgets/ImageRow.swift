@@ -7,11 +7,9 @@
 import SwiftUI
 
 struct ImageRow: View {
-    @State public var status: StatusData
-
-    @State private var imageHeight: Double
-    @State private var imageWidth: Double
-    
+    private let status: StatusData
+    private let imageHeight: Double
+    private let imageWidth: Double
     private let uiImage:UIImage?
     private let attachmentData: AttachmentData?
     
@@ -27,7 +25,7 @@ struct ImageRow: View {
             let divider = imgWidth / UIScreen.main.bounds.size.width
             let calculatedHeight = imgHeight / divider
             
-            self.imageWidth = imgWidth
+            self.imageWidth = UIScreen.main.bounds.width
             self.imageHeight = (calculatedHeight > 0 && calculatedHeight < .infinity) ? calculatedHeight : UIScreen.main.bounds.width
         } else {
             self.uiImage = nil
@@ -51,7 +49,7 @@ struct ImageRow: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                 }
-
+                
                 if let count = self.status.attachments().count, count > 1 {
                     BottomRight {
                         Text("1 / \(count)")

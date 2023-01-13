@@ -14,7 +14,7 @@ struct BottomRight<Content: View>: View {
     }
     
     var body: some View {
-        VStack(alignment:.trailing) {
+        VStack(alignment: .trailing) {
             Spacer()
             HStack {
                 Spacer()

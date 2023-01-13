@@ -17,6 +17,7 @@ struct StatusView: View {
 
     @State private var messageForStatus: StatusViewModel?
     @State private var showCompose = false
+    @State private var showImageViewer = false
     @State private var firstLoadFinished = false
     
     @State private var statusViewModel: StatusViewModel?
@@ -25,7 +26,7 @@ struct StatusView: View {
     @State private var exifExposure: String?
     @State private var exifCreatedDate: String?
     @State private var exifLens: String?
-    
+        
     var body: some View {
         ScrollView {
             if let statusViewModel = self.statusViewModel {
@@ -35,6 +36,11 @@ struct StatusView: View {
                                    exifExposure: $exifExposure,
                                    exifCreatedDate: $exifCreatedDate,
                                    exifLens: $exifLens)
+                    .onTapGesture {
+                        withoutAnimation {
+                            self.showImageViewer.toggle()
+                        }
+                    }
                     
                     VStack(alignment: .leading) {
                         NavigationLink(destination: UserProfileView(
@@ -96,6 +102,17 @@ struct StatusView: View {
         .sheet(isPresented: $showCompose, content: {
             ComposeView(statusViewModel: $messageForStatus)
         })
+        .fullScreenCover(isPresented: $showImageViewer, content: {
+            if let statusViewModel = self.statusViewModel {
+                ImagesViewer(statusViewModel: statusViewModel)
+                // ImagesViewer(statusViewModel: statusViewModel, imgViewModel: imgViewModel)
+            }
+        })
+//        .overlay(content: {
+//            if self.showImageViewer, let statusViewModel = self.statusViewModel {
+//                ImagesViewer(showImageViewer: $showImageViewer, statusViewModel: statusViewModel)
+//            }
+//        })
         .task {
             do {
                 guard firstLoadFinished == false else {

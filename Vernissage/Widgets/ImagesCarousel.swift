@@ -64,6 +64,5 @@ struct ImagesCarousel: View {
 struct ImagesCarousel_Previews: PreviewProvider {
     static var previews: some View {
         ImagesCarousel(attachments: [], exifCamera: .constant(""), exifExposure: .constant(""), exifCreatedDate: .constant(""), exifLens: .constant(""))
-        // ImagesCarousel(attachments: [])
     }
 }
