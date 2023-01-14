@@ -16,7 +16,7 @@ struct ComposeView: View {
     @Environment(\.dismiss) private var dismiss
     
     @Binding var statusViewModel: StatusViewModel?
-    @State private var text = ""
+    @State private var text = String.empty()
 
     @FocusState private var focusedField: FocusField?
     
@@ -120,7 +120,7 @@ struct ComposeView: View {
     }
     
     private func getUserName(statusViewModel: StatusViewModel) -> String {
-        return self.statusViewModel?.account.displayName ?? self.statusViewModel?.account.acct ?? self.statusViewModel?.account.username ?? ""
+        return self.statusViewModel?.account.displayName ?? self.statusViewModel?.account.acct ?? self.statusViewModel?.account.username ?? String.empty()
     }
 }
 

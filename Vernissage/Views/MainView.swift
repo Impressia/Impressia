@@ -64,24 +64,24 @@ struct MainView: View {
     private func getMainView() -> some View {
         switch self.viewMode {
         case .home:
-            HomeFeedView(accountId: applicationState.accountData?.id ?? "")
-                .id(applicationState.accountData?.id ?? "")
+            HomeFeedView(accountId: applicationState.accountData?.id ?? String.empty())
+                .id(applicationState.accountData?.id ?? String.empty())
         case .local:
             LocalFeedView()
-                .id(applicationState.accountData?.id ?? "")
+                .id(applicationState.accountData?.id ?? String.empty())
         case .federated:
             FederatedFeedView()
-                .id(applicationState.accountData?.id ?? "")
+                .id(applicationState.accountData?.id ?? String.empty())
         case .profile:
             if let accountData = self.applicationState.accountData {
                 UserProfileView(accountId: accountData.id,
                                 accountDisplayName: accountData.displayName,
                                 accountUserName: accountData.acct)
-                    .id(applicationState.accountData?.id ?? "")
+                .id(applicationState.accountData?.id ?? String.empty())
             }
         case .notifications:
             NotificationsView()
-                .id(applicationState.accountData?.id ?? "")
+                .id(applicationState.accountData?.id ?? String.empty())
         }
     }
     

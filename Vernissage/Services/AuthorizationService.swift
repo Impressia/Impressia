@@ -84,7 +84,7 @@ public class AuthorizationService {
         accountData.serverUrl = baseUrl
         accountData.clientId = oAuthApp.clientId
         accountData.clientSecret = oAuthApp.clientSecret
-        accountData.clientVapidKey = oAuthApp.vapidKey ?? ""
+        accountData.clientVapidKey = oAuthApp.vapidKey ?? String.empty()
         accountData.accessToken = oAuthSwiftCredential.oauthToken
         
         // Download avatar image.

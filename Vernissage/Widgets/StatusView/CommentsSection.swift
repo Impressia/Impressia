@@ -12,29 +12,29 @@ struct CommentsSection: View {
     @EnvironmentObject var applicationState: ApplicationState
 
     @State public var statusId: String
-    @State public var withDivider = true
-    @State private var context: Context?
-    
     var onNewStatus: ((_ context: StatusViewModel) -> Void)?
+    
+    @State private var commentViewModels: [CommentViewModel]?
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            if let context = context {
-                ForEach(context.descendants.toStatusViewModel(), id: \.id) { statusViewModel in
+            if let commentViewModels {
+                ForEach(commentViewModels, id: \.status.id) { commentViewModel in
                     VStack(alignment: .leading, spacing: 0) {
 
-                        if withDivider {
+                        if commentViewModel.showDivider {
                             Divider()
-                                .foregroundColor(.mainTextColor)
+                                .frame(height: 1)
+                                .overlay(Color.placeholderText.opacity(0.3))
                                 .padding(0)
                         }
                                                 
-                        CommentBody(statusViewModel: statusViewModel)
+                        CommentBody(statusViewModel: commentViewModel.status)
                         
-                        if self.applicationState.showInteractionStatusId == statusViewModel.id {
+                        if self.applicationState.showInteractionStatusId == commentViewModel.status.id {
                             VStack (alignment: .leading, spacing: 0) {
-                                InteractionRow(statusViewModel: statusViewModel) {
-                                    self.onNewStatus?(statusViewModel)
+                                InteractionRow(statusViewModel: commentViewModel.status) {
+                                    self.onNewStatus?(commentViewModel.status)
                                 }
                                 .foregroundColor(self.getInteractionRowTextColor())
                                 .padding(.horizontal, 16)
@@ -43,20 +43,20 @@ struct CommentsSection: View {
                             .background(Color.lightGrayColor.opacity(0.5))
                             .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
                         }
-                        
-                        CommentsSection(statusId: statusViewModel.id, withDivider: false)  { context in
-                            self.onNewStatus?(context)
-                        }
                     }
+                }
+            } else {
+                HStack {
+                    Spacer()
+                    LoadingIndicator()
+                    Spacer()
                 }
             }
         }
         .task {
             do {
                 if let accountData = applicationState.accountData {
-                    self.context = try await TimelineService.shared.getComments(
-                        for: statusId,
-                        and: accountData)
+                    self.commentViewModels = try await TimelineService.shared.getComments(for: statusId, and: accountData)
                 }
             } catch {
                 print("Error \(error.localizedDescription)")
@@ -71,6 +71,6 @@ struct CommentsSection: View {
 
 struct CommentsSection_Previews: PreviewProvider {
     static var previews: some View {
-        CommentsSection(statusId: "", withDivider: true)
+        CommentsSection(statusId: "")
     }
 }

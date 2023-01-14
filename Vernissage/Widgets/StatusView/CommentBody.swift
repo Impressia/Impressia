@@ -85,7 +85,7 @@ struct CommentBody: View {
             .onTapGesture {
                 withAnimation(.linear(duration: 0.3)) {
                     if self.statusViewModel.id == self.applicationState.showInteractionStatusId {
-                        self.applicationState.showInteractionStatusId = ""
+                        self.applicationState.showInteractionStatusId = String.empty()
                     } else {
                         self.applicationState.showInteractionStatusId = self.statusViewModel.id
                     }

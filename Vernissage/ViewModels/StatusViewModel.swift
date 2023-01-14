@@ -152,8 +152,12 @@ public extension StatusViewModel {
 
 public extension [Status] {
     func toStatusViewModel() -> [StatusViewModel] {
-        self.map { status in
-            StatusViewModel(status: status)
-        }
+        self
+            .sorted(by: { lhs, rhs in
+                lhs.id < rhs.id
+            })
+            .map { status in
+                StatusViewModel(status: status)
+            }
     }
 }

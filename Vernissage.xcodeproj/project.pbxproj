@@ -75,6 +75,8 @@
 		F897978D2968369600B22335 /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F897978C2968369600B22335 /* HapticService.swift */; };
 		F897978F29684BCB00B22335 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F897978E29684BCB00B22335 /* LoadingView.swift */; };
 		F8984E4D296B648000A2610F /* UIImage+Blurhash.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8984E4C296B648000A2610F /* UIImage+Blurhash.swift */; };
+		F898DE702972868A004B4A6A /* String+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = F898DE6F2972868A004B4A6A /* String+Empty.swift */; };
+		F898DE7229728CB2004B4A6A /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F898DE7129728CB2004B4A6A /* CommentViewModel.swift */; };
 		F8996DEB2971D29D0043EEC6 /* View+Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8996DEA2971D29D0043EEC6 /* View+Transition.swift */; };
 		F89992C7296D3DF8005994BF /* MastodonKit in Frameworks */ = {isa = PBXBuildFile; productRef = F89992C6296D3DF8005994BF /* MastodonKit */; };
 		F89992C9296D6DC7005994BF /* CommentBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89992C8296D6DC7005994BF /* CommentBody.swift */; };
@@ -165,6 +167,8 @@
 		F897978C2968369600B22335 /* HapticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticService.swift; sourceTree = "<group>"; };
 		F897978E29684BCB00B22335 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		F8984E4C296B648000A2610F /* UIImage+Blurhash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Blurhash.swift"; sourceTree = "<group>"; };
+		F898DE6F2972868A004B4A6A /* String+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Empty.swift"; sourceTree = "<group>"; };
+		F898DE7129728CB2004B4A6A /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
 		F8996DEA2971D29D0043EEC6 /* View+Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Transition.swift"; sourceTree = "<group>"; };
 		F89992C8296D6DC7005994BF /* CommentBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentBody.swift; sourceTree = "<group>"; };
 		F89992CB296D9231005994BF /* StatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewModel.swift; sourceTree = "<group>"; };
@@ -235,6 +239,7 @@
 				F8341F8F295C636C009C8EE6 /* Data+Exif.swift */,
 				F85D49862964334100751DF7 /* String+Date.swift */,
 				F8C14391296AF0B3001FE31D /* String+Exif.swift */,
+				F898DE6F2972868A004B4A6A /* String+Empty.swift */,
 				F8210DE42966E160001D9973 /* Color+SystemColors.swift */,
 				F8210DE62966E1D1001D9973 /* Color+Assets.swift */,
 				F8C14393296AF21B001FE31D /* Double+Round.swift */,
@@ -412,6 +417,7 @@
 				F89992CB296D9231005994BF /* StatusViewModel.swift */,
 				F89992CD296D92E7005994BF /* AttachmentViewModel.swift */,
 				F89D6C4B297197FE001DA3D4 /* ImageViewerViewModel.swift */,
+				F898DE7129728CB2004B4A6A /* CommentViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -570,6 +576,7 @@
 				F88C246E295C37B80006098B /* MainView.swift in Sources */,
 				F86B721E296C458700EE59EC /* BlurredImage.swift in Sources */,
 				F88C2478295C37BB0006098B /* Vernissage.xcdatamodeld in Sources */,
+				F898DE7229728CB2004B4A6A /* CommentViewModel.swift in Sources */,
 				F89A46DE296EABA20062125F /* StatusPlaceholder.swift in Sources */,
 				F88C2482295C3A4F0006098B /* StatusView.swift in Sources */,
 				F866F6A329604161002E8F88 /* AccountDataHandler.swift in Sources */,
@@ -603,6 +610,7 @@
 				F8A93D802965FED4001D8331 /* AccountService.swift in Sources */,
 				F866F6AA29605AFA002E8F88 /* SceneDelegate.swift in Sources */,
 				F85D4973296406E700751DF7 /* BottomRight.swift in Sources */,
+				F898DE702972868A004B4A6A /* String+Empty.swift in Sources */,
 				F86B7218296C27C100EE59EC /* ActionButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

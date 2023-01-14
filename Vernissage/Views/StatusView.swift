@@ -105,14 +105,8 @@ struct StatusView: View {
         .fullScreenCover(isPresented: $showImageViewer, content: {
             if let statusViewModel = self.statusViewModel {
                 ImagesViewer(statusViewModel: statusViewModel)
-                // ImagesViewer(statusViewModel: statusViewModel, imgViewModel: imgViewModel)
             }
         })
-//        .overlay(content: {
-//            if self.showImageViewer, let statusViewModel = self.statusViewModel {
-//                ImagesViewer(showImageViewer: $showImageViewer, statusViewModel: statusViewModel)
-//            }
-//        })
         .task {
             do {
                 guard firstLoadFinished == false else {
@@ -158,6 +152,7 @@ struct StatusView: View {
             return self.calculateHeight(width: Double(imageWidth), height: Double(imageHeight))
         }
         
+        // If we don't have image height and width in metadata, we have to use some constant height.
         return UIScreen.main.bounds.width * 0.75
     }
     

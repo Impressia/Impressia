@@ -49,9 +49,31 @@ public class TimelineService {
         return try await client.read(statusId: statusId)
     }
     
-    public func getComments(for statusId: String, and accountData: AccountData) async throws -> Context {
-        let client = MastodonClient(baseURL: accountData.serverUrl).getAuthenticated(token: accountData.accessToken ?? "")
-        return try await client.getContext(for: statusId)
+    public func getComments(for statusId: String, and accountData: AccountData) async throws -> [CommentViewModel] {
+        var commentViewModels: [CommentViewModel] = []
+        
+        // Get first level of comments.
+        let client = MastodonClient(baseURL: accountData.serverUrl).getAuthenticated(token: accountData.accessToken ?? String.empty())
+        let context = try await client.getContext(for: statusId)
+        
+        // Iterate throught first level of comments and download descendants/
+        let descendants = context.descendants.toStatusViewModel()
+        for status in descendants {
+            commentViewModels.append(CommentViewModel(status: status, showDivider: true))
+            try await self.getCommentDescendants(for: status.id, client: client, to: &commentViewModels)
+        }
+        
+        return commentViewModels
+    }
+    
+    private func getCommentDescendants(for statusId: String, client: MastodonClientAuthenticated, to commentViewModels: inout [CommentViewModel]) async throws {
+        let context = try await client.getContext(for: statusId)
+        
+        let descendants = context.descendants.toStatusViewModel()
+        for status in descendants {
+            commentViewModels.append(CommentViewModel(status: status, showDivider: false))
+            try await self.getCommentDescendants(for: status.id, client: client, to: &commentViewModels)
+        }
     }
     
     private func loadData(for accountData: AccountData, on backgroundContext: NSManagedObjectContext, minId: String? = nil, maxId: String? = nil) async throws -> Int {

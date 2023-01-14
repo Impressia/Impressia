@@ -9,7 +9,7 @@ import SwiftUI
 struct ImagesCarousel: View {
     @State public var attachments: [AttachmentViewModel]
     @State private var height: Double = 0.0
-    @State private var selectedAttachmentId = ""
+    @State private var selectedAttachmentId = String.empty()
     
     @Binding public var exifCamera: String?
     @Binding public var exifExposure: String?
@@ -38,7 +38,7 @@ struct ImagesCarousel: View {
             }
         })
         .onAppear {
-            self.selectedAttachmentId = self.attachments.first?.id ?? ""
+            self.selectedAttachmentId = self.attachments.first?.id ?? String.empty()
             self.calculateImageHeight()
         }
     }

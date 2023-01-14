@@ -45,7 +45,7 @@ struct SettingsView: View {
                     HStack {
                         Text("Version")
                         Spacer()
-                        Text(appVersion ?? "")
+                        Text(appVersion ?? String.empty())
                             .foregroundColor(.accentColor)
                     }
                 }

@@ -8,8 +8,9 @@ import UIKit
 import SwiftUI
 
 struct HTMLFormattedText: UIViewRepresentable {
+    @EnvironmentObject var applicationState: ApplicationState
 
-    let text: String
+    private let text: String
     private let textView = UITextView()
     private let fontSize: Int
     private let width: Int
@@ -32,11 +33,11 @@ struct HTMLFormattedText: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UITextView, context: UIViewRepresentableContext<Self>) {
-        DispatchQueue.main.async {
+        Task { @MainActor in
             if let attributeText = self.converHTML(text: text) {
                 textView.attributedText = attributeText
             } else {
-                textView.text = ""
+                textView.text = String.empty()
             }
         }
     }
@@ -53,13 +54,14 @@ struct HTMLFormattedText: UIViewRepresentable {
 
         let linkAttributes = [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: CGFloat(self.fontSize)),
-            NSAttributedString.Key.foregroundColor: UIColor(.accentColor)
+            NSAttributedString.Key.foregroundColor: UIColor(applicationState.tintColor.color())
         ]
       
-        if let attributedString = try? NSMutableAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) {
-          
+        if let attributedString = try? NSMutableAttributedString(data: data,
+                                                                 options: [.documentType: NSAttributedString.DocumentType.html],
+                                                                 documentAttributes: nil) {
             attributedString.enumerateAttributes(in: NSRange(0..<attributedString.length)) { value, range, stop in
-              attributedString.setAttributes(largeAttributes, range: range)
+                attributedString.setAttributes(largeAttributes, range: range)
 
                 if value.keys.contains(NSAttributedString.Key.link) {
                     attributedString.setAttributes(linkAttributes, range: range)

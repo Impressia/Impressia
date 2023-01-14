@@ -11,7 +11,7 @@ struct SignInView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var applicationState: ApplicationState
 
-    @State private var serverAddress: String = ""
+    @State private var serverAddress: String = String.empty()
     
     
     var onSignInStateChenge: ((_ applicationViewMode: ApplicationViewMode) -> Void)?

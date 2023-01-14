@@ -15,7 +15,7 @@ public class ApplicationState: ObservableObject {
     @Published var accountData: AccountData?
     @Published var tintColor = TintColor.accentColor2
     @Published var theme = Theme.system
-    @Published var showInteractionStatusId = ""
+    @Published var showInteractionStatusId = String.empty()
 }
 
 extension ApplicationState {
