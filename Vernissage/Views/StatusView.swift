@@ -22,6 +22,7 @@ struct StatusView: View {
     
     @State private var statusViewModel: StatusViewModel?
     
+    @State private var selectedAttachmentId: String?
     @State private var exifCamera: String?
     @State private var exifExposure: String?
     @State private var exifCreatedDate: String?
@@ -32,6 +33,7 @@ struct StatusView: View {
             if let statusViewModel = self.statusViewModel {
                 VStack (alignment: .leading) {                    
                     ImagesCarousel(attachments: statusViewModel.mediaAttachments,
+                                   selectedAttachmentId: $selectedAttachmentId,
                                    exifCamera: $exifCamera,
                                    exifExposure: $exifExposure,
                                    exifCreatedDate: $exifCreatedDate,
@@ -104,7 +106,7 @@ struct StatusView: View {
         })
         .fullScreenCover(isPresented: $showImageViewer, content: {
             if let statusViewModel = self.statusViewModel {
-                ImagesViewer(statusViewModel: statusViewModel)
+                ImagesViewer(statusViewModel: statusViewModel, selectedAttachmentId: selectedAttachmentId ?? String.empty())
             }
         })
         .task {
@@ -126,6 +128,7 @@ struct StatusView: View {
                     }
                     
                     self.statusViewModel = statusViewModel
+                    self.selectedAttachmentId = statusViewModel.mediaAttachments.first?.id ?? String.empty()
                     self.firstLoadFinished = true
                     
                     // If we have status in database then we can update data.

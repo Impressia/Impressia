@@ -9,15 +9,16 @@ import SwiftUI
 struct ImagesCarousel: View {
     @State public var attachments: [AttachmentViewModel]
     @State private var height: Double = 0.0
-    @State private var selectedAttachmentId = String.empty()
+    @State private var selected = String.empty()
     
+    @Binding public var selectedAttachmentId: String?
     @Binding public var exifCamera: String?
     @Binding public var exifExposure: String?
     @Binding public var exifCreatedDate: String?
     @Binding public var exifLens: String?
     
     var body: some View {
-        TabView() {
+        TabView(selection: $selected) {
             ForEach(attachments, id: \.id) { attachment in
                 if let data = attachment.data, let image = UIImage(data: data) {
                     Image(uiImage: image)
@@ -29,7 +30,9 @@ struct ImagesCarousel: View {
         }
         .frame(height: CGFloat(self.height))
         .tabViewStyle(PageTabViewStyle())
-        .onChange(of: selectedAttachmentId, perform: { index in
+        .onChange(of: selected, perform: { index in
+            self.selectedAttachmentId = selected
+
             if let attachment = attachments.first(where: { item in item.id == index }) {
                 self.exifCamera = attachment.exifCamera
                 self.exifExposure = attachment.exifExposure
@@ -38,7 +41,7 @@ struct ImagesCarousel: View {
             }
         })
         .onAppear {
-            self.selectedAttachmentId = self.attachments.first?.id ?? String.empty()
+            self.selected = self.attachments.first?.id ?? String.empty()
             self.calculateImageHeight()
         }
     }
@@ -63,6 +66,7 @@ struct ImagesCarousel: View {
 
 struct ImagesCarousel_Previews: PreviewProvider {
     static var previews: some View {
-        ImagesCarousel(attachments: [], exifCamera: .constant(""), exifExposure: .constant(""), exifCreatedDate: .constant(""), exifLens: .constant(""))
+        Text("")
+        // ImagesCarousel(attachments: [], exifCamera: .constant(""), exifExposure: .constant(""), exifCreatedDate: .constant(""), exifLens: .constant(""))
     }
 }

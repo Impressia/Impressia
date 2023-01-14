@@ -8,11 +8,14 @@ import SwiftUI
 
 struct ImagesViewer: View {
     @State var statusViewModel: StatusViewModel
-    @State var visible = false
+    @State var selectedAttachmentId: String = String.empty()
     @Environment(\.dismiss) private var dismiss
         
+    // Opacity usied during fadein/fadeoff animations.
+    @State private var opacity = 0.6
+    
     // Zoom.
-    @State var zoomScale = 1.0
+    @State private var zoomScale = 1.0
     
     // Magnification.
     @State private var currentAmount = 0.0
@@ -20,53 +23,54 @@ struct ImagesViewer: View {
     
     // Draging.
     @State private var currentOffset = CGSize.zero
+    @State private var accumulatedOffset = CGSize.zero
         
     var body: some View {
         ZStack {
-            if self.visible {
-                TabView() {
-                    ForEach(statusViewModel.mediaAttachments, id: \.id) { attachment in
-                        if let data = attachment.data, let image = UIImage(data: data) {
-                            Image(uiImage: image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .tag(attachment.id)
-                                .offset(currentOffset)
-                                .scaleEffect((finalAmount + currentAmount) < 1.0 ? 1.0 : (finalAmount + currentAmount))
-                                .gesture((finalAmount + currentAmount) > 1.0 ? dragGesture : nil)
-                                .gesture(magnificationGesture)
-                                .gesture(doubleTapGesture)
-                                .gesture(tapGesture)
-                        }
+            TabView(selection: $selectedAttachmentId) {
+                ForEach(statusViewModel.mediaAttachments, id: \.id) { attachment in
+                    if let data = attachment.data, let image = UIImage(data: data) {
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .tag(attachment.id)
+                            .offset(x: currentOffset.width)
+                            .scaleEffect(finalAmount + currentAmount)
+                            .gesture((finalAmount + currentAmount) > 1.0 ? dragGesture : nil)
+                            .gesture(magnificationGesture)
+                            .gesture(doubleTapGesture)
+                            .gesture(tapGesture)
                     }
                 }
-                .tabViewStyle(PageTabViewStyle())
-                .overlay(alignment: .topTrailing, content: {
-                    Button {
-                        self.close()
-                    } label: {
-                        Image(systemName: "xmark")
-                            .foregroundColor(.white)
-                            .padding(8)
-                            .background(Color.white.opacity(0.25))
-                            .clipShape(Circle())
-                    }
-                })
             }
+            .opacity(self.opacity)
+            .tabViewStyle(PageTabViewStyle())
+            .overlay(alignment: .topTrailing, content: {
+                Button {
+                    self.close()
+                } label: {
+                    Image(systemName: "xmark")
+                        .foregroundColor(.white)
+                        .padding(8)
+                        .background(Color.mainTextColor.opacity(0.3))
+                        .clipShape(Circle())
+                        .padding()
+                }
+            })
         }
         .onAppear {
-            withAnimation(.easeInOut) {
-                self.visible = true
+            withAnimation(.linear(duration: 0.2)) {
+                opacity = 1.0
             }
         }
     }
     
     private func close() {
-        withAnimation(.easeInOut) {
-            self.visible = false
+        withAnimation(.linear(duration: 0.3)) {
+            opacity = 0.1
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.36) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             withoutAnimation {
                 dismiss()
             }
@@ -79,30 +83,50 @@ struct ImagesViewer: View {
                 currentAmount = amount - 1
             }
             .onEnded { amount in
-                finalAmount += currentAmount
-                currentAmount = 0
+                let finalMagnification = finalAmount + currentAmount
+                
+                if finalMagnification < 1.0 {
+                    // When image is small we are returning to starting point.
+                    withAnimation(.default) {
+                        finalAmount = 1.0
+                        currentAmount = 0
+                        
+                        // Also we have to move image to orginal position.
+                        currentOffset = CGSize.zero
+                    }
+                } else if finalMagnification > 2.0 {
+                    // When image is magnified to much we are rturning to 1.5 maginification.
+                    withAnimation(.default) {
+                        finalAmount = 1.5
+                        currentAmount = 0
+                    }
+                } else {
+                    finalAmount = finalMagnification
+                    currentAmount = 0
+                }
             }
     }
     
     var doubleTapGesture: some Gesture {
         TapGesture(count: 2)
             .onEnded { _ in
-                currentOffset = CGSize.zero
-                currentAmount = 0
-                finalAmount = 1.0
+                withAnimation {
+                    currentOffset = CGSize.zero
+                    currentAmount = 0
+                    finalAmount = 1.0
+                }
             }
     }
     
     var dragGesture: some Gesture {
         DragGesture()
             .onChanged { amount in
-                self.currentOffset = amount.translation
+                self.currentOffset = CGSize(width: amount.translation.width + self.accumulatedOffset.width,
+                                            height: amount.translation.height + self.accumulatedOffset.height)
             } .onEnded { amount in
-                if (finalAmount + currentAmount) == 1.0 {
-                    withAnimation(.linear) {
-                        currentOffset = CGSize.zero
-                    }
-                }
+                self.currentOffset = CGSize(width: amount.translation.width + self.accumulatedOffset.width,
+                                            height: amount.translation.height + self.accumulatedOffset.height)
+                self.accumulatedOffset = self.currentOffset
             }
     }
     
