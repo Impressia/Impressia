@@ -42,6 +42,9 @@ struct VernissageApp: App {
             .tint(self.tintColor)
             .preferredColorScheme(self.theme)
             .task {
+                UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.label
+                UIPageControl.appearance().pageIndicatorTintColor = UIColor.secondaryLabel
+                
                 let defaultSettings = ApplicationSettingsHandler.shared.getDefaultSettings()
                 
                 if let tintColor = TintColor(rawValue: Int(defaultSettings.tintColor)) {

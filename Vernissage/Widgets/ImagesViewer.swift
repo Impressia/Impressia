@@ -11,8 +11,9 @@ struct ImagesViewer: View {
     @State var selectedAttachmentId: String = String.empty()
     @Environment(\.dismiss) private var dismiss
         
-    // Opacity usied during fadein/fadeoff animations.
-    @State private var opacity = 0.6
+    // Opacity usied during close dialog animation.
+    @State private var opacity = 1.0
+    private let closeDragDistance = 140.0
     
     // Zoom.
     @State private var zoomScale = 1.0
@@ -34,47 +35,23 @@ struct ImagesViewer: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .tag(attachment.id)
-                            .offset(x: currentOffset.width)
+                            .offset(currentOffset)
                             .scaleEffect(finalAmount + currentAmount)
-                            .gesture((finalAmount + currentAmount) > 1.0 ? dragGesture : nil)
+                            .opacity(self.opacity)
+                            //.gesture((finalAmount + currentAmount) > 1.0 ? dragGesture : nil)
+                            .gesture(dragGesture)
                             .gesture(magnificationGesture)
                             .gesture(doubleTapGesture)
                             .gesture(tapGesture)
                     }
                 }
             }
-            .opacity(self.opacity)
             .tabViewStyle(PageTabViewStyle())
-            .overlay(alignment: .topTrailing, content: {
-                Button {
-                    self.close()
-                } label: {
-                    Image(systemName: "xmark")
-                        .foregroundColor(.white)
-                        .padding(8)
-                        .background(Color.mainTextColor.opacity(0.3))
-                        .clipShape(Circle())
-                        .padding()
-                }
-            })
-        }
-        .onAppear {
-            withAnimation(.linear(duration: 0.2)) {
-                opacity = 1.0
-            }
         }
     }
     
     private func close() {
-        withAnimation(.linear(duration: 0.3)) {
-            opacity = 0.1
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            withoutAnimation {
-                dismiss()
-            }
-        }
+        dismiss()
     }
     
     var magnificationGesture: some Gesture {
@@ -84,26 +61,8 @@ struct ImagesViewer: View {
             }
             .onEnded { amount in
                 let finalMagnification = finalAmount + currentAmount
-                
-                if finalMagnification < 1.0 {
-                    // When image is small we are returning to starting point.
-                    withAnimation(.default) {
-                        finalAmount = 1.0
-                        currentAmount = 0
-                        
-                        // Also we have to move image to orginal position.
-                        currentOffset = CGSize.zero
-                    }
-                } else if finalMagnification > 2.0 {
-                    // When image is magnified to much we are rturning to 1.5 maginification.
-                    withAnimation(.default) {
-                        finalAmount = 1.5
-                        currentAmount = 0
-                    }
-                } else {
-                    finalAmount = finalMagnification
-                    currentAmount = 0
-                }
+                // self.revertToPrecalculatedMagnification(magnification: finalMagnification)
+                self.resetMagnification(magnification: finalMagnification)
             }
     }
     
@@ -119,14 +78,27 @@ struct ImagesViewer: View {
     }
     
     var dragGesture: some Gesture {
-        DragGesture()
+        DragGesture(minimumDistance:20)
             .onChanged { amount in
                 self.currentOffset = CGSize(width: amount.translation.width + self.accumulatedOffset.width,
                                             height: amount.translation.height + self.accumulatedOffset.height)
+                
+                let pictureOpacity = (self.closeDragDistance - self.currentOffset.height) / self.closeDragDistance
+                self.opacity = pictureOpacity >= 0 ? pictureOpacity : 0
             } .onEnded { amount in
                 self.currentOffset = CGSize(width: amount.translation.width + self.accumulatedOffset.width,
                                             height: amount.translation.height + self.accumulatedOffset.height)
                 self.accumulatedOffset = self.currentOffset
+                
+                if self.accumulatedOffset.height < self.closeDragDistance {
+                    withAnimation(.default) {
+                        self.currentOffset = CGSize.zero
+                        self.accumulatedOffset = CGSize.zero
+                        self.opacity = 1.0
+                    }
+                } else {
+                    self.close()
+                }
             }
     }
     
@@ -134,6 +106,35 @@ struct ImagesViewer: View {
         TapGesture().onEnded({ _ in
             self.close()
         })
+    }
+    
+    private func revertToPrecalculatedMagnification(magnification: Double) {
+        if magnification < 1.0 {
+            // When image is small we are returning to starting point.
+            withAnimation(.default) {
+                finalAmount = 1.0
+                currentAmount = 0
+                
+                // Also we have to move image to orginal position.
+                currentOffset = CGSize.zero
+            }
+        } else if magnification > 2.0 {
+            // When image is magnified to much we are rturning to 1.5 maginification.
+            withAnimation(.default) {
+                finalAmount = 1.5
+                currentAmount = 0
+            }
+        } else {
+            finalAmount = magnification
+            currentAmount = 0
+        }
+    }
+    
+    private func resetMagnification(magnification: Double) {
+        withAnimation(.default) {
+            finalAmount = 1.0
+            currentAmount = 0
+        }
     }
 }
 

@@ -39,9 +39,9 @@ struct StatusView: View {
                                    exifCreatedDate: $exifCreatedDate,
                                    exifLens: $exifLens)
                     .onTapGesture {
-                        withoutAnimation {
+                        // withoutAnimation {
                             self.showImageViewer.toggle()
-                        }
+                        // }
                     }
                     
                     VStack(alignment: .leading) {
