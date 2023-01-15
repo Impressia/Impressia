@@ -44,18 +44,21 @@ public class TimelineService {
         var commentViewModels: [CommentViewModel] = []
         
         let client = MastodonClient(baseURL: accountData.serverUrl).getAuthenticated(token: accountData.accessToken ?? String.empty())
-        try await self.getCommentDescendants(for: statusId, client: client, to: &commentViewModels)
+        try await self.getCommentDescendants(for: statusId, client: client, showDivider: true, to: &commentViewModels)
         
         return commentViewModels
     }
     
-    private func getCommentDescendants(for statusId: String, client: MastodonClientAuthenticated, to commentViewModels: inout [CommentViewModel]) async throws {
+    private func getCommentDescendants(for statusId: String, client: MastodonClientAuthenticated, showDivider: Bool, to commentViewModels: inout [CommentViewModel]) async throws {
         let context = try await client.getContext(for: statusId)
         
         let descendants = context.descendants.toStatusViewModel()
         for status in descendants {
-            commentViewModels.append(CommentViewModel(status: status, showDivider: false))
-            try await self.getCommentDescendants(for: status.id, client: client, to: &commentViewModels)
+            commentViewModels.append(CommentViewModel(status: status, showDivider: showDivider))
+            
+            if status.repliesCount > 0 {
+                try await self.getCommentDescendants(for: status.id, client: client, showDivider: false, to: &commentViewModels)
+            }
         }
     }
     
