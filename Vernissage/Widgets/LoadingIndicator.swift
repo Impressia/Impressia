@@ -4,27 +4,25 @@
 //  Licensed under the MIT License.
 //
     
-
 import SwiftUI
+import ActivityIndicatorView
 
 struct LoadingIndicator: View {
-    @State var withText = true
+    @Binding var isVisible: Bool
+
+    init(isVisible: Binding<Bool> = .constant(true)) {
+        self._isVisible = isVisible
+    }
     
     var body: some View {
-        ProgressView {
-            if self.withText {
-                Text("Loading...")
-                    .foregroundColor(.mainTextColor)
-                    .font(.caption2)
-            }
-        }
-        .progressViewStyle(CircularProgressViewStyle())
-        .tint(.mainTextColor)
+        ActivityIndicatorView(isVisible: $isVisible, type: .equalizer(count: 5))
+            .frame(width: 36.0, height: 24.0)
+            .foregroundColor(.lightGrayColor)
     }
 }
 
 struct LoadingIndicator_Previews: PreviewProvider {
     static var previews: some View {
-        LoadingIndicator()
+        LoadingIndicator(isVisible: .constant(true))
     }
 }

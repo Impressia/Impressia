@@ -37,7 +37,7 @@ struct ActionButton<Label> : View where Label : View {
             }
         } label: {
             if isDuringAction {
-                LoadingIndicator(withText: false)
+                LoadingIndicator(isVisible: .constant(true))
                     .transition(.opacity)
             } else {
                 label()

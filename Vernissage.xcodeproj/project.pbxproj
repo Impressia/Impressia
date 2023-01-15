@@ -40,6 +40,7 @@
 		F85DBF912967385F0069BF89 /* FollowingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85DBF902967385F0069BF89 /* FollowingView.swift */; };
 		F85DBF93296760790069BF89 /* CacheAvatarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85DBF92296760790069BF89 /* CacheAvatarService.swift */; };
 		F85E1320297409CD006A051D /* ErrorsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85E131F297409CD006A051D /* ErrorsService.swift */; };
+		F85E132529741F05006A051D /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = F85E132429741F05006A051D /* ActivityIndicatorView */; };
 		F866F6A0296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F69E296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift */; };
 		F866F6A1296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F69F296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift */; };
 		F866F6A329604161002E8F88 /* AccountDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F6A229604161002E8F88 /* AccountDataHandler.swift */; };
@@ -204,6 +205,7 @@
 				F8210DD52966BB7E001D9973 /* Nuke in Frameworks */,
 				F8210DD72966BB7E001D9973 /* NukeExtensions in Frameworks */,
 				F8210DD92966BB7E001D9973 /* NukeUI in Frameworks */,
+				F85E132529741F05006A051D /* ActivityIndicatorView in Frameworks */,
 				F8B1E64F2973F61400EE0D10 /* Drops in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,6 +483,7 @@
 				F8210DD82966BB7E001D9973 /* NukeUI */,
 				F89992C6296D3DF8005994BF /* MastodonKit */,
 				F8B1E64E2973F61400EE0D10 /* Drops */,
+				F85E132429741F05006A051D /* ActivityIndicatorView */,
 			);
 			productName = Vernissage;
 			productReference = F88C2468295C37B80006098B /* Vernissage.app */;
@@ -513,6 +516,7 @@
 			packageReferences = (
 				F8210DD32966BB7E001D9973 /* XCRemoteSwiftPackageReference "Nuke" */,
 				F8B1E64D2973F61400EE0D10 /* XCRemoteSwiftPackageReference "Drops" */,
+				F85E132329741F05006A051D /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
 			);
 			productRefGroup = F88C2469295C37B80006098B /* Products */;
 			projectDirPath = "";
@@ -844,6 +848,14 @@
 				minimumVersion = 11.5.3;
 			};
 		};
+		F85E132329741F05006A051D /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/ActivityIndicatorView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		F8B1E64D2973F61400EE0D10 /* XCRemoteSwiftPackageReference "Drops" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/omaralbeik/Drops";
@@ -869,6 +881,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F8210DD32966BB7E001D9973 /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = NukeUI;
+		};
+		F85E132429741F05006A051D /* ActivityIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F85E132329741F05006A051D /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */;
+			productName = ActivityIndicatorView;
 		};
 		F89992C6296D3DF8005994BF /* MastodonKit */ = {
 			isa = XCSwiftPackageProductDependency;
