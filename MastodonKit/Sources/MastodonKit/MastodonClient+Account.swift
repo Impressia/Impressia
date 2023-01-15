@@ -14,12 +14,7 @@ public extension MastodonClientAuthenticated {
             withBearerToken: token
         )
         
-        let (data, response) = try await urlSession.data(for: request)
-        guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
-            throw NetworkError.notSuccessResponse(response)
-        }
-        
-        return try JSONDecoder().decode(Account.self, from: data)
+        return try await downloadJson(Account.self, request: request)
     }
     
     func getRelationship(for accountId: String) async throws -> Relationship? {
@@ -28,13 +23,8 @@ public extension MastodonClientAuthenticated {
             target: Mastodon.Account.relationships([accountId]),
             withBearerToken: token
         )
-        
-        let (data, response) = try await urlSession.data(for: request)
-        guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
-            throw NetworkError.notSuccessResponse(response)
-        }
-        
-        let relationships = try JSONDecoder().decode([Relationship].self, from: data)
+                
+        let relationships =  try await downloadJson([Relationship].self, request: request)
         return relationships.first
     }
     
@@ -51,12 +41,7 @@ public extension MastodonClientAuthenticated {
             withBearerToken: token
         )
         
-        let (data, response) = try await urlSession.data(for: request)
-        guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
-            throw NetworkError.notSuccessResponse(response)
-        }
-        
-        return try JSONDecoder().decode([Status].self, from: data)
+        return try await downloadJson([Status].self, request: request)
     }
     
     func follow(for accountId: String) async throws -> Relationship {
@@ -66,12 +51,7 @@ public extension MastodonClientAuthenticated {
             withBearerToken: token
         )
         
-        let (data, response) = try await urlSession.data(for: request)
-        guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
-            throw NetworkError.notSuccessResponse(response)
-        }
-               
-        return try JSONDecoder().decode(Relationship.self, from: data)
+        return try await downloadJson(Relationship.self, request: request)
     }
     
     func unfollow(for accountId: String) async throws -> Relationship {
@@ -81,12 +61,7 @@ public extension MastodonClientAuthenticated {
             withBearerToken: token
         )
         
-        let (data, response) = try await urlSession.data(for: request)
-        guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
-            throw NetworkError.notSuccessResponse(response)
-        }
-               
-        return try JSONDecoder().decode(Relationship.self, from: data)
+        return try await downloadJson(Relationship.self, request: request)
     }
     
     func getFollowers(for accountId: String, page: Int = 1) async throws -> [Account] {
@@ -96,12 +71,7 @@ public extension MastodonClientAuthenticated {
             withBearerToken: token
         )
         
-        let (data, response) = try await urlSession.data(for: request)
-        guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
-            throw NetworkError.notSuccessResponse(response)
-        }
-        
-        return try JSONDecoder().decode([Account].self, from: data)
+        return try await downloadJson([Account].self, request: request)
     }
     
     func getFollowing(for accountId: String, page: Int = 1) async throws -> [Account] {
@@ -110,12 +80,7 @@ public extension MastodonClientAuthenticated {
             target: Mastodon.Account.following(accountId, nil, nil, nil, nil, page),
             withBearerToken: token
         )
-        
-        let (data, response) = try await urlSession.data(for: request)
-        guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
-            throw NetworkError.notSuccessResponse(response)
-        }
-        
-        return try JSONDecoder().decode([Account].self, from: data)
+
+        return try await downloadJson([Account].self, request: request)
     }
 }

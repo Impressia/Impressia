@@ -39,6 +39,7 @@
 		F85DBF8F296732E20069BF89 /* FollowersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85DBF8E296732E20069BF89 /* FollowersView.swift */; };
 		F85DBF912967385F0069BF89 /* FollowingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85DBF902967385F0069BF89 /* FollowingView.swift */; };
 		F85DBF93296760790069BF89 /* CacheAvatarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85DBF92296760790069BF89 /* CacheAvatarService.swift */; };
+		F85E1320297409CD006A051D /* ErrorsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85E131F297409CD006A051D /* ErrorsService.swift */; };
 		F866F6A0296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F69E296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift */; };
 		F866F6A1296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F69F296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift */; };
 		F866F6A329604161002E8F88 /* AccountDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F6A229604161002E8F88 /* AccountDataHandler.swift */; };
@@ -92,6 +93,8 @@
 		F89D6C4C297197FE001DA3D4 /* ImageViewerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C4B297197FE001DA3D4 /* ImageViewerViewModel.swift */; };
 		F8A93D7E2965FD89001D8331 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A93D7D2965FD89001D8331 /* UserProfileView.swift */; };
 		F8A93D802965FED4001D8331 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A93D7F2965FED4001D8331 /* AccountService.swift */; };
+		F8B1E64F2973F61400EE0D10 /* Drops in Frameworks */ = {isa = PBXBuildFile; productRef = F8B1E64E2973F61400EE0D10 /* Drops */; };
+		F8B1E6512973FB7E00EE0D10 /* ToastrService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B1E6502973FB7E00EE0D10 /* ToastrService.swift */; };
 		F8C14392296AF0B3001FE31D /* String+Exif.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C14391296AF0B3001FE31D /* String+Exif.swift */; };
 		F8C14394296AF21B001FE31D /* Double+Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C14393296AF21B001FE31D /* Double+Round.swift */; };
 		F8CC95CE2970761D00C9C2AC /* TintColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CC95CD2970761D00C9C2AC /* TintColor.swift */; };
@@ -127,6 +130,7 @@
 		F85DBF8E296732E20069BF89 /* FollowersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersView.swift; sourceTree = "<group>"; };
 		F85DBF902967385F0069BF89 /* FollowingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingView.swift; sourceTree = "<group>"; };
 		F85DBF92296760790069BF89 /* CacheAvatarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheAvatarService.swift; sourceTree = "<group>"; };
+		F85E131F297409CD006A051D /* ErrorsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorsService.swift; sourceTree = "<group>"; };
 		F866F69E296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplicationSettings+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F866F69F296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplicationSettings+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F866F6A229604161002E8F88 /* AccountDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDataHandler.swift; sourceTree = "<group>"; };
@@ -185,6 +189,7 @@
 		F8A93D7D2965FD89001D8331 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		F8A93D7F2965FED4001D8331 /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
 		F8AF2A61297073FE00D2DA3F /* Vernissage20230112-001.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage20230112-001.xcdatamodel"; sourceTree = "<group>"; };
+		F8B1E6502973FB7E00EE0D10 /* ToastrService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastrService.swift; sourceTree = "<group>"; };
 		F8C14391296AF0B3001FE31D /* String+Exif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Exif.swift"; sourceTree = "<group>"; };
 		F8C14393296AF21B001FE31D /* Double+Round.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Round.swift"; sourceTree = "<group>"; };
 		F8CC95CD2970761D00C9C2AC /* TintColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TintColor.swift; sourceTree = "<group>"; };
@@ -199,6 +204,7 @@
 				F8210DD52966BB7E001D9973 /* Nuke in Frameworks */,
 				F8210DD72966BB7E001D9973 /* NukeExtensions in Frameworks */,
 				F8210DD92966BB7E001D9973 /* NukeUI in Frameworks */,
+				F8B1E64F2973F61400EE0D10 /* Drops in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +398,8 @@
 				F8A93D7F2965FED4001D8331 /* AccountService.swift */,
 				F8210DE02966D0C4001D9973 /* StatusService.swift */,
 				F85DBF92296760790069BF89 /* CacheAvatarService.swift */,
+				F8B1E6502973FB7E00EE0D10 /* ToastrService.swift */,
+				F85E131F297409CD006A051D /* ErrorsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -472,6 +480,7 @@
 				F8210DD62966BB7E001D9973 /* NukeExtensions */,
 				F8210DD82966BB7E001D9973 /* NukeUI */,
 				F89992C6296D3DF8005994BF /* MastodonKit */,
+				F8B1E64E2973F61400EE0D10 /* Drops */,
 			);
 			productName = Vernissage;
 			productReference = F88C2468295C37B80006098B /* Vernissage.app */;
@@ -503,6 +512,7 @@
 			mainGroup = F88C245F295C37B80006098B;
 			packageReferences = (
 				F8210DD32966BB7E001D9973 /* XCRemoteSwiftPackageReference "Nuke" */,
+				F8B1E64D2973F61400EE0D10 /* XCRemoteSwiftPackageReference "Drops" */,
 			);
 			productRefGroup = F88C2469295C37B80006098B /* Products */;
 			projectDirPath = "";
@@ -565,6 +575,7 @@
 				F80048042961850500E6868A /* AttachmentData+CoreDataProperties.swift in Sources */,
 				F86B7223296C4BF500EE59EC /* ContentWarning.swift in Sources */,
 				F83901A6295D8EC000456AE2 /* LabelIcon.swift in Sources */,
+				F8B1E6512973FB7E00EE0D10 /* ToastrService.swift in Sources */,
 				F85DBF912967385F0069BF89 /* FollowingView.swift in Sources */,
 				F89992CE296D92E7005994BF /* AttachmentViewModel.swift in Sources */,
 				F800480A2961EA1900E6868A /* AttachmentDataHandler.swift in Sources */,
@@ -593,6 +604,7 @@
 				F85D497D29640D5900751DF7 /* InteractionRow.swift in Sources */,
 				F866F6A729604629002E8F88 /* SignInView.swift in Sources */,
 				F8C14392296AF0B3001FE31D /* String+Exif.swift in Sources */,
+				F85E1320297409CD006A051D /* ErrorsService.swift in Sources */,
 				F88C246C295C37B80006098B /* VernissageApp.swift in Sources */,
 				F85D4971296402DC00751DF7 /* AuthorizationService.swift in Sources */,
 				F88FAD25295F3FF7009B20C9 /* FederatedFeedView.swift in Sources */,
@@ -832,6 +844,14 @@
 				minimumVersion = 11.5.3;
 			};
 		};
+		F8B1E64D2973F61400EE0D10 /* XCRemoteSwiftPackageReference "Drops" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/omaralbeik/Drops";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.6.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -853,6 +873,11 @@
 		F89992C6296D3DF8005994BF /* MastodonKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MastodonKit;
+		};
+		F8B1E64E2973F61400EE0D10 /* Drops */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F8B1E64D2973F61400EE0D10 /* XCRemoteSwiftPackageReference "Drops" */;
+			productName = Drops;
 		};
 /* End XCSwiftPackageProductDependency section */
 

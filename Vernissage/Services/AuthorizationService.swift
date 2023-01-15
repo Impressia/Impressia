@@ -32,8 +32,7 @@ public class AuthorizationService {
                 try await self.refreshCredentials(accountData: accountData)
                 result(accountData)
             } catch {
-                // TODO: show information to the user.
-                print("Cannot refresh credentials!!!")
+                ErrorService.shared.handle(error, message: "Issues during refreshing credentials.", showToastr: true)
             }
         }
     }
@@ -94,7 +93,7 @@ public class AuthorizationService {
                 accountData.avatarData = avatarData
             }
             catch {
-                print("Avatar has not been downloaded")
+                ErrorService.shared.handle(error, message: "Avatar has not been downloaded.")
             }
         }
         
@@ -151,7 +150,7 @@ public class AuthorizationService {
                 accountData.avatarData = avatarData
             }
             catch {
-                print("Avatar has not been downloaded")
+                ErrorService.shared.handle(error, message: "Avatar has not been downloaded.")
             }
         }
         

@@ -6,10 +6,8 @@ public extension MastodonClientAuthenticated {
             for: baseURL,
             target: Mastodon.Statuses.status(statusId),
             withBearerToken: token)
-
-        let (data, _) = try await urlSession.data(for: request)
-
-        return try JSONDecoder().decode(Status.self, from: data)
+        
+        return try await downloadJson(Status.self, request: request)
     }
 
     func boost(statusId: StatusId) async throws -> Status {
@@ -19,10 +17,8 @@ public extension MastodonClientAuthenticated {
             target: Mastodon.Statuses.reblog(statusId),
             withBearerToken: token
         )
-        
-        let (data, _) = try await urlSession.data(for: request)
-        
-        return try JSONDecoder().decode(Status.self, from: data)
+                
+        return try await downloadJson(Status.self, request: request)
     }
     
     func unboost(statusId: StatusId) async throws -> Status {
@@ -32,9 +28,7 @@ public extension MastodonClientAuthenticated {
             withBearerToken: token
         )
         
-        let (data, _) = try await urlSession.data(for: request)
-        
-        return try JSONDecoder().decode(Status.self, from: data)
+        return try await downloadJson(Status.self, request: request)
     }
 
     func bookmark(statusId: StatusId) async throws -> Status {
@@ -44,9 +38,7 @@ public extension MastodonClientAuthenticated {
             withBearerToken: token
         )
 
-        let (data, _) = try await urlSession.data(for: request)
-
-        return try JSONDecoder().decode(Status.self, from: data)
+        return try await downloadJson(Status.self, request: request)
     }
 
     func unbookmark(statusId: StatusId) async throws -> Status {
@@ -56,9 +48,7 @@ public extension MastodonClientAuthenticated {
             withBearerToken: token
         )
 
-        let (data, _) = try await urlSession.data(for: request)
-
-        return try JSONDecoder().decode(Status.self, from: data)
+        return try await downloadJson(Status.self, request: request)
     }
 
     func favourite(statusId: StatusId) async throws -> Status {
@@ -68,9 +58,7 @@ public extension MastodonClientAuthenticated {
             withBearerToken: token
         )
 
-        let (data, _) = try await urlSession.data(for: request)
-
-        return try JSONDecoder().decode(Status.self, from: data)
+        return try await downloadJson(Status.self, request: request)
     }
 
     func unfavourite(statusId: StatusId) async throws -> Status {
@@ -80,9 +68,7 @@ public extension MastodonClientAuthenticated {
             withBearerToken: token
         )
 
-        let (data, _) = try await urlSession.data(for: request)
-
-        return try JSONDecoder().decode(Status.self, from: data)
+        return try await downloadJson(Status.self, request: request)
     }
 
     func new(statusComponents: Mastodon.Statuses.Components) async throws -> Status {
@@ -91,8 +77,6 @@ public extension MastodonClientAuthenticated {
             target: Mastodon.Statuses.new(statusComponents),
             withBearerToken: token)
 
-        let (data, _) = try await urlSession.data(for: request)
-
-        return try JSONDecoder().decode(Status.self, from: data)
+        return try await downloadJson(Status.self, request: request)
     }
 }

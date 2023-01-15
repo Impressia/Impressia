@@ -35,7 +35,7 @@ struct UserProfileView: View {
             do {
                 try await self.loadData()
             } catch {
-                print("Error \(error.localizedDescription)")
+                ErrorService.shared.handle(error, message: "Error during download account from server.", showToastr: true)
             }
         }
     }

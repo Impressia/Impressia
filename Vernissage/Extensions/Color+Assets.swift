@@ -24,3 +24,10 @@ extension Color {
     static let accentColor9 = Color("AccentColor9")
     static let accentColor10 = Color("AccentColor10")
 }
+
+
+extension Color {
+    func toUIColor() -> UIColor {
+        UIColor(self)
+    }
+}

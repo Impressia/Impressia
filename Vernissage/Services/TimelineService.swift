@@ -40,15 +40,6 @@ public class TimelineService {
         return try await self.loadData(for: accountData, on: backgroundContext, minId: newestStatus?.id)
     }
     
-    public func getStatus(withId statusId: String, and accountData: AccountData?) async throws -> Status? {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
-            return nil
-        }
-
-        let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
-        return try await client.read(statusId: statusId)
-    }
-    
     public func getComments(for statusId: String, and accountData: AccountData) async throws -> [CommentViewModel] {
         var commentViewModels: [CommentViewModel] = []
         
@@ -196,7 +187,7 @@ public class TimelineService {
                         
                         return (attachmentUrl.key, nil)
                     } catch {
-                        print("Error \(error.localizedDescription)")
+                        ErrorService.shared.handle(error, message: "Fatching all images failed.")
                         return (attachmentUrl.key, nil)
                     }
                 }

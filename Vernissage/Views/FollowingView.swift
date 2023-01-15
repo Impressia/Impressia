@@ -81,7 +81,7 @@ struct FollowingView: View {
             await self.downloadAvatars(accounts: accountsFromApi)
             self.accounts.append(contentsOf: accountsFromApi)
         } catch {
-            print("Error \(error.localizedDescription)")
+            ErrorService.shared.handle(error, message: "Error during download following from server.", showToastr: true)
         }
     }
     

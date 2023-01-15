@@ -61,6 +61,15 @@ public class MastodonClient: MastodonClientProtocol {
         oAuthContinuation?.resume(throwing: MastodonClientError.oAuthCancelled)
         oAuthHandle?.cancel()
     }
+    
+    public func downloadJson<T>(_ type: T.Type, request: URLRequest) async throws -> T where T: Decodable {
+        let (data, response) = try await urlSession.data(for: request)
+        guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
+            throw NetworkError.notSuccessResponse(response)
+        }
+        
+        return try JSONDecoder().decode(type, from: data)
+    }
 }
 
 public class MastodonClientAuthenticated: MastodonClientProtocol {
@@ -86,10 +95,8 @@ public class MastodonClientAuthenticated: MastodonClientProtocol {
             target: Mastodon.Timelines.home(maxId, sinceId, minId, limit),
             withBearerToken: token
         )
-        
-        let (data, _) = try await urlSession.data(for: request)
-        
-        return try JSONDecoder().decode([Status].self, from: data)
+                    
+        return try await downloadJson([Status].self, request: request)
     }
 
     public func getPublicTimeline(isLocal: Bool = false,
@@ -102,9 +109,8 @@ public class MastodonClientAuthenticated: MastodonClientProtocol {
             withBearerToken: token
         )
         
-        let (data, _) = try await urlSession.data(for: request)
         
-        return try JSONDecoder().decode([Status].self, from: data)
+        return try await downloadJson([Status].self, request: request)
     }
 
     public func getTagTimeline(tag: String,
@@ -118,9 +124,7 @@ public class MastodonClientAuthenticated: MastodonClientProtocol {
             withBearerToken: token
         )
         
-        let (data, _) = try await urlSession.data(for: request)
-        
-        return try JSONDecoder().decode([Status].self, from: data)
+        return try await downloadJson([Status].self, request: request)
     }
 
     public func saveMarkers(_ markers: [Mastodon.Markers.Timeline: StatusId]) async throws -> Markers {
@@ -130,9 +134,7 @@ public class MastodonClientAuthenticated: MastodonClientProtocol {
             withBearerToken: token
         )
 
-        let (data, _) = try await urlSession.data(for: request)
-
-        return try JSONDecoder().decode(Markers.self, from: data)
+        return try await downloadJson(Markers.self, request: request)
     }
 
     public func readMarkers(_ markers: Set<Mastodon.Markers.Timeline>) async throws -> Markers {
@@ -142,8 +144,15 @@ public class MastodonClientAuthenticated: MastodonClientProtocol {
             withBearerToken: token
         )
 
-        let (data, _) = try await urlSession.data(for: request)
-
-        return try JSONDecoder().decode(Markers.self, from: data)
+        return try await downloadJson(Markers.self, request: request)
+    }
+    
+    public func downloadJson<T>(_ type: T.Type, request: URLRequest) async throws -> T where T: Decodable {
+        let (data, response) = try await urlSession.data(for: request)
+        guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
+            throw NetworkError.notSuccessResponse(response)
+        }
+        
+        return try JSONDecoder().decode(type, from: data)
     }
 }

@@ -32,7 +32,7 @@ public final class HapticService: ObservableObject {
             
             try player?.start(atTime: CHHapticTimeImmediate)
         } catch {
-            print("Error \(error.localizedDescription)")
+            ErrorService.shared.handle(error, message: "Haptic service failed.")
         }
     }
 

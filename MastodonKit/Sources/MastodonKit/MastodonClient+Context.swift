@@ -14,11 +14,6 @@ public extension MastodonClientAuthenticated {
             withBearerToken: token
         )
         
-        let (data, response) = try await urlSession.data(for: request)
-        guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
-            throw NetworkError.notSuccessResponse(response)
-        }
-        
-        return try JSONDecoder().decode(Context.self, from: data)
+        return try await downloadJson(Context.self, request: request)
     }
 }

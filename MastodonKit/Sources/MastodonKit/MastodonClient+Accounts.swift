@@ -8,8 +8,6 @@ public extension MastodonClientAuthenticated {
             withBearerToken: token
         )
         
-        let (data, _) = try await urlSession.data(for: request)
-        
-        return try JSONDecoder().decode(Account.self, from: data)
+        return try await downloadJson(Account.self, request: request)
     }
 }

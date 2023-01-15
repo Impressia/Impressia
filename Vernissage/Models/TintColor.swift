@@ -34,4 +34,8 @@ public enum TintColor: Int {
             return Color.accentColor10
         }
     }
+    
+    public func uiColor() -> UIColor {
+        return self.color().toUIColor()
+    }
 }

@@ -39,7 +39,7 @@ struct UserProfileStatuses: View {
                                 do {
                                     try await self.loadMoreStatuses()
                                 } catch {
-                                    print("Error \(error.localizedDescription)")
+                                    ErrorService.shared.handle(error, message: "Loading more statuses failed.", showToastr: true)
                                 }
                             }
                             .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
@@ -53,7 +53,7 @@ struct UserProfileStatuses: View {
             do {
                 try await self.loadStatuses()
             } catch {
-                print("Error \(error.localizedDescription)")
+                ErrorService.shared.handle(error, message: "Loading statuses failed.", showToastr: true)
             }
         }
     }

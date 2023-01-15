@@ -19,7 +19,7 @@ class ApplicationSettingsHandler {
         do {
             settingsList = try context.fetch(fetchRequest)
         } catch {
-            print("Error during fetching application settings")
+            ErrorService.shared.handle(error, message: "Error during fetching application settings.")
         }
 
         if let settings = settingsList.first {

@@ -81,7 +81,7 @@ struct FollowersView: View {
             await self.downloadAvatars(accounts: accountsFromApi)
             self.accounts.append(contentsOf: accountsFromApi)
         } catch {
-            print("Error \(error.localizedDescription)")
+            ErrorService.shared.handle(error, message: "Error during download followers from server.", showToastr: true)
         }
     }
     

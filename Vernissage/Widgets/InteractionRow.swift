@@ -6,6 +6,7 @@
 
 import SwiftUI
 import MastodonKit
+import Drops
 
 struct InteractionRow: View {
     @EnvironmentObject var applicationState: ApplicationState
@@ -48,8 +49,10 @@ struct InteractionRow: View {
 
                         self.reblogged = status.reblogged
                     }
+
+                    ToastrService.shared.showSuccess("Reblogged", imageSystemName: "paperplane.fill")
                 } catch {
-                    print("Error \(error.localizedDescription)")
+                    ErrorService.shared.handle(error, message: "Reblog action failed.", showToastr: true)
                 }
             } label: {
                 HStack(alignment: .center) {
@@ -74,8 +77,10 @@ struct InteractionRow: View {
 
                         self.favourited = status.favourited
                     }
+                    
+                    ToastrService.shared.showSuccess("Favourited", imageSystemName: "hand.thumbsup.fill")
                 } catch {
-                    print("Error \(error.localizedDescription)")
+                    ErrorService.shared.handle(error, message: "Favourite action failed.", showToastr: true)
                 }
             } label: {
                 HStack(alignment: .center) {
@@ -95,8 +100,10 @@ struct InteractionRow: View {
 
                     self.bookmarked.toggle()
                 } catch {
-                    print("Error \(error.localizedDescription)")
+                    ErrorService.shared.handle(error, message: "Favourite action failed.", showToastr: true)
                 }
+                
+                ToastrService.shared.showSuccess("Bookmarked", imageSystemName: "bookmark.fill")
             } label: {
                 Image(systemName: self.bookmarked ? "bookmark.fill" : "bookmark")
             }
@@ -105,6 +112,7 @@ struct InteractionRow: View {
             
             ActionButton {
                 // TODO: Share.
+                ToastrService.shared.showError(subtitle: "Sending new status failed!")
             } label: {
                 Image(systemName: "square.and.arrow.up")
             }

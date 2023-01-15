@@ -10,6 +10,8 @@ import AVFoundation
 
 struct StatusView: View {
     @EnvironmentObject var applicationState: ApplicationState
+    @Environment(\.dismiss) private var dismiss
+
     @State var statusId: String
     @State var imageBlurhash: String?
     @State var imageWidth: Int32?
@@ -116,7 +118,7 @@ struct StatusView: View {
                 }
                 
                 // Get status from API.
-                if let status = try await TimelineService.shared.getStatus(withId: self.statusId, and: self.applicationState.accountData) {
+                if let status = try await StatusService.shared.getStatus(withId: self.statusId, and: self.applicationState.accountData) {
                     let statusViewModel = StatusViewModel(status: status)
                     
                     // Download images and recalculate exif data.
@@ -137,8 +139,15 @@ struct StatusView: View {
                         _ = try await TimelineService.shared.updateStatus(statusDataFromDatabase, accountData: accountData, basedOn: status)
                     }
                 }
-            } catch {
-                print("Error \(error.localizedDescription)")
+            } catch NetworkError.notSuccessResponse(let response) {
+                if response.statusCode() == HTTPStatusCode.notFound, let accountId = self.applicationState.accountData?.id {
+                    StatusDataHandler.shared.remove(accountId: accountId, statusId: self.statusId)
+                    ErrorService.shared.handle(NetworkError.notSuccessResponse(response), message: "Status not existing anymore.", showToastr: true)
+                    dismiss()
+                }
+            }
+            catch {
+                ErrorService.shared.handle(error, message: "Error during download status from server.", showToastr: true)
             }
         }
     }

@@ -26,7 +26,7 @@ class StatusDataHandler {
         do {
             return try context.fetch(fetchRequest).first
         } catch {
-            print("Error during fetching status (getStatusData)")
+            ErrorService.shared.handle(error, message: "Error during fetching status (getStatusData).")
             return nil
         }
     }
@@ -45,7 +45,7 @@ class StatusDataHandler {
             let statuses = try context.fetch(fetchRequest)
             return statuses.first
         } catch {
-            print("Error during fetching maximum status (getMaximumStatus)")
+            ErrorService.shared.handle(error, message: "Error during fetching maximum status (getMaximumStatus).")
             return nil
         }
     }
@@ -64,8 +64,24 @@ class StatusDataHandler {
             let statuses = try context.fetch(fetchRequest)
             return statuses.first
         } catch {
-            print("Error during fetching minimum status (getMinimumtatus)")
+            ErrorService.shared.handle(error, message: "Error during fetching minimum status (getMinimumtatus).")
             return nil
+        }
+    }
+    
+    func remove(accountId: String, statusId: String) {
+        let status = self.getStatusData(accountId: accountId, statusId: statusId)
+        guard let status else {
+            return
+        }
+        
+        let context = CoreDataHandler.shared.container.viewContext
+        context.delete(status)
+
+        do {
+            try context.save()
+        } catch {
+            ErrorService.shared.handle(error, message: "Error during deleting status (remove).")
         }
     }
     

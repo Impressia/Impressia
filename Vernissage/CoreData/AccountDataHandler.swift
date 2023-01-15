@@ -18,7 +18,7 @@ class AccountDataHandler {
         do {
             return try context.fetch(fetchRequest)
         } catch {
-            print("Error during fetching accounts")
+            ErrorService.shared.handle(error, message: "Accounts cannot be retrieved (getAccountsData).")
             return []
         }
     }
@@ -48,7 +48,7 @@ class AccountDataHandler {
         do {
             return try context.fetch(fetchRequest).first
         } catch {
-            print("Error during fetching status (getAccountData)")
+            ErrorService.shared.handle(error, message: "Error during fetching status (getAccountData).")
             return nil
         }
     }

@@ -49,7 +49,7 @@ struct HomeFeedView: View {
                                     }
                                 }
                             } catch {
-                                print("Error", error)
+                                ErrorService.shared.handle(error, message: "Error during download statuses from server.", showToastr: true)
                             }
                         }
                 }
@@ -95,7 +95,7 @@ struct HomeFeedView: View {
                     _ = try await TimelineService.shared.onTopOfList(for: accountData)
                 }
             } catch {
-                print("Error", error)
+                ErrorService.shared.handle(error, message: "Error during download statuses from server.", showToastr: true)
             }
         }
     }

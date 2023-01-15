@@ -35,7 +35,7 @@ public class CacheAvatarService {
                 CacheAvatarService.shared.addImage(for: accountId, data: avatarData)
             }
         } catch {
-            print("Error \(error.localizedDescription)")
+            ErrorService.shared.handle(error, message: "Downloading avatar into cache failed.")
         }
     }
     

@@ -17,9 +17,7 @@ public extension MastodonClient {
             )
         )
         
-        let (data, _) = try await urlSession.data(for: request)
-        
-        return try JSONDecoder().decode(App.self, from: data)
+        return try await downloadJson(App.self, request: request)
     }
     
     func authenticate(app: App, scope: Scopes) async throws -> OAuthSwiftCredential { // todo: we should not load OAuthSwift objects here
@@ -65,9 +63,7 @@ public extension MastodonClient {
             target: Mastodon.OAuth.authenticate(app, username, password, scope.asScopeString)
         )
         
-        let (data, _) = try await urlSession.data(for: request)
-        
-        return try JSONDecoder().decode(AccessToken.self, from: data)
+        return try await downloadJson(AccessToken.self, request: request)
     }
 }
 

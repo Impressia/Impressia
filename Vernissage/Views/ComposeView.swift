@@ -89,6 +89,7 @@ struct ComposeView: View {
                         Task {
                             await self.publishStatus()
                             dismiss()
+                            ToastrService.shared.showSuccess("Status published", imageSystemName: "message.fill")
                         }
                     } label: {
                         Text("Publish")
@@ -115,7 +116,7 @@ struct ComposeView: View {
                 status: Mastodon.Statuses.Components(inReplyToId: self.statusViewModel?.id, text: self.text),
                 accountData: self.applicationState.accountData)
         } catch {
-            print("Error \(error.localizedDescription)")
+            ErrorService.shared.handle(error, message: "Error during post status.", showToastr: true)
         }
     }
     

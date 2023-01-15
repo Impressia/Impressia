@@ -115,7 +115,7 @@ struct UserProfileHeader: View {
                 }
             }
         } catch {
-            print("Error \(error.localizedDescription)")
+            ErrorService.shared.handle(error, message: "Relationship action failed.", showToastr: true)
         }
     }
 }
