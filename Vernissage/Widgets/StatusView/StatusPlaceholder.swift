@@ -24,7 +24,8 @@ struct StatusPlaceholder: View {
             }
             
             VStack(alignment: .leading) {
-                UsernameRow(accountDisplayName: "Verylong Displayname",
+                UsernameRow(accountId: "",
+                            accountDisplayName: "Verylong Displayname",
                             accountUsername: "@username")
                 
                 Text("Lorem ispum text something")

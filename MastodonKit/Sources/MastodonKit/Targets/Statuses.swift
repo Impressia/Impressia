@@ -26,7 +26,7 @@ extension Mastodon {
 
 extension Mastodon.Statuses {
     public struct Components {
-        public let inReplyToId: StatusId?
+        public let inReplyToId: EntityId?
         public let text: String
         public let spoilerText: String
         public let mediaIds: [String]
@@ -37,7 +37,7 @@ extension Mastodon.Statuses {
         public let pollMultipleChoice: Bool
 
         public init(
-            inReplyToId: StatusId? = nil,
+            inReplyToId: EntityId? = nil,
             text: String,
             spoilerText: String = "",
             mediaIds: [String] = [],

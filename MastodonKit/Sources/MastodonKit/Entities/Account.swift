@@ -14,6 +14,7 @@ public struct Account: Codable {
     public let followersCount: Int
     public let followingCount: Int
     public let statusesCount: Int
+    public let emojis: [Emoji] = []
     
     private enum CodingKeys: String, CodingKey {
         case id
@@ -29,5 +30,20 @@ public struct Account: Codable {
         case url
         case avatar
         case header
+        case emojis
+    }
+}
+
+extension Account {
+    public var safeDisplayName: String {
+        return self.displayName ?? self.acct
+    }
+    
+    public var displayNameWithoutEmojis: String {
+        var name = safeDisplayName
+        for emoji in emojis {
+            name = name.replacingOccurrences(of: ":\(emoji.shortcode):", with: "")
+        }
+        return name.split(separator: " ", omittingEmptySubsequences: true).joined(separator: " ")
     }
 }

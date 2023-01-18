@@ -85,9 +85,9 @@ public class MastodonClientAuthenticated: MastodonClientProtocol {
     }
         
     public func getHomeTimeline(
-        maxId: StatusId? = nil,
-        sinceId: StatusId? = nil,
-        minId: StatusId? = nil,
+        maxId: EntityId? = nil,
+        sinceId: EntityId? = nil,
+        minId: EntityId? = nil,
         limit: Int? = nil) async throws -> [Status] {
 
         let request = try Self.request(
@@ -100,8 +100,8 @@ public class MastodonClientAuthenticated: MastodonClientProtocol {
     }
 
     public func getPublicTimeline(isLocal: Bool = false,
-                                  maxId: StatusId? = nil,
-                                  sinceId: StatusId? = nil) async throws -> [Status] {
+                                  maxId: EntityId? = nil,
+                                  sinceId: EntityId? = nil) async throws -> [Status] {
 
         let request = try Self.request(
             for: baseURL,
@@ -115,8 +115,8 @@ public class MastodonClientAuthenticated: MastodonClientProtocol {
 
     public func getTagTimeline(tag: String,
                                isLocal: Bool = false,
-                               maxId: StatusId? = nil,
-                               sinceId: StatusId? = nil) async throws -> [Status] {
+                               maxId: EntityId? = nil,
+                               sinceId: EntityId? = nil) async throws -> [Status] {
 
         let request = try Self.request(
             for: baseURL,
@@ -127,7 +127,7 @@ public class MastodonClientAuthenticated: MastodonClientProtocol {
         return try await downloadJson([Status].self, request: request)
     }
 
-    public func saveMarkers(_ markers: [Mastodon.Markers.Timeline: StatusId]) async throws -> Markers {
+    public func saveMarkers(_ markers: [Mastodon.Markers.Timeline: EntityId]) async throws -> Markers {
         let request = try Self.request(
             for: baseURL,
             target: Mastodon.Markers.set(markers),
@@ -152,7 +152,51 @@ public class MastodonClientAuthenticated: MastodonClientProtocol {
         guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
             throw NetworkError.notSuccessResponse(response)
         }
+        #if DEBUG
+            do {
+                return try JSONDecoder().decode(type, from: data)
+            } catch {
+                let json = String(data: data, encoding: .utf8)!
+                print(json)
+
+                throw error
+            }
+        #else
+            return try JSONDecoder().decode(type, from: data)
+        #endif
+    }
+    
+    public func downloadJsonWithLink<T>(_ type: T.Type, request: URLRequest) async throws -> Linkable<T> where T: Decodable {
+        let (data, response) = try await urlSession.data(for: request)
+        guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
+            throw NetworkError.notSuccessResponse(response)
+        }
+
+        #if DEBUG
+            do {
+                let decoded = try JSONDecoder().decode(type, from: data)
+                
+                var link: Link?
+                if let response = response as? HTTPURLResponse, let linkHeader = response.allHeaderFields["Link"] as? String {
+                    link = Link(rawLink: linkHeader)
+                }
+                
+                return Linkable(data: decoded, link: link)
+            } catch {
+                let json = String(data: data, encoding: .utf8)!
+                print(json)
+
+                throw error
+            }
+        #else
+            let decoded =  try JSONDecoder().decode(type, from: data)
         
-        return try JSONDecoder().decode(type, from: data)
+            var link: Link?
+            if let response = response as? HTTPURLResponse, let linkHeader = response.allHeaderFields["Link"] as? String {
+                link = Link(rawLink: linkHeader)
+            }
+            
+            return Linkable(data: decoded, link: link)
+        #endif
     }
 }

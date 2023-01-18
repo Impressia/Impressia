@@ -29,10 +29,10 @@ struct ComposeView: View {
                     if let accountData = applicationState.accountData {
                         HStack {
                             UsernameRow(
+                                accountId: accountData.id,
                                 accountAvatar: accountData.avatar,
                                 accountDisplayName: accountData.displayName,
-                                accountUsername: accountData.username,
-                                cachedAvatar: CacheAvatarService.shared.getImage(for: accountData.id))
+                                accountUsername: accountData.username)
                             Spacer()
                         }
                         .padding(8)
@@ -46,23 +46,12 @@ struct ComposeView: View {
                         }
 
                     if let status = self.statusViewModel {
-                        HStack (alignment: .top) {
-
-                            AsyncImage(url: status.account.avatar) { image in
-                                image
-                                    .resizable()
-                                    .clipShape(Circle())
-                                    .aspectRatio(contentMode: .fit)
-                            } placeholder: {
-                                Image(systemName: "person.circle")
-                                    .resizable()
-                                    .foregroundColor(.mainTextColor)
-                            }
-                            .frame(width: 32.0, height: 32.0)
+                        HStack (alignment: .top) {                            
+                            UserAvatar(accountId: status.account.id, accountAvatar: status.account.avatar, width: 32, height: 32)
 
                             VStack (alignment: .leading, spacing: 0) {
                                 HStack (alignment: .top) {
-                                    Text(self.getUserName(statusViewModel: status))
+                                    Text(statusViewModel?.account.displayNameWithoutEmojis ?? "")
                                         .foregroundColor(.mainTextColor)
                                         .font(.footnote)
                                         .fontWeight(.bold)
@@ -118,10 +107,6 @@ struct ComposeView: View {
         } catch {
             ErrorService.shared.handle(error, message: "Error during post status.", showToastr: true)
         }
-    }
-    
-    private func getUserName(statusViewModel: StatusViewModel) -> String {
-        return self.statusViewModel?.account.displayName ?? self.statusViewModel?.account.acct ?? self.statusViewModel?.account.username ?? String.empty()
     }
 }
 

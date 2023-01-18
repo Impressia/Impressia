@@ -80,8 +80,10 @@ struct MainView: View {
                 .id(applicationState.accountData?.id ?? String.empty())
             }
         case .notifications:
-            NotificationsView()
-                .id(applicationState.accountData?.id ?? String.empty())
+            if let accountData = self.applicationState.accountData {
+                NotificationsView(accountId: accountData.id)
+                    .id(applicationState.accountData?.id ?? String.empty())
+            }
         }
     }
     

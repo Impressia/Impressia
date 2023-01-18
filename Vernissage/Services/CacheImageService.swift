@@ -8,8 +8,8 @@
 import Foundation
 import SwiftUI
 
-public class CacheAvatarService {
-    public static let shared = CacheAvatarService()
+public class CacheImageService {
+    public static let shared = CacheImageService()
     private init() { }
     
     private var memoryChartData = MemoryCache<String, Image>(entryLifetime: 5 * 60)
@@ -24,8 +24,8 @@ public class CacheAvatarService {
         self.memoryChartData[id] = image
     }
 
-    func downloadImage(for accountId: String?, avatarUrl: URL?) async {
-        guard let accountId, let avatarUrl else {
+    func downloadImage(for accountId: String?, url: URL?) async {
+        guard let accountId, let url else {
             return
         }
         
@@ -34,12 +34,12 @@ public class CacheAvatarService {
         }
         
         do {
-            let avatarData = try await RemoteFileService.shared.fetchData(url: avatarUrl)
-            if let avatarData {
-                CacheAvatarService.shared.addImage(for: accountId, data: avatarData)
+            let imageData = try await RemoteFileService.shared.fetchData(url: url)
+            if let imageData {
+                CacheImageService.shared.addImage(for: accountId, data: imageData)
             }
         } catch {
-            ErrorService.shared.handle(error, message: "Downloading avatar into cache failed.")
+            ErrorService.shared.handle(error, message: "Downloading image into cache failed.")
         }
     }
     

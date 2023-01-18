@@ -52,8 +52,9 @@ struct StatusView: View {
                             accountDisplayName: statusViewModel.account.displayName,
                             accountUserName: statusViewModel.account.username)
                             .environmentObject(applicationState)) {
-                                UsernameRow(accountAvatar: statusViewModel.account.avatar,
-                                            accountDisplayName: statusViewModel.account.displayName,
+                                UsernameRow(accountId: statusViewModel.account.id,
+                                            accountAvatar: statusViewModel.account.avatar,
+                                            accountDisplayName: statusViewModel.account.displayNameWithoutEmojis,
                                             accountUsername: statusViewModel.account.username)
                             }
                         

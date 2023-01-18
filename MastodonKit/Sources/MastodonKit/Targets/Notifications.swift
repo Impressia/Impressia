@@ -2,7 +2,7 @@ import Foundation
 
 extension Mastodon {
     public enum Notifications {
-        case notifications
+        case notifications(MaxId?, SinceId?, MinId?, Limit?)
         case notification(String)
         case clear
     }
@@ -35,10 +35,36 @@ extension Mastodon.Notifications: TargetType {
     
     /// The parameters to be incoded in the request.
     public var queryItems: [(String, String)]? {
+        var params: [(String, String)] = []
+
+        var maxId: MaxId? = nil
+        var sinceId: SinceId? = nil
+        var minId: MinId? = nil
+        var limit: Limit? = nil
+        
         switch self {
-        default:
-            return nil
+        case .notifications(let _maxId, let _sinceId, let _minId, let _limit):
+            maxId = _maxId
+            sinceId = _sinceId
+            minId = _minId
+            limit = _limit
+        default: break
         }
+    
+        if let maxId {
+            params.append(("max_id",  maxId))
+        }
+        if let sinceId {
+            params.append(("since_id", sinceId))
+        }
+        if let minId {
+            params.append(("min_id", minId))
+        }
+        if let limit {
+            params.append(("limit", "\(limit)"))
+        }
+            
+        return params
     }
     
     public var headers: [String: String]? {

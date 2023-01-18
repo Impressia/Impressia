@@ -7,7 +7,7 @@ extension Mastodon {
             case notifications
         }
 
-        case set([Timeline: StatusId])
+        case set([Timeline: EntityId])
         case read(Set<Timeline>)
     }
 }

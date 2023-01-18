@@ -1,7 +1,7 @@
 import Foundation
 
 public extension MastodonClientAuthenticated {
-    func read(statusId: StatusId) async throws -> Status {
+    func read(statusId: EntityId) async throws -> Status {
         let request = try Self.request(
             for: baseURL,
             target: Mastodon.Statuses.status(statusId),
@@ -10,7 +10,7 @@ public extension MastodonClientAuthenticated {
         return try await downloadJson(Status.self, request: request)
     }
 
-    func boost(statusId: StatusId) async throws -> Status {
+    func boost(statusId: EntityId) async throws -> Status {
         // TODO: Check whether the current user already boosted the status
         let request = try Self.request(
             for: baseURL,
@@ -21,7 +21,7 @@ public extension MastodonClientAuthenticated {
         return try await downloadJson(Status.self, request: request)
     }
     
-    func unboost(statusId: StatusId) async throws -> Status {
+    func unboost(statusId: EntityId) async throws -> Status {
         let request = try Self.request(
             for: baseURL,
             target: Mastodon.Statuses.unreblog(statusId),
@@ -31,7 +31,7 @@ public extension MastodonClientAuthenticated {
         return try await downloadJson(Status.self, request: request)
     }
 
-    func bookmark(statusId: StatusId) async throws -> Status {
+    func bookmark(statusId: EntityId) async throws -> Status {
         let request = try Self.request(
             for: baseURL,
             target: Mastodon.Statuses.bookmark(statusId),
@@ -41,7 +41,7 @@ public extension MastodonClientAuthenticated {
         return try await downloadJson(Status.self, request: request)
     }
 
-    func unbookmark(statusId: StatusId) async throws -> Status {
+    func unbookmark(statusId: EntityId) async throws -> Status {
         let request = try Self.request(
             for: baseURL,
             target: Mastodon.Statuses.unbookmark(statusId),
@@ -51,7 +51,7 @@ public extension MastodonClientAuthenticated {
         return try await downloadJson(Status.self, request: request)
     }
 
-    func favourite(statusId: StatusId) async throws -> Status {
+    func favourite(statusId: EntityId) async throws -> Status {
         let request = try Self.request(
             for: baseURL,
             target: Mastodon.Statuses.favourite(statusId),
@@ -61,7 +61,7 @@ public extension MastodonClientAuthenticated {
         return try await downloadJson(Status.self, request: request)
     }
 
-    func unfavourite(statusId: StatusId) async throws -> Status {
+    func unfavourite(statusId: EntityId) async throws -> Status {
         let request = try Self.request(
             for: baseURL,
             target: Mastodon.Statuses.unfavourite(statusId),

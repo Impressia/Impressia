@@ -15,7 +15,7 @@ struct UserProfileHeader: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .center) {
-                UserAvatar(accountAvatar: account.avatar, width: 96, height: 96)
+                UserAvatar(accountId: account.id, accountAvatar: account.avatar, width: 96, height: 96)
                 
                 Spacer()
                 
@@ -58,7 +58,7 @@ struct UserProfileHeader: View {
             
             HStack (alignment: .center) {
                 VStack(alignment: .leading) {
-                    Text(account.displayName ?? account.acct)
+                    Text(account.displayNameWithoutEmojis)
                         .foregroundColor(.mainTextColor)
                         .font(.footnote)
                         .fontWeight(.bold)

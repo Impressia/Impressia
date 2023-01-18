@@ -10,14 +10,14 @@ import MastodonKit
 public class StatusViewModel {
 
     public let uniqueId: UUID
-    public let id: StatusId
+    public let id: EntityId
     public let content: Html
     
     public let uri: String?
     public let url: URL?
     public let account: Account
     public let inReplyToId: AccountId?
-    public let inReplyToAccount: StatusId?
+    public let inReplyToAccount: EntityId?
     public let reblog: Status?
     public let createdAt: String
     public let reblogsCount: Int
@@ -39,14 +39,14 @@ public class StatusViewModel {
     public let place: Place?
     
     public init(
-        id: StatusId,
+        id: EntityId,
         content: Html,
         uri: String,
         account: Account,
         application: Application,
         url: URL? = nil,
         inReplyToId: AccountId? = nil,
-        inReplyToAccount: StatusId? = nil,
+        inReplyToAccount: EntityId? = nil,
         reblog: Status? = nil,
         createdAt: String? = nil,
         reblogsCount: Int = 0,

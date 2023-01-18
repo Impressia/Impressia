@@ -13,6 +13,8 @@
 		F80048062961850500E6868A /* StatusData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048022961850500E6868A /* StatusData+CoreDataProperties.swift */; };
 		F80048082961E6DE00E6868A /* StatusDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048072961E6DE00E6868A /* StatusDataHandler.swift */; };
 		F800480A2961EA1900E6868A /* AttachmentDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048092961EA1900E6868A /* AttachmentDataHandler.swift */; };
+		F80864112975537F009F035C /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80864102975537F009F035C /* NotificationService.swift */; };
+		F808641429756666009F035C /* NotificationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F808641329756666009F035C /* NotificationRow.swift */; };
 		F8210DCF2966B600001D9973 /* ImageRowAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8210DCE2966B600001D9973 /* ImageRowAsync.swift */; };
 		F8210DD52966BB7E001D9973 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = F8210DD42966BB7E001D9973 /* Nuke */; };
 		F8210DD72966BB7E001D9973 /* NukeExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = F8210DD62966BB7E001D9973 /* NukeExtensions */; };
@@ -54,6 +56,7 @@
 		F86B721E296C458700EE59EC /* BlurredImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B721D296C458700EE59EC /* BlurredImage.swift */; };
 		F86B7221296C49A300EE59EC /* EmptyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7220296C49A300EE59EC /* EmptyButtonStyle.swift */; };
 		F86B7223296C4BF500EE59EC /* ContentWarning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7222296C4BF500EE59EC /* ContentWarning.swift */; };
+		F886F257297859E300879356 /* CacheImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F886F256297859E300879356 /* CacheImageService.swift */; };
 		F88ABD9229686F1C004EF61E /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88ABD9129686F1C004EF61E /* MemoryCache.swift */; };
 		F88ABD9429687CA4004EF61E /* ComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88ABD9329687CA4004EF61E /* ComposeView.swift */; };
 		F88C246C295C37B80006098B /* VernissageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C246B295C37B80006098B /* VernissageApp.swift */; };
@@ -108,6 +111,8 @@
 		F80048022961850500E6868A /* StatusData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F80048072961E6DE00E6868A /* StatusDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusDataHandler.swift; sourceTree = "<group>"; };
 		F80048092961EA1900E6868A /* AttachmentDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentDataHandler.swift; sourceTree = "<group>"; };
+		F80864102975537F009F035C /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		F808641329756666009F035C /* NotificationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRow.swift; sourceTree = "<group>"; };
 		F8210DCE2966B600001D9973 /* ImageRowAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRowAsync.swift; sourceTree = "<group>"; };
 		F8210DDC2966CF17001D9973 /* StatusData+Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusData+Status.swift"; sourceTree = "<group>"; };
 		F8210DDE2966CFC7001D9973 /* AttachmentData+Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttachmentData+Attachment.swift"; sourceTree = "<group>"; };
@@ -147,6 +152,7 @@
 		F86B721D296C458700EE59EC /* BlurredImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredImage.swift; sourceTree = "<group>"; };
 		F86B7220296C49A300EE59EC /* EmptyButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyButtonStyle.swift; sourceTree = "<group>"; };
 		F86B7222296C4BF500EE59EC /* ContentWarning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentWarning.swift; sourceTree = "<group>"; };
+		F886F256297859E300879356 /* CacheImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheImageService.swift; sourceTree = "<group>"; };
 		F88ABD9129686F1C004EF61E /* MemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
 		F88ABD9329687CA4004EF61E /* ComposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeView.swift; sourceTree = "<group>"; };
 		F88ABD9529687D4D004EF61E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -213,6 +219,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F808641229756583009F035C /* NotificationsView */ = {
+			isa = PBXGroup;
+			children = (
+				F808641329756666009F035C /* NotificationRow.swift */,
+			);
+			path = NotificationsView;
+			sourceTree = "<group>";
+		};
 		F8210DE82966E4D8001D9973 /* Modifiers */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,6 +317,7 @@
 		F83901A2295D863B00456AE2 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				F808641229756583009F035C /* NotificationsView */,
 				F89D6C4829718868001DA3D4 /* StatusView */,
 				F89D6C4729718822001DA3D4 /* UserProfile */,
 				F89D6C4029717FC0001DA3D4 /* SettingsView */,
@@ -402,6 +417,8 @@
 				F85DBF92296760790069BF89 /* CacheAvatarService.swift */,
 				F8B1E6502973FB7E00EE0D10 /* ToastrService.swift */,
 				F85E131F297409CD006A051D /* ErrorsService.swift */,
+				F80864102975537F009F035C /* NotificationService.swift */,
+				F886F256297859E300879356 /* CacheImageService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -550,6 +567,7 @@
 				F80048082961E6DE00E6868A /* StatusDataHandler.swift in Sources */,
 				F866F6A0296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift in Sources */,
 				F8210DEA2966E4F9001D9973 /* AnimatePlaceholderModifier.swift in Sources */,
+				F886F257297859E300879356 /* CacheImageService.swift in Sources */,
 				F8984E4D296B648000A2610F /* UIImage+Blurhash.swift in Sources */,
 				F897978A2968314A00B22335 /* LoadingIndicator.swift in Sources */,
 				F8210DE52966E160001D9973 /* Color+SystemColors.swift in Sources */,
@@ -565,6 +583,7 @@
 				F85DBF8F296732E20069BF89 /* FollowersView.swift in Sources */,
 				F85D49872964334100751DF7 /* String+Date.swift in Sources */,
 				F897978829681B9C00B22335 /* UserAvatar.swift in Sources */,
+				F808641429756666009F035C /* NotificationRow.swift in Sources */,
 				F8210DDD2966CF17001D9973 /* StatusData+Status.swift in Sources */,
 				F8210DCF2966B600001D9973 /* ImageRowAsync.swift in Sources */,
 				F85D498329642FAC00751DF7 /* AttachmentData+Comperable.swift in Sources */,
@@ -587,6 +606,7 @@
 				F897978D2968369600B22335 /* HapticService.swift in Sources */,
 				F8341F90295C636C009C8EE6 /* Data+Exif.swift in Sources */,
 				F89D6C4A297196FF001DA3D4 /* ImagesViewer.swift in Sources */,
+				F80864112975537F009F035C /* NotificationService.swift in Sources */,
 				F8A93D7E2965FD89001D8331 /* UserProfileView.swift in Sources */,
 				F88C246E295C37B80006098B /* MainView.swift in Sources */,
 				F86B721E296C458700EE59EC /* BlurredImage.swift in Sources */,

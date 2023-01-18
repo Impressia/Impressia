@@ -1,6 +1,6 @@
 import Foundation
 
-public typealias StatusId = String
+public typealias EntityId = String
 public typealias Html = String
 
 public class Status: Codable {
@@ -11,14 +11,14 @@ public class Status: Codable {
         case direct = "direct"
     }
 
-    public let id: StatusId
+    public let id: EntityId
     public let content: Html
     
     public let uri: String?
     public let url: URL?
     public let account: Account
     public let inReplyToId: AccountId?
-    public let inReplyToAccount: StatusId?
+    public let inReplyToAccount: EntityId?
     public let reblog: Status?
     public let createdAt: String
     public let reblogsCount: Int
@@ -71,14 +71,14 @@ public class Status: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        self.id = try container.decode(StatusId.self, forKey: .id)
+        self.id = try container.decode(EntityId.self, forKey: .id)
         self.uri = try container.decode(String.self, forKey: .uri)
         self.url = try? container.decode(URL.self, forKey: .url)
         self.account = try container.decode(Account.self, forKey: .account)
         self.content = try container.decode(Html.self, forKey: .content)
         self.createdAt = try container.decode(String.self, forKey: .createdAt)
         self.inReplyToId = try? container.decode(AccountId.self, forKey: .inReplyToId)
-        self.inReplyToAccount = try? container.decode(StatusId.self, forKey: .inReplyToAccount)
+        self.inReplyToAccount = try? container.decode(EntityId.self, forKey: .inReplyToAccount)
         self.reblog = try? container.decode(Status.self, forKey: .reblog)
         self.spoilerText = try? container.decode(String.self, forKey: .spoilerText)
         self.reblogsCount = (try? container.decode(Int.self, forKey: .reblogsCount)) ?? 0

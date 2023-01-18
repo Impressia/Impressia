@@ -1,8 +1,8 @@
 import Foundation
 
-public typealias SinceId = StatusId
-public typealias MaxId = StatusId
-public typealias MinId = StatusId
+public typealias SinceId = EntityId
+public typealias MaxId = EntityId
+public typealias MinId = EntityId
 public typealias Limit = Int
 public typealias Page = Int
 

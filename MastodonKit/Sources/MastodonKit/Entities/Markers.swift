@@ -1,7 +1,7 @@
 import Foundation
 
 public struct Marker: Codable {
-    public let lastReadId: StatusId
+    public let lastReadId: EntityId
     public let version: Int64
     public let updatedAt: String
 

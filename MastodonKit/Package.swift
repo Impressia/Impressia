@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "MastodonKit",
     platforms: [
-        .iOS(.v15),
+        .iOS(.v16),
         .macOS(.v12),
         .watchOS(.v8)
     ],

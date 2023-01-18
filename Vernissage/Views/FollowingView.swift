@@ -24,20 +24,24 @@ struct FollowingView: View {
                     accountDisplayName: account.displayName,
                     accountUserName: account.acct)
                     .environmentObject(applicationState)) {
-                        UsernameRow(accountAvatar: account.avatar,
+                        UsernameRow(accountId: account.id,
+                                    accountAvatar: account.avatar,
                                     accountDisplayName: account.displayName,
-                                    accountUsername: account.acct,
-                                    cachedAvatar: CacheAvatarService.shared.getImage(for: account.id))
+                                    accountUsername: account.acct)
                     }
             }
             
             if allItemsLoaded == false && firstLoadFinished == true {
-                LoadingIndicator()
-                    .task {
-                        self.page = self.page + 1
-                        await self.loadAccounts(page: self.page)
-                    }
-                    .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                HStack {
+                    Spacer()
+                    LoadingIndicator()
+                        .task {
+                            self.page = self.page + 1
+                            await self.loadAccounts(page: self.page)
+                        }
+                    Spacer()
+                }
+                .listRowSeparator(.hidden)
             }
         }.overlay {
             if firstLoadFinished == false {
@@ -62,7 +66,6 @@ struct FollowingView: View {
             }
             
             await self.loadAccounts(page: self.page)
-            self.firstLoadFinished = true
         }
     }
     
@@ -75,11 +78,12 @@ struct FollowingView: View {
             
             if accountsFromApi.isEmpty || accountsFromApi.count < 10 {
                 self.allItemsLoaded = true
-                return
             }
             
             await self.downloadAvatars(accounts: accountsFromApi)
             self.accounts.append(contentsOf: accountsFromApi)
+            
+            self.firstLoadFinished = true
         } catch {
             ErrorService.shared.handle(error, message: "Error during download following from server.", showToastr: true)
         }

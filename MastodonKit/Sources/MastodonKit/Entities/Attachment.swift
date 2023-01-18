@@ -34,7 +34,7 @@ public class Attachment: Codable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        self.id = try container.decode(StatusId.self, forKey: .id)
+        self.id = try container.decode(EntityId.self, forKey: .id)
         self.type = try container.decode(AttachmentType.self, forKey: .type)
         self.url = try container.decode(URL.self, forKey: .url)
         self.previewUrl = try? container.decode(URL.self, forKey: .previewUrl)

@@ -22,22 +22,12 @@ struct CommentBody: View {
                 accountDisplayName: self.statusViewModel.account.displayName,
                 accountUserName: self.statusViewModel.account.acct)
                 .environmentObject(applicationState)) {
-                    AsyncImage(url: self.statusViewModel.account.avatar) { image in
-                        image
-                            .resizable()
-                            .clipShape(Circle())
-                            .aspectRatio(contentMode: .fit)
-                    } placeholder: {
-                        Image(systemName: "person.circle")
-                            .resizable()
-                            .foregroundColor(.mainTextColor)
-                    }
-                    .frame(width: 32.0, height: 32.0)
+                    UserAvatar(accountId: self.statusViewModel.account.id, accountAvatar: self.statusViewModel.account.avatar, width: 32, height: 32)
                 }
             
             VStack (alignment: .leading, spacing: 0) {
                 HStack (alignment: .top) {
-                    Text(self.getUserName(statusViewModel: statusViewModel))
+                    Text(statusViewModel.account.displayNameWithoutEmojis)
                         .foregroundColor(.mainTextColor)
                         .font(.footnote)
                         .fontWeight(.bold)
@@ -94,10 +84,6 @@ struct CommentBody: View {
         }
         .padding(8)
         .background(self.getSelectedRowColor(statusViewModel: statusViewModel))
-    }
-    
-    private func getUserName(statusViewModel: StatusViewModel) -> String {
-        return statusViewModel.account.displayName ?? statusViewModel.account.acct 
     }
     
     private func getSelectedRowColor(statusViewModel: StatusViewModel) -> Color {

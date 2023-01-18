@@ -11,7 +11,7 @@ public struct Notification: Codable {
     public let type: NotificationType
     public let createdAt: String
     public let account: Account
-    public let status: Status
+    public let status: Status?
     
     private enum CodingKeys: String, CodingKey {
         case id
@@ -27,7 +27,7 @@ public struct Notification: Codable {
         self.type = try container.decode(NotificationType.self, forKey: .type)
         self.createdAt = try container.decode(String.self, forKey: .createdAat)
         self.account = try container.decode(Account.self, forKey: .account)
-        self.status = try container.decode(Status.self, forKey: .status)
+        self.status = try? container.decode(Status.self, forKey: .status)
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -36,6 +36,9 @@ public struct Notification: Codable {
         try container.encode(type, forKey: .type)
         try container.encode(createdAt, forKey: .createdAat)
         try container.encode(account, forKey: .account)
-        try container.encode(status, forKey: .status)
+        
+        if let status {
+            try container.encode(status, forKey: .status)
+        }
     }
 }

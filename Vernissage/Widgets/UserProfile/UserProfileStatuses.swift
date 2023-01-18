@@ -34,15 +34,18 @@ struct UserProfileStatuses: View {
                 
                 LazyVStack {
                     if allItemsLoaded == false && firstLoadFinished == true {
-                        LoadingIndicator()
-                            .task {
-                                do {
-                                    try await self.loadMoreStatuses()
-                                } catch {
-                                    ErrorService.shared.handle(error, message: "Loading more statuses failed.", showToastr: true)
+                        HStack {
+                            Spacer()
+                            LoadingIndicator()
+                                .task {
+                                    do {
+                                        try await self.loadMoreStatuses()
+                                    } catch {
+                                        ErrorService.shared.handle(error, message: "Loading more statuses failed.", showToastr: true)
+                                    }
                                 }
-                            }
-                            .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
+                            Spacer()
+                        }
                     }
                 }
                 

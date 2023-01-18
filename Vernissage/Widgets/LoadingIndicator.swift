@@ -16,7 +16,7 @@ struct LoadingIndicator: View {
     
     var body: some View {
         ActivityIndicatorView(isVisible: $isVisible, type: .equalizer(count: 5))
-            .frame(width: 36.0, height: 24.0)
+            .frame(width: 24.0, height: 16.0)
             .foregroundColor(.lightGrayColor)
     }
 }

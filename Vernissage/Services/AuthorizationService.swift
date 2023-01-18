@@ -69,7 +69,7 @@ public class AuthorizationService {
         accountData.id = account.id
         accountData.username = account.username
         accountData.acct = account.acct
-        accountData.displayName = account.displayName
+        accountData.displayName = account.displayNameWithoutEmojis
         accountData.note = account.note
         accountData.url = account.url
         accountData.avatar = account.avatar
