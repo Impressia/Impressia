@@ -97,9 +97,3 @@ struct FollowersView: View {
         }
     }
 }
-
-struct FollowersView_Previews: PreviewProvider {
-    static var previews: some View {
-        FollowersView(accountId: "")
-    }
-}

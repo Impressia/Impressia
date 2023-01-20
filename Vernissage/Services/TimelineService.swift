@@ -8,10 +8,6 @@ import Foundation
 import CoreData
 import MastodonKit
 
-public enum DatabaseError: Error {
-    case cannotDownloadAccount
-}
-
 public class TimelineService {
     public static let shared = TimelineService()
     private init() { }
@@ -40,11 +36,11 @@ public class TimelineService {
         // Get maximimum downloaded stauts id.
         let newestStatus = StatusDataHandler.shared.getMaximumStatus(accountId: accountData.id, viewContext: backgroundContext)
                 
-        let statuses = try await self.loadData(for: accountData, on: backgroundContext, minId: newestStatus?.id)
-        try await self.clearOldStatuses(for: accountData, on: backgroundContext)
+        let newStatuses = try await self.loadData(for: accountData, on: backgroundContext, minId: newestStatus?.id)
+        try await self.clearOldStatuses(newStatuses: newStatuses, for: accountData, on: backgroundContext)
         
         try backgroundContext.save()
-        return statuses.count
+        return newStatuses.count
     }
     
     public func getComments(for statusId: String, and accountData: AccountData) async throws -> [CommentViewModel] {
@@ -69,7 +65,7 @@ public class TimelineService {
         }
     }
     
-    private func clearOldStatuses(for accountData: AccountData, on backgroundContext: NSManagedObjectContext) async throws {
+    private func clearOldStatuses(newStatuses: [Status], for accountData: AccountData, on backgroundContext: NSManagedObjectContext) async throws {
         guard let accessToken = accountData.accessToken else {
             return
         }
@@ -87,8 +83,23 @@ public class TimelineService {
             }
         }
         
+        // Remove statuses that are not in 40 downloaded once.
         if !dbStatusesToRemove.isEmpty {
             StatusDataHandler.shared.remove(accountId: accountData.id, statuses: dbStatusesToRemove)
+        }
+        
+        // Add statuses which are not existing in database, but has been downloaded via API.
+        var statusesToAdd: [Status] = []
+        for status in statuses {
+            if !dbStatuses.contains(where: { statusData in statusData.id == status.id }) &&
+                !newStatuses.contains(where: { newStatus in newStatus.id == status.id }) {
+                statusesToAdd.append(status)
+            }
+        }
+        
+        // Save statuses in database (and download images).
+        if !statusesToAdd.isEmpty {
+            try await self.save(statuses: statusesToAdd, accountData: accountData, on: backgroundContext)
         }
     }
     
@@ -100,7 +111,28 @@ public class TimelineService {
         // Retrieve statuses from API.
         let client = MastodonClient(baseURL: accountData.serverUrl).getAuthenticated(token: accessToken)
         let statuses = try await client.getHomeTimeline(maxId: maxId, minId: minId, limit: 20)
-                
+
+        // Save statuses in database (and download images).
+        try await self.save(statuses: statuses, accountData: accountData, on: backgroundContext)
+
+        return statuses
+    }
+    
+    public func updateStatus(_ statusData: StatusData, accountData: AccountData, basedOn status: Status) async throws -> StatusData? {
+        // Load data from API and operate on CoreData on background context.
+        let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
+        
+        // Download all images from server.
+        let attachmentsData = await self.fetchAllImages(statuses: [status])
+        
+        // Update status data in database.
+        try await self.copy(from: status, to: statusData, attachmentsData: attachmentsData, on: backgroundContext)
+        try backgroundContext.save()
+        
+        return statusData
+    }
+    
+    private func save(statuses: [Status], accountData: AccountData, on backgroundContext: NSManagedObjectContext) async throws {
         // Download all images from server.
         let attachmentsData = await self.fetchAllImages(statuses: statuses)
         
@@ -128,22 +160,6 @@ public class TimelineService {
             
             try await self.copy(from: status, to: statusData, attachmentsData: attachmentsData, on: backgroundContext)
         }
-        
-        return statuses
-    }
-    
-    public func updateStatus(_ statusData: StatusData, accountData: AccountData, basedOn status: Status) async throws -> StatusData? {
-        // Load data from API and operate on CoreData on background context.
-        let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
-        
-        // Download all images from server.
-        let attachmentsData = await self.fetchAllImages(statuses: [status])
-        
-        // Update status data in database.
-        try await self.copy(from: status, to: statusData, attachmentsData: attachmentsData, on: backgroundContext)
-        try backgroundContext.save()
-        
-        return statusData
     }
     
     private func copy(from status: Status, to statusData: StatusData, attachmentsData: Dictionary<String, Data>, on backgroundContext: NSManagedObjectContext) async throws {

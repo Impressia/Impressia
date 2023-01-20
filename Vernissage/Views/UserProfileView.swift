@@ -53,9 +53,3 @@ struct UserProfileView: View {
         (self.relationship, self.account) = try await (relationshipTask, accountTask)
     }
 }
-
-struct UserProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        UserProfileView(accountId: "", accountDisplayName: "", accountUserName: "")
-    }
-}

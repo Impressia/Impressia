@@ -100,9 +100,3 @@ struct HomeFeedView: View {
         }
     }
 }
-
-struct HomeFeedView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeFeedView(accountId: "")
-    }
-}

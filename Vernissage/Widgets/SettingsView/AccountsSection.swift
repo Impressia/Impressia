@@ -31,9 +31,3 @@ struct AccountsSection: View {
         }
     }
 }
-
-struct AccountsSection_Previews: PreviewProvider {
-    static var previews: some View {
-        AccountsSection()
-    }
-}

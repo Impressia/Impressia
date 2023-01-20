@@ -109,10 +109,3 @@ struct ComposeView: View {
         }
     }
 }
-
-struct ComposeView_Previews: PreviewProvider {
-    static var previews: some View {
-        Text("")
-        // ComposeView(status: .constant(Status(id: "", content: "", application: Application(name: ""))))
-    }
-}

@@ -11,9 +11,3 @@ struct FederatedFeedView: View {
         Text("Federated feed")
     }
 }
-
-struct FederatedFeedView_Previews: PreviewProvider {
-    static var previews: some View {
-        FederatedFeedView()
-    }
-}

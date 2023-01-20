@@ -6,7 +6,6 @@
 
 import Foundation
 
-
 public extension MastodonClientAuthenticated {
     func getNotifications(maxId: MaxId? = nil,
                           sinceId: SinceId? = nil,

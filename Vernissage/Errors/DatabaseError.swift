@@ -4,10 +4,6 @@
 //  Licensed under the MIT License.
 //
 
-import Foundation
-import CoreData
-
-@objc(AttachmentData)
-public class AttachmentData: NSManagedObject {
-
+public enum DatabaseError: Error {
+    case cannotDownloadAccount
 }

@@ -175,8 +175,3 @@ struct StatusView: View {
     }
 }
 
-struct StatusView_Previews: PreviewProvider {
-    static var previews: some View {
-        StatusView(statusId: "123")
-    }
-}

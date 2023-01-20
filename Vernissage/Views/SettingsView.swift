@@ -82,9 +82,3 @@ struct SettingsView: View {
         return UITraitCollection.current.userInterfaceStyle == .light ? .light : .dark
     }
 }
-
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView()
-    }
-}

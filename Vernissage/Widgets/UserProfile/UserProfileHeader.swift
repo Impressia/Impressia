@@ -120,9 +120,3 @@ struct UserProfileHeader: View {
     }
 }
 
-struct UserProfileHeader_Previews: PreviewProvider {
-    static var previews: some View {
-        Text("")
-        // UserProfileHeader(account: Account(), relationship: Relationship())
-    }
-}

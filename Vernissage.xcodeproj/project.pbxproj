@@ -13,6 +13,7 @@
 		F80048062961850500E6868A /* StatusData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048022961850500E6868A /* StatusData+CoreDataProperties.swift */; };
 		F80048082961E6DE00E6868A /* StatusDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048072961E6DE00E6868A /* StatusDataHandler.swift */; };
 		F800480A2961EA1900E6868A /* AttachmentDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048092961EA1900E6868A /* AttachmentDataHandler.swift */; };
+		F802884F297AEED5000BDD51 /* DatabaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F802884E297AEED5000BDD51 /* DatabaseError.swift */; };
 		F80864112975537F009F035C /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80864102975537F009F035C /* NotificationService.swift */; };
 		F808641429756666009F035C /* NotificationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F808641329756666009F035C /* NotificationRow.swift */; };
 		F8210DCF2966B600001D9973 /* ImageRowAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8210DCE2966B600001D9973 /* ImageRowAsync.swift */; };
@@ -111,6 +112,7 @@
 		F80048022961850500E6868A /* StatusData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F80048072961E6DE00E6868A /* StatusDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusDataHandler.swift; sourceTree = "<group>"; };
 		F80048092961EA1900E6868A /* AttachmentDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentDataHandler.swift; sourceTree = "<group>"; };
+		F802884E297AEED5000BDD51 /* DatabaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseError.swift; sourceTree = "<group>"; };
 		F80864102975537F009F035C /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		F808641329756666009F035C /* NotificationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRow.swift; sourceTree = "<group>"; };
 		F8210DCE2966B600001D9973 /* ImageRowAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRowAsync.swift; sourceTree = "<group>"; };
@@ -219,6 +221,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F802884D297AEEAA000BDD51 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				F802884E297AEED5000BDD51 /* DatabaseError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
 		F808641229756583009F035C /* NotificationsView */ = {
 			isa = PBXGroup;
 			children = (
@@ -377,6 +387,7 @@
 			isa = PBXGroup;
 			children = (
 				F866F6A829604FFF002E8F88 /* Info.plist */,
+				F802884D297AEEAA000BDD51 /* Errors */,
 				F89992CA296D9211005994BF /* ViewModels */,
 				F86B721F296C498B00EE59EC /* Styles */,
 				F88ABD9029686F00004EF61E /* Cache */,
@@ -630,6 +641,7 @@
 				F8C14392296AF0B3001FE31D /* String+Exif.swift in Sources */,
 				F85E1320297409CD006A051D /* ErrorsService.swift in Sources */,
 				F88C246C295C37B80006098B /* VernissageApp.swift in Sources */,
+				F802884F297AEED5000BDD51 /* DatabaseError.swift in Sources */,
 				F85D4971296402DC00751DF7 /* AuthorizationService.swift in Sources */,
 				F88FAD25295F3FF7009B20C9 /* FederatedFeedView.swift in Sources */,
 				F88FAD32295F5029009B20C9 /* RemoteFileService.swift in Sources */,

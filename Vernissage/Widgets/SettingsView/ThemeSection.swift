@@ -55,9 +55,3 @@ struct ThemeSection: View {
         }
     }
 }
-
-struct ThemeSection_Previews: PreviewProvider {
-    static var previews: some View {
-        ThemeSection()
-    }
-}

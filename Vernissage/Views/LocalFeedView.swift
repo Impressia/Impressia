@@ -11,9 +11,3 @@ struct LocalFeedView: View {
         Text("Local feed")
     }
 }
-
-struct LocalFeedView_Previews: PreviewProvider {
-    static var previews: some View {
-        LocalFeedView()
-    }
-}

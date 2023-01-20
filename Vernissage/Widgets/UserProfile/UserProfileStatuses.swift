@@ -106,8 +106,3 @@ struct UserProfileStatuses: View {
     }
 }
 
-struct UserProfileStatuses_Previews: PreviewProvider {
-    static var previews: some View {
-        UserProfileStatuses(accountId: "")
-    }
-}
