@@ -49,7 +49,7 @@ struct HomeFeedView: View {
                                     }
                                 }
                             } catch {
-                                ErrorService.shared.handle(error, message: "Error during download statuses from server.", showToastr: true)
+                                ErrorService.shared.handle(error, message: "Error during download statuses from server.", showToastr: !Task.isCancelled)
                             }
                         }
                 }
@@ -95,7 +95,7 @@ struct HomeFeedView: View {
                     _ = try await TimelineService.shared.onTopOfList(for: accountData)
                 }
             } catch {
-                ErrorService.shared.handle(error, message: "Error during download statuses from server.", showToastr: true)
+                ErrorService.shared.handle(error, message: "Error during download statuses from server.", showToastr: !Task.isCancelled)
             }
         }
     }

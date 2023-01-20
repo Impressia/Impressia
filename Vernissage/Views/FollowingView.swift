@@ -85,7 +85,7 @@ struct FollowingView: View {
             
             self.firstLoadFinished = true
         } catch {
-            ErrorService.shared.handle(error, message: "Error during download following from server.", showToastr: true)
+            ErrorService.shared.handle(error, message: "Error during download following from server.", showToastr: !Task.isCancelled)
         }
     }
     

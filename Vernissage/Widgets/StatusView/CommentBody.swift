@@ -12,7 +12,7 @@ struct CommentBody: View {
     @EnvironmentObject var applicationState: ApplicationState
 
     @State var statusViewModel: StatusViewModel
-    private let contentWidth = Int(UIScreen.main.bounds.width) - 50
+    private let contentWidth = Int(UIScreen.main.bounds.width) - 60
     
     var body: some View {
         HStack (alignment: .top) {

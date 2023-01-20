@@ -59,7 +59,7 @@ struct CommentsSection: View {
                     self.commentViewModels = try await TimelineService.shared.getComments(for: statusId, and: accountData)
                 }
             } catch {
-                ErrorService.shared.handle(error, message: "Comments cannot be downloaded.", showToastr: true)
+                ErrorService.shared.handle(error, message: "Comments cannot be downloaded.", showToastr: !Task.isCancelled)
             }
         }
     }

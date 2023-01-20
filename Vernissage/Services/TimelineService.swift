@@ -27,7 +27,10 @@ public class TimelineService {
             return 0
         }
         
-        return try await self.loadData(for: accountData, on: backgroundContext, maxId: oldestStatus.id)
+        let statuses = try await self.loadData(for: accountData, on: backgroundContext, maxId: oldestStatus.id)
+        
+        try backgroundContext.save()
+        return statuses.count
     }
 
     public func onTopOfList(for accountData: AccountData) async throws -> Int {
@@ -37,7 +40,11 @@ public class TimelineService {
         // Get maximimum downloaded stauts id.
         let newestStatus = StatusDataHandler.shared.getMaximumStatus(accountId: accountData.id, viewContext: backgroundContext)
                 
-        return try await self.loadData(for: accountData, on: backgroundContext, minId: newestStatus?.id)
+        let statuses = try await self.loadData(for: accountData, on: backgroundContext, minId: newestStatus?.id)
+        try await self.clearOldStatuses(for: accountData, on: backgroundContext)
+        
+        try backgroundContext.save()
+        return statuses.count
     }
     
     public func getComments(for statusId: String, and accountData: AccountData) async throws -> [CommentViewModel] {
@@ -62,9 +69,32 @@ public class TimelineService {
         }
     }
     
-    private func loadData(for accountData: AccountData, on backgroundContext: NSManagedObjectContext, minId: String? = nil, maxId: String? = nil) async throws -> Int {
+    private func clearOldStatuses(for accountData: AccountData, on backgroundContext: NSManagedObjectContext) async throws {
         guard let accessToken = accountData.accessToken else {
-            return 0
+            return
+        }
+        
+        // Retrieve statuses from API.
+        let client = MastodonClient(baseURL: accountData.serverUrl).getAuthenticated(token: accessToken)
+        let statuses = try await client.getHomeTimeline(limit: 40)
+        
+        let dbStatuses = StatusDataHandler.shared.getAllStatuses(accountId: accountData.id)
+        
+        var dbStatusesToRemove: [StatusData] = []
+        for dbStatus in dbStatuses {
+            if !statuses.contains(where: { status in status.id == dbStatus.id }) {
+                dbStatusesToRemove.append(dbStatus)
+            }
+        }
+        
+        if !dbStatusesToRemove.isEmpty {
+            StatusDataHandler.shared.remove(accountId: accountData.id, statuses: dbStatusesToRemove)
+        }
+    }
+    
+    private func loadData(for accountData: AccountData, on backgroundContext: NSManagedObjectContext, minId: String? = nil, maxId: String? = nil) async throws -> [Status] {
+        guard let accessToken = accountData.accessToken else {
+            return []
         }
                 
         // Retrieve statuses from API.
@@ -86,21 +116,20 @@ public class TimelineService {
             if contains == false {
                 continue
             }
-            
-            let statusData = StatusDataHandler.shared.createStatusDataEntity(viewContext: backgroundContext)
-            
+
             guard let dbAccount = AccountDataHandler.shared.getAccountData(accountId: accountData.id, viewContext: backgroundContext) else {
                 throw DatabaseError.cannotDownloadAccount
             }
             
+            let statusData = StatusDataHandler.shared.createStatusDataEntity(viewContext: backgroundContext)
+
             statusData.pixelfedAccount = dbAccount
             dbAccount.addToStatuses(statusData)
             
             try await self.copy(from: status, to: statusData, attachmentsData: attachmentsData, on: backgroundContext)
         }
         
-        try backgroundContext.save()
-        return statuses.count
+        return statuses
     }
     
     public func updateStatus(_ statusData: StatusData, accountData: AccountData, basedOn status: Status) async throws -> StatusData? {

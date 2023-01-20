@@ -85,7 +85,7 @@ struct FollowersView: View {
             
             self.firstLoadFinished = true
         } catch {
-            ErrorService.shared.handle(error, message: "Error during download followers from server.", showToastr: true)
+            ErrorService.shared.handle(error, message: "Error during download followers from server.", showToastr: !Task.isCancelled)
         }
     }
     

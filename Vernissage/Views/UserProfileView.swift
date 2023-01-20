@@ -35,7 +35,7 @@ struct UserProfileView: View {
             do {
                 try await self.loadData()
             } catch {
-                ErrorService.shared.handle(error, message: "Error during download account from server.", showToastr: true)
+                ErrorService.shared.handle(error, message: "Error during download account from server.", showToastr: !Task.isCancelled)
             }
         }
     }

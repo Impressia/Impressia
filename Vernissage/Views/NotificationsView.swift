@@ -18,7 +18,7 @@ struct NotificationsView: View {
     @State private var minId: String?
     @State private var maxId: String?
     
-    private let defaultPageSize = 10
+    private let defaultPageSize = 20
     
     var body: some View {
         List {
@@ -103,7 +103,7 @@ struct NotificationsView: View {
             
             self.firstLoadFinished = true
         } catch {
-            ErrorService.shared.handle(error, message: "Error during download notifications from server.", showToastr: true)
+            ErrorService.shared.handle(error, message: "Error during download notifications from server.", showToastr: !Task.isCancelled)
         }
     }
     
@@ -124,7 +124,7 @@ struct NotificationsView: View {
                 self.allItemsLoaded = true
             }
         } catch {
-            ErrorService.shared.handle(error, message: "Error during download notifications from server.", showToastr: true)
+            ErrorService.shared.handle(error, message: "Error during download notifications from server.", showToastr: !Task.isCancelled)
         }
     }
     
@@ -149,7 +149,7 @@ struct NotificationsView: View {
 
             self.notifications = downloaded
         } catch {
-            ErrorService.shared.handle(error, message: "Error during download notifications from server.", showToastr: true)
+            ErrorService.shared.handle(error, message: "Error during download notifications from server.", showToastr: !Task.isCancelled)
         }
     }
     

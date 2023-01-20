@@ -3,7 +3,6 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the MIT License.
 //
-    
 
 import Foundation
 import CoreData
@@ -12,6 +11,22 @@ import MastodonKit
 class StatusDataHandler {
     public static let shared = StatusDataHandler()
     private init() { }
+    
+    func getAllStatuses(accountId: String) -> [StatusData] {
+        let context = CoreDataHandler.shared.container.viewContext
+        let fetchRequest = StatusData.fetchRequest()
+
+        let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.predicate = NSPredicate(format: "pixelfedAccount.id = %@", accountId)
+        
+        do {
+            return try context.fetch(fetchRequest)
+        } catch {
+            ErrorService.shared.handle(error, message: "Error during fetching status (getStatusData).")
+            return []
+        }
+    }
     
     func getStatusData(accountId: String, statusId: String) -> StatusData? {
         let context = CoreDataHandler.shared.container.viewContext
@@ -77,6 +92,20 @@ class StatusDataHandler {
         
         let context = CoreDataHandler.shared.container.viewContext
         context.delete(status)
+
+        do {
+            try context.save()
+        } catch {
+            ErrorService.shared.handle(error, message: "Error during deleting status (remove).")
+        }
+    }
+    
+    func remove(accountId: String, statuses: [StatusData]) {
+        let context = CoreDataHandler.shared.container.viewContext
+        
+        for status in statuses {
+            context.delete(status)
+        }
 
         do {
             try context.save()

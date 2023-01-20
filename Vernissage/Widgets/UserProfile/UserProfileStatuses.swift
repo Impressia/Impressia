@@ -56,7 +56,7 @@ struct UserProfileStatuses: View {
             do {
                 try await self.loadStatuses()
             } catch {
-                ErrorService.shared.handle(error, message: "Loading statuses failed.", showToastr: true)
+                ErrorService.shared.handle(error, message: "Loading statuses failed.", showToastr: !Task.isCancelled)
             }
         }
     }

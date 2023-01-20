@@ -148,7 +148,7 @@ struct StatusView: View {
                 }
             }
             catch {
-                ErrorService.shared.handle(error, message: "Error during download status from server.", showToastr: true)
+                ErrorService.shared.handle(error, message: "Error during download status from server.", showToastr: !Task.isCancelled)
             }
         }
     }
