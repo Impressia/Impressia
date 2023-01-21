@@ -43,7 +43,7 @@ struct HomeFeedView: View {
                         .task {
                             do {
                                 if let accountData = self.applicationState.accountData {
-                                    let newStatusesCount = try await TimelineService.shared.onBottomOfList(for: accountData)
+                                    let newStatusesCount = try await HomeTimelineService.shared.onBottomOfList(for: accountData)
                                     if newStatusesCount == 0 {
                                         allItemsBottomLoaded = true
                                     }
@@ -73,7 +73,7 @@ struct HomeFeedView: View {
         .refreshable {
             do {
                 if let accountData = self.applicationState.accountData {
-                    _ = try await TimelineService.shared.onTopOfList(for: accountData)
+                    _ = try await HomeTimelineService.shared.onTopOfList(for: accountData)
                 }
             } catch {
                 print("Error", error)
@@ -92,7 +92,7 @@ struct HomeFeedView: View {
                 }
 
                 if let accountData = self.applicationState.accountData {
-                    _ = try await TimelineService.shared.onTopOfList(for: accountData)
+                    _ = try await HomeTimelineService.shared.onTopOfList(for: accountData)
                 }
             } catch {
                 ErrorService.shared.handle(error, message: "Error during download statuses from server.", showToastr: !Task.isCancelled)

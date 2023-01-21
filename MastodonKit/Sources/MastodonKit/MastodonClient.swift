@@ -89,69 +89,6 @@ public class MastodonClientAuthenticated: MastodonClientProtocol {
         self.baseURL = baseURL
         self.urlSession = urlSession
     }
-        
-    public func getHomeTimeline(
-        maxId: EntityId? = nil,
-        sinceId: EntityId? = nil,
-        minId: EntityId? = nil,
-        limit: Int? = nil) async throws -> [Status] {
-
-        let request = try Self.request(
-            for: baseURL,
-            target: Mastodon.Timelines.home(maxId, sinceId, minId, limit),
-            withBearerToken: token
-        )
-                    
-        return try await downloadJson([Status].self, request: request)
-    }
-
-    public func getPublicTimeline(isLocal: Bool = false,
-                                  maxId: EntityId? = nil,
-                                  sinceId: EntityId? = nil) async throws -> [Status] {
-
-        let request = try Self.request(
-            for: baseURL,
-            target: Mastodon.Timelines.pub(isLocal, maxId, sinceId),
-            withBearerToken: token
-        )
-        
-        
-        return try await downloadJson([Status].self, request: request)
-    }
-
-    public func getTagTimeline(tag: String,
-                               isLocal: Bool = false,
-                               maxId: EntityId? = nil,
-                               sinceId: EntityId? = nil) async throws -> [Status] {
-
-        let request = try Self.request(
-            for: baseURL,
-            target: Mastodon.Timelines.tag(tag, isLocal, maxId, sinceId),
-            withBearerToken: token
-        )
-        
-        return try await downloadJson([Status].self, request: request)
-    }
-
-    public func saveMarkers(_ markers: [Mastodon.Markers.Timeline: EntityId]) async throws -> Markers {
-        let request = try Self.request(
-            for: baseURL,
-            target: Mastodon.Markers.set(markers),
-            withBearerToken: token
-        )
-
-        return try await downloadJson(Markers.self, request: request)
-    }
-
-    public func readMarkers(_ markers: Set<Mastodon.Markers.Timeline>) async throws -> Markers {
-        let request = try Self.request(
-            for: baseURL,
-            target: Mastodon.Markers.read(markers),
-            withBearerToken: token
-        )
-
-        return try await downloadJson(Markers.self, request: request)
-    }
     
     public func downloadJson<T>(_ type: T.Type, request: URLRequest) async throws -> T where T: Decodable {
         let (data, response) = try await urlSession.data(for: request)

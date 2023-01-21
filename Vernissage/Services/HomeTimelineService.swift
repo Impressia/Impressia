@@ -8,8 +8,8 @@ import Foundation
 import CoreData
 import MastodonKit
 
-public class TimelineService {
-    public static let shared = TimelineService()
+public class HomeTimelineService {
+    public static let shared = HomeTimelineService()
     private init() { }
     
     public func onBottomOfList(for accountData: AccountData) async throws -> Int {
@@ -41,28 +41,6 @@ public class TimelineService {
         
         try backgroundContext.save()
         return newStatuses.count
-    }
-    
-    public func getComments(for statusId: String, and accountData: AccountData) async throws -> [CommentViewModel] {
-        var commentViewModels: [CommentViewModel] = []
-        
-        let client = MastodonClient(baseURL: accountData.serverUrl).getAuthenticated(token: accountData.accessToken ?? String.empty())
-        try await self.getCommentDescendants(for: statusId, client: client, showDivider: true, to: &commentViewModels)
-        
-        return commentViewModels
-    }
-    
-    private func getCommentDescendants(for statusId: String, client: MastodonClientAuthenticated, showDivider: Bool, to commentViewModels: inout [CommentViewModel]) async throws {
-        let context = try await client.getContext(for: statusId)
-        
-        let descendants = context.descendants.toStatusViewModel()
-        for status in descendants {
-            commentViewModels.append(CommentViewModel(status: status, showDivider: showDivider))
-            
-            if status.repliesCount > 0 {
-                try await self.getCommentDescendants(for: status.id, client: client, showDivider: false, to: &commentViewModels)
-            }
-        }
     }
     
     private func clearOldStatuses(newStatuses: [Status], for accountData: AccountData, on backgroundContext: NSManagedObjectContext) async throws {

@@ -145,9 +145,8 @@ struct NotificationsView: View {
             
             self.minId = linkable.link?.minId
             var downloaded = linkable.data
-            downloaded.append(contentsOf: self.notifications)
 
-            self.notifications = downloaded
+            self.notifications.insert(contentsOf: downloaded, at: 0)
         } catch {
             ErrorService.shared.handle(error, message: "Error during download notifications from server.", showToastr: !Task.isCancelled)
         }

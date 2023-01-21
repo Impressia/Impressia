@@ -15,6 +15,11 @@ struct ImageRowAsync: View {
     @State private var imageWidth = UIScreen.main.bounds.width
     @State private var heightWasPrecalculated = true
     
+    init(statusViewModel: StatusViewModel) {
+        self.statusViewModel = statusViewModel
+        self.recalculateSizeFromMetadata()
+    }
+    
     var body: some View {
         if let attachment = statusViewModel.mediaAttachments.first {
             ZStack {
@@ -64,9 +69,6 @@ struct ImageRowAsync: View {
                 }
             }
             .frame(width: self.imageWidth, height: self.imageHeight)
-            .onAppear {
-                self.recalculateSizeFromMetadata()
-            }
         } else {
             EmptyView()
         }
@@ -95,12 +97,5 @@ struct ImageRowAsync: View {
     private func calculateHeight(width: Double, height: Double) -> CGFloat {
         let divider = width / UIScreen.main.bounds.size.width
         return height / divider
-    }
-}
-
-struct ImageRowAsync_Previews: PreviewProvider {
-    static var previews: some View {
-        Text("")
-        // ImageRowAsync(status: Status())
     }
 }

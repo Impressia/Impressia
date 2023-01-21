@@ -15,8 +15,8 @@ public typealias Page = Int
 extension Mastodon {
     public enum Timelines {
         case home(MaxId?, SinceId?, MinId?, Limit?)
-        case pub(Bool, MaxId?, SinceId?) // Bool = local
-        case tag(String, Bool, MaxId?, SinceId?) // Bool = local
+        case pub(Bool, Bool, Bool, MaxId?, SinceId?, MinId?, Limit?)
+        case tag(String, Bool, Bool, Bool, MaxId?, SinceId?, MinId?, Limit?)
     }
 }
 
@@ -30,7 +30,7 @@ extension Mastodon.Timelines: TargetType {
             return "\(apiPath)/home"
         case .pub:
             return "\(apiPath)/public"
-        case .tag(let hashtag, _, _, _):
+        case .tag(let hashtag, _, _, _, _, _, _, _):
             return "\(apiPath)/tag/\(hashtag)"
         }
     }
@@ -47,17 +47,23 @@ extension Mastodon.Timelines: TargetType {
     public var queryItems: [(String, String)]? {
         var params: [(String, String)] = []
         var local: Bool? = nil
+        var remote: Bool? = nil
+        var onlyMedia: Bool? = nil
         var maxId: MaxId? = nil
         var sinceId: SinceId? = nil
         var minId: MinId? = nil
         var limit: Limit? = nil
 
         switch self {
-        case .tag(_, let _local, let _maxId, let _sinceId),
-             .pub(let _local, let _maxId, let _sinceId):
+        case .tag(_, let _local, let _remote, let _onlyMedia, let _maxId, let _sinceId, let _minId, let _limit),
+             .pub(let _local, let _remote, let _onlyMedia, let _maxId, let _sinceId, let _minId, let _limit):
             local = _local
+            remote = _remote
+            onlyMedia = _onlyMedia
             maxId = _maxId
             sinceId = _sinceId
+            minId = _minId
+            limit = _limit
         case .home(let _maxId, let _sinceId, let _minId, let _limit):
             maxId = _maxId
             sinceId = _sinceId
@@ -77,8 +83,14 @@ extension Mastodon.Timelines: TargetType {
         if let limit {
             params.append(("limit", "\(limit)"))
         }
-        if let local = local {
+        if let local {
             params.append(("local", local.asString))
+        }
+        if let remote {
+            params.append(("remote", remote.asString))
+        }
+        if let onlyMedia {
+            params.append(("only_media", onlyMedia.asString))
         }
         return params
     }

@@ -123,7 +123,7 @@ struct StatusView: View {
                     let statusViewModel = StatusViewModel(status: status)
                     
                     // Download images and recalculate exif data.
-                    let allImages = await TimelineService.shared.fetchAllImages(statuses: [status])
+                    let allImages = await HomeTimelineService.shared.fetchAllImages(statuses: [status])
                     for attachment in statusViewModel.mediaAttachments {
                         if let data = allImages[attachment.id] {
                             attachment.set(data: data)
@@ -137,7 +137,7 @@ struct StatusView: View {
                     // If we have status in database then we can update data.
                     if let accountData = self.applicationState.accountData,
                        let statusDataFromDatabase = StatusDataHandler.shared.getStatusData(accountId: accountData.id, statusId: self.statusId) {
-                        _ = try await TimelineService.shared.updateStatus(statusDataFromDatabase, accountData: accountData, basedOn: status)
+                        _ = try await HomeTimelineService.shared.updateStatus(statusDataFromDatabase, accountData: accountData, basedOn: status)
                     }
                 }
             } catch NetworkError.notSuccessResponse(let response) {
