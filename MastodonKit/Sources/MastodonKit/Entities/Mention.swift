@@ -6,9 +6,18 @@
 
 import Foundation
 
+/// Mentions of users within the status content.
 public struct Mention: Codable {
-    public let url: String
-    public let username: String
-    public let acct: String
+    
+    /// The account ID of the mentioned user.
     public let id: String
+
+    /// The location of the mentioned user’s profile.
+    public let url: String
+    
+    /// The username of the mentioned user.
+    public let username: String
+    
+    /// The webfinger acct: URI of the mentioned user. Equivalent to username for local users, or username@domain for remote users.
+    public let acct: String
 }

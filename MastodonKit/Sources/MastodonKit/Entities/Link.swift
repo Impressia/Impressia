@@ -7,7 +7,10 @@
 import Foundation
 import RegexBuilder
 
+/// Link returned in header for paging feature/
 public struct Link {
+    
+    /// Raw value of header link.
     public let rawLink: String
 }
 

@@ -47,12 +47,12 @@ struct NotificationRow: View {
                 
                 
                 switch self.notification.type {
-                case .favourite, .reblog, .mention:
+                case .favourite, .reblog, .mention, .status, .poll, .update:
                     if let status = self.notification.status, let statusViewModel = StatusViewModel(status: status) {
                         HStack(alignment: .top) {
                             Spacer()
                             if let attachment = statusViewModel.mediaAttachments.filter({ attachment in
-                                attachment.type == Attachment.AttachmentType.image
+                                attachment.type == MediaAttachment.MediaAttachmentType.image
                             }).first {
                                 if let cachedImage = CacheImageService.shared.getImage(for: attachment.id) {
                                     cachedImage
@@ -67,7 +67,7 @@ struct NotificationRow: View {
                             }
                         }
                     }
-                case .follow:
+                case .follow, .followRequest, .adminSignUp:
                     if let note = self.notification.account.note {
                         HTMLFormattedText(note, withFontSize: 12, andWidth: contentWidth)
                             .padding(.top, -4)
@@ -75,6 +75,9 @@ struct NotificationRow: View {
                     } else {
                         EmptyView()
                     }
+                case .adminReport:
+                    Text(self.notification.report?.comment ?? "")
+                        .multilineTextAlignment(.leading)
                 }
             }
         }
@@ -109,6 +112,18 @@ struct NotificationRow: View {
             return "boosted"
         case .favourite:
             return "favourited"
+        case .status:
+            return "posted status"
+        case .followRequest:
+            return "follow request"
+        case .poll:
+            return "poll"
+        case .update:
+            return "updated post"
+        case .adminSignUp:
+            return "signed up"
+        case .adminReport:
+            return "new report"
         }
     }
     
@@ -122,6 +137,18 @@ struct NotificationRow: View {
             return "paperplane"
         case .favourite:
             return "hand.thumbsup"
+        case .status:
+            return "photo.on.rectangle.angled"
+        case .followRequest:
+            return "person.badge.clock"
+        case .poll:
+            return "checklist"
+        case .update:
+            return "text.below.photo"
+        case .adminSignUp:
+            return "person.badge.key"
+        case .adminReport:
+            return "exclamationmark.bubble"
         }
     }
     
@@ -135,6 +162,18 @@ struct NotificationRow: View {
             return Color.accentColor5
         case .favourite:
             return Color.accentColor6
+        case .status:
+            return Color.accentColor1
+        case .followRequest:
+            return Color.accentColor2
+        case .poll:
+            return Color.accentColor7
+        case .update:
+            return Color.accentColor8
+        case .adminSignUp:
+            return Color.accentColor9
+        case .adminReport:
+            return Color.accentColor10
         }
     }
 }

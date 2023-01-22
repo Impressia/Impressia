@@ -6,9 +6,19 @@
     
 import Foundation
 
+/// Location where image has been taken.
+/// Entity specific for Pixelfed.
 public struct Place: Codable {
+    
+    /// Id of the entity.
     public let id: Int32
+    
+    /// City where picture has been taken.
     public let slug: String?
+    
+    /// City where picture has been taken.
     public let name: String?
+    
+    /// Country where picture has been taken.
     public let country: String?
 }

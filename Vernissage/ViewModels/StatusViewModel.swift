@@ -16,7 +16,7 @@ public class StatusViewModel {
     public let uri: String?
     public let url: URL?
     public let account: Account
-    public let inReplyToId: AccountId?
+    public let inReplyToId: EntityId?
     public let inReplyToAccount: EntityId?
     public let reblog: Status?
     public let createdAt: String
@@ -32,10 +32,10 @@ public class StatusViewModel {
     public let spoilerText: String?
     public let visibility: Status.Visibility
     public let mediaAttachments: [AttachmentViewModel]
-    public let card: Card?
+    public let card: PreviewCard?
     public let mentions: [Mention]
     public let tags: [Tag]
-    public let application: Application?
+    public let application: BaseApplication?
     public let place: Place?
     
     public init(
@@ -43,9 +43,9 @@ public class StatusViewModel {
         content: Html,
         uri: String,
         account: Account,
-        application: Application,
+        application: BaseApplication,
         url: URL? = nil,
-        inReplyToId: AccountId? = nil,
+        inReplyToId: EntityId? = nil,
         inReplyToAccount: EntityId? = nil,
         reblog: Status? = nil,
         createdAt: String? = nil,
@@ -61,7 +61,7 @@ public class StatusViewModel {
         spoilerText: String? = nil,
         visibility: Status.Visibility = Status.Visibility.pub,
         mediaAttachments: [AttachmentViewModel] = [],
-        card: Card? = nil,
+        card: PreviewCard? = nil,
         mentions: [Mention] = [],
         tags: [Tag] = [],
         place: Place? = nil

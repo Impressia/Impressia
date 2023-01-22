@@ -6,14 +6,9 @@
 
 import Foundation
 
-public typealias ClientId = String
-public typealias ClientSecret = String
-public typealias UsernameType = String
-public typealias PasswordType = String
-
 extension Mastodon {
     public enum OAuth {
-        case authenticate(App, UsernameType, PasswordType, String?)
+        case authenticate(Application, UsernameType, PasswordType, String?)
     }
 }
 

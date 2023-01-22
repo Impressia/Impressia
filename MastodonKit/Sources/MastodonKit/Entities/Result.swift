@@ -6,12 +6,17 @@
 
 import Foundation
 
-public typealias Hashtag = String
-
+/// Search results.
 public struct Result: Codable {
+    
+    /// List of accoutns.
     public let accounts: [Account]
+    
+    /// List od statuses.
     public let statuses: [Status]
-    public let hashtags: [Hashtag]
+    
+    
+    public let hashtags: [Tag]
 
     public enum CodingKeys: CodingKey {
         case accounts
@@ -23,6 +28,6 @@ public struct Result: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.accounts = (try? container.decode([Account].self, forKey: .accounts)) ?? []
         self.statuses = (try? container.decode([Status].self, forKey: .statuses)) ?? []
-        self.hashtags = (try? container.decode([Hashtag].self, forKey: .hashtags)) ?? []
+        self.hashtags = (try? container.decode([Tag].self, forKey: .hashtags)) ?? []
     }
 }

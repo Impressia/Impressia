@@ -96,7 +96,6 @@
 		F89D6C4429718092001DA3D4 /* AccentsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C4329718092001DA3D4 /* AccentsSection.swift */; };
 		F89D6C4629718193001DA3D4 /* ThemeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C4529718193001DA3D4 /* ThemeSection.swift */; };
 		F89D6C4A297196FF001DA3D4 /* ImagesViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C49297196FF001DA3D4 /* ImagesViewer.swift */; };
-		F89D6C4C297197FE001DA3D4 /* ImageViewerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C4B297197FE001DA3D4 /* ImageViewerViewModel.swift */; };
 		F8A93D7E2965FD89001D8331 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A93D7D2965FD89001D8331 /* UserProfileView.swift */; };
 		F8A93D802965FED4001D8331 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A93D7F2965FED4001D8331 /* AccountService.swift */; };
 		F8B1E64F2973F61400EE0D10 /* Drops in Frameworks */ = {isa = PBXBuildFile; productRef = F8B1E64E2973F61400EE0D10 /* Drops */; };
@@ -196,7 +195,6 @@
 		F89D6C4329718092001DA3D4 /* AccentsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentsSection.swift; sourceTree = "<group>"; };
 		F89D6C4529718193001DA3D4 /* ThemeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSection.swift; sourceTree = "<group>"; };
 		F89D6C49297196FF001DA3D4 /* ImagesViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesViewer.swift; sourceTree = "<group>"; };
-		F89D6C4B297197FE001DA3D4 /* ImageViewerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerViewModel.swift; sourceTree = "<group>"; };
 		F8A93D7D2965FD89001D8331 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		F8A93D7F2965FED4001D8331 /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
 		F8AF2A61297073FE00D2DA3F /* Vernissage20230112-001.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage20230112-001.xcdatamodel"; sourceTree = "<group>"; };
@@ -457,7 +455,6 @@
 			children = (
 				F89992CB296D9231005994BF /* StatusViewModel.swift */,
 				F89992CD296D92E7005994BF /* AttachmentViewModel.swift */,
-				F89D6C4B297197FE001DA3D4 /* ImageViewerViewModel.swift */,
 				F898DE7129728CB2004B4A6A /* CommentViewModel.swift */,
 			);
 			path = ViewModels;
@@ -650,7 +647,6 @@
 				F88FAD25295F3FF7009B20C9 /* FederatedFeedView.swift in Sources */,
 				F88FAD32295F5029009B20C9 /* RemoteFileService.swift in Sources */,
 				F88FAD27295F400E009B20C9 /* NotificationsView.swift in Sources */,
-				F89D6C4C297197FE001DA3D4 /* ImageViewerViewModel.swift in Sources */,
 				F86B7216296BFFDA00EE59EC /* UserProfileStatuses.swift in Sources */,
 				F897978F29684BCB00B22335 /* LoadingView.swift in Sources */,
 				F89992C9296D6DC7005994BF /* CommentBody.swift in Sources */,

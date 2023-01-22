@@ -6,18 +6,57 @@
 
 import Foundation
 
+/// Reports filed against users and/or statuses, to be taken action on by moderators.
 public struct Report: Codable {
-    public let id: String
-    public let actionTaken: String?
-
-    public enum CodingKeys: CodingKey {
-        case id
-        case actionTaken
+    public enum ReportCategoryTye: String, Codable {
+        /// Unwanted or repetitive content
+        case spam = "spam"
+        /// A specific rule was violated
+        case violation = "violation"
+        /// Some other reason
+        case other = "other"
     }
     
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.decode(String.self, forKey: .id)
-        self.actionTaken = try? container.decodeIfPresent(String.self, forKey: .actionTaken)
+    /// The ID of the report in the database.
+    public let id: EntityId
+    
+    /// Whether an action was taken yet.
+    public let actionTaken: String?
+    
+    /// When an action was taken against the report. NULLABLE String (ISO 8601 Datetime) or null.
+    public let actionTakenAt: String?
+    
+    /// The generic reason for the report.
+    public let category: ReportCategoryTye
+    
+    /// The reason for the report.
+    public let comment: String
+    
+    /// Whether the report was forwarded to a remote domain.
+    public let forwarded: Bool
+
+    /// When the report was created. String (ISO 8601 Datetime).
+    public let createdAt: String
+    
+    /// List od statuses in the report.
+    public let statusIds: [EntityId]?
+    
+    /// List of the rules in ther report.
+    public let ruleIds: [EntityId]?
+    
+    /// The account that was reported.
+    public let targetAccount: Account
+
+    public enum CodingKeys: String, CodingKey {
+        case id
+        case actionTaken
+        case actionTakenAt = "action_taken_at"
+        case category
+        case comment
+        case forwarded
+        case createdAt = "created_at"
+        case statusIds = "status_ids"
+        case ruleIds = "rule_ids"
+        case targetAccount = "target_account"
     }
 }

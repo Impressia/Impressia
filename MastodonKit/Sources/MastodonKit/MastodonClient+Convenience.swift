@@ -11,7 +11,7 @@ public extension MastodonClient {
     func createApp(named name: String,
                           redirectUri: String = "urn:ietf:wg:oauth:2.0:oob",
                           scopes: Scopes,
-                          website: URL) async throws -> App {
+                          website: URL) async throws -> Application {
         
         let request = try Self.request(
             for: baseURL,
@@ -23,10 +23,10 @@ public extension MastodonClient {
             )
         )
         
-        return try await downloadJson(App.self, request: request)
+        return try await downloadJson(Application.self, request: request)
     }
     
-    func authenticate(app: App, scope: Scopes) async throws -> OAuthSwiftCredential { // todo: we should not load OAuthSwift objects here
+    func authenticate(app: Application, scope: Scopes) async throws -> OAuthSwiftCredential { // todo: we should not load OAuthSwift objects here
         oauthClient = OAuth2Swift(
             consumerKey: app.clientId,
             consumerSecret: app.clientSecret,
@@ -59,7 +59,7 @@ public extension MastodonClient {
     }
 
     @available(*, deprecated, message: "The password flow is discoured and won't support 2FA. Please use authentiate(app:, scope:)")
-    func getToken(withApp app: App,
+    func getToken(withApp app: Application,
                          username: String,
                          password: String,
                          scope: Scopes) async throws -> AccessToken {

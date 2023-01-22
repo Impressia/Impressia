@@ -8,18 +8,18 @@ import Foundation
 
 extension Mastodon {
     public enum Account {
-        case account(AccountId)
+        case account(EntityId)
         case verifyCredentials
-        case followers(AccountId, MaxId?, SinceId?, MinId?, Limit?, Page?)
-        case following(AccountId, MaxId?, SinceId?, MinId?, Limit?, Page?)
-        case statuses(AccountId, Bool, Bool, MaxId?, SinceId?, MinId?, Limit?)
-        case follow(AccountId)
-        case unfollow(AccountId)
-        case block(AccountId)
-        case unblock(AccountId)
-        case mute(AccountId)
-        case unmute(AccountId)
-        case relationships([AccountId])
+        case followers(EntityId, MaxId?, SinceId?, MinId?, Limit?, Page?)
+        case following(EntityId, MaxId?, SinceId?, MinId?, Limit?, Page?)
+        case statuses(EntityId, Bool, Bool, MaxId?, SinceId?, MinId?, Limit?)
+        case follow(EntityId)
+        case unfollow(EntityId)
+        case block(EntityId)
+        case unblock(EntityId)
+        case mute(EntityId)
+        case unmute(EntityId)
+        case relationships([EntityId])
         case search(SearchQuery, Int)
     }
 }

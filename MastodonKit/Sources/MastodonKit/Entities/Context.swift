@@ -6,8 +6,13 @@
 
 import Foundation
 
+/// Represents the tree around a given status. Used for reconstructing threads of statuses.
 public struct Context: Codable {
+    
+    /// Parents in the thread.
     public let ancestors: [Status]
+    
+    /// Children in the thread.
     public let descendants: [Status]
 
     public enum CodingKeys: CodingKey {

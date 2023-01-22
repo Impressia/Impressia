@@ -9,7 +9,7 @@ import MastodonKit
 
 public class AttachmentViewModel {
     public let id: String
-    public let type: Attachment.AttachmentType
+    public let type: MediaAttachment.MediaAttachmentType
     public let url: URL
 
     public let previewUrl: URL?
@@ -28,7 +28,7 @@ public class AttachmentViewModel {
     public var exifLens: String?
     
     init(id: String,
-         type: Attachment.AttachmentType,
+         type: MediaAttachment.MediaAttachmentType,
          url: URL,
          previewUrl: URL? = nil,
          remoteUrl: URL? = nil,
@@ -60,7 +60,7 @@ public class AttachmentViewModel {
         self.data = data
     }
     
-    init(attachment: Attachment) {
+    init(attachment: MediaAttachment) {
         self.id = attachment.id
         self.type = attachment.type
         self.url = attachment.url

@@ -26,7 +26,7 @@ struct FollowersView: View {
                     .environmentObject(applicationState)) {
                         UsernameRow(accountId: account.id,
                                     accountAvatar: account.avatar,
-                                    accountDisplayName: account.displayName,
+                                    accountDisplayName: account.displayNameWithoutEmojis,
                                     accountUsername: account.acct)
                     }
             }

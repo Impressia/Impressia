@@ -6,12 +6,6 @@
 
 import Foundation
 
-public typealias SinceId = EntityId
-public typealias MaxId = EntityId
-public typealias MinId = EntityId
-public typealias Limit = Int
-public typealias Page = Int
-
 extension Mastodon {
     public enum Timelines {
         case home(MaxId?, SinceId?, MinId?, Limit?)

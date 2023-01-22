@@ -7,10 +7,6 @@
 import Foundation
 import OAuthSwift
 
-public typealias Scope = String
-public typealias Scopes = [Scope]
-public typealias Token = String
-
 public enum MastodonClientError: Swift.Error {
     case oAuthCancelled
 }

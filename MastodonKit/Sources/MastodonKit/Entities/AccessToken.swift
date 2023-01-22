@@ -7,7 +7,10 @@
 import Foundation
 import OAuthSwift
 
+/// Access token returned by the server.
 public struct AccessToken: Codable {
+    
+    /// Access token.
     public let token: String
     
     private enum CodingKeys: String, CodingKey {

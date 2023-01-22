@@ -6,8 +6,10 @@
 
 import Foundation
 
-public class Attachment: Codable {
-    public enum AttachmentType: String, Codable {
+/// Represents a file or media attachment that can be added to a status.
+public class MediaAttachment: Codable {
+
+    public enum MediaAttachmentType: String, Codable {
         case unknown    = "unknown"
         case image      = "image"
         case gifv       = "gifv"
@@ -15,14 +17,29 @@ public class Attachment: Codable {
         case audio      = "audio"
     }
     
+    /// The ID of the attachment in the database.
     public let id: String
-    public let type: AttachmentType
+    
+    /// The type of the attachment.
+    public let type: MediaAttachmentType
+    
+    /// The location of the original full-size attachment.
     public let url: URL
+    
+    /// The location of a scaled-down preview of the attachment.
     public let previewUrl: URL?
 
+    /// The location of the full-size original attachment on the remote website.
     public let remoteUrl: URL?
+    
+    /// Alternate text that describes what is in the media attachment, to be used for the visually impaired or when media attachments do not load.
     public let description: String?
+    
+    /// A hash computed by the [BlurHash](https://github.com/woltapp/blurhash) algorithm, for generating colorful preview thumbnails when media has not been downloaded yet.
     public let blurhash: String?
+    
+    /// Metadata returned by Paperclip.
+    /// May contain subtrees small and original, as well as various other top-level properties.
     public let meta: Metadata?
 
     private enum CodingKeys: String, CodingKey {
@@ -41,7 +58,7 @@ public class Attachment: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         self.id = try container.decode(EntityId.self, forKey: .id)
-        self.type = try container.decode(AttachmentType.self, forKey: .type)
+        self.type = try container.decode(MediaAttachmentType.self, forKey: .type)
         self.url = try container.decode(URL.self, forKey: .url)
         self.previewUrl = try? container.decode(URL.self, forKey: .previewUrl)
         self.remoteUrl = try? container.decode(URL.self, forKey: .remoteUrl)

@@ -8,7 +8,7 @@ import Foundation
 import MastodonKit
 
 extension AttachmentData {
-    func copyFrom(_ attachment: Attachment) {
+    func copyFrom(_ attachment: MediaAttachment) {
         self.id = attachment.id
         self.url = attachment.url
         self.blurhash = attachment.blurhash

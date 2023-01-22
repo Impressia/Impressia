@@ -24,21 +24,31 @@ struct NotificationsView: View {
         List {
             ForEach(notifications, id: \.id) { notification in
                 switch notification.type {
-                case .mention, .reblog, .favourite:
+                case .favourite, .reblog, .mention, .status, .poll, .update:
                     if let status = notification.status {
                         NavigationLink(destination: StatusView(statusId: status.id)
                             .environmentObject(applicationState)) {
                                 NotificationRow(notification: notification)
                             }
                     }
-                case .follow:
+                case .follow, .followRequest, .adminSignUp:
                     NavigationLink(destination: UserProfileView(
                         accountId: notification.account.id,
-                        accountDisplayName: notification.account.displayName,
+                        accountDisplayName: notification.account.displayNameWithoutEmojis,
                         accountUserName: notification.account.acct)
                         .environmentObject(applicationState)) {
                             NotificationRow(notification: notification)
                         }
+                case .adminReport:
+                    if let targetAccount = notification.report?.targetAccount {
+                        NavigationLink(destination: UserProfileView(
+                            accountId: targetAccount.id,
+                            accountDisplayName: targetAccount.displayNameWithoutEmojis,
+                            accountUserName: targetAccount.acct)
+                            .environmentObject(applicationState)) {
+                                NotificationRow(notification: notification)
+                            }
+                    }
                 }
             }
             
@@ -164,7 +174,7 @@ struct NotificationsView: View {
                 images.append(contentsOf:
                     mediaAttachment
                         .filter({ attachment in
-                            attachment.type == Attachment.AttachmentType.image
+                            attachment.type == MediaAttachment.MediaAttachmentType.image
                         })
                         .map({
                             attachment in (id: attachment.id, url: attachment.url)
