@@ -74,6 +74,46 @@ public extension MastodonClientAuthenticated {
         return try await downloadJson(Relationship.self, request: request)
     }
     
+    func mute(for accountId: String) async throws -> Relationship {
+        let request = try Self.request(
+            for: baseURL,
+            target: Mastodon.Account.mute(accountId),
+            withBearerToken: token
+        )
+        
+        return try await downloadJson(Relationship.self, request: request)
+    }
+    
+    func unmute(for accountId: String) async throws -> Relationship {
+        let request = try Self.request(
+            for: baseURL,
+            target: Mastodon.Account.unmute(accountId),
+            withBearerToken: token
+        )
+        
+        return try await downloadJson(Relationship.self, request: request)
+    }
+    
+    func block(for accountId: String) async throws -> Relationship {
+        let request = try Self.request(
+            for: baseURL,
+            target: Mastodon.Account.block(accountId),
+            withBearerToken: token
+        )
+        
+        return try await downloadJson(Relationship.self, request: request)
+    }
+    
+    func unblock(for accountId: String) async throws -> Relationship {
+        let request = try Self.request(
+            for: baseURL,
+            target: Mastodon.Account.unblock(accountId),
+            withBearerToken: token
+        )
+        
+        return try await downloadJson(Relationship.self, request: request)
+    }
+    
     func getFollowers(for accountId: String, page: Int = 1) async throws -> [Account] {
         let request = try Self.request(
             for: baseURL,

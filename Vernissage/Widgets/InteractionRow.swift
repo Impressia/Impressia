@@ -108,13 +108,11 @@ struct InteractionRow: View {
                 Image(systemName: self.bookmarked ? "bookmark.fill" : "bookmark")
             }
             
-            Spacer()
-            
-            ActionButton {
-                // TODO: Share.
-                ToastrService.shared.showError(subtitle: "Sending new status failed!")
-            } label: {
-                Image(systemName: "square.and.arrow.up")
+            if let url = statusViewModel.url {
+                Spacer()
+                ShareLink(item: url) {
+                    Image(systemName: "square.and.arrow.up")
+                }
             }
         }
         .font(.title3)
@@ -131,13 +129,5 @@ struct InteractionRow: View {
         self.favourited = self.statusViewModel.favourited
         self.favouritesCount = self.statusViewModel.favouritesCount
         self.bookmarked = self.statusViewModel.bookmarked
-    }
-}
-
-struct InteractionRow_Previews: PreviewProvider {
-    static var previews: some View {
-        Text("")
-//        InteractionRow(status: Status(id: "", content: "", application: Application(name: "")))
-//            .previewLayout(.fixed(width: 300, height: 70))
     }
 }

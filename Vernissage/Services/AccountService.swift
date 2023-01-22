@@ -69,6 +69,42 @@ public class AccountService {
         return try await client.unfollow(for: accountId)
     }
     
+    public func mute(forAccountId accountId: String, andContext accountData: AccountData?) async throws -> Relationship? {
+        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+            return nil
+        }
+        
+        let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
+        return try await client.mute(for: accountId)
+    }
+    
+    public func unmute(forAccountId accountId: String, andContext accountData: AccountData?) async throws -> Relationship? {
+        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+            return nil
+        }
+        
+        let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
+        return try await client.unmute(for: accountId)
+    }
+    
+    public func block(forAccountId accountId: String, andContext accountData: AccountData?) async throws -> Relationship? {
+        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+            return nil
+        }
+        
+        let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
+        return try await client.block(for: accountId)
+    }
+    
+    public func unblock(forAccountId accountId: String, andContext accountData: AccountData?) async throws -> Relationship? {
+        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+            return nil
+        }
+        
+        let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
+        return try await client.unblock(for: accountId)
+    }
+    
     public func getFollowers(forAccountId accountId: String, andContext accountData: AccountData?, page: Int) async throws -> [Account] {
         guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
             return []

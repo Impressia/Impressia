@@ -69,18 +69,7 @@ struct UserProfileHeader: View {
                 
                 Spacer()
                 
-                if self.applicationState.accountData?.id != self.account.id {
-                    ActionButton {
-                        await onRelationshipButtonTap()
-                    } label: {
-                        HStack {
-                            Image(systemName: relationship?.following == true ? "person.badge.minus" : "person.badge.plus")
-                            Text(relationship?.following == true ? "Unfollow" : (relationship?.followedBy == true ? "Follow back" : "Follow"))
-                        }
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .tint(relationship?.following == true ? .dangerColor : .accentColor)
-                }
+                self.actionButtons()
             }
             
             if let note = account.note, !note.isEmpty {
@@ -95,6 +84,65 @@ struct UserProfileHeader: View {
             
         }
         .padding()
+    }
+    
+    @ViewBuilder
+    private func actionButtons() -> some View {
+        if self.applicationState.accountData?.id != self.account.id {
+            ActionButton {
+                await onRelationshipButtonTap()
+            } label: {
+                HStack {
+                    Image(systemName: relationship?.following == true ? "person.badge.minus" : "person.badge.plus")
+                    Text(relationship?.following == true ? "Unfollow" : (relationship?.followedBy == true ? "Follow back" : "Follow"))
+                }
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(relationship?.following == true ? .dangerColor : .accentColor)
+            
+            Menu (content: {
+                if let accountUrl = account.url {
+                    Link(destination: accountUrl) {
+                        Label("Open link to profile", systemImage: "safari")
+                    }
+                    
+                    ShareLink(item: accountUrl) {
+                        Label("Share", systemImage: "square.and.arrow.up")
+                    }
+                    
+                    Divider()
+                }
+                
+                Button {
+                    Task {
+                        await onMuteAccount()
+                    }
+                } label: {
+                    if self.relationship?.muting == true {
+                        Label("Unute", systemImage: "message.and.waveform.fill")
+                    } else {
+                        Label("Mute", systemImage: "message.and.waveform")
+                    }
+                }
+                
+                Button {
+                    Task {
+                        await onBlockAccount()
+                    }
+                } label: {
+                    if self.relationship?.blocking == true {
+                        Label("Unblock", systemImage: "hand.raised.fill")
+                    } else {
+                        Label("Block", systemImage: "hand.raised")
+                    }
+                }
+                
+            }, label: {
+                Image(systemName: "ellipsis.circle")
+            })
+            .buttonStyle(.borderedProminent)
+            .tint(Color.secondaryLabel)
+        }
     }
     
     private func onRelationshipButtonTap() async {
@@ -116,6 +164,50 @@ struct UserProfileHeader: View {
             }
         } catch {
             ErrorService.shared.handle(error, message: "Relationship action failed.", showToastr: true)
+        }
+    }
+    
+    private func onMuteAccount() async {
+        do {
+            if self.relationship?.muting == true {
+                if let relationship = try await AccountService.shared.unmute(
+                    forAccountId: self.account.id,
+                    andContext: self.applicationState.accountData
+                ) {
+                    self.relationship = relationship
+                }
+            } else {
+                if let relationship = try await AccountService.shared.mute(
+                    forAccountId: self.account.id,
+                    andContext: self.applicationState.accountData
+                ) {
+                    self.relationship = relationship
+                }
+            }
+        } catch {
+            ErrorService.shared.handle(error, message: "Muting/unmuting action failed.", showToastr: true)
+        }
+    }
+    
+    private func onBlockAccount() async {
+        do {
+            if self.relationship?.blocking == true {
+                if let relationship = try await AccountService.shared.unblock(
+                    forAccountId: self.account.id,
+                    andContext: self.applicationState.accountData
+                ) {
+                    self.relationship = relationship
+                }
+            } else {
+                if let relationship = try await AccountService.shared.block(
+                    forAccountId: self.account.id,
+                    andContext: self.applicationState.accountData
+                ) {
+                    self.relationship = relationship
+                }
+            }
+        } catch {
+            ErrorService.shared.handle(error, message: "Block/unblock action failed.", showToastr: true)
         }
     }
 }
