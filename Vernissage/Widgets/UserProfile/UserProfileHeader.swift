@@ -29,7 +29,7 @@ struct UserProfileHeader: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: FollowersView(accountId: account.id)
+                NavigationLink(destination: AccountsView(entityId: account.id, listType: .followers)
                     .environmentObject(applicationState)
                 ) {
                     VStack(alignment: .center) {
@@ -43,7 +43,7 @@ struct UserProfileHeader: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: FollowingView(accountId: account.id)
+                NavigationLink(destination: AccountsView(entityId: account.id, listType: .following)
                     .environmentObject(applicationState)
                 ) {
                     VStack(alignment: .center) {
@@ -138,7 +138,7 @@ struct UserProfileHeader: View {
                 }
                 
             }, label: {
-                Image(systemName: "ellipsis.circle")
+                Image(systemName: "person.crop.square.fill")
             })
             .buttonStyle(.borderedProminent)
             .tint(Color.secondaryLabel)

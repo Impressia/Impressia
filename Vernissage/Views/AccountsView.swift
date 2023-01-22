@@ -7,10 +7,19 @@
 import SwiftUI
 import MastodonKit
 
-struct FollowingView: View {
+struct AccountsView: View {
+    public enum ListType {
+        case followers
+        case following
+        case reblogged
+        case favourited
+    }
+    
     @EnvironmentObject var applicationState: ApplicationState
 
-    @State var accountId: String
+    @State var entityId: String
+    @State var listType: ListType
+
     @State private var accounts: [Account] = []
     @State private var page = 1
     @State private var allItemsLoaded = false
@@ -58,7 +67,7 @@ struct FollowingView: View {
                 }
             }
         }
-        .navigationBarTitle("Following")
+        .navigationBarTitle(self.getTitle())
         .listStyle(PlainListStyle())
         .task {
             if self.accounts.isEmpty == false {
@@ -69,13 +78,9 @@ struct FollowingView: View {
         }
     }
     
-    func loadAccounts(page: Int) async {
+    private func loadAccounts(page: Int) async {
         do {
-            let accountsFromApi = try await AccountService.shared.getFollowing(
-                forAccountId: self.accountId,
-                andContext: self.applicationState.accountData,
-                page: page)
-            
+            let accountsFromApi = try await self.loadFromApi()
             if accountsFromApi.isEmpty || accountsFromApi.count < 10 {
                 self.allItemsLoaded = true
             }
@@ -85,11 +90,49 @@ struct FollowingView: View {
             
             self.firstLoadFinished = true
         } catch {
-            ErrorService.shared.handle(error, message: "Error during download following from server.", showToastr: !Task.isCancelled)
+            ErrorService.shared.handle(error, message: "Error during download followers from server.", showToastr: !Task.isCancelled)
         }
     }
     
-    func downloadAvatars(accounts: [Account]) async {
+    private func getTitle() -> String {
+        switch self.listType {
+        case .followers:
+            return "Followers"
+        case .following:
+            return "Following"
+        case .favourited:
+            return "Favourited by"
+        case .reblogged:
+            return "Reboosted by"
+        }
+    }
+    
+    private func loadFromApi() async throws -> [Account] {
+        switch self.listType {
+        case .followers:
+            return try await AccountService.shared.getFollowers(
+                forAccountId: self.entityId,
+                andContext: self.applicationState.accountData,
+                page: page)
+        case .following:
+            return try await AccountService.shared.getFollowing(
+                forAccountId: self.entityId,
+                andContext: self.applicationState.accountData,
+                page: page)
+        case .favourited:
+            return try await StatusService.shared.favouritedBy(
+                statusId: self.entityId,
+                andContext: self.applicationState.accountData,
+                page: page)
+        case .reblogged:
+            return try await StatusService.shared.rebloggedBy(
+                statusId: self.entityId,
+                andContext: self.applicationState.accountData,
+                page: page)
+        }
+    }
+    
+    private func downloadAvatars(accounts: [Account]) async {
         await withTaskGroup(of: Void.self) { group in
             for account in accounts {
                 group.addTask { await CacheAvatarService.shared.downloadImage(for: account.id, avatarUrl: account.avatar) }

@@ -6,19 +6,32 @@
 
 import SwiftUI
 
-struct ActionButton<Label>: View where Label: View {
+struct ActionMenu<Label: View, Content: View>: View {
     @State private var isDuringAction = false
-    
-    private let action: () async -> Void
+
+    private let primaryAction: () async -> Void
     private let label: () -> Label
-    
-    public init(action: @escaping () async -> Void, @ViewBuilder label: @escaping () -> Label) {
-        self.action = action
+    private let content: () -> Content
+
+
+    init(@ViewBuilder content: @escaping () -> Content, @ViewBuilder label: @escaping () -> Label, primaryAction: @escaping () async -> Void) {
         self.label = label
+        self.content = content
+        self.primaryAction = primaryAction
     }
-    
+
     var body: some View {
-        Button {
+        Menu {
+            content()
+        } label: {
+            if isDuringAction {
+                LoadingIndicator(isVisible: .constant(true))
+                    .transition(.opacity)
+            } else {
+                label()
+                    .transition(.opacity)
+            }
+        } primaryAction: {
             Task {
                 HapticService.shared.touch()
                 defer {
@@ -32,18 +45,9 @@ struct ActionButton<Label>: View where Label: View {
                 withAnimation {
                     self.isDuringAction = true
                 }
-
-                await action()
-            }
-        } label: {
-            if isDuringAction {
-                LoadingIndicator(isVisible: .constant(true))
-                    .transition(.opacity)
-            } else {
-                label()
-                    .transition(.opacity)
+                
+                await primaryAction()
             }
         }.disabled(isDuringAction)
     }
 }
-

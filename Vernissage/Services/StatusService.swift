@@ -92,6 +92,24 @@ public class StatusService {
         return commentViewModels
     }
     
+    public func favouritedBy(statusId: String, andContext accountData: AccountData?, page: Int) async throws -> [Account] {
+        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+            return []
+        }
+        
+        let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
+        return try await client.favouritedBy(for: statusId, page: page)
+    }
+    
+    public func rebloggedBy(statusId: String, andContext accountData: AccountData?, page: Int) async throws -> [Account] {
+        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+            return []
+        }
+        
+        let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
+        return try await client.rebloggedBy(for: statusId, page: page)
+    }
+    
     private func getCommentDescendants(for statusId: String, client: MastodonClientAuthenticated, showDivider: Bool, to commentViewModels: inout [CommentViewModel]) async throws {
         let context = try await client.getContext(for: statusId)
         

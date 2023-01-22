@@ -17,8 +17,8 @@ extension Mastodon {
         case status(String)
         case context(String)
         case card(String)
-        case rebloggedBy(String)
-        case favouritedBy(String)
+        case rebloggedBy(EntityId, MaxId?, SinceId?, MinId?, Limit?, Page?)
+        case favouritedBy(EntityId, MaxId?, SinceId?, MinId?, Limit?, Page?)
         case new(Components)
         case delete(String)
         case reblog(String)
@@ -105,9 +105,9 @@ extension Mastodon.Statuses: TargetType {
             return "\(apiPath)/\(id)/context"
         case .card(let id):
             return "\(apiPath)/\(id)/card"
-        case .rebloggedBy(let id):
+        case .rebloggedBy(let id, _, _, _, _, _):
             return "\(apiPath)/\(id)/reblogged_by"
-        case .favouritedBy(let id):
+        case .favouritedBy(let id, _, _, _, _, _):
             return "\(apiPath)/\(id)/favourited_by"
         case .new(_):
             return "\(apiPath)"
@@ -148,7 +148,48 @@ extension Mastodon.Statuses: TargetType {
     
     /// The parameters to be incoded in the request.
     public var queryItems: [(String, String)]? {
-        nil
+        var params: [(String, String)] = []
+
+        var maxId: MaxId? = nil
+        var sinceId: SinceId? = nil
+        var minId: MinId? = nil
+        var limit: Limit? = nil
+        var page: Page? = nil
+
+        switch self {
+        case .favouritedBy(_, let _maxId, let _sinceId, let _minId, let _limit, let _page):
+            maxId = _maxId
+            sinceId = _sinceId
+            minId = _minId
+            limit = _limit
+            page = _page
+        case .rebloggedBy(_, let _maxId, let _sinceId, let _minId, let _limit, let _page):
+            maxId = _maxId
+            sinceId = _sinceId
+            minId = _minId
+            limit = _limit
+            page = _page
+        default:
+            return nil
+        }
+        
+        if let maxId {
+            params.append(("max_id",  maxId))
+        }
+        if let sinceId {
+            params.append(("since_id", sinceId))
+        }
+        if let minId {
+            params.append(("min_id", minId))
+        }
+        if let limit {
+            params.append(("limit", "\(limit)"))
+        }
+        if let page {
+            params.append(("page", "\(page)"))
+        }
+        
+        return params
     }
     
     public var headers: [String: String]? {

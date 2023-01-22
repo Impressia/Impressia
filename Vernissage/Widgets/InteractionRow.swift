@@ -36,7 +36,19 @@ struct InteractionRow: View {
             
             Spacer()
             
-            ActionButton {
+            ActionMenu {
+                NavigationLink(destination: AccountsView(entityId: statusViewModel.id, listType: .reblogged)
+                    .environmentObject(applicationState)
+                ) {
+                    Label("Reboosted by", systemImage: "person.3.sequence")
+                }
+            } label: {
+                HStack(alignment: .center) {
+                    Image(systemName: self.reblogged ? "paperplane.fill" : "paperplane")
+                    Text("\(self.reblogsCount)")
+                        .font(.caption)
+                }
+            } primaryAction: {
                 do {
                     let status = self.reblogged
                     ? try await StatusService.shared.unboost(statusId: self.statusViewModel.id, accountData: self.applicationState.accountData)
@@ -50,21 +62,27 @@ struct InteractionRow: View {
                         self.reblogged = status.reblogged
                     }
 
-                    ToastrService.shared.showSuccess("Reblogged", imageSystemName: "paperplane.fill")
+                    ToastrService.shared.showSuccess("Reboosted", imageSystemName: "paperplane.fill")
                 } catch {
-                    ErrorService.shared.handle(error, message: "Reblog action failed.", showToastr: true)
-                }
-            } label: {
-                HStack(alignment: .center) {
-                    Image(systemName: self.reblogged ? "paperplane.fill" : "paperplane")
-                    Text("\(self.reblogsCount)")
-                        .font(.caption)
+                    ErrorService.shared.handle(error, message: "Reboost action failed.", showToastr: true)
                 }
             }
             
             Spacer()
             
-            ActionButton {
+            ActionMenu {
+                NavigationLink(destination: AccountsView(entityId: statusViewModel.id, listType: .favourited)
+                    .environmentObject(applicationState)
+                ) {
+                    Label("Favourited by", systemImage: "person.3.sequence")
+                }
+            } label: {
+                HStack(alignment: .center) {
+                    Image(systemName: self.favourited ? "hand.thumbsup.fill" : "hand.thumbsup")
+                    Text("\(self.favouritesCount)")
+                        .font(.caption)
+                }
+            } primaryAction: {
                 do {
                     let status = self.favourited
                     ? try await StatusService.shared.unfavourite(statusId: self.statusViewModel.id, accountData: self.applicationState.accountData)
@@ -81,12 +99,6 @@ struct InteractionRow: View {
                     ToastrService.shared.showSuccess("Favourited", imageSystemName: "hand.thumbsup.fill")
                 } catch {
                     ErrorService.shared.handle(error, message: "Favourite action failed.", showToastr: true)
-                }
-            } label: {
-                HStack(alignment: .center) {
-                    Image(systemName: self.favourited ? "hand.thumbsup.fill" : "hand.thumbsup")
-                    Text("\(self.favouritesCount)")
-                        .font(.caption)
                 }
             }
             
