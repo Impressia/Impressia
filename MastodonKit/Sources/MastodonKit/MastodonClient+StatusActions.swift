@@ -7,7 +7,7 @@
 import Foundation
 
 public extension MastodonClientAuthenticated {
-    func read(statusId: EntityId) async throws -> Status {
+    func status(statusId: EntityId) async throws -> Status {
         let request = try Self.request(
             for: baseURL,
             target: Mastodon.Statuses.status(statusId),

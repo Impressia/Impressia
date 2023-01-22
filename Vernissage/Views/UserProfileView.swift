@@ -45,8 +45,8 @@ struct UserProfileView: View {
             return
         }
 
-        async let relationshipTask = AccountService.shared.getRelationship(withId: self.accountId, forUser: self.applicationState.accountData)
-        async let accountTask = AccountService.shared.getAccount(withId: self.accountId, and: self.applicationState.accountData)
+        async let relationshipTask = AccountService.shared.relationships(withId: self.accountId, forUser: self.applicationState.accountData)
+        async let accountTask = AccountService.shared.account(withId: self.accountId, and: self.applicationState.accountData)
         
         // Wait for download account and relationships.
         self.firstLoadFinished = true

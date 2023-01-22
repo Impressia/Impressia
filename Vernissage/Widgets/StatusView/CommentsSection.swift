@@ -56,7 +56,7 @@ struct CommentsSection: View {
         .task {
             do {
                 if let accountData = applicationState.accountData {
-                    self.commentViewModels = try await StatusService.shared.getComments(for: statusId, and: accountData)
+                    self.commentViewModels = try await StatusService.shared.comments(for: statusId, and: accountData)
                 }
             } catch {
                 ErrorService.shared.handle(error, message: "Comments cannot be downloaded.", showToastr: !Task.isCancelled)

@@ -196,7 +196,7 @@ struct MainView: View {
             Button {
                 self.sheet = .compose
             } label: {
-                Image(systemName: "photo.stack")
+                Image(systemName: "square.and.pencil")
                     .tint(.mainTextColor)
             }
 

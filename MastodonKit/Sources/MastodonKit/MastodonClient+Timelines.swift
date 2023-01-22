@@ -58,7 +58,7 @@ public extension MastodonClientAuthenticated {
         return try await downloadJson([Status].self, request: request)
     }
 
-    func saveMarkers(_ markers: [Mastodon.Markers.Timeline: EntityId]) async throws -> Markers {
+    func setMarkers(_ markers: [Mastodon.Markers.Timeline: EntityId]) async throws -> Markers {
         let request = try Self.request(
             for: baseURL,
             target: Mastodon.Markers.set(markers),

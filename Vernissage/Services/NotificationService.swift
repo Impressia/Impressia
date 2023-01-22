@@ -11,7 +11,7 @@ public class NotificationService {
     public static let shared = NotificationService()
     private init() { }
     
-    public func getNotifications(forAccountId accountId: String,
+    public func notifications(forAccountId accountId: String,
                                  andContext accountData: AccountData?,
                                  maxId: MaxId? = nil,
                                  sinceId: SinceId? = nil,
@@ -23,6 +23,6 @@ public class NotificationService {
         }
         
         let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
-        return try await client.getNotifications(maxId: maxId, sinceId: sinceId, minId: minId, limit: limit)
+        return try await client.notifications(maxId: maxId, sinceId: sinceId, minId: minId, limit: limit)
     }
 }

@@ -13,7 +13,7 @@ struct ImagesViewer: View {
         
     // Opacity usied during close dialog animation.
     @State private var opacity = 1.0
-    private let closeDragDistance = 140.0
+    private let closeDragDistance = 100.0
     
     // Zoom.
     @State private var zoomScale = 1.0
@@ -37,7 +37,7 @@ struct ImagesViewer: View {
                             .tag(attachment.id)
                             .offset(currentOffset)
                             .scaleEffect(finalAmount + currentAmount)
-                            .opacity(self.opacity)
+                            // .opacity(self.opacity)
                             //.gesture((finalAmount + currentAmount) > 1.0 ? dragGesture : nil)
                             .gesture(dragGesture)
                             .gesture(magnificationGesture)
@@ -51,7 +51,9 @@ struct ImagesViewer: View {
     }
     
     private func close() {
-        dismiss()
+        withoutAnimation {
+            dismiss()
+        }
     }
     
     var magnificationGesture: some Gesture {
@@ -86,17 +88,22 @@ struct ImagesViewer: View {
                 let pictureOpacity = (self.closeDragDistance - self.currentOffset.height) / self.closeDragDistance
                 self.opacity = pictureOpacity >= 0 ? pictureOpacity : 0
             } .onEnded { amount in
-                self.currentOffset = CGSize(width: amount.translation.width + self.accumulatedOffset.width,
+                let offset = CGSize(width: amount.translation.width + self.accumulatedOffset.width,
                                             height: amount.translation.height + self.accumulatedOffset.height)
-                self.accumulatedOffset = self.currentOffset
                 
-                if self.accumulatedOffset.height < self.closeDragDistance {
-                    withAnimation(.default) {
+                if offset.height < closeDragDistance {
+                    withAnimation(.easeInOut) {
                         self.currentOffset = CGSize.zero
                         self.accumulatedOffset = CGSize.zero
                         self.opacity = 1.0
                     }
                 } else {
+                    withAnimation(.easeInOut) {
+                        self.currentOffset = amount.predictedEndTranslation
+                        self.accumulatedOffset = CGSize.zero
+                        self.opacity = 1.0
+                    }
+                    
                     self.close()
                 }
             }
@@ -135,12 +142,5 @@ struct ImagesViewer: View {
             finalAmount = 1.0
             currentAmount = 0
         }
-    }
-}
-
-struct ImagesViewer_Previews: PreviewProvider {
-    static var previews: some View {
-        Text("Cos")
-        // ImagesViewer(statusViewModel: StatusViewModel())
     }
 }

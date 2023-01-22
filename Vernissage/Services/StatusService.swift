@@ -11,13 +11,13 @@ public class StatusService {
     public static let shared = StatusService()
     private init() { }
     
-    public func getStatus(withId statusId: String, and accountData: AccountData?) async throws -> Status? {
+    public func status(withId statusId: String, and accountData: AccountData?) async throws -> Status? {
         guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
             return nil
         }
 
         let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
-        return try await client.read(statusId: statusId)
+        return try await client.status(statusId: statusId)
     }
     
     func favourite(statusId: String, accountData: AccountData?) async throws -> Status? {
@@ -83,7 +83,7 @@ public class StatusService {
         return try await client.new(statusComponents: status)
     }
     
-    func getComments(for statusId: String, and accountData: AccountData) async throws -> [CommentViewModel] {
+    func comments(for statusId: String, and accountData: AccountData) async throws -> [CommentViewModel] {
         var commentViewModels: [CommentViewModel] = []
         
         let client = MastodonClient(baseURL: accountData.serverUrl).getAuthenticated(token: accountData.accessToken ?? String.empty())

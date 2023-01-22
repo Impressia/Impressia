@@ -94,7 +94,7 @@ struct NotificationsView: View {
     
     func loadNotifications() async {
         do {
-            let linkable = try await NotificationService.shared.getNotifications(
+            let linkable = try await NotificationService.shared.notifications(
                 forAccountId: self.accountId,
                 andContext: self.applicationState.accountData,
                 maxId: maxId,
@@ -119,7 +119,7 @@ struct NotificationsView: View {
     
     private func loadMoreNotifications() async {
         do {
-            let linkable = try await NotificationService.shared.getNotifications(
+            let linkable = try await NotificationService.shared.notifications(
                 forAccountId: self.accountId,
                 andContext: self.applicationState.accountData,
                 maxId: self.maxId,
@@ -140,7 +140,7 @@ struct NotificationsView: View {
     
     private func loadNewNotifications() async {
         do {
-            let linkable = try await NotificationService.shared.getNotifications(
+            let linkable = try await NotificationService.shared.notifications(
                 forAccountId: self.accountId,
                 andContext: self.applicationState.accountData,
                 minId: self.minId,
@@ -154,9 +154,7 @@ struct NotificationsView: View {
             await self.downloadAllImages(notifications: linkable.data)
             
             self.minId = linkable.link?.minId
-            var downloaded = linkable.data
-
-            self.notifications.insert(contentsOf: downloaded, at: 0)
+            self.notifications.insert(contentsOf: linkable.data, at: 0)
         } catch {
             ErrorService.shared.handle(error, message: "Error during download notifications from server.", showToastr: !Task.isCancelled)
         }

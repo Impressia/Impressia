@@ -69,7 +69,11 @@ struct UserProfileHeader: View {
                 
                 Spacer()
                 
-                self.actionButtons()
+                if self.applicationState.accountData?.id != self.account.id {
+                    self.otherAccountActionButtons()
+                } else {
+                    self.profileAccountActionButtons()
+                }
             }
             
             if let note = account.note, !note.isEmpty {
@@ -87,62 +91,97 @@ struct UserProfileHeader: View {
     }
     
     @ViewBuilder
-    private func actionButtons() -> some View {
-        if self.applicationState.accountData?.id != self.account.id {
-            ActionButton {
-                await onRelationshipButtonTap()
+    private func otherAccountActionButtons() -> some View {
+        ActionButton {
+            await onRelationshipButtonTap()
+        } label: {
+            HStack {
+                Image(systemName: relationship?.following == true ? "person.badge.minus" : "person.badge.plus")
+                Text(relationship?.following == true ? "Unfollow" : (relationship?.followedBy == true ? "Follow back" : "Follow"))
+            }
+        }
+        .buttonStyle(.borderedProminent)
+        .tint(relationship?.following == true ? .dangerColor : .accentColor)
+        
+        Menu (content: {
+            if let accountUrl = account.url {
+                Link(destination: accountUrl) {
+                    Label("Open in browser", systemImage: "safari")
+                }
+                
+                ShareLink(item: accountUrl) {
+                    Label("Share", systemImage: "square.and.arrow.up")
+                }
+                
+                Divider()
+            }
+            
+            Button {
+                Task {
+                    await onMuteAccount()
+                }
             } label: {
-                HStack {
-                    Image(systemName: relationship?.following == true ? "person.badge.minus" : "person.badge.plus")
-                    Text(relationship?.following == true ? "Unfollow" : (relationship?.followedBy == true ? "Follow back" : "Follow"))
+                if self.relationship?.muting == true {
+                    Label("Unute", systemImage: "message.and.waveform.fill")
+                } else {
+                    Label("Mute", systemImage: "message.and.waveform")
                 }
             }
-            .buttonStyle(.borderedProminent)
-            .tint(relationship?.following == true ? .dangerColor : .accentColor)
             
-            Menu (content: {
-                if let accountUrl = account.url {
-                    Link(destination: accountUrl) {
-                        Label("Open link to profile", systemImage: "safari")
-                    }
-                    
-                    ShareLink(item: accountUrl) {
-                        Label("Share", systemImage: "square.and.arrow.up")
-                    }
-                    
-                    Divider()
+            Button {
+                Task {
+                    await onBlockAccount()
+                }
+            } label: {
+                if self.relationship?.blocking == true {
+                    Label("Unblock", systemImage: "hand.raised.fill")
+                } else {
+                    Label("Block", systemImage: "hand.raised")
+                }
+            }
+            
+        }, label: {
+            Image(systemName: "gear")
+        })
+        .buttonStyle(.borderedProminent)
+        .tint(.accentColor)
+    }
+    
+    @ViewBuilder
+    private func profileAccountActionButtons() -> some View {
+        Menu (content: {
+            if let accountUrl = account.url {
+                Link(destination: accountUrl) {
+                    Label("Open in browser", systemImage: "safari")
                 }
                 
-                Button {
-                    Task {
-                        await onMuteAccount()
-                    }
-                } label: {
-                    if self.relationship?.muting == true {
-                        Label("Unute", systemImage: "message.and.waveform.fill")
-                    } else {
-                        Label("Mute", systemImage: "message.and.waveform")
-                    }
+                ShareLink(item: accountUrl) {
+                    Label("Share", systemImage: "square.and.arrow.up")
                 }
                 
-                Button {
-                    Task {
-                        await onBlockAccount()
-                    }
-                } label: {
-                    if self.relationship?.blocking == true {
-                        Label("Unblock", systemImage: "hand.raised.fill")
-                    } else {
-                        Label("Block", systemImage: "hand.raised")
-                    }
+                Divider()
+            }
+            
+            Button {
+                Task {
+                    // await onMuteAccount()
                 }
-                
-            }, label: {
-                Image(systemName: "person.crop.square.fill")
-            })
-            .buttonStyle(.borderedProminent)
-            .tint(Color.secondaryLabel)
-        }
+            } label: {
+                Label("Favourites", systemImage: "hand.thumbsup")
+            }
+            
+            Button {
+                Task {
+                    // await onMuteAccount()
+                }
+            } label: {
+                Label("Bookmarks", systemImage: "bookmark")
+            }
+        }, label: {
+            Image(systemName: "gear")
+        })
+        .buttonStyle(.borderedProminent)
+        .tint(.accentColor)
     }
     
     private func onRelationshipButtonTap() async {

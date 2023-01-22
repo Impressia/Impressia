@@ -110,12 +110,12 @@ struct AccountsView: View {
     private func loadFromApi() async throws -> [Account] {
         switch self.listType {
         case .followers:
-            return try await AccountService.shared.getFollowers(
+            return try await AccountService.shared.followers(
                 forAccountId: self.entityId,
                 andContext: self.applicationState.accountData,
                 page: page)
         case .following:
-            return try await AccountService.shared.getFollowing(
+            return try await AccountService.shared.following(
                 forAccountId: self.entityId,
                 andContext: self.applicationState.accountData,
                 page: page)

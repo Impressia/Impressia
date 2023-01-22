@@ -17,7 +17,7 @@ public extension MastodonClientAuthenticated {
         return try await downloadJson(Account.self, request: request)
     }
     
-    func getAccount(for accountId: String) async throws -> Account {
+    func account(for accountId: String) async throws -> Account {
         let request = try Self.request(
             for: baseURL,
             target: Mastodon.Account.account(accountId),
@@ -27,7 +27,7 @@ public extension MastodonClientAuthenticated {
         return try await downloadJson(Account.self, request: request)
     }
     
-    func getRelationship(for accountId: String) async throws -> Relationship? {
+    func relationships(for accountId: String) async throws -> Relationship? {
         let request = try Self.request(
             for: baseURL,
             target: Mastodon.Account.relationships([accountId]),
@@ -38,7 +38,7 @@ public extension MastodonClientAuthenticated {
         return relationships.first
     }
     
-    func getStatuses(for accountId: String,
+    func statuses(for accountId: String,
                      onlyMedia: Bool = true,
                      excludeReplies: Bool = true,
                      maxId: String? = nil,
@@ -114,7 +114,7 @@ public extension MastodonClientAuthenticated {
         return try await downloadJson(Relationship.self, request: request)
     }
     
-    func getFollowers(for accountId: String, page: Int = 1) async throws -> [Account] {
+    func followers(for accountId: String, page: Int = 1) async throws -> [Account] {
         let request = try Self.request(
             for: baseURL,
             target: Mastodon.Account.followers(accountId, nil, nil, nil, nil, page),
@@ -124,7 +124,7 @@ public extension MastodonClientAuthenticated {
         return try await downloadJson([Account].self, request: request)
     }
     
-    func getFollowing(for accountId: String, page: Int = 1) async throws -> [Account] {
+    func following(for accountId: String, page: Int = 1) async throws -> [Account] {
         let request = try Self.request(
             for: baseURL,
             target: Mastodon.Account.following(accountId, nil, nil, nil, nil, page),

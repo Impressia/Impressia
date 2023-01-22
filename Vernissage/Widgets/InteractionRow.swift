@@ -36,19 +36,7 @@ struct InteractionRow: View {
             
             Spacer()
             
-            ActionMenu {
-                NavigationLink(destination: AccountsView(entityId: statusViewModel.id, listType: .reblogged)
-                    .environmentObject(applicationState)
-                ) {
-                    Label("Reboosted by", systemImage: "person.3.sequence")
-                }
-            } label: {
-                HStack(alignment: .center) {
-                    Image(systemName: self.reblogged ? "paperplane.fill" : "paperplane")
-                    Text("\(self.reblogsCount)")
-                        .font(.caption)
-                }
-            } primaryAction: {
+            ActionButton {
                 do {
                     let status = self.reblogged
                     ? try await StatusService.shared.unboost(statusId: self.statusViewModel.id, accountData: self.applicationState.accountData)
@@ -66,23 +54,17 @@ struct InteractionRow: View {
                 } catch {
                     ErrorService.shared.handle(error, message: "Reboost action failed.", showToastr: true)
                 }
+            } label: {
+                HStack(alignment: .center) {
+                    Image(systemName: self.reblogged ? "paperplane.fill" : "paperplane")
+                    Text("\(self.reblogsCount)")
+                        .font(.caption)
+                }
             }
             
             Spacer()
             
-            ActionMenu {
-                NavigationLink(destination: AccountsView(entityId: statusViewModel.id, listType: .favourited)
-                    .environmentObject(applicationState)
-                ) {
-                    Label("Favourited by", systemImage: "person.3.sequence")
-                }
-            } label: {
-                HStack(alignment: .center) {
-                    Image(systemName: self.favourited ? "hand.thumbsup.fill" : "hand.thumbsup")
-                    Text("\(self.favouritesCount)")
-                        .font(.caption)
-                }
-            } primaryAction: {
+            ActionButton {
                 do {
                     let status = self.favourited
                     ? try await StatusService.shared.unfavourite(statusId: self.statusViewModel.id, accountData: self.applicationState.accountData)
@@ -99,6 +81,12 @@ struct InteractionRow: View {
                     ToastrService.shared.showSuccess("Favourited", imageSystemName: "hand.thumbsup.fill")
                 } catch {
                     ErrorService.shared.handle(error, message: "Favourite action failed.", showToastr: true)
+                }
+            } label: {
+                HStack(alignment: .center) {
+                    Image(systemName: self.favourited ? "hand.thumbsup.fill" : "hand.thumbsup")
+                    Text("\(self.favouritesCount)")
+                        .font(.caption)
                 }
             }
             
@@ -120,11 +108,34 @@ struct InteractionRow: View {
                 Image(systemName: self.bookmarked ? "bookmark.fill" : "bookmark")
             }
             
-            if let url = statusViewModel.url {
-                Spacer()
-                ShareLink(item: url) {
-                    Image(systemName: "square.and.arrow.up")
+            Spacer()
+            
+            Menu {
+                NavigationLink(destination: AccountsView(entityId: statusViewModel.id, listType: .reblogged)
+                    .environmentObject(applicationState)
+                ) {
+                    Label("Reboosted by", systemImage: "paperplane")
                 }
+                
+                NavigationLink(destination: AccountsView(entityId: statusViewModel.id, listType: .favourited)
+                    .environmentObject(applicationState)
+                ) {
+                    Label("Favourited by", systemImage: "hand.thumbsup")
+                }
+                                
+                if let url = statusViewModel.url {
+                    Divider()
+
+                    Link(destination: url) {
+                        Label("Open in browser", systemImage: "safari")
+                    }
+                    
+                    ShareLink(item: url) {
+                        Label("Share post", systemImage: "square.and.arrow.up")
+                    }
+                }
+            } label: {
+                Image(systemName: "gear")
             }
         }
         .font(.title3)

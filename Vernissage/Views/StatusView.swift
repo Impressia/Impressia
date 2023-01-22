@@ -41,9 +41,9 @@ struct StatusView: View {
                                    exifCreatedDate: $exifCreatedDate,
                                    exifLens: $exifLens)
                     .onTapGesture {
-                        // withoutAnimation {
+                        withoutAnimation {
                             self.showImageViewer.toggle()
-                        // }
+                        }
                     }
                     
                     VStack(alignment: .leading) {
@@ -119,7 +119,7 @@ struct StatusView: View {
                 }
                 
                 // Get status from API.
-                if let status = try await StatusService.shared.getStatus(withId: self.statusId, and: self.applicationState.accountData) {
+                if let status = try await StatusService.shared.status(withId: self.statusId, and: self.applicationState.accountData) {
                     let statusViewModel = StatusViewModel(status: status)
                     
                     // Download images and recalculate exif data.

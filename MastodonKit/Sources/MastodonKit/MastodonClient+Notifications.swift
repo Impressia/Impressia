@@ -7,7 +7,7 @@
 import Foundation
 
 public extension MastodonClientAuthenticated {
-    func getNotifications(maxId: MaxId? = nil,
+    func notifications(maxId: MaxId? = nil,
                           sinceId: SinceId? = nil,
                           minId: MinId? = nil,
                           limit: Int? = nil
@@ -15,6 +15,7 @@ public extension MastodonClientAuthenticated {
         let request = try Self.request(for: baseURL,
                                        target: Mastodon.Notifications.notifications(maxId, sinceId, minId, limit),
                                        withBearerToken: token)
+
         return try await downloadJsonWithLink([Notification].self, request: request)
     }
 }
