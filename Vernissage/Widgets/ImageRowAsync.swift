@@ -68,6 +68,7 @@ struct ImageRowAsync: View {
                         .frame(width: self.imageWidth, height: self.imageHeight)
                     }
                 }
+                .priority(.high)
                 .onSuccess { imageResponse in
                     self.recalculateSizeOfDownloadedImage(imageResponse: imageResponse)
                 }
