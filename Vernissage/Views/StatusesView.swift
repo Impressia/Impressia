@@ -5,11 +5,19 @@
 //
 
 import SwiftUI
+import MastodonKit
 
-struct TimelineFeedView: View {
+struct StatusesView: View {
+    public enum ListType {
+        case local
+        case federated
+        case favourites
+        case bookmarks
+    }
+    
     @EnvironmentObject private var applicationState: ApplicationState
     @State public var accountId: String
-    @State public var isLocalOnly: Bool
+    @State public var listType: ListType
 
     @State private var allItemsLoaded = false
     @State private var firstLoadFinished = false
@@ -53,6 +61,7 @@ struct TimelineFeedView: View {
                 }
             }
         }
+        .navigationBarTitle(self.getTitle())
         .overlay(alignment: .center) {
             if firstLoadFinished == false {
                 LoadingIndicator()
@@ -88,11 +97,7 @@ struct TimelineFeedView: View {
             return
         }
         
-        let statuses = try await PublicTimelineService.shared.getStatuses(
-            accountData: self.applicationState.accountData,
-            local: isLocalOnly,
-            remote: !isLocalOnly,
-            limit: self.defaultLimit)
+        let statuses = try await self.loadFromApi()
         var inPlaceStatuses: [StatusViewModel] = []
 
         for item in statuses {
@@ -109,12 +114,7 @@ struct TimelineFeedView: View {
         
     private func loadMoreStatuses() async throws {
         if let lastStatusId = self.statusViewModels.last?.id {
-            let previousStatuses = try await PublicTimelineService.shared.getStatuses(
-                accountData: self.applicationState.accountData,
-                local: isLocalOnly,
-                remote: !isLocalOnly,
-                maxId: lastStatusId,
-                limit: self.defaultLimit)
+            let previousStatuses = try await self.loadFromApi(maxId: lastStatusId)
 
             if previousStatuses.count < self.defaultLimit {
                 self.allItemsLoaded = true
@@ -131,12 +131,7 @@ struct TimelineFeedView: View {
     
     private func loadTopStatuses() async throws {
         if let firstStatusId = self.statusViewModels.first?.id {
-            let newestStatuses = try await PublicTimelineService.shared.getStatuses(
-                accountData: self.applicationState.accountData,
-                local: isLocalOnly,
-                remote: !isLocalOnly,
-                sinceId: firstStatusId,
-                limit: self.defaultLimit)
+            let newestStatuses = try await self.loadFromApi(sinceId: firstStatusId)
             
             var inPlaceStatuses: [StatusViewModel] = []
             for item in newestStatuses {
@@ -144,6 +139,56 @@ struct TimelineFeedView: View {
             }
             
             self.statusViewModels.insert(contentsOf: inPlaceStatuses, at: 0)
+        }
+    }
+    
+    private func loadFromApi(maxId: String? = nil, sinceId: String? = nil, minId: String? = nil) async throws -> [Status] {
+        switch self.listType {
+        case .local:
+            return try await PublicTimelineService.shared.getStatuses(
+                accountData: self.applicationState.accountData,
+                local: true,
+                remote: false,
+                maxId: maxId,
+                sinceId: sinceId,
+                minId: minId,
+                limit: self.defaultLimit)
+        case .federated:
+            return try await PublicTimelineService.shared.getStatuses(
+                accountData: self.applicationState.accountData,
+                local: false,
+                remote: true,
+                maxId: maxId,
+                sinceId: sinceId,
+                minId: minId,
+                limit: self.defaultLimit)
+        case .favourites:
+            return try await AccountService.shared.favourites(
+                accountData: self.applicationState.accountData,
+                maxId: maxId,
+                sinceId: sinceId,
+                minId: minId,
+                limit: self.defaultLimit)
+        case .bookmarks:
+            return try await AccountService.shared.bookmarks(
+                accountData: self.applicationState.accountData,
+                maxId: maxId,
+                sinceId: sinceId,
+                minId: minId,
+                limit: self.defaultLimit)
+        }
+    }
+    
+    private func getTitle() -> String {
+        switch self.listType {
+        case .local:
+            return "Local"
+        case .federated:
+            return "Federeted"
+        case .favourites:
+            return "Favourites"
+        case .bookmarks:
+            return "Bookmarks"
         }
     }
 }

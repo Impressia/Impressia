@@ -162,19 +162,15 @@ struct UserProfileHeader: View {
                 Divider()
             }
             
-            Button {
-                Task {
-                    // await onMuteAccount()
-                }
-            } label: {
+            NavigationLink(destination: StatusesView(accountId: applicationState.accountData?.id ?? String.empty(), listType: .favourites)
+                .environmentObject(applicationState)
+            ) {
                 Label("Favourites", systemImage: "hand.thumbsup")
             }
             
-            Button {
-                Task {
-                    // await onMuteAccount()
-                }
-            } label: {
+            NavigationLink(destination: StatusesView(accountId: applicationState.accountData?.id ?? String.empty(), listType: .bookmarks)
+                .environmentObject(applicationState)
+            ) {
                 Label("Bookmarks", systemImage: "bookmark")
             }
         }, label: {

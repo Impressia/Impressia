@@ -133,4 +133,30 @@ public extension MastodonClientAuthenticated {
 
         return try await downloadJson([Account].self, request: request)
     }
+    
+    func favourites(maxId: EntityId? = nil,
+                   sinceId: EntityId? = nil,
+                   minId: EntityId? = nil,
+                   limit: Int? = nil) async throws -> [Status] {
+        let request = try Self.request(
+            for: baseURL,
+            target: Mastodon.Favourites.favourites(maxId, sinceId, minId, limit),
+            withBearerToken: token
+        )
+
+        return try await downloadJson([Status].self, request: request)
+    }
+    
+    func bookmarks(maxId: EntityId? = nil,
+                   sinceId: EntityId? = nil,
+                   minId: EntityId? = nil,
+                   limit: Int? = nil) async throws -> [Status] {
+        let request = try Self.request(
+            for: baseURL,
+            target: Mastodon.Bookmarks.bookmarks(maxId, sinceId, minId, limit),
+            withBearerToken: token
+        )
+
+        return try await downloadJson([Status].self, request: request)
+    }
 }

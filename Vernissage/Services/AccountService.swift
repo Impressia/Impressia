@@ -122,4 +122,30 @@ public class AccountService {
         let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
         return try await client.following(for: accountId, page: page)
     }
+    
+    public func favourites(accountData: AccountData?,
+                           maxId: String? = nil,
+                           sinceId: String? = nil,
+                           minId: String? = nil,
+                           limit: Int = 40) async throws -> [Status] {
+        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+            return []
+        }
+        
+        let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
+        return try await client.favourites(maxId: maxId, sinceId: sinceId, minId: minId, limit: limit)
+    }
+    
+    public func bookmarks(accountData: AccountData?,
+                          maxId: String? = nil,
+                          sinceId: String? = nil,
+                          minId: String? = nil,
+                          limit: Int = 40) async throws -> [Status] {
+        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+            return []
+        }
+        
+        let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
+        return try await client.bookmarks(maxId: maxId, sinceId: sinceId, minId: minId, limit: limit)
+    }
 }

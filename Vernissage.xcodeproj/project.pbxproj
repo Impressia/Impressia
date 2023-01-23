@@ -69,9 +69,8 @@
 		F88C2478295C37BB0006098B /* Vernissage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F88C2476295C37BB0006098B /* Vernissage.xcdatamodeld */; };
 		F88C2482295C3A4F0006098B /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C2481295C3A4F0006098B /* StatusView.swift */; };
 		F88C2486295C48030006098B /* HTMLFotmattedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C2485295C48030006098B /* HTMLFotmattedText.swift */; };
+		F88E4D42297E69FD0057491A /* StatusesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88E4D41297E69FD0057491A /* StatusesView.swift */; };
 		F88FAD21295F3944009B20C9 /* HomeFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD20295F3944009B20C9 /* HomeFeedView.swift */; };
-		F88FAD23295F3FC4009B20C9 /* TimelineFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD22295F3FC4009B20C9 /* TimelineFeedView.swift */; };
-		F88FAD25295F3FF7009B20C9 /* FederatedFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD24295F3FF7009B20C9 /* FederatedFeedView.swift */; };
 		F88FAD27295F400E009B20C9 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD26295F400E009B20C9 /* NotificationsView.swift */; };
 		F88FAD2A295F43B8009B20C9 /* AccountData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD28295F43B8009B20C9 /* AccountData+CoreDataClass.swift */; };
 		F88FAD2B295F43B8009B20C9 /* AccountData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD29295F43B8009B20C9 /* AccountData+CoreDataProperties.swift */; };
@@ -168,9 +167,8 @@
 		F88C2477295C37BB0006098B /* Vernissage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vernissage.xcdatamodel; sourceTree = "<group>"; };
 		F88C2481295C3A4F0006098B /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		F88C2485295C48030006098B /* HTMLFotmattedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLFotmattedText.swift; sourceTree = "<group>"; };
+		F88E4D41297E69FD0057491A /* StatusesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusesView.swift; sourceTree = "<group>"; };
 		F88FAD20295F3944009B20C9 /* HomeFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedView.swift; sourceTree = "<group>"; };
-		F88FAD22295F3FC4009B20C9 /* TimelineFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineFeedView.swift; sourceTree = "<group>"; };
-		F88FAD24295F3FF7009B20C9 /* FederatedFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FederatedFeedView.swift; sourceTree = "<group>"; };
 		F88FAD26295F400E009B20C9 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		F88FAD28295F43B8009B20C9 /* AccountData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F88FAD29295F43B8009B20C9 /* AccountData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountData+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -251,8 +249,6 @@
 				F88C2481295C3A4F0006098B /* StatusView.swift */,
 				F88C246D295C37B80006098B /* MainView.swift */,
 				F88FAD20295F3944009B20C9 /* HomeFeedView.swift */,
-				F88FAD22295F3FC4009B20C9 /* TimelineFeedView.swift */,
-				F88FAD24295F3FF7009B20C9 /* FederatedFeedView.swift */,
 				F88FAD26295F400E009B20C9 /* NotificationsView.swift */,
 				F866F6A629604629002E8F88 /* SignInView.swift */,
 				F8A93D7D2965FD89001D8331 /* UserProfileView.swift */,
@@ -260,6 +256,7 @@
 				F897978E29684BCB00B22335 /* LoadingView.swift */,
 				F88ABD9329687CA4004EF61E /* ComposeView.swift */,
 				F89A46DB296EAACE0062125F /* SettingsView.swift */,
+				F88E4D41297E69FD0057491A /* StatusesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -584,7 +581,6 @@
 				F897978A2968314A00B22335 /* LoadingIndicator.swift in Sources */,
 				F8210DE52966E160001D9973 /* Color+SystemColors.swift in Sources */,
 				F85DBF93296760790069BF89 /* CacheAvatarService.swift in Sources */,
-				F88FAD23295F3FC4009B20C9 /* TimelineFeedView.swift in Sources */,
 				F88FAD2B295F43B8009B20C9 /* AccountData+CoreDataProperties.swift in Sources */,
 				F85D4975296407F100751DF7 /* HomeTimelineService.swift in Sources */,
 				F80048062961850500E6868A /* StatusData+CoreDataProperties.swift in Sources */,
@@ -601,6 +597,7 @@
 				F85D498329642FAC00751DF7 /* AttachmentData+Comperable.swift in Sources */,
 				F85D497B29640C8200751DF7 /* UsernameRow.swift in Sources */,
 				F89D6C4429718092001DA3D4 /* AccentsSection.swift in Sources */,
+				F88E4D42297E69FD0057491A /* StatusesView.swift in Sources */,
 				F85D497929640B9D00751DF7 /* ImagesCarousel.swift in Sources */,
 				F89D6C3F29716E41001DA3D4 /* Theme.swift in Sources */,
 				F8CC95CE2970761D00C9C2AC /* TintColor.swift in Sources */,
@@ -644,7 +641,6 @@
 				F88C246C295C37B80006098B /* VernissageApp.swift in Sources */,
 				F802884F297AEED5000BDD51 /* DatabaseError.swift in Sources */,
 				F85D4971296402DC00751DF7 /* AuthorizationService.swift in Sources */,
-				F88FAD25295F3FF7009B20C9 /* FederatedFeedView.swift in Sources */,
 				F88FAD32295F5029009B20C9 /* RemoteFileService.swift in Sources */,
 				F88FAD27295F400E009B20C9 /* NotificationsView.swift in Sources */,
 				F86B7216296BFFDA00EE59EC /* UserProfileStatuses.swift in Sources */,

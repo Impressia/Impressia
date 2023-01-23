@@ -67,10 +67,10 @@ struct MainView: View {
             HomeFeedView(accountId: applicationState.accountData?.id ?? String.empty())
                 .id(applicationState.accountData?.id ?? String.empty())
         case .local:
-            TimelineFeedView(accountId: applicationState.accountData?.id ?? String.empty(), isLocalOnly: true)
+            StatusesView(accountId: applicationState.accountData?.id ?? String.empty(), listType: .local)
                 .id(applicationState.accountData?.id ?? String.empty())
         case .federated:
-            TimelineFeedView(accountId: applicationState.accountData?.id ?? String.empty(), isLocalOnly: false)
+            StatusesView(accountId: applicationState.accountData?.id ?? String.empty(), listType: .federated)
                 .id(applicationState.accountData?.id ?? String.empty())
         case .profile:
             if let accountData = self.applicationState.accountData {

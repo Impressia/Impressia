@@ -7,18 +7,18 @@
 import Foundation
 
 extension Mastodon {
-    public enum Favourites {
-        case favourites(MaxId?, SinceId?, MinId?, Limit?)
+    public enum Bookmarks {
+        case bookmarks(MaxId?, SinceId?, MinId?, Limit?)
     }
 }
 
-extension Mastodon.Favourites: TargetType {
-    fileprivate var apiPath: String { return "/api/v1/favourites" }
+extension Mastodon.Bookmarks: TargetType {
+    fileprivate var apiPath: String { return "/api/v1/bookmarks" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.
     public var path: String {
         switch self {
-        case .favourites(_, _, _, _):
+        case .bookmarks(_, _, _, _):
             return "\(apiPath)"
         }
     }
@@ -26,7 +26,7 @@ extension Mastodon.Favourites: TargetType {
     /// The HTTP method used in the request.
     public var method: Method {
         switch self {
-        case .favourites:
+        case .bookmarks:
             return .get
         }
     }
@@ -41,7 +41,7 @@ extension Mastodon.Favourites: TargetType {
         var limit: Limit? = nil
 
         switch self {
-        case .favourites(let _maxId, let _sinceId, let _minId, let _limit):
+        case .bookmarks(let _maxId, let _sinceId, let _minId, let _limit):
             maxId = _maxId
             sinceId = _sinceId
             minId = _minId
