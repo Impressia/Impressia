@@ -19,55 +19,58 @@ struct SettingsView: View {
     var onThemeChange: ((Theme) -> Void)?
         
     var body: some View {
-        NavigationView {
-            List {
-                // Accounts.
-                AccountsSection()
-                
-                // Themes.
-                ThemeSection { theme in
-                    changeTheme(theme: theme)
-                }
-                
-                // Accents.
-                AccentsSection { color in
-                    self.onTintChange?(color)
-                }
-                
-                // Other.
-                Section("Other") {
-                    Text("Third party") // Link to dependeinces
-                    Text("Report a bug")
-                    Text("Follow me on Mastodon")
-                }
-                
-                // Version.
-                Section() {
-                    HStack {
-                        Text("Version")
-                        Spacer()
-                        Text("\(appVersion ?? String.empty()) (\(appBundleVersion ?? String.empty()))")
-                            .foregroundColor(.accentColor)
+        NavigationStack {
+            NavigationView {
+                List {
+                    // Accounts.
+                    AccountsSection()
+                    
+                    // Themes.
+                    ThemeSection { theme in
+                        changeTheme(theme: theme)
+                    }
+                    
+                    // Accents.
+                    AccentsSection { color in
+                        self.onTintChange?(color)
+                    }
+                    
+                    // Other.
+                    Section("Other") {
+                        Text("Third party") // Link to dependeinces
+                        Text("Report a bug")
+                        Text("Follow me on Mastodon")
+                    }
+                    
+                    // Version.
+                    Section() {
+                        HStack {
+                            Text("Version")
+                            Spacer()
+                            Text("\(appVersion ?? String.empty()) (\(appBundleVersion ?? String.empty()))")
+                                .foregroundColor(.accentColor)
+                        }
                     }
                 }
-            }
-            .frame(alignment: .topLeading)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Close", role: .cancel) {
-                        dismiss()
+                .frame(alignment: .topLeading)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Close", role: .cancel) {
+                            dismiss()
+                        }
                     }
                 }
+                .task {
+                    self.appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+                    self.appBundleVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+                }
+                .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification), perform: { _ in
+                    self.theme = applicationState.theme.colorScheme() ?? self.getSystemColorScheme()
+                })
+                .navigationBarTitle(Text("Settings"), displayMode: .inline)
+                .preferredColorScheme(self.theme)
             }
-            .task {
-                self.appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-                self.appBundleVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
-            }
-            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification), perform: { _ in
-                self.theme = applicationState.theme.colorScheme() ?? self.getSystemColorScheme()
-            })
-            .navigationBarTitle(Text("Settings"), displayMode: .inline)
-            .preferredColorScheme(self.theme)
+            .withAppRouteur()
         }
     }
         

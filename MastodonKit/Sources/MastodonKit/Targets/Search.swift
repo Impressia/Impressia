@@ -8,13 +8,19 @@ import Foundation
 
 extension Mastodon {
     public enum Search {
-        case search(SearchQuery, Bool)
+        case search(SearchQuery, ResultsType, Bool)
     }
 }
 
 
 extension Mastodon.Search: TargetType {
-    fileprivate var apiPath: String { return "/api/v1/search" }
+    public enum ResultsType: String {
+        case accounts = "accounts"
+        case hashtags = "hashtags"
+        case statuses = "statuses"
+    }
+    
+    fileprivate var apiPath: String { return "/api/v2/search" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.
     public var path: String {
@@ -35,9 +41,10 @@ extension Mastodon.Search: TargetType {
     /// The parameters to be incoded in the request.
     public var queryItems: [(String, String)]? {
         switch self {
-        case .search(let query, let resolveNonLocal):
+        case .search(let query, let resultsType, let resolveNonLocal):
             return [
                 ("q", query),
+                ("type", resultsType.rawValue),
                 ("resolve", resolveNonLocal.asString)
             ]
         }

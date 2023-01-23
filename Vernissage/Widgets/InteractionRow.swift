@@ -10,6 +10,7 @@ import Drops
 
 struct InteractionRow: View {
     @EnvironmentObject var applicationState: ApplicationState
+    @EnvironmentObject var routerPath: RouterPath
     
     @State var statusViewModel: StatusViewModel
     
@@ -19,13 +20,11 @@ struct InteractionRow: View {
     @State private var favourited = false
     @State private var favouritesCount = 0
     @State private var bookmarked = false
-        
-    var onNewStatus: (() -> Void)?
-    
+            
     var body: some View {
         HStack (alignment: .top) {
             ActionButton {
-                onNewStatus?()
+                self.routerPath.presentedSheet = .replyToStatusEditor(status: statusViewModel)
             } label: {
                 HStack(alignment: .center) {
                     Image(systemName: "message")
@@ -111,15 +110,11 @@ struct InteractionRow: View {
             Spacer()
             
             Menu {
-                NavigationLink(destination: AccountsView(entityId: statusViewModel.id, listType: .reblogged)
-                    .environmentObject(applicationState)
-                ) {
+                NavigationLink(value: RouteurDestinations.accounts(entityId: statusViewModel.id, listType: .reblogged)) {
                     Label("Reboosted by", systemImage: "paperplane")
                 }
-                
-                NavigationLink(destination: AccountsView(entityId: statusViewModel.id, listType: .favourited)
-                    .environmentObject(applicationState)
-                ) {
+
+                NavigationLink(value: RouteurDestinations.accounts(entityId: statusViewModel.id, listType: .favourited)) {
                     Label("Favourited by", systemImage: "hand.thumbsup")
                 }
 

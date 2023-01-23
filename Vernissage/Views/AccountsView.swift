@@ -28,16 +28,16 @@ struct AccountsView: View {
     var body: some View {
         List {
             ForEach(accounts, id: \.id) { account in
-                NavigationLink(destination: UserProfileView(
+                NavigationLink(value: RouteurDestinations.userProfile(
                     accountId: account.id,
-                    accountDisplayName: account.displayName,
+                    accountDisplayName: account.displayNameWithoutEmojis,
                     accountUserName: account.acct)
-                    .environmentObject(applicationState)) {
-                        UsernameRow(accountId: account.id,
-                                    accountAvatar: account.avatar,
-                                    accountDisplayName: account.displayNameWithoutEmojis,
-                                    accountUsername: account.acct)
-                    }
+                ) {
+                    UsernameRow(accountId: account.id,
+                                accountAvatar: account.avatar,
+                                accountDisplayName: account.displayNameWithoutEmojis,
+                                accountUsername: account.acct)
+                }
             }
             
             if allItemsLoaded == false && firstLoadFinished == true {

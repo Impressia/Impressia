@@ -25,4 +25,20 @@ public class PublicTimelineService {
         let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
         return try await client.getPublicTimeline(local: local, remote: remote, onlyMedia: true, maxId: maxId, sinceId: sinceId, minId: minId, limit: limit)
     }
+    
+    public func getTagStatuses(accountData: AccountData?,
+                               tag: String,
+                               local: Bool,
+                               remote: Bool,
+                               maxId: String? = nil,
+                               sinceId: String? = nil,
+                               minId: String? = nil,
+                               limit: Int = 40) async throws -> [Status] {
+        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+            return []
+        }
+        
+        let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
+        return try await client.getTagTimeline(tag: tag, local: local, remote: remote, onlyMedia: true, maxId: maxId, sinceId: sinceId, minId: minId, limit: limit)
+    }
 }

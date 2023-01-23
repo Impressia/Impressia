@@ -10,6 +10,8 @@ import AVFoundation
 
 struct StatusView: View {
     @EnvironmentObject var applicationState: ApplicationState
+    @EnvironmentObject var routerPath: RouterPath
+
     @Environment(\.dismiss) private var dismiss
 
     @State var statusId: String
@@ -17,8 +19,6 @@ struct StatusView: View {
     @State var imageWidth: Int32?
     @State var imageHeight: Int32?
 
-    @State private var messageForStatus: StatusViewModel?
-    @State private var showCompose = false
     @State private var showImageViewer = false
     @State private var firstLoadFinished = false
     
@@ -47,20 +47,22 @@ struct StatusView: View {
                     }
                     
                     VStack(alignment: .leading) {
-                        NavigationLink(destination: UserProfileView(
+                        NavigationLink(value: RouteurDestinations.userProfile(
                             accountId: statusViewModel.account.id,
-                            accountDisplayName: statusViewModel.account.displayName,
-                            accountUserName: statusViewModel.account.username)
-                            .environmentObject(applicationState)) {
-                                UsernameRow(accountId: statusViewModel.account.id,
-                                            accountAvatar: statusViewModel.account.avatar,
-                                            accountDisplayName: statusViewModel.account.displayNameWithoutEmojis,
-                                            accountUsername: statusViewModel.account.username)
-                            }
+                            accountDisplayName: statusViewModel.account.displayNameWithoutEmojis,
+                            accountUserName: statusViewModel.account.acct)
+                        ) {
+                            UsernameRow(accountId: statusViewModel.account.id,
+                                        accountAvatar: statusViewModel.account.avatar,
+                                        accountDisplayName: statusViewModel.account.displayNameWithoutEmojis,
+                                        accountUsername: statusViewModel.account.username)
+                        }
                         
-                        HTMLFormattedText(statusViewModel.content)
-                            .padding(.leading, -4)
-                        
+                        MarkdownFormattedText(statusViewModel.content.asMarkdown)
+                            .environment(\.openURL, OpenURLAction { url in
+                                routerPath.handle(url: url, accountData: self.applicationState.accountData)
+                            })
+
                         VStack (alignment: .leading) {
                             if let name = statusViewModel.place?.name, let country = statusViewModel.place?.country {
                                 LabelIcon(iconName: "mappin.and.ellipse", value: "\(name), \(country)")
@@ -85,28 +87,19 @@ struct StatusView: View {
                         .foregroundColor(.lightGrayColor)
                         .font(.footnote)
                         
-                        InteractionRow(statusViewModel: statusViewModel) {
-                            self.messageForStatus = statusViewModel
-                            self.showCompose.toggle()
-                        }
-                        .foregroundColor(.accentColor)
-                        .padding(8)
+                        InteractionRow(statusViewModel: statusViewModel)
+                            .foregroundColor(.accentColor)
+                            .padding(8)
                     }
                     .padding(8)
                                         
-                    CommentsSection(statusId: statusViewModel.id) { messageForStatus in
-                        self.messageForStatus = messageForStatus
-                        self.showCompose.toggle()
-                    }
+                    CommentsSection(statusId: statusViewModel.id)
                 }
             } else {
                 StatusPlaceholder(imageHeight: self.getImageHeight(), imageBlurhash: self.imageBlurhash)
             }
         }
         .navigationBarTitle("Details")
-        .sheet(isPresented: $showCompose, content: {
-            ComposeView(statusViewModel: $messageForStatus)
-        })
         .fullScreenCover(isPresented: $showImageViewer, content: {
             if let statusViewModel = self.statusViewModel {
                 ImagesViewer(statusViewModel: statusViewModel, selectedAttachmentId: selectedAttachmentId ?? String.empty())

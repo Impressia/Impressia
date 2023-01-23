@@ -18,7 +18,7 @@ struct AccountsSection: View {
                             accountUsername: account.username)
             }
             
-            NavigationLink(destination: SignInView()) {
+            NavigationLink(value: RouteurDestinations.signIn) {
                 HStack {
                     Text("New account")
                     Spacer()

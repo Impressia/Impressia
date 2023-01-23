@@ -127,17 +127,14 @@ struct UserProfileView: View {
                     Divider()
                 }
                 
-                NavigationLink(destination: StatusesView(accountId: applicationState.accountData?.id ?? String.empty(), listType: .favourites)
-                    .environmentObject(applicationState)
-                ) {
+                NavigationLink(value: RouteurDestinations.statuses(listType: .favourites)) {
                     Label("Favourites", systemImage: "hand.thumbsup")
                 }
                 
-                NavigationLink(destination: StatusesView(accountId: applicationState.accountData?.id ?? String.empty(), listType: .bookmarks)
-                    .environmentObject(applicationState)
-                ) {
+                NavigationLink(value: RouteurDestinations.statuses(listType: .bookmarks)) {
                     Label("Bookmarks", systemImage: "bookmark")
                 }
+                
             }, label: {
                 Image(systemName: "gear")
                     .tint(.mainTextColor)

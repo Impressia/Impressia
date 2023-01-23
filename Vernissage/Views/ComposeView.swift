@@ -15,7 +15,7 @@ struct ComposeView: View {
     @EnvironmentObject var applicationState: ApplicationState
     @Environment(\.dismiss) private var dismiss
     
-    @Binding var statusViewModel: StatusViewModel?
+    @State var statusViewModel: StatusViewModel?
     @State private var text = String.empty()
 
     @FocusState private var focusedField: FocusField?
@@ -59,9 +59,8 @@ struct ComposeView: View {
                                     Spacer()
                                 }
 
-                                HTMLFormattedText(status.content, withFontSize: 14, andWidth: contentWidth)
-                                    .padding(.top, -4)
-                                    .padding(.leading, -4)
+                                MarkdownFormattedText(status.content.asMarkdown, withFontSize: 14, andWidth: contentWidth)
+                                    .environment(\.openURL, OpenURLAction { url in .handled })
                             }
                         }
                         .padding(8)

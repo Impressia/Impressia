@@ -9,6 +9,7 @@ import SwiftUI
 struct HomeFeedView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var applicationState: ApplicationState
+    @EnvironmentObject var routerPath: RouterPath
     
     @State private var firstLoadFinished = false
     @State private var allItemsBottomLoaded = false
@@ -28,11 +29,12 @@ struct HomeFeedView: View {
         ScrollView {
             LazyVGrid(columns: gridColumns) {
                 ForEach(dbStatuses, id: \.self) { item in
-                    NavigationLink(destination: StatusView(statusId: item.id,
-                                                           imageBlurhash: item.attachments().first?.blurhash,
-                                                           imageWidth: item.attachments().first?.metaImageWidth,
-                                                           imageHeight: item.attachments().first?.metaImageHeight)
-                        .environmentObject(applicationState)) {
+                    NavigationLink(value: RouteurDestinations.status(
+                        id: item.id,
+                        blurhash: item.attachments().first?.blurhash,
+                        metaImageWidth: item.attachments().first?.metaImageWidth,
+                        metaImageHeight: item.attachments().first?.metaImageHeight)
+                    ) {
                         ImageRow(statusData: item)
                     }
                     .buttonStyle(EmptyButtonStyle())

@@ -69,9 +69,8 @@ struct NotificationRow: View {
                     }
                 case .follow, .followRequest, .adminSignUp:
                     if let note = self.notification.account.note {
-                        HTMLFormattedText(note, withFontSize: 12, andWidth: contentWidth)
-                            .padding(.top, -4)
-                            .padding(.leading, -4)
+                        MarkdownFormattedText(note.asMarkdown, withFontSize: 12, andWidth: contentWidth)
+                            .environment(\.openURL, OpenURLAction { url in .handled })
                     } else {
                         EmptyView()
                     }

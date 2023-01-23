@@ -6,16 +6,16 @@
 
 import Foundation
 
-/// Search results.
-public struct Result: Codable {
+/// Represents the results of a search.
+public struct SearchResults: Codable {
     
-    /// List of accoutns.
+    /// Accounts which match the given query.
     public let accounts: [Account]
     
-    /// List od statuses.
+    /// Statuses which match the given query.
     public let statuses: [Status]
     
-    
+    /// Hashtags which match the given query
     public let hashtags: [Tag]
 
     public enum CodingKeys: CodingKey {

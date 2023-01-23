@@ -8,15 +8,17 @@ import SwiftUI
 import MastodonKit
 
 struct StatusesView: View {
-    public enum ListType {
+    public enum ListType: Hashable {
         case local
         case federated
         case favourites
         case bookmarks
+        case hashtag(tag: String)
     }
     
     @EnvironmentObject private var applicationState: ApplicationState
-    @State public var accountId: String
+    @EnvironmentObject private var routerPath: RouterPath
+
     @State public var listType: ListType
 
     @State private var allItemsLoaded = false
@@ -30,15 +32,15 @@ struct StatusesView: View {
             VStack(alignment: .center) {
                 if firstLoadFinished == true {
                     ForEach(self.statusViewModels, id: \.uniqueId) { item in
-                        NavigationLink(destination: StatusView(statusId: item.id,
-                                                               imageBlurhash: item.mediaAttachments.first?.blurhash,
-                                                               imageWidth: item.getImageWidth(),
-                                                               imageHeight: item.getImageHeight())
-                            .environmentObject(applicationState)) {
-                                ImageRowAsync(statusViewModel: item)
-                            }
-                            .buttonStyle(EmptyButtonStyle())
-                        
+                        NavigationLink(value: RouteurDestinations.status(
+                            id: item.id,
+                            blurhash: item.mediaAttachments.first?.blurhash,
+                            metaImageWidth: item.getImageWidth(),
+                            metaImageHeight: item.getImageHeight())
+                        ) {
+                            ImageRowAsync(statusViewModel: item)
+                        }
+                        .buttonStyle(EmptyButtonStyle())
                     }
                     
                     LazyVStack {
@@ -176,6 +178,16 @@ struct StatusesView: View {
                 sinceId: sinceId,
                 minId: minId,
                 limit: self.defaultLimit)
+        case .hashtag(let tag):
+            return try await PublicTimelineService.shared.getTagStatuses(
+                accountData: self.applicationState.accountData,
+                tag: tag,
+                local: false,
+                remote: true,
+                maxId: maxId,
+                sinceId: sinceId,
+                minId: minId,
+                limit: self.defaultLimit)
         }
     }
     
@@ -189,6 +201,8 @@ struct StatusesView: View {
             return "Favourites"
         case .bookmarks:
             return "Bookmarks"
+        case .hashtag(let tag):
+            return "#\(tag)"
         }
     }
 }

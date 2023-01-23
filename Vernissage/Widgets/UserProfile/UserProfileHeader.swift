@@ -9,6 +9,8 @@ import MastodonKit
 
 struct UserProfileHeader: View {
     @EnvironmentObject private var applicationState: ApplicationState
+    @EnvironmentObject private var routerPath: RouterPath
+    
     @State var account: Account
     @State var relationship: Relationship? = nil
     
@@ -29,9 +31,7 @@ struct UserProfileHeader: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: AccountsView(entityId: account.id, listType: .followers)
-                    .environmentObject(applicationState)
-                ) {
+                NavigationLink(value: RouteurDestinations.accounts(entityId: account.id, listType: .followers)) {
                     VStack(alignment: .center) {
                         Text("\(account.followersCount)")
                             .font(.title3)
@@ -40,12 +40,10 @@ struct UserProfileHeader: View {
                             .opacity(0.6)
                     }
                 }.foregroundColor(.mainTextColor)
-                
+                                
                 Spacer()
                 
-                NavigationLink(destination: AccountsView(entityId: account.id, listType: .following)
-                    .environmentObject(applicationState)
-                ) {
+                NavigationLink(value: RouteurDestinations.accounts(entityId: account.id, listType: .following)) {
                     VStack(alignment: .center) {
                         Text("\(account.followingCount)")
                             .font(.title3)
@@ -75,9 +73,10 @@ struct UserProfileHeader: View {
             }
             
             if let note = account.note, !note.isEmpty {
-                HTMLFormattedText(note, withFontSize: 14, andWidth: Int(UIScreen.main.bounds.width) - 16)
-                    .padding(.top, -10)
-                    .padding(.leading, -4)
+                MarkdownFormattedText(note.asMarkdown, withFontSize: 14, andWidth: Int(UIScreen.main.bounds.width) - 16)
+                    .environment(\.openURL, OpenURLAction { url in
+                        routerPath.handle(url: url, accountData: self.applicationState.accountData)
+                    })
             }
             
             Text("Joined \(account.createdAt.toRelative(.isoDateTimeMilliSec))")

@@ -16,13 +16,13 @@ struct CommentBody: View {
     var body: some View {
         HStack (alignment: .top) {
             
-            NavigationLink(destination: UserProfileView(
+            NavigationLink(value: RouteurDestinations.userProfile(
                 accountId: self.statusViewModel.account.id,
                 accountDisplayName: self.statusViewModel.account.displayName,
                 accountUserName: self.statusViewModel.account.acct)
-                .environmentObject(applicationState)) {
-                    UserAvatar(accountId: self.statusViewModel.account.id, accountAvatar: self.statusViewModel.account.avatar, width: 32, height: 32)
-                }
+            ) {
+                UserAvatar(accountId: self.statusViewModel.account.id, accountAvatar: self.statusViewModel.account.avatar, width: 32, height: 32)
+            }
             
             VStack (alignment: .leading, spacing: 0) {
                 HStack (alignment: .top) {
@@ -38,9 +38,9 @@ struct CommentBody: View {
                         .font(.footnote)
                 }
                 
-                HTMLFormattedText(self.statusViewModel.content, withFontSize: 14, andWidth: contentWidth)
-                    .padding(.top, -4)
-                    .padding(.leading, -4)
+                MarkdownFormattedText(self.statusViewModel.content.asMarkdown, withFontSize: 14, andWidth: contentWidth)
+                    .environment(\.openURL, OpenURLAction { url in .handled })
+                    .padding(.top, 4)
                 
                 if self.statusViewModel.mediaAttachments.count > 0 {
                     LazyVGrid(

@@ -13,7 +13,6 @@ struct SignInView: View {
 
     @State private var serverAddress: String = String.empty()
     
-    
     var onSignInStateChenge: ((_ applicationViewMode: ApplicationViewMode) -> Void)?
     
     var body: some View {

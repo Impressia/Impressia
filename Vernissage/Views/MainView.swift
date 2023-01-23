@@ -17,12 +17,7 @@ struct MainView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var applicationState: ApplicationState
-
-    var onTintChange: ((TintColor) -> Void)?
-    var onThemeChange: ((Theme) -> Void)?
-    
-    @State private var showSettings = false
-    @State private var sheet: Sheet?
+    @EnvironmentObject var routerPath: RouterPath
     
     @State private var navBarTitle: String = "Home"
     @State private var viewMode: ViewMode = .home {
@@ -41,18 +36,6 @@ struct MainView: View {
         self.getMainView()
         .navigationBarTitle(navBarTitle)
         .navigationBarTitleDisplayMode(.inline)
-        .sheet(item: $sheet, content: { item in
-            switch item {
-            case .settings:
-                SettingsView { color in
-                    self.onTintChange?(color)
-                } onThemeChange: { theme in
-                    self.onThemeChange?(theme)
-                }
-            case .compose:
-                ComposeView(statusViewModel: .constant(nil))
-            }
-        })
         .toolbar {
             self.getLeadingToolbar()
             self.getPrincipalToolbar()
@@ -70,10 +53,10 @@ struct MainView: View {
             TrendStatusesView(accountId: applicationState.accountData?.id ?? String.empty())
                 .id(applicationState.accountData?.id ?? String.empty())
         case .local:
-            StatusesView(accountId: applicationState.accountData?.id ?? String.empty(), listType: .local)
+            StatusesView(listType: .local)
                 .id(applicationState.accountData?.id ?? String.empty())
         case .federated:
-            StatusesView(accountId: applicationState.accountData?.id ?? String.empty(), listType: .federated)
+            StatusesView(listType: .federated)
                 .id(applicationState.accountData?.id ?? String.empty())
         case .profile:
             if let accountData = self.applicationState.accountData {
@@ -182,7 +165,7 @@ struct MainView: View {
                 Divider()
                 
                 Button {
-                    self.sheet = .settings
+                    self.routerPath.presentedSheet = .settings
                 } label: {
                     Label("Settings", systemImage: "gear")
                 }
@@ -207,7 +190,7 @@ struct MainView: View {
         if viewMode == .local || viewMode == .home || viewMode == .federated {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    self.sheet = .compose
+                    self.routerPath.presentedSheet = .newStatusEditor
                 } label: {
                     Image(systemName: "square.and.pencil")
                         .tint(.mainTextColor)

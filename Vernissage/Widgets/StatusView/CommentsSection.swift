@@ -11,9 +11,7 @@ struct CommentsSection: View {
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var applicationState: ApplicationState
 
-    @State public var statusId: String
-    var onNewStatus: ((_ context: StatusViewModel) -> Void)?
-    
+    @State public var statusId: String    
     @State private var commentViewModels: [CommentViewModel]?
     
     var body: some View {
@@ -33,12 +31,10 @@ struct CommentsSection: View {
                         
                         if self.applicationState.showInteractionStatusId == commentViewModel.status.id {
                             VStack (alignment: .leading, spacing: 0) {
-                                InteractionRow(statusViewModel: commentViewModel.status) {
-                                    self.onNewStatus?(commentViewModel.status)
-                                }
-                                .foregroundColor(self.getInteractionRowTextColor())
-                                .padding(.horizontal, 16)
-                                .padding(.vertical, 8)
+                                InteractionRow(statusViewModel: commentViewModel.status)
+                                    .foregroundColor(self.getInteractionRowTextColor())
+                                    .padding(.horizontal, 16)
+                                    .padding(.vertical, 8)
                             }
                             .background(Color.lightGrayColor.opacity(0.5))
                             .transition(AnyTransition.move(edge: .top).combined(with: .opacity))

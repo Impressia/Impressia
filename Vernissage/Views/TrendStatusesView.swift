@@ -43,15 +43,15 @@ struct TrendStatusesView: View {
             VStack(alignment: .center) {
                 if firstLoadFinished == true {
                     ForEach(self.statusViewModels, id: \.uniqueId) { item in
-                        NavigationLink(destination: StatusView(statusId: item.id,
-                                                               imageBlurhash: item.mediaAttachments.first?.blurhash,
-                                                               imageWidth: item.getImageWidth(),
-                                                               imageHeight: item.getImageHeight())
-                            .environmentObject(applicationState)) {
-                                ImageRowAsync(statusViewModel: item)
-                            }
-                            .buttonStyle(EmptyButtonStyle())
-                        
+                        NavigationLink(value: RouteurDestinations.status(
+                            id: item.id,
+                            blurhash: item.mediaAttachments.first?.blurhash,
+                            metaImageWidth: item.getImageWidth(),
+                            metaImageHeight: item.getImageHeight())
+                        ) {
+                            ImageRowAsync(statusViewModel: item)
+                        }
+                        .buttonStyle(EmptyButtonStyle())
                     }
                 }
             }

@@ -11,34 +11,37 @@ struct VernissageApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     let coreDataHandler = CoreDataHandler.shared
-    let applicationState = ApplicationState.shared
+    @StateObject var applicationState = ApplicationState.shared
     
     @State var applicationViewMode: ApplicationViewMode = .loading
     @State var tintColor = ApplicationState.shared.tintColor.color()
     @State var theme = ApplicationState.shared.theme.colorScheme()
     
+    @StateObject private var routerPath = RouterPath()
+    
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
+            NavigationStack(path: $routerPath.path) {
                 switch applicationViewMode {
                 case .loading:
                     LoadingView()
+                        .withAppRouteur()
+                        .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
                 case .signIn:
                     SignInView { viewMode in
                         applicationViewMode = viewMode
                     }
-                    .environment(\.managedObjectContext, coreDataHandler.container.viewContext)
-                    .environmentObject(applicationState)
+                    .withAppRouteur()
+                    .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
                 case .mainView:
-                    MainView { color in
-                        self.tintColor = color.color()
-                    } onThemeChange: { theme in
-                        self.theme = theme.colorScheme()
-                    }
-                    .environment(\.managedObjectContext, coreDataHandler.container.viewContext)
-                    .environmentObject(applicationState)
+                    MainView()
+                        .withAppRouteur()
+                        .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
                 }
             }
+            .environment(\.managedObjectContext, coreDataHandler.container.viewContext)
+            .environmentObject(applicationState)
+            .environmentObject(routerPath)
             .tint(self.tintColor)
             .preferredColorScheme(self.theme)
             .task {
@@ -63,7 +66,10 @@ struct VernissageApp: App {
                         return
                     }
                     
-                    self.applicationState.accountData = accountData
+                    Task { @MainActor in
+                        self.applicationState.accountData = accountData
+                    }
+                    
                     self.applicationViewMode = .mainView
                 })
             }
@@ -73,6 +79,12 @@ struct VernissageApp: App {
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
                 HapticService.shared.stop()
+            }
+            .onChange(of: applicationState.theme) { newValue in
+                self.theme = newValue.colorScheme()
+            }
+            .onChange(of: applicationState.tintColor) { newValue in
+                self.tintColor = newValue.color()
             }
         }
     }
