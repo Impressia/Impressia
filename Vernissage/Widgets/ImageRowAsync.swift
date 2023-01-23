@@ -11,13 +11,28 @@ import NukeUI
 struct ImageRowAsync: View {
     @State public var statusViewModel: StatusViewModel
 
-    @State private var imageHeight = UIScreen.main.bounds.width
-    @State private var imageWidth = UIScreen.main.bounds.width
-    @State private var heightWasPrecalculated = true
+    @State private var imageHeight: Double
+    @State private var imageWidth: Double
+    @State private var heightWasPrecalculated: Bool
     
     init(statusViewModel: StatusViewModel) {
         self.statusViewModel = statusViewModel
-        self.recalculateSizeFromMetadata()
+        
+        if let firstAttachment = statusViewModel.mediaAttachments.first,
+           let imgHeight = (firstAttachment.meta as? ImageMetadata)?.original?.height,
+           let imgWidth = (firstAttachment.meta as? ImageMetadata)?.original?.width {
+            
+            let divider = Double(imgWidth) / UIScreen.main.bounds.size.width
+            let calculatedHeight = Double(imgHeight) / divider
+            
+            self.imageWidth = UIScreen.main.bounds.width
+            self.imageHeight = (calculatedHeight > 0 && calculatedHeight < .infinity) ? calculatedHeight : UIScreen.main.bounds.width
+            self.heightWasPrecalculated = true
+        } else {
+            self.imageWidth = UIScreen.main.bounds.width
+            self.imageHeight = UIScreen.main.bounds.width
+            heightWasPrecalculated = false
+        }
     }
     
     var body: some View {
@@ -82,18 +97,7 @@ struct ImageRowAsync: View {
             self.imageHeight = (calculatedHeight > 0 && calculatedHeight < .infinity) ? calculatedHeight : UIScreen.main.bounds.width
         }
     }
-    
-    private func recalculateSizeFromMetadata() {
-        if let firstAttachment = self.statusViewModel.mediaAttachments.first,
-           let imgHeight = (firstAttachment.meta as? ImageMetadata)?.original?.height,
-           let imgWidth = (firstAttachment.meta as? ImageMetadata)?.original?.width {
-            let calculatedHeight = self.calculateHeight(width: Double(imgWidth), height: Double(imgHeight))
-            self.imageHeight = (calculatedHeight > 0 && calculatedHeight < .infinity) ? calculatedHeight : UIScreen.main.bounds.width
-        } else {
-            heightWasPrecalculated = false
-        }
-    }
-    
+        
     private func calculateHeight(width: Double, height: Double) -> CGFloat {
         let divider = width / UIScreen.main.bounds.size.width
         return height / divider
