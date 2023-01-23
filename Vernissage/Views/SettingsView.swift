@@ -13,6 +13,7 @@ struct SettingsView: View {
     
     @State private var theme: ColorScheme?
     @State private var appVersion: String?
+    @State private var appBundleVersion: String?
     
     var onTintChange: ((TintColor) -> Void)?
     var onThemeChange: ((Theme) -> Void)?
@@ -45,7 +46,7 @@ struct SettingsView: View {
                     HStack {
                         Text("Version")
                         Spacer()
-                        Text(appVersion ?? String.empty())
+                        Text("\(appVersion ?? String.empty()) (\(appBundleVersion ?? String.empty()))")
                             .foregroundColor(.accentColor)
                     }
                 }
@@ -60,6 +61,7 @@ struct SettingsView: View {
             }
             .task {
                 self.appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+                self.appBundleVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification), perform: { _ in
                 self.theme = applicationState.theme.colorScheme() ?? self.getSystemColorScheme()

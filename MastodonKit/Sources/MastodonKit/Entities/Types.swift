@@ -20,6 +20,7 @@ public typealias MaxId = EntityId
 public typealias MinId = EntityId
 public typealias Limit = Int
 public typealias Page = Int
+public typealias Offset = Int
 
 public typealias Scope = String
 public typealias Scopes = [Scope]

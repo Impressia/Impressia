@@ -34,7 +34,7 @@ struct MainView: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\.acct, order: .forward)]) var dbAccounts: FetchedResults<AccountData>
     
     private enum ViewMode {
-        case home, local, federated, profile, notifications
+        case home, local, federated, profile, notifications, trending
     }
     
     var body: some View {
@@ -65,6 +65,9 @@ struct MainView: View {
         switch self.viewMode {
         case .home:
             HomeFeedView(accountId: applicationState.accountData?.id ?? String.empty())
+                .id(applicationState.accountData?.id ?? String.empty())
+        case .trending:
+            TrendStatusesView(accountId: applicationState.accountData?.id ?? String.empty())
                 .id(applicationState.accountData?.id ?? String.empty())
         case .local:
             StatusesView(accountId: applicationState.accountData?.id ?? String.empty(), listType: .local)
@@ -97,6 +100,15 @@ struct MainView: View {
                     HStack {
                         Text(self.getViewTitle(viewMode: .home))
                         Image(systemName: "house")
+                    }
+                }
+
+                Button {
+                    viewMode = .trending
+                } label: {
+                    HStack {
+                        Text(self.getViewTitle(viewMode: .trending))
+                        Image(systemName: "chart.line.uptrend.xyaxis")
                     }
                 }
                 
@@ -208,6 +220,8 @@ struct MainView: View {
         switch viewMode {
         case .home:
             return "Home"
+        case .trending:
+            return "Trending"
         case .local:
             return "Local"
         case .federated:

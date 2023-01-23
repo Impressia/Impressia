@@ -100,7 +100,7 @@ struct StatusesView: View {
         let statuses = try await self.loadFromApi()
         var inPlaceStatuses: [StatusViewModel] = []
 
-        for item in statuses {
+        for item in statuses.getStatusesWithImagesOnly() {
             inPlaceStatuses.append(StatusViewModel(status: item))
         }
         
@@ -121,7 +121,7 @@ struct StatusesView: View {
             }
             
             var inPlaceStatuses: [StatusViewModel] = []
-            for item in previousStatuses {
+            for item in previousStatuses.getStatusesWithImagesOnly() {
                 inPlaceStatuses.append(StatusViewModel(status: item))
             }
             
@@ -134,7 +134,7 @@ struct StatusesView: View {
             let newestStatuses = try await self.loadFromApi(sinceId: firstStatusId)
             
             var inPlaceStatuses: [StatusViewModel] = []
-            for item in newestStatuses {
+            for item in newestStatuses.getStatusesWithImagesOnly() {
                 inPlaceStatuses.append(StatusViewModel(status: item))
             }
             

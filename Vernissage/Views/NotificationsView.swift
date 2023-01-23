@@ -69,10 +69,10 @@ struct NotificationsView: View {
             } else {
                 if self.notifications.isEmpty {
                     VStack {
-                        Image(systemName: "person.3.sequence")
+                        Image(systemName: "bell")
                             .font(.largeTitle)
                             .padding(.bottom, 4)
-                        Text("Unfortunately, there is no one here.")
+                        Text("Unfortunately, there is nothing here.")
                             .font(.title3)
                     }.foregroundColor(.lightGrayColor)
                 }

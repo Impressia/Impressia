@@ -122,14 +122,14 @@ struct InteractionRow: View {
                 ) {
                     Label("Favourited by", systemImage: "hand.thumbsup")
                 }
-                                
+
                 if let url = statusViewModel.url {
                     Divider()
 
                     Link(destination: url) {
                         Label("Open in browser", systemImage: "safari")
                     }
-                    
+
                     ShareLink(item: url) {
                         Label("Share post", systemImage: "square.and.arrow.up")
                     }

@@ -189,7 +189,8 @@ public class HomeTimelineService {
     public func fetchAllImages(statuses: [Status]) async -> Dictionary<String, Data> {
         var attachmentUrls: Dictionary<String, URL> = [:]
         
-        statuses.forEach { status in
+        let statusesWithImages = statuses.getStatusesWithImagesOnly()
+        statusesWithImages.forEach { status in
             status.mediaAttachments.forEach { attachment in
                 attachmentUrls[attachment.id] = attachment.url
             }
