@@ -192,14 +192,15 @@ struct MainView: View {
     
     @ToolbarContentBuilder
     private func getTrailingToolbar() -> some ToolbarContent {
-        ToolbarItem(placement: .navigationBarTrailing) {
-            Button {
-                self.sheet = .compose
-            } label: {
-                Image(systemName: "square.and.pencil")
-                    .tint(.mainTextColor)
+        if viewMode == .local || viewMode == .home || viewMode == .federated {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    self.sheet = .compose
+                } label: {
+                    Image(systemName: "square.and.pencil")
+                        .tint(.mainTextColor)
+                }
             }
-
         }
     }
     
