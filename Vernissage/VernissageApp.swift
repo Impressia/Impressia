@@ -59,6 +59,10 @@ struct VernissageApp: App {
                     self.applicationState.theme = theme
                     self.theme = theme.colorScheme()
                 }
+
+                if let avatarShape = AvatarShape(rawValue: Int(defaultSettings.avatarShape)) {
+                    self.applicationState.avatarShape = avatarShape
+                }
                 
                 await AuthorizationService.shared.verifyAccount({ accountData in
                     guard let accountData = accountData else {

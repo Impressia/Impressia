@@ -14,9 +14,6 @@ struct SettingsView: View {
     @State private var theme: ColorScheme?
     @State private var appVersion: String?
     @State private var appBundleVersion: String?
-    
-    var onTintChange: ((TintColor) -> Void)?
-    var onThemeChange: ((Theme) -> Void)?
         
     var body: some View {
         NavigationStack {
@@ -26,14 +23,13 @@ struct SettingsView: View {
                     AccountsSection()
                     
                     // Themes.
-                    ThemeSection { theme in
-                        changeTheme(theme: theme)
-                    }
+                    ThemeSection()
                     
                     // Accents.
-                    AccentsSection { color in
-                        self.onTintChange?(color)
-                    }
+                    AccentsSection()
+                    
+                    // Avatar shapes.
+                    AvatarShapesSection()
                     
                     // Other.
                     Section("Other") {
@@ -72,17 +68,12 @@ struct SettingsView: View {
             }
             .withAppRouteur()
         }
+        .onChange(of: self.applicationState.theme) { newValue in
+            // Change theme of current modal screen (unformtunatelly it's not changed autmatically.
+            self.theme = self.applicationState.theme.colorScheme() ?? self.getSystemColorScheme()
+        }
     }
-        
-    private func changeTheme(theme: Theme) {
-        // Change theme of current modal screen (unformtunatelly it's not changed autmatically_
-        self.theme = theme.colorScheme() ?? self.getSystemColorScheme()
-        
-        self.applicationState.theme = theme
-        ApplicationSettingsHandler.shared.setDefaultTheme(theme: theme)
-        onThemeChange?(theme)
-    }
-    
+
     func getSystemColorScheme() -> ColorScheme {
         return UITraitCollection.current.userInterfaceStyle == .light ? .light : .dark
     }

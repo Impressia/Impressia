@@ -9,13 +9,12 @@ import SwiftUI
 struct ThemeSection: View {
     @EnvironmentObject var applicationState: ApplicationState
     @Environment(\.colorScheme) var colorScheme
-
-    var onThemeChange: ((Theme) -> Void)?
     
     var body: some View {
         Section("Theme") {
             Button {
-                onThemeChange?(.system)
+                self.applicationState.theme = .system
+                ApplicationSettingsHandler.shared.setDefaultTheme(theme: .system)
             } label: {
                 HStack {
                     Text("System")
@@ -28,7 +27,8 @@ struct ThemeSection: View {
             }
 
             Button {
-                onThemeChange?(.light)
+                self.applicationState.theme = .light
+                ApplicationSettingsHandler.shared.setDefaultTheme(theme: .light)
             } label: {
                 HStack {
                     Text("Light")
@@ -41,7 +41,8 @@ struct ThemeSection: View {
             }
 
             Button {
-                onThemeChange?(.dark)
+                self.applicationState.theme = .dark
+                ApplicationSettingsHandler.shared.setDefaultTheme(theme: .dark)
             } label: {
                 HStack {
                     Text("Dark")

@@ -7,8 +7,16 @@
 import SwiftUI
 
 public enum TintColor: Int {
-    case accentColor1, accentColor2, accentColor3, accentColor4, accentColor5,
-         accentColor6, accentColor7, accentColor8, accentColor9, accentColor10
+    case accentColor1 = 1
+    case accentColor2 = 2
+    case accentColor3 = 3
+    case accentColor4 = 4
+    case accentColor5 = 5
+    case accentColor6 = 6
+    case accentColor7 = 7
+    case accentColor8 = 8
+    case accentColor9 = 9
+    case accentColor10 = 10
     
     public func color() -> Color {
         switch self {

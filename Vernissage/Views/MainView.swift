@@ -173,13 +173,19 @@ struct MainView: View {
                 if let avatarData = self.applicationState.accountData?.avatarData, let uiImage = UIImage(data: avatarData) {
                     Image(uiImage: uiImage)
                         .resizable()
-                        .clipShape(Circle())
+                        .clipShape(self.applicationState.avatarShape.shape())
                         .frame(width: 32.0, height: 32.0)
                 } else {
-                    Image(systemName: "person.circle")
+                    Image(systemName: "person")
                         .resizable()
-                        .frame(width: 32.0, height: 32.0)
-                        .foregroundColor(.mainTextColor)
+                        .frame(width: 16, height: 16)
+                        .foregroundColor(.white)
+                        .padding(8)
+                        .background(Color.lightGrayColor)
+                        .clipShape(AvatarShape.circle.shape())
+                        .background(
+                            AvatarShape.circle.shape()
+                        )
                 }
             }
         }

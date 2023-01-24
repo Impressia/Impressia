@@ -8,8 +8,6 @@ import SwiftUI
 
 struct AccentsSection: View {
     @EnvironmentObject var applicationState: ApplicationState
-
-    var onTintChange: ((TintColor) -> Void)?
     
     private let accentColors1: [TintColor] = [.accentColor1, .accentColor2, .accentColor3, .accentColor4, .accentColor5]
     private let accentColors2: [TintColor] = [.accentColor6, .accentColor7, .accentColor8, .accentColor9, .accentColor10]
@@ -26,7 +24,6 @@ struct AccentsSection: View {
                                 .onTapGesture {
                                     self.applicationState.tintColor = color
                                     ApplicationSettingsHandler.shared.setDefaultTintColor(tintColor: color)
-                                    self.onTintChange?(color)
                                 }
                             if color == self.applicationState.tintColor {
                                 Image(systemName: "checkmark")
@@ -51,7 +48,6 @@ struct AccentsSection: View {
                                 .onTapGesture {
                                     self.applicationState.tintColor = color
                                     ApplicationSettingsHandler.shared.setDefaultTintColor(tintColor: color)
-                                    self.onTintChange?(color)
                                 }
                             if color == self.applicationState.tintColor {
                                 Image(systemName: "checkmark")

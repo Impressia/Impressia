@@ -16,6 +16,7 @@ extension ApplicationSettings {
     @NSManaged public var currentAccount: String?
     @NSManaged public var theme: Int32
     @NSManaged public var tintColor: Int32
+    @NSManaged public var avatarShape: Int32
 
 }
 

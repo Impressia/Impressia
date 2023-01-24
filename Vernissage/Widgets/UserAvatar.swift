@@ -7,6 +7,8 @@
 import SwiftUI
 
 struct UserAvatar: View {
+    @EnvironmentObject var applicationState: ApplicationState
+    
     @State public var accountId: String
     @State public var accountAvatar: URL?
     @State public var width = 48.0
@@ -16,7 +18,7 @@ struct UserAvatar: View {
         if let cachedAvatar = CacheAvatarService.shared.getImage(for: accountId) {
             cachedAvatar
                 .resizable()
-                .clipShape(Circle())
+                .clipShape(applicationState.avatarShape.shape())
                 .aspectRatio(contentMode: .fit)
                 .frame(width: self.width, height: self.height)
         }
@@ -25,23 +27,33 @@ struct UserAvatar: View {
                 if let image = phase.image {
                     image
                         .resizable()
-                        .clipShape(Circle())
+                        .clipShape(applicationState.avatarShape.shape())
                         .aspectRatio(contentMode: .fit)
                         .onAppear {
                             CacheAvatarService.shared.addImage(for: self.accountId, image: image)
                         }
                 } else if phase.error != nil {
-                    Image(systemName: "person.circle")
+                    Image(systemName: "person")
                         .resizable()
-                        .clipShape(Circle())
                         .aspectRatio(contentMode: .fit)
-                        .foregroundColor(.mainTextColor)
+                        .foregroundColor(.white)
+                        .padding(8)
+                        .background(Color.lightGrayColor)
+                        .clipShape(AvatarShape.circle.shape())
+                        .background(
+                            AvatarShape.circle.shape()
+                        )
                 } else {
-                    Image(systemName: "person.circle")
+                    Image(systemName: "person")
                         .resizable()
-                        .clipShape(Circle())
                         .aspectRatio(contentMode: .fit)
-                        .foregroundColor(.mainTextColor)
+                        .foregroundColor(.white)
+                        .padding(8)
+                        .background(Color.lightGrayColor)
+                        .clipShape(applicationState.avatarShape.shape())
+                        .background(
+                            AvatarShape.circle.shape()
+                        )
                 }
             }
             .frame(width: self.width, height: self.height)
@@ -49,9 +61,3 @@ struct UserAvatar: View {
     }
 }
 
-struct UserAvatar_Previews: PreviewProvider {
-    static var previews: some View {
-        UserAvatar(accountId: "")
-            .previewLayout(.fixed(width: 128, height: 128))
-    }
-}

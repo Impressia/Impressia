@@ -49,6 +49,12 @@ class ApplicationSettingsHandler {
         CoreDataHandler.shared.save()
     }
     
+    func setDefaultAvatarShape(avatarShape: AvatarShape) {
+        let defaultSettings = self.getDefaultSettings()
+        defaultSettings.avatarShape = Int32(avatarShape.rawValue)
+        CoreDataHandler.shared.save()
+    }
+    
     private func createApplicationSettingsEntity() -> ApplicationSettings {
         let context = CoreDataHandler.shared.container.viewContext
         return ApplicationSettings(context: context)
