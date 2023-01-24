@@ -10,6 +10,7 @@ import NukeUI
 
 struct NotificationRow: View {
     @EnvironmentObject var applicationState: ApplicationState
+    @EnvironmentObject var routerPath: RouterPath
 
     @State public var notification: MastodonKit.Notification
     
@@ -21,6 +22,11 @@ struct NotificationRow: View {
                 HStack {
                     Spacer()
                     UserAvatar(accountAvatar: self.notification.account.avatar, size: .list)
+                        .onTapGesture {
+                            self.routerPath.navigate(to: .userProfile(accountId: notification.account.id,
+                                                                      accountDisplayName: notification.account.displayNameWithoutEmojis,
+                                                                      accountUserName: notification.account.acct))
+                        }
                 }
                 self.notificationBadge()
             }
@@ -77,6 +83,29 @@ struct NotificationRow: View {
                 case .adminReport:
                     Text(self.notification.report?.comment ?? "")
                         .multilineTextAlignment(.leading)
+                }
+            }
+        }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            switch notification.type {
+            case .favourite, .reblog, .mention, .status, .poll, .update:
+                if let status = notification.status {
+                    let statusViewModel = StatusViewModel(status: status)
+                    self.routerPath.navigate(to: .status(id: statusViewModel.id,
+                                                         blurhash: statusViewModel.mediaAttachments.first?.blurhash,
+                                                         metaImageWidth: statusViewModel.getImageWidth(),
+                                                         metaImageHeight: statusViewModel.getImageHeight()))
+                }
+            case .follow, .followRequest, .adminSignUp:
+                self.routerPath.navigate(to: .userProfile(accountId: notification.account.id,
+                                                          accountDisplayName: notification.account.displayNameWithoutEmojis,
+                                                          accountUserName: notification.account.acct))
+            case .adminReport:
+                if let targetAccount = notification.report?.targetAccount {
+                    self.routerPath.navigate(to: .userProfile(accountId: targetAccount.id,
+                                                              accountDisplayName: targetAccount.displayNameWithoutEmojis,
+                                                              accountUserName: targetAccount.acct))
                 }
             }
         }

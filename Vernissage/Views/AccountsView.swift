@@ -6,6 +6,7 @@
     
 import SwiftUI
 import MastodonKit
+import Foundation
 
 struct AccountsView: View {
     public enum ListType {
@@ -68,7 +69,7 @@ struct AccountsView: View {
             }
         }
         .navigationBarTitle(self.getTitle())
-        .listStyle(PlainListStyle())
+        .listStyle(.plain)
         .task {
             if self.accounts.isEmpty == false {
                 return

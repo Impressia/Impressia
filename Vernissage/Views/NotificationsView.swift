@@ -23,38 +23,7 @@ struct NotificationsView: View {
     var body: some View {
         List {
             ForEach(notifications, id: \.id) { notification in
-                switch notification.type {
-                case .favourite, .reblog, .mention, .status, .poll, .update:
-                    if let status = notification.status, let statusViewModel = StatusViewModel(status: status) {
-                        NavigationLink(value: RouteurDestinations.status(
-                            id: statusViewModel.id,
-                            blurhash: statusViewModel.mediaAttachments.first?.blurhash,
-                            metaImageWidth: statusViewModel.getImageWidth(),
-                            metaImageHeight: statusViewModel.getImageHeight())
-                        ) {
-                            NotificationRow(notification: notification)
-                        }
-                        .buttonStyle(EmptyButtonStyle())
-                    }
-                case .follow, .followRequest, .adminSignUp:
-                    NavigationLink(value: RouteurDestinations.userProfile(
-                        accountId: notification.account.id,
-                        accountDisplayName: notification.account.displayNameWithoutEmojis,
-                        accountUserName: notification.account.acct)
-                    ) {
-                        NotificationRow(notification: notification)
-                    }
-                case .adminReport:
-                    if let targetAccount = notification.report?.targetAccount {
-                        NavigationLink(value: RouteurDestinations.userProfile(
-                            accountId: targetAccount.id,
-                            accountDisplayName: targetAccount.displayNameWithoutEmojis,
-                            accountUserName: targetAccount.acct)
-                        ) {
-                            NotificationRow(notification: notification)
-                        }
-                    }
-                }
+                NotificationRow(notification: notification)
             }
             
             if allItemsLoaded == false && firstLoadFinished == true {
