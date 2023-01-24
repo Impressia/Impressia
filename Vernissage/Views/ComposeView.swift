@@ -47,7 +47,7 @@ struct ComposeView: View {
 
                     if let status = self.statusViewModel {
                         HStack (alignment: .top) {                            
-                            UserAvatar(accountId: status.account.id, accountAvatar: status.account.avatar, width: 32, height: 32)
+                            UserAvatar(accountAvatar: status.account.avatar, size: .comment)
 
                             VStack (alignment: .leading, spacing: 0) {
                                 HStack (alignment: .top) {

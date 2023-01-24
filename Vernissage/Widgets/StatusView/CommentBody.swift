@@ -21,7 +21,7 @@ struct CommentBody: View {
                 accountDisplayName: self.statusViewModel.account.displayName,
                 accountUserName: self.statusViewModel.account.acct)
             ) {
-                UserAvatar(accountId: self.statusViewModel.account.id, accountAvatar: self.statusViewModel.account.avatar, width: 32, height: 32)
+                UserAvatar(accountAvatar: self.statusViewModel.account.avatar, size: .comment)
             }
             
             VStack (alignment: .leading, spacing: 0) {
@@ -90,9 +90,3 @@ struct CommentBody: View {
     }
 }
 
-struct CommentBody_Previews: PreviewProvider {
-    static var previews: some View {
-        Text("")
-        // CommentBody(status: Status(id: "", content: "", application: Application(name: "")))
-    }
-}

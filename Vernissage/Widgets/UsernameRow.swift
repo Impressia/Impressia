@@ -15,7 +15,7 @@ struct UsernameRow: View {
 
     var body: some View {
         HStack (alignment: .center) {
-            UserAvatar(accountId: accountId, accountAvatar: accountAvatar, width: 48, height: 48)
+            UserAvatar(accountAvatar: accountAvatar, size: .list)
             
             VStack (alignment: .leading) {
                 Text(accountDisplayName ?? accountUsername)
@@ -26,12 +26,5 @@ struct UsernameRow: View {
             }
             .padding(.leading, 8)
         }
-    }
-}
-
-struct UsernameRow_Previews: PreviewProvider {
-    static var previews: some View {
-        UsernameRow(accountId: "", accountDisplayName: "John Doe", accountUsername: "johndoe@mastodon.xx")
-            .previewLayout(.fixed(width: 320, height: 64))
     }
 }

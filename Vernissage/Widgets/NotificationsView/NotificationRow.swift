@@ -20,7 +20,7 @@ struct NotificationRow: View {
             ZStack {
                 HStack {
                     Spacer()
-                    UserAvatar(accountId: self.notification.account.id, accountAvatar: self.notification.account.avatar, width: 48, height: 48)
+                    UserAvatar(accountAvatar: self.notification.account.avatar, size: .list)
                 }
                 self.notificationBadge()
             }
@@ -54,7 +54,7 @@ struct NotificationRow: View {
                             if let attachment = statusViewModel.mediaAttachments.filter({ attachment in
                                 attachment.type == MediaAttachment.MediaAttachmentType.image
                             }).first {
-                                if let cachedImage = CacheImageService.shared.getImage(for: attachment.id) {
+                                if let cachedImage = CacheImageService.shared.getImage(for: attachment.url) {
                                     cachedImage
                                         .resizable()
                                         .frame(width: 50, height: 50)

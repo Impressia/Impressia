@@ -42,7 +42,6 @@
 		F85D49852964301800751DF7 /* StatusData+Attachments.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D49842964301800751DF7 /* StatusData+Attachments.swift */; };
 		F85D49872964334100751DF7 /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D49862964334100751DF7 /* String+Date.swift */; };
 		F85DBF8F296732E20069BF89 /* AccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85DBF8E296732E20069BF89 /* AccountsView.swift */; };
-		F85DBF93296760790069BF89 /* CacheAvatarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85DBF92296760790069BF89 /* CacheAvatarService.swift */; };
 		F85E1320297409CD006A051D /* ErrorsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85E131F297409CD006A051D /* ErrorsService.swift */; };
 		F85E132529741F05006A051D /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = F85E132429741F05006A051D /* ActivityIndicatorView */; };
 		F86167C6297FE6CC004D1F67 /* AvatarShapesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86167C5297FE6CC004D1F67 /* AvatarShapesSection.swift */; };
@@ -148,7 +147,6 @@
 		F85D49842964301800751DF7 /* StatusData+Attachments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusData+Attachments.swift"; sourceTree = "<group>"; };
 		F85D49862964334100751DF7 /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		F85DBF8E296732E20069BF89 /* AccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsView.swift; sourceTree = "<group>"; };
-		F85DBF92296760790069BF89 /* CacheAvatarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheAvatarService.swift; sourceTree = "<group>"; };
 		F85E131F297409CD006A051D /* ErrorsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorsService.swift; sourceTree = "<group>"; };
 		F86167C5297FE6CC004D1F67 /* AvatarShapesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarShapesSection.swift; sourceTree = "<group>"; };
 		F86167C7297FE781004D1F67 /* AvatarShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarShape.swift; sourceTree = "<group>"; };
@@ -442,7 +440,6 @@
 				F85D4974296407F100751DF7 /* HomeTimelineService.swift */,
 				F8A93D7F2965FED4001D8331 /* AccountService.swift */,
 				F8210DE02966D0C4001D9973 /* StatusService.swift */,
-				F85DBF92296760790069BF89 /* CacheAvatarService.swift */,
 				F8B1E6502973FB7E00EE0D10 /* ToastrService.swift */,
 				F85E131F297409CD006A051D /* ErrorsService.swift */,
 				F80864102975537F009F035C /* NotificationService.swift */,
@@ -609,7 +606,6 @@
 				F8984E4D296B648000A2610F /* UIImage+Blurhash.swift in Sources */,
 				F897978A2968314A00B22335 /* LoadingIndicator.swift in Sources */,
 				F8210DE52966E160001D9973 /* Color+SystemColors.swift in Sources */,
-				F85DBF93296760790069BF89 /* CacheAvatarService.swift in Sources */,
 				F88FAD2B295F43B8009B20C9 /* AccountData+CoreDataProperties.swift in Sources */,
 				F85D4975296407F100751DF7 /* HomeTimelineService.swift in Sources */,
 				F80048062961850500E6868A /* StatusData+CoreDataProperties.swift in Sources */,

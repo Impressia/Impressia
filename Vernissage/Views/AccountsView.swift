@@ -135,7 +135,7 @@ struct AccountsView: View {
     private func downloadAvatars(accounts: [Account]) async {
         await withTaskGroup(of: Void.self) { group in
             for account in accounts {
-                group.addTask { await CacheAvatarService.shared.downloadImage(for: account.id, avatarUrl: account.avatar) }
+                group.addTask { await CacheImageService.shared.downloadImage(url: account.avatar) }
             }
         }
     }

@@ -191,7 +191,7 @@ struct NotificationsView: View {
     private func downloadAvatars(accounts: [Account]) async {
         await withTaskGroup(of: Void.self) { group in
             for account in accounts {
-                group.addTask { await CacheAvatarService.shared.downloadImage(for: account.id, avatarUrl: account.avatar) }
+                group.addTask { await CacheImageService.shared.downloadImage(url: account.avatar) }
             }
         }
     }
@@ -199,7 +199,7 @@ struct NotificationsView: View {
     private func downloadImages(images: [(id: String, url: URL)]) async {
         await withTaskGroup(of: Void.self) { group in
             for image in images {
-                group.addTask { await CacheImageService.shared.downloadImage(for: image.id, url: image.url) }
+                group.addTask { await CacheImageService.shared.downloadImage(url: image.url) }
             }
         }
     }

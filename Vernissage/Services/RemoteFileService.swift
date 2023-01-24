@@ -6,16 +6,19 @@
     
 import Foundation
 import MastodonKit
+import Nuke
 
 public class RemoteFileService {
     public static let shared = RemoteFileService()
     private init() { }
     
     public func fetchData(url: URL) async throws -> Data? {
-        let urlRequest = URLRequest(url: url)
+        let (data, response) = try await ImagePipeline.shared.data(for: url)
         
-        // Fetching data.
-        let (data, response) = try await URLSession.shared.data(for: urlRequest)
+        guard let response else {
+            return data
+        }
+        
         guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
             throw NetworkError.notSuccessResponse(response)
         }

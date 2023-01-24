@@ -5,6 +5,8 @@
 //
 
 import SwiftUI
+import Nuke
+import NukeUI
 
 @main
 struct VernissageApp: App {
@@ -48,22 +50,13 @@ struct VernissageApp: App {
                 UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.label
                 UIPageControl.appearance().pageIndicatorTintColor = UIColor.secondaryLabel
                 
-                let defaultSettings = ApplicationSettingsHandler.shared.getDefaultSettings()
-                
-                if let tintColor = TintColor(rawValue: Int(defaultSettings.tintColor)) {
-                    self.applicationState.tintColor = tintColor
-                    self.tintColor = tintColor.color()
-                }
-                
-                if let theme = Theme(rawValue: Int(defaultSettings.theme)) {
-                    self.applicationState.theme = theme
-                    self.theme = theme.colorScheme()
-                }
+                // Set custom configurations for Nuke image/data loaders.
+                self.setImagePipelines()
 
-                if let avatarShape = AvatarShape(rawValue: Int(defaultSettings.avatarShape)) {
-                    self.applicationState.avatarShape = avatarShape
-                }
+                // Load user preferences from database.
+                self.loadUserPreferences()
                 
+                // Verify access token correctness.
                 await AuthorizationService.shared.verifyAccount({ accountData in
                     guard let accountData = accountData else {
                         self.applicationViewMode = .signIn
@@ -91,6 +84,40 @@ struct VernissageApp: App {
                 self.tintColor = newValue.color()
             }
         }
+    }
+    
+    private func loadUserPreferences() {
+        let defaultSettings = ApplicationSettingsHandler.shared.getDefaultSettings()
+        
+        if let tintColor = TintColor(rawValue: Int(defaultSettings.tintColor)) {
+            self.applicationState.tintColor = tintColor
+            self.tintColor = tintColor.color()
+        }
+        
+        if let theme = Theme(rawValue: Int(defaultSettings.theme)) {
+            self.applicationState.theme = theme
+            self.theme = theme.colorScheme()
+        }
+
+        if let avatarShape = AvatarShape(rawValue: Int(defaultSettings.avatarShape)) {
+            self.applicationState.avatarShape = avatarShape
+        }
+    }
+    
+    private func setImagePipelines() {
+        let pipeline = ImagePipeline {
+            $0.dataLoader =  DataLoader(configuration: {
+                // Disable disk caching built into URLSession
+                let conf = DataLoader.defaultConfiguration
+                conf.urlCache = nil
+                return conf
+            }())
+            
+            $0.imageCache = ImageCache.shared
+            $0.dataCache = try! DataCache(name: "dev.mczachurski.Vernissage.DataCache")
+        }
+        
+        ImagePipeline.shared = pipeline
     }
 }
 

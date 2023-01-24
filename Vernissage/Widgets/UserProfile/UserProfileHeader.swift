@@ -17,7 +17,7 @@ struct UserProfileHeader: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .center) {
-                UserAvatar(accountId: account.id, accountAvatar: account.avatar, width: 96, height: 96)
+                UserAvatar(accountAvatar: account.avatar, size: .profile)
                 
                 Spacer()
                 

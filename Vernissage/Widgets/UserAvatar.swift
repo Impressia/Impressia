@@ -5,59 +5,70 @@
 //
 
 import SwiftUI
+import NukeUI
 
 struct UserAvatar: View {
     @EnvironmentObject var applicationState: ApplicationState
     
-    @State public var accountId: String
-    @State public var accountAvatar: URL?
-    @State public var width = 48.0
-    @State public var height = 48.0
+    public enum Size {
+        case list, comment, profile
+      
+        public var size: CGSize {
+            switch self {
+            case .list:
+                return .init(width: 48, height: 48)
+            case .comment:
+                return .init(width: 32, height: 32)
+            case .profile:
+                return .init(width: 96, height: 96)
+            }
+        }
+    }
+    
+    public let accountAvatar: URL?
+    public let size: Size
+    
+    public init(accountAvatar: URL?, size: Size = .list) {
+      self.accountAvatar = accountAvatar
+      self.size = size
+    }
     
     var body: some View {
-        if let cachedAvatar = CacheAvatarService.shared.getImage(for: accountId) {
-            cachedAvatar
-                .resizable()
-                .clipShape(applicationState.avatarShape.shape())
-                .aspectRatio(contentMode: .fit)
-                .frame(width: self.width, height: self.height)
-        }
-        else {
-            AsyncImage(url: self.accountAvatar) { phase in
-                if let image = phase.image {
-                    image
+        Group {
+            if let accountAvatar {
+                if let cachedAvatar = CacheImageService.shared.getImage(for: accountAvatar) {
+                    cachedAvatar
                         .resizable()
                         .clipShape(applicationState.avatarShape.shape())
                         .aspectRatio(contentMode: .fit)
-                        .onAppear {
-                            CacheAvatarService.shared.addImage(for: self.accountId, image: image)
-                        }
-                } else if phase.error != nil {
-                    Image(systemName: "person")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .foregroundColor(.white)
-                        .padding(8)
-                        .background(Color.lightGrayColor)
-                        .clipShape(AvatarShape.circle.shape())
-                        .background(
-                            AvatarShape.circle.shape()
-                        )
+                        .frame(width: size.size.width, height: size.size.height)
                 } else {
-                    Image(systemName: "person")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .foregroundColor(.white)
-                        .padding(8)
-                        .background(Color.lightGrayColor)
-                        .clipShape(applicationState.avatarShape.shape())
-                        .background(
-                            AvatarShape.circle.shape()
-                        )
+                    LazyImage(url: accountAvatar) { state in
+                        if let image = state.image {
+                            image
+                                .clipShape(applicationState.avatarShape.shape())
+                                .aspectRatio(contentMode: .fit)
+                        } else if state.isLoading {
+                            placeholderView
+                        } else {
+                            placeholderView
+                        }
+                    }
+                    .priority(.high)
+                    .frame(width: size.size.width, height: size.size.height)
                 }
+            } else {
+                placeholderView
+                    .frame(width: size.size.width, height: size.size.height)
             }
-            .frame(width: self.width, height: self.height)
         }
+    }
+    
+    @ViewBuilder private var placeholderView: some View {
+        Image("Avatar")
+            .resizable()
+            .clipShape(applicationState.avatarShape.shape())
+            .aspectRatio(contentMode: .fit)
     }
 }
 

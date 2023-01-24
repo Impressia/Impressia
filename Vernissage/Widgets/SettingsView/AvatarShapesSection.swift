@@ -17,16 +17,11 @@ struct AvatarShapesSection: View {
                 ApplicationSettingsHandler.shared.setDefaultAvatarShape(avatarShape: .circle)
             } label: {
                 HStack {
-                    Image(systemName: "person")
+                    Image("Avatar")
                         .resizable()
-                        .frame(width: 24, height: 24)
-                        .foregroundColor(.white)
-                        .padding(8)
-                        .background(Color.lightGrayColor)
                         .clipShape(AvatarShape.circle.shape())
-                        .background(
-                            AvatarShape.circle.shape()
-                        )
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 32, height: 32)
                     
                     Text("Circle")
                         .foregroundColor(.label)
@@ -43,16 +38,12 @@ struct AvatarShapesSection: View {
                 ApplicationSettingsHandler.shared.setDefaultAvatarShape(avatarShape: .roundedRectangle)
             } label: {
                 HStack {
-                    Image(systemName: "person")
+                    Image("Avatar")
                         .resizable()
-                        .frame(width: 24, height: 24)
-                        .foregroundColor(.white)
-                        .padding(8)
-                        .background(Color.lightGrayColor)
                         .clipShape(AvatarShape.roundedRectangle.shape())
-                        .background(
-                            AvatarShape.roundedRectangle.shape()
-                        )
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 32, height: 32)
+
                     Text("Rounded rectangle")
                         .foregroundColor(.label)
                     Spacer()
