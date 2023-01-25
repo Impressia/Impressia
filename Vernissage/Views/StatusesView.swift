@@ -24,6 +24,7 @@ struct StatusesView: View {
     @State private var allItemsLoaded = false
     @State private var firstLoadFinished = false
     
+    @State private var tag: Tag?
     @State private var statusViewModels: [StatusViewModel] = []
     private let defaultLimit = 20
 
@@ -79,9 +80,17 @@ struct StatusesView: View {
                 }
             }
         }
+        .toolbar {
+            // TODO: It seems like pixelfed is not supporting the endpoints.
+            // self.getTrailingToolbar()
+        }
         .task {
             do {
                 try await self.loadStatuses()
+
+                if case .hashtag(let hashtag) = self.listType {
+                    await self.loadTag(hashtag: hashtag)
+                }
             } catch {
                 ErrorService.shared.handle(error, message: "Loading statuses failed.", showToastr: !Task.isCancelled)
             }
@@ -203,6 +212,52 @@ struct StatusesView: View {
             return "Bookmarks"
         case .hashtag(let tag):
             return "#\(tag)"
+        }
+    }
+    
+    @ToolbarContentBuilder
+    private func getTrailingToolbar() -> some ToolbarContent {
+        if case .hashtag(let hashtag) = self.listType {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    Task {
+                        if self.tag?.following == true {
+                            await self.follow(hashtag: hashtag)
+                        } else {
+                            await self.unfollow(hashtag: hashtag)
+                        }
+                    }
+                } label: {
+                    Image(systemName: self.tag?.following == true ? "number.square.fill" : "number.square")
+                        .tint(.mainTextColor)
+                }
+            }
+        }
+    }
+    
+    private func loadTag(hashtag: String) async {
+        do {
+            self.tag = try await TagsService.shared.tag(accountData: self.applicationState.accountData, hashTag: hashtag)
+        } catch {
+            ErrorService.shared.handle(error, message: "Error during loading tag from server.", showToastr: false)
+        }
+    }
+    
+    private func follow(hashtag: String) async {
+        do {
+            self.tag = try await TagsService.shared.follow(accountData: self.applicationState.accountData, hashTag: hashtag)
+            ToastrService.shared.showSuccess("You are following the tag.", imageSystemName: "number.square.fill")
+        } catch {
+            ErrorService.shared.handle(error, message: "Error during following tag.", showToastr: true)
+        }
+    }
+    
+    private func unfollow(hashtag: String) async {
+        do {
+            self.tag = try await TagsService.shared.unfollow(accountData: self.applicationState.accountData, hashTag: hashtag)
+            ToastrService.shared.showSuccess("Tag has been unfollowed.", imageSystemName: "number.square")
+        } catch {
+            ErrorService.shared.handle(error, message: "Error during unfollowing tag.", showToastr: true)
         }
     }
 }

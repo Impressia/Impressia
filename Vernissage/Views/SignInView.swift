@@ -17,7 +17,7 @@ struct SignInView: View {
     
     var body: some View {
         VStack {
-            // TODO: Rebild signin.
+            // TODO: Rebuild signin page.
             HStack {
                 TextField(
                     "Server address",

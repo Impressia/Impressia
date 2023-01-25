@@ -34,33 +34,31 @@ struct UserAvatar: View {
     }
     
     var body: some View {
-        Group {
-            if let accountAvatar {
-                if let cachedAvatar = CacheImageService.shared.getImage(for: accountAvatar) {
-                    cachedAvatar
-                        .resizable()
-                        .clipShape(applicationState.avatarShape.shape())
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: size.size.width, height: size.size.height)
-                } else {
-                    LazyImage(url: accountAvatar) { state in
-                        if let image = state.image {
-                            image
-                                .clipShape(applicationState.avatarShape.shape())
-                                .aspectRatio(contentMode: .fit)
-                        } else if state.isLoading {
-                            placeholderView
-                        } else {
-                            placeholderView
-                        }
-                    }
-                    .priority(.high)
+        if let accountAvatar {
+            if let cachedAvatar = CacheImageService.shared.getImage(for: accountAvatar) {
+                cachedAvatar
+                    .resizable()
+                    .clipShape(applicationState.avatarShape.shape())
+                    .aspectRatio(contentMode: .fit)
                     .frame(width: size.size.width, height: size.size.height)
-                }
             } else {
-                placeholderView
-                    .frame(width: size.size.width, height: size.size.height)
+                LazyImage(url: accountAvatar) { state in
+                    if let image = state.image {
+                        image
+                            .clipShape(applicationState.avatarShape.shape())
+                            .aspectRatio(contentMode: .fit)
+                    } else if state.isLoading {
+                        placeholderView
+                    } else {
+                        placeholderView
+                    }
+                }
+                .priority(.high)
+                .frame(width: size.size.width, height: size.size.height)
             }
+        } else {
+            placeholderView
+                .frame(width: size.size.width, height: size.size.height)
         }
     }
     

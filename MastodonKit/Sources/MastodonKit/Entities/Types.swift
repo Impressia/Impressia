@@ -25,3 +25,4 @@ public typealias Offset = Int
 public typealias Scope = String
 public typealias Scopes = [Scope]
 public typealias Token = String
+public typealias Hashtag = String

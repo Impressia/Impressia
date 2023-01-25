@@ -9,20 +9,19 @@ import MastodonKit
 
 struct CommentBody: View {
     @EnvironmentObject var applicationState: ApplicationState
+    @EnvironmentObject var routerPath: RouterPath
 
     @State var statusViewModel: StatusViewModel
     private let contentWidth = Int(UIScreen.main.bounds.width) - 60
     
     var body: some View {
         HStack (alignment: .top) {
-            
-            NavigationLink(value: RouteurDestinations.userProfile(
-                accountId: self.statusViewModel.account.id,
-                accountDisplayName: self.statusViewModel.account.displayName,
-                accountUserName: self.statusViewModel.account.acct)
-            ) {
-                UserAvatar(accountAvatar: self.statusViewModel.account.avatar, size: .comment)
-            }
+            UserAvatar(accountAvatar: self.statusViewModel.account.avatar, size: .comment)
+                .onTapGesture {
+                    routerPath.navigate(to: .userProfile(accountId: self.statusViewModel.account.id,
+                                                         accountDisplayName: self.statusViewModel.account.displayNameWithoutEmojis,
+                                                         accountUserName: self.statusViewModel.account.acct))
+                }
             
             VStack (alignment: .leading, spacing: 0) {
                 HStack (alignment: .top) {
@@ -71,6 +70,7 @@ struct CommentBody: View {
                     .padding(.bottom, 8)
                 }
             }
+            .contentShape(Rectangle())
             .onTapGesture {
                 withAnimation(.linear(duration: 0.3)) {
                     if self.statusViewModel.id == self.applicationState.showInteractionStatusId {
