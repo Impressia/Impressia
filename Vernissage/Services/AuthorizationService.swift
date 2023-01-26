@@ -43,7 +43,6 @@ public class AuthorizationService {
         
         // Verify address.
         let instanceInformation = try await client.readInstanceInformation()
-        print(instanceInformation)
 
         // Create application (we will get clientId amd clientSecret).
         let oAuthApp = try await client.createApp(

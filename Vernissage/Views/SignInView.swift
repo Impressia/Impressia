@@ -30,13 +30,17 @@ struct SignInView: View {
                 
                 Button("Go") {
                     Task {
-                        try await AuthorizationService.shared.signIn(serverAddress: serverAddress, { accountData in
-                            DispatchQueue.main.async {
-                                self.applicationState.accountData = accountData
-                                onSignInStateChenge?(.mainView)
-                                dismiss()
-                            }
-                        })
+                        do {
+                            try await AuthorizationService.shared.signIn(serverAddress: serverAddress, { accountData in
+                                DispatchQueue.main.async {
+                                    self.applicationState.accountData = accountData
+                                    onSignInStateChenge?(.mainView)
+                                    dismiss()
+                                }
+                            })
+                        } catch {
+                            ErrorService.shared.handle(error, message: "Error during communication with server", showToastr: true)
+                        }
                     }
                 }
             }

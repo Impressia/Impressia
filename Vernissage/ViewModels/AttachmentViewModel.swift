@@ -7,7 +7,7 @@
 import Foundation
 import MastodonKit
 
-public class AttachmentViewModel {
+public class AttachmentViewModel: ObservableObject {
     public let id: String
     public let type: MediaAttachment.MediaAttachmentType
     public let url: URL
@@ -21,11 +21,11 @@ public class AttachmentViewModel {
     public let metaImageWidth: Int32?
     public let metaImageHeight: Int32?
     
-    public var data: Data?
-    public var exifCamera: String?
-    public var exifCreatedDate: String?
-    public var exifExposure: String?
-    public var exifLens: String?
+    @Published public var exifCamera: String?
+    @Published public var exifCreatedDate: String?
+    @Published public var exifExposure: String?
+    @Published public var exifLens: String?
+    @Published public var data: Data?
     
     init(id: String,
          type: MediaAttachment.MediaAttachmentType,

@@ -30,7 +30,7 @@ struct HomeFeedView: View {
             LazyVGrid(columns: gridColumns) {
                 ForEach(dbStatuses, id: \.self) { item in
                     NavigationLink(value: RouteurDestinations.status(
-                        id: item.id,
+                        id: item.rebloggedStatusId ?? item.id,
                         blurhash: item.attachments().first?.blurhash,
                         metaImageWidth: item.attachments().first?.metaImageWidth,
                         metaImageHeight: item.attachments().first?.metaImageHeight)

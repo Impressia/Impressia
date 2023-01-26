@@ -30,7 +30,7 @@ public class BaseApplication: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         self.name = try container.decode(String.self, forKey: .name)
-        self.website = try? container.decode(URL.self, forKey: .website)
+        self.website = try? container.decodeIfPresent(URL.self, forKey: .website)
     }
     
     public func encode(to encoder: Encoder) throws {

@@ -70,7 +70,18 @@ public class MastodonClient: MastodonClientProtocol {
             throw NetworkError.notSuccessResponse(response)
         }
         
-        return try JSONDecoder().decode(type, from: data)
+        #if DEBUG
+            do {
+                return try JSONDecoder().decode(type, from: data)
+            } catch {
+                let json = String(data: data, encoding: .utf8)!
+                print(json)
+
+                throw error
+            }
+        #else
+            return try JSONDecoder().decode(type, from: data)
+        #endif
     }
 }
 

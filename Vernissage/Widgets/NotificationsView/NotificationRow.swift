@@ -12,9 +12,20 @@ struct NotificationRow: View {
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var routerPath: RouterPath
 
-    @State public var notification: MastodonKit.Notification
+    @State private var image: SwiftUI.Image?
     
+    private var attachment: MediaAttachment?
+    private var notification: MastodonKit.Notification
     private let contentWidth = Int(UIScreen.main.bounds.width) - 150
+    
+    public init(notification: MastodonKit.Notification) {
+        self.notification = notification
+        self.attachment = notification.status?.getAllImageMediaAttachments().first
+        
+        if let attachment, let previewUrl = attachment.previewUrl, let imageFromCache = CacheImageService.shared.getImage(for: previewUrl) {
+            self.image = imageFromCache
+        }
+    }
     
     var body: some View {
         HStack (alignment: .top, spacing: 8) {
@@ -54,23 +65,27 @@ struct NotificationRow: View {
                 
                 switch self.notification.type {
                 case .favourite, .reblog, .mention, .status, .poll, .update:
-                    if let status = self.notification.status, let statusViewModel = StatusViewModel(status: status) {
-                        HStack(alignment: .top) {
-                            Spacer()
-                            if let attachment = statusViewModel.mediaAttachments.filter({ attachment in
-                                attachment.type == MediaAttachment.MediaAttachmentType.image
-                            }).first {
-                                if let cachedImage = CacheImageService.shared.getImage(for: attachment.url) {
-                                    cachedImage
-                                        .resizable()
-                                        .frame(width: 50, height: 50)
-                                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                                } else {
-                                    EmptyView()
-                                }
+                    HStack(alignment: .top) {
+                        Spacer()
+                        if let attachment {
+                            if let cachedImage = self.image {
+                                cachedImage
+                                    .resizable()
+                                    .frame(width: 50, height: 50)
+                                    .clipShape(RoundedRectangle(cornerRadius: 8))
                             } else {
-                                EmptyView()
+                                BlurredImage(blurhash: attachment.blurhash)
+                                    .frame(width: 50, height: 50)
+                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                                    .task {
+                                        await CacheImageService.shared.downloadImage(url: attachment.previewUrl)
+                                        if let previewUrl = attachment.previewUrl, let imageFromCache = CacheImageService.shared.getImage(for: previewUrl) {
+                                            self.image = imageFromCache
+                                        }
+                                    }
                             }
+                        } else {
+                            EmptyView()
                         }
                     }
                 case .follow, .followRequest, .adminSignUp:

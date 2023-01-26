@@ -7,7 +7,7 @@
 import Foundation
 import MastodonKit
 
-public class StatusViewModel {
+public class StatusViewModel: ObservableObject {
 
     public let uniqueId: UUID
     public let id: EntityId
@@ -18,7 +18,7 @@ public class StatusViewModel {
     public let account: Account
     public let inReplyToId: EntityId?
     public let inReplyToAccount: EntityId?
-    public let reblog: Status?
+    
     public let createdAt: String
     public let reblogsCount: Int
     public let favouritesCount: Int
@@ -31,12 +31,15 @@ public class StatusViewModel {
     public let muted: Bool
     public let spoilerText: String?
     public let visibility: Status.Visibility
-    public let mediaAttachments: [AttachmentViewModel]
     public let card: PreviewCard?
     public let mentions: [Mention]
     public let tags: [Tag]
     public let application: BaseApplication?
     public let place: Place?
+    
+    public let reblogStatus: Status?
+    
+    @Published public var mediaAttachments: [AttachmentViewModel]
     
     public init(
         id: EntityId,
@@ -75,7 +78,6 @@ public class StatusViewModel {
         self.application = application
         self.inReplyToId = inReplyToId
         self.inReplyToAccount = inReplyToAccount
-        self.reblog = reblog
         self.createdAt = createdAt ?? Date().formatted(.iso8601)
         self.reblogsCount = reblogsCount
         self.favouritesCount = favouritesCount
@@ -93,42 +95,52 @@ public class StatusViewModel {
         self.mentions = mentions
         self.tags = tags
         self.place = place
+        self.reblogStatus = nil
     }
     
     init(status: Status) {
+        
+        // If status has been rebloged we are saving orginal status here.
+        let orginalStatus = status.reblog ?? status
+        
         self.uniqueId = UUID()
-        self.id = status.id
-        self.content = status.content
-        self.uri = status.uri
-        self.url = status.url
-        self.account = status.account
-        self.inReplyToId = status.inReplyToId
-        self.inReplyToAccount = status.inReplyToAccount
-        self.reblog = status.reblog
-        self.createdAt = status.createdAt
-        self.reblogsCount = status.reblogsCount
-        self.favouritesCount = status.favouritesCount
-        self.repliesCount = status.repliesCount
-        self.reblogged = status.reblogged
-        self.favourited = status.favourited
-        self.sensitive = status.sensitive
-        self.bookmarked = status.bookmarked
-        self.pinned = status.pinned
-        self.muted = status.muted
-        self.spoilerText = status.spoilerText
-        self.visibility = status.visibility
-        self.card = status.card
-        self.mentions = status.mentions
-        self.tags = status.tags
-        self.application = status.application
-        self.place = status.place
+        self.id = orginalStatus.id
+        self.content = orginalStatus.content
+        self.uri = orginalStatus.uri
+        self.url = orginalStatus.url
+        self.account = orginalStatus.account
+        self.inReplyToId = orginalStatus.inReplyToId
+        self.inReplyToAccount = orginalStatus.inReplyToAccount
+        self.createdAt = orginalStatus.createdAt
+        self.reblogsCount = orginalStatus.reblogsCount
+        self.favouritesCount = orginalStatus.favouritesCount
+        self.repliesCount = orginalStatus.repliesCount
+        self.reblogged = orginalStatus.reblogged
+        self.favourited = orginalStatus.favourited
+        self.sensitive = orginalStatus.sensitive
+        self.bookmarked = orginalStatus.bookmarked
+        self.pinned = orginalStatus.pinned
+        self.muted = orginalStatus.muted
+        self.spoilerText = orginalStatus.spoilerText
+        self.visibility = orginalStatus.visibility
+        self.card = orginalStatus.card
+        self.mentions = orginalStatus.mentions
+        self.tags = orginalStatus.tags
+        self.application = orginalStatus.application
+        self.place = orginalStatus.place
         
         var mediaAttachments: [AttachmentViewModel] = []
-        for item in status.mediaAttachments {
+        for item in orginalStatus.mediaAttachments {
             mediaAttachments.append(AttachmentViewModel(attachment: item))
         }
         
         self.mediaAttachments = mediaAttachments
+        
+        if status.reblog != nil {
+            self.reblogStatus = status
+        } else {
+            self.reblogStatus = nil
+        }
     }
 }
 

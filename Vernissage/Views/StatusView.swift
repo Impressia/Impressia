@@ -33,7 +33,7 @@ struct StatusView: View {
     var body: some View {
         ScrollView {
             if let statusViewModel = self.statusViewModel {
-                VStack (alignment: .leading) {                    
+                VStack (alignment: .leading) {
                     ImagesCarousel(attachments: statusViewModel.mediaAttachments,
                                    selectedAttachmentId: $selectedAttachmentId,
                                    exifCamera: $exifCamera,
@@ -47,15 +47,16 @@ struct StatusView: View {
                     }
                     
                     VStack(alignment: .leading) {
-                        NavigationLink(value: RouteurDestinations.userProfile(
-                            accountId: statusViewModel.account.id,
-                            accountDisplayName: statusViewModel.account.displayNameWithoutEmojis,
-                            accountUserName: statusViewModel.account.acct)
-                        ) {
-                            UsernameRow(accountId: statusViewModel.account.id,
-                                        accountAvatar: statusViewModel.account.avatar,
-                                        accountDisplayName: statusViewModel.account.displayNameWithoutEmojis,
-                                        accountUsername: statusViewModel.account.username)
+                        self.reblogInformation()
+
+                        UsernameRow(accountId: statusViewModel.account.id,
+                                    accountAvatar: statusViewModel.account.avatar,
+                                    accountDisplayName: statusViewModel.account.displayNameWithoutEmojis,
+                                    accountUsername: statusViewModel.account.acct)
+                        .onTapGesture {
+                            self.routerPath.navigate(to: .userProfile(accountId: statusViewModel.account.id,
+                                                                      accountDisplayName: statusViewModel.account.displayNameWithoutEmojis,
+                                                                      accountUserName: statusViewModel.account.acct))
                         }
                         
                         MarkdownFormattedText(statusViewModel.content.asMarkdown)
@@ -114,15 +115,7 @@ struct StatusView: View {
                 // Get status from API.
                 if let status = try await StatusService.shared.status(withId: self.statusId, and: self.applicationState.accountData) {
                     let statusViewModel = StatusViewModel(status: status)
-                    
-                    // Download images and recalculate exif data.
-                    let allImages = await HomeTimelineService.shared.fetchAllImages(statuses: [status])
-                    for attachment in statusViewModel.mediaAttachments {
-                        if let data = allImages[attachment.id] {
-                            attachment.set(data: data)
-                        }
-                    }
-                    
+                                        
                     self.statusViewModel = statusViewModel
                     self.selectedAttachmentId = statusViewModel.mediaAttachments.first?.id ?? String.empty()
                     self.firstLoadFinished = true
@@ -143,6 +136,21 @@ struct StatusView: View {
             catch {
                 ErrorService.shared.handle(error, message: "Error during download status from server.", showToastr: !Task.isCancelled)
             }
+        }
+    }
+    
+    @ViewBuilder func reblogInformation() -> some View {
+        if let reblogStatus = self.statusViewModel?.reblogStatus {
+            HStack(alignment: .center, spacing: 4) {
+                UserAvatar(accountAvatar: reblogStatus.account.avatar, size: .mini)
+                Text(reblogStatus.account.displayNameWithoutEmojis)
+                Image(systemName: "paperplane")
+                    .padding(.trailing, 8)
+            }
+            .font(.footnote)
+            .foregroundColor(Color.mainTextColor.opacity(0.4))
+            .background(Color.mainTextColor.opacity(0.1))
+            .clipShape(Capsule())
         }
     }
     

@@ -74,8 +74,6 @@ struct NotificationsView: View {
                 maxId: maxId,
                 minId: minId,
                 limit: 5)
-            
-            await self.downloadAllImages(notifications: linkable.data)
 
             self.minId = linkable.link?.minId
             self.maxId = linkable.link?.maxId
@@ -98,8 +96,6 @@ struct NotificationsView: View {
                 andContext: self.applicationState.accountData,
                 maxId: self.maxId,
                 limit: self.defaultPageSize)
-            
-            await self.downloadAllImages(notifications: linkable.data)
 
             self.maxId = linkable.link?.maxId
             self.notifications.append(contentsOf: linkable.data)
@@ -124,8 +120,6 @@ struct NotificationsView: View {
                 // We have all notifications, we don't have to do anything.
                 return
             }
-            
-            await self.downloadAllImages(notifications: linkable.data)
             
             self.minId = linkable.link?.minId
             self.notifications.insert(contentsOf: linkable.data, at: 0)

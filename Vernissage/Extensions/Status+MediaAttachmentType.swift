@@ -10,9 +10,22 @@ import MastodonKit
 extension [Status] {
     func getStatusesWithImagesOnly() -> [Status] {
         return self.filter { status in
-            status.mediaAttachments.contains { mediaAttachment in
-                mediaAttachment.type == .image
-            }
+            status.statusContainsImage()
         }
+    }
+}
+
+extension Status {
+    func statusContainsImage() -> Bool {
+        return getAllImageMediaAttachments().isEmpty == false
+    }
+    
+    func getAllImageMediaAttachments() -> [MediaAttachment] {
+        if let reblog = self.reblog {
+            // If status is rebloged the we have to check if orginal status contains image.
+            return reblog.mediaAttachments.filter { mediaAttachment in mediaAttachment.type == .image }
+        }
+        
+        return self.mediaAttachments.filter { mediaAttachment in mediaAttachment.type == .image }
     }
 }

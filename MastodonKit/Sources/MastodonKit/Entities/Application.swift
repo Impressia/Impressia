@@ -44,20 +44,19 @@ public class Application: BaseApplication {
     
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-
         self.id = try container.decode(String.self, forKey: .id)
         self.redirectUri = try container.decode(String.self, forKey: .redirectUri)
         self.clientId = try container.decode(String.self, forKey: .clientId)
         self.clientSecret = try container.decode(String.self, forKey: .clientSecret)
-        self.vapidKey = try? container.decode(String.self, forKey: .vapidKey)
+        self.vapidKey = try? container.decodeIfPresent(String.self, forKey: .vapidKey)
         
-        let superDecoder = try container.superDecoder()
-        try super.init(from: superDecoder)
+        try super.init(from: decoder)
     }
     
     public override func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
+        try super.encode(to: encoder)
         
+        var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(redirectUri, forKey: .redirectUri)
         try container.encode(clientId, forKey: .clientId)
@@ -66,8 +65,5 @@ public class Application: BaseApplication {
         if let vapidKey {
             try container.encode(vapidKey, forKey: .vapidKey)
         }
-        
-        let superEncoder = container.superEncoder()
-        try super.encode(to: superEncoder)
     }
 }

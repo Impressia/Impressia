@@ -11,14 +11,16 @@ struct UserAvatar: View {
     @EnvironmentObject var applicationState: ApplicationState
     
     public enum Size {
-        case list, comment, profile
+        case mini, list, comment, profile
       
         public var size: CGSize {
             switch self {
-            case .list:
-                return .init(width: 48, height: 48)
+            case .mini:
+                return .init(width: 20, height: 20)
             case .comment:
                 return .init(width: 32, height: 32)
+            case .list:
+                return .init(width: 48, height: 48)
             case .profile:
                 return .init(width: 96, height: 96)
             }
@@ -54,6 +56,9 @@ struct UserAvatar: View {
                     }
                 }
                 .priority(.high)
+                .task {
+                    await CacheImageService.shared.downloadImage(url: accountAvatar)
+                }
                 .frame(width: size.size.width, height: size.size.height)
             }
         } else {

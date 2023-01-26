@@ -29,6 +29,7 @@
 		F8210DEA2966E4F9001D9973 /* AnimatePlaceholderModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8210DE92966E4F9001D9973 /* AnimatePlaceholderModifier.swift */; };
 		F8341F90295C636C009C8EE6 /* Data+Exif.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8341F8F295C636C009C8EE6 /* Data+Exif.swift */; };
 		F83901A6295D8EC000456AE2 /* LabelIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83901A5295D8EC000456AE2 /* LabelIcon.swift */; };
+		F83CBEFB298298A1002972C8 /* ImageCarouselPicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83CBEFA298298A1002972C8 /* ImageCarouselPicture.swift */; };
 		F857F9FD297D8ED3002C109C /* ActionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = F857F9FC297D8ED3002C109C /* ActionMenu.swift */; };
 		F85D4971296402DC00751DF7 /* AuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D4970296402DC00751DF7 /* AuthorizationService.swift */; };
 		F85D4973296406E700751DF7 /* BottomRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D4972296406E700751DF7 /* BottomRight.swift */; };
@@ -135,6 +136,8 @@
 		F8210DE92966E4F9001D9973 /* AnimatePlaceholderModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatePlaceholderModifier.swift; sourceTree = "<group>"; };
 		F8341F8F295C636C009C8EE6 /* Data+Exif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Exif.swift"; sourceTree = "<group>"; };
 		F83901A5295D8EC000456AE2 /* LabelIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelIcon.swift; sourceTree = "<group>"; };
+		F83CBEFA298298A1002972C8 /* ImageCarouselPicture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCarouselPicture.swift; sourceTree = "<group>"; };
+		F85183232981C2CE001BB950 /* Vernissage20230125-001.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage20230125-001.xcdatamodel"; sourceTree = "<group>"; };
 		F857F9FC297D8ED3002C109C /* ActionMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionMenu.swift; sourceTree = "<group>"; };
 		F85D4970296402DC00751DF7 /* AuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationService.swift; sourceTree = "<group>"; };
 		F85D4972296406E700751DF7 /* BottomRight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomRight.swift; sourceTree = "<group>"; };
@@ -201,6 +204,7 @@
 		F8984E4C296B648000A2610F /* UIImage+Blurhash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Blurhash.swift"; sourceTree = "<group>"; };
 		F898DE6F2972868A004B4A6A /* String+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Empty.swift"; sourceTree = "<group>"; };
 		F898DE7129728CB2004B4A6A /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
+		F8995E432982865C004C191C /* Vernissage20230126-001.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage20230126-001.xcdatamodel"; sourceTree = "<group>"; };
 		F8996DEA2971D29D0043EEC6 /* View+Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Transition.swift"; sourceTree = "<group>"; };
 		F89992C8296D6DC7005994BF /* CommentBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentBody.swift; sourceTree = "<group>"; };
 		F89992CB296D9231005994BF /* StatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewModel.swift; sourceTree = "<group>"; };
@@ -351,6 +355,7 @@
 				F85D497629640A5200751DF7 /* ImageRow.swift */,
 				F8210DCE2966B600001D9973 /* ImageRowAsync.swift */,
 				F85D497829640B9D00751DF7 /* ImagesCarousel.swift */,
+				F83CBEFA298298A1002972C8 /* ImageCarouselPicture.swift */,
 				F85D497A29640C8200751DF7 /* UsernameRow.swift */,
 				F85D497C29640D5900751DF7 /* InteractionRow.swift */,
 				F897978729681B9C00B22335 /* UserAvatar.swift */,
@@ -685,6 +690,7 @@
 				F88E4D54297EA7EE0057491A /* MarkdownFormattedText.swift in Sources */,
 				F866F6A1296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift in Sources */,
 				F8C14394296AF21B001FE31D /* Double+Round.swift in Sources */,
+				F83CBEFB298298A1002972C8 /* ImageCarouselPicture.swift in Sources */,
 				F89A46DC296EAACE0062125F /* SettingsView.swift in Sources */,
 				F866F6AE29606367002E8F88 /* ApplicationViewMode.swift in Sources */,
 				F8A93D802965FED4001D8331 /* AccountService.swift in Sources */,
@@ -993,12 +999,14 @@
 		F88C2476295C37BB0006098B /* Vernissage.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				F8995E432982865C004C191C /* Vernissage20230126-001.xcdatamodel */,
+				F85183232981C2CE001BB950 /* Vernissage20230125-001.xcdatamodel */,
 				F86167C9297FF423004D1F67 /* Vernissage20230121-001.xcdatamodel */,
 				F89D6C3B29716DBC001DA3D4 /* Vernissage20230113-001.xcdatamodel */,
 				F8AF2A61297073FE00D2DA3F /* Vernissage20230112-001.xcdatamodel */,
 				F88C2477295C37BB0006098B /* Vernissage.xcdatamodel */,
 			);
-			currentVersion = F86167C9297FF423004D1F67 /* Vernissage20230121-001.xcdatamodel */;
+			currentVersion = F8995E432982865C004C191C /* Vernissage20230126-001.xcdatamodel */;
 			path = Vernissage.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

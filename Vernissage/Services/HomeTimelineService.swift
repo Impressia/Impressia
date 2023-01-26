@@ -23,10 +23,10 @@ public class HomeTimelineService {
             return 0
         }
         
-        let statuses = try await self.loadData(for: accountData, on: backgroundContext, maxId: oldestStatus.id)
+        let newStatuses = try await self.loadData(for: accountData, on: backgroundContext, maxId: oldestStatus.id)
         
         try backgroundContext.save()
-        return statuses.count
+        return newStatuses.count
     }
 
     public func onTopOfList(for accountData: AccountData) async throws -> Int {
@@ -77,7 +77,7 @@ public class HomeTimelineService {
         
         // Save statuses in database (and download images).
         if !statusesToAdd.isEmpty {
-            try await self.save(statuses: statusesToAdd, accountData: accountData, on: backgroundContext)
+            _ = try await self.save(statuses: statusesToAdd, accountData: accountData, on: backgroundContext)
         }
     }
     
@@ -91,42 +91,33 @@ public class HomeTimelineService {
         let statuses = try await client.getHomeTimeline(maxId: maxId, minId: minId, limit: 20)
 
         // Save statuses in database (and download images).
-        try await self.save(statuses: statuses, accountData: accountData, on: backgroundContext)
-
-        return statuses
+        return try await self.save(statuses: statuses, accountData: accountData, on: backgroundContext)
     }
     
     public func updateStatus(_ statusData: StatusData, accountData: AccountData, basedOn status: Status) async throws -> StatusData? {
         // Load data from API and operate on CoreData on background context.
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
-        
-        // Download all images from server.
-        let attachmentsData = await self.fetchAllImages(statuses: [status])
-        
+                
         // Update status data in database.
-        try await self.copy(from: status, to: statusData, attachmentsData: attachmentsData, on: backgroundContext)
+        self.copy(from: status, to: statusData, on: backgroundContext)
         try backgroundContext.save()
         
         return statusData
     }
     
-    private func save(statuses: [Status], accountData: AccountData, on backgroundContext: NSManagedObjectContext) async throws {
-        // Download all images from server.
-        let attachmentsData = await self.fetchAllImages(statuses: statuses)
+    public func updateAttachmentDataImage(attachmentData: AttachmentData, imageData: Data) {        
+        attachmentData.data = imageData
+        self.setExifProperties(in: attachmentData, from: imageData)
         
+        CoreDataHandler.shared.save()
+    }
+    
+    private func save(statuses: [Status], accountData: AccountData, on backgroundContext: NSManagedObjectContext) async throws -> [Status] {
+        // Proceed statuses with images only.
+        let statusesWithImages = statuses.getStatusesWithImagesOnly()
+                        
         // Save status data in database.
-        for status in statuses {
-            let contains = attachmentsData.contains { (key: String, value: Data) in
-                status.mediaAttachments.contains { attachment in
-                    attachment.id == key
-                }
-            }
-            
-            // We are adding status only when we have at least one image for status.
-            if contains == false {
-                continue
-            }
-
+        for status in statusesWithImages {
             guard let dbAccount = AccountDataHandler.shared.getAccountData(accountId: accountData.id, viewContext: backgroundContext) else {
                 throw DatabaseError.cannotDownloadAccount
             }
@@ -136,17 +127,19 @@ public class HomeTimelineService {
             statusData.pixelfedAccount = dbAccount
             dbAccount.addToStatuses(statusData)
             
-            try await self.copy(from: status, to: statusData, attachmentsData: attachmentsData, on: backgroundContext)
+            self.copy(from: status, to: statusData, on: backgroundContext)
         }
+        
+        return statusesWithImages
     }
     
-    private func copy(from status: Status, to statusData: StatusData, attachmentsData: Dictionary<String, Data>, on backgroundContext: NSManagedObjectContext) async throws {
+    private func copy(from status: Status,
+                      to statusData: StatusData,
+                      on backgroundContext: NSManagedObjectContext
+    ) {
         statusData.copyFrom(status)
         
-        for attachment in status.mediaAttachments {
-            guard let imageData = attachmentsData[attachment.id] else {
-                continue
-            }
+        for attachment in status.getAllImageMediaAttachments() {
             
             // Save attachment in database.
             let attachmentData = statusData.attachments().first { item in item.id == attachment.id }
@@ -154,31 +147,7 @@ public class HomeTimelineService {
             
             attachmentData.copyFrom(attachment)
             attachmentData.statusId = statusData.id
-            attachmentData.data = imageData
-            
-            // Read exif information.
-            if let exifProperties = imageData.getExifData() {
-                if let make = exifProperties.getExifValue("Make"), let model = exifProperties.getExifValue("Model") {
-                    attachmentData.exifCamera = "\(make) \(model)"
-                }
-                
-                // "Lens" or "Lens Model"
-                if let lens = exifProperties.getExifValue("Lens") {
-                    attachmentData.exifLens = lens
-                }
-                
-                if let createData = exifProperties.getExifValue("CreateDate") {
-                    attachmentData.exifCreatedDate = createData
-                }
-                
-                if let focalLenIn35mmFilm = exifProperties.getExifValue("FocalLenIn35mmFilm"),
-                   let fNumber = exifProperties.getExifValue("FNumber")?.calculateExifNumber(),
-                   let exposureTime = exifProperties.getExifValue("ExposureTime"),
-                   let photographicSensitivity = exifProperties.getExifValue("PhotographicSensitivity") {
-                    attachmentData.exifExposure = "\(focalLenIn35mmFilm)mm, f/\(fNumber), \(exposureTime)s, ISO \(photographicSensitivity)"
-                }
-            }
-            
+                        
             if attachmentData.isInserted {
                 attachmentData.statusRelation = statusData
                 statusData.addToAttachmentRelation(attachmentData)
@@ -189,10 +158,11 @@ public class HomeTimelineService {
     public func fetchAllImages(statuses: [Status]) async -> Dictionary<String, Data> {
         var attachmentUrls: Dictionary<String, URL> = [:]
         
-        let statusesWithImages = statuses.getStatusesWithImagesOnly()
-        statusesWithImages.forEach { status in
+        statuses.forEach { status in
             status.mediaAttachments.forEach { attachment in
-                attachmentUrls[attachment.id] = attachment.url
+                if attachment.type == .image {
+                    attachmentUrls[attachment.id] = attachment.url
+                }
             }
         }
         
@@ -200,13 +170,15 @@ public class HomeTimelineService {
             for attachmentUrl in attachmentUrls {
                 taskGroup.addTask {
                     do {
+                        print("Fetching image \(attachmentUrl.value)")
                         if let imageData = try await self.fetchImage(attachmentUrl: attachmentUrl.value) {
+                            print("Image fetched \(attachmentUrl.value)")
                             return (attachmentUrl.key, imageData)
                         }
                         
                         return (attachmentUrl.key, nil)
                     } catch {
-                        ErrorService.shared.handle(error, message: "Fatching all images failed.")
+                        ErrorService.shared.handle(error, message: "Fatching image '\(attachmentUrl.value)' failed.")
                         return (attachmentUrl.key, nil)
                     }
                 }
@@ -222,6 +194,31 @@ public class HomeTimelineService {
             }
 
             return childTaskResults
+        }
+    }
+    
+    private func setExifProperties(in attachmentData: AttachmentData, from imageData: Data) {
+        // Read exif information.
+        if let exifProperties = imageData.getExifData() {
+            if let make = exifProperties.getExifValue("Make"), let model = exifProperties.getExifValue("Model") {
+                attachmentData.exifCamera = "\(make) \(model)"
+            }
+            
+            // "Lens" or "Lens Model"
+            if let lens = exifProperties.getExifValue("Lens") {
+                attachmentData.exifLens = lens
+            }
+            
+            if let createData = exifProperties.getExifValue("CreateDate") {
+                attachmentData.exifCreatedDate = createData
+            }
+            
+            if let focalLenIn35mmFilm = exifProperties.getExifValue("FocalLenIn35mmFilm"),
+               let fNumber = exifProperties.getExifValue("FNumber")?.calculateExifNumber(),
+               let exposureTime = exifProperties.getExifValue("ExposureTime"),
+               let photographicSensitivity = exifProperties.getExifValue("PhotographicSensitivity") {
+                attachmentData.exifExposure = "\(focalLenIn35mmFilm)mm, f/\(fNumber), \(exposureTime)s, ISO \(photographicSensitivity)"
+            }
         }
     }
     

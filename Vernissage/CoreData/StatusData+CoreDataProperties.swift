@@ -39,7 +39,12 @@ extension StatusData {
     @NSManaged public var visibility: String
     @NSManaged public var attachmentRelation: Set<AttachmentData>?
     @NSManaged public var pixelfedAccount: AccountData
-
+    
+    @NSManaged public var rebloggedStatusId: String?
+    @NSManaged public var rebloggedAccountAvatar: URL?
+    @NSManaged public var rebloggedAccountDisplayName: String?
+    @NSManaged public var rebloggedAccountId: String?
+    @NSManaged public var rebloggedAccountUsername: String?
 }
 
 // MARK: Generated accessors for attachmentRelation

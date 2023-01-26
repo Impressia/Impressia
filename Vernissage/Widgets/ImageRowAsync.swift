@@ -91,12 +91,14 @@ struct ImageRowAsync: View {
     }
     
     private func recalculateSizeOfDownloadedImage(imageResponse: ImageResponse) {
-        if heightWasPrecalculated == false {
-            let imgHeight = imageResponse.image.size.height
-            let imgWidth = imageResponse.image.size.width
-            let calculatedHeight = self.calculateHeight(width: imgWidth, height: imgHeight)
-            self.imageHeight = (calculatedHeight > 0 && calculatedHeight < .infinity) ? calculatedHeight : UIScreen.main.bounds.width
+        guard heightWasPrecalculated == false else {
+            return
         }
+        
+        let imgHeight = imageResponse.image.size.height
+        let imgWidth = imageResponse.image.size.width
+        let calculatedHeight = self.calculateHeight(width: imgWidth, height: imgHeight)
+        self.imageHeight = (calculatedHeight > 0 && calculatedHeight < .infinity) ? calculatedHeight : UIScreen.main.bounds.width
     }
         
     private func calculateHeight(width: Double, height: Double) -> CGFloat {

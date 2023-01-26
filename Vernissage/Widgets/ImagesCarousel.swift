@@ -5,11 +5,14 @@
 //
     
 import SwiftUI
+import MastodonKit
 
 struct ImagesCarousel: View {
     @State public var attachments: [AttachmentViewModel]
-    @State private var height: Double = 0.0
-    @State private var selected = String.empty()
+    @State private var imageHeight: Double
+    @State private var imageWidth: Double
+    @State private var selected: String
+    @State private var heightWasPrecalculated: Bool
     
     @Binding public var selectedAttachmentId: String?
     @Binding public var exifCamera: String?
@@ -17,18 +20,64 @@ struct ImagesCarousel: View {
     @Binding public var exifCreatedDate: String?
     @Binding public var exifLens: String?
     
+    init(attachments: [AttachmentViewModel],
+         selectedAttachmentId: Binding<String?>,
+         exifCamera: Binding<String?>,
+         exifExposure: Binding<String?>,
+         exifCreatedDate: Binding<String?>,
+         exifLens: Binding<String?>
+    ) {
+        _selectedAttachmentId = selectedAttachmentId
+        _exifCamera = exifCamera
+        _exifExposure = exifExposure
+        _exifCreatedDate = exifCreatedDate
+        _exifLens = exifLens
+        
+        self.attachments = attachments
+        self.selected = String.empty()
+
+        var imgHeight = 0.0
+        var imgWidth = 0.0
+
+        for item in attachments {
+            let attachmentheight = Double((item.meta as? ImageMetadata)?.original?.height ?? 0)
+            if attachmentheight > imgHeight {
+                imgHeight = attachmentheight
+                imgWidth = Double((item.meta as? ImageMetadata)?.original?.width ?? 0)
+            }
+        }
+        
+        if imgHeight > 0 && imgWidth > 0 {
+            let divider = Double(imgWidth) / UIScreen.main.bounds.size.width
+            let calculatedHeight = Double(imgHeight) / divider
+            
+            self.imageWidth = UIScreen.main.bounds.width
+            self.imageHeight = (calculatedHeight > 0 && calculatedHeight < .infinity) ? calculatedHeight : UIScreen.main.bounds.width
+            self.heightWasPrecalculated = true
+        } else {
+            self.imageWidth = UIScreen.main.bounds.width
+            self.imageHeight = UIScreen.main.bounds.width * 0.75
+            self.heightWasPrecalculated = false
+        }
+    }
+    
     var body: some View {
         TabView(selection: $selected) {
             ForEach(attachments, id: \.id) { attachment in
-                if let data = attachment.data, let image = UIImage(data: data) {
-                    Image(uiImage: image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .tag(attachment.id)
+                ImageCarouselPicture(attachment: attachment) { (attachment, imageData) in
+                    withAnimation {
+                        self.recalculateImageHeight(imageData: imageData)   
+                    }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                        attachment.set(data: imageData)
+                    }
+                    
                 }
+                .tag(attachment.id)
             }
         }
-        .frame(height: CGFloat(self.height))
+        .frame(height: CGFloat(self.imageHeight))
         .tabViewStyle(PageTabViewStyle())
         .onChange(of: selected, perform: { index in
             self.selectedAttachmentId = selected
@@ -42,11 +91,14 @@ struct ImagesCarousel: View {
         })
         .onAppear {
             self.selected = self.attachments.first?.id ?? String.empty()
-            self.calculateImageHeight()
         }
     }
     
-    private func calculateImageHeight() {
+    private func recalculateImageHeight(imageData: Data) {
+        guard heightWasPrecalculated == false else {
+            return
+        }
+
         var imageHeight = 0.0
         var imageWidth = 0.0
         
@@ -59,14 +111,14 @@ struct ImagesCarousel: View {
             }
         }
         
+        if let image = UIImage(data: imageData) {
+            if image.size.height > imageHeight {
+                imageHeight = image.size.height
+                imageWidth = image.size.width
+            }
+        }
+        
         let divider = imageWidth / UIScreen.main.bounds.size.width
-        self.height = imageHeight / divider
-    }
-}
-
-struct ImagesCarousel_Previews: PreviewProvider {
-    static var previews: some View {
-        Text("")
-        // ImagesCarousel(attachments: [], exifCamera: .constant(""), exifExposure: .constant(""), exifCreatedDate: .constant(""), exifLens: .constant(""))
+        self.imageHeight = imageHeight / divider
     }
 }

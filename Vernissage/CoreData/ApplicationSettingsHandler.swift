@@ -25,6 +25,9 @@ class ApplicationSettingsHandler {
             return settings
         } else {
             let settings = self.createApplicationSettingsEntity()
+            settings.avatarShape = Int32(AvatarShape.circle.rawValue)
+            settings.theme = Int32(Theme.system.rawValue)
+            settings.tintColor = Int32(TintColor.accentColor2.rawValue)
             CoreDataHandler.shared.save()
 
             return settings
