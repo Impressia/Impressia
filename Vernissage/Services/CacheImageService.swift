@@ -11,16 +11,16 @@ public class CacheImageService {
     public static let shared = CacheImageService()
     private init() { }
     
-    private var memoryChartData = MemoryCache<URL, Image>(entryLifetime: 600)
+    private var memoryCacheData = MemoryCache<URL, Image>(entryLifetime: 600)
         
     func addImage(for url: URL, data: Data) {
         if let uiImage = UIImage(data: data) {
-            self.memoryChartData[url] = Image(uiImage: uiImage)
+            self.memoryCacheData[url] = Image(uiImage: uiImage)
         }
     }
 
     func addImage(for url: URL, image: Image) {
-        self.memoryChartData[url] = image
+        self.memoryCacheData[url] = image
     }
 
     func downloadImage(url: URL?) async {
@@ -28,7 +28,7 @@ public class CacheImageService {
             return
         }
         
-        if memoryChartData[url] != nil {
+        if memoryCacheData[url] != nil {
             return
         }
         
@@ -43,6 +43,6 @@ public class CacheImageService {
     }
     
     func getImage(for url: URL) -> Image? {
-        return self.memoryChartData[url]
+        return self.memoryCacheData[url]
     }
 }

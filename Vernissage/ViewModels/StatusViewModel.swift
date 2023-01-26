@@ -9,7 +9,6 @@ import MastodonKit
 
 public class StatusViewModel: ObservableObject {
 
-    public let uniqueId: UUID
     public let id: EntityId
     public let content: Html
     
@@ -69,7 +68,6 @@ public class StatusViewModel: ObservableObject {
         tags: [Tag] = [],
         place: Place? = nil
     ) {
-        self.uniqueId = UUID()
         self.id = id
         self.content = content
         self.uri = uri
@@ -103,7 +101,6 @@ public class StatusViewModel: ObservableObject {
         // If status has been rebloged we are saving orginal status here.
         let orginalStatus = status.reblog ?? status
         
-        self.uniqueId = UUID()
         self.id = orginalStatus.id
         self.content = orginalStatus.content
         self.uri = orginalStatus.uri

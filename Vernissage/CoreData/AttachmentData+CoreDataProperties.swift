@@ -14,7 +14,7 @@ extension AttachmentData {
     }
 
     @NSManaged public var blurhash: String?
-    @NSManaged public var data: Data
+    @NSManaged public var data: Data?
     @NSManaged public var exifCamera: String?
     @NSManaged public var exifCreatedDate: String?
     @NSManaged public var exifExposure: String?

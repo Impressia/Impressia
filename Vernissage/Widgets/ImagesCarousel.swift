@@ -38,21 +38,33 @@ struct ImagesCarousel: View {
 
         var imgHeight = 0.0
         var imgWidth = 0.0
+        var attachment: AttachmentViewModel?
 
         for item in attachments {
             let attachmentheight = Double((item.meta as? ImageMetadata)?.original?.height ?? 0)
             if attachmentheight > imgHeight {
+                attachment = item
                 imgHeight = attachmentheight
                 imgWidth = Double((item.meta as? ImageMetadata)?.original?.width ?? 0)
             }
         }
         
-        if imgHeight > 0 && imgWidth > 0 {
-            let divider = Double(imgWidth) / UIScreen.main.bounds.size.width
-            let calculatedHeight = Double(imgHeight) / divider
-            
-            self.imageWidth = UIScreen.main.bounds.width
-            self.imageHeight = (calculatedHeight > 0 && calculatedHeight < .infinity) ? calculatedHeight : UIScreen.main.bounds.width
+        // Attachments doesn't have any metadata with sizes, thus we have to use first one.
+        if attachment == nil {
+            attachment = attachments.first
+        }
+        
+        // Calculate size of frame (first from cache, then from metadata).
+        if let attachment, let size = ImageSizeService.shared.getImageSize(for: attachment.url) {
+            self.imageWidth = size.width
+            self.imageHeight = size.height
+
+            self.heightWasPrecalculated = true
+        } else if let attachment, imgHeight > 0 && imgWidth > 0 {
+            let size = ImageSizeService.shared.calculateSize(for: attachment.url, width: imgWidth, height: imgHeight)
+            self.imageWidth = size.width
+            self.imageHeight = size.height
+
             self.heightWasPrecalculated = true
         } else {
             self.imageWidth = UIScreen.main.bounds.width
@@ -66,7 +78,7 @@ struct ImagesCarousel: View {
             ForEach(attachments, id: \.id) { attachment in
                 ImageCarouselPicture(attachment: attachment) { (attachment, imageData) in
                     withAnimation {
-                        self.recalculateImageHeight(imageData: imageData)   
+                        self.recalculateImageHeight(attachment: attachment,  imageData: imageData)
                     }
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
@@ -94,7 +106,7 @@ struct ImagesCarousel: View {
         }
     }
     
-    private func recalculateImageHeight(imageData: Data) {
+    private func recalculateImageHeight(attachment: AttachmentViewModel, imageData: Data) {
         guard heightWasPrecalculated == false else {
             return
         }
@@ -118,7 +130,8 @@ struct ImagesCarousel: View {
             }
         }
         
-        let divider = imageWidth / UIScreen.main.bounds.size.width
-        self.imageHeight = imageHeight / divider
+        let size = ImageSizeService.shared.calculateSize(for: attachment.url, width: imageWidth, height: imageHeight)
+        self.imageWidth = size.width
+        self.imageHeight = size.height
     }
 }

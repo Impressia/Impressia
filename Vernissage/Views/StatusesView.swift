@@ -30,9 +30,9 @@ struct StatusesView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .center) {
-                if firstLoadFinished == true {
-                    ForEach(self.statusViewModels, id: \.uniqueId) { item in
+            if firstLoadFinished == true {
+                LazyVStack(alignment: .center) {
+                    ForEach(self.statusViewModels, id: \.id) { item in
                         NavigationLink(value: RouteurDestinations.status(
                             id: item.id,
                             blurhash: item.mediaAttachments.first?.blurhash,
@@ -43,24 +43,21 @@ struct StatusesView: View {
                         }
                         .buttonStyle(EmptyButtonStyle())
                     }
-                    
-                    LazyVStack {
-                        if allItemsLoaded == false && firstLoadFinished == true {
-                            HStack {
-                                Spacer()
-                                LoadingIndicator()
-                                    .task {
-                                        do {
-                                            try await self.loadMoreStatuses()
-                                        } catch {
-                                            ErrorService.shared.handle(error, message: "Loading more statuses failed.", showToastr: true)
-                                        }
+
+                    if allItemsLoaded == false && firstLoadFinished == true {
+                        HStack {
+                            Spacer()
+                            LoadingIndicator()
+                                .task {
+                                    do {
+                                        try await self.loadMoreStatuses()
+                                    } catch {
+                                        ErrorService.shared.handle(error, message: "Loading more statuses failed.", showToastr: true)
                                     }
-                                Spacer()
-                            }
+                                }
+                            Spacer()
                         }
                     }
-                    
                 }
             }
         }

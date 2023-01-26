@@ -18,9 +18,9 @@ struct UserProfileStatuses: View {
     private let defaultLimit = 20
 
     var body: some View {
-        VStack(alignment: .center) {
+        LazyVStack(alignment: .center) {
             if firstLoadFinished == true {
-                ForEach(self.statusViewModels, id: \.uniqueId) { item in
+                ForEach(self.statusViewModels, id: \.id) { item in
                     NavigationLink(value: RouteurDestinations.status(
                         id: item.id,
                         blurhash: item.mediaAttachments.first?.blurhash,
@@ -31,24 +31,21 @@ struct UserProfileStatuses: View {
                     }
                     .buttonStyle(EmptyButtonStyle())
                 }
-                
-                LazyVStack {
-                    if allItemsLoaded == false && firstLoadFinished == true {
-                        HStack {
-                            Spacer()
-                            LoadingIndicator()
-                                .task {
-                                    do {
-                                        try await self.loadMoreStatuses()
-                                    } catch {
-                                        ErrorService.shared.handle(error, message: "Loading more statuses failed.", showToastr: true)
-                                    }
+
+                if allItemsLoaded == false && firstLoadFinished == true {
+                    HStack {
+                        Spacer()
+                        LoadingIndicator()
+                            .task {
+                                do {
+                                    try await self.loadMoreStatuses()
+                                } catch {
+                                    ErrorService.shared.handle(error, message: "Loading more statuses failed.", showToastr: true)
                                 }
-                            Spacer()
-                        }
+                            }
+                        Spacer()
                     }
                 }
-                
             } else {
                 LoadingIndicator()
             }

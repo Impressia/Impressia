@@ -13,7 +13,12 @@ public class RemoteFileService {
     private init() { }
     
     public func fetchData(url: URL) async throws -> Data? {
-        let (data, response) = try await ImagePipeline.shared.data(for: url)
+        let request = ImageRequest(
+            url: url,
+            priority: .high
+        )
+        
+        let (data, response) = try await ImagePipeline.shared.data(for: request)
         
         guard let response else {
             return data

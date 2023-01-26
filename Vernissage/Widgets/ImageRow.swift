@@ -18,26 +18,25 @@ struct ImageRow: View {
         self.status = statusData
         self.attachmentData = statusData.attachments().first
         
-        if let imageData = self.attachmentData?.data, let uiImage = UIImage(data: imageData) {
+        // Calculate size of frame (first from cache, then from real image, then from metadata).
+        if let attachmentData, let size = ImageSizeService.shared.getImageSize(for: attachmentData.url) {
+            self.imageWidth = size.width
+            self.imageHeight = size.height
+        } else if let attachmentData, let imageData = attachmentData.data, let uiImage = UIImage(data: imageData) {
             self.uiImage = uiImage
             
-            let imgHeight = uiImage.size.height
-            let imgWidth = uiImage.size.width
-            let divider = imgWidth / UIScreen.main.bounds.size.width
-            let calculatedHeight = imgHeight / divider
-            
-            self.imageWidth = UIScreen.main.bounds.width
-            self.imageHeight = (calculatedHeight > 0 && calculatedHeight < .infinity) ? calculatedHeight : UIScreen.main.bounds.width
-        } else if let imgWidth = attachmentData?.metaImageWidth, let imgHeight = attachmentData?.metaImageHeight {
-                let divider = Double(imgWidth) / UIScreen.main.bounds.size.width
-                let calculatedHeight = Double(imgHeight) / divider
-            
-                self.uiImage = nil
-                self.imageWidth = UIScreen.main.bounds.width
-                self.imageHeight = (calculatedHeight > 0 && calculatedHeight < .infinity) ? calculatedHeight : UIScreen.main.bounds.width
+            let size = ImageSizeService.shared.calculateSize(for: attachmentData.url, width: uiImage.size.width, height: uiImage.size.height)
+            self.imageWidth = size.width
+            self.imageHeight = size.height
+        } else if let attachmentData, attachmentData.metaImageWidth > 0 && attachmentData.metaImageHeight > 0 {
+            let size = ImageSizeService.shared.calculateSize(for: attachmentData.url,
+                                                             width: attachmentData.metaImageWidth,
+                                                             height: attachmentData.metaImageHeight)
+            self.imageWidth = size.width
+            self.imageHeight = size.height
         } else {
             self.uiImage = nil
-            self.imageHeight = UIScreen.main.bounds.width
+            self.imageHeight = UIScreen.main.bounds.width * 0.75
             self.imageWidth = UIScreen.main.bounds.width
         }
     }

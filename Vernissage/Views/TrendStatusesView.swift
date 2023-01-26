@@ -40,9 +40,9 @@ struct TrendStatusesView: View {
                 }
             }
             
-            VStack(alignment: .center) {
+            LazyVStack(alignment: .center) {
                 if firstLoadFinished == true {
-                    ForEach(self.statusViewModels, id: \.uniqueId) { item in
+                    ForEach(self.statusViewModels, id: \.id) { item in
                         NavigationLink(value: RouteurDestinations.status(
                             id: item.id,
                             blurhash: item.mediaAttachments.first?.blurhash,

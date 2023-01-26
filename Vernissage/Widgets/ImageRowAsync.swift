@@ -18,19 +18,25 @@ struct ImageRowAsync: View {
     init(statusViewModel: StatusViewModel) {
         self.statusViewModel = statusViewModel
         
+        // Calculate size of frame (first from cache, then from metadata).
         if let firstAttachment = statusViewModel.mediaAttachments.first,
+           let size = ImageSizeService.shared.getImageSize(for: firstAttachment.url) {
+            self.imageWidth = size.width
+            self.imageHeight = size.height
+            
+            self.heightWasPrecalculated = true
+        } else if let firstAttachment = statusViewModel.mediaAttachments.first,
            let imgHeight = (firstAttachment.meta as? ImageMetadata)?.original?.height,
            let imgWidth = (firstAttachment.meta as? ImageMetadata)?.original?.width {
             
-            let divider = Double(imgWidth) / UIScreen.main.bounds.size.width
-            let calculatedHeight = Double(imgHeight) / divider
-            
-            self.imageWidth = UIScreen.main.bounds.width
-            self.imageHeight = (calculatedHeight > 0 && calculatedHeight < .infinity) ? calculatedHeight : UIScreen.main.bounds.width
+            let size = ImageSizeService.shared.calculateSize(for: firstAttachment.url, width: imgWidth, height: imgHeight)
+            self.imageWidth = size.width
+            self.imageHeight = size.height
+
             self.heightWasPrecalculated = true
         } else {
             self.imageWidth = UIScreen.main.bounds.width
-            self.imageHeight = UIScreen.main.bounds.width
+            self.imageHeight = UIScreen.main.bounds.width * 0.75
             heightWasPrecalculated = false
         }
     }
@@ -94,15 +100,13 @@ struct ImageRowAsync: View {
         guard heightWasPrecalculated == false else {
             return
         }
-        
-        let imgHeight = imageResponse.image.size.height
-        let imgWidth = imageResponse.image.size.width
-        let calculatedHeight = self.calculateHeight(width: imgWidth, height: imgHeight)
-        self.imageHeight = (calculatedHeight > 0 && calculatedHeight < .infinity) ? calculatedHeight : UIScreen.main.bounds.width
-    }
-        
-    private func calculateHeight(width: Double, height: Double) -> CGFloat {
-        let divider = width / UIScreen.main.bounds.size.width
-        return height / divider
+
+        if let attachment = statusViewModel.mediaAttachments.first {
+            let size = ImageSizeService.shared.calculateSize(for: attachment.url,
+                                                             width: imageResponse.image.size.width,
+                                                             height: imageResponse.image.size.height)
+            self.imageWidth = size.width
+            self.imageHeight = size.height
+        }
     }
 }
