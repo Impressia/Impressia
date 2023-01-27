@@ -10,7 +10,7 @@ import MastodonKit
 
 enum RouteurDestinations: Hashable {
     case tag(hashTag: String)
-    case status(id: String, blurhash: String? = nil, metaImageWidth: Int32? = nil, metaImageHeight: Int32? = nil)
+    case status(id: String, blurhash: String? = nil, highestImageUrl: URL? = nil, metaImageWidth: Int32? = nil, metaImageHeight: Int32? = nil)
     case statuses(listType: StatusesView.ListType)
     case userProfile(accountId: String, accountDisplayName: String?, accountUserName: String)
     case accounts(entityId: String, listType: AccountsView.ListType)

@@ -109,6 +109,7 @@ struct NotificationRow: View {
                     let statusViewModel = StatusViewModel(status: status)
                     self.routerPath.navigate(to: .status(id: statusViewModel.id,
                                                          blurhash: statusViewModel.mediaAttachments.first?.blurhash,
+                                                         highestImageUrl: statusViewModel.mediaAttachments.getHighestImage()?.url,
                                                          metaImageWidth: statusViewModel.getImageWidth(),
                                                          metaImageHeight: statusViewModel.getImageHeight()))
                 }

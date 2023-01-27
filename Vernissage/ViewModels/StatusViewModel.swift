@@ -143,7 +143,8 @@ public class StatusViewModel: ObservableObject {
 
 public extension StatusViewModel {
     func getImageWidth() -> Int32? {
-        if let width = (self.mediaAttachments.first?.meta as? ImageMetadata)?.original?.width {
+        let highestImage = self.mediaAttachments.getHighestImage()
+        if let width = (highestImage?.meta as? ImageMetadata)?.original?.width {
             return Int32(width)
         } else {
             return nil
@@ -151,7 +152,8 @@ public extension StatusViewModel {
     }
     
     func getImageHeight() -> Int32? {
-        if let height = (self.mediaAttachments.first?.meta as? ImageMetadata)?.original?.height {
+        let highestImage = self.mediaAttachments.getHighestImage()
+        if let height = (highestImage?.meta as? ImageMetadata)?.original?.height {
             return Int32(height)
         } else {
             return nil

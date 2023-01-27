@@ -13,9 +13,10 @@ extension View {
             switch destination {
             case .tag(let hashTag):
                 StatusesView(listType: .hashtag(tag: hashTag))
-            case .status(let id, let blurhash, let metaImageWidth, let metaImageHeight):
+            case .status(let id, let blurhash, let highestImageUrl, let metaImageWidth, let metaImageHeight):
                 StatusView(statusId: id,
                            imageBlurhash: blurhash,
+                           highestImageUrl: highestImageUrl,
                            imageWidth: metaImageWidth,
                            imageHeight: metaImageHeight)
             case .statuses(let listType):

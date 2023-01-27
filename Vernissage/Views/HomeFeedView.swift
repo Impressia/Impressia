@@ -32,6 +32,7 @@ struct HomeFeedView: View {
                     NavigationLink(value: RouteurDestinations.status(
                         id: item.rebloggedStatusId ?? item.id,
                         blurhash: item.attachments().first?.blurhash,
+                        highestImageUrl: item.attachments().getHighestImage()?.url,
                         metaImageWidth: item.attachments().first?.metaImageWidth,
                         metaImageHeight: item.attachments().first?.metaImageHeight)
                     ) {

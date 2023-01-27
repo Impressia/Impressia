@@ -116,3 +116,20 @@ public class AttachmentViewModel: ObservableObject {
         }
     }
 }
+
+extension [AttachmentViewModel] {
+    func getHighestImage() -> AttachmentViewModel? {
+        var attachment = self.first
+        var imgHeight = 0.0
+
+        for item in self {
+            let attachmentheight = Double((item.meta as? ImageMetadata)?.original?.height ?? 0)
+            if attachmentheight > imgHeight {
+                attachment = item
+                imgHeight = attachmentheight
+            }
+        }
+        
+        return attachment
+    }
+}

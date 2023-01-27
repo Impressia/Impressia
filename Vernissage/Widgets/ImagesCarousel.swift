@@ -36,32 +36,18 @@ struct ImagesCarousel: View {
         self.attachments = attachments
         self.selected = String.empty()
 
-        var imgHeight = 0.0
-        var imgWidth = 0.0
-        var attachment: AttachmentViewModel?
-
-        for item in attachments {
-            let attachmentheight = Double((item.meta as? ImageMetadata)?.original?.height ?? 0)
-            if attachmentheight > imgHeight {
-                attachment = item
-                imgHeight = attachmentheight
-                imgWidth = Double((item.meta as? ImageMetadata)?.original?.width ?? 0)
-            }
-        }
-        
-        // Attachments doesn't have any metadata with sizes, thus we have to use first one.
-        if attachment == nil {
-            attachment = attachments.first
-        }
+        let highestImage = attachments.getHighestImage()
+        let imgHeight = Double((highestImage?.meta as? ImageMetadata)?.original?.height ?? 0)
+        let imgWidth = Double((highestImage?.meta as? ImageMetadata)?.original?.width ?? 0)
         
         // Calculate size of frame (first from cache, then from metadata).
-        if let attachment, let size = ImageSizeService.shared.getImageSize(for: attachment.url) {
+        if let highestImage, let size = ImageSizeService.shared.getImageSize(for: highestImage.url) {
             self.imageWidth = size.width
             self.imageHeight = size.height
 
             self.heightWasPrecalculated = true
-        } else if let attachment, imgHeight > 0 && imgWidth > 0 {
-            let size = ImageSizeService.shared.calculateSize(for: attachment.url, width: imgWidth, height: imgHeight)
+        } else if let highestImage, imgHeight > 0 && imgWidth > 0 {
+            let size = ImageSizeService.shared.calculateSize(for: highestImage.url, width: imgWidth, height: imgHeight)
             self.imageWidth = size.width
             self.imageHeight = size.height
 
@@ -71,6 +57,10 @@ struct ImagesCarousel: View {
             self.imageHeight = UIScreen.main.bounds.width * 0.75
             self.heightWasPrecalculated = false
         }
+        
+        print(self.heightWasPrecalculated)
+        print(self.imageWidth)
+        print(self.imageHeight)
     }
     
     var body: some View {
@@ -89,7 +79,7 @@ struct ImagesCarousel: View {
                 .tag(attachment.id)
             }
         }
-        .frame(height: CGFloat(self.imageHeight))
+        .frame(height: self.imageHeight)
         .tabViewStyle(PageTabViewStyle())
         .onChange(of: selected, perform: { index in
             self.selectedAttachmentId = selected

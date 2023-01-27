@@ -36,6 +36,7 @@ struct StatusesView: View {
                         NavigationLink(value: RouteurDestinations.status(
                             id: item.id,
                             blurhash: item.mediaAttachments.first?.blurhash,
+                            highestImageUrl: item.mediaAttachments.getHighestImage()?.url,
                             metaImageWidth: item.getImageWidth(),
                             metaImageHeight: item.getImageHeight())
                         ) {

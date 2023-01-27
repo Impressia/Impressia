@@ -16,6 +16,7 @@ struct StatusView: View {
 
     @State var statusId: String
     @State var imageBlurhash: String?
+    @State var highestImageUrl: URL?
     @State var imageWidth: Int32?
     @State var imageHeight: Int32?
 
@@ -162,6 +163,10 @@ struct StatusView: View {
     }
     
     private func getImageHeight() -> Double {
+        if let highestImageUrl = self.highestImageUrl, let imageSize = ImageSizeService.shared.getImageSize(for: highestImageUrl) {
+            return imageSize.height
+        }
+        
         if let imageHeight = self.imageHeight, let imageWidth = self.imageWidth, imageHeight > 0 && imageWidth > 0 {
             return self.calculateHeight(width: Double(imageWidth), height: Double(imageHeight))
         }
