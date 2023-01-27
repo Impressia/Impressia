@@ -7,16 +7,27 @@
 import SwiftUI
 
 struct AccountsSection: View {
+    @EnvironmentObject var applicationState: ApplicationState
+
     @State private var accounts: [AccountData] = []
     
     var body: some View {
         Section("Accounts") {
             ForEach(self.accounts) { account in
-                UsernameRow(accountId: account.id,
-                            accountAvatar: account.avatar,
-                            accountDisplayName: account.displayName,
-                            accountUsername: account.username)
+                HStack(alignment: .center) {
+                    UsernameRow(accountId: account.id,
+                                accountAvatar: account.avatar,
+                                accountDisplayName: account.displayName,
+                                accountUsername: account.username)
+                    Spacer()
+                    if self.applicationState.accountData?.id == account.id {
+                        Image(systemName: "checkmark")
+                            .foregroundColor(self.applicationState.tintColor.color())
+                    }
+                }
+                .deleteDisabled(self.applicationState.accountData?.id == account.id)
             }
+            .onDelete(perform: delete)
             
             NavigationLink(value: RouteurDestinations.signIn) {
                 HStack {
@@ -28,6 +39,13 @@ struct AccountsSection: View {
         }
         .task {
             self.accounts = AccountDataHandler.shared.getAccountsData()
+        }
+    }
+    
+    func delete(at offsets: IndexSet) {
+        let accountsToDelete = offsets.map { self.accounts[$0] }
+        for account in accountsToDelete {
+            AccountDataHandler.shared.remove(accountData: account)
         }
     }
 }

@@ -57,10 +57,6 @@ struct ImagesCarousel: View {
             self.imageHeight = UIScreen.main.bounds.width * 0.75
             self.heightWasPrecalculated = false
         }
-        
-        print(self.heightWasPrecalculated)
-        print(self.imageWidth)
-        print(self.imageHeight)
     }
     
     var body: some View {

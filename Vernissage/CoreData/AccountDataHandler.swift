@@ -52,6 +52,17 @@ class AccountDataHandler {
         }
     }
     
+    func remove(accountData: AccountData) {
+        let context = CoreDataHandler.shared.container.viewContext
+        context.delete(accountData)
+    
+        do {
+            try context.save()
+        } catch {
+            ErrorService.shared.handle(error, message: "Error during deleting account data (remove).")
+        }
+    }
+    
     func createAccountDataEntity() -> AccountData {
         let context = CoreDataHandler.shared.container.viewContext
         return AccountData(context: context)

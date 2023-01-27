@@ -32,6 +32,7 @@ struct AvatarShapesSection: View {
                     }
                 }
             }
+            .padding(.vertical, 4)
 
             Button {
                 self.applicationState.avatarShape = .roundedRectangle
@@ -53,6 +54,7 @@ struct AvatarShapesSection: View {
                     }
                 }
             }
+            .padding(.vertical, 4)
         }
     }
 }
