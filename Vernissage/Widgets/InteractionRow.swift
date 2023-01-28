@@ -98,11 +98,10 @@ struct InteractionRow: View {
                     : try await StatusService.shared.bookmark(statusId: self.statusViewModel.id, accountData: self.applicationState.accountData)
 
                     self.bookmarked.toggle()
+                    ToastrService.shared.showSuccess("Bookmarked", imageSystemName: "bookmark.fill")
                 } catch {
-                    ErrorService.shared.handle(error, message: "Favourite action failed.", showToastr: true)
+                    ErrorService.shared.handle(error, message: "Bookmark action failed.", showToastr: true)
                 }
-                
-                ToastrService.shared.showSuccess("Bookmarked", imageSystemName: "bookmark.fill")
             } label: {
                 Image(systemName: self.bookmarked ? "bookmark.fill" : "bookmark")
             }
