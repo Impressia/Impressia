@@ -11,7 +11,7 @@ public class SearchService {
     public static let shared = SearchService()
     private init() { }
     
-    public func search(accountData: AccountData?,
+    public func search(for accountData: AccountData?,
                        query: String,
                        resultsType: Mastodon.Search.ResultsType) async throws -> SearchResults? {
         guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {

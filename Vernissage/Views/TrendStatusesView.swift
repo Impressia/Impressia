@@ -94,7 +94,7 @@ struct TrendStatusesView: View {
         }
         
         let statuses = try await TrendsService.shared.statuses(
-            accountData: self.applicationState.accountData,
+            for: self.applicationState.accountData,
             range: tabSelectedValue)
 
         var inPlaceStatuses: [StatusViewModel] = []

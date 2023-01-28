@@ -69,8 +69,7 @@ struct NotificationsView: View {
     func loadNotifications() async {
         do {
             let linkable = try await NotificationService.shared.notifications(
-                forAccountId: self.accountId,
-                andContext: self.applicationState.accountData,
+                for: self.applicationState.accountData,
                 maxId: maxId,
                 minId: minId,
                 limit: 5)
@@ -92,8 +91,7 @@ struct NotificationsView: View {
     private func loadMoreNotifications() async {
         do {
             let linkable = try await NotificationService.shared.notifications(
-                forAccountId: self.accountId,
-                andContext: self.applicationState.accountData,
+                for: self.applicationState.accountData,
                 maxId: self.maxId,
                 limit: self.defaultPageSize)
 
@@ -111,8 +109,7 @@ struct NotificationsView: View {
     private func loadNewNotifications() async {
         do {
             let linkable = try await NotificationService.shared.notifications(
-                forAccountId: self.accountId,
-                andContext: self.applicationState.accountData,
+                for: self.applicationState.accountData,
                 minId: self.minId,
                 limit: self.defaultPageSize)
             
@@ -154,7 +151,7 @@ struct NotificationsView: View {
     private func downloadAvatars(accounts: [Account]) async {
         await withTaskGroup(of: Void.self) { group in
             for account in accounts {
-                group.addTask { await CacheImageService.shared.downloadImage(url: account.avatar) }
+                group.addTask { await CacheImageService.shared.download(url: account.avatar) }
             }
         }
     }
@@ -162,7 +159,7 @@ struct NotificationsView: View {
     private func downloadImages(images: [(id: String, url: URL)]) async {
         await withTaskGroup(of: Void.self) { group in
             for image in images {
-                group.addTask { await CacheImageService.shared.downloadImage(url: image.url) }
+                group.addTask { await CacheImageService.shared.download(url: image.url) }
             }
         }
     }

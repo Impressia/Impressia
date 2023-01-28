@@ -11,7 +11,7 @@ public class TrendsService {
     public static let shared = TrendsService()
     private init() { }
     
-    public func statuses(accountData: AccountData?,
+    public func statuses(for accountData: AccountData?,
                          range: Mastodon.PixelfedTrends.TrendRange) async throws -> [Status] {
         guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
             return []

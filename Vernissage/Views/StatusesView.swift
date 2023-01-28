@@ -155,7 +155,7 @@ struct StatusesView: View {
         switch self.listType {
         case .local:
             return try await PublicTimelineService.shared.getStatuses(
-                accountData: self.applicationState.accountData,
+                for: self.applicationState.accountData,
                 local: true,
                 remote: false,
                 maxId: maxId,
@@ -164,7 +164,7 @@ struct StatusesView: View {
                 limit: self.defaultLimit)
         case .federated:
             return try await PublicTimelineService.shared.getStatuses(
-                accountData: self.applicationState.accountData,
+                for: self.applicationState.accountData,
                 local: false,
                 remote: true,
                 maxId: maxId,
@@ -173,21 +173,21 @@ struct StatusesView: View {
                 limit: self.defaultLimit)
         case .favourites:
             return try await AccountService.shared.favourites(
-                accountData: self.applicationState.accountData,
+                for: self.applicationState.accountData,
                 maxId: maxId,
                 sinceId: sinceId,
                 minId: minId,
                 limit: self.defaultLimit)
         case .bookmarks:
             return try await AccountService.shared.bookmarks(
-                accountData: self.applicationState.accountData,
+                for: self.applicationState.accountData,
                 maxId: maxId,
                 sinceId: sinceId,
                 minId: minId,
                 limit: self.defaultLimit)
         case .hashtag(let tag):
             return try await PublicTimelineService.shared.getTagStatuses(
-                accountData: self.applicationState.accountData,
+                for: self.applicationState.accountData,
                 tag: tag,
                 local: false,
                 remote: true,
@@ -235,7 +235,7 @@ struct StatusesView: View {
     
     private func loadTag(hashtag: String) async {
         do {
-            self.tag = try await TagsService.shared.tag(accountData: self.applicationState.accountData, hashTag: hashtag)
+            self.tag = try await TagsService.shared.get(tag: hashtag, for: self.applicationState.accountData)
         } catch {
             ErrorService.shared.handle(error, message: "Error during loading tag from server.", showToastr: false)
         }
@@ -243,7 +243,7 @@ struct StatusesView: View {
     
     private func follow(hashtag: String) async {
         do {
-            self.tag = try await TagsService.shared.follow(accountData: self.applicationState.accountData, hashTag: hashtag)
+            self.tag = try await TagsService.shared.follow(tag: hashtag, for: self.applicationState.accountData)
             ToastrService.shared.showSuccess("You are following the tag.", imageSystemName: "number.square.fill")
         } catch {
             ErrorService.shared.handle(error, message: "Error during following tag.", showToastr: true)
@@ -252,7 +252,7 @@ struct StatusesView: View {
     
     private func unfollow(hashtag: String) async {
         do {
-            self.tag = try await TagsService.shared.unfollow(accountData: self.applicationState.accountData, hashTag: hashtag)
+            self.tag = try await TagsService.shared.unfollow(tag: hashtag, for: self.applicationState.accountData)
             ToastrService.shared.showSuccess("Tag has been unfollowed.", imageSystemName: "number.square")
         } catch {
             ErrorService.shared.handle(error, message: "Error during unfollowing tag.", showToastr: true)

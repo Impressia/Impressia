@@ -54,8 +54,8 @@ struct UserProfileView: View {
             return
         }
 
-        async let relationshipTask = AccountService.shared.relationships(withId: self.accountId, forUser: self.applicationState.accountData)
-        async let accountTask = AccountService.shared.account(withId: self.accountId, and: self.applicationState.accountData)
+        async let relationshipTask = AccountService.shared.relationships(withId: self.accountId, for: self.applicationState.accountData)
+        async let accountTask = AccountService.shared.account(withId: self.accountId, for: self.applicationState.accountData)
         
         // Wait for download account and relationships.
         self.firstLoadFinished = true
@@ -147,15 +147,15 @@ struct UserProfileView: View {
         do {
             if self.relationship?.muting == true {
                 if let relationship = try await AccountService.shared.unmute(
-                    forAccountId: account.id,
-                    andContext: self.applicationState.accountData
+                    account: account.id,
+                    for: self.applicationState.accountData
                 ) {
                     self.relationship = relationship
                 }
             } else {
                 if let relationship = try await AccountService.shared.mute(
-                    forAccountId: account.id,
-                    andContext: self.applicationState.accountData
+                    account: account.id,
+                    for: self.applicationState.accountData
                 ) {
                     self.relationship = relationship
                 }
@@ -169,15 +169,15 @@ struct UserProfileView: View {
         do {
             if self.relationship?.blocking == true {
                 if let relationship = try await AccountService.shared.unblock(
-                    forAccountId: account.id,
-                    andContext: self.applicationState.accountData
+                    account: account.id,
+                    for: self.applicationState.accountData
                 ) {
                     self.relationship = relationship
                 }
             } else {
                 if let relationship = try await AccountService.shared.block(
-                    forAccountId: account.id,
-                    andContext: self.applicationState.accountData
+                    account: account.id,
+                    for: self.applicationState.accountData
                 ) {
                     self.relationship = relationship
                 }

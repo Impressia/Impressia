@@ -19,19 +19,19 @@ struct ImageRow: View {
         self.attachmentData = statusData.attachments().first
         
         // Calculate size of frame (first from cache, then from real image, then from metadata).
-        if let attachmentData, let size = ImageSizeService.shared.getImageSize(for: attachmentData.url) {
+        if let attachmentData, let size = ImageSizeService.shared.get(for: attachmentData.url) {
             self.imageWidth = size.width
             self.imageHeight = size.height
         } else if let attachmentData, let imageData = attachmentData.data, let uiImage = UIImage(data: imageData) {
             self.uiImage = uiImage
             
-            let size = ImageSizeService.shared.calculateSize(for: attachmentData.url, width: uiImage.size.width, height: uiImage.size.height)
+            let size = ImageSizeService.shared.calculate(for: attachmentData.url, width: uiImage.size.width, height: uiImage.size.height)
             self.imageWidth = size.width
             self.imageHeight = size.height
         } else if let attachmentData, attachmentData.metaImageWidth > 0 && attachmentData.metaImageHeight > 0 {
-            let size = ImageSizeService.shared.calculateSize(for: attachmentData.url,
-                                                             width: attachmentData.metaImageWidth,
-                                                             height: attachmentData.metaImageHeight)
+            let size = ImageSizeService.shared.calculate(for: attachmentData.url,
+                                                         width: attachmentData.metaImageWidth,
+                                                         height: attachmentData.metaImageHeight)
             self.imageWidth = size.width
             self.imageHeight = size.height
         } else {
@@ -76,7 +76,7 @@ struct ImageRow: View {
                     .task {
                         do {
                             if let imageData = try await RemoteFileService.shared.fetchData(url: attachmentData.url) {
-                                HomeTimelineService.shared.updateAttachmentDataImage(attachmentData: attachmentData, imageData: imageData)
+                                HomeTimelineService.shared.update(attachment: attachmentData, withData: imageData)
                                 self.uiImage = UIImage(data: imageData)
                             }
                         } catch {

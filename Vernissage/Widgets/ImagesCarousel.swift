@@ -41,13 +41,13 @@ struct ImagesCarousel: View {
         let imgWidth = Double((highestImage?.meta as? ImageMetadata)?.original?.width ?? 0)
         
         // Calculate size of frame (first from cache, then from metadata).
-        if let highestImage, let size = ImageSizeService.shared.getImageSize(for: highestImage.url) {
+        if let highestImage, let size = ImageSizeService.shared.get(for: highestImage.url) {
             self.imageWidth = size.width
             self.imageHeight = size.height
 
             self.heightWasPrecalculated = true
         } else if let highestImage, imgHeight > 0 && imgWidth > 0 {
-            let size = ImageSizeService.shared.calculateSize(for: highestImage.url, width: imgWidth, height: imgHeight)
+            let size = ImageSizeService.shared.calculate(for: highestImage.url, width: imgWidth, height: imgHeight)
             self.imageWidth = size.width
             self.imageHeight = size.height
 
@@ -116,7 +116,7 @@ struct ImagesCarousel: View {
             }
         }
         
-        let size = ImageSizeService.shared.calculateSize(for: attachment.url, width: imageWidth, height: imageHeight)
+        let size = ImageSizeService.shared.calculate(for: attachment.url, width: imageWidth, height: imageHeight)
         self.imageWidth = size.width
         self.imageHeight = size.height
     }

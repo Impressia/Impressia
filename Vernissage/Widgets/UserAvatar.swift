@@ -37,7 +37,7 @@ struct UserAvatar: View {
     
     var body: some View {
         if let accountAvatar {
-            if let cachedAvatar = CacheImageService.shared.getImage(for: accountAvatar) {
+            if let cachedAvatar = CacheImageService.shared.get(for: accountAvatar) {
                 cachedAvatar
                     .resizable()
                     .clipShape(applicationState.avatarShape.shape())
@@ -57,7 +57,7 @@ struct UserAvatar: View {
                 }
                 .priority(.high)
                 .task {
-                    await CacheImageService.shared.downloadImage(url: accountAvatar)
+                    await CacheImageService.shared.download(url: accountAvatar)
                 }
                 .frame(width: size.size.width, height: size.size.height)
             }

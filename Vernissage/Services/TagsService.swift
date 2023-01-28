@@ -11,30 +11,30 @@ public class TagsService {
     public static let shared = TagsService()
     private init() { }
     
-    public func tag(accountData: AccountData?, hashTag: String) async throws -> Tag? {
+    public func get(tag: String, for accountData: AccountData?) async throws -> Tag? {
         guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
             return nil
         }
         
         let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
-        return try await client.tag(hashtag: hashTag)
+        return try await client.tag(hashtag: tag)
     }
     
-    public func follow(accountData: AccountData?, hashTag: String) async throws -> Tag? {
+    public func follow(tag: String, for accountData: AccountData?) async throws -> Tag? {
         guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
             return nil
         }
         
         let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
-        return try await client.follow(hashtag: hashTag)
+        return try await client.follow(hashtag: tag)
     }
     
-    public func unfollow(accountData: AccountData?, hashTag: String) async throws -> Tag? {
+    public func unfollow(tag: String, for accountData: AccountData?) async throws -> Tag? {
         guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
             return nil
         }
         
         let client = MastodonClient(baseURL: serverUrl).getAuthenticated(token: accessToken)
-        return try await client.unfollow(hashtag: hashTag)
+        return try await client.unfollow(hashtag: tag)
     }
 }

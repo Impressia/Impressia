@@ -22,7 +22,7 @@ struct NotificationRow: View {
         self.notification = notification
         self.attachment = notification.status?.getAllImageMediaAttachments().first
         
-        if let attachment, let previewUrl = attachment.previewUrl, let imageFromCache = CacheImageService.shared.getImage(for: previewUrl) {
+        if let attachment, let previewUrl = attachment.previewUrl, let imageFromCache = CacheImageService.shared.get(for: previewUrl) {
             self.image = imageFromCache
         }
     }
@@ -78,8 +78,8 @@ struct NotificationRow: View {
                                     .frame(width: 50, height: 50)
                                     .clipShape(RoundedRectangle(cornerRadius: 8))
                                     .task {
-                                        await CacheImageService.shared.downloadImage(url: attachment.previewUrl)
-                                        if let previewUrl = attachment.previewUrl, let imageFromCache = CacheImageService.shared.getImage(for: previewUrl) {
+                                        await CacheImageService.shared.download(url: attachment.previewUrl)
+                                        if let previewUrl = attachment.previewUrl, let imageFromCache = CacheImageService.shared.get(for: previewUrl) {
                                             self.image = imageFromCache
                                         }
                                     }

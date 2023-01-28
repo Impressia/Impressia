@@ -114,7 +114,7 @@ struct StatusView: View {
                 }
                 
                 // Get status from API.
-                if let status = try await StatusService.shared.status(withId: self.statusId, and: self.applicationState.accountData) {
+                if let status = try await StatusService.shared.status(withId: self.statusId, for: self.applicationState.accountData) {
                     let statusViewModel = StatusViewModel(status: status)
                                         
                     self.statusViewModel = statusViewModel
@@ -124,7 +124,7 @@ struct StatusView: View {
                     // If we have status in database then we can update data.
                     if let accountData = self.applicationState.accountData,
                        let statusDataFromDatabase = StatusDataHandler.shared.getStatusData(accountId: accountData.id, statusId: self.statusId) {
-                        _ = try await HomeTimelineService.shared.updateStatus(statusDataFromDatabase, accountData: accountData, basedOn: status)
+                        _ = try await HomeTimelineService.shared.update(status: statusDataFromDatabase, basedOn: status, for: accountData)
                     }
                 }
             } catch NetworkError.notSuccessResponse(let response) {
@@ -163,7 +163,7 @@ struct StatusView: View {
     }
     
     private func getImageHeight() -> Double {
-        if let highestImageUrl = self.highestImageUrl, let imageSize = ImageSizeService.shared.getImageSize(for: highestImageUrl) {
+        if let highestImageUrl = self.highestImageUrl, let imageSize = ImageSizeService.shared.get(for: highestImageUrl) {
             return imageSize.height
         }
         

@@ -12,18 +12,8 @@ public class CacheImageService {
     private init() { }
     
     private var memoryCacheData = MemoryCache<URL, Image>(entryLifetime: 600)
-        
-    func addImage(for url: URL, data: Data) {
-        if let uiImage = UIImage(data: data) {
-            self.memoryCacheData[url] = Image(uiImage: uiImage)
-        }
-    }
 
-    func addImage(for url: URL, image: Image) {
-        self.memoryCacheData[url] = image
-    }
-
-    func downloadImage(url: URL?) async {
+    func download(url: URL?) async {
         guard let url else {
             return
         }
@@ -35,14 +25,20 @@ public class CacheImageService {
         do {
             let imageData = try await RemoteFileService.shared.fetchData(url: url)
             if let imageData {
-                CacheImageService.shared.addImage(for: url, data: imageData)
+                self.add(data: imageData, for: url)
             }
         } catch {
             ErrorService.shared.handle(error, message: "Downloading image into cache failed.")
         }
     }
     
-    func getImage(for url: URL) -> Image? {
+    func get(for url: URL) -> Image? {
         return self.memoryCacheData[url]
+    }
+    
+    private func add(data: Data, for url: URL) {
+        if let uiImage = UIImage(data: data) {
+            self.memoryCacheData[url] = Image(uiImage: uiImage)
+        }
     }
 }

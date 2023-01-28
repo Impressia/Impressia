@@ -102,7 +102,7 @@ struct ComposeView: View {
         do {
             _ = try await StatusService.shared.new(
                 status: Mastodon.Statuses.Components(inReplyToId: self.statusViewModel?.id, text: self.text),
-                accountData: self.applicationState.accountData)
+                for: self.applicationState.accountData)
         } catch {
             ErrorService.shared.handle(error, message: "Error during post status.", showToastr: true)
         }

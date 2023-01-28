@@ -11,7 +11,7 @@ public class AccountService {
     public static let shared = AccountService()
     private init() { }
     
-    public func account(withId accountId: String, and accountData: AccountData?) async throws -> Account? {
+    public func account(withId accountId: String, for accountData: AccountData?) async throws -> Account? {
         guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
             return nil
         }
@@ -20,7 +20,7 @@ public class AccountService {
         return try await client.account(for: accountId)
     }
     
-    public func relationships(withId accountId: String, forUser accountData: AccountData?) async throws -> Relationship? {
+    public func relationships(withId accountId: String, for accountData: AccountData?) async throws -> Relationship? {
         guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
             return nil
         }
@@ -29,8 +29,8 @@ public class AccountService {
         return try await client.relationships(for: accountId)
     }
     
-    public func statuses(forAccountId accountId: String,
-                         andContext accountData: AccountData?,
+    public func statuses(createdBy accountId: String,
+                         for accountData: AccountData?,
                          onlyMedia: Bool = true,
                          excludeReplies: Bool = true,
                          maxId: String? = nil,
@@ -51,7 +51,7 @@ public class AccountService {
                                             limit: limit)
     }
     
-    public func follow(forAccountId accountId: String, andContext accountData: AccountData?) async throws -> Relationship? {
+    public func follow(account accountId: String, for accountData: AccountData?) async throws -> Relationship? {
         guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
             return nil
         }
@@ -60,7 +60,7 @@ public class AccountService {
         return try await client.follow(for: accountId)
     }
     
-    public func unfollow(forAccountId accountId: String, andContext accountData: AccountData?) async throws -> Relationship? {
+    public func unfollow(account accountId: String, for accountData: AccountData?) async throws -> Relationship? {
         guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
             return nil
         }
@@ -69,7 +69,7 @@ public class AccountService {
         return try await client.unfollow(for: accountId)
     }
     
-    public func mute(forAccountId accountId: String, andContext accountData: AccountData?) async throws -> Relationship? {
+    public func mute(account accountId: String, for accountData: AccountData?) async throws -> Relationship? {
         guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
             return nil
         }
@@ -78,7 +78,7 @@ public class AccountService {
         return try await client.mute(for: accountId)
     }
     
-    public func unmute(forAccountId accountId: String, andContext accountData: AccountData?) async throws -> Relationship? {
+    public func unmute(account accountId: String, for accountData: AccountData?) async throws -> Relationship? {
         guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
             return nil
         }
@@ -87,7 +87,7 @@ public class AccountService {
         return try await client.unmute(for: accountId)
     }
     
-    public func block(forAccountId accountId: String, andContext accountData: AccountData?) async throws -> Relationship? {
+    public func block(account accountId: String, for accountData: AccountData?) async throws -> Relationship? {
         guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
             return nil
         }
@@ -96,7 +96,7 @@ public class AccountService {
         return try await client.block(for: accountId)
     }
     
-    public func unblock(forAccountId accountId: String, andContext accountData: AccountData?) async throws -> Relationship? {
+    public func unblock(account accountId: String, for accountData: AccountData?) async throws -> Relationship? {
         guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
             return nil
         }
@@ -105,7 +105,7 @@ public class AccountService {
         return try await client.unblock(for: accountId)
     }
     
-    public func followers(forAccountId accountId: String, andContext accountData: AccountData?, page: Int) async throws -> [Account] {
+    public func followers(account accountId: String, for accountData: AccountData?, page: Int) async throws -> [Account] {
         guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
             return []
         }
@@ -114,7 +114,7 @@ public class AccountService {
         return try await client.followers(for: accountId, page: page)
     }
     
-    public func following(forAccountId accountId: String, andContext accountData: AccountData?, page: Int) async throws -> [Account] {
+    public func following(account accountId: String, for accountData: AccountData?, page: Int) async throws -> [Account] {
         guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
             return []
         }
@@ -123,7 +123,7 @@ public class AccountService {
         return try await client.following(for: accountId, page: page)
     }
     
-    public func favourites(accountData: AccountData?,
+    public func favourites(for accountData: AccountData?,
                            maxId: String? = nil,
                            sinceId: String? = nil,
                            minId: String? = nil,
@@ -136,7 +136,7 @@ public class AccountService {
         return try await client.favourites(maxId: maxId, sinceId: sinceId, minId: minId, limit: limit)
     }
     
-    public func bookmarks(accountData: AccountData?,
+    public func bookmarks(for accountData: AccountData?,
                           maxId: String? = nil,
                           sinceId: String? = nil,
                           minId: String? = nil,

@@ -65,7 +65,7 @@ class RouterPath: ObservableObject {
         guard let accountData else { return }
         
         Task {
-            let results = try? await SearchService.shared.search(accountData: accountData,
+            let results = try? await SearchService.shared.search(for: accountData,
                                                                  query: acct,
                                                                  resultsType: Mastodon.Search.ResultsType.accounts)
                         

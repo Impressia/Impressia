@@ -112,23 +112,23 @@ struct AccountsView: View {
         switch self.listType {
         case .followers:
             return try await AccountService.shared.followers(
-                forAccountId: self.entityId,
-                andContext: self.applicationState.accountData,
+                account: self.entityId,
+                for: self.applicationState.accountData,
                 page: page)
         case .following:
             return try await AccountService.shared.following(
-                forAccountId: self.entityId,
-                andContext: self.applicationState.accountData,
+                account: self.entityId,
+                for: self.applicationState.accountData,
                 page: page)
         case .favourited:
             return try await StatusService.shared.favouritedBy(
                 statusId: self.entityId,
-                andContext: self.applicationState.accountData,
+                for: self.applicationState.accountData,
                 page: page)
         case .reblogged:
             return try await StatusService.shared.rebloggedBy(
                 statusId: self.entityId,
-                andContext: self.applicationState.accountData,
+                for: self.applicationState.accountData,
                 page: page)
         }
     }
@@ -136,7 +136,7 @@ struct AccountsView: View {
     private func downloadAvatars(accounts: [Account]) async {
         await withTaskGroup(of: Void.self) { group in
             for account in accounts {
-                group.addTask { await CacheImageService.shared.downloadImage(url: account.avatar) }
+                group.addTask { await CacheImageService.shared.download(url: account.avatar) }
             }
         }
     }

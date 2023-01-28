@@ -65,8 +65,8 @@ struct UserProfileStatuses: View {
         }
         
         let statuses = try await AccountService.shared.statuses(
-            forAccountId: self.accountId,
-            andContext: self.applicationState.accountData,
+            createdBy: self.accountId,
+            for: self.applicationState.accountData,
             limit: self.defaultLimit)
         var inPlaceStatuses: [StatusViewModel] = []
 
@@ -85,8 +85,8 @@ struct UserProfileStatuses: View {
     private func loadMoreStatuses() async throws {
         if let lastStatusId = self.statusViewModels.last?.id {
             let previousStatuses = try await AccountService.shared.statuses(
-                forAccountId: self.accountId,
-                andContext: self.applicationState.accountData,
+                createdBy: self.accountId,
+                for: self.applicationState.accountData,
                 maxId: lastStatusId,
                 limit: self.defaultLimit)
 

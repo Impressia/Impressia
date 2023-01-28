@@ -20,7 +20,7 @@ struct ImageRowAsync: View {
         
         // Calculate size of frame (first from cache, then from metadata).
         if let firstAttachment = statusViewModel.mediaAttachments.first,
-           let size = ImageSizeService.shared.getImageSize(for: firstAttachment.url) {
+           let size = ImageSizeService.shared.get(for: firstAttachment.url) {
             self.imageWidth = size.width
             self.imageHeight = size.height
             
@@ -29,7 +29,7 @@ struct ImageRowAsync: View {
            let imgHeight = (firstAttachment.meta as? ImageMetadata)?.original?.height,
            let imgWidth = (firstAttachment.meta as? ImageMetadata)?.original?.width {
             
-            let size = ImageSizeService.shared.calculateSize(for: firstAttachment.url, width: imgWidth, height: imgHeight)
+            let size = ImageSizeService.shared.calculate(for: firstAttachment.url, width: imgWidth, height: imgHeight)
             self.imageWidth = size.width
             self.imageHeight = size.height
 
@@ -102,9 +102,9 @@ struct ImageRowAsync: View {
         }
 
         if let attachment = statusViewModel.mediaAttachments.first {
-            let size = ImageSizeService.shared.calculateSize(for: attachment.url,
-                                                             width: imageResponse.image.size.width,
-                                                             height: imageResponse.image.size.height)
+            let size = ImageSizeService.shared.calculate(for: attachment.url,
+                                                         width: imageResponse.image.size.width,
+                                                         height: imageResponse.image.size.height)
             self.imageWidth = size.width
             self.imageHeight = size.height
         }

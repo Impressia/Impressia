@@ -12,24 +12,20 @@ public class ImageSizeService {
     private init() { }
     
     private var memoryCacheData = MemoryCache<URL, CGSize>(entryLifetime: 3600)
-    
-    func addImageSize(for url: URL, size: CGSize) {
-        self.memoryCacheData[url] = size
-    }
-    
-    func getImageSize(for url: URL) -> CGSize? {
+        
+    func get(for url: URL) -> CGSize? {
         return self.memoryCacheData[url]
     }
 
-    func calculateSize(for url: URL, width: Int32, height: Int32) -> CGSize {
-        return calculateSize(for: url, width: Double(width), height: Double(height))
+    func calculate(for url: URL, width: Int32, height: Int32) -> CGSize {
+        return calculate(for: url, width: Double(width), height: Double(height))
     }
     
-    func calculateSize(for url: URL, width: Int, height: Int) -> CGSize {
-        return calculateSize(for: url, width: Double(width), height: Double(height))
+    func calculate(for url: URL, width: Int, height: Int) -> CGSize {
+        return calculate(for: url, width: Double(width), height: Double(height))
     }
     
-    func calculateSize(for url: URL, width: Double, height: Double) -> CGSize {
+    func calculate(for url: URL, width: Double, height: Double) -> CGSize {
         let divider = Double(width) / UIScreen.main.bounds.size.width
         let calculatedHeight = Double(height) / divider
         

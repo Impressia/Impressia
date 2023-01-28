@@ -38,8 +38,8 @@ struct InteractionRow: View {
             ActionButton {
                 do {
                     let status = self.reblogged
-                    ? try await StatusService.shared.unboost(statusId: self.statusViewModel.id, accountData: self.applicationState.accountData)
-                    : try await StatusService.shared.boost(statusId: self.statusViewModel.id, accountData: self.applicationState.accountData)
+                    ? try await StatusService.shared.unboost(statusId: self.statusViewModel.id, for: self.applicationState.accountData)
+                    : try await StatusService.shared.boost(statusId: self.statusViewModel.id, for: self.applicationState.accountData)
 
                     if let status {
                         self.reblogsCount = status.reblogsCount == self.reblogsCount
@@ -66,8 +66,8 @@ struct InteractionRow: View {
             ActionButton {
                 do {
                     let status = self.favourited
-                    ? try await StatusService.shared.unfavourite(statusId: self.statusViewModel.id, accountData: self.applicationState.accountData)
-                    : try await StatusService.shared.favourite(statusId: self.statusViewModel.id, accountData: self.applicationState.accountData)
+                    ? try await StatusService.shared.unfavourite(statusId: self.statusViewModel.id, for: self.applicationState.accountData)
+                    : try await StatusService.shared.favourite(statusId: self.statusViewModel.id, for: self.applicationState.accountData)
 
                     if let status {
                         self.favouritesCount = status.favouritesCount == self.favouritesCount
@@ -94,8 +94,8 @@ struct InteractionRow: View {
             ActionButton {
                 do {
                     _ = self.bookmarked
-                    ? try await StatusService.shared.unbookmark(statusId: self.statusViewModel.id, accountData: self.applicationState.accountData)
-                    : try await StatusService.shared.bookmark(statusId: self.statusViewModel.id, accountData: self.applicationState.accountData)
+                    ? try await StatusService.shared.unbookmark(statusId: self.statusViewModel.id, for: self.applicationState.accountData)
+                    : try await StatusService.shared.bookmark(statusId: self.statusViewModel.id, for: self.applicationState.accountData)
 
                     self.bookmarked.toggle()
                     ToastrService.shared.showSuccess("Bookmarked", imageSystemName: "bookmark.fill")

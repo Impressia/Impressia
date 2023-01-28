@@ -8,11 +8,12 @@ import Foundation
 import CoreData
 import MastodonKit
 
+/// Service responsible for managing home timeline.
 public class HomeTimelineService {
     public static let shared = HomeTimelineService()
     private init() { }
     
-    public func onBottomOfList(for accountData: AccountData) async throws -> Int {
+    public func loadOnBottom(for accountData: AccountData) async throws -> Int {
         // Load data from API and operate on CoreData on background context.
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
 
@@ -23,78 +24,24 @@ public class HomeTimelineService {
             return 0
         }
         
-        let newStatuses = try await self.loadData(for: accountData, on: backgroundContext, maxId: oldestStatus.id)
+        let newStatuses = try await self.load(for: accountData, on: backgroundContext, maxId: oldestStatus.id)
         
         try backgroundContext.save()
         return newStatuses.count
     }
 
-    public func onTopOfList(for accountData: AccountData) async throws -> Int {
+    public func loadOnTop(for accountData: AccountData) async throws {
         // Load data from API and operate on CoreData on background context.
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
 
-        // Get maximimum downloaded stauts id.
-        let newestStatus = StatusDataHandler.shared.getMaximumStatus(accountId: accountData.id, viewContext: backgroundContext)
-                
-        let newStatuses = try await self.loadData(for: accountData, on: backgroundContext, minId: newestStatus?.id)
-        try await self.clearOldStatuses(newStatuses: newStatuses, for: accountData, on: backgroundContext)
+        // Refresh/load home timeline (refreshing on top downloads always first 40 items).
+        // TODO: When Apple introduce good way to show new items without scroll to top then we can change that method.
+        try await self.refresh(for: accountData, on: backgroundContext)
         
         try backgroundContext.save()
-        return newStatuses.count
     }
     
-    private func clearOldStatuses(newStatuses: [Status], for accountData: AccountData, on backgroundContext: NSManagedObjectContext) async throws {
-        guard let accessToken = accountData.accessToken else {
-            return
-        }
-        
-        // Retrieve statuses from API.
-        let client = MastodonClient(baseURL: accountData.serverUrl).getAuthenticated(token: accessToken)
-        let statuses = try await client.getHomeTimeline(limit: 40)
-        
-        let dbStatuses = StatusDataHandler.shared.getAllStatuses(accountId: accountData.id)
-        
-        var dbStatusesToRemove: [StatusData] = []
-        for dbStatus in dbStatuses {
-            if !statuses.contains(where: { status in status.id == dbStatus.id }) {
-                dbStatusesToRemove.append(dbStatus)
-            }
-        }
-        
-        // Remove statuses that are not in 40 downloaded once.
-        if !dbStatusesToRemove.isEmpty {
-            StatusDataHandler.shared.remove(accountId: accountData.id, statuses: dbStatusesToRemove)
-        }
-        
-        // Add statuses which are not existing in database, but has been downloaded via API.
-        var statusesToAdd: [Status] = []
-        for status in statuses {
-            if !dbStatuses.contains(where: { statusData in statusData.id == status.id }) &&
-                !newStatuses.contains(where: { newStatus in newStatus.id == status.id }) {
-                statusesToAdd.append(status)
-            }
-        }
-        
-        // Save statuses in database (and download images).
-        if !statusesToAdd.isEmpty {
-            _ = try await self.save(statuses: statusesToAdd, accountData: accountData, on: backgroundContext)
-        }
-    }
-    
-    private func loadData(for accountData: AccountData, on backgroundContext: NSManagedObjectContext, minId: String? = nil, maxId: String? = nil) async throws -> [Status] {
-        guard let accessToken = accountData.accessToken else {
-            return []
-        }
-                
-        // Retrieve statuses from API.
-        let client = MastodonClient(baseURL: accountData.serverUrl).getAuthenticated(token: accessToken)
-        let statuses = try await client.getHomeTimeline(maxId: maxId, minId: minId, limit: 20)
-
-        // Save statuses in database (and download images).
-        return try await self.save(statuses: statuses, accountData: accountData, on: backgroundContext)
-    }
-    
-    public func updateStatus(_ statusData: StatusData, accountData: AccountData, basedOn status: Status) async throws -> StatusData? {
+    public func update(status statusData: StatusData, basedOn status: Status, for accountData: AccountData) async throws -> StatusData? {
         // Load data from API and operate on CoreData on background context.
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
                 
@@ -105,23 +52,81 @@ public class HomeTimelineService {
         return statusData
     }
     
-    public func updateAttachmentDataImage(attachmentData: AttachmentData, imageData: Data) {        
-        attachmentData.data = imageData
-        self.setExifProperties(in: attachmentData, from: imageData)
+    public func update(attachment: AttachmentData, withData imageData: Data) {
+        attachment.data = imageData
+        self.setExifProperties(in: attachment, from: imageData)
         
         CoreDataHandler.shared.save()
     }
     
-    private func save(statuses: [Status], accountData: AccountData, on backgroundContext: NSManagedObjectContext) async throws -> [Status] {
+    private func refresh(for accountData: AccountData, on backgroundContext: NSManagedObjectContext) async throws {
+        guard let accessToken = accountData.accessToken else {
+            return
+        }
+        
+        // Retrieve statuses from API.
+        let client = MastodonClient(baseURL: accountData.serverUrl).getAuthenticated(token: accessToken)
+        let statuses = try await client.getHomeTimeline(limit: 40)
+        
+        // Retrieve all statuses from database.
+        let dbStatuses = StatusDataHandler.shared.getAllStatuses(accountId: accountData.id)
+        
+        // Remove statuses that are not in 40 downloaded once.
+        var dbStatusesToRemove: [StatusData] = []
+        for dbStatus in dbStatuses {
+            if !statuses.contains(where: { status in status.id == dbStatus.id }) {
+                dbStatusesToRemove.append(dbStatus)
+            }
+        }
+        
+        if !dbStatusesToRemove.isEmpty {
+            StatusDataHandler.shared.remove(accountId: accountData.id, statuses: dbStatusesToRemove)
+        }
+        
+        // Add statuses which are not existing in database, but has been downloaded via API.
+        var statusesToAdd: [Status] = []
+        for status in statuses {
+            if !dbStatuses.contains(where: { statusData in statusData.id == status.id }) {
+                statusesToAdd.append(status)
+            }
+        }
+        
+        // Save statuses in database.
+        if !statusesToAdd.isEmpty {
+            _ = try await self.save(statuses: statusesToAdd, for: accountData, on: backgroundContext)
+        }
+    }
+    
+    private func load(for accountData: AccountData,
+                      on backgroundContext: NSManagedObjectContext,
+                      minId: String? = nil,
+                      maxId: String? = nil
+    ) async throws -> [Status] {
+        guard let accessToken = accountData.accessToken else {
+            return []
+        }
+                
+        // Retrieve statuses from API.
+        let client = MastodonClient(baseURL: accountData.serverUrl).getAuthenticated(token: accessToken)
+        let statuses = try await client.getHomeTimeline(maxId: maxId, minId: minId, limit: 20)
+
+        // Save statuses in database.
+        return try await self.save(statuses: statuses, for: accountData, on: backgroundContext)
+    }
+    
+    private func save(statuses: [Status],
+                      for accountData: AccountData,
+                      on backgroundContext: NSManagedObjectContext
+    ) async throws -> [Status] {
+        guard let dbAccount = AccountDataHandler.shared.getAccountData(accountId: accountData.id, viewContext: backgroundContext) else {
+            throw DatabaseError.cannotDownloadAccount
+        }
+        
         // Proceed statuses with images only.
         let statusesWithImages = statuses.getStatusesWithImagesOnly()
                         
         // Save status data in database.
         for status in statusesWithImages {
-            guard let dbAccount = AccountDataHandler.shared.getAccountData(accountId: accountData.id, viewContext: backgroundContext) else {
-                throw DatabaseError.cannotDownloadAccount
-            }
-            
             let statusData = StatusDataHandler.shared.createStatusDataEntity(viewContext: backgroundContext)
 
             statusData.pixelfedAccount = dbAccount
@@ -154,49 +159,7 @@ public class HomeTimelineService {
             }
         }
     }
-    
-    public func fetchAllImages(statuses: [Status]) async -> Dictionary<String, Data> {
-        var attachmentUrls: Dictionary<String, URL> = [:]
         
-        statuses.forEach { status in
-            status.mediaAttachments.forEach { attachment in
-                if attachment.type == .image {
-                    attachmentUrls[attachment.id] = attachment.url
-                }
-            }
-        }
-        
-        return await withTaskGroup(of: (String, Data?).self, returning: [String : Data].self) { taskGroup in            
-            for attachmentUrl in attachmentUrls {
-                taskGroup.addTask {
-                    do {
-                        print("Fetching image \(attachmentUrl.value)")
-                        if let imageData = try await self.fetchImage(attachmentUrl: attachmentUrl.value) {
-                            print("Image fetched \(attachmentUrl.value)")
-                            return (attachmentUrl.key, imageData)
-                        }
-                        
-                        return (attachmentUrl.key, nil)
-                    } catch {
-                        ErrorService.shared.handle(error, message: "Fatching image '\(attachmentUrl.value)' failed.")
-                        return (attachmentUrl.key, nil)
-                    }
-                }
-            }
-            
-            var childTaskResults = [String: Data]()
-            for await result in taskGroup {
-                guard let data = result.1 else {
-                    continue
-                }
-
-                childTaskResults[result.0] = data
-            }
-
-            return childTaskResults
-        }
-    }
-    
     private func setExifProperties(in attachmentData: AttachmentData, from imageData: Data) {
         // Read exif information.
         if let exifProperties = imageData.getExifData() {
@@ -220,13 +183,5 @@ public class HomeTimelineService {
                 attachmentData.exifExposure = "\(focalLenIn35mmFilm)mm, f/\(fNumber), \(exposureTime)s, ISO \(photographicSensitivity)"
             }
         }
-    }
-    
-    private func fetchImage(attachmentUrl: URL) async throws -> Data? {
-        guard let data = try await RemoteFileService.shared.fetchData(url: attachmentUrl) else {
-            return nil
-        }
-        
-        return data
     }
 }

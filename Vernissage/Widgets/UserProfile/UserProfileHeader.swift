@@ -105,15 +105,15 @@ struct UserProfileHeader: View {
         do {
             if self.relationship?.following == true {
                 if let relationship = try await AccountService.shared.unfollow(
-                    forAccountId: self.account.id,
-                    andContext: self.applicationState.accountData
+                    account: self.account.id,
+                    for: self.applicationState.accountData
                 ) {
                     self.relationship = relationship
                 }
             } else {
                 if let relationship = try await AccountService.shared.follow(
-                    forAccountId: self.account.id,
-                    andContext: self.applicationState.accountData
+                    account: self.account.id,
+                    for: self.applicationState.accountData
                 ) {
                     self.relationship = relationship
                 }

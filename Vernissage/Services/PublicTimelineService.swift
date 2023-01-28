@@ -11,7 +11,7 @@ public class PublicTimelineService {
     public static let shared = PublicTimelineService()
     private init() { }
     
-    public func getStatuses(accountData: AccountData?,
+    public func getStatuses(for accountData: AccountData?,
                             local: Bool,
                             remote: Bool,
                             maxId: String? = nil,
@@ -26,7 +26,7 @@ public class PublicTimelineService {
         return try await client.getPublicTimeline(local: local, remote: remote, onlyMedia: true, maxId: maxId, sinceId: sinceId, minId: minId, limit: limit)
     }
     
-    public func getTagStatuses(accountData: AccountData?,
+    public func getTagStatuses(for accountData: AccountData?,
                                tag: String,
                                local: Bool,
                                remote: Bool,
