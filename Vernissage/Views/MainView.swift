@@ -152,6 +152,7 @@ struct MainView: View {
                 ForEach(self.dbAccounts) { account in
                     Button {
                         self.applicationState.accountData = account
+
                         ApplicationSettingsHandler.shared.setAccountAsDefault(accountData: account)
                     } label: {
                         if self.applicationState.accountData?.id == account.id {

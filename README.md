@@ -40,7 +40,17 @@ from my pixelfed account I don't see his reboost on my Pixelfed home timeline.
 Pixelfed uses endpoint (GET): https://pixelfed.social/api/pixelfed/v2/discover/posts/trending?range=daily
 This endpoint is not working in different servers e.g.: https://pxlmo.com/api/pixelfed/v2/discover/posts/trending?range=daily
 
+Mastodon endpoint `/api/v1/trends/statuses` is not available (404 response). 
+
 - **Place is not available in the API**
 
 In the status response there is no information about place.
 That information is visible when using Pixelfed web app. 
+
+- **Status doesn't contains information about bookmark status**
+
+In the status JSON we don't have information about bookmark status.
+
+- ** Endpoint about instance information returns different JSON structure**
+
+API in Pixelfed (`/api/v1/instance`) returns JSON with diefferent structure then API specify.

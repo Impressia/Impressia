@@ -16,6 +16,7 @@
         <attribute name="id" attributeType="String"/>
         <attribute name="locked" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="note" optional="YES" attributeType="String"/>
+        <attribute name="refreshToken" optional="YES" attributeType="String"/>
         <attribute name="serverUrl" attributeType="URI"/>
         <attribute name="statusesCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="url" optional="YES" attributeType="URI"/>
@@ -23,11 +24,14 @@
         <relationship name="statuses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StatusData" inverseName="pixelfedAccount" inverseEntity="StatusData"/>
     </entity>
     <entity name="ApplicationSettings" representedClassName="ApplicationSettings" syncable="YES">
+        <attribute name="avatarShape" attributeType="Integer 32" defaultValueString="1" usesScalarValueType="YES"/>
         <attribute name="currentAccount" optional="YES" attributeType="String"/>
+        <attribute name="theme" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tintColor" attributeType="Integer 32" defaultValueString="2" usesScalarValueType="YES"/>
     </entity>
     <entity name="AttachmentData" representedClassName="AttachmentData" syncable="YES">
         <attribute name="blurhash" optional="YES" attributeType="String"/>
-        <attribute name="data" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="data" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="exifCamera" optional="YES" attributeType="String"/>
         <attribute name="exifCreatedDate" optional="YES" attributeType="String"/>
         <attribute name="exifExposure" optional="YES" attributeType="String"/>
@@ -41,7 +45,7 @@
         <attribute name="text" optional="YES" attributeType="String"/>
         <attribute name="type" attributeType="String"/>
         <attribute name="url" attributeType="URI"/>
-        <relationship name="statusRelation" maxCount="1" deletionRule="Cascade" destinationEntity="StatusData" inverseName="attachmentRelation" inverseEntity="StatusData"/>
+        <relationship name="statusRelation" maxCount="1" deletionRule="Nullify" destinationEntity="StatusData" inverseName="attachmentsRelation" inverseEntity="StatusData"/>
     </entity>
     <entity name="StatusData" representedClassName="StatusData" syncable="YES">
         <attribute name="accountAvatar" optional="YES" attributeType="URI"/>
@@ -61,6 +65,11 @@
         <attribute name="muted" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="pinned" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="reblogged" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="rebloggedAccountAvatar" optional="YES" attributeType="URI"/>
+        <attribute name="rebloggedAccountDisplayName" optional="YES" attributeType="String"/>
+        <attribute name="rebloggedAccountId" optional="YES" attributeType="String"/>
+        <attribute name="rebloggedAccountUsername" optional="YES" attributeType="String"/>
+        <attribute name="rebloggedStatusId" optional="YES" attributeType="String"/>
         <attribute name="reblogsCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="repliesCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="sensitive" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
@@ -68,7 +77,7 @@
         <attribute name="uri" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="URI"/>
         <attribute name="visibility" attributeType="String"/>
-        <relationship name="attachmentRelation" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AttachmentData" inverseName="statusRelation" inverseEntity="AttachmentData"/>
-        <relationship name="pixelfedAccount" maxCount="1" deletionRule="No Action" destinationEntity="AccountData" inverseName="statuses" inverseEntity="AccountData"/>
+        <relationship name="attachmentsRelation" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AttachmentData" inverseName="statusRelation" inverseEntity="AttachmentData"/>
+        <relationship name="pixelfedAccount" maxCount="1" deletionRule="Nullify" destinationEntity="AccountData" inverseName="statuses" inverseEntity="AccountData"/>
     </entity>
 </model>

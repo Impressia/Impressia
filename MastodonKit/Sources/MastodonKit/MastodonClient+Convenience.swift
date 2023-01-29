@@ -6,10 +6,13 @@
 
 import Foundation
 import OAuthSwift
+import AuthenticationServices
 
 public extension MastodonClient {
+    
+    /// Creates OAuth application in Pixelfed.
     func createApp(named name: String,
-                          redirectUri: String = "urn:ietf:wg:oauth:2.0:oob",
+                          redirectUri: String,
                           scopes: Scopes,
                           website: URL) async throws -> Application {
         
@@ -26,7 +29,40 @@ public extension MastodonClient {
         return try await downloadJson(Application.self, request: request)
     }
     
-    func authenticate(app: Application, scope: Scopes) async throws -> OAuthSwiftCredential { // todo: we should not load OAuthSwift objects here
+    /// Refresh access token..
+    func refreshToken(clientId: String, clientSecret: String, refreshToken: String) async throws -> OAuthSwiftCredential {
+        oauthClient = OAuth2Swift(
+            consumerKey: clientId,
+            consumerSecret: clientSecret,
+            authorizeUrl: baseURL.appendingPathComponent("oauth/authorize"),
+            accessTokenUrl: baseURL.appendingPathComponent("oauth/token"),
+            responseType: "code"
+        )
+        
+        return try await withCheckedThrowingContinuation { [weak self] continuation in
+            self?.oAuthContinuation = continuation
+            
+            oauthClient?.renewAccessToken(
+                withRefreshToken: "refrestoken",
+                completionHandler: { result in
+                    switch result {
+                    case let .success((credentials, _, _)):
+                        continuation.resume(with: .success(credentials))
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
+                    self?.oAuthContinuation = nil
+            })
+        }
+    }
+    
+    /// User authentication.
+    func authenticate(app: Application,
+                      scope: Scopes,
+                      callbackUrlScheme: String,
+                      presentationContextProvider: ASWebAuthenticationPresentationContextProviding
+    ) async throws -> OAuthSwiftCredential {
+        
         oauthClient = OAuth2Swift(
             consumerKey: app.clientId,
             consumerSecret: app.clientSecret,
@@ -35,11 +71,14 @@ public extension MastodonClient {
             responseType: "code"
         )
         
+        oauthClient?.authorizeURLHandler = ASWebAuthenticationURLHandler(callbackUrlScheme: callbackUrlScheme,
+                                                                         presentationContextProvider: presentationContextProvider)
+        
         return try await withCheckedThrowingContinuation { [weak self] continuation in
             self?.oAuthContinuation = continuation
             oAuthHandle = oauthClient?.authorize(
                 withCallbackURL: app.redirectUri,
-                scope: scope.asScopeString,
+                scope: scope.joined(separator: " "),
                 state: "MASToDON_AUTH",
                 completionHandler: { result in
                     switch result {
@@ -56,25 +95,5 @@ public extension MastodonClient {
     
     static func handleOAuthResponse(url: URL) {
         OAuthSwift.handle(url: url)
-    }
-
-    @available(*, deprecated, message: "The password flow is discoured and won't support 2FA. Please use authentiate(app:, scope:)")
-    func getToken(withApp app: Application,
-                         username: String,
-                         password: String,
-                         scope: Scopes) async throws -> AccessToken {
-
-        let request = try Self.request(
-            for: baseURL,
-            target: Mastodon.OAuth.authenticate(app, username, password, scope.asScopeString)
-        )
-        
-        return try await downloadJson(AccessToken.self, request: request)
-    }
-}
-
-private extension [String] {
-    var asScopeString: String {
-        joined(separator: " ")
     }
 }

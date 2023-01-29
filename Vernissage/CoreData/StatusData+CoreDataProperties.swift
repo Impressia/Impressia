@@ -37,7 +37,7 @@ extension StatusData {
     @NSManaged public var uri: String?
     @NSManaged public var url: URL?
     @NSManaged public var visibility: String
-    @NSManaged public var attachmentRelation: Set<AttachmentData>?
+    @NSManaged public var attachmentsRelation: Set<AttachmentData>?
     @NSManaged public var pixelfedAccount: AccountData
     
     @NSManaged public var rebloggedStatusId: String?
@@ -50,17 +50,17 @@ extension StatusData {
 // MARK: Generated accessors for attachmentRelation
 extension StatusData {
 
-    @objc(addAttachmentRelationObject:)
-    @NSManaged public func addToAttachmentRelation(_ value: AttachmentData)
+    @objc(addAttachmentsRelationObject:)
+    @NSManaged public func addToAttachmentsRelation(_ value: AttachmentData)
 
-    @objc(removeAttachmentRelationObject:)
-    @NSManaged public func removeFromAttachmentRelation(_ value: AttachmentData)
+    @objc(removeAttachmentsRelationObject:)
+    @NSManaged public func removeFromAttachmentsRelation(_ value: AttachmentData)
 
-    @objc(addAttachmentRelation:)
-    @NSManaged public func addToAttachmentRelation(_ values: NSSet)
+    @objc(addAttachmentsRelation:)
+    @NSManaged public func addToAttachmentsRelation(_ values: NSSet)
 
-    @objc(removeAttachmentRelation:)
-    @NSManaged public func removeFromAttachmentRelation(_ values: NSSet)
+    @objc(removeAttachmentsRelation:)
+    @NSManaged public func removeFromAttachmentsRelation(_ values: NSSet)
 
 }
 

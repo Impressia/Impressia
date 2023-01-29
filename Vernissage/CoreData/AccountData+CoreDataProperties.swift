@@ -14,6 +14,7 @@ extension AccountData {
     }
 
     @NSManaged public var accessToken: String?
+    @NSManaged public var refreshToken: String?
     @NSManaged public var acct: String
     @NSManaged public var avatar: URL?
     @NSManaged public var avatarData: Data?

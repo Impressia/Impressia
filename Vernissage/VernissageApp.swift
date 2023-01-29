@@ -57,7 +57,8 @@ struct VernissageApp: App {
                 self.loadUserPreferences()
                 
                 // Verify access token correctness.
-                await AuthorizationService.shared.verifyAccount({ accountData in
+                let authorizationSession = AuthorizationSession()
+                await AuthorizationService.shared.verifyAccount(session: authorizationSession) { accountData in
                     guard let accountData = accountData else {
                         self.applicationViewMode = .signIn
                         return
@@ -65,10 +66,9 @@ struct VernissageApp: App {
                     
                     Task { @MainActor in
                         self.applicationState.accountData = accountData
+                        self.applicationViewMode = .mainView
                     }
-                    
-                    self.applicationViewMode = .mainView
-                })
+                }
             }
             .navigationViewStyle(.stack)
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
@@ -114,7 +114,7 @@ struct VernissageApp: App {
             }())
             
             $0.imageCache = ImageCache.shared
-            $0.dataCache = try! DataCache(name: "dev.mczachurski.Vernissage.DataCache")
+            $0.dataCache = try! DataCache(name: AppConstants.imagePipelineCacheName)
         }
         
         ImagePipeline.shared = pipeline

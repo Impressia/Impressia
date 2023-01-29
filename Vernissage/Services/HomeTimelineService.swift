@@ -155,7 +155,7 @@ public class HomeTimelineService {
                         
             if attachmentData.isInserted {
                 attachmentData.statusRelation = statusData
-                statusData.addToAttachmentRelation(attachmentData)
+                statusData.addToAttachmentsRelation(attachmentData)
             }
         }
     }

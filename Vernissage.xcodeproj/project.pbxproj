@@ -61,6 +61,9 @@
 		F86B721E296C458700EE59EC /* BlurredImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B721D296C458700EE59EC /* BlurredImage.swift */; };
 		F86B7221296C49A300EE59EC /* EmptyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7220296C49A300EE59EC /* EmptyButtonStyle.swift */; };
 		F86B7223296C4BF500EE59EC /* ContentWarning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7222296C4BF500EE59EC /* ContentWarning.swift */; };
+		F87AEB922986C44E00434FB6 /* AuthorizationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87AEB912986C44E00434FB6 /* AuthorizationSession.swift */; };
+		F87AEB942986C51B00434FB6 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87AEB932986C51B00434FB6 /* AppConstants.swift */; };
+		F87AEB972986D16D00434FB6 /* AuthorisationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87AEB962986D16D00434FB6 /* AuthorisationError.swift */; };
 		F886F257297859E300879356 /* CacheImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F886F256297859E300879356 /* CacheImageService.swift */; };
 		F88ABD9229686F1C004EF61E /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88ABD9129686F1C004EF61E /* MemoryCache.swift */; };
 		F88ABD9429687CA4004EF61E /* ComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88ABD9329687CA4004EF61E /* ComposeView.swift */; };
@@ -140,7 +143,6 @@
 		F8341F8F295C636C009C8EE6 /* Data+Exif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Exif.swift"; sourceTree = "<group>"; };
 		F83901A5295D8EC000456AE2 /* LabelIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelIcon.swift; sourceTree = "<group>"; };
 		F83CBEFA298298A1002972C8 /* ImageCarouselPicture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCarouselPicture.swift; sourceTree = "<group>"; };
-		F85183232981C2CE001BB950 /* Vernissage20230125-001.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage20230125-001.xcdatamodel"; sourceTree = "<group>"; };
 		F857F9FC297D8ED3002C109C /* ActionMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionMenu.swift; sourceTree = "<group>"; };
 		F85D4970296402DC00751DF7 /* AuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationService.swift; sourceTree = "<group>"; };
 		F85D4972296406E700751DF7 /* BottomRight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomRight.swift; sourceTree = "<group>"; };
@@ -157,7 +159,6 @@
 		F85E131F297409CD006A051D /* ErrorsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorsService.swift; sourceTree = "<group>"; };
 		F86167C5297FE6CC004D1F67 /* AvatarShapesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarShapesSection.swift; sourceTree = "<group>"; };
 		F86167C7297FE781004D1F67 /* AvatarShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarShape.swift; sourceTree = "<group>"; };
-		F86167C9297FF423004D1F67 /* Vernissage20230121-001.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage20230121-001.xcdatamodel"; sourceTree = "<group>"; };
 		F866F69E296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplicationSettings+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F866F69F296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplicationSettings+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F866F6A229604161002E8F88 /* AccountDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDataHandler.swift; sourceTree = "<group>"; };
@@ -173,6 +174,9 @@
 		F86B721D296C458700EE59EC /* BlurredImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredImage.swift; sourceTree = "<group>"; };
 		F86B7220296C49A300EE59EC /* EmptyButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyButtonStyle.swift; sourceTree = "<group>"; };
 		F86B7222296C4BF500EE59EC /* ContentWarning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentWarning.swift; sourceTree = "<group>"; };
+		F87AEB912986C44E00434FB6 /* AuthorizationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSession.swift; sourceTree = "<group>"; };
+		F87AEB932986C51B00434FB6 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		F87AEB962986D16D00434FB6 /* AuthorisationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorisationError.swift; sourceTree = "<group>"; };
 		F886F256297859E300879356 /* CacheImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheImageService.swift; sourceTree = "<group>"; };
 		F88ABD9129686F1C004EF61E /* MemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
 		F88ABD9329687CA4004EF61E /* ComposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeView.swift; sourceTree = "<group>"; };
@@ -207,7 +211,6 @@
 		F8984E4C296B648000A2610F /* UIImage+Blurhash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Blurhash.swift"; sourceTree = "<group>"; };
 		F898DE6F2972868A004B4A6A /* String+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Empty.swift"; sourceTree = "<group>"; };
 		F898DE7129728CB2004B4A6A /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
-		F8995E432982865C004C191C /* Vernissage20230126-001.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage20230126-001.xcdatamodel"; sourceTree = "<group>"; };
 		F8996DEA2971D29D0043EEC6 /* View+Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Transition.swift"; sourceTree = "<group>"; };
 		F89992C8296D6DC7005994BF /* CommentBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentBody.swift; sourceTree = "<group>"; };
 		F89992CB296D9231005994BF /* StatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewModel.swift; sourceTree = "<group>"; };
@@ -215,7 +218,6 @@
 		F89A46DB296EAACE0062125F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		F89A46DD296EABA20062125F /* StatusPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPlaceholder.swift; sourceTree = "<group>"; };
 		F89CEB7F2984198600A1376F /* AttachmentData+HighestImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttachmentData+HighestImage.swift"; sourceTree = "<group>"; };
-		F89D6C3B29716DBC001DA3D4 /* Vernissage20230113-001.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage20230113-001.xcdatamodel"; sourceTree = "<group>"; };
 		F89D6C3E29716E41001DA3D4 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		F89D6C4129717FDC001DA3D4 /* AccountsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSection.swift; sourceTree = "<group>"; };
 		F89D6C4329718092001DA3D4 /* AccentsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentsSection.swift; sourceTree = "<group>"; };
@@ -223,7 +225,6 @@
 		F89D6C49297196FF001DA3D4 /* ImagesViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesViewer.swift; sourceTree = "<group>"; };
 		F8A93D7D2965FD89001D8331 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		F8A93D7F2965FED4001D8331 /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
-		F8AF2A61297073FE00D2DA3F /* Vernissage20230112-001.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage20230112-001.xcdatamodel"; sourceTree = "<group>"; };
 		F8B1E6502973FB7E00EE0D10 /* ToastrService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastrService.swift; sourceTree = "<group>"; };
 		F8C14391296AF0B3001FE31D /* String+Exif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Exif.swift"; sourceTree = "<group>"; };
 		F8C14393296AF21B001FE31D /* Double+Round.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Round.swift"; sourceTree = "<group>"; };
@@ -254,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				F802884E297AEED5000BDD51 /* DatabaseError.swift */,
+				F87AEB962986D16D00434FB6 /* AuthorisationError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -428,6 +430,7 @@
 				F8341F93295C63E2009C8EE6 /* Views */,
 				F88C246B295C37B80006098B /* VernissageApp.swift */,
 				F88E4D55297EAD6E0057491A /* AppRouteur.swift */,
+				F87AEB932986C51B00434FB6 /* AppConstants.swift */,
 				F866F6A929605AFA002E8F88 /* SceneDelegate.swift */,
 				F88C246F295C37BB0006098B /* Assets.xcassets */,
 				F88C2476295C37BB0006098B /* Vernissage.xcdatamodeld */,
@@ -449,6 +452,7 @@
 			children = (
 				F88FAD31295F5029009B20C9 /* RemoteFileService.swift */,
 				F85D4970296402DC00751DF7 /* AuthorizationService.swift */,
+				F87AEB912986C44E00434FB6 /* AuthorizationSession.swift */,
 				F85D4974296407F100751DF7 /* HomeTimelineService.swift */,
 				F8A93D7F2965FED4001D8331 /* AccountService.swift */,
 				F8210DE02966D0C4001D9973 /* StatusService.swift */,
@@ -610,6 +614,7 @@
 			files = (
 				F85D497729640A5200751DF7 /* ImageRow.swift in Sources */,
 				F8210DDF2966CFC7001D9973 /* AttachmentData+Attachment.swift in Sources */,
+				F87AEB922986C44E00434FB6 /* AuthorizationSession.swift in Sources */,
 				F88E4D44297E82EB0057491A /* Status+MediaAttachmentType.swift in Sources */,
 				F89D6C4229717FDC001DA3D4 /* AccountsSection.swift in Sources */,
 				F80048082961E6DE00E6868A /* StatusDataHandler.swift in Sources */,
@@ -626,6 +631,7 @@
 				F80048062961850500E6868A /* StatusData+CoreDataProperties.swift in Sources */,
 				F88FAD21295F3944009B20C9 /* HomeFeedView.swift in Sources */,
 				F88C2475295C37BB0006098B /* CoreDataHandler.swift in Sources */,
+				F87AEB972986D16D00434FB6 /* AuthorisationError.swift in Sources */,
 				F829193C2983012400367CE2 /* ImageSizeService.swift in Sources */,
 				F88FAD2A295F43B8009B20C9 /* AccountData+CoreDataClass.swift in Sources */,
 				F8210DE12966D0C4001D9973 /* StatusService.swift in Sources */,
@@ -678,6 +684,7 @@
 				F8210DE72966E1D1001D9973 /* Color+Assets.swift in Sources */,
 				F88ABD9429687CA4004EF61E /* ComposeView.swift in Sources */,
 				F89CEB802984198600A1376F /* AttachmentData+HighestImage.swift in Sources */,
+				F87AEB942986C51B00434FB6 /* AppConstants.swift in Sources */,
 				F86B7214296BFDCE00EE59EC /* UserProfileHeader.swift in Sources */,
 				F88E4D46297E89DF0057491A /* TrendsService.swift in Sources */,
 				F85D497D29640D5900751DF7 /* InteractionRow.swift in Sources */,
@@ -1007,14 +1014,9 @@
 		F88C2476295C37BB0006098B /* Vernissage.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				F8995E432982865C004C191C /* Vernissage20230126-001.xcdatamodel */,
-				F85183232981C2CE001BB950 /* Vernissage20230125-001.xcdatamodel */,
-				F86167C9297FF423004D1F67 /* Vernissage20230121-001.xcdatamodel */,
-				F89D6C3B29716DBC001DA3D4 /* Vernissage20230113-001.xcdatamodel */,
-				F8AF2A61297073FE00D2DA3F /* Vernissage20230112-001.xcdatamodel */,
 				F88C2477295C37BB0006098B /* Vernissage.xcdatamodel */,
 			);
-			currentVersion = F8995E432982865C004C191C /* Vernissage20230126-001.xcdatamodel */;
+			currentVersion = F88C2477295C37BB0006098B /* Vernissage.xcdatamodel */;
 			path = Vernissage.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

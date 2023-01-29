@@ -6,6 +6,7 @@
     
 import Foundation
 import MastodonKit
+import AuthenticationServices
 
 /// Srvice responsible for login user into the Pixelfed account.
 public class AuthorizationService {
@@ -13,7 +14,7 @@ public class AuthorizationService {
     private init() { }
     
     /// Access token verification.
-    public func verifyAccount(_ result: @escaping (AccountData?) -> Void) async {
+    public func verifyAccount(session: AuthorizationSession, _ result: @escaping (AccountData?) -> Void) async {
         let currentAccount = AccountDataHandler.shared.getCurrentAccountData()
         
         // When we dont have even one account stored in database then we have to ask user to enter server and sign in.
@@ -27,11 +28,15 @@ public class AuthorizationService {
 
         do {
             let account = try await client.verifyCredentials()
-            try await self.update(account: currentAccount, basedOn: account)
+            try await self.update(account: currentAccount,
+                                  basedOn: account,
+                                  accessToken: accessToken,
+                                  refreshToken: currentAccount.refreshToken)
+
             result(currentAccount)
         } catch {
             do {
-                try await self.refreshCredentials(for: currentAccount)
+                try await self.refreshCredentials(for: currentAccount, presentationContextProvider: session)
                 result(currentAccount)
             } catch {
                 ErrorService.shared.handle(error, message: "Issues during refreshing credentials.", showToastr: true)
@@ -40,25 +45,31 @@ public class AuthorizationService {
     }
     
     /// Sign in to the Pixelfed server.
-    public func sign(in serverAddress: String, _ result: @escaping (AccountData?) -> Void) async throws {
-        let baseUrl = URL(string: serverAddress)!
+    public func sign(in serverAddress: String, session: AuthorizationSession, _ result: @escaping (AccountData?) -> Void) async throws {
+                
+        guard let baseUrl = URL(string: serverAddress) else {
+            throw AuthorisationError.badServerUrl
+        }
+        
         let client = MastodonClient(baseURL: baseUrl)
         
         // Verify address.
-        let instanceInformation = try await client.readInstanceInformation()
+        _ = try await client.readInstanceInformation()
 
         // Create application (we will get clientId amd clientSecret).
         let oAuthApp = try await client.createApp(
-            named: "Vernissage",
-            redirectUri: "oauth-vernissage://oauth-callback/mastodon",
-            scopes: Scopes(["read", "write", "follow", "push"]),
+            named: AppConstants.oauthApplicationName,
+            redirectUri: AppConstants.oauthRedirectUri,
+            scopes: Scopes(AppConstants.oauthScopes),
             website: baseUrl)
         
         // Authorize a user (browser, we will get clientCode).
         let oAuthSwiftCredential = try await client.authenticate(
             app: oAuthApp,
-            scope: Scopes(["read", "write", "follow", "push"]))
-        
+            scope: Scopes(AppConstants.oauthScopes),
+            callbackUrlScheme: AppConstants.oauthScheme,
+            presentationContextProvider: session)
+                
         // Get authenticated client.
         let authenticatedClient = client.getAuthenticated(token: oAuthSwiftCredential.oauthToken)
         
@@ -82,11 +93,15 @@ public class AuthorizationService {
         accountData.followingCount = Int32(account.followingCount)
         accountData.statusesCount = Int32(account.statusesCount)
         
+        // Store data about Server and OAuth client.
         accountData.serverUrl = baseUrl
         accountData.clientId = oAuthApp.clientId
         accountData.clientSecret = oAuthApp.clientSecret
         accountData.clientVapidKey = oAuthApp.vapidKey ?? String.empty()
+        
+        // Store data about oauth tokens.
         accountData.accessToken = oAuthSwiftCredential.oauthToken
+        accountData.refreshToken = oAuthSwiftCredential.oauthRefreshToken
         
         // Download avatar image.
         if let avatarUrl = account.avatar {
@@ -109,25 +124,38 @@ public class AuthorizationService {
         // Return account data.
         result(accountData)
     }
-    
-    private func refreshCredentials(for accountData: AccountData) async throws {
+        
+    private func refreshCredentials(for accountData: AccountData,
+                                    presentationContextProvider: ASWebAuthenticationPresentationContextProviding
+    ) async throws {
+
         let client = MastodonClient(baseURL: accountData.serverUrl)
 
         // Create application (we will get clientId amd clientSecret).
         let oAuthApp = Application(clientId: accountData.clientId, clientSecret: accountData.clientSecret)
         
         // Authorize a user (browser, we will get clientCode).
-        let oAuthSwiftCredential = try await client.authenticate(app: oAuthApp, scope: Scopes(["read", "write", "follow", "push"]))
-        
+        let oAuthSwiftCredential = try await client.authenticate(app: oAuthApp,
+                                                                 scope: Scopes(AppConstants.oauthScopes),
+                                                                 callbackUrlScheme: AppConstants.oauthScheme,
+                                                                 presentationContextProvider: presentationContextProvider)
+                
         // Get authenticated client.
         let authenticatedClient = client.getAuthenticated(token: oAuthSwiftCredential.oauthToken)
         
         // Get account information from server.
         let account = try await authenticatedClient.verifyCredentials()
-        try await self.update(account: accountData, basedOn: account, accessToken: oAuthSwiftCredential.oauthToken)
+        try await self.update(account: accountData,
+                              basedOn: account,
+                              accessToken: oAuthSwiftCredential.oauthToken,
+                              refreshToken: oAuthSwiftCredential.oauthRefreshToken)
     }
     
-    private func update(account dbAccount: AccountData, basedOn account: Account, accessToken: String? = nil) async throws {
+    private func update(account dbAccount: AccountData,
+                        basedOn account: Account,
+                        accessToken: String,
+                        refreshToken: String?
+    ) async throws {
         dbAccount.username = account.username
         dbAccount.acct = account.acct
         dbAccount.displayName = account.displayName
@@ -140,10 +168,10 @@ public class AuthorizationService {
         dbAccount.followersCount = Int32(account.followersCount)
         dbAccount.followingCount = Int32(account.followingCount)
         dbAccount.statusesCount = Int32(account.statusesCount)
-        
-        if accessToken != nil {
-            dbAccount.accessToken = accessToken
-        }
+            
+        // Store data about new oauth tokens.
+        dbAccount.accessToken = accessToken
+        dbAccount.refreshToken = refreshToken
         
         // Download avatar image.
         if let avatarUrl = account.avatar {
