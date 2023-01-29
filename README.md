@@ -35,7 +35,12 @@ Even if we save bookmark on the web, we don't have reflected that information in
 Seems like reboost is working only from Pixelfed to Mastodon. When I'm following someone from Pixelfed
 from my pixelfed account I don't see his reboost on my Pixelfed home timeline.  
 
-- **Trend are not availabe through the API**
+- **Trends are not availabe through the API**
 
 Pixelfed uses endpoint (GET): https://pixelfed.social/api/pixelfed/v2/discover/posts/trending?range=daily
 This endpoint is not working in different servers e.g.: https://pxlmo.com/api/pixelfed/v2/discover/posts/trending?range=daily
+
+- **Place is not available in the API**
+
+In the status response there is no information about place.
+That information is visible when using Pixelfed web app. 
