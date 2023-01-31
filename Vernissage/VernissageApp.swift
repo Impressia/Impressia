@@ -65,7 +65,8 @@ struct VernissageApp: App {
                     }
                     
                     Task { @MainActor in
-                        self.applicationState.accountData = accountData
+                        self.applicationState.account = AccountModel(accountData: accountData)
+                        self.applicationState.lastSeenStatusId = accountData.lastSeenStatusId
                         self.applicationViewMode = .mainView
                     }
                 }

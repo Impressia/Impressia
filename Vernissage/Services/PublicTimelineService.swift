@@ -11,14 +11,14 @@ public class PublicTimelineService {
     public static let shared = PublicTimelineService()
     private init() { }
     
-    public func getStatuses(for accountData: AccountData?,
+    public func getStatuses(for account: AccountModel?,
                             local: Bool,
                             remote: Bool,
                             maxId: String? = nil,
                             sinceId: String? = nil,
                             minId: String? = nil,
                             limit: Int = 40) async throws -> [Status] {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return []
         }
         
@@ -26,7 +26,7 @@ public class PublicTimelineService {
         return try await client.getPublicTimeline(local: local, remote: remote, onlyMedia: true, maxId: maxId, sinceId: sinceId, minId: minId, limit: limit)
     }
     
-    public func getTagStatuses(for accountData: AccountData?,
+    public func getTagStatuses(for account: AccountModel?,
                                tag: String,
                                local: Bool,
                                remote: Bool,
@@ -34,7 +34,7 @@ public class PublicTimelineService {
                                sinceId: String? = nil,
                                minId: String? = nil,
                                limit: Int = 40) async throws -> [Status] {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return []
         }
         

@@ -106,7 +106,7 @@ struct NotificationRow: View {
             switch notification.type {
             case .favourite, .reblog, .mention, .status, .poll, .update:
                 if let status = notification.status {
-                    let statusViewModel = StatusViewModel(status: status)
+                    let statusViewModel = StatusModel(status: status)
                     self.routerPath.navigate(to: .status(id: statusViewModel.id,
                                                          blurhash: statusViewModel.mediaAttachments.first?.blurhash,
                                                          highestImageUrl: statusViewModel.mediaAttachments.getHighestImage()?.url,

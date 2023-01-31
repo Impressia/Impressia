@@ -7,7 +7,7 @@
 import Foundation
 import MastodonKit
 
-public class StatusViewModel: ObservableObject {
+public class StatusModel: ObservableObject {
 
     public let id: EntityId
     public let content: Html
@@ -38,7 +38,7 @@ public class StatusViewModel: ObservableObject {
     
     public let reblogStatus: Status?
     
-    @Published public var mediaAttachments: [AttachmentViewModel]
+    @Published public var mediaAttachments: [AttachmentModel]
     
     public init(
         id: EntityId,
@@ -62,7 +62,7 @@ public class StatusViewModel: ObservableObject {
         muted: Bool = false,
         spoilerText: String? = nil,
         visibility: Status.Visibility = Status.Visibility.pub,
-        mediaAttachments: [AttachmentViewModel] = [],
+        mediaAttachments: [AttachmentModel] = [],
         card: PreviewCard? = nil,
         mentions: [Mention] = [],
         tags: [Tag] = [],
@@ -126,9 +126,9 @@ public class StatusViewModel: ObservableObject {
         self.application = orginalStatus.application
         self.place = orginalStatus.place
         
-        var mediaAttachments: [AttachmentViewModel] = []
+        var mediaAttachments: [AttachmentModel] = []
         for item in orginalStatus.mediaAttachments {
-            mediaAttachments.append(AttachmentViewModel(attachment: item))
+            mediaAttachments.append(AttachmentModel(attachment: item))
         }
         
         self.mediaAttachments = mediaAttachments
@@ -141,7 +141,7 @@ public class StatusViewModel: ObservableObject {
     }
 }
 
-public extension StatusViewModel {
+public extension StatusModel {
     func getImageWidth() -> Int32? {
         let highestImage = self.mediaAttachments.getHighestImage()
         if let width = (highestImage?.meta as? ImageMetadata)?.original?.width {
@@ -162,13 +162,13 @@ public extension StatusViewModel {
 }
 
 public extension [Status] {
-    func toStatusViewModel() -> [StatusViewModel] {
+    func toStatusViewModel() -> [StatusModel] {
         self
             .sorted(by: { lhs, rhs in
                 lhs.id < rhs.id
             })
             .map { status in
-                StatusViewModel(status: status)
+                StatusModel(status: status)
             }
     }
 }

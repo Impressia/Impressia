@@ -70,11 +70,7 @@ struct AccountsView: View {
         }
         .navigationBarTitle(self.getTitle())
         .listStyle(.plain)
-        .task {
-            if self.accounts.isEmpty == false {
-                return
-            }
-            
+        .onFirstAppear {
             await self.loadAccounts(page: self.page)
         }
     }
@@ -113,22 +109,22 @@ struct AccountsView: View {
         case .followers:
             return try await AccountService.shared.followers(
                 account: self.entityId,
-                for: self.applicationState.accountData,
+                for: self.applicationState.account,
                 page: page)
         case .following:
             return try await AccountService.shared.following(
                 account: self.entityId,
-                for: self.applicationState.accountData,
+                for: self.applicationState.account,
                 page: page)
         case .favourited:
             return try await StatusService.shared.favouritedBy(
                 statusId: self.entityId,
-                for: self.applicationState.accountData,
+                for: self.applicationState.account,
                 page: page)
         case .reblogged:
             return try await StatusService.shared.rebloggedBy(
                 statusId: self.entityId,
-                for: self.applicationState.accountData,
+                for: self.applicationState.account,
                 page: page)
         }
     }

@@ -14,7 +14,7 @@ struct UserProfileStatuses: View {
     @State private var allItemsLoaded = false
     @State private var firstLoadFinished = false
     
-    @State private var statusViewModels: [StatusViewModel] = []
+    @State private var statusViewModels: [StatusModel] = []
     private let defaultLimit = 20
 
     var body: some View {
@@ -66,12 +66,12 @@ struct UserProfileStatuses: View {
         
         let statuses = try await AccountService.shared.statuses(
             createdBy: self.accountId,
-            for: self.applicationState.accountData,
+            for: self.applicationState.account,
             limit: self.defaultLimit)
-        var inPlaceStatuses: [StatusViewModel] = []
+        var inPlaceStatuses: [StatusModel] = []
 
         for item in statuses {
-            inPlaceStatuses.append(StatusViewModel(status: item))
+            inPlaceStatuses.append(StatusModel(status: item))
         }
         
         self.firstLoadFinished = true
@@ -86,7 +86,7 @@ struct UserProfileStatuses: View {
         if let lastStatusId = self.statusViewModels.last?.id {
             let previousStatuses = try await AccountService.shared.statuses(
                 createdBy: self.accountId,
-                for: self.applicationState.accountData,
+                for: self.applicationState.account,
                 maxId: lastStatusId,
                 limit: self.defaultLimit)
 
@@ -94,9 +94,9 @@ struct UserProfileStatuses: View {
                 self.allItemsLoaded = true
             }
             
-            var inPlaceStatuses: [StatusViewModel] = []
+            var inPlaceStatuses: [StatusModel] = []
             for item in previousStatuses {
-                inPlaceStatuses.append(StatusViewModel(status: item))
+                inPlaceStatuses.append(StatusModel(status: item))
             }
             
             self.statusViewModels.append(contentsOf: inPlaceStatuses)

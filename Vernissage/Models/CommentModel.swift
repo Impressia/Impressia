@@ -6,7 +6,7 @@
     
 import Foundation
 
-public struct CommentViewModel {
-    var status: StatusViewModel
+public struct CommentModel {
+    var status: StatusModel
     var showDivider: Bool
 }

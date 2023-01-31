@@ -19,7 +19,7 @@ enum RouteurDestinations: Hashable {
 
 enum SheetDestinations: Identifiable {
     case newStatusEditor
-    case replyToStatusEditor(status: StatusViewModel)
+    case replyToStatusEditor(status: StatusModel)
     case settings
   
     public var id: String {
@@ -45,14 +45,14 @@ class RouterPath: ObservableObject {
         path.append(to)
     }
     
-    public func handle(url: URL, accountData: AccountData? = nil) -> OpenURLAction.Result {
+    public func handle(url: URL, account: AccountModel? = nil) -> OpenURLAction.Result {
         if url.pathComponents.contains(where: { $0 == "tags" }), let tag = url.pathComponents.last {
             navigate(to: .tag(hashTag: tag))
             return .handled
         } else if url.lastPathComponent.first == "@", let host = url.host {
             let acct = "\(url.lastPathComponent)@\(host)"
             Task {
-                await navigateToAccountFrom(acct: acct, url: url, accountData: accountData)
+                await navigateToAccountFrom(acct: acct, url: url, account: account)
             }
 
             return .handled
@@ -61,16 +61,18 @@ class RouterPath: ObservableObject {
         return urlHandler?(url) ?? .systemAction
     }
     
-    public func navigateToAccountFrom(acct: String, url: URL, accountData: AccountData? = nil) async {
-        guard let accountData else { return }
+    public func navigateToAccountFrom(acct: String, url: URL, account: AccountModel? = nil) async {
+        guard let account else { return }
         
         Task {
-            let results = try? await SearchService.shared.search(for: accountData,
+            let results = try? await SearchService.shared.search(for: account,
                                                                  query: acct,
                                                                  resultsType: Mastodon.Search.ResultsType.accounts)
                         
-            if let account = results?.accounts.first {
-                navigate(to: .userProfile(accountId: account.id, accountDisplayName: account.displayNameWithoutEmojis, accountUserName: account.acct))
+            if let accountFromApi = results?.accounts.first {
+                navigate(to: .userProfile(accountId: accountFromApi.id,
+                                          accountDisplayName: accountFromApi.displayNameWithoutEmojis,
+                                          accountUserName: accountFromApi.acct))
             } else {
                 await UIApplication.shared.open(url)
             }

@@ -70,7 +70,7 @@ struct SignInView: View {
                 try await AuthorizationService.shared.sign(in: self.getServerAddress(),
                                                            session: authorizationSession) { accountData in
                     DispatchQueue.main.async {
-                        self.applicationState.accountData = accountData
+                        self.applicationState.account = AccountModel(accountData: accountData)
                         onSignInStateChenge?(.mainView)
                         dismiss()
                     }

@@ -11,8 +11,8 @@ public class TagsService {
     public static let shared = TagsService()
     private init() { }
     
-    public func get(tag: String, for accountData: AccountData?) async throws -> Tag? {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+    public func get(tag: String, for account: AccountModel?) async throws -> Tag? {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return nil
         }
         
@@ -20,8 +20,8 @@ public class TagsService {
         return try await client.tag(hashtag: tag)
     }
     
-    public func follow(tag: String, for accountData: AccountData?) async throws -> Tag? {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+    public func follow(tag: String, for account: AccountModel?) async throws -> Tag? {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return nil
         }
         
@@ -29,8 +29,8 @@ public class TagsService {
         return try await client.follow(hashtag: tag)
     }
     
-    public func unfollow(tag: String, for accountData: AccountData?) async throws -> Tag? {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+    public func unfollow(tag: String, for account: AccountModel?) async throws -> Tag? {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return nil
         }
         

@@ -29,6 +29,11 @@ struct HomeFeedView: View {
         ScrollView {
             LazyVGrid(columns: gridColumns) {
                 ForEach(dbStatuses, id: \.self) { item in
+                    
+                    if self.shouldUpToDateBeVisible(statusId: item.id) {
+                        self.upToDatePlaceholder()
+                    }
+                    
                     NavigationLink(value: RouteurDestinations.status(
                         id: item.rebloggedStatusId ?? item.id,
                         blurhash: item.attachments().first?.blurhash,
@@ -45,8 +50,8 @@ struct HomeFeedView: View {
                     LoadingIndicator()
                         .task {
                             do {
-                                if let accountData = self.applicationState.accountData {
-                                    let newStatusesCount = try await HomeTimelineService.shared.loadOnBottom(for: accountData)
+                                if let account = self.applicationState.account {
+                                    let newStatusesCount = try await HomeTimelineService.shared.loadOnBottom(for: account)
                                     if newStatusesCount == 0 {
                                         allItemsBottomLoaded = true
                                     }
@@ -75,8 +80,11 @@ struct HomeFeedView: View {
         }
         .refreshable {
             do {
-                if let accountData = self.applicationState.accountData {
-                    try await HomeTimelineService.shared.loadOnTop(for: accountData)
+                if let account = self.applicationState.account {
+                    if let lastSeenStatusId = try await HomeTimelineService.shared.loadOnTop(for: account) {   
+                        try await HomeTimelineService.shared.save(lastSeenStatusId: lastSeenStatusId, for: account)
+                        self.applicationState.lastSeenStatusId = lastSeenStatusId
+                    }
                 }
             } catch {
                 print("Error", error)
@@ -94,12 +102,33 @@ struct HomeFeedView: View {
                     return
                 }
 
-                if let accountData = self.applicationState.accountData {
-                    try await HomeTimelineService.shared.loadOnTop(for: accountData)
+                if let account = self.applicationState.account {
+                    _ = try await HomeTimelineService.shared.loadOnTop(for: account)
                 }
             } catch {
                 ErrorService.shared.handle(error, message: "Error during download statuses from server.", showToastr: !Task.isCancelled)
             }
         }
+    }
+    
+    private func shouldUpToDateBeVisible(statusId: String) -> Bool {
+        return self.applicationState.lastSeenStatusId != dbStatuses.first?.id && self.applicationState.lastSeenStatusId == statusId
+    }
+    
+    @ViewBuilder
+    private func upToDatePlaceholder() -> some View {
+        VStack(alignment: .center) {
+            Image(systemName: "checkmark.seal")
+                .resizable()
+                .frame(width: 64, height: 64)
+                .fontWeight(.ultraLight)
+                .foregroundColor(.accentColor.opacity(0.6))
+            Text("You're all caught up")
+                .font(.title2)
+                .fontWeight(.thin)
+                .foregroundColor(Color.mainTextColor.opacity(0.6))
+        }
+        .padding(.vertical, 8)
+        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width * 0.75)
     }
 }

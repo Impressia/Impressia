@@ -20,12 +20,12 @@ struct AccountsSection: View {
                                 accountDisplayName: account.displayName,
                                 accountUsername: account.username)
                     Spacer()
-                    if self.applicationState.accountData?.id == account.id {
+                    if self.applicationState.account?.id == account.id {
                         Image(systemName: "checkmark")
                             .foregroundColor(self.applicationState.tintColor.color())
                     }
                 }
-                .deleteDisabled(self.applicationState.accountData?.id == account.id)
+                .deleteDisabled(self.applicationState.account?.id == account.id)
             }
             .onDelete(perform: delete)
             

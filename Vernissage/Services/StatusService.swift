@@ -11,8 +11,8 @@ public class StatusService {
     public static let shared = StatusService()
     private init() { }
     
-    public func status(withId statusId: String, for accountData: AccountData?) async throws -> Status? {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+    public func status(withId statusId: String, for account: AccountModel?) async throws -> Status? {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return nil
         }
 
@@ -20,8 +20,8 @@ public class StatusService {
         return try await client.status(statusId: statusId)
     }
     
-    func favourite(statusId: String, for accountData: AccountData?) async throws -> Status? {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+    func favourite(statusId: String, for account: AccountModel?) async throws -> Status? {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return nil
         }
         
@@ -29,8 +29,8 @@ public class StatusService {
         return try await client.favourite(statusId: statusId)
     }
     
-    func unfavourite(statusId: String, for accountData: AccountData?) async throws -> Status? {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+    func unfavourite(statusId: String, for account: AccountModel?) async throws -> Status? {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return nil
         }
         
@@ -38,8 +38,8 @@ public class StatusService {
         return try await client.unfavourite(statusId: statusId)
     }
     
-    func boost(statusId: String, for accountData: AccountData?) async throws -> Status? {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+    func boost(statusId: String, for account: AccountModel?) async throws -> Status? {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return nil
         }
         
@@ -47,8 +47,8 @@ public class StatusService {
         return try await client.boost(statusId: statusId)
     }
     
-    func unboost(statusId: String, for accountData: AccountData?) async throws -> Status? {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+    func unboost(statusId: String, for account: AccountModel?) async throws -> Status? {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return nil
         }
         
@@ -56,8 +56,8 @@ public class StatusService {
         return try await client.unboost(statusId: statusId)
     }
     
-    func bookmark(statusId: String, for accountData: AccountData?) async throws -> Status? {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+    func bookmark(statusId: String, for account: AccountModel?) async throws -> Status? {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return nil
         }
         
@@ -65,8 +65,8 @@ public class StatusService {
         return try await client.bookmark(statusId: statusId)
     }
     
-    func unbookmark(statusId: String, for accountData: AccountData?) async throws -> Status? {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+    func unbookmark(statusId: String, for account: AccountModel?) async throws -> Status? {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return nil
         }
         
@@ -74,8 +74,8 @@ public class StatusService {
         return try await client.unbookmark(statusId: statusId)
     }
     
-    func new(status: Mastodon.Statuses.Components, for accountData: AccountData?) async throws -> Status? {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+    func new(status: Mastodon.Statuses.Components, for account: AccountModel?) async throws -> Status? {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return nil
         }
         
@@ -83,17 +83,17 @@ public class StatusService {
         return try await client.new(statusComponents: status)
     }
     
-    func comments(to statusId: String, for accountData: AccountData) async throws -> [CommentViewModel] {
-        var commentViewModels: [CommentViewModel] = []
+    func comments(to statusId: String, for account: AccountModel) async throws -> [CommentModel] {
+        var commentViewModels: [CommentModel] = []
         
-        let client = MastodonClient(baseURL: accountData.serverUrl).getAuthenticated(token: accountData.accessToken ?? String.empty())
+        let client = MastodonClient(baseURL: account.serverUrl).getAuthenticated(token: account.accessToken ?? String.empty())
         try await self.getCommentDescendants(to: statusId, client: client, showDivider: true, to: &commentViewModels)
         
         return commentViewModels
     }
     
-    public func favouritedBy(statusId: String, for accountData: AccountData?, page: Int) async throws -> [Account] {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+    public func favouritedBy(statusId: String, for account: AccountModel?, page: Int) async throws -> [Account] {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return []
         }
         
@@ -101,8 +101,8 @@ public class StatusService {
         return try await client.favouritedBy(for: statusId, page: page)
     }
     
-    public func rebloggedBy(statusId: String, for accountData: AccountData?, page: Int) async throws -> [Account] {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+    public func rebloggedBy(statusId: String, for account: AccountModel?, page: Int) async throws -> [Account] {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return []
         }
         
@@ -110,12 +110,12 @@ public class StatusService {
         return try await client.rebloggedBy(for: statusId, page: page)
     }
     
-    private func getCommentDescendants(to statusId: String, client: MastodonClientAuthenticated, showDivider: Bool, to commentViewModels: inout [CommentViewModel]) async throws {
+    private func getCommentDescendants(to statusId: String, client: MastodonClientAuthenticated, showDivider: Bool, to commentViewModels: inout [CommentModel]) async throws {
         let context = try await client.getContext(for: statusId)
         
         let descendants = context.descendants.toStatusViewModel()
         for status in descendants {
-            commentViewModels.append(CommentViewModel(status: status, showDivider: showDivider))
+            commentViewModels.append(CommentModel(status: status, showDivider: showDivider))
             
             if status.repliesCount > 0 {
                 try await self.getCommentDescendants(to: status.id, client: client, showDivider: false, to: &commentViewModels)

@@ -34,7 +34,7 @@ extension AccountData {
     @NSManaged public var url: URL?
     @NSManaged public var username: String
     @NSManaged public var statuses: Set<StatusData>?
-
+    @NSManaged public var lastSeenStatusId: String?
 }
 
 // MARK: Generated accessors for statuses

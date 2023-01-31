@@ -15,7 +15,7 @@ struct TrendStatusesView: View {
     @State private var firstLoadFinished = false
     @State private var tabSelectedValue: Mastodon.PixelfedTrends.TrendRange = .daily
     
-    @State private var statusViewModels: [StatusViewModel] = []
+    @State private var statusViewModels: [StatusModel] = []
 
     var body: some View {
         ScrollView {
@@ -73,7 +73,7 @@ struct TrendStatusesView: View {
                 }
             }
         }
-        .task {
+        .onFirstAppear {
             do {
                 try await self.loadStatuses()
             } catch {
@@ -94,13 +94,13 @@ struct TrendStatusesView: View {
         }
         
         let statuses = try await TrendsService.shared.statuses(
-            for: self.applicationState.accountData,
+            for: self.applicationState.account,
             range: tabSelectedValue)
 
-        var inPlaceStatuses: [StatusViewModel] = []
+        var inPlaceStatuses: [StatusModel] = []
 
         for item in statuses.getStatusesWithImagesOnly() {
-            inPlaceStatuses.append(StatusViewModel(status: item))
+            inPlaceStatuses.append(StatusModel(status: item))
         }
         
         self.statusViewModels = inPlaceStatuses

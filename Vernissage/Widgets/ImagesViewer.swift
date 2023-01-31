@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct ImagesViewer: View {
-    @State var statusViewModel: StatusViewModel
+    @State var statusViewModel: StatusModel
     @State var selectedAttachmentId: String = String.empty()
     @Environment(\.dismiss) private var dismiss
         

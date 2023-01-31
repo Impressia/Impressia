@@ -97,12 +97,12 @@
 		F897978F29684BCB00B22335 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F897978E29684BCB00B22335 /* LoadingView.swift */; };
 		F8984E4D296B648000A2610F /* UIImage+Blurhash.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8984E4C296B648000A2610F /* UIImage+Blurhash.swift */; };
 		F898DE702972868A004B4A6A /* String+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = F898DE6F2972868A004B4A6A /* String+Empty.swift */; };
-		F898DE7229728CB2004B4A6A /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F898DE7129728CB2004B4A6A /* CommentViewModel.swift */; };
+		F898DE7229728CB2004B4A6A /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F898DE7129728CB2004B4A6A /* CommentModel.swift */; };
 		F8996DEB2971D29D0043EEC6 /* View+Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8996DEA2971D29D0043EEC6 /* View+Transition.swift */; };
 		F89992C7296D3DF8005994BF /* MastodonKit in Frameworks */ = {isa = PBXBuildFile; productRef = F89992C6296D3DF8005994BF /* MastodonKit */; };
 		F89992C9296D6DC7005994BF /* CommentBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89992C8296D6DC7005994BF /* CommentBody.swift */; };
-		F89992CC296D9231005994BF /* StatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89992CB296D9231005994BF /* StatusViewModel.swift */; };
-		F89992CE296D92E7005994BF /* AttachmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89992CD296D92E7005994BF /* AttachmentViewModel.swift */; };
+		F89992CC296D9231005994BF /* StatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89992CB296D9231005994BF /* StatusModel.swift */; };
+		F89992CE296D92E7005994BF /* AttachmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89992CD296D92E7005994BF /* AttachmentModel.swift */; };
 		F89A46DC296EAACE0062125F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89A46DB296EAACE0062125F /* SettingsView.swift */; };
 		F89A46DE296EABA20062125F /* StatusPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89A46DD296EABA20062125F /* StatusPlaceholder.swift */; };
 		F89CEB802984198600A1376F /* AttachmentData+HighestImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89CEB7F2984198600A1376F /* AttachmentData+HighestImage.swift */; };
@@ -117,6 +117,8 @@
 		F8B1E6512973FB7E00EE0D10 /* ToastrService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B1E6502973FB7E00EE0D10 /* ToastrService.swift */; };
 		F8C14392296AF0B3001FE31D /* String+Exif.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C14391296AF0B3001FE31D /* String+Exif.swift */; };
 		F8C14394296AF21B001FE31D /* Double+Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C14393296AF21B001FE31D /* Double+Round.swift */; };
+		F8C5E55F2988E92600ADF6A7 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C5E55E2988E92600ADF6A7 /* AccountModel.swift */; };
+		F8C5E56229892CC300ADF6A7 /* FirstAppear.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C5E56129892CC300ADF6A7 /* FirstAppear.swift */; };
 		F8C7EDBF298169EE002843BC /* TagsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C7EDBE298169EE002843BC /* TagsService.swift */; };
 		F8CC95CE2970761D00C9C2AC /* TintColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CC95CD2970761D00C9C2AC /* TintColor.swift */; };
 /* End PBXBuildFile section */
@@ -210,11 +212,11 @@
 		F897978E29684BCB00B22335 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		F8984E4C296B648000A2610F /* UIImage+Blurhash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Blurhash.swift"; sourceTree = "<group>"; };
 		F898DE6F2972868A004B4A6A /* String+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Empty.swift"; sourceTree = "<group>"; };
-		F898DE7129728CB2004B4A6A /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
+		F898DE7129728CB2004B4A6A /* CommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
 		F8996DEA2971D29D0043EEC6 /* View+Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Transition.swift"; sourceTree = "<group>"; };
 		F89992C8296D6DC7005994BF /* CommentBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentBody.swift; sourceTree = "<group>"; };
-		F89992CB296D9231005994BF /* StatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewModel.swift; sourceTree = "<group>"; };
-		F89992CD296D92E7005994BF /* AttachmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentViewModel.swift; sourceTree = "<group>"; };
+		F89992CB296D9231005994BF /* StatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusModel.swift; sourceTree = "<group>"; };
+		F89992CD296D92E7005994BF /* AttachmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentModel.swift; sourceTree = "<group>"; };
 		F89A46DB296EAACE0062125F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		F89A46DD296EABA20062125F /* StatusPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPlaceholder.swift; sourceTree = "<group>"; };
 		F89CEB7F2984198600A1376F /* AttachmentData+HighestImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttachmentData+HighestImage.swift"; sourceTree = "<group>"; };
@@ -228,7 +230,10 @@
 		F8B1E6502973FB7E00EE0D10 /* ToastrService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastrService.swift; sourceTree = "<group>"; };
 		F8C14391296AF0B3001FE31D /* String+Exif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Exif.swift"; sourceTree = "<group>"; };
 		F8C14393296AF21B001FE31D /* Double+Round.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Round.swift"; sourceTree = "<group>"; };
+		F8C5E55E2988E92600ADF6A7 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
+		F8C5E56129892CC300ADF6A7 /* FirstAppear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAppear.swift; sourceTree = "<group>"; };
 		F8C7EDBE298169EE002843BC /* TagsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsService.swift; sourceTree = "<group>"; };
+		F8C937A929882CA90004D782 /* Vernissage-001.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-001.xcdatamodel"; sourceTree = "<group>"; };
 		F8CC95CD2970761D00C9C2AC /* TintColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TintColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -316,6 +321,10 @@
 		F8341F95295C640C009C8EE6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F89992CB296D9231005994BF /* StatusModel.swift */,
+				F89992CD296D92E7005994BF /* AttachmentModel.swift */,
+				F898DE7129728CB2004B4A6A /* CommentModel.swift */,
+				F8C5E55E2988E92600ADF6A7 /* AccountModel.swift */,
 				F88FAD2C295F4AD7009B20C9 /* ApplicationState.swift */,
 				F866F6AD29606367002E8F88 /* ApplicationViewMode.swift */,
 				F8CC95CD2970761D00C9C2AC /* TintColor.swift */,
@@ -417,12 +426,12 @@
 			children = (
 				F866F6A829604FFF002E8F88 /* Info.plist */,
 				F802884D297AEEAA000BDD51 /* Errors */,
-				F89992CA296D9211005994BF /* ViewModels */,
 				F86B721F296C498B00EE59EC /* Styles */,
 				F88ABD9029686F00004EF61E /* Cache */,
 				F897978B2968367E00B22335 /* Haptics */,
 				F8210DE82966E4D8001D9973 /* Modifiers */,
 				F88FAD30295F5010009B20C9 /* Services */,
+				F8C5E56029892C8A00ADF6A7 /* ViewModifiers */,
 				F83901A2295D863B00456AE2 /* Widgets */,
 				F8341F96295C6427009C8EE6 /* CoreData */,
 				F8341F95295C640C009C8EE6 /* Models */,
@@ -485,16 +494,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F89992CA296D9211005994BF /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				F89992CB296D9231005994BF /* StatusViewModel.swift */,
-				F89992CD296D92E7005994BF /* AttachmentViewModel.swift */,
-				F898DE7129728CB2004B4A6A /* CommentViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		F89D6C4029717FC0001DA3D4 /* SettingsView */ = {
 			isa = PBXGroup;
 			children = (
@@ -523,6 +522,14 @@
 				F89A46DD296EABA20062125F /* StatusPlaceholder.swift */,
 			);
 			path = StatusView;
+			sourceTree = "<group>";
+		};
+		F8C5E56029892C8A00ADF6A7 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				F8C5E56129892CC300ADF6A7 /* FirstAppear.swift */,
+			);
+			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -646,10 +653,11 @@
 				F89D6C4429718092001DA3D4 /* AccentsSection.swift in Sources */,
 				F88E4D42297E69FD0057491A /* StatusesView.swift in Sources */,
 				F85D497929640B9D00751DF7 /* ImagesCarousel.swift in Sources */,
+				F8C5E55F2988E92600ADF6A7 /* AccountModel.swift in Sources */,
 				F89D6C3F29716E41001DA3D4 /* Theme.swift in Sources */,
 				F88E4D5A297ECEE60057491A /* SearchService.swift in Sources */,
 				F8CC95CE2970761D00C9C2AC /* TintColor.swift in Sources */,
-				F89992CC296D9231005994BF /* StatusViewModel.swift in Sources */,
+				F89992CC296D9231005994BF /* StatusModel.swift in Sources */,
 				F80048052961850500E6868A /* StatusData+CoreDataClass.swift in Sources */,
 				F86B7221296C49A300EE59EC /* EmptyButtonStyle.swift in Sources */,
 				F80048042961850500E6868A /* AttachmentData+CoreDataProperties.swift in Sources */,
@@ -658,7 +666,7 @@
 				F83901A6295D8EC000456AE2 /* LabelIcon.swift in Sources */,
 				F8B1E6512973FB7E00EE0D10 /* ToastrService.swift in Sources */,
 				F88E4D48297E90CD0057491A /* TrendStatusesView.swift in Sources */,
-				F89992CE296D92E7005994BF /* AttachmentViewModel.swift in Sources */,
+				F89992CE296D92E7005994BF /* AttachmentModel.swift in Sources */,
 				F800480A2961EA1900E6868A /* AttachmentDataHandler.swift in Sources */,
 				F80048032961850500E6868A /* AttachmentData+CoreDataClass.swift in Sources */,
 				F897978D2968369600B22335 /* HapticService.swift in Sources */,
@@ -670,7 +678,7 @@
 				F86B721E296C458700EE59EC /* BlurredImage.swift in Sources */,
 				F88C2478295C37BB0006098B /* Vernissage.xcdatamodeld in Sources */,
 				F88E4D52297EA6DA0057491A /* String+Markdown.swift in Sources */,
-				F898DE7229728CB2004B4A6A /* CommentViewModel.swift in Sources */,
+				F898DE7229728CB2004B4A6A /* CommentModel.swift in Sources */,
 				F89A46DE296EABA20062125F /* StatusPlaceholder.swift in Sources */,
 				F88C2482295C3A4F0006098B /* StatusView.swift in Sources */,
 				F866F6A329604161002E8F88 /* AccountDataHandler.swift in Sources */,
@@ -704,6 +712,7 @@
 				F88FAD2D295F4AD7009B20C9 /* ApplicationState.swift in Sources */,
 				F88E4D54297EA7EE0057491A /* MarkdownFormattedText.swift in Sources */,
 				F866F6A1296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift in Sources */,
+				F8C5E56229892CC300ADF6A7 /* FirstAppear.swift in Sources */,
 				F8C14394296AF21B001FE31D /* Double+Round.swift in Sources */,
 				F83CBEFB298298A1002972C8 /* ImageCarouselPicture.swift in Sources */,
 				F89A46DC296EAACE0062125F /* SettingsView.swift in Sources */,
@@ -1014,9 +1023,10 @@
 		F88C2476295C37BB0006098B /* Vernissage.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				F8C937A929882CA90004D782 /* Vernissage-001.xcdatamodel */,
 				F88C2477295C37BB0006098B /* Vernissage.xcdatamodel */,
 			);
-			currentVersion = F88C2477295C37BB0006098B /* Vernissage.xcdatamodel */;
+			currentVersion = F8C937A929882CA90004D782 /* Vernissage-001.xcdatamodel */;
 			path = Vernissage.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -7,11 +7,11 @@
 import SwiftUI
 
 struct ImageCarouselPicture: View {
-    @ObservedObject public var attachment: AttachmentViewModel
+    @ObservedObject public var attachment: AttachmentModel
     
-    private let onImageDownloaded: (AttachmentViewModel, Data) -> Void
+    private let onImageDownloaded: (AttachmentModel, Data) -> Void
     
-    init(attachment: AttachmentViewModel, onImageDownloaded: @escaping (_: AttachmentViewModel, _: Data) -> Void) {
+    init(attachment: AttachmentModel, onImageDownloaded: @escaping (_: AttachmentModel, _: Data) -> Void) {
         self.attachment = attachment
         self.onImageDownloaded = onImageDownloaded
     }

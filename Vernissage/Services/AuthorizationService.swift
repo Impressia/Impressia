@@ -45,7 +45,7 @@ public class AuthorizationService {
     }
     
     /// Sign in to the Pixelfed server.
-    public func sign(in serverAddress: String, session: AuthorizationSession, _ result: @escaping (AccountData?) -> Void) async throws {
+    public func sign(in serverAddress: String, session: AuthorizationSession, _ result: @escaping (AccountData) -> Void) async throws {
                 
         guard let baseUrl = URL(string: serverAddress) else {
             throw AuthorisationError.badServerUrl

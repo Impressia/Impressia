@@ -67,7 +67,7 @@ struct UserProfileHeader: View {
                 
                 Spacer()
                 
-                if self.applicationState.accountData?.id != self.account.id {
+                if self.applicationState.account?.id != self.account.id {
                     self.otherAccountActionButtons()
                 }
             }
@@ -75,7 +75,7 @@ struct UserProfileHeader: View {
             if let note = account.note, !note.isEmpty {
                 MarkdownFormattedText(note.asMarkdown, withFontSize: 14, andWidth: Int(UIScreen.main.bounds.width) - 16)
                     .environment(\.openURL, OpenURLAction { url in
-                        routerPath.handle(url: url, accountData: self.applicationState.accountData)
+                        routerPath.handle(url: url, account: self.applicationState.account)
                     })
             }
             
@@ -106,14 +106,14 @@ struct UserProfileHeader: View {
             if self.relationship?.following == true {
                 if let relationship = try await AccountService.shared.unfollow(
                     account: self.account.id,
-                    for: self.applicationState.accountData
+                    for: self.applicationState.account
                 ) {
                     self.relationship = relationship
                 }
             } else {
                 if let relationship = try await AccountService.shared.follow(
                     account: self.account.id,
-                    for: self.applicationState.accountData
+                    for: self.applicationState.account
                 ) {
                     self.relationship = relationship
                 }

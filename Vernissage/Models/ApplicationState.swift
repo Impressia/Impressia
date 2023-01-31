@@ -12,7 +12,9 @@ public class ApplicationState: ObservableObject {
     public static let shared = ApplicationState()
     private init() { }
 
-    @Published var accountData: AccountData?
+    @Published var account: AccountModel?
+
+    @Published var lastSeenStatusId: String?
     @Published var tintColor = TintColor.accentColor2
     @Published var theme = Theme.system
     @Published var avatarShape = AvatarShape.circle

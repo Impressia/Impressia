@@ -12,7 +12,7 @@ struct CommentsSection: View {
     @EnvironmentObject var applicationState: ApplicationState
 
     @State public var statusId: String    
-    @State private var commentViewModels: [CommentViewModel]?
+    @State private var commentViewModels: [CommentModel]?
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -51,7 +51,7 @@ struct CommentsSection: View {
         }
         .task {
             do {
-                if let accountData = applicationState.accountData {
+                if let accountData = applicationState.account {
                     self.commentViewModels = try await StatusService.shared.comments(to: statusId, for: accountData)
                 }
             } catch {

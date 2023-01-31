@@ -9,13 +9,13 @@ import MastodonKit
 import NukeUI
 
 struct ImageRowAsync: View {
-    @State public var statusViewModel: StatusViewModel
+    @State public var statusViewModel: StatusModel
 
     @State private var imageHeight: Double
     @State private var imageWidth: Double
     @State private var heightWasPrecalculated: Bool
     
-    init(statusViewModel: StatusViewModel) {
+    init(statusViewModel: StatusModel) {
         self.statusViewModel = statusViewModel
         
         // Calculate size of frame (first from cache, then from metadata).

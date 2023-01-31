@@ -25,7 +25,7 @@ struct StatusesView: View {
     @State private var firstLoadFinished = false
     
     @State private var tag: Tag?
-    @State private var statusViewModels: [StatusViewModel] = []
+    @State private var statusViewModels: [StatusModel] = []
     private let defaultLimit = 20
 
     var body: some View {
@@ -82,7 +82,7 @@ struct StatusesView: View {
             // TODO: It seems like pixelfed is not supporting the endpoints.
             // self.getTrailingToolbar()
         }
-        .task {
+        .onFirstAppear {
             do {
                 try await self.loadStatuses()
 
@@ -107,10 +107,10 @@ struct StatusesView: View {
         }
         
         let statuses = try await self.loadFromApi()
-        var inPlaceStatuses: [StatusViewModel] = []
+        var inPlaceStatuses: [StatusModel] = []
 
         for item in statuses.getStatusesWithImagesOnly() {
-            inPlaceStatuses.append(StatusViewModel(status: item))
+            inPlaceStatuses.append(StatusModel(status: item))
         }
         
         self.firstLoadFinished = true
@@ -129,9 +129,9 @@ struct StatusesView: View {
                 self.allItemsLoaded = true
             }
             
-            var inPlaceStatuses: [StatusViewModel] = []
+            var inPlaceStatuses: [StatusModel] = []
             for item in previousStatuses.getStatusesWithImagesOnly() {
-                inPlaceStatuses.append(StatusViewModel(status: item))
+                inPlaceStatuses.append(StatusModel(status: item))
             }
             
             self.statusViewModels.append(contentsOf: inPlaceStatuses)
@@ -142,9 +142,9 @@ struct StatusesView: View {
         if let firstStatusId = self.statusViewModels.first?.id {
             let newestStatuses = try await self.loadFromApi(sinceId: firstStatusId)
             
-            var inPlaceStatuses: [StatusViewModel] = []
+            var inPlaceStatuses: [StatusModel] = []
             for item in newestStatuses.getStatusesWithImagesOnly() {
-                inPlaceStatuses.append(StatusViewModel(status: item))
+                inPlaceStatuses.append(StatusModel(status: item))
             }
             
             self.statusViewModels.insert(contentsOf: inPlaceStatuses, at: 0)
@@ -155,7 +155,7 @@ struct StatusesView: View {
         switch self.listType {
         case .local:
             return try await PublicTimelineService.shared.getStatuses(
-                for: self.applicationState.accountData,
+                for: self.applicationState.account,
                 local: true,
                 remote: false,
                 maxId: maxId,
@@ -164,7 +164,7 @@ struct StatusesView: View {
                 limit: self.defaultLimit)
         case .federated:
             return try await PublicTimelineService.shared.getStatuses(
-                for: self.applicationState.accountData,
+                for: self.applicationState.account,
                 local: false,
                 remote: true,
                 maxId: maxId,
@@ -173,21 +173,21 @@ struct StatusesView: View {
                 limit: self.defaultLimit)
         case .favourites:
             return try await AccountService.shared.favourites(
-                for: self.applicationState.accountData,
+                for: self.applicationState.account,
                 maxId: maxId,
                 sinceId: sinceId,
                 minId: minId,
                 limit: self.defaultLimit)
         case .bookmarks:
             return try await AccountService.shared.bookmarks(
-                for: self.applicationState.accountData,
+                for: self.applicationState.account,
                 maxId: maxId,
                 sinceId: sinceId,
                 minId: minId,
                 limit: self.defaultLimit)
         case .hashtag(let tag):
             return try await PublicTimelineService.shared.getTagStatuses(
-                for: self.applicationState.accountData,
+                for: self.applicationState.account,
                 tag: tag,
                 local: false,
                 remote: true,
@@ -235,7 +235,7 @@ struct StatusesView: View {
     
     private func loadTag(hashtag: String) async {
         do {
-            self.tag = try await TagsService.shared.get(tag: hashtag, for: self.applicationState.accountData)
+            self.tag = try await TagsService.shared.get(tag: hashtag, for: self.applicationState.account)
         } catch {
             ErrorService.shared.handle(error, message: "Error during loading tag from server.", showToastr: false)
         }
@@ -243,7 +243,7 @@ struct StatusesView: View {
     
     private func follow(hashtag: String) async {
         do {
-            self.tag = try await TagsService.shared.follow(tag: hashtag, for: self.applicationState.accountData)
+            self.tag = try await TagsService.shared.follow(tag: hashtag, for: self.applicationState.account)
             ToastrService.shared.showSuccess("You are following the tag.", imageSystemName: "number.square.fill")
         } catch {
             ErrorService.shared.handle(error, message: "Error during following tag.", showToastr: true)
@@ -252,7 +252,7 @@ struct StatusesView: View {
     
     private func unfollow(hashtag: String) async {
         do {
-            self.tag = try await TagsService.shared.unfollow(tag: hashtag, for: self.applicationState.accountData)
+            self.tag = try await TagsService.shared.unfollow(tag: hashtag, for: self.applicationState.account)
             ToastrService.shared.showSuccess("Tag has been unfollowed.", imageSystemName: "number.square")
         } catch {
             ErrorService.shared.handle(error, message: "Error during unfollowing tag.", showToastr: true)

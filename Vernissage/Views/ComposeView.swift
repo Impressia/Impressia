@@ -15,7 +15,7 @@ struct ComposeView: View {
     @EnvironmentObject var applicationState: ApplicationState
     @Environment(\.dismiss) private var dismiss
     
-    @State var statusViewModel: StatusViewModel?
+    @State var statusViewModel: StatusModel?
     @State private var text = String.empty()
 
     @FocusState private var focusedField: FocusField?
@@ -26,7 +26,7 @@ struct ComposeView: View {
         NavigationView {
             ScrollView {
                 VStack (alignment: .leading){
-                    if let accountData = applicationState.accountData {
+                    if let accountData = applicationState.account {
                         HStack {
                             UsernameRow(
                                 accountId: accountData.id,
@@ -102,7 +102,7 @@ struct ComposeView: View {
         do {
             _ = try await StatusService.shared.new(
                 status: Mastodon.Statuses.Components(inReplyToId: self.statusViewModel?.id, text: self.text),
-                for: self.applicationState.accountData)
+                for: self.applicationState.account)
         } catch {
             ErrorService.shared.handle(error, message: "Error during post status.", showToastr: true)
         }

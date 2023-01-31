@@ -23,7 +23,7 @@ struct StatusView: View {
     @State private var showImageViewer = false
     @State private var firstLoadFinished = false
     
-    @State private var statusViewModel: StatusViewModel?
+    @State private var statusViewModel: StatusModel?
     
     @State private var selectedAttachmentId: String?
     @State private var exifCamera: String?
@@ -62,7 +62,7 @@ struct StatusView: View {
                         
                         MarkdownFormattedText(statusViewModel.content.asMarkdown)
                             .environment(\.openURL, OpenURLAction { url in
-                                routerPath.handle(url: url, accountData: self.applicationState.accountData)
+                                routerPath.handle(url: url, account: self.applicationState.account)
                             })
 
                         VStack (alignment: .leading) {
@@ -114,21 +114,21 @@ struct StatusView: View {
                 }
                 
                 // Get status from API.
-                if let status = try await StatusService.shared.status(withId: self.statusId, for: self.applicationState.accountData) {
-                    let statusViewModel = StatusViewModel(status: status)
+                if let status = try await StatusService.shared.status(withId: self.statusId, for: self.applicationState.account) {
+                    let statusViewModel = StatusModel(status: status)
                                         
                     self.statusViewModel = statusViewModel
                     self.selectedAttachmentId = statusViewModel.mediaAttachments.first?.id ?? String.empty()
                     self.firstLoadFinished = true
                     
                     // If we have status in database then we can update data.
-                    if let accountData = self.applicationState.accountData,
+                    if let accountData = self.applicationState.account,
                        let statusDataFromDatabase = StatusDataHandler.shared.getStatusData(accountId: accountData.id, statusId: self.statusId) {
                         _ = try await HomeTimelineService.shared.update(status: statusDataFromDatabase, basedOn: status, for: accountData)
                     }
                 }
             } catch NetworkError.notSuccessResponse(let response) {
-                if response.statusCode() == HTTPStatusCode.notFound, let accountId = self.applicationState.accountData?.id {
+                if response.statusCode() == HTTPStatusCode.notFound, let accountId = self.applicationState.account?.id {
                     StatusDataHandler.shared.remove(accountId: accountId, statusId: self.statusId)
                     ErrorService.shared.handle(NetworkError.notSuccessResponse(response), message: "Status not existing anymore.", showToastr: true)
                     dismiss()

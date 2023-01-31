@@ -11,13 +11,13 @@ public class NotificationService {
     public static let shared = NotificationService()
     private init() { }
     
-    public func notifications(for accountData: AccountData?,
+    public func notifications(for account: AccountModel?,
                               maxId: MaxId? = nil,
                               sinceId: SinceId? = nil,
                               minId: MinId? = nil,
                               limit: Int? = nil
     ) async throws -> Linkable<[MastodonKit.Notification]> {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return Linkable<[MastodonKit.Notification]>(data: [])
         }
         

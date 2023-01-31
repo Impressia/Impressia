@@ -11,10 +11,10 @@ public class SearchService {
     public static let shared = SearchService()
     private init() { }
     
-    public func search(for accountData: AccountData?,
+    public func search(for account: AccountModel?,
                        query: String,
                        resultsType: Mastodon.Search.ResultsType) async throws -> SearchResults? {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return nil
         }
         

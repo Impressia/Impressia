@@ -7,7 +7,7 @@
 import Foundation
 import MastodonKit
 
-public class AttachmentViewModel: ObservableObject {
+public class AttachmentModel: ObservableObject {
     public let id: String
     public let type: MediaAttachment.MediaAttachmentType
     public let url: URL
@@ -117,8 +117,8 @@ public class AttachmentViewModel: ObservableObject {
     }
 }
 
-extension [AttachmentViewModel] {
-    func getHighestImage() -> AttachmentViewModel? {
+extension [AttachmentModel] {
+    func getHighestImage() -> AttachmentModel? {
         var attachment = self.first
         var imgHeight = 0.0
 

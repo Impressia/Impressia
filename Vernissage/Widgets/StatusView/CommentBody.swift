@@ -11,7 +11,7 @@ struct CommentBody: View {
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var routerPath: RouterPath
 
-    @State var statusViewModel: StatusViewModel
+    @State var statusViewModel: StatusModel
     private let contentWidth = Int(UIScreen.main.bounds.width) - 60
     
     var body: some View {
@@ -85,7 +85,7 @@ struct CommentBody: View {
         .background(self.getSelectedRowColor(statusViewModel: statusViewModel))
     }
     
-    private func getSelectedRowColor(statusViewModel: StatusViewModel) -> Color {
+    private func getSelectedRowColor(statusViewModel: StatusModel) -> Color {
         return self.applicationState.showInteractionStatusId == statusViewModel.id ? Color.selectedRowColor : Color.systemBackground
     }
 }

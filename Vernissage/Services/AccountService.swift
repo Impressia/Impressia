@@ -11,8 +11,8 @@ public class AccountService {
     public static let shared = AccountService()
     private init() { }
     
-    public func account(withId accountId: String, for accountData: AccountData?) async throws -> Account? {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+    public func account(withId accountId: String, for account: AccountModel?) async throws -> Account? {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return nil
         }
 
@@ -20,8 +20,8 @@ public class AccountService {
         return try await client.account(for: accountId)
     }
     
-    public func relationships(withId accountId: String, for accountData: AccountData?) async throws -> Relationship? {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+    public func relationships(withId accountId: String, for account: AccountModel?) async throws -> Relationship? {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return nil
         }
         
@@ -30,14 +30,14 @@ public class AccountService {
     }
     
     public func statuses(createdBy accountId: String,
-                         for accountData: AccountData?,
+                         for account: AccountModel?,
                          onlyMedia: Bool = true,
                          excludeReplies: Bool = true,
                          maxId: String? = nil,
                          sinceId: String? = nil,
                          minId: String? = nil,
                          limit: Int = 40) async throws -> [Status] {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return []
         }
         
@@ -51,8 +51,8 @@ public class AccountService {
                                             limit: limit)
     }
     
-    public func follow(account accountId: String, for accountData: AccountData?) async throws -> Relationship? {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+    public func follow(account accountId: String, for account: AccountModel?) async throws -> Relationship? {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return nil
         }
         
@@ -60,8 +60,8 @@ public class AccountService {
         return try await client.follow(for: accountId)
     }
     
-    public func unfollow(account accountId: String, for accountData: AccountData?) async throws -> Relationship? {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+    public func unfollow(account accountId: String, for account: AccountModel?) async throws -> Relationship? {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return nil
         }
         
@@ -69,8 +69,8 @@ public class AccountService {
         return try await client.unfollow(for: accountId)
     }
     
-    public func mute(account accountId: String, for accountData: AccountData?) async throws -> Relationship? {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+    public func mute(account accountId: String, for account: AccountModel?) async throws -> Relationship? {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return nil
         }
         
@@ -78,8 +78,8 @@ public class AccountService {
         return try await client.mute(for: accountId)
     }
     
-    public func unmute(account accountId: String, for accountData: AccountData?) async throws -> Relationship? {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+    public func unmute(account accountId: String, for account: AccountModel?) async throws -> Relationship? {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return nil
         }
         
@@ -87,8 +87,8 @@ public class AccountService {
         return try await client.unmute(for: accountId)
     }
     
-    public func block(account accountId: String, for accountData: AccountData?) async throws -> Relationship? {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+    public func block(account accountId: String, for account: AccountModel?) async throws -> Relationship? {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return nil
         }
         
@@ -96,8 +96,8 @@ public class AccountService {
         return try await client.block(for: accountId)
     }
     
-    public func unblock(account accountId: String, for accountData: AccountData?) async throws -> Relationship? {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+    public func unblock(account accountId: String, for account: AccountModel?) async throws -> Relationship? {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return nil
         }
         
@@ -105,8 +105,8 @@ public class AccountService {
         return try await client.unblock(for: accountId)
     }
     
-    public func followers(account accountId: String, for accountData: AccountData?, page: Int) async throws -> [Account] {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+    public func followers(account accountId: String, for account: AccountModel?, page: Int) async throws -> [Account] {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return []
         }
         
@@ -114,8 +114,8 @@ public class AccountService {
         return try await client.followers(for: accountId, page: page)
     }
     
-    public func following(account accountId: String, for accountData: AccountData?, page: Int) async throws -> [Account] {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+    public func following(account accountId: String, for account: AccountModel?, page: Int) async throws -> [Account] {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return []
         }
         
@@ -123,12 +123,12 @@ public class AccountService {
         return try await client.following(for: accountId, page: page)
     }
     
-    public func favourites(for accountData: AccountData?,
+    public func favourites(for account: AccountModel?,
                            maxId: String? = nil,
                            sinceId: String? = nil,
                            minId: String? = nil,
                            limit: Int = 40) async throws -> [Status] {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return []
         }
         
@@ -136,12 +136,12 @@ public class AccountService {
         return try await client.favourites(maxId: maxId, sinceId: sinceId, minId: minId, limit: limit)
     }
     
-    public func bookmarks(for accountData: AccountData?,
+    public func bookmarks(for account: AccountModel?,
                           maxId: String? = nil,
                           sinceId: String? = nil,
                           minId: String? = nil,
                           limit: Int = 40) async throws -> [Status] {
-        guard let accessToken = accountData?.accessToken, let serverUrl = accountData?.serverUrl else {
+        guard let accessToken = account?.accessToken, let serverUrl = account?.serverUrl else {
             return []
         }
         

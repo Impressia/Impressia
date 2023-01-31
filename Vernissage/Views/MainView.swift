@@ -47,28 +47,28 @@ struct MainView: View {
     private func getMainView() -> some View {
         switch self.viewMode {
         case .home:
-            HomeFeedView(accountId: applicationState.accountData?.id ?? String.empty())
-                .id(applicationState.accountData?.id ?? String.empty())
+            HomeFeedView(accountId: applicationState.account?.id ?? String.empty())
+                .id(applicationState.account?.id ?? String.empty())
         case .trending:
-            TrendStatusesView(accountId: applicationState.accountData?.id ?? String.empty())
-                .id(applicationState.accountData?.id ?? String.empty())
+            TrendStatusesView(accountId: applicationState.account?.id ?? String.empty())
+                .id(applicationState.account?.id ?? String.empty())
         case .local:
             StatusesView(listType: .local)
-                .id(applicationState.accountData?.id ?? String.empty())
+                .id(applicationState.account?.id ?? String.empty())
         case .federated:
             StatusesView(listType: .federated)
-                .id(applicationState.accountData?.id ?? String.empty())
+                .id(applicationState.account?.id ?? String.empty())
         case .profile:
-            if let accountData = self.applicationState.accountData {
+            if let accountData = self.applicationState.account {
                 UserProfileView(accountId: accountData.id,
                                 accountDisplayName: accountData.displayName,
                                 accountUserName: accountData.acct)
-                .id(applicationState.accountData?.id ?? String.empty())
+                .id(applicationState.account?.id ?? String.empty())
             }
         case .notifications:
-            if let accountData = self.applicationState.accountData {
+            if let accountData = self.applicationState.account {
                 NotificationsView(accountId: accountData.id)
-                    .id(applicationState.accountData?.id ?? String.empty())
+                    .id(applicationState.account?.id ?? String.empty())
             }
         }
     }
@@ -151,11 +151,12 @@ struct MainView: View {
             Menu {
                 ForEach(self.dbAccounts) { account in
                     Button {
-                        self.applicationState.accountData = account
+                        self.applicationState.account = AccountModel(accountData: account)
+                        self.applicationState.lastSeenStatusId = account.lastSeenStatusId
 
                         ApplicationSettingsHandler.shared.setAccountAsDefault(accountData: account)
                     } label: {
-                        if self.applicationState.accountData?.id == account.id {
+                        if self.applicationState.account?.id == account.id {
                             Label(account.displayName ?? account.acct, systemImage: "checkmark")
                         } else {
                             Text(account.displayName ?? account.acct)
@@ -171,7 +172,7 @@ struct MainView: View {
                     Label("Settings", systemImage: "gear")
                 }
             } label: {
-                if let avatarData = self.applicationState.accountData?.avatarData, let uiImage = UIImage(data: avatarData) {
+                if let avatarData = self.applicationState.account?.avatarData, let uiImage = UIImage(data: avatarData) {
                     Image(uiImage: uiImage)
                         .resizable()
                         .clipShape(self.applicationState.avatarShape.shape())

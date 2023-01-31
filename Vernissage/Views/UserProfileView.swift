@@ -33,7 +33,7 @@ struct UserProfileView: View {
         .navigationBarTitle(self.accountDisplayName ?? self.accountUserName)
         .toolbar {
             if let account = self.account {
-                if self.applicationState.accountData?.id != account.id {
+                if self.applicationState.account?.id != account.id {
                     self.getTrailingAccountToolbar(account: account)
                 } else {
                     self.getTrailingProfileToolbar(account: account)
@@ -54,8 +54,8 @@ struct UserProfileView: View {
             return
         }
 
-        async let relationshipTask = AccountService.shared.relationships(withId: self.accountId, for: self.applicationState.accountData)
-        async let accountTask = AccountService.shared.account(withId: self.accountId, for: self.applicationState.accountData)
+        async let relationshipTask = AccountService.shared.relationships(withId: self.accountId, for: self.applicationState.account)
+        async let accountTask = AccountService.shared.account(withId: self.accountId, for: self.applicationState.account)
         
         // Wait for download account and relationships.
         self.firstLoadFinished = true
@@ -148,14 +148,14 @@ struct UserProfileView: View {
             if self.relationship?.muting == true {
                 if let relationship = try await AccountService.shared.unmute(
                     account: account.id,
-                    for: self.applicationState.accountData
+                    for: self.applicationState.account
                 ) {
                     self.relationship = relationship
                 }
             } else {
                 if let relationship = try await AccountService.shared.mute(
                     account: account.id,
-                    for: self.applicationState.accountData
+                    for: self.applicationState.account
                 ) {
                     self.relationship = relationship
                 }
@@ -170,14 +170,14 @@ struct UserProfileView: View {
             if self.relationship?.blocking == true {
                 if let relationship = try await AccountService.shared.unblock(
                     account: account.id,
-                    for: self.applicationState.accountData
+                    for: self.applicationState.account
                 ) {
                     self.relationship = relationship
                 }
             } else {
                 if let relationship = try await AccountService.shared.block(
                     account: account.id,
-                    for: self.applicationState.accountData
+                    for: self.applicationState.account
                 ) {
                     self.relationship = relationship
                 }

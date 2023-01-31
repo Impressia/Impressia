@@ -57,11 +57,7 @@ struct NotificationsView: View {
         .refreshable {
             await self.loadNewNotifications()
         }
-        .task {
-            if self.notifications.isEmpty == false {
-                return
-            }
-            
+        .onFirstAppear {            
             await self.loadNotifications()
         }
     }
@@ -69,7 +65,7 @@ struct NotificationsView: View {
     func loadNotifications() async {
         do {
             let linkable = try await NotificationService.shared.notifications(
-                for: self.applicationState.accountData,
+                for: self.applicationState.account,
                 maxId: maxId,
                 minId: minId,
                 limit: 5)
@@ -91,7 +87,7 @@ struct NotificationsView: View {
     private func loadMoreNotifications() async {
         do {
             let linkable = try await NotificationService.shared.notifications(
-                for: self.applicationState.accountData,
+                for: self.applicationState.account,
                 maxId: self.maxId,
                 limit: self.defaultPageSize)
 
@@ -109,7 +105,7 @@ struct NotificationsView: View {
     private func loadNewNotifications() async {
         do {
             let linkable = try await NotificationService.shared.notifications(
-                for: self.applicationState.accountData,
+                for: self.applicationState.account,
                 minId: self.minId,
                 limit: self.defaultPageSize)
             

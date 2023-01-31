@@ -8,7 +8,7 @@ import SwiftUI
 import MastodonKit
 
 struct ImagesCarousel: View {
-    @State public var attachments: [AttachmentViewModel]
+    @State public var attachments: [AttachmentModel]
     @State private var imageHeight: Double
     @State private var imageWidth: Double
     @State private var selected: String
@@ -20,7 +20,7 @@ struct ImagesCarousel: View {
     @Binding public var exifCreatedDate: String?
     @Binding public var exifLens: String?
     
-    init(attachments: [AttachmentViewModel],
+    init(attachments: [AttachmentModel],
          selectedAttachmentId: Binding<String?>,
          exifCamera: Binding<String?>,
          exifExposure: Binding<String?>,
@@ -92,7 +92,7 @@ struct ImagesCarousel: View {
         }
     }
     
-    private func recalculateImageHeight(attachment: AttachmentViewModel, imageData: Data) {
+    private func recalculateImageHeight(attachment: AttachmentModel, imageData: Data) {
         guard heightWasPrecalculated == false else {
             return
         }
