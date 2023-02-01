@@ -135,12 +135,13 @@ public extension MastodonClientAuthenticated {
     }
     
     func favourites(maxId: EntityId? = nil,
-                   sinceId: EntityId? = nil,
-                   minId: EntityId? = nil,
-                   limit: Int? = nil) async throws -> [Status] {
+                    sinceId: EntityId? = nil,
+                    minId: EntityId? = nil,
+                    limit: Int? = nil,
+                    page: Page? = nil) async throws -> [Status] {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Favourites.favourites(maxId, sinceId, minId, limit),
+            target: Mastodon.Favourites.favourites(maxId, sinceId, minId, limit, page),
             withBearerToken: token
         )
 
@@ -150,10 +151,11 @@ public extension MastodonClientAuthenticated {
     func bookmarks(maxId: EntityId? = nil,
                    sinceId: EntityId? = nil,
                    minId: EntityId? = nil,
-                   limit: Int? = nil) async throws -> [Status] {
+                   limit: Int? = nil,
+                   page: Page? = nil) async throws -> [Status] {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Bookmarks.bookmarks(maxId, sinceId, minId, limit),
+            target: Mastodon.Bookmarks.bookmarks(maxId, sinceId, minId, limit, page),
             withBearerToken: token
         )
 

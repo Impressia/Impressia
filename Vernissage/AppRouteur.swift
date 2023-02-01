@@ -21,6 +21,10 @@ extension View {
                            imageHeight: metaImageHeight)
             case .statuses(let listType):
                 StatusesView(listType: listType)
+            case .bookmarks:
+                PaginableStatusesView(listType: .bookmarks)
+            case .favourites:
+                PaginableStatusesView(listType: .favourites)
             case .userProfile(let accountId, let accountDisplayName, let accountUserName):
                 UserProfileView(
                     accountId: accountId,

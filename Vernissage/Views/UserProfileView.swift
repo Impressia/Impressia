@@ -136,11 +136,11 @@ struct UserProfileView: View {
                     Divider()
                 }
                 
-                NavigationLink(value: RouteurDestinations.statuses(listType: .favourites)) {
+                NavigationLink(value: RouteurDestinations.favourites) {
                     Label("Favourites", systemImage: "hand.thumbsup")
                 }
                 
-                NavigationLink(value: RouteurDestinations.statuses(listType: .bookmarks)) {
+                NavigationLink(value: RouteurDestinations.bookmarks) {
                     Label("Bookmarks", systemImage: "bookmark")
                 }
                 

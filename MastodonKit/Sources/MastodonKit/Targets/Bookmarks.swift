@@ -8,7 +8,7 @@ import Foundation
 
 extension Mastodon {
     public enum Bookmarks {
-        case bookmarks(MaxId?, SinceId?, MinId?, Limit?)
+        case bookmarks(MaxId?, SinceId?, MinId?, Limit?, Page?)
     }
 }
 
@@ -18,7 +18,7 @@ extension Mastodon.Bookmarks: TargetType {
     /// The path to be appended to `baseURL` to form the full `URL`.
     public var path: String {
         switch self {
-        case .bookmarks(_, _, _, _):
+        case .bookmarks(_, _, _, _, _):
             return "\(apiPath)"
         }
     }
@@ -39,26 +39,35 @@ extension Mastodon.Bookmarks: TargetType {
         var sinceId: SinceId? = nil
         var minId: MinId? = nil
         var limit: Limit? = nil
+        var page: Page? = nil
 
         switch self {
-        case .bookmarks(let _maxId, let _sinceId, let _minId, let _limit):
+        case .bookmarks(let _maxId, let _sinceId, let _minId, let _limit, let _page):
             maxId = _maxId
             sinceId = _sinceId
             minId = _minId
             limit = _limit
+            page = _page
         }
         
         if let maxId {
             params.append(("max_id",  maxId))
         }
+
         if let sinceId {
             params.append(("since_id", sinceId))
         }
+        
         if let minId {
             params.append(("min_id", minId))
         }
+        
         if let limit {
             params.append(("limit", "\(limit)"))
+        }
+        
+        if let page {
+            params.append(("page", "\(page)"))
         }
         
         return params

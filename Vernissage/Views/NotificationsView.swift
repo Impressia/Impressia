@@ -102,12 +102,13 @@ struct NotificationsView: View {
                 maxId: self.maxId,
                 limit: self.defaultPageSize)
 
-            self.maxId = linkable.link?.maxId
-            self.notifications.append(contentsOf: linkable.data)
-
             if linkable.data.isEmpty {
                 self.allItemsLoaded = true
+                return
             }
+            
+            self.maxId = linkable.link?.maxId
+            self.notifications.append(contentsOf: linkable.data)
         } catch {
             ErrorService.shared.handle(error, message: "Error during download notifications from server.", showToastr: !Task.isCancelled)
         }

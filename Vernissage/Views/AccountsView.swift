@@ -88,8 +88,10 @@ struct AccountsView: View {
     private func loadAccounts(page: Int) async {
         do {
             let accountsFromApi = try await self.loadFromApi()
+
             if accountsFromApi.isEmpty {
                 self.allItemsLoaded = true
+                return
             }
             
             await self.downloadAvatars(accounts: accountsFromApi)

@@ -66,6 +66,7 @@
 		F8764187298ABB520057D362 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8764186298ABB520057D362 /* ViewState.swift */; };
 		F8764189298ABEC80057D362 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8764188298ABEC80057D362 /* ErrorView.swift */; };
 		F876418B298AC1B80057D362 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F876418A298AC1B80057D362 /* NoDataView.swift */; };
+		F876418D298AE5020057D362 /* PaginableStatusesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F876418C298AE5020057D362 /* PaginableStatusesView.swift */; };
 		F87AEB922986C44E00434FB6 /* AuthorizationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87AEB912986C44E00434FB6 /* AuthorizationSession.swift */; };
 		F87AEB942986C51B00434FB6 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87AEB932986C51B00434FB6 /* AppConstants.swift */; };
 		F87AEB972986D16D00434FB6 /* AuthorisationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87AEB962986D16D00434FB6 /* AuthorisationError.swift */; };
@@ -186,6 +187,7 @@
 		F8764186298ABB520057D362 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		F8764188298ABEC80057D362 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		F876418A298AC1B80057D362 /* NoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
+		F876418C298AE5020057D362 /* PaginableStatusesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginableStatusesView.swift; sourceTree = "<group>"; };
 		F87AEB912986C44E00434FB6 /* AuthorizationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSession.swift; sourceTree = "<group>"; };
 		F87AEB932986C51B00434FB6 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		F87AEB962986D16D00434FB6 /* AuthorisationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorisationError.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				F88ABD9329687CA4004EF61E /* ComposeView.swift */,
 				F89A46DB296EAACE0062125F /* SettingsView.swift */,
 				F88E4D41297E69FD0057491A /* StatusesView.swift */,
+				F876418C298AE5020057D362 /* PaginableStatusesView.swift */,
 				F88E4D47297E90CD0057491A /* TrendStatusesView.swift */,
 			);
 			path = Views;
@@ -714,6 +717,7 @@
 				F866F6A529604194002E8F88 /* ApplicationSettingsHandler.swift in Sources */,
 				F88ABD9229686F1C004EF61E /* MemoryCache.swift in Sources */,
 				F857F9FD297D8ED3002C109C /* ActionMenu.swift in Sources */,
+				F876418D298AE5020057D362 /* PaginableStatusesView.swift in Sources */,
 				F85D49852964301800751DF7 /* StatusData+Attachments.swift in Sources */,
 				F8764187298ABB520057D362 /* ViewState.swift in Sources */,
 				F8210DE72966E1D1001D9973 /* Color+Assets.swift in Sources */,

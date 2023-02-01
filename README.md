@@ -54,3 +54,7 @@ In the status JSON we don't have information about bookmark status.
 - ** Endpoint about instance information returns different JSON structure**
 
 API in Pixelfed (`/api/v1/instance`) returns JSON with diefferent structure then API specify.
+
+- **There are some issues in bookmarks/favourites endpoints**
+
+It seems like paging is not working in that endpoints (I've tried with page and max_id).

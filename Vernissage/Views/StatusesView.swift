@@ -22,7 +22,6 @@ struct StatusesView: View {
     @State public var listType: ListType
 
     @State private var allItemsLoaded = false
-    @State private var firstLoadFinished = false
     @State private var tag: Tag?
     @State private var statusViewModels: [StatusModel] = []
     @State private var state: ViewState = .loading
@@ -51,34 +50,32 @@ struct StatusesView: View {
                 NoDataView(imageSystemName: "photo.on.rectangle.angled", text: "Unfortunately, there are no photos here.")
             } else {
                 ScrollView {
-                    if firstLoadFinished == true {
-                        LazyVStack(alignment: .center) {
-                            ForEach(self.statusViewModels, id: \.id) { item in
-                                NavigationLink(value: RouteurDestinations.status(
-                                    id: item.id,
-                                    blurhash: item.mediaAttachments.first?.blurhash,
-                                    highestImageUrl: item.mediaAttachments.getHighestImage()?.url,
-                                    metaImageWidth: item.getImageWidth(),
-                                    metaImageHeight: item.getImageHeight())
-                                ) {
-                                    ImageRowAsync(statusViewModel: item)
-                                }
-                                .buttonStyle(EmptyButtonStyle())
+                    LazyVStack(alignment: .center) {
+                        ForEach(self.statusViewModels, id: \.id) { item in
+                            NavigationLink(value: RouteurDestinations.status(
+                                id: item.id,
+                                blurhash: item.mediaAttachments.first?.blurhash,
+                                highestImageUrl: item.mediaAttachments.getHighestImage()?.url,
+                                metaImageWidth: item.getImageWidth(),
+                                metaImageHeight: item.getImageHeight())
+                            ) {
+                                ImageRowAsync(statusViewModel: item)
                             }
-                            
-                            if allItemsLoaded == false && firstLoadFinished == true {
-                                HStack {
-                                    Spacer()
-                                    LoadingIndicator()
-                                        .task {
-                                            do {
-                                                try await self.loadMoreStatuses()
-                                            } catch {
-                                                ErrorService.shared.handle(error, message: "Loading more statuses failed.", showToastr: !Task.isCancelled)
-                                            }
+                            .buttonStyle(EmptyButtonStyle())
+                        }
+                        
+                        if allItemsLoaded == false {
+                            HStack {
+                                Spacer()
+                                LoadingIndicator()
+                                    .task {
+                                        do {
+                                            try await self.loadMoreStatuses()
+                                        } catch {
+                                            ErrorService.shared.handle(error, message: "Loading more statuses failed.", showToastr: !Task.isCancelled)
                                         }
-                                    Spacer()
-                                }
+                                    }
+                                Spacer()
                             }
                         }
                     }
@@ -116,18 +113,18 @@ struct StatusesView: View {
     }
         
     private func loadStatuses() async throws {
-        guard firstLoadFinished == false else {
+        let statuses = try await self.loadFromApi()
+        
+        if statuses.isEmpty {
+            self.allItemsLoaded = true
             return
         }
-        
-        let statuses = try await self.loadFromApi()
+                
         var inPlaceStatuses: [StatusModel] = []
-
         for item in statuses.getStatusesWithImagesOnly() {
             inPlaceStatuses.append(StatusModel(status: item))
         }
         
-        self.firstLoadFinished = true
         self.statusViewModels.append(contentsOf: inPlaceStatuses)
     }
         
@@ -137,6 +134,7 @@ struct StatusesView: View {
 
             if previousStatuses.isEmpty {
                 self.allItemsLoaded = true
+                return
             }
             
             var inPlaceStatuses: [StatusModel] = []
