@@ -22,7 +22,6 @@ struct SignInView: View {
         List {
             
             Section("Custom server address") {
-                // Custom server address.
                 VStack(alignment: .center) {
                     HStack(alignment: .center, spacing: 4) {
                         TextField("Server address", text: $serverAddress)
@@ -44,7 +43,6 @@ struct SignInView: View {
                 }
             }
             
-            // List of predefined servers.
             Section("Pixelfed servers") {
                 if self.instances.isEmpty {
                     HStack {

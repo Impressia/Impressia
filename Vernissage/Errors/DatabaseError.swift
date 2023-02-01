@@ -4,6 +4,17 @@
 //  Licensed under the MIT License.
 //
 
+import Foundation
+
 public enum DatabaseError: Error {
     case cannotDownloadAccount
+}
+
+extension DatabaseError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .cannotDownloadAccount:
+            return NSLocalizedString("Cannot retrieve user account.", comment: "User acount cannot be downloaded from Core Data.")
+        }
+    }
 }

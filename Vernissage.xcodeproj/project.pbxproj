@@ -63,6 +63,9 @@
 		F86B721E296C458700EE59EC /* BlurredImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B721D296C458700EE59EC /* BlurredImage.swift */; };
 		F86B7221296C49A300EE59EC /* EmptyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7220296C49A300EE59EC /* EmptyButtonStyle.swift */; };
 		F86B7223296C4BF500EE59EC /* ContentWarning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7222296C4BF500EE59EC /* ContentWarning.swift */; };
+		F8764187298ABB520057D362 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8764186298ABB520057D362 /* ViewState.swift */; };
+		F8764189298ABEC80057D362 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8764188298ABEC80057D362 /* ErrorView.swift */; };
+		F876418B298AC1B80057D362 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F876418A298AC1B80057D362 /* NoDataView.swift */; };
 		F87AEB922986C44E00434FB6 /* AuthorizationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87AEB912986C44E00434FB6 /* AuthorizationSession.swift */; };
 		F87AEB942986C51B00434FB6 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87AEB932986C51B00434FB6 /* AppConstants.swift */; };
 		F87AEB972986D16D00434FB6 /* AuthorisationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87AEB962986D16D00434FB6 /* AuthorisationError.swift */; };
@@ -180,6 +183,9 @@
 		F86B721D296C458700EE59EC /* BlurredImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredImage.swift; sourceTree = "<group>"; };
 		F86B7220296C49A300EE59EC /* EmptyButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyButtonStyle.swift; sourceTree = "<group>"; };
 		F86B7222296C4BF500EE59EC /* ContentWarning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentWarning.swift; sourceTree = "<group>"; };
+		F8764186298ABB520057D362 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
+		F8764188298ABEC80057D362 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		F876418A298AC1B80057D362 /* NoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataView.swift; sourceTree = "<group>"; };
 		F87AEB912986C44E00434FB6 /* AuthorizationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSession.swift; sourceTree = "<group>"; };
 		F87AEB932986C51B00434FB6 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		F87AEB962986D16D00434FB6 /* AuthorisationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorisationError.swift; sourceTree = "<group>"; };
@@ -342,6 +348,7 @@
 				F8CC95CD2970761D00C9C2AC /* TintColor.swift */,
 				F89D6C3E29716E41001DA3D4 /* Theme.swift */,
 				F86167C7297FE781004D1F67 /* AvatarShape.swift */,
+				F8764186298ABB520057D362 /* ViewState.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -395,6 +402,8 @@
 				F89D6C49297196FF001DA3D4 /* ImagesViewer.swift */,
 				F857F9FC297D8ED3002C109C /* ActionMenu.swift */,
 				F88E4D53297EA7EE0057491A /* MarkdownFormattedText.swift */,
+				F8764188298ABEC80057D362 /* ErrorView.swift */,
+				F876418A298AC1B80057D362 /* NoDataView.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -640,6 +649,7 @@
 				F89D6C4229717FDC001DA3D4 /* AccountsSection.swift in Sources */,
 				F80048082961E6DE00E6868A /* StatusDataHandler.swift in Sources */,
 				F866F6A0296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift in Sources */,
+				F8764189298ABEC80057D362 /* ErrorView.swift in Sources */,
 				F8210DEA2966E4F9001D9973 /* AnimatePlaceholderModifier.swift in Sources */,
 				F8163776297C3E3D00E6E04A /* PublicTimelineService.swift in Sources */,
 				F886F257297859E300879356 /* CacheImageService.swift in Sources */,
@@ -698,12 +708,14 @@
 				F88C2482295C3A4F0006098B /* StatusView.swift in Sources */,
 				F866F6A329604161002E8F88 /* AccountDataHandler.swift in Sources */,
 				F8996DEB2971D29D0043EEC6 /* View+Transition.swift in Sources */,
+				F876418B298AC1B80057D362 /* NoDataView.swift in Sources */,
 				F89D6C4629718193001DA3D4 /* ThemeSection.swift in Sources */,
 				F85D497F296416C800751DF7 /* CommentsSection.swift in Sources */,
 				F866F6A529604194002E8F88 /* ApplicationSettingsHandler.swift in Sources */,
 				F88ABD9229686F1C004EF61E /* MemoryCache.swift in Sources */,
 				F857F9FD297D8ED3002C109C /* ActionMenu.swift in Sources */,
 				F85D49852964301800751DF7 /* StatusData+Attachments.swift in Sources */,
+				F8764187298ABB520057D362 /* ViewState.swift in Sources */,
 				F8210DE72966E1D1001D9973 /* Color+Assets.swift in Sources */,
 				F88ABD9429687CA4004EF61E /* ComposeView.swift in Sources */,
 				F89CEB802984198600A1376F /* AttachmentData+HighestImage.swift in Sources */,

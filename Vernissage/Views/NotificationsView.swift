@@ -13,57 +13,63 @@ struct NotificationsView: View {
     @State var accountId: String
     @State private var notifications: [MastodonKit.Notification] = []
     @State private var allItemsLoaded = false
-    @State private var firstLoadFinished = false
+    @State private var state: ViewState = .loading
     
     @State private var minId: String?
     @State private var maxId: String?
     
-    private let defaultPageSize = 20
+    private let defaultPageSize = 40
     
     var body: some View {
-        List {
-            ForEach(notifications, id: \.id) { notification in
-                NotificationRow(notification: notification)
-            }
-            
-            if allItemsLoaded == false && firstLoadFinished == true {
-                HStack {
-                    Spacer()
-                    LoadingIndicator()
-                        .task {
-                            await self.loadMoreNotifications()
-                        }
-                    Spacer()
+        self.mainBody()
+            .navigationBarTitle("Notifications")
+    }
+    
+    @ViewBuilder
+    private func mainBody() -> some View {
+        switch state {
+        case .loading:
+            LoadingIndicator()
+                .task {
+                    await self.loadNotifications()
                 }
-                .listRowSeparator(.hidden)
-            }
-        }.overlay {
-            if firstLoadFinished == false {
-                LoadingIndicator()
+        case .loaded:
+            if self.notifications.isEmpty {
+                NoDataView(imageSystemName: "bell", text: "Unfortunately, there is nothing here.")
             } else {
-                if self.notifications.isEmpty {
-                    VStack {
-                        Image(systemName: "bell")
-                            .font(.largeTitle)
-                            .padding(.bottom, 4)
-                        Text("Unfortunately, there is nothing here.")
-                            .font(.title3)
-                    }.foregroundColor(.lightGrayColor)
+                List {
+                    ForEach(notifications, id: \.id) { notification in
+                        NotificationRow(notification: notification)
+                    }
+                    
+                    if allItemsLoaded == false {
+                        HStack {
+                            Spacer()
+                            LoadingIndicator()
+                                .task {
+                                    await self.loadMoreNotifications()
+                                }
+                            Spacer()
+                        }
+                        .listRowSeparator(.hidden)
+                    }
+                }
+                .listStyle(PlainListStyle())
+                .refreshable {
+                    await self.loadNewNotifications()
                 }
             }
-        }
-        .navigationBarTitle("Notifications")
-        .listStyle(PlainListStyle())
-        .refreshable {
-            await self.loadNewNotifications()
-        }
-        .onFirstAppear {            
-            await self.loadNotifications()
+        case .error(let error):
+            ErrorView(error: error) {
+                self.state = .loading
+                await self.loadMoreNotifications()
+            }
+            .padding()
         }
     }
     
     func loadNotifications() async {
-        do {
+        do {            
             let linkable = try await NotificationService.shared.notifications(
                 for: self.applicationState.account,
                 maxId: maxId,
@@ -73,14 +79,19 @@ struct NotificationsView: View {
             self.minId = linkable.link?.minId
             self.maxId = linkable.link?.maxId
             self.notifications = linkable.data
-
-            if linkable.data.isEmpty || linkable.data.count < 5 {
+            
+            if linkable.data.isEmpty {
                 self.allItemsLoaded = true
             }
             
-            self.firstLoadFinished = true
+            self.state = .loaded
         } catch {
-            ErrorService.shared.handle(error, message: "Error during download notifications from server.", showToastr: !Task.isCancelled)
+            if !Task.isCancelled {
+                ErrorService.shared.handle(error, message: "Error during download notifications from server.", showToastr: true)
+                self.state = .error(error)
+            } else {
+                ErrorService.shared.handle(error, message: "Error during download notifications from server.", showToastr: false)
+            }
         }
     }
     
@@ -94,7 +105,7 @@ struct NotificationsView: View {
             self.maxId = linkable.link?.maxId
             self.notifications.append(contentsOf: linkable.data)
 
-            if linkable.data.isEmpty || linkable.data.count < self.defaultPageSize {
+            if linkable.data.isEmpty {
                 self.allItemsLoaded = true
             }
         } catch {
@@ -118,45 +129,6 @@ struct NotificationsView: View {
             self.notifications.insert(contentsOf: linkable.data, at: 0)
         } catch {
             ErrorService.shared.handle(error, message: "Error during download notifications from server.", showToastr: !Task.isCancelled)
-        }
-    }
-    
-    private func downloadAllImages(notifications: [MastodonKit.Notification]) async {
-        // Download all avatars into cache.
-        let accounts = notifications.map({ notification in notification.account })
-        await self.downloadAvatars(accounts: accounts)
-
-        // Download all images into cache.
-        var images: [(id: String, url: URL)] = []
-        for notification in notifications {
-            if let mediaAttachment = notification.status?.mediaAttachments {
-                images.append(contentsOf:
-                    mediaAttachment
-                        .filter({ attachment in
-                            attachment.type == MediaAttachment.MediaAttachmentType.image
-                        })
-                        .map({
-                            attachment in (id: attachment.id, url: attachment.url)
-                        }))
-            }
-        }
-
-        await self.downloadImages(images: images)
-    }
-    
-    private func downloadAvatars(accounts: [Account]) async {
-        await withTaskGroup(of: Void.self) { group in
-            for account in accounts {
-                group.addTask { await CacheImageService.shared.download(url: account.avatar) }
-            }
-        }
-    }
-    
-    private func downloadImages(images: [(id: String, url: URL)]) async {
-        await withTaskGroup(of: Void.self) { group in
-            for image in images {
-                group.addTask { await CacheImageService.shared.download(url: image.url) }
-            }
         }
     }
 }

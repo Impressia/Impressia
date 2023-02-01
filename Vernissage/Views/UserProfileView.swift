@@ -13,53 +13,62 @@ struct UserProfileView: View {
     @State public var accountId: String
     @State public var accountDisplayName: String?
     @State public var accountUserName: String
+
     @State private var account: Account? = nil
     @State private var relationship: Relationship? = nil
-    @State private var firstLoadFinished = false
+    @State private var state: ViewState = .loading
     
     var body: some View {
-        VStack {
+        self.mainBody()
+            .navigationBarTitle(self.accountDisplayName ?? self.accountUserName)
+            .toolbar {
+                if let account = self.account {
+                    if self.applicationState.account?.id != account.id {
+                        self.getTrailingAccountToolbar(account: account)
+                    } else {
+                        self.getTrailingProfileToolbar(account: account)
+                    }
+                }
+            }
+    }
+    
+    @ViewBuilder
+    private func mainBody() -> some View {
+        switch state {
+        case .loading:
+            LoadingIndicator()
+                .task {
+                    await self.loadData()
+                }
+        case .loaded:
             if let account = self.account {
                 ScrollView {
                     UserProfileHeader(account: account, relationship: relationship)
                     UserProfileStatuses(accountId: account.id)
                 }
-            } else {
-                Spacer()
-                LoadingIndicator()
-                Spacer()
             }
-        }
-        .navigationBarTitle(self.accountDisplayName ?? self.accountUserName)
-        .toolbar {
-            if let account = self.account {
-                if self.applicationState.account?.id != account.id {
-                    self.getTrailingAccountToolbar(account: account)
-                } else {
-                    self.getTrailingProfileToolbar(account: account)
-                }
+        case .error(let error):
+            ErrorView(error: error) {
+                self.state = .loading
+                await self.loadData()
             }
-        }
-        .task {
-            do {
-                try await self.loadData()
-            } catch {
-                ErrorService.shared.handle(error, message: "Error during download account from server.", showToastr: !Task.isCancelled)
-            }
+            .padding()
         }
     }
     
-    private func loadData() async throws {
-        guard firstLoadFinished == false else {
-            return
+    private func loadData() async {
+        do {
+            async let relationshipTask = AccountService.shared.relationships(withId: self.accountId, for: self.applicationState.account)
+            async let accountTask = AccountService.shared.account(withId: self.accountId, for: self.applicationState.account)
+            
+            // Wait for download account and relationships.
+            (self.relationship, self.account) = try await (relationshipTask, accountTask)
+            
+            self.state = .loaded
+        } catch {
+            ErrorService.shared.handle(error, message: "Error during download account from server.", showToastr: !Task.isCancelled)
+            self.state = .error(error)
         }
-
-        async let relationshipTask = AccountService.shared.relationships(withId: self.accountId, for: self.applicationState.account)
-        async let accountTask = AccountService.shared.account(withId: self.accountId, for: self.applicationState.account)
-        
-        // Wait for download account and relationships.
-        self.firstLoadFinished = true
-        (self.relationship, self.account) = try await (relationshipTask, accountTask)
     }
     
     @ToolbarContentBuilder

@@ -24,70 +24,85 @@ struct AccountsView: View {
     @State private var accounts: [Account] = []
     @State private var page = 1
     @State private var allItemsLoaded = false
-    @State private var firstLoadFinished = false
+    @State private var state: ViewState = .loading
     
     var body: some View {
-        List {
-            ForEach(accounts, id: \.id) { account in
-                NavigationLink(value: RouteurDestinations.userProfile(
-                    accountId: account.id,
-                    accountDisplayName: account.displayNameWithoutEmojis,
-                    accountUserName: account.acct)
-                ) {
-                    UsernameRow(accountId: account.id,
-                                accountAvatar: account.avatar,
-                                accountDisplayName: account.displayNameWithoutEmojis,
-                                accountUsername: account.acct)
+        self.mainBody()
+            .navigationBarTitle(self.getTitle())
+    }
+    
+    @ViewBuilder
+    private func mainBody() -> some View {
+        switch state {
+        case .loading:
+            LoadingIndicator()
+                .task {
+                    await self.loadAccounts(page: self.page)
                 }
-            }
-            
-            if allItemsLoaded == false && firstLoadFinished == true {
-                HStack {
-                    Spacer()
-                    LoadingIndicator()
-                        .task {
-                            self.page = self.page + 1
-                            await self.loadAccounts(page: self.page)
-                        }
-                    Spacer()
-                }
-                .listRowSeparator(.hidden)
-            }
-        }.overlay {
-            if firstLoadFinished == false {
-                LoadingIndicator()
+        case .loaded:
+            if self.accounts.isEmpty {
+                NoDataView(imageSystemName: "person.3.sequence", text: "Unfortunately, there is no one here.")
             } else {
-                if self.accounts.isEmpty {
-                    VStack {
-                        Image(systemName: "person.3.sequence")
-                            .font(.largeTitle)
-                            .padding(.bottom, 4)
-                        Text("Unfortunately, there is no one here.")
-                            .font(.title3)
-                    }.foregroundColor(.lightGrayColor)
+                List {
+                    ForEach(accounts, id: \.id) { account in
+                        NavigationLink(value: RouteurDestinations.userProfile(
+                            accountId: account.id,
+                            accountDisplayName: account.displayNameWithoutEmojis,
+                            accountUserName: account.acct)
+                        ) {
+                            UsernameRow(accountId: account.id,
+                                        accountAvatar: account.avatar,
+                                        accountDisplayName: account.displayNameWithoutEmojis,
+                                        accountUsername: account.acct)
+                        }
+                    }
+                    
+                    if allItemsLoaded == false {
+                        HStack {
+                            Spacer()
+                            LoadingIndicator()
+                                .task {
+                                    self.page = self.page + 1
+                                    await self.loadAccounts(page: self.page)
+                                }
+                            Spacer()
+                        }
+                        .listRowSeparator(.hidden)
+                    }
                 }
+                .listStyle(.plain)
             }
-        }
-        .navigationBarTitle(self.getTitle())
-        .listStyle(.plain)
-        .onFirstAppear {
-            await self.loadAccounts(page: self.page)
+        case .error(let error):
+            ErrorView(error: error) {
+                self.state = .loading
+                
+                self.page = 1
+                self.allItemsLoaded = false
+                self.accounts = []
+                await self.loadAccounts(page: self.page)
+            }
+            .padding()
         }
     }
     
     private func loadAccounts(page: Int) async {
         do {
             let accountsFromApi = try await self.loadFromApi()
-            if accountsFromApi.isEmpty || accountsFromApi.count < 10 {
+            if accountsFromApi.isEmpty {
                 self.allItemsLoaded = true
             }
             
             await self.downloadAvatars(accounts: accountsFromApi)
             self.accounts.append(contentsOf: accountsFromApi)
             
-            self.firstLoadFinished = true
+            self.state = .loaded
         } catch {
-            ErrorService.shared.handle(error, message: "Error during download followers from server.", showToastr: !Task.isCancelled)
+            if !Task.isCancelled {
+                ErrorService.shared.handle(error, message: "Error during download followers from server.", showToastr: true)
+                self.state = .error(error)
+            } else {
+                ErrorService.shared.handle(error, message: "Error during download followers from server.", showToastr: false)
+            }
         }
     }
     

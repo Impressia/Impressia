@@ -23,84 +23,98 @@ struct StatusesView: View {
 
     @State private var allItemsLoaded = false
     @State private var firstLoadFinished = false
-    
     @State private var tag: Tag?
     @State private var statusViewModels: [StatusModel] = []
+    @State private var state: ViewState = .loading
+    
     private let defaultLimit = 20
 
     var body: some View {
-        ScrollView {
-            if firstLoadFinished == true {
-                LazyVStack(alignment: .center) {
-                    ForEach(self.statusViewModels, id: \.id) { item in
-                        NavigationLink(value: RouteurDestinations.status(
-                            id: item.id,
-                            blurhash: item.mediaAttachments.first?.blurhash,
-                            highestImageUrl: item.mediaAttachments.getHighestImage()?.url,
-                            metaImageWidth: item.getImageWidth(),
-                            metaImageHeight: item.getImageHeight())
-                        ) {
-                            ImageRowAsync(statusViewModel: item)
-                        }
-                        .buttonStyle(EmptyButtonStyle())
-                    }
-
-                    if allItemsLoaded == false && firstLoadFinished == true {
-                        HStack {
-                            Spacer()
-                            LoadingIndicator()
-                                .task {
-                                    do {
-                                        try await self.loadMoreStatuses()
-                                    } catch {
-                                        ErrorService.shared.handle(error, message: "Loading more statuses failed.", showToastr: true)
-                                    }
-                                }
-                            Spacer()
-                        }
-                    }
-                }
+        self.mainBody()
+            .navigationBarTitle(self.getTitle())
+            .toolbar {
+                // TODO: It seems like pixelfed is not supporting the endpoints.
+                // self.getTrailingToolbar()
             }
-        }
-        .navigationBarTitle(self.getTitle())
-        .overlay(alignment: .center) {
-            if firstLoadFinished == false {
-                LoadingIndicator()
+    }
+    
+    @ViewBuilder
+    private func mainBody() -> some View {
+        switch state {
+        case .loading:
+            LoadingIndicator()
+                .task {
+                    await self.loadData()
+                }
+        case .loaded:
+            if self.statusViewModels.isEmpty {
+                NoDataView(imageSystemName: "photo.on.rectangle.angled", text: "Unfortunately, there are no photos here.")
             } else {
-                if self.statusViewModels.isEmpty {
-                    VStack {
-                        Image(systemName: "photo.on.rectangle.angled")
-                            .font(.largeTitle)
-                            .padding(.bottom, 4)
-                        Text("Unfortunately, there are no photos here.")
-                            .font(.title3)
-                    }.foregroundColor(.lightGrayColor)
+                ScrollView {
+                    if firstLoadFinished == true {
+                        LazyVStack(alignment: .center) {
+                            ForEach(self.statusViewModels, id: \.id) { item in
+                                NavigationLink(value: RouteurDestinations.status(
+                                    id: item.id,
+                                    blurhash: item.mediaAttachments.first?.blurhash,
+                                    highestImageUrl: item.mediaAttachments.getHighestImage()?.url,
+                                    metaImageWidth: item.getImageWidth(),
+                                    metaImageHeight: item.getImageHeight())
+                                ) {
+                                    ImageRowAsync(statusViewModel: item)
+                                }
+                                .buttonStyle(EmptyButtonStyle())
+                            }
+                            
+                            if allItemsLoaded == false && firstLoadFinished == true {
+                                HStack {
+                                    Spacer()
+                                    LoadingIndicator()
+                                        .task {
+                                            do {
+                                                try await self.loadMoreStatuses()
+                                            } catch {
+                                                ErrorService.shared.handle(error, message: "Loading more statuses failed.", showToastr: !Task.isCancelled)
+                                            }
+                                        }
+                                    Spacer()
+                                }
+                            }
+                        }
+                    }
+                }
+                .refreshable {
+                    do {
+                        try await self.loadTopStatuses()
+                    } catch {
+                        ErrorService.shared.handle(error, message: "Loading statuses failed.", showToastr: !Task.isCancelled)
+                    }
                 }
             }
-        }
-        .toolbar {
-            // TODO: It seems like pixelfed is not supporting the endpoints.
-            // self.getTrailingToolbar()
-        }
-        .onFirstAppear {
-            do {
-                try await self.loadStatuses()
-
-                if case .hashtag(let hashtag) = self.listType {
-                    await self.loadTag(hashtag: hashtag)
-                }
-            } catch {
-                ErrorService.shared.handle(error, message: "Loading statuses failed.", showToastr: !Task.isCancelled)
+        case .error(let error):
+            ErrorView(error: error) {
+                self.state = .loading
+                await self.loadData()
             }
-        }.refreshable {
-            do {
-                try await self.loadTopStatuses()
-            } catch {
-                ErrorService.shared.handle(error, message: "Loading statuses failed.", showToastr: !Task.isCancelled)
-            }
+            .padding()
         }
     }
     
+    private func loadData() async {
+        do {
+            try await self.loadStatuses()
+
+            if case .hashtag(let hashtag) = self.listType {
+                await self.loadTag(hashtag: hashtag)
+            }
+            
+            self.state = .loaded
+        } catch {
+            ErrorService.shared.handle(error, message: "Loading statuses failed.", showToastr: !Task.isCancelled)
+            self.state = .error(error)
+        }
+    }
+        
     private func loadStatuses() async throws {
         guard firstLoadFinished == false else {
             return
@@ -115,17 +129,13 @@ struct StatusesView: View {
         
         self.firstLoadFinished = true
         self.statusViewModels.append(contentsOf: inPlaceStatuses)
-        
-        if statuses.count < self.defaultLimit {
-            self.allItemsLoaded = true
-        }
     }
         
     private func loadMoreStatuses() async throws {
         if let lastStatusId = self.statusViewModels.last?.id {
             let previousStatuses = try await self.loadFromApi(maxId: lastStatusId)
 
-            if previousStatuses.count < self.defaultLimit {
+            if previousStatuses.isEmpty {
                 self.allItemsLoaded = true
             }
             

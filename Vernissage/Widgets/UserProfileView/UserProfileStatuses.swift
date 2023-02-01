@@ -13,7 +13,6 @@ struct UserProfileStatuses: View {
 
     @State private var allItemsLoaded = false
     @State private var firstLoadFinished = false
-    
     @State private var statusViewModels: [StatusModel] = []
     private let defaultLimit = 20
 
@@ -50,7 +49,8 @@ struct UserProfileStatuses: View {
             } else {
                 LoadingIndicator()
             }
-        }.task {
+        }
+        .onFirstAppear {
             do {
                 try await self.loadStatuses()
             } catch {
@@ -60,10 +60,6 @@ struct UserProfileStatuses: View {
     }
     
     private func loadStatuses() async throws {
-        guard firstLoadFinished == false else {
-            return
-        }
-        
         let statuses = try await AccountService.shared.statuses(
             createdBy: self.accountId,
             for: self.applicationState.account,
@@ -90,7 +86,7 @@ struct UserProfileStatuses: View {
                 maxId: lastStatusId,
                 limit: self.defaultLimit)
 
-            if previousStatuses.count < self.defaultLimit {
+            if previousStatuses.isEmpty {
                 self.allItemsLoaded = true
             }
             
