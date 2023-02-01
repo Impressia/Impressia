@@ -5,6 +5,7 @@
 //
     
 import SwiftUI
+import MastodonKit
 import AuthenticationServices
 
 struct SignInView: View {
@@ -13,10 +14,12 @@ struct SignInView: View {
     @EnvironmentObject var applicationState: ApplicationState
 
     @State private var serverAddress: String = String.empty()
-    @State private var pixelfedInstances: [String] = [
-        "pixelfed.de", "pixelfed.social", "pxlmo.com", "metapixl.com", "pixey.org",
-        "pixel.tchncs.de", "pixelfed.tokyo", "pixelfed.fr", "pixelfed.nz", "pixelfed.au",
-        "pixelfed.eus", "pixelfed.bachgau.social"
+    @State private var instances: [Instance] = []
+    
+    private let pixelfedInstances: [String] = [
+        "https://pixelfed.de", "https://pixelfed.social", "https://pxlmo.com", "https://metapixl.com", "https://pixey.org",
+        "https://pixel.tchncs.de", "https://pixelfed.tokyo", "https://pixelfed.fr", "https://pixelfed.nz", "https://pixelfed.au",
+        "https://pixelfed.eus", "https://pixelfed.bachgau.social"
     ]
     
     var onSignInStateChenge: ((_ applicationViewMode: ApplicationViewMode) -> Void)?
@@ -30,44 +33,55 @@ struct SignInView: View {
                     HStack(alignment: .center, spacing: 4) {
                         TextField("Server address", text: $serverAddress)
                             .onSubmit {
-                                self.signIn()
+                                let baseAddress = self.getServerAddress(uri: self.serverAddress)
+                                self.signIn(baseAddress: baseAddress)
                             }
                             .textInputAutocapitalization(.never)
                             .keyboardType(.URL)
                             .disableAutocorrection(true)
                         
                         Button("Sign in") {
-                            self.signIn()
-                        }.buttonStyle(.borderedProminent)
+                            let baseAddress = self.getServerAddress(uri: self.serverAddress)
+                            self.signIn(baseAddress: baseAddress)
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .padding(.vertical, 4)
                     }
                 }
             }
             
             // List of predefined servers.
             Section("Pixelfed servers") {
-                ForEach(pixelfedInstances, id: \.self) { address in
-                    NavigationLink(value: RouteurDestinations.signIn) {
-                        VStack {
-                            Text(address)
-                        }
+                if self.instances.isEmpty {
+                    HStack {
+                        Spacer()
+                        LoadingIndicator()
+                        Spacer()
+                    }
+                }
+                
+                ForEach(self.instances, id: \.uri) { instance in                    
+                    InstanceRow(instance: instance) { uri in
+                        let baseAddress = self.getServerAddress(uri: uri)
+                        self.signIn(baseAddress: baseAddress)
                     }
                 }
             }
             
         }
-        .task {
-            
+        .onFirstAppear {
+            self.instances = await InstanceService.shared.instances(urls: self.pixelfedInstances)
         }
         .navigationBarTitle("Sign in to Pixelfed")
         .navigationBarTitleDisplayMode(.inline)
     }
     
-    private func signIn() {
+    private func signIn(baseAddress: String) {
         Task {
             do {
                 
                 let authorizationSession = AuthorizationSession()
-                try await AuthorizationService.shared.sign(in: self.getServerAddress(),
+                try await AuthorizationService.shared.sign(in: baseAddress,
                                                            session: authorizationSession) { accountData in
                     DispatchQueue.main.async {
                         self.applicationState.account = AccountModel(accountData: accountData)
@@ -84,11 +98,11 @@ struct SignInView: View {
         }
     }
     
-    private func getServerAddress() -> String {
-        if !serverAddress.starts(with: "https://") {
-            return "https://\(serverAddress)"
+    private func getServerAddress(uri: String) -> String {
+        if !uri.starts(with: "https://") {
+            return "https://\(uri)"
         }
         
-        return serverAddress
+        return uri
     }
 }
