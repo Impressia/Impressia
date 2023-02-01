@@ -11,6 +11,41 @@ public class InstanceService {
     public static let shared = InstanceService()
     private init() { }
     
+    public let pixelfedInstances: [String] = [
+        "https://pixelfed.de",
+        "https://pixelfed.social",
+        "https://pxlmo.com",
+        "https://metapixl.com",
+        "https://pixey.org",
+        "https://pixel.tchncs.de",
+        "https://pixelfed.tokyo",
+        "https://pixelfed.fr",
+        "https://pixelfed.nz",
+        "https://pixelfed.au",
+        "https://pixelfed.eus",
+        "https://pixelfed.bachgau.social",
+        "https://pixelfed.es",
+        "https://pixelfed.cz",
+        "https://pixelfed.automat.click",
+        "https://gram.social",
+        "https://nixorigin.one",
+        "https://miniature.photography",
+        "https://fedifilm.art",
+        "https://fedipix.de",
+        "https://pixel.jabbxi.de",
+        "https://nodegray.com",
+        "https://socialpixels.xyz",
+        "https://pixel.mamutut.space",
+        "https://pixelfed.fioverse.zone",
+        "https://pixel.artemai.art",
+        "https://pix.anduin.net",
+        "https://jauntypix.net",
+        "https://faf.photos",
+        "https://pix.vleij.com",
+        "https://pixels.gsi.li",
+        "https://eorzea.photos"
+    ]
+    
     func instances(urls: [String]) async -> [Instance] {
         var instances: [Instance] = []
         

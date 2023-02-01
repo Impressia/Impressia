@@ -15,13 +15,7 @@ struct SignInView: View {
 
     @State private var serverAddress: String = String.empty()
     @State private var instances: [Instance] = []
-    
-    private let pixelfedInstances: [String] = [
-        "https://pixelfed.de", "https://pixelfed.social", "https://pxlmo.com", "https://metapixl.com", "https://pixey.org",
-        "https://pixel.tchncs.de", "https://pixelfed.tokyo", "https://pixelfed.fr", "https://pixelfed.nz", "https://pixelfed.au",
-        "https://pixelfed.eus", "https://pixelfed.bachgau.social"
-    ]
-    
+        
     var onSignInStateChenge: ((_ applicationViewMode: ApplicationViewMode) -> Void)?
     
     var body: some View {
@@ -70,7 +64,7 @@ struct SignInView: View {
             
         }
         .onFirstAppear {
-            self.instances = await InstanceService.shared.instances(urls: self.pixelfedInstances)
+            self.instances = await InstanceService.shared.instances(urls: InstanceService.shared.pixelfedInstances)
         }
         .navigationBarTitle("Sign in to Pixelfed")
         .navigationBarTitleDisplayMode(.inline)
