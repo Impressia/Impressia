@@ -9,11 +9,15 @@ import MastodonKit
 import NukeUI
 
 struct ImageRowAsync: View {
+    @EnvironmentObject var applicationState: ApplicationState
+    @EnvironmentObject var routerPath: RouterPath
+
     @State public var statusViewModel: StatusModel
 
     @State private var imageHeight: Double
     @State private var imageWidth: Double
     @State private var heightWasPrecalculated: Bool
+    @State private var showThumbImage = false
     
     init(statusViewModel: StatusModel) {
         self.statusViewModel = statusViewModel
@@ -47,11 +51,27 @@ struct ImageRowAsync: View {
                 LazyImage(url: attachment.url) { state in
                     if let image = state.image {
                         if self.statusViewModel.sensitive {
-                            ContentWarning(blurhash: attachment.blurhash, spoilerText: self.statusViewModel.spoilerText) {
-                                image
+                            ZStack {
+                                ContentWarning(blurhash: attachment.blurhash, spoilerText: self.statusViewModel.spoilerText) {
+                                    self.imageView(image: image)
+                                }
+                                
+                                if showThumbImage {
+                                    FavouriteTouch {
+                                        self.showThumbImage = false
+                                    }
+                                }
                             }
                         } else {
-                            image
+                            ZStack {
+                                self.imageView(image: image)
+                                
+                                if showThumbImage {
+                                    FavouriteTouch {
+                                        self.showThumbImage = false
+                                    }
+                                }
+                            }
                         }
                     } else if state.error != nil {
                         ZStack {
@@ -94,6 +114,27 @@ struct ImageRowAsync: View {
         } else {
             EmptyView()
         }
+    }
+    
+    private func imageView(image: NukeUI.Image) -> some View {
+        image
+            .onTapGesture{
+                self.routerPath.navigate(to: .status(
+                    id: statusViewModel.id,
+                    blurhash: statusViewModel.mediaAttachments.first?.blurhash,
+                    highestImageUrl: statusViewModel.mediaAttachments.getHighestImage()?.url,
+                    metaImageWidth: statusViewModel.getImageWidth(),
+                    metaImageHeight: statusViewModel.getImageHeight()
+                ))
+            }
+            .onLongPressGesture(minimumDuration: 0.2) {
+                Task {
+                    try? await StatusService.shared.favourite(statusId: self.statusViewModel.id, for: self.applicationState.account)
+                }
+
+                self.showThumbImage = true
+                HapticService.shared.touch()
+            }
     }
     
     private func recalculateSizeOfDownloadedImage(imageResponse: ImageResponse) {

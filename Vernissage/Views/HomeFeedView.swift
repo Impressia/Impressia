@@ -11,12 +11,9 @@ struct HomeFeedView: View {
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var routerPath: RouterPath
     
-    @State private var allItemsBottomLoaded = false
+    @State private var allItemsLoaded = false
     @State private var state: ViewState = .loading
-    
-    private static let initialColumns = 1
-    @State private var gridColumns = Array(repeating: GridItem(.flexible()), count: initialColumns)
-        
+            
     @FetchRequest var dbStatuses: FetchedResults<StatusData>
     
     init(accountId: String) {
@@ -26,11 +23,6 @@ struct HomeFeedView: View {
     }
     
     var body: some View {
-        self.mainBody()
-    }
-    
-    @ViewBuilder
-    private func mainBody() -> some View {
         switch state {
         case .loading:
             LoadingIndicator()
@@ -41,55 +33,7 @@ struct HomeFeedView: View {
             if self.dbStatuses.isEmpty {
                 NoDataView(imageSystemName: "photo.on.rectangle.angled", text: "Unfortunately, there are no photos here.")
             } else {
-                ScrollView {
-                    LazyVGrid(columns: gridColumns) {
-                        ForEach(dbStatuses, id: \.self) { item in
-                            
-                            if self.shouldUpToDateBeVisible(statusId: item.id) {
-                                self.upToDatePlaceholder()
-                            }
-                            
-                            NavigationLink(value: RouteurDestinations.status(
-                                id: item.rebloggedStatusId ?? item.id,
-                                blurhash: item.attachments().first?.blurhash,
-                                highestImageUrl: item.attachments().getHighestImage()?.url,
-                                metaImageWidth: item.attachments().first?.metaImageWidth,
-                                metaImageHeight: item.attachments().first?.metaImageHeight)
-                            ) {
-                                ImageRow(statusData: item)
-                            }
-                            .buttonStyle(EmptyButtonStyle())
-                        }
-                        
-                        if allItemsBottomLoaded == false {
-                            LoadingIndicator()
-                                .task {
-                                    do {
-                                        if let account = self.applicationState.account {
-                                            let newStatusesCount = try await HomeTimelineService.shared.loadOnBottom(for: account)
-                                            if newStatusesCount == 0 {
-                                                allItemsBottomLoaded = true
-                                            }
-                                        }
-                                    } catch {
-                                        ErrorService.shared.handle(error, message: "Error during download statuses from server.", showToastr: !Task.isCancelled)
-                                    }
-                                }
-                        }
-                    }
-                }
-                .refreshable {
-                    do {
-                        if let account = self.applicationState.account {
-                            if let lastSeenStatusId = try await HomeTimelineService.shared.loadOnTop(for: account) {
-                                try await HomeTimelineService.shared.save(lastSeenStatusId: lastSeenStatusId, for: account)
-                                self.applicationState.lastSeenStatusId = lastSeenStatusId
-                            }
-                        }
-                    } catch {
-                        ErrorService.shared.handle(error, message: "Error during download statuses from server.", showToastr: !Task.isCancelled)
-                    }
-                }
+                self.timeline()
             }
         case .error(let error):
             ErrorView(error: error) {
@@ -100,13 +44,51 @@ struct HomeFeedView: View {
         }
     }
     
+    @ViewBuilder
+    private func timeline() -> some View {
+        ScrollView {
+            LazyVStack {
+                ForEach(dbStatuses, id: \.self) { item in
+                    if self.shouldUpToDateBeVisible(statusId: item.id) {
+                        self.upToDatePlaceholder()
+                    }
+                    
+                    ImageRow(statusData: item)
+                }
+                
+                if allItemsLoaded == false {
+                    LoadingIndicator()
+                        .task {
+                            do {
+                                if let account = self.applicationState.account {
+                                    let newStatusesCount = try await HomeTimelineService.shared.loadOnBottom(for: account)
+                                    if newStatusesCount == 0 {
+                                        allItemsLoaded = true
+                                    }
+                                }
+                            } catch {
+                                ErrorService.shared.handle(error, message: "Error during download statuses from server.", showToastr: !Task.isCancelled)
+                            }
+                        }
+                }
+            }
+        }
+        .refreshable {
+            do {
+                if let account = self.applicationState.account {
+                    if let lastSeenStatusId = try await HomeTimelineService.shared.loadOnTop(for: account) {
+                        try await HomeTimelineService.shared.save(lastSeenStatusId: lastSeenStatusId, for: account)
+                        self.applicationState.lastSeenStatusId = lastSeenStatusId
+                    }
+                }
+            } catch {
+                ErrorService.shared.handle(error, message: "Error during download statuses from server.", showToastr: !Task.isCancelled)
+            }
+        }
+    }
+    
     private func loadData() async {
         do {
-            if self.dbStatuses.isEmpty == false {
-                self.state = .loaded
-                return
-            }
-
             if let account = self.applicationState.account {
                 _ = try await HomeTimelineService.shared.loadOnTop(for: account)
             }

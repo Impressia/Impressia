@@ -7,12 +7,16 @@
 import SwiftUI
 
 struct ImageRow: View {
+    @EnvironmentObject var applicationState: ApplicationState
+    @EnvironmentObject var routerPath: RouterPath
+    
     private let status: StatusData
-    private let imageHeight: Double
-    private let imageWidth: Double
     private let attachmentData: AttachmentData?
     
+    @State private var imageHeight: Double
+    @State private var imageWidth: Double
     @State private var uiImage:UIImage?
+    @State private var showThumbImage = false
     
     init(statusData: StatusData) {
         self.status = statusData
@@ -25,7 +29,9 @@ struct ImageRow: View {
         } else if let attachmentData, let imageData = attachmentData.data, let uiImage = UIImage(data: imageData) {
             self.uiImage = uiImage
             
-            let size = ImageSizeService.shared.calculate(for: attachmentData.url, width: uiImage.size.width, height: uiImage.size.height)
+            let size = ImageSizeService.shared.calculate(for: attachmentData.url,
+                                                         width: uiImage.size.width,
+                                                         height: uiImage.size.height)
             self.imageWidth = size.width
             self.imageHeight = size.height
         } else if let attachmentData, attachmentData.metaImageWidth > 0 && attachmentData.metaImageHeight > 0 {
@@ -53,9 +59,34 @@ struct ImageRow: View {
                                 .transition(.opacity)
                         }
                     } else {
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
+                        ZStack {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .onTapGesture{
+                                    self.routerPath.navigate(to: .status(
+                                        id: status.rebloggedStatusId ?? status.id,
+                                        blurhash: status.attachments().first?.blurhash,
+                                        highestImageUrl: status.attachments().getHighestImage()?.url,
+                                        metaImageWidth: status.attachments().first?.metaImageWidth,
+                                        metaImageHeight: status.attachments().first?.metaImageHeight
+                                    ))
+                                }
+                                .onLongPressGesture(minimumDuration: 0.2) {
+                                    Task {
+                                        try? await StatusService.shared.favourite(statusId: self.status.id, for: self.applicationState.account)
+                                    }
+
+                                    self.showThumbImage = true
+                                    HapticService.shared.touch()
+                                }
+                            
+                            if showThumbImage {
+                                FavouriteTouch {
+                                    self.showThumbImage = false
+                                }
+                            }
+                        }
                     }
                     
                     if let count = self.status.attachments().count, count > 1 {
@@ -77,7 +108,15 @@ struct ImageRow: View {
                         do {
                             if let imageData = try await RemoteFileService.shared.fetchData(url: attachmentData.url) {
                                 HomeTimelineService.shared.update(attachment: attachmentData, withData: imageData)
-                                self.uiImage = UIImage(data: imageData)
+                                if let downloadedImage = UIImage(data: imageData) {
+                                    
+                                    let size = ImageSizeService.shared.calculate(for: attachmentData.url,
+                                                                                 width: downloadedImage.size.width,
+                                                                                 height: downloadedImage.size.height)
+                                    self.imageWidth = size.width
+                                    self.imageHeight = size.height
+                                    self.uiImage = downloadedImage
+                                }
                             }
                         } catch {
                             ErrorService.shared.handle(error, message: "Cannot download the image.")
