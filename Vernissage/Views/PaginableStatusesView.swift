@@ -14,6 +14,7 @@ struct PaginableStatusesView: View {
     }
     
     @EnvironmentObject private var applicationState: ApplicationState
+    @EnvironmentObject private var client: Client
     @EnvironmentObject private var routerPath: RouterPath
 
     @State public var listType: ListType
@@ -137,15 +138,9 @@ struct PaginableStatusesView: View {
         switch self.listType {
 
         case .favourites:
-            return try await AccountService.shared.favourites(
-                for: self.applicationState.account,
-                limit: self.defaultLimit,
-                page: self.page)
+            return try await self.client.accounts?.favourites(limit: self.defaultLimit, page: self.page) ?? []
         case .bookmarks:
-            return try await AccountService.shared.bookmarks(
-                for: self.applicationState.account,
-                limit: self.defaultLimit,
-                page: self.page)
+            return try await self.client.accounts?.bookmarks(limit: self.defaultLimit, page: self.page) ?? []
         }
     }
     

@@ -11,7 +11,9 @@ import AuthenticationServices
 struct SignInView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.dismiss) private var dismiss
+
     @EnvironmentObject var applicationState: ApplicationState
+    @EnvironmentObject var client: Client
 
     @State private var serverAddress: String = String.empty()
     @State private var instances: [Instance] = []
@@ -62,7 +64,7 @@ struct SignInView: View {
             
         }
         .onFirstAppear {
-            self.instances = await InstanceService.shared.instances(urls: InstanceService.shared.pixelfedInstances)
+            self.instances = await self.client.instances.instances(urls: self.client.instances.pixelfedInstances)
         }
         .navigationBarTitle("Sign in to Pixelfed")
         .navigationBarTitleDisplayMode(.inline)

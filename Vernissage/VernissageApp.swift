@@ -13,14 +13,15 @@ struct VernissageApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     let coreDataHandler = CoreDataHandler.shared
+
     @StateObject var applicationState = ApplicationState.shared
+    @StateObject var client = Client.shared
+    @StateObject var routerPath = RouterPath()
     
     @State var applicationViewMode: ApplicationViewMode = .loading
     @State var tintColor = ApplicationState.shared.tintColor.color()
     @State var theme = ApplicationState.shared.theme.colorScheme()
-    
-    @StateObject private var routerPath = RouterPath()
-    
+
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $routerPath.path) {
@@ -43,6 +44,7 @@ struct VernissageApp: App {
             }
             .environment(\.managedObjectContext, coreDataHandler.container.viewContext)
             .environmentObject(applicationState)
+            .environmentObject(client)
             .environmentObject(routerPath)
             .tint(self.tintColor)
             .preferredColorScheme(self.theme)
@@ -65,8 +67,10 @@ struct VernissageApp: App {
                     }
                     
                     Task { @MainActor in
-                        self.applicationState.account = AccountModel(accountData: accountData)
+                        let accountModel = AccountModel(accountData: accountData)
+                        self.applicationState.account = accountModel
                         self.applicationState.lastSeenStatusId = accountData.lastSeenStatusId
+                        self.client.setAccount(account: accountModel)
                         self.applicationViewMode = .mainView
                     }
                 }

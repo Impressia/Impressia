@@ -10,6 +10,7 @@ import AVFoundation
 
 struct StatusView: View {
     @EnvironmentObject var applicationState: ApplicationState
+    @EnvironmentObject var client: Client
     @EnvironmentObject var routerPath: RouterPath
 
     @Environment(\.dismiss) private var dismiss
@@ -80,7 +81,7 @@ struct StatusView: View {
                             
                             MarkdownFormattedText(statusViewModel.content.asMarkdown)
                                 .environment(\.openURL, OpenURLAction { url in
-                                    routerPath.handle(url: url, account: self.applicationState.account)
+                                    routerPath.handle(url: url)
                                 })
 
                             VStack (alignment: .leading) {
@@ -145,7 +146,7 @@ struct StatusView: View {
     private func loadData() async {
         do {
             // Get status from API.
-            if let status = try await StatusService.shared.status(withId: self.statusId, for: self.applicationState.account) {
+            if let status = try await self.client.statuses?.status(withId: self.statusId) {
                 let statusViewModel = StatusModel(status: status)
                                     
                 self.statusViewModel = statusViewModel

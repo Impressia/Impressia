@@ -8,6 +8,7 @@ import SwiftUI
 
 struct ImageRow: View {
     @EnvironmentObject var applicationState: ApplicationState
+    @EnvironmentObject var client: Client
     @EnvironmentObject var routerPath: RouterPath
     
     private let status: StatusData
@@ -74,7 +75,7 @@ struct ImageRow: View {
                                 }
                                 .onLongPressGesture(minimumDuration: 0.2) {
                                     Task {
-                                        try? await StatusService.shared.favourite(statusId: self.status.id, for: self.applicationState.account)
+                                        try? await self.client.statuses?.favourite(statusId: self.status.id)
                                     }
 
                                     self.showThumbImage = true

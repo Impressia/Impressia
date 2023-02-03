@@ -16,7 +16,9 @@ struct MainView: View {
     }
     
     @Environment(\.managedObjectContext) private var viewContext
+
     @EnvironmentObject var applicationState: ApplicationState
+    @EnvironmentObject var client: Client
     @EnvironmentObject var routerPath: RouterPath
     
     @State private var navBarTitle: String = "Home"
@@ -151,7 +153,9 @@ struct MainView: View {
             Menu {
                 ForEach(self.dbAccounts) { account in
                     Button {
-                        self.applicationState.account = AccountModel(accountData: account)
+                        let accountModel = AccountModel(accountData: account)
+                        self.applicationState.account = accountModel
+                        self.client.setAccount(account: accountModel)
                         self.applicationState.lastSeenStatusId = account.lastSeenStatusId
 
                         ApplicationSettingsHandler.shared.setAccountAsDefault(accountData: account)

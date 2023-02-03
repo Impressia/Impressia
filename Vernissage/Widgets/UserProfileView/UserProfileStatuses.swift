@@ -9,6 +9,8 @@ import MastodonKit
 
 struct UserProfileStatuses: View {
     @EnvironmentObject private var applicationState: ApplicationState
+    @EnvironmentObject private var client: Client
+    
     @State public var accountId: String
 
     @State private var allItemsLoaded = false
@@ -60,10 +62,7 @@ struct UserProfileStatuses: View {
     }
     
     private func loadStatuses() async throws {
-        let statuses = try await AccountService.shared.statuses(
-            createdBy: self.accountId,
-            for: self.applicationState.account,
-            limit: self.defaultLimit)
+        let statuses = try await self.client.accounts?.statuses(createdBy: self.accountId, limit: self.defaultLimit) ?? []
         var inPlaceStatuses: [StatusModel] = []
 
         for item in statuses {
@@ -80,11 +79,7 @@ struct UserProfileStatuses: View {
         
     private func loadMoreStatuses() async throws {
         if let lastStatusId = self.statusViewModels.last?.id {
-            let previousStatuses = try await AccountService.shared.statuses(
-                createdBy: self.accountId,
-                for: self.applicationState.account,
-                maxId: lastStatusId,
-                limit: self.defaultLimit)
+            let previousStatuses = try await self.client.accounts?.statuses(createdBy: self.accountId, maxId: lastStatusId, limit: self.defaultLimit) ?? []
 
             if previousStatuses.isEmpty {
                 self.allItemsLoaded = true

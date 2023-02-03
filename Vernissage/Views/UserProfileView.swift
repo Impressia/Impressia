@@ -9,6 +9,7 @@ import MastodonKit
 
 struct UserProfileView: View {
     @EnvironmentObject private var applicationState: ApplicationState
+    @EnvironmentObject private var client: Client
     
     @State public var accountId: String
     @State public var accountDisplayName: String?
@@ -58,8 +59,8 @@ struct UserProfileView: View {
     
     private func loadData() async {
         do {
-            async let relationshipTask = AccountService.shared.relationships(withId: self.accountId, for: self.applicationState.account)
-            async let accountTask = AccountService.shared.account(withId: self.accountId, for: self.applicationState.account)
+            async let relationshipTask = self.client.accounts?.relationships(withId: self.accountId)
+            async let accountTask = self.client.accounts?.account(withId: self.accountId)
             
             // Wait for download account and relationships.
             (self.relationship, self.account) = try await (relationshipTask, accountTask)
@@ -155,17 +156,11 @@ struct UserProfileView: View {
     private func onMuteAccount(account: Account) async {
         do {
             if self.relationship?.muting == true {
-                if let relationship = try await AccountService.shared.unmute(
-                    account: account.id,
-                    for: self.applicationState.account
-                ) {
+                if let relationship = try await self.client.accounts?.unmute(account: account.id) {
                     self.relationship = relationship
                 }
             } else {
-                if let relationship = try await AccountService.shared.mute(
-                    account: account.id,
-                    for: self.applicationState.account
-                ) {
+                if let relationship = try await self.client.accounts?.mute(account: account.id) {
                     self.relationship = relationship
                 }
             }
@@ -177,17 +172,11 @@ struct UserProfileView: View {
     private func onBlockAccount(account: Account) async {
         do {
             if self.relationship?.blocking == true {
-                if let relationship = try await AccountService.shared.unblock(
-                    account: account.id,
-                    for: self.applicationState.account
-                ) {
+                if let relationship = try await self.client.accounts?.unblock(account: account.id) {
                     self.relationship = relationship
                 }
             } else {
-                if let relationship = try await AccountService.shared.block(
-                    account: account.id,
-                    for: self.applicationState.account
-                ) {
+                if let relationship = try await self.client.accounts?.block(account: account.id) {
                     self.relationship = relationship
                 }
             }

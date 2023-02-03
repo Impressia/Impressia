@@ -9,6 +9,7 @@ import MastodonKit
 
 struct UserProfileHeader: View {
     @EnvironmentObject private var applicationState: ApplicationState
+    @EnvironmentObject private var client: Client
     @EnvironmentObject private var routerPath: RouterPath
     
     @State var account: Account
@@ -75,7 +76,7 @@ struct UserProfileHeader: View {
             if let note = account.note, !note.isEmpty {
                 MarkdownFormattedText(note.asMarkdown, withFontSize: 14, andWidth: Int(UIScreen.main.bounds.width) - 16)
                     .environment(\.openURL, OpenURLAction { url in
-                        routerPath.handle(url: url, account: self.applicationState.account)
+                        routerPath.handle(url: url)
                     })
             }
             
@@ -104,17 +105,11 @@ struct UserProfileHeader: View {
     private func onRelationshipButtonTap() async {
         do {
             if self.relationship?.following == true {
-                if let relationship = try await AccountService.shared.unfollow(
-                    account: self.account.id,
-                    for: self.applicationState.account
-                ) {
+                if let relationship = try await self.client.accounts?.unfollow(account: self.account.id) {
                     self.relationship = relationship
                 }
             } else {
-                if let relationship = try await AccountService.shared.follow(
-                    account: self.account.id,
-                    for: self.applicationState.account
-                ) {
+                if let relationship = try await self.client.accounts?.follow(account: self.account.id) {
                     self.relationship = relationship
                 }
             }

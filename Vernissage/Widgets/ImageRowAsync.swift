@@ -10,6 +10,7 @@ import NukeUI
 
 struct ImageRowAsync: View {
     @EnvironmentObject var applicationState: ApplicationState
+    @EnvironmentObject var client: Client
     @EnvironmentObject var routerPath: RouterPath
 
     @State public var statusViewModel: StatusModel
@@ -129,7 +130,7 @@ struct ImageRowAsync: View {
             }
             .onLongPressGesture(minimumDuration: 0.2) {
                 Task {
-                    try? await StatusService.shared.favourite(statusId: self.statusViewModel.id, for: self.applicationState.account)
+                    try? await self.client.statuses?.favourite(statusId: self.statusViewModel.id)
                 }
 
                 self.showThumbImage = true

@@ -17,6 +17,7 @@ struct StatusesView: View {
     }
     
     @EnvironmentObject private var applicationState: ApplicationState
+    @EnvironmentObject private var client: Client
     @EnvironmentObject private var routerPath: RouterPath
 
     @State public var listType: ListType
@@ -162,47 +163,42 @@ struct StatusesView: View {
     private func loadFromApi(maxId: String? = nil, sinceId: String? = nil, minId: String? = nil) async throws -> [Status] {
         switch self.listType {
         case .local:
-            return try await PublicTimelineService.shared.getStatuses(
-                for: self.applicationState.account,
+            return try await self.client.publicTimeline?.getStatuses(
                 local: true,
                 remote: false,
                 maxId: maxId,
                 sinceId: sinceId,
                 minId: minId,
-                limit: self.defaultLimit)
+                limit: self.defaultLimit) ?? []
         case .federated:
-            return try await PublicTimelineService.shared.getStatuses(
-                for: self.applicationState.account,
+            return try await self.client.publicTimeline?.getStatuses(
                 local: false,
                 remote: true,
                 maxId: maxId,
                 sinceId: sinceId,
                 minId: minId,
-                limit: self.defaultLimit)
+                limit: self.defaultLimit) ?? []
         case .favourites:
-            return try await AccountService.shared.favourites(
-                for: self.applicationState.account,
+            return try await self.client.accounts?.favourites(
                 maxId: maxId,
                 sinceId: sinceId,
                 minId: minId,
-                limit: self.defaultLimit)
+                limit: self.defaultLimit) ?? []
         case .bookmarks:
-            return try await AccountService.shared.bookmarks(
-                for: self.applicationState.account,
+            return try await self.client.accounts?.bookmarks(
                 maxId: maxId,
                 sinceId: sinceId,
                 minId: minId,
-                limit: self.defaultLimit)
+                limit: self.defaultLimit) ?? []
         case .hashtag(let tag):
-            return try await PublicTimelineService.shared.getTagStatuses(
-                for: self.applicationState.account,
+            return try await self.client.publicTimeline?.getTagStatuses(
                 tag: tag,
                 local: false,
                 remote: true,
                 maxId: maxId,
                 sinceId: sinceId,
                 minId: minId,
-                limit: self.defaultLimit)
+                limit: self.defaultLimit) ?? []
         }
     }
     
@@ -243,7 +239,7 @@ struct StatusesView: View {
     
     private func loadTag(hashtag: String) async {
         do {
-            self.tag = try await TagsService.shared.get(tag: hashtag, for: self.applicationState.account)
+            self.tag = try await self.client.tags?.get(tag: hashtag)
         } catch {
             ErrorService.shared.handle(error, message: "Error during loading tag from server.", showToastr: false)
         }
@@ -251,7 +247,7 @@ struct StatusesView: View {
     
     private func follow(hashtag: String) async {
         do {
-            self.tag = try await TagsService.shared.follow(tag: hashtag, for: self.applicationState.account)
+            self.tag = try await self.client.tags?.follow(tag: hashtag)
             ToastrService.shared.showSuccess("You are following the tag.", imageSystemName: "number.square.fill")
         } catch {
             ErrorService.shared.handle(error, message: "Error during following tag.", showToastr: true)
@@ -260,7 +256,7 @@ struct StatusesView: View {
     
     private func unfollow(hashtag: String) async {
         do {
-            self.tag = try await TagsService.shared.unfollow(tag: hashtag, for: self.applicationState.account)
+            self.tag = try await self.client.tags?.unfollow(tag: hashtag)
             ToastrService.shared.showSuccess("Tag has been unfollowed.", imageSystemName: "number.square")
         } catch {
             ErrorService.shared.handle(error, message: "Error during unfollowing tag.", showToastr: true)

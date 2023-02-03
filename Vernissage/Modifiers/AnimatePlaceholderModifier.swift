@@ -6,6 +6,7 @@
     
 import SwiftUI
 
+/// Modifier for using with view placeholders (with redacted modifier).
 struct AnimatePlaceholderModifier: AnimatableModifier {
     @Binding var isLoading: Bool
 
@@ -39,6 +40,8 @@ struct AnimatePlaceholderModifier: AnimatableModifier {
 }
 
 extension View {
+
+    /// Animate redacted placeholders.
     func animatePlaceholder(isLoading: Binding<Bool>) -> some View {
         self.modifier(AnimatePlaceholderModifier(isLoading: isLoading))
     }

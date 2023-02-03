@@ -17,6 +17,7 @@ struct AccountsView: View {
     }
     
     @EnvironmentObject var applicationState: ApplicationState
+    @EnvironmentObject var client: Client
 
     @State var entityId: String
     @State var listType: ListType
@@ -124,25 +125,13 @@ struct AccountsView: View {
     private func loadFromApi() async throws -> [Account] {
         switch self.listType {
         case .followers:
-            return try await AccountService.shared.followers(
-                account: self.entityId,
-                for: self.applicationState.account,
-                page: page)
+            return try await self.client.accounts?.followers(account: self.entityId, page: page) ?? []
         case .following:
-            return try await AccountService.shared.following(
-                account: self.entityId,
-                for: self.applicationState.account,
-                page: page)
+            return try await self.client.accounts?.following(account: self.entityId, page: page) ?? []
         case .favourited:
-            return try await StatusService.shared.favouritedBy(
-                statusId: self.entityId,
-                for: self.applicationState.account,
-                page: page)
+            return try await self.client.statuses?.favouritedBy(statusId: self.entityId, page: page) ?? []
         case .reblogged:
-            return try await StatusService.shared.rebloggedBy(
-                statusId: self.entityId,
-                for: self.applicationState.account,
-                page: page)
+            return try await self.client.statuses?.rebloggedBy(statusId: self.entityId, page: page) ?? []
         }
     }
     

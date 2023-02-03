@@ -9,6 +9,7 @@ import MastodonKit
 
 struct NotificationsView: View {
     @EnvironmentObject var applicationState: ApplicationState
+    @EnvironmentObject var client: Client
 
     @State var accountId: String
     @State private var notifications: [MastodonKit.Notification] = []
@@ -70,21 +71,17 @@ struct NotificationsView: View {
     
     func loadNotifications() async {
         do {            
-            let linkable = try await NotificationService.shared.notifications(
-                for: self.applicationState.account,
-                maxId: maxId,
-                minId: minId,
-                limit: 5)
-
-            self.minId = linkable.link?.minId
-            self.maxId = linkable.link?.maxId
-            self.notifications = linkable.data
-            
-            if linkable.data.isEmpty {
-                self.allItemsLoaded = true
+            if let linkable = try await self.client.notifications?.notifications(maxId: maxId, minId: minId, limit: 5) {
+                self.minId = linkable.link?.minId
+                self.maxId = linkable.link?.maxId
+                self.notifications = linkable.data
+                
+                if linkable.data.isEmpty {
+                    self.allItemsLoaded = true
+                }
+                
+                self.state = .loaded
             }
-            
-            self.state = .loaded
         } catch {
             if !Task.isCancelled {
                 ErrorService.shared.handle(error, message: "Error during download notifications from server.", showToastr: true)
@@ -97,18 +94,15 @@ struct NotificationsView: View {
     
     private func loadMoreNotifications() async {
         do {
-            let linkable = try await NotificationService.shared.notifications(
-                for: self.applicationState.account,
-                maxId: self.maxId,
-                limit: self.defaultPageSize)
-
-            if linkable.data.isEmpty {
-                self.allItemsLoaded = true
-                return
+            if let linkable = try await self.client.notifications?.notifications(maxId: self.maxId, limit: self.defaultPageSize) {
+                if linkable.data.isEmpty {
+                    self.allItemsLoaded = true
+                    return
+                }
+                
+                self.maxId = linkable.link?.maxId
+                self.notifications.append(contentsOf: linkable.data)
             }
-            
-            self.maxId = linkable.link?.maxId
-            self.notifications.append(contentsOf: linkable.data)
         } catch {
             ErrorService.shared.handle(error, message: "Error during download notifications from server.", showToastr: !Task.isCancelled)
         }
@@ -116,18 +110,15 @@ struct NotificationsView: View {
     
     private func loadNewNotifications() async {
         do {
-            let linkable = try await NotificationService.shared.notifications(
-                for: self.applicationState.account,
-                minId: self.minId,
-                limit: self.defaultPageSize)
-            
-            if let first = linkable.data.first, self.notifications.contains(where: { notification in notification.id == first.id }) {
-                // We have all notifications, we don't have to do anything.
-                return
+            if let linkable = try await self.client.notifications?.notifications(minId: self.minId, limit: self.defaultPageSize) {
+                if let first = linkable.data.first, self.notifications.contains(where: { notification in notification.id == first.id }) {
+                    // We have all notifications, we don't have to do anything.
+                    return
+                }
+                
+                self.minId = linkable.link?.minId
+                self.notifications.insert(contentsOf: linkable.data, at: 0)
             }
-            
-            self.minId = linkable.link?.minId
-            self.notifications.insert(contentsOf: linkable.data, at: 0)
         } catch {
             ErrorService.shared.handle(error, message: "Error during download notifications from server.", showToastr: !Task.isCancelled)
         }

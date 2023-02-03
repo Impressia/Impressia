@@ -13,6 +13,7 @@ struct ComposeView: View {
     }
     
     @EnvironmentObject var applicationState: ApplicationState
+    @EnvironmentObject var client: Client
     @Environment(\.dismiss) private var dismiss
     
     @State var statusViewModel: StatusModel?
@@ -100,9 +101,7 @@ struct ComposeView: View {
     
     private func publishStatus() async {
         do {
-            _ = try await StatusService.shared.new(
-                status: Mastodon.Statuses.Components(inReplyToId: self.statusViewModel?.id, text: self.text),
-                for: self.applicationState.account)
+            _ = try await self.client.statuses?.new(status: Mastodon.Statuses.Components(inReplyToId: self.statusViewModel?.id, text: self.text))
         } catch {
             ErrorService.shared.handle(error, message: "Error during post status.", showToastr: true)
         }

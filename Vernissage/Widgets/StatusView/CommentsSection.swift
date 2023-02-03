@@ -10,6 +10,7 @@ import MastodonKit
 struct CommentsSection: View {
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var applicationState: ApplicationState
+    @EnvironmentObject var client: Client
 
     @State public var statusId: String    
     @State private var commentViewModels: [CommentModel]?
@@ -51,9 +52,7 @@ struct CommentsSection: View {
         }
         .task {
             do {
-                if let accountData = applicationState.account {
-                    self.commentViewModels = try await StatusService.shared.comments(to: statusId, for: accountData)
-                }
+                self.commentViewModels = try await self.client.statuses?.comments(to: statusId) ?? []
             } catch {
                 ErrorService.shared.handle(error, message: "Comments cannot be downloaded.", showToastr: !Task.isCancelled)
             }

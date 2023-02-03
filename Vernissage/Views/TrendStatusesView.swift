@@ -8,8 +8,9 @@ import SwiftUI
 import MastodonKit
 
 struct TrendStatusesView: View {
-    
     @EnvironmentObject private var applicationState: ApplicationState
+    @EnvironmentObject private var client: Client
+
     @State public var accountId: String
 
     @State private var tabSelectedValue: Mastodon.PixelfedTrends.TrendRange = .daily
@@ -108,16 +109,14 @@ struct TrendStatusesView: View {
     }
     
     private func loadStatuses() async throws {
-        let statuses = try await TrendsService.shared.statuses(
-            for: self.applicationState.account,
-            range: tabSelectedValue)
-
-        var inPlaceStatuses: [StatusModel] = []
-
-        for item in statuses.getStatusesWithImagesOnly() {
-            inPlaceStatuses.append(StatusModel(status: item))
+        if let statuses = try await client.trends?.statuses(range: tabSelectedValue) {
+            var inPlaceStatuses: [StatusModel] = []
+            
+            for item in statuses.getStatusesWithImagesOnly() {
+                inPlaceStatuses.append(StatusModel(status: item))
+            }
+            
+            self.statusViewModels = inPlaceStatuses
         }
-        
-        self.statusViewModels = inPlaceStatuses
     }
 }

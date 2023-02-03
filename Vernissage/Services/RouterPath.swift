@@ -47,14 +47,14 @@ class RouterPath: ObservableObject {
         path.append(to)
     }
     
-    public func handle(url: URL, account: AccountModel? = nil) -> OpenURLAction.Result {
+    public func handle(url: URL) -> OpenURLAction.Result {
         if url.pathComponents.contains(where: { $0 == "tags" }), let tag = url.pathComponents.last {
             navigate(to: .tag(hashTag: tag))
             return .handled
         } else if url.lastPathComponent.first == "@", let host = url.host {
             let acct = "\(url.lastPathComponent)@\(host)"
             Task {
-                await navigateToAccountFrom(acct: acct, url: url, account: account)
+                await navigateToAccountFrom(acct: acct, url: url)
             }
 
             return .handled
@@ -63,13 +63,9 @@ class RouterPath: ObservableObject {
         return urlHandler?(url) ?? .systemAction
     }
     
-    public func navigateToAccountFrom(acct: String, url: URL, account: AccountModel? = nil) async {
-        guard let account else { return }
-        
+    public func navigateToAccountFrom(acct: String, url: URL) async {
         Task {
-            let results = try? await SearchService.shared.search(for: account,
-                                                                 query: acct,
-                                                                 resultsType: Mastodon.Search.ResultsType.accounts)
+            let results = try? await Client.shared.search?.search(query: acct, resultsType: Mastodon.Search.ResultsType.accounts)
                         
             if let accountFromApi = results?.accounts.first {
                 navigate(to: .userProfile(accountId: accountFromApi.id,
