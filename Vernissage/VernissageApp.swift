@@ -58,6 +58,9 @@ struct VernissageApp: App {
                 // Load user preferences from database.
                 self.loadUserPreferences()
                 
+                // Refresh other access tokens.
+                await self.refreshAccessTokens()
+                
                 // Verify access token correctness.
                 let authorizationSession = AuthorizationSession()
                 await AuthorizationService.shared.verifyAccount(session: authorizationSession) { accountData in
@@ -123,6 +126,23 @@ struct VernissageApp: App {
         }
         
         ImagePipeline.shared = pipeline
+    }
+    
+    private func refreshAccessTokens() async {
+        let defaultSettings = ApplicationSettingsHandler.shared.getDefaultSettings()
+        print(defaultSettings.lastRefreshTokens)
+        
+        // Run refreshing access tokens once per day.
+        guard let refreshTokenDate = Calendar.current.date(byAdding: .day, value: 1, to: defaultSettings.lastRefreshTokens), refreshTokenDate < Date.now else {
+            return
+        }
+    
+        // Refresh access tokens.
+        await AuthorizationService.shared.refreshAccessTokens()
+        
+        // Update time when refresh tokens has been updated.
+        defaultSettings.lastRefreshTokens = Date.now
+        CoreDataHandler.shared.save()
     }
 }
 

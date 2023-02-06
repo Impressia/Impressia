@@ -43,7 +43,7 @@ public extension MastodonClient {
             self?.oAuthContinuation = continuation
             
             oauthClient?.renewAccessToken(
-                withRefreshToken: "refrestoken",
+                withRefreshToken: refreshToken,
                 completionHandler: { result in
                     switch result {
                     case let .success((credentials, _, _)):

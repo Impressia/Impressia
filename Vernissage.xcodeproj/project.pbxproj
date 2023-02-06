@@ -234,6 +234,7 @@
 		F89D6C4329718092001DA3D4 /* AccentsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentsSection.swift; sourceTree = "<group>"; };
 		F89D6C4529718193001DA3D4 /* ThemeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSection.swift; sourceTree = "<group>"; };
 		F89D6C49297196FF001DA3D4 /* ImagesViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesViewer.swift; sourceTree = "<group>"; };
+		F89F0605299139F6003DC875 /* Vernissage-002.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-002.xcdatamodel"; sourceTree = "<group>"; };
 		F8A93D7D2965FD89001D8331 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		F8B1E6502973FB7E00EE0D10 /* ToastrService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastrService.swift; sourceTree = "<group>"; };
 		F8B9B344298D1FCB009CC69C /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
@@ -1071,10 +1072,11 @@
 		F88C2476295C37BB0006098B /* Vernissage.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				F89F0605299139F6003DC875 /* Vernissage-002.xcdatamodel */,
 				F8C937A929882CA90004D782 /* Vernissage-001.xcdatamodel */,
 				F88C2477295C37BB0006098B /* Vernissage.xcdatamodel */,
 			);
-			currentVersion = F8C937A929882CA90004D782 /* Vernissage-001.xcdatamodel */;
+			currentVersion = F89F0605299139F6003DC875 /* Vernissage-002.xcdatamodel */;
 			path = Vernissage.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

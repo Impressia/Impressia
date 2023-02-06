@@ -56,7 +56,7 @@ public class AuthorizationService {
         // Verify address.
         _ = try await client.readInstanceInformation()
 
-        // Create application (we will get clientId amd clientSecret).
+        // Create application (we will get clientId and clientSecret).
         let oAuthApp = try await client.createApp(
             named: AppConstants.oauthApplicationName,
             redirectUri: AppConstants.oauthRedirectUri,
@@ -76,8 +76,8 @@ public class AuthorizationService {
         // Get account information from server.
         let account = try await authenticatedClient.verifyCredentials()
         
-        // Create account object in database.
-        let accountData = AccountDataHandler.shared.createAccountDataEntity()
+        // Get/create account object in database.
+        let accountData = self.getAccountData(account: account)
 
         accountData.id = account.id
         accountData.username = account.username
@@ -125,6 +125,44 @@ public class AuthorizationService {
         result(accountData)
     }
         
+    public func refreshAccessTokens() async {
+        let accounts = AccountDataHandler.shared.getAccountsData()
+        
+        await withTaskGroup(of: Void.self) { group in
+            for account in accounts {
+                group.addTask {
+                    do {
+                        try await self.refreshAccessToken(accountData: account)
+                    } catch {
+                        ErrorService.shared.handle(error, message: "Error during refreshing access token for account '\(account.acct)'.")
+                    }
+                }
+            }
+        }
+    }
+    
+    private func refreshAccessToken(accountData: AccountData) async throws {
+        let client = MastodonClient(baseURL: accountData.serverUrl)
+        
+        guard let refreshToken = accountData.refreshToken else {
+            return
+        }
+        
+        let oAuthSwiftCredential = try await client.refreshToken(clientId: accountData.clientId,
+                                                                 clientSecret: accountData.clientSecret,
+                                                                 refreshToken: refreshToken)
+        
+        // Get authenticated client.
+        let authenticatedClient = client.getAuthenticated(token: oAuthSwiftCredential.oauthToken)
+        
+        // Get account information from server.
+        let account = try await authenticatedClient.verifyCredentials()
+        try await self.update(account: accountData,
+                              basedOn: account,
+                              accessToken: oAuthSwiftCredential.oauthToken,
+                              refreshToken: oAuthSwiftCredential.oauthRefreshToken)
+    }
+    
     private func refreshCredentials(for accountData: AccountData,
                                     presentationContextProvider: ASWebAuthenticationPresentationContextProviding
     ) async throws {
@@ -190,5 +228,13 @@ public class AuthorizationService {
         
         // Save account data in database and in application state.
         CoreDataHandler.shared.save()
+    }
+    
+    private func getAccountData(account: Account) -> AccountData {
+        if let accountFromDb = AccountDataHandler.shared.getAccountData(accountId: account.id) {
+            return accountFromDb
+        }
+        
+        return AccountDataHandler.shared.createAccountDataEntity()
     }
 }
