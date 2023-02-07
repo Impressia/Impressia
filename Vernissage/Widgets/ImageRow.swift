@@ -18,6 +18,7 @@ struct ImageRow: View {
     @State private var imageWidth: Double
     @State private var uiImage:UIImage?
     @State private var showThumbImage = false
+    @State private var error: Error?
     
     init(statusData: StatusData) {
         self.status = statusData
@@ -103,27 +104,45 @@ struct ImageRow: View {
                 }
                 .frame(width: self.imageWidth, height: self.imageHeight)
             } else {
-                BlurredImage(blurhash: attachmentData.blurhash)
-                    .frame(width: self.imageWidth, height: self.imageHeight)
-                    .task {
-                        do {
-                            if let imageData = try await RemoteFileService.shared.fetchData(url: attachmentData.url) {
-                                HomeTimelineService.shared.update(attachment: attachmentData, withData: imageData)
-                                if let downloadedImage = UIImage(data: imageData) {
-                                    
-                                    let size = ImageSizeService.shared.calculate(for: attachmentData.url,
-                                                                                 width: downloadedImage.size.width,
-                                                                                 height: downloadedImage.size.height)
-                                    self.imageWidth = size.width
-                                    self.imageHeight = size.height
-                                    self.uiImage = downloadedImage
-                                }
-                            }
-                        } catch {
-                            ErrorService.shared.handle(error, message: "Cannot download the image.")
+                if let error {
+                    ZStack {
+                        BlurredImage(blurhash: attachmentData.blurhash)
+                            .frame(width: self.imageWidth, height: self.imageHeight)
+                        
+                        ErrorView(error: error) {
+                            self.error = nil
+                            await self.downloadImage(attachmentData: attachmentData)
                         }
+                        .padding()
                     }
+                } else {
+                    BlurredImage(blurhash: attachmentData.blurhash)
+                        .frame(width: self.imageWidth, height: self.imageHeight)
+                        .task {
+                            await self.downloadImage(attachmentData: attachmentData)
+                        }
+                }
             }
+        }
+    }
+    
+    private func downloadImage(attachmentData: AttachmentData) async {
+        do {
+            if let imageData = try await RemoteFileService.shared.fetchData(url: attachmentData.url) {
+                HomeTimelineService.shared.update(attachment: attachmentData, withData: imageData)
+                if let downloadedImage = UIImage(data: imageData) {
+                    
+                    let size = ImageSizeService.shared.calculate(for: attachmentData.url,
+                                                                 width: downloadedImage.size.width,
+                                                                 height: downloadedImage.size.height)
+                    self.imageWidth = size.width
+                    self.imageHeight = size.height
+                    self.uiImage = downloadedImage
+                }
+            }
+        } catch {
+            ErrorService.shared.handle(error, message: "Cannot download the image.")
+            self.error = error
         }
     }
 }

@@ -17,7 +17,7 @@ public class HomeTimelineService {
         // Load data from API and operate on CoreData on background context.
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
 
-        // Get maximimum downloaded stauts id.
+        // Get minimum downloaded stauts id.
         let oldestStatus = StatusDataHandler.shared.getMinimumStatus(accountId: account.id, viewContext: backgroundContext)
         
         guard let oldestStatus = oldestStatus else {
@@ -78,6 +78,42 @@ public class HomeTimelineService {
         self.setExifProperties(in: attachment, from: imageData)
         
         CoreDataHandler.shared.save()
+    }
+    
+    public func amountOfNewStatuses(for account: AccountModel) async -> Int {
+        guard let accessToken = account.accessToken else {
+            return 0
+        }
+        
+        // Load data from API and operate on CoreData on background context.
+        let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
+
+        // Get maximimum downloaded stauts id.
+        let newestStatus = StatusDataHandler.shared.getMaximumStatus(accountId: account.id, viewContext: backgroundContext)
+        guard let newestStatus else {
+            return 0
+        }
+        
+        let client = MastodonClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
+        var amountOfStatuses = 0
+        var newestStatusId = newestStatus.id
+        
+        while(true) {
+            do {
+                let downloadedStatuses = try await client.getHomeTimeline(minId: newestStatusId, limit: 40)
+                guard let firstStatus = downloadedStatuses.first else {
+                    break
+                }
+                
+                amountOfStatuses = amountOfStatuses + downloadedStatuses.count
+                newestStatusId = firstStatus.id
+            } catch {
+                ErrorService.shared.handle(error, message: "Error during downloading new statuses for amountof new statuses.")
+                break
+            }
+        }
+
+        return amountOfStatuses
     }
     
     private func refresh(for account: AccountModel, on backgroundContext: NSManagedObjectContext) async throws -> String? {

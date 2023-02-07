@@ -73,6 +73,7 @@ struct VernissageApp: App {
                         let accountModel = AccountModel(accountData: accountData)
                         self.applicationState.account = accountModel
                         self.applicationState.lastSeenStatusId = accountData.lastSeenStatusId
+                        self.applicationState.lastBackgroundRefresh = nil
                         self.client.setAccount(account: accountModel)
                         self.applicationViewMode = .mainView
                     }

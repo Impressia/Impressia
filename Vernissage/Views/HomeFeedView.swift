@@ -11,6 +11,7 @@ struct HomeFeedView: View {
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var routerPath: RouterPath
     
+    @State private var amountOfNewStatuses = 0
     @State private var allItemsLoaded = false
     @State private var state: ViewState = .loading
             
@@ -46,44 +47,74 @@ struct HomeFeedView: View {
     
     @ViewBuilder
     private func timeline() -> some View {
-        ScrollView {
-            LazyVStack {
-                ForEach(dbStatuses, id: \.self) { item in
-                    if self.shouldUpToDateBeVisible(statusId: item.id) {
-                        self.upToDatePlaceholder()
+        ZStack {
+            ScrollView {
+                LazyVStack {
+                    ForEach(dbStatuses, id: \.self) { item in
+                        if self.shouldUpToDateBeVisible(statusId: item.id) {
+                            self.upToDatePlaceholder()
+                        }
+                        
+                        ImageRow(statusData: item)
                     }
                     
-                    ImageRow(statusData: item)
-                }
-                
-                if allItemsLoaded == false {
-                    LoadingIndicator()
-                        .task {
-                            do {
-                                if let account = self.applicationState.account {
-                                    let newStatusesCount = try await HomeTimelineService.shared.loadOnBottom(for: account)
-                                    if newStatusesCount == 0 {
-                                        allItemsLoaded = true
+                    if allItemsLoaded == false {
+                        LoadingIndicator()
+                            .task {
+                                do {
+                                    if let account = self.applicationState.account {
+                                        let newStatusesCount = try await HomeTimelineService.shared.loadOnBottom(for: account)
+                                        if newStatusesCount == 0 {
+                                            allItemsLoaded = true
+                                        }
                                     }
+                                } catch {
+                                    ErrorService.shared.handle(error, message: "Error during download statuses from server.", showToastr: !Task.isCancelled)
                                 }
-                            } catch {
-                                ErrorService.shared.handle(error, message: "Error during download statuses from server.", showToastr: !Task.isCancelled)
                             }
-                        }
-                }
-            }
-        }
-        .refreshable {
-            do {
-                if let account = self.applicationState.account {
-                    if let lastSeenStatusId = try await HomeTimelineService.shared.loadOnTop(for: account) {
-                        try await HomeTimelineService.shared.save(lastSeenStatusId: lastSeenStatusId, for: account)
-                        self.applicationState.lastSeenStatusId = lastSeenStatusId
                     }
                 }
-            } catch {
-                ErrorService.shared.handle(error, message: "Error during download statuses from server.", showToastr: !Task.isCancelled)
             }
+            
+            if self.amountOfNewStatuses > 0 {
+                self.newPahotosView()
+            }
+        }
+        .task {
+            await self.loadInBackground()
+        }
+        .refreshable {
+            await self.refreshData()
+        }
+    }
+    
+    private func loadInBackground() async {
+        // Refreshing in background each 1 minute.
+        if let lastBackgroundRefresh = self.applicationState.lastBackgroundRefresh {
+            guard let refreshDate = Calendar.current.date(byAdding: .minute, value: 1, to: lastBackgroundRefresh), refreshDate < Date.now else {
+                return
+            }
+        }
+        
+        if let account = self.applicationState.account {
+            self.amountOfNewStatuses = await HomeTimelineService.shared.amountOfNewStatuses(for: account)
+            self.applicationState.lastBackgroundRefresh = Date.now
+        }
+    }
+    
+    private func refreshData() async {
+        do {
+            if let account = self.applicationState.account {
+                if let lastSeenStatusId = try await HomeTimelineService.shared.loadOnTop(for: account) {
+                    try await HomeTimelineService.shared.save(lastSeenStatusId: lastSeenStatusId, for: account)
+
+                    self.applicationState.lastSeenStatusId = lastSeenStatusId
+                    self.amountOfNewStatuses = 0
+                    self.applicationState.lastBackgroundRefresh = Date.now
+                }
+            }
+        } catch {
+            ErrorService.shared.handle(error, message: "Error during download statuses from server.", showToastr: !Task.isCancelled)
         }
     }
     
@@ -93,6 +124,9 @@ struct HomeFeedView: View {
                 _ = try await HomeTimelineService.shared.loadOnTop(for: account)
             }
             
+            self.amountOfNewStatuses = 0
+            self.applicationState.lastBackgroundRefresh = Date.now
+
             self.state = .loaded
         } catch {
             if !Task.isCancelled {
@@ -123,5 +157,27 @@ struct HomeFeedView: View {
         }
         .padding(.vertical, 8)
         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width * 0.75)
+    }
+    
+    @ViewBuilder
+    private func newPahotosView() -> some View {
+        VStack(alignment: .trailing, spacing: 4) {
+            HStack {
+                Spacer()
+
+                HStack {
+                    Text("\(amountOfNewStatuses) new \(amountOfNewStatuses == 1 ? "photo" : "photos")")
+                }
+                .padding(4)
+                .font(.footnote)
+                .foregroundColor(Color.white.opacity(0.7))
+                .background(.ultraThinMaterial)
+                .clipShape(Capsule())
+            }
+
+            Spacer()
+        }
+        .padding(.top, 4)
+        .padding(.trailing, 4)
     }
 }

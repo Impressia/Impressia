@@ -8,6 +8,12 @@ import Foundation
 
 extension StatusData {
     func attachments() -> [AttachmentData] {
-        return self.attachmentsRelation?.sorted(by: <) ?? []
+        guard let attachments = self.attachmentsRelation else {
+            return []
+        }
+
+        return attachments.sorted(by: { lhs, rhs in
+            lhs.id < rhs.id
+        })
     }
 }

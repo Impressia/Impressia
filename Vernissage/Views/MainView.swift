@@ -157,6 +157,7 @@ struct MainView: View {
                         self.applicationState.account = accountModel
                         self.client.setAccount(account: accountModel)
                         self.applicationState.lastSeenStatusId = account.lastSeenStatusId
+                        self.applicationState.lastBackgroundRefresh = nil
 
                         ApplicationSettingsHandler.shared.setAccountAsDefault(accountData: account)
                     } label: {

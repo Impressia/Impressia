@@ -15,6 +15,7 @@ public class ApplicationState: ObservableObject {
     @Published var account: AccountModel?
 
     @Published var lastSeenStatusId: String?
+    @Published var lastBackgroundRefresh: Date?
     @Published var tintColor = TintColor.accentColor2
     @Published var theme = Theme.system
     @Published var avatarShape = AvatarShape.circle
