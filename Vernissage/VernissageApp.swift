@@ -21,6 +21,8 @@ struct VernissageApp: App {
     @State var applicationViewMode: ApplicationViewMode = .loading
     @State var tintColor = ApplicationState.shared.tintColor.color()
     @State var theme = ApplicationState.shared.theme.colorScheme()
+    
+    let timer = Timer.publish(every: 120, on: .main, in: .common).autoconnect()
 
     var body: some Scene {
         WindowGroup {
@@ -73,18 +75,29 @@ struct VernissageApp: App {
                         let accountModel = AccountModel(accountData: accountData)
                         self.applicationState.account = accountModel
                         self.applicationState.lastSeenStatusId = accountData.lastSeenStatusId
-                        self.applicationState.lastBackgroundRefresh = nil
+                        self.applicationState.amountOfNewStatuses = 0
                         self.client.setAccount(account: accountModel)
                         self.applicationViewMode = .mainView
+                        
+                        // Check amount of newly added photos.
+                        await self.loadInBackground()
                     }
                 }
             }
             .navigationViewStyle(.stack)
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                 try? HapticService.shared.start()
+                Task {
+                    await self.loadInBackground()
+                }
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
                 HapticService.shared.stop()
+            }
+            .onReceive(timer) { time in
+                Task {
+                    await self.loadInBackground()
+                }
             }
             .onChange(of: applicationState.theme) { newValue in
                 self.theme = newValue.colorScheme()
@@ -144,6 +157,12 @@ struct VernissageApp: App {
         // Update time when refresh tokens has been updated.
         defaultSettings.lastRefreshTokens = Date.now
         CoreDataHandler.shared.save()
+    }
+    
+    private func loadInBackground() async {
+        if let account = self.applicationState.account {
+            self.applicationState.amountOfNewStatuses = await HomeTimelineService.shared.amountOfNewStatuses(for: account)
+        }
     }
 }
 

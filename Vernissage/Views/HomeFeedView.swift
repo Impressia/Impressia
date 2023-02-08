@@ -6,15 +6,23 @@
 
 import SwiftUI
 
+private struct OffsetPreferenceKey: PreferenceKey {
+  static var defaultValue: CGFloat = .zero
+  static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {}
+}
+
 struct HomeFeedView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var routerPath: RouterPath
     
-    @State private var amountOfNewStatuses = 0
     @State private var allItemsLoaded = false
     @State private var state: ViewState = .loading
-            
+
+    @State private var opacity = 0.0
+    @State private var offset = -50.0
+    
     @FetchRequest var dbStatuses: FetchedResults<StatusData>
     
     init(accountId: String) {
@@ -49,6 +57,10 @@ struct HomeFeedView: View {
     private func timeline() -> some View {
         ZStack {
             ScrollView {
+                // Offset reader for hiding top pill with amount of new photos.
+                self.offsetReader()
+                
+                // VStack with all photos from database.
                 LazyVStack {
                     ForEach(dbStatuses, id: \.self) { item in
                         if self.shouldUpToDateBeVisible(statusId: item.id) {
@@ -75,30 +87,25 @@ struct HomeFeedView: View {
                     }
                 }
             }
-            
-            if self.amountOfNewStatuses > 0 {
-                self.newPahotosView()
+            .coordinateSpace(name: "frameLayer")
+            .onPreferenceChange(OffsetPreferenceKey.self) {(offset) in
+                self.calculateOpacity(offset: offset)
             }
-        }
-        .task {
-            await self.loadInBackground()
+            
+            self.newPahotosView()
+                .offset(y: self.offset)
+                .opacity(self.opacity)
         }
         .refreshable {
-            await self.refreshData()
-        }
-    }
-    
-    private func loadInBackground() async {
-        // Refreshing in background each 1 minute.
-        if let lastBackgroundRefresh = self.applicationState.lastBackgroundRefresh {
-            guard let refreshDate = Calendar.current.date(byAdding: .minute, value: 1, to: lastBackgroundRefresh), refreshDate < Date.now else {
-                return
+            self.applicationState.amountOfNewStatuses = 0
+            Task {
+                await self.refreshData()
             }
         }
-        
-        if let account = self.applicationState.account {
-            self.amountOfNewStatuses = await HomeTimelineService.shared.amountOfNewStatuses(for: account)
-            self.applicationState.lastBackgroundRefresh = Date.now
+        .onChange(of: self.applicationState.amountOfNewStatuses) { newValue in
+            self.calculateOffset()
+        }.onAppear {
+            self.calculateOffset()
         }
     }
     
@@ -107,10 +114,8 @@ struct HomeFeedView: View {
             if let account = self.applicationState.account {
                 if let lastSeenStatusId = try await HomeTimelineService.shared.loadOnTop(for: account) {
                     try await HomeTimelineService.shared.save(lastSeenStatusId: lastSeenStatusId, for: account)
-
+                    
                     self.applicationState.lastSeenStatusId = lastSeenStatusId
-                    self.amountOfNewStatuses = 0
-                    self.applicationState.lastBackgroundRefresh = Date.now
                 }
             }
         } catch {
@@ -124,9 +129,7 @@ struct HomeFeedView: View {
                 _ = try await HomeTimelineService.shared.loadOnTop(for: account)
             }
             
-            self.amountOfNewStatuses = 0
-            self.applicationState.lastBackgroundRefresh = Date.now
-
+            self.applicationState.amountOfNewStatuses = 0
             self.state = .loaded
         } catch {
             if !Task.isCancelled {
@@ -138,8 +141,62 @@ struct HomeFeedView: View {
         }
     }
     
+    private func calculateOpacity(offset: CGFloat) {
+        if self.applicationState.amountOfNewStatuses == 0 {
+            return
+        }
+        
+        // View is scrolled down.
+        if offset <= 0 {
+            self.opacity = 1.0
+            return
+        }
+        
+        // View is scrolled up (loader is visible).
+        self.opacity = 1.0 - min((offset / 50.0), 1.0)
+        
+        // View is scrolled so high that we can hide view.
+        if offset > 170 {
+            self.hideNewStatusesView()
+        }
+    }
+    
+    private func calculateOffset() {
+        if self.applicationState.amountOfNewStatuses > 0 {
+            withAnimation(.easeIn) {
+                self.showNewStatusesView()
+            }
+        } else {
+            withAnimation(.easeOut) {
+                self.hideNewStatusesView()
+            }
+        }
+    }
+    
+    private func showNewStatusesView() {
+        self.offset = 0.0
+        self.opacity = 1.0
+    }
+    
+    private func hideNewStatusesView() {
+        self.offset = -50.0
+        self.opacity = 0.0
+    }
+    
     private func shouldUpToDateBeVisible(statusId: String) -> Bool {
         return self.applicationState.lastSeenStatusId != dbStatuses.first?.id && self.applicationState.lastSeenStatusId == statusId
+    }
+    
+    @ViewBuilder
+    private func offsetReader() -> some View {
+      GeometryReader { proxy in
+        Color.clear
+          .preference(
+            key: OffsetPreferenceKey.self,
+            value: proxy.frame(in: .named("frameLayer")).minY
+          )
+      }
+      .frame(height: 0)
     }
     
     @ViewBuilder
@@ -163,17 +220,15 @@ struct HomeFeedView: View {
     private func newPahotosView() -> some View {
         VStack(alignment: .trailing, spacing: 4) {
             HStack {
-                Spacer()
-
-                HStack {
-                    Text("\(amountOfNewStatuses) new \(amountOfNewStatuses == 1 ? "photo" : "photos")")
-                }
-                .padding(4)
-                .font(.footnote)
-                .foregroundColor(Color.white.opacity(0.7))
-                .background(.ultraThinMaterial)
-                .clipShape(Capsule())
+                Image(systemName: "arrow.up")
+                Text("\(self.applicationState.amountOfNewStatuses) New \(self.applicationState.amountOfNewStatuses == 1 ? "Photo" : "Photos")")
             }
+            .padding(12)
+            .font(.footnote)
+            .fontWeight(.light)
+            .foregroundColor(Color.white)
+            .background(.ultraThinMaterial)
+            .clipShape(Capsule())
 
             Spacer()
         }
