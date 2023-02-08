@@ -34,6 +34,8 @@ extension View {
                 AccountsView(entityId: entityId, listType: listType)
             case .signIn:
                 SignInView()
+            case .thirdParty:
+                ThirdPartyView()
             }
         }
     }

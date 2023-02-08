@@ -31,22 +31,14 @@ struct SettingsView: View {
                     // Avatar shapes.
                     AvatarShapesSection()
                     
+                    // Support.
+                    SupportView()
+                    
                     // Other.
-                    Section("Other") {
-                        Text("Third party") // Link to dependeinces
-                        Text("Report a bug")
-                        Text("Follow me on Mastodon")
-                    }
+                    OtherSection()
                     
                     // Version.
-                    Section() {
-                        HStack {
-                            Text("Version")
-                            Spacer()
-                            Text("\(appVersion ?? String.empty()) (\(appBundleVersion ?? String.empty()))")
-                                .foregroundColor(.accentColor)
-                        }
-                    }
+                    self.version()
                 }
                 .frame(alignment: .topLeading)
                 .toolbar {
@@ -73,8 +65,20 @@ struct SettingsView: View {
             self.theme = self.applicationState.theme.colorScheme() ?? self.getSystemColorScheme()
         }
     }
+    
+    @ViewBuilder
+    private func version() -> some View {
+        Section() {
+            HStack {
+                Text("Version")
+                Spacer()
+                Text("\(appVersion ?? String.empty()) (\(appBundleVersion ?? String.empty()))")
+                    .foregroundColor(.accentColor)
+            }
+        }
+    }
 
-    func getSystemColorScheme() -> ColorScheme {
+    private func getSystemColorScheme() -> ColorScheme {
         return UITraitCollection.current.userInterfaceStyle == .light ? .light : .dark
     }
 }
