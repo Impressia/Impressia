@@ -73,8 +73,10 @@ public class HomeTimelineService {
         return statusData
     }
     
-    public func update(attachment: AttachmentData, withData imageData: Data) {
+    public func update(attachment: AttachmentData, withData imageData: Data, imageWidth: Double, imageHeight: Double) {
         attachment.data = imageData
+        attachment.metaImageWidth = Int32(imageWidth)
+        attachment.metaImageHeight = Int32(imageHeight)
         self.setExifProperties(in: attachment, from: imageData)
         
         CoreDataHandler.shared.save()

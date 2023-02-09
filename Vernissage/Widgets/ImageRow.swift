@@ -28,14 +28,6 @@ struct ImageRow: View {
         if let attachmentData, let size = ImageSizeService.shared.get(for: attachmentData.url) {
             self.imageWidth = size.width
             self.imageHeight = size.height
-        } else if let attachmentData, let imageData = attachmentData.data, let uiImage = UIImage(data: imageData) {
-            self.uiImage = uiImage
-            
-            let size = ImageSizeService.shared.calculate(for: attachmentData.url,
-                                                         width: uiImage.size.width,
-                                                         height: uiImage.size.height)
-            self.imageWidth = size.width
-            self.imageHeight = size.height
         } else if let attachmentData, attachmentData.metaImageWidth > 0 && attachmentData.metaImageHeight > 0 {
             let size = ImageSizeService.shared.calculate(for: attachmentData.url,
                                                          width: attachmentData.metaImageWidth,
@@ -128,17 +120,17 @@ struct ImageRow: View {
     
     private func downloadImage(attachmentData: AttachmentData) async {
         do {
-            if let imageData = try await RemoteFileService.shared.fetchData(url: attachmentData.url) {
-                HomeTimelineService.shared.update(attachment: attachmentData, withData: imageData)
-                if let downloadedImage = UIImage(data: imageData) {
+            if let imageData = try await RemoteFileService.shared.fetchData(url: attachmentData.url),
+               let downloadedImage = UIImage(data: imageData) {
                     
-                    let size = ImageSizeService.shared.calculate(for: attachmentData.url,
-                                                                 width: downloadedImage.size.width,
-                                                                 height: downloadedImage.size.height)
-                    self.imageWidth = size.width
-                    self.imageHeight = size.height
-                    self.uiImage = downloadedImage
-                }
+                let size = ImageSizeService.shared.calculate(for: attachmentData.url,
+                                                             width: downloadedImage.size.width,
+                                                             height: downloadedImage.size.height)
+                self.imageWidth = size.width
+                self.imageHeight = size.height
+                self.uiImage = downloadedImage
+                
+                HomeTimelineService.shared.update(attachment: attachmentData, withData: imageData, imageWidth: size.width, imageHeight: size.height)
             }
         } catch {
             ErrorService.shared.handle(error, message: "Cannot download the image.")
