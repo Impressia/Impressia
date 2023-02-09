@@ -169,15 +169,17 @@ public class AuthorizationService {
 
         let client = MastodonClient(baseURL: accountData.serverUrl)
 
-        // Create application (we will get clientId amd clientSecret).
-        let oAuthApp = Application(clientId: accountData.clientId, clientSecret: accountData.clientSecret)
+        // Create application (we will get clientId and clientSecret).
+        let oAuthApp = Application(clientId: accountData.clientId,
+                                   clientSecret: accountData.clientSecret,
+                                   redirectUri: AppConstants.oauthRedirectUri)
         
         // Authorize a user (browser, we will get clientCode).
         let oAuthSwiftCredential = try await client.authenticate(app: oAuthApp,
                                                                  scope: Scopes(AppConstants.oauthScopes),
                                                                  callbackUrlScheme: AppConstants.oauthScheme,
                                                                  presentationContextProvider: presentationContextProvider)
-                
+        
         // Get authenticated client.
         let authenticatedClient = client.getAuthenticated(token: oAuthSwiftCredential.oauthToken)
         

@@ -32,9 +32,9 @@ public class Application: BaseApplication {
         case vapidKey = "vapid_key"
     }
     
-    public init(clientId: String, clientSecret: String, vapidKey: String = "") {
+    public init(clientId: String, clientSecret: String, redirectUri: String, vapidKey: String = "") {
         self.id = ""
-        self.redirectUri = "urn:ietf:wg:oauth:2.0:oob"
+        self.redirectUri = redirectUri
         self.clientId = clientId
         self.clientSecret = clientSecret
         self.vapidKey = vapidKey
