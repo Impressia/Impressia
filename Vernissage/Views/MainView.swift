@@ -153,6 +153,8 @@ struct MainView: View {
             Menu {
                 ForEach(self.dbAccounts) { account in
                     Button {
+                        HapticService.shared.touch()
+
                         let accountModel = AccountModel(accountData: account)
                         self.applicationState.account = accountModel
                         self.client.setAccount(account: accountModel)
@@ -172,6 +174,7 @@ struct MainView: View {
                 Divider()
                 
                 Button {
+                    HapticService.shared.touch()
                     self.routerPath.presentedSheet = .settings
                 } label: {
                     Label("Settings", systemImage: "gear")
@@ -203,6 +206,7 @@ struct MainView: View {
         if viewMode == .local || viewMode == .home || viewMode == .federated {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
+                    HapticService.shared.touch()
                     self.routerPath.presentedSheet = .newStatusEditor
                 } label: {
                     Image(systemName: "square.and.pencil")

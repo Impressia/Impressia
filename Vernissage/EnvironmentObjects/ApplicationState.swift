@@ -16,6 +16,7 @@ public class ApplicationState: ObservableObject {
 
     @Published var lastSeenStatusId: String?
     @Published var amountOfNewStatuses = 0
+    @Published var newComment: CommentModel?
     @Published var tintColor = TintColor.accentColor2
     @Published var theme = Theme.system
     @Published var avatarShape = AvatarShape.circle

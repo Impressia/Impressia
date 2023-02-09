@@ -50,17 +50,27 @@ struct CommentsSection: View {
                 }
             }
         }
-        .task {
-            do {
-                self.commentViewModels = try await self.client.statuses?.comments(to: statusId) ?? []
-            } catch {
-                ErrorService.shared.handle(error, message: "Comments cannot be downloaded.", showToastr: !Task.isCancelled)
+        .onChange(of: self.applicationState.newComment) { _ in
+            self.commentViewModels = nil
+            Task {
+                await self.loadComments()
             }
+        }
+        .task {
+            await self.loadComments()
         }
     }
     
     private func getInteractionRowTextColor() -> Color {
         return self.colorScheme == .dark ? Color.black : Color.white
+    }
+
+    private func loadComments() async {
+        do {
+            self.commentViewModels = try await self.client.statuses?.comments(to: statusId) ?? []
+        } catch {
+            ErrorService.shared.handle(error, message: "Comments cannot be downloaded.", showToastr: !Task.isCancelled)
+        }
     }
 }
 

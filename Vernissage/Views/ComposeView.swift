@@ -101,7 +101,11 @@ struct ComposeView: View {
     
     private func publishStatus() async {
         do {
-            _ = try await self.client.statuses?.new(status: Mastodon.Statuses.Components(inReplyToId: self.statusViewModel?.id, text: self.text))
+            if let newStatus = try await self.client.statuses?.new(status:Mastodon.Statuses.Components(inReplyToId: self.statusViewModel?.id, text: self.text)) {
+                let statusModel = StatusModel(status: newStatus)
+                let commentModel = CommentModel(status: statusModel, showDivider: false)
+                self.applicationState.newComment = commentModel
+            }
         } catch {
             ErrorService.shared.handle(error, message: "Error during post status.", showToastr: true)
         }
