@@ -50,7 +50,9 @@ struct ImageRow: View {
                             Image(uiImage: uiImage)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .transition(.opacity)
+                                .onTapGesture{
+                                    self.navigateToStatus()
+                                }
                         }
                     } else {
                         ZStack {
@@ -58,13 +60,7 @@ struct ImageRow: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .onTapGesture{
-                                    self.routerPath.navigate(to: .status(
-                                        id: status.rebloggedStatusId ?? status.id,
-                                        blurhash: status.attachments().first?.blurhash,
-                                        highestImageUrl: status.attachments().getHighestImage()?.url,
-                                        metaImageWidth: status.attachments().first?.metaImageWidth,
-                                        metaImageHeight: status.attachments().first?.metaImageHeight
-                                    ))
+                                    self.navigateToStatus()
                                 }
                                 .onLongPressGesture(minimumDuration: 0.2) {
                                     Task {
@@ -110,6 +106,9 @@ struct ImageRow: View {
                 } else {
                     BlurredImage(blurhash: attachmentData.blurhash)
                         .frame(width: self.imageWidth, height: self.imageHeight)
+                        .onTapGesture{
+                            self.navigateToStatus()
+                        }
                         .task {
                             await self.downloadImage(attachmentData: attachmentData)
                         }
@@ -136,5 +135,15 @@ struct ImageRow: View {
             ErrorService.shared.handle(error, message: "Cannot download the image.")
             self.error = error
         }
+    }
+    
+    private func navigateToStatus() {
+        self.routerPath.navigate(to: .status(
+            id: status.rebloggedStatusId ?? status.id,
+            blurhash: status.attachments().first?.blurhash,
+            highestImageUrl: status.attachments().getHighestImage()?.url,
+            metaImageWidth: status.attachments().first?.metaImageWidth,
+            metaImageHeight: status.attachments().first?.metaImageHeight
+        ))
     }
 }

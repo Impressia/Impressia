@@ -92,7 +92,7 @@ struct HomeFeedView: View {
                 self.calculateOpacity(offset: offset)
             }
             
-            self.newPahotosView()
+            self.newPhotosView()
                 .offset(y: self.offset)
                 .opacity(self.opacity)
         }
@@ -217,7 +217,7 @@ struct HomeFeedView: View {
     }
     
     @ViewBuilder
-    private func newPahotosView() -> some View {
+    private func newPhotosView() -> some View {
         VStack(alignment: .trailing, spacing: 4) {
             HStack {
                 Image(systemName: "arrow.up")
