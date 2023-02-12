@@ -11,27 +11,30 @@ struct SupportView: View {
     var body: some View {
         Section("Support") {
             HStack(alignment: .center) {
+                Text("🍩")
+                    .font(.title)
                 VStack(alignment: .leading) {
-                    Text("🍭 Lollypop")
+                    Text("Donut")
                         .font(.caption)
-                        .padding(.bottom, 4)
-                    Text("Small but cute and it's sweet.")
+                    Text("Treat me to a doughnut.")
                         .font(.footnote)
                         .foregroundColor(.lightGrayColor)
                 }
                 Spacer()
-                Button("2.99 PLN") {
+                Button("5.99 PLN") {
                 }
                 .font(.footnote)
                 .buttonStyle(.borderedProminent)
             }
+            .padding(.vertical, 4)
             
             HStack(alignment: .center) {
+                Text("☕️")
+                    .font(.title)
                 VStack(alignment: .leading) {
-                    Text("☕️ Cofee")
+                    Text("Cofee")
                         .font(.caption)
-                        .padding(.bottom, 4)
-                    Text("More adrenaline before implemnenting something new.")
+                    Text("Treat me to a coffe.")
                         .font(.footnote)
                         .foregroundColor(.lightGrayColor)
                 }
@@ -41,13 +44,15 @@ struct SupportView: View {
                 .font(.footnote)
                 .buttonStyle(.borderedProminent)
             }
+            .padding(.vertical, 4)
             
             HStack(alignment: .center) {
+                Text("🍰")
+                    .font(.title)
                 VStack(alignment: .leading) {
-                    Text("🍰 Cofee & cake")
+                    Text("Cofee & cake")
                         .font(.caption)
-                        .padding(.bottom, 4)
-                    Text("More adrenaline and sugar, now we can create rocket into space.")
+                    Text("Treat me to a coffe and cake.")
                         .font(.footnote)
                         .foregroundColor(.lightGrayColor)
                 }
@@ -57,6 +62,7 @@ struct SupportView: View {
                 .font(.footnote)
                 .buttonStyle(.borderedProminent)
             }
+            .padding(.vertical, 4)
         }
     }
 }

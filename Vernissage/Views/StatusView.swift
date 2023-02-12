@@ -31,7 +31,7 @@ struct StatusView: View {
     @State private var exifExposure: String?
     @State private var exifCreatedDate: String?
     @State private var exifLens: String?
-        
+    
     var body: some View {
         self.mainBody()
             .navigationBarTitle("Details")
@@ -147,10 +147,18 @@ struct StatusView: View {
         do {
             // Get status from API.
             if let status = try await self.client.statuses?.status(withId: self.statusId) {
-                let statusViewModel = StatusModel(status: status)
-                                    
-                self.statusViewModel = statusViewModel
-                self.selectedAttachmentId = statusViewModel.mediaAttachments.first?.id ?? String.empty()
+                var statusModel = StatusModel(status: status)
+                
+                // We have to always open main status (even if the user is redirected from notifications to comment).
+                statusModel = try await self.getMainStatus(status: statusModel)
+                if status.id != statusModel.id {
+                     self.highestImageUrl = statusModel.mediaAttachments.getHighestImage()?.url
+                     self.imageWidth = statusModel.getImageWidth()
+                     self.imageHeight = statusModel.getImageHeight()
+                }
+                
+                self.statusViewModel = statusModel
+                self.selectedAttachmentId = statusModel.mediaAttachments.first?.id ?? String.empty()
                 
                 // If we have status in database then we can update data.
                 if let accountData = self.applicationState.account,
@@ -200,6 +208,19 @@ struct StatusView: View {
     private func calculateHeight(width: Double, height: Double) -> CGFloat {
         let divider = width / UIScreen.main.bounds.size.width
         return height / divider
+    }
+    
+    private func getMainStatus(status: StatusModel) async throws -> StatusModel {
+        guard let inReplyToId = status.inReplyToId else {
+            return status
+        }
+        
+        guard let previousStatus = try await self.client.statuses?.status(withId: inReplyToId) else {
+            throw ClientError.cannotRetrieveStatus
+        }
+        
+        let previousStatusModel = StatusModel(status: previousStatus)
+        return try await self.getMainStatus(status: previousStatusModel)
     }
 }
 

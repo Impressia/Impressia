@@ -11,7 +11,7 @@ import MastodonKit
 extension Client {
     public class Statuses: BaseClient {
         
-        public func status(withId statusId: String) async throws -> Status? {
+        public func status(withId statusId: String) async throws -> Status {
             return try await mastodonClient.status(statusId: statusId)
         }
         

@@ -11,6 +11,7 @@ import NukeUI
 struct NotificationRow: View {
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var routerPath: RouterPath
+    @EnvironmentObject var client: Client
 
     @State private var image: SwiftUI.Image?
     
@@ -64,7 +65,7 @@ struct NotificationRow: View {
                 
                 
                 switch self.notification.type {
-                case .favourite, .reblog, .mention, .status, .poll, .update:
+                case .favourite, .reblog, .status, .poll, .update:
                     HStack(alignment: .top) {
                         Spacer()
                         if let attachment {
@@ -88,6 +89,13 @@ struct NotificationRow: View {
                             EmptyView()
                         }
                     }
+                case .mention:
+                    if let status = self.notification.status {
+                        MarkdownFormattedText(status.content.asMarkdown, withFontSize: 12, andWidth: contentWidth)
+                            .environment(\.openURL, OpenURLAction { url in .handled })
+                    } else {
+                        EmptyView()
+                    }
                 case .follow, .followRequest, .adminSignUp:
                     if let note = self.notification.account.note {
                         MarkdownFormattedText(note.asMarkdown, withFontSize: 12, andWidth: contentWidth)
@@ -106,12 +114,12 @@ struct NotificationRow: View {
             switch notification.type {
             case .favourite, .reblog, .mention, .status, .poll, .update:
                 if let status = notification.status {
-                    let statusViewModel = StatusModel(status: status)
-                    self.routerPath.navigate(to: .status(id: statusViewModel.id,
-                                                         blurhash: statusViewModel.mediaAttachments.first?.blurhash,
-                                                         highestImageUrl: statusViewModel.mediaAttachments.getHighestImage()?.url,
-                                                         metaImageWidth: statusViewModel.getImageWidth(),
-                                                         metaImageHeight: statusViewModel.getImageHeight()))
+                    let statusModel = StatusModel(status: status)
+                    self.routerPath.navigate(to: .status(id: statusModel.id,
+                                                         blurhash: statusModel.mediaAttachments.first?.blurhash,
+                                                         highestImageUrl: statusModel.mediaAttachments.getHighestImage()?.url,
+                                                         metaImageWidth: statusModel.getImageWidth(),
+                                                         metaImageHeight: statusModel.getImageHeight()))
                 }
             case .follow, .followRequest, .adminSignUp:
                 self.routerPath.navigate(to: .userProfile(accountId: notification.account.id,
