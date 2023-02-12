@@ -153,15 +153,7 @@ struct MainView: View {
             Menu {
                 ForEach(self.dbAccounts) { account in
                     Button {
-                        HapticService.shared.touch()
-
-                        let accountModel = AccountModel(accountData: account)
-                        self.applicationState.account = accountModel
-                        self.client.setAccount(account: accountModel)
-                        self.applicationState.lastSeenStatusId = account.lastSeenStatusId
-                        self.applicationState.amountOfNewStatuses = 0
-
-                        ApplicationSettingsHandler.shared.setAccountAsDefault(accountData: account)
+                        self.tryToSwitch(account)
                     } label: {
                         if self.applicationState.account?.id == account.id {
                             Label(account.displayName ?? account.acct, systemImage: "checkmark")
@@ -230,6 +222,31 @@ struct MainView: View {
             return "Profile"
         case .notifications:
             return "Notifications"
+        }
+    }
+    
+    private func tryToSwitch(_ account: AccountData) {
+        HapticService.shared.touch()
+
+        Task {
+            // Verify access token correctness.
+            let authorizationSession = AuthorizationSession()
+            await AuthorizationService.shared.verifyAccount(session: authorizationSession, currentAccount: account) { accountData in
+                guard let accountData = accountData else {
+                    ToastrService.shared.showError(subtitle: "Cannot switch accounts.")
+                    return
+                }
+
+                Task { @MainActor in
+                    let accountModel = AccountModel(accountData: accountData)
+                    self.applicationState.account = accountModel
+                    self.client.setAccount(account: accountModel)
+                    self.applicationState.lastSeenStatusId = account.lastSeenStatusId
+                    self.applicationState.amountOfNewStatuses = 0
+                    
+                    ApplicationSettingsHandler.shared.setAccountAsDefault(accountData: accountData)
+                }
+            }
         }
     }
 }

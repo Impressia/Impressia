@@ -65,7 +65,8 @@ struct VernissageApp: App {
                 
                 // Verify access token correctness.
                 let authorizationSession = AuthorizationSession()
-                await AuthorizationService.shared.verifyAccount(session: authorizationSession) { accountData in
+                let currentAccount = AccountDataHandler.shared.getCurrentAccountData()
+                await AuthorizationService.shared.verifyAccount(session: authorizationSession, currentAccount: currentAccount) { accountData in
                     guard let accountData = accountData else {
                         self.applicationViewMode = .signIn
                         return

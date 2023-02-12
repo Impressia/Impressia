@@ -72,7 +72,8 @@ public extension MastodonClient {
         )
         
         oauthClient?.authorizeURLHandler = ASWebAuthenticationURLHandler(callbackUrlScheme: callbackUrlScheme,
-                                                                         presentationContextProvider: presentationContextProvider)
+                                                                         presentationContextProvider: presentationContextProvider,
+                                                                         prefersEphemeralWebBrowserSession: true)
         
         return try await withCheckedThrowingContinuation { [weak self] continuation in
             self?.oAuthContinuation = continuation

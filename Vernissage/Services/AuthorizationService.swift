@@ -14,9 +14,7 @@ public class AuthorizationService {
     private init() { }
     
     /// Access token verification.
-    public func verifyAccount(session: AuthorizationSession, _ result: @escaping (AccountData?) -> Void) async {
-        let currentAccount = AccountDataHandler.shared.getCurrentAccountData()
-        
+    public func verifyAccount(session: AuthorizationSession, currentAccount: AccountData?, _ result: @escaping (AccountData?) -> Void) async {
         // When we dont have even one account stored in database then we have to ask user to enter server and sign in.
         guard let currentAccount, let accessToken = currentAccount.accessToken else {
             result(nil)
@@ -133,8 +131,16 @@ public class AuthorizationService {
                 group.addTask {
                     do {
                         try await self.refreshAccessToken(accountData: account)
+
+                        #if DEBUG
+                            ToastrService.shared.showSuccess("New access tokens has been retrieved", imageSystemName: "key.fill")
+                        #endif
                     } catch {
-                        ErrorService.shared.handle(error, message: "Error during refreshing access token for account '\(account.acct)'.")
+                        #if DEBUG
+                            ErrorService.shared.handle(error, message: "Error during refreshing access token for account '\(account.acct)'.", showToastr: true)
+                        #else
+                            ErrorService.shared.handle(error, message: "Error during refreshing access token for account '\(account.acct)'.")
+                        #endif
                     }
                 }
             }
