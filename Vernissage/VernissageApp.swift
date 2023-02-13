@@ -17,6 +17,7 @@ struct VernissageApp: App {
     @StateObject var applicationState = ApplicationState.shared
     @StateObject var client = Client.shared
     @StateObject var routerPath = RouterPath()
+    @StateObject var tips = Tips()
     
     @State var applicationViewMode: ApplicationViewMode = .loading
     @State var tintColor = ApplicationState.shared.tintColor.color()
@@ -42,12 +43,14 @@ struct VernissageApp: App {
                     MainView()
                         .withAppRouteur()
                         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
+                        .withOverlayDestinations(overlayDestinations: $routerPath.presentedOverlay)
                 }
             }
             .environment(\.managedObjectContext, coreDataHandler.container.viewContext)
             .environmentObject(applicationState)
             .environmentObject(client)
             .environmentObject(routerPath)
+            .environmentObject(tips)
             .tint(self.tintColor)
             .preferredColorScheme(self.theme)
             .task {

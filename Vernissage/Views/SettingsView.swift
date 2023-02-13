@@ -8,6 +8,9 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var applicationState: ApplicationState
+    @EnvironmentObject var routerPath: RouterPath
+    @EnvironmentObject var tips: Tips
+
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) private var dismiss
     
@@ -59,11 +62,21 @@ struct SettingsView: View {
                 .preferredColorScheme(self.theme)
             }
             .withAppRouteur()
+            .withOverlayDestinations(overlayDestinations: $routerPath.presentedOverlay)
         }
         .onChange(of: self.applicationState.theme) { newValue in
             // Change theme of current modal screen (unformtunatelly it's not changed autmatically.
             self.theme = self.applicationState.theme.colorScheme() ?? self.getSystemColorScheme()
         }
+        .onChange(of: tips.status) { status in
+            if status == .successful {
+                withAnimation(.spring()) {
+                    self.routerPath.presentedOverlay = .successPayment
+                    self.tips.reset()
+                }
+            }
+        }
+        .alert(isPresented: $tips.hasError, error: tips.error) { }
     }
     
     @ViewBuilder

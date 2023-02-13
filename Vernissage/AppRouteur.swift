@@ -52,4 +52,16 @@ extension View {
             }
         }
     }
+    
+    func withOverlayDestinations(overlayDestinations: Binding<OverlayDestinations?>) -> some View {
+        self.overlay {
+            switch overlayDestinations.wrappedValue {
+            case .successPayment:
+                ThanksView()
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+            default:
+                EmptyView()
+            }
+        }
+    }
 }

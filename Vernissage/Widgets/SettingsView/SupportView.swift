@@ -3,66 +3,48 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the MIT License.
 //
-    
 
 import SwiftUI
+import StoreKit
 
 struct SupportView: View {
+    
+    @EnvironmentObject var tips: Tips
+    
     var body: some View {
         Section("Support") {
-            HStack(alignment: .center) {
-                Text("🍩")
-                    .font(.title)
-                VStack(alignment: .leading) {
-                    Text("Donut")
-                        .font(.caption)
-                    Text("Treat me to a doughnut.")
-                        .font(.footnote)
-                        .foregroundColor(.lightGrayColor)
+            ForEach(tips.items) { product in
+                HStack(alignment: .center) {
+                    Text(self.getIcon(for: product))
+                        .font(.title)
+                    VStack(alignment: .leading) {
+                        Text(product.displayName)
+                            .font(.caption)
+                        Text(product.description)
+                            .font(.footnote)
+                            .foregroundColor(.lightGrayColor)
+                    }
+                    Spacer()
+                    Button(product.displayPrice) {
+                        Task {
+                            await tips.purchase(product)
+                        }
+                    }
+                    .font(.footnote)
+                    .buttonStyle(.borderedProminent)
                 }
-                Spacer()
-                Button("5.99 PLN") {
-                }
-                .font(.footnote)
-                .buttonStyle(.borderedProminent)
+                .padding(.vertical, 4)
             }
-            .padding(.vertical, 4)
-            
-            HStack(alignment: .center) {
-                Text("☕️")
-                    .font(.title)
-                VStack(alignment: .leading) {
-                    Text("Cofee")
-                        .font(.caption)
-                    Text("Treat me to a coffe.")
-                        .font(.footnote)
-                        .foregroundColor(.lightGrayColor)
-                }
-                Spacer()
-                Button("17.99 PLN") {
-                }
-                .font(.footnote)
-                .buttonStyle(.borderedProminent)
-            }
-            .padding(.vertical, 4)
-            
-            HStack(alignment: .center) {
-                Text("🍰")
-                    .font(.title)
-                VStack(alignment: .leading) {
-                    Text("Cofee & cake")
-                        .font(.caption)
-                    Text("Treat me to a coffe and cake.")
-                        .font(.footnote)
-                        .foregroundColor(.lightGrayColor)
-                }
-                Spacer()
-                Button("39.99 PLN") {
-                }
-                .font(.footnote)
-                .buttonStyle(.borderedProminent)
-            }
-            .padding(.vertical, 4)
+        }
+    }
+    
+    private func getIcon(for product: Product) -> String {
+        if product.id == ProductIdentifiers.donut.rawValue {
+            return "🍩"
+        } else if product.id == ProductIdentifiers.cofee.rawValue {
+            return "☕️"
+        } else {
+            return "🍰"
         }
     }
 }

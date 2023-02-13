@@ -1,0 +1,65 @@
+{
+  "identifier" : "1FBBF671",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "FCCAC94C",
+      "localizations" : [
+        {
+          "description" : "Treat me to a doughnut.",
+          "displayName" : "Donut",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "dev.mczachurski.Vernissage.donut",
+      "referenceName" : "Donut",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "3.99",
+      "familyShareable" : false,
+      "internalID" : "AD04459F",
+      "localizations" : [
+        {
+          "description" : "Treat me to a coffe.",
+          "displayName" : "Cofee",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "dev.mczachurski.Vernissage.cofee",
+      "referenceName" : "Cofee",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "9.99",
+      "familyShareable" : false,
+      "internalID" : "16E4E30C",
+      "localizations" : [
+        {
+          "description" : "Treat me to a coffe and cake.",
+          "displayName" : "Cofee & cake",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "dev.mczachurski.Vernissage.cake",
+      "referenceName" : "Cake",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_billingIssuesEnabled" : false,
+    "_failTransactionsEnabled" : false,
+    "_storeKitError" : 0
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}

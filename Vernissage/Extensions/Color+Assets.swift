@@ -13,6 +13,8 @@ extension Color {
     static let lightGrayColor = Color("LightGrayColor")
     static let mainTextColor = Color("MainTextColor")
     static let selectedRowColor = Color("SelectedRowColor")
+    static let viewBackgroundColor = Color("ViewBackgroundColor")
+    static let viewTextColor = Color("ViewTextColor")
     static let accentColor1 = Color("AccentColor1")
     static let accentColor2 = Color("AccentColor2")
     static let accentColor3 = Color("AccentColor3")

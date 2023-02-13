@@ -35,12 +35,17 @@ enum SheetDestinations: Identifiable {
     }
 }
 
+enum OverlayDestinations {
+    case successPayment
+}
+
 @MainActor
 class RouterPath: ObservableObject {
     public var urlHandler: ((URL) -> OpenURLAction.Result)?
   
     @Published public var path: [RouteurDestinations] = []
     @Published public var presentedSheet: SheetDestinations?
+    @Published public var presentedOverlay: OverlayDestinations?
 
     public init() {}
 
