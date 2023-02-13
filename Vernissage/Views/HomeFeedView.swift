@@ -157,6 +157,7 @@ struct HomeFeedView: View {
         
         // View is scrolled so high that we can hide view.
         if offset > 170 {
+            self.applicationState.amountOfNewStatuses = 0
             self.hideNewStatusesView()
         }
     }

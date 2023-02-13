@@ -19,6 +19,7 @@ struct ImageRow: View {
     @State private var uiImage:UIImage?
     @State private var showThumbImage = false
     @State private var error: Error?
+    @State private var cancelled = true
     
     init(statusData: StatusData) {
         self.status = statusData
@@ -92,13 +93,19 @@ struct ImageRow: View {
                 }
                 .frame(width: self.imageWidth, height: self.imageHeight)
             } else {
-                if let error {
+                if cancelled {
+                    BlurredImage(blurhash: attachmentData.blurhash)
+                        .frame(width: self.imageWidth, height: self.imageHeight)
+                        .task {
+                            await self.downloadImage(attachmentData: attachmentData)
+                        }
+                }
+                else if let error {
                     ZStack {
                         BlurredImage(blurhash: attachmentData.blurhash)
                             .frame(width: self.imageWidth, height: self.imageHeight)
                         
                         ErrorView(error: error) {
-                            self.error = nil
                             await self.downloadImage(attachmentData: attachmentData)
                         }
                         .padding()
@@ -130,10 +137,17 @@ struct ImageRow: View {
                 self.uiImage = downloadedImage
                 
                 HomeTimelineService.shared.update(attachment: attachmentData, withData: imageData, imageWidth: size.width, imageHeight: size.height)
+                self.error = nil
+                self.cancelled = false
             }
         } catch {
-            ErrorService.shared.handle(error, message: "Cannot download the image.")
-            self.error = error
+            if !Task.isCancelled {
+                ErrorService.shared.handle(error, message: "Cannot download the image.")
+                self.error = error
+            } else {
+                ErrorService.shared.handle(error, message: "Download image has been canceled.")
+                self.cancelled = true
+            }
         }
     }
     

@@ -15,6 +15,6 @@ public class ErrorService {
             ToastrService.shared.showError(subtitle: message)
         }
         
-        print("Error: \(error.localizedDescription)")
+        print("Error ['\(message)']: \(error.localizedDescription)")
     }
 }
