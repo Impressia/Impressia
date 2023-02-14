@@ -5,10 +5,12 @@
 //
     
 import SwiftUI
+import PhotosUI
 import MastodonKit
 
 struct ComposeView: View {
     enum FocusField: Hashable {
+        case unknown
         case content
     }
     
@@ -18,6 +20,10 @@ struct ComposeView: View {
     
     @State var statusViewModel: StatusModel?
     @State private var text = String.empty()
+    
+    @State private var photosPickerVisible = false
+    @State private var selectedItems: [PhotosPickerItem] = []
+    @State private var photosData: [Data] = []
 
     @FocusState private var focusedField: FocusField?
     
@@ -45,6 +51,35 @@ struct ComposeView: View {
                         .task {
                             self.focusedField = .content
                         }
+                        .toolbar {
+                            ToolbarItemGroup(placement: .keyboard) {
+                                HStack(alignment: .center) {
+                                    Button {
+                                        hideKeyboard()
+                                        self.focusedField = .unknown
+                                        self.photosPickerVisible = true
+                                    } label: {
+                                        Image(systemName: "photo.on.rectangle.angled")
+                                    }
+
+                                    Spacer()
+                                }
+                            }
+                        }
+                    
+                    
+                    
+                    HStack(alignment: .center) {
+                        ForEach(self.photosData, id: \.self) { photoData in
+                            if let uiImage = UIImage(data: photoData) {
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .frame(width: 80, height: 80)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                            }
+                        }
+                    }
+
 
                     if let status = self.statusViewModel {
                         HStack (alignment: .top) {                            
@@ -95,6 +130,27 @@ struct ComposeView: View {
                     }
                 }
             }
+            .onChange(of: self.selectedItems) { selectedItem in
+                self.photosData = []
+
+                for item in self.selectedItems {
+                    item.loadTransferable(type: Data.self) { result in
+                        switch result {
+                        case .success(let data):
+                            if let data {
+                                self.photosData.append(data)
+                            } else {
+                                ToastrService.shared.showError(subtitle: "Cannot show image preview.")
+                            }
+                        case .failure(let error):
+                            ErrorService.shared.handle(error, message: "Cannot retreive image from library.", showToastr: true)
+                        }
+                    }
+                    
+                    self.focusedField = .content
+                }
+            }
+            .photosPicker(isPresented: $photosPickerVisible, selection: $selectedItems, maxSelectionCount: 4, matching: .images)
             .navigationBarTitle(Text("Compose"), displayMode: .inline)
         }
     }
