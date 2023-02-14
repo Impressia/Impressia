@@ -14,7 +14,7 @@ public extension MastodonClientAuthenticated {
             target: Mastodon.Statuses.favouritedBy(statusId, nil, nil, nil, nil, page),
             withBearerToken: token
         )
-        
+
         return try await downloadJson([Account].self, request: request)
     }
     

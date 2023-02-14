@@ -58,3 +58,4 @@ API in Pixelfed (`/api/v1/instance`) returns JSON with diefferent structure then
 - **There are some issues in bookmarks/favourites endpoints**
 
 It seems like paging is not working in that endpoints (I've tried with page and max_id).
+Github issue: https://github.com/pixelfed/pixelfed/issues/4182

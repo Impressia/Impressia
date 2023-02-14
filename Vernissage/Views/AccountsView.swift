@@ -23,7 +23,7 @@ struct AccountsView: View {
     @State var listType: ListType
 
     @State private var accounts: [Account] = []
-    @State private var page = 1
+    @State private var downloadedPage = 1
     @State private var allItemsLoaded = false
     @State private var state: ViewState = .loading
     
@@ -38,7 +38,7 @@ struct AccountsView: View {
         case .loading:
             LoadingIndicator()
                 .task {
-                    await self.loadAccounts(page: self.page)
+                    await self.loadAccounts(page: self.downloadedPage)
                 }
         case .loaded:
             if self.accounts.isEmpty {
@@ -63,8 +63,8 @@ struct AccountsView: View {
                             Spacer()
                             LoadingIndicator()
                                 .task {
-                                    self.page = self.page + 1
-                                    await self.loadAccounts(page: self.page)
+                                    self.downloadedPage = self.downloadedPage + 1
+                                    await self.loadAccounts(page: self.downloadedPage)
                                 }
                             Spacer()
                         }
@@ -77,10 +77,10 @@ struct AccountsView: View {
             ErrorView(error: error) {
                 self.state = .loading
                 
-                self.page = 1
+                self.downloadedPage = 1
                 self.allItemsLoaded = false
                 self.accounts = []
-                await self.loadAccounts(page: self.page)
+                await self.loadAccounts(page: self.downloadedPage)
             }
             .padding()
         }
@@ -88,7 +88,7 @@ struct AccountsView: View {
     
     private func loadAccounts(page: Int) async {
         do {
-            let accountsFromApi = try await self.loadFromApi()
+            let accountsFromApi = try await self.loadFromApi(page: page)
 
             if accountsFromApi.isEmpty {
                 self.allItemsLoaded = true
@@ -122,7 +122,7 @@ struct AccountsView: View {
         }
     }
     
-    private func loadFromApi() async throws -> [Account] {
+    private func loadFromApi(page: Int) async throws -> [Account] {
         switch self.listType {
         case .followers:
             return try await self.client.accounts?.followers(account: self.entityId, page: page) ?? []
