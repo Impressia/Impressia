@@ -17,7 +17,7 @@ struct VernissageApp: App {
     @StateObject var applicationState = ApplicationState.shared
     @StateObject var client = Client.shared
     @StateObject var routerPath = RouterPath()
-    @StateObject var tips = Tips()
+    @StateObject var tipsStore = TipsStore()
     
     @State var applicationViewMode: ApplicationViewMode = .loading
     @State var tintColor = ApplicationState.shared.tintColor.color()
@@ -50,7 +50,7 @@ struct VernissageApp: App {
             .environmentObject(applicationState)
             .environmentObject(client)
             .environmentObject(routerPath)
-            .environmentObject(tips)
+            .environmentObject(tipsStore)
             .tint(self.tintColor)
             .preferredColorScheme(self.theme)
             .task {

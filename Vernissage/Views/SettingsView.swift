@@ -9,7 +9,7 @@ import SwiftUI
 struct SettingsView: View {
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var routerPath: RouterPath
-    @EnvironmentObject var tips: Tips
+    @EnvironmentObject var tipsStore: TipsStore
 
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) private var dismiss
@@ -68,15 +68,15 @@ struct SettingsView: View {
             // Change theme of current modal screen (unformtunatelly it's not changed autmatically.
             self.theme = self.applicationState.theme.colorScheme() ?? self.getSystemColorScheme()
         }
-        .onChange(of: tips.status) { status in
+        .onChange(of: tipsStore.status) { status in
             if status == .successful {
                 withAnimation(.spring()) {
                     self.routerPath.presentedOverlay = .successPayment
-                    self.tips.reset()
+                    self.tipsStore.reset()
                 }
             }
         }
-        .alert(isPresented: $tips.hasError, error: tips.error) { }
+        .alert(isPresented: $tipsStore.hasError, error: tipsStore.error) { }
     }
     
     @ViewBuilder

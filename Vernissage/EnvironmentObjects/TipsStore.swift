@@ -8,9 +8,12 @@ import Foundation
 import StoreKit
 
 @MainActor
-final class Tips: ObservableObject {
+final class TipsStore: ObservableObject {
 
+    /// Products are registered in AppStore connect (and for development in InAppPurchaseStoreKitConfiguration.storekit file).
     @Published private(set) var items = [Product]()
+    
+    /// Status of the purchase.
     @Published private(set) var status: ActionStatus? {
         didSet{
             switch status {
@@ -22,8 +25,10 @@ final class Tips: ObservableObject {
         }
     }
 
+    /// True when error during purchase occures.
     @Published var hasError = false
     
+    /// Error during purchase.
     var error: PurchaseError? {
         switch status {
         case .failed(let error):
@@ -33,6 +38,7 @@ final class Tips: ObservableObject {
         }
     }
     
+    /// Listener responsible for waiting for new events from AppStore (when transaction didn't finish during the purchase).
     private var transactionListener: Task<Void, Error>?
     
     init() {
@@ -119,12 +125,12 @@ final class Tips: ObservableObject {
     }
 }
 
-extension Tips {
+extension TipsStore {
     public enum ActionStatus: Equatable {
         case successful
         case failed(PurchaseError)
         
-        public static func == (lhs: Tips.ActionStatus, rhs: Tips.ActionStatus) -> Bool {
+        public static func == (lhs: TipsStore.ActionStatus, rhs: TipsStore.ActionStatus) -> Bool {
             switch (lhs, rhs) {
             case (.successful, .successful):
                 return true

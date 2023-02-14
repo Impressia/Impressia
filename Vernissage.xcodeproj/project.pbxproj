@@ -56,7 +56,7 @@
 		F86A42FD299A8B8E00DF7645 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F86A42FC299A8B8E00DF7645 /* StoreKit.framework */; };
 		F86A42FF299A8C5500DF7645 /* InAppPurchaseStoreKitConfiguration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = F86A42FE299A8C5500DF7645 /* InAppPurchaseStoreKitConfiguration.storekit */; };
 		F86A4301299A97F500DF7645 /* ProductIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86A4300299A97F500DF7645 /* ProductIdentifiers.swift */; };
-		F86A4303299A9AF500DF7645 /* Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86A4302299A9AF500DF7645 /* Tips.swift */; };
+		F86A4303299A9AF500DF7645 /* TipsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86A4302299A9AF500DF7645 /* TipsStore.swift */; };
 		F86A4305299AA12800DF7645 /* PurchaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86A4304299AA12800DF7645 /* PurchaseError.swift */; };
 		F86A4307299AA5E900DF7645 /* ThanksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86A4306299AA5E900DF7645 /* ThanksView.swift */; };
 		F86B7214296BFDCE00EE59EC /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7213296BFDCE00EE59EC /* UserProfileHeader.swift */; };
@@ -189,7 +189,7 @@
 		F86A42FC299A8B8E00DF7645 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		F86A42FE299A8C5500DF7645 /* InAppPurchaseStoreKitConfiguration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = InAppPurchaseStoreKitConfiguration.storekit; sourceTree = "<group>"; };
 		F86A4300299A97F500DF7645 /* ProductIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductIdentifiers.swift; sourceTree = "<group>"; };
-		F86A4302299A9AF500DF7645 /* Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tips.swift; sourceTree = "<group>"; };
+		F86A4302299A9AF500DF7645 /* TipsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsStore.swift; sourceTree = "<group>"; };
 		F86A4304299AA12800DF7645 /* PurchaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseError.swift; sourceTree = "<group>"; };
 		F86A4306299AA5E900DF7645 /* ThanksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThanksView.swift; sourceTree = "<group>"; };
 		F86B7213296BFDCE00EE59EC /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
@@ -591,7 +591,7 @@
 				F8B9B350298D4B34009CC69C /* Client+Account.swift */,
 				F8B9B352298D4B5D009CC69C /* Client+Search.swift */,
 				F8B9B355298D4C1E009CC69C /* Client+Instance.swift */,
-				F86A4302299A9AF500DF7645 /* Tips.swift */,
+				F86A4302299A9AF500DF7645 /* TipsStore.swift */,
 			);
 			path = EnvironmentObjects;
 			sourceTree = "<group>";
@@ -801,7 +801,7 @@
 				F88FAD2D295F4AD7009B20C9 /* ApplicationState.swift in Sources */,
 				F88E4D54297EA7EE0057491A /* MarkdownFormattedText.swift in Sources */,
 				F866F6A1296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift in Sources */,
-				F86A4303299A9AF500DF7645 /* Tips.swift in Sources */,
+				F86A4303299A9AF500DF7645 /* TipsStore.swift in Sources */,
 				F8C5E56229892CC300ADF6A7 /* FirstAppear.swift in Sources */,
 				F8C14394296AF21B001FE31D /* Double+Round.swift in Sources */,
 				F83CBEFB298298A1002972C8 /* ImageCarouselPicture.swift in Sources */,

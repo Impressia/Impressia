@@ -20,7 +20,7 @@ struct MainView: View {
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var client: Client
     @EnvironmentObject var routerPath: RouterPath
-    @EnvironmentObject var tips: Tips
+    @EnvironmentObject var tipsStore: TipsStore
     
     @State private var navBarTitle: String = "Home"
     @State private var viewMode: ViewMode = .home {
@@ -44,11 +44,11 @@ struct MainView: View {
             self.getPrincipalToolbar()
             self.getTrailingToolbar()
         }
-        .onChange(of: tips.status) { action in
-            if action == .successful {
+        .onChange(of: tipsStore.status) { status in
+            if status == .successful {
                 withAnimation(.spring()) {
                     self.routerPath.presentedOverlay = .successPayment
-                    self.tips.reset()
+                    self.tipsStore.reset()
                 }
             }
         }

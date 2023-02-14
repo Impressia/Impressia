@@ -9,11 +9,11 @@ import StoreKit
 
 struct SupportView: View {
     
-    @EnvironmentObject var tips: Tips
+    @EnvironmentObject var tipsStore: TipsStore
     
     var body: some View {
         Section("Support") {
-            ForEach(tips.items) { product in
+            ForEach(tipsStore.items) { product in
                 HStack(alignment: .center) {
                     Text(self.getIcon(for: product))
                         .font(.title)
@@ -27,7 +27,7 @@ struct SupportView: View {
                     Spacer()
                     Button(product.displayPrice) {
                         Task {
-                            await tips.purchase(product)
+                            await tipsStore.purchase(product)
                         }
                     }
                     .font(.footnote)
