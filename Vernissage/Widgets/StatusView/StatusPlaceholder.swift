@@ -49,10 +49,3 @@ struct StatusPlaceholder: View {
         }
     }
 }
-
-struct StatusPlaceholder_Previews: PreviewProvider {
-    static var previews: some View {
-        StatusPlaceholder(imageHeight: 100.0)
-            .previewLayout(.fixed(width: 320, height: 320))
-    }
-}

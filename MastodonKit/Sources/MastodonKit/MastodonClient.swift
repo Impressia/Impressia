@@ -101,6 +101,11 @@ public class MastodonClientAuthenticated: MastodonClientProtocol {
         let (data, response) = try await urlSession.data(for: request)
         
         guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
+            #if DEBUG
+                let json = String(data: data, encoding: .utf8)!
+                print(json)
+            #endif
+            
             throw NetworkError.notSuccessResponse(response)
         }
 

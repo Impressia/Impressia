@@ -10,18 +10,38 @@ fileprivate let multipartBoundary = UUID().uuidString
 
 extension Mastodon {
     public enum Media {
-        case upload(Data, String, String, String?, CGPoint?)
+        case upload(Data, String, String)
+        case update(EntityId, String?, CGPoint?)
     }
 }
 
 extension Mastodon.Media: TargetType {
-    fileprivate var apiPath: String { return "/api/v2/media" }
+    struct Request: Encodable {
+        let description: String?
+        let focus: String?
+
+        enum CodingKeys: String, CodingKey {
+            case description
+            case focus
+        }
+        
+        func encode(to encoder: Encoder) throws {
+            var container: KeyedEncodingContainer<Mastodon.Media.Request.CodingKeys> = encoder.container(keyedBy: Mastodon.Media.Request.CodingKeys.self)
+            try container.encode(self.description, forKey: Mastodon.Media.Request.CodingKeys.description)
+            try container.encode(self.focus, forKey: Mastodon.Media.Request.CodingKeys.focus)
+        }
+    }
+    
+    
+    fileprivate var apiPath: String { return "/api" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.
     public var path: String {
         switch self {
         case .upload:
-            return "\(apiPath)"
+            return "\(apiPath)/v2/media"
+        case .update(let id, _, _):
+            return "\(apiPath)/v1/media/\(id)"
         }
     }
     
@@ -30,6 +50,8 @@ extension Mastodon.Media: TargetType {
         switch self {
         case .upload:
             return .post
+        case .update(_, _, _):
+            return .put
         }
     }
     
@@ -38,6 +60,8 @@ extension Mastodon.Media: TargetType {
         switch self {
         case .upload:
             return nil
+        case .update(_, _, _):
+            return nil
         }
     }
     
@@ -45,24 +69,28 @@ extension Mastodon.Media: TargetType {
         switch self {
         case .upload:
             return ["content-type": "multipart/form-data; boundary=\(multipartBoundary)"]
+        case .update(_, _, _):
+            return nil
         }
     }
     
     public var httpBody: Data? {
         switch self {
-        case .upload(let data, let fileName, let mimeType, let description, let focus):
+        case .upload(let data, let fileName, let mimeType):
             let formDataBuilder = MultipartFormData(boundary: multipartBoundary)
             formDataBuilder.addDataField(named: "file", fileName: fileName, data: data, mimeType: mimeType)
-
-            if let description {
-                formDataBuilder.addTextField(named: "description", value: description)
-            }
-
-            if let focus {
-                formDataBuilder.addTextField(named: "focus", value: "(\(focus.x), \(focus.y)")
-            }
-
             return formDataBuilder.build()
+        case .update(_, let description, let focus):
+            var focusString: String?
+            
+            if let focus {
+                focusString = "(\(focus.x), \(focus.y))"
+            }
+            
+            return try? JSONEncoder().encode(
+                Request(description: description, focus: focusString)
+            )
         }
     }
+    
 }

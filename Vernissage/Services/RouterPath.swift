@@ -18,6 +18,7 @@ enum RouteurDestinations: Hashable {
     case accounts(entityId: String, listType: AccountsView.ListType)
     case signIn
     case thirdParty
+    case photoEditor(photoAttachment: PhotoAttachment)
 }
 
 enum SheetDestinations: Identifiable {

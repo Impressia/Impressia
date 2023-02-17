@@ -15,7 +15,9 @@ struct ComposeView: View {
     }
     
     @EnvironmentObject var applicationState: ApplicationState
+    @EnvironmentObject var routerPath: RouterPath
     @EnvironmentObject var client: Client
+
     @Environment(\.dismiss) private var dismiss
     
     @State var statusViewModel: StatusModel?
@@ -24,124 +26,124 @@ struct ComposeView: View {
     
     @State private var photosAreUploading = false
     @State private var photosPickerVisible = false
+
     @State private var selectedItems: [PhotosPickerItem] = []
-    @State private var photosData: [Data] = []
-    @State private var mediaAttachments: [UploadedAttachment] = []
+    @State private var photosAttachment: [PhotoAttachment] = []
 
     @FocusState private var focusedField: FocusField?
     
     private let contentWidth = Int(UIScreen.main.bounds.width) - 50
     
     var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack (alignment: .leading){
-                    if let accountData = applicationState.account {
-                        HStack {
-                            UsernameRow(
-                                accountId: accountData.id,
-                                accountAvatar: accountData.avatar,
-                                accountDisplayName: accountData.displayName,
-                                accountUsername: accountData.username)
-                            Spacer()
+        NavigationStack {
+            NavigationView {
+                ScrollView {
+                    VStack (alignment: .leading){
+                        if let accountData = applicationState.account {
+                            HStack {
+                                UsernameRow(
+                                    accountId: accountData.id,
+                                    accountAvatar: accountData.avatar,
+                                    accountDisplayName: accountData.displayName,
+                                    accountUsername: accountData.username)
+                                Spacer()
+                            }
+                            .padding(8)
                         }
-                        .padding(8)
-                    }
-
-                    TextField("Type what's on your mind", text: $text)
-                        .padding(8)
-                        .focused($focusedField, equals: .content)
-                        .keyboardType(.twitter)
-                        .task {
-                            self.focusedField = .content
-                        }
-                        .onChange(of: self.text) { newValue in
-                            self.publishDisabled = self.isPublishButtonDisabled()
-                        }
-                        .toolbar {
-                            ToolbarItemGroup(placement: .keyboard) {
-                                HStack(alignment: .center) {
-                                    Button {
-                                        hideKeyboard()
-                                        self.focusedField = .unknown
-                                        self.photosPickerVisible = true
-                                    } label: {
-                                        Image(systemName: "photo.on.rectangle.angled")
+                        
+                        TextField("Type what's on your mind", text: $text)
+                            .padding(8)
+                            .focused($focusedField, equals: .content)
+                            .keyboardType(.twitter)
+                            .task {
+                                self.focusedField = .content
+                            }
+                            .onChange(of: self.text) { newValue in
+                                self.publishDisabled = self.isPublishButtonDisabled()
+                            }
+                            .toolbar {
+                                ToolbarItemGroup(placement: .keyboard) {
+                                    HStack(alignment: .center) {
+                                        Button {
+                                            hideKeyboard()
+                                            self.focusedField = .unknown
+                                            self.photosPickerVisible = true
+                                        } label: {
+                                            Image(systemName: "photo.on.rectangle.angled")
+                                        }
+                                        
+                                        Spacer()
                                     }
-
-                                    Spacer()
                                 }
                             }
-                        }
-                    
-                    HStack(alignment: .center) {
-                        ForEach(self.photosData, id: \.self) { photoData in
-                            if let uiImage = UIImage(data: photoData) {
-                                Image(uiImage: uiImage)
-                                    .resizable()
-                                    .frame(width: 80, height: 80)
-                                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                            }
-                        }
-                    }
-                    .padding(8)
-
-                    if let status = self.statusViewModel {
-                        HStack (alignment: .top) {                            
-                            UserAvatar(accountAvatar: status.account.avatar, size: .comment)
-
-                            VStack (alignment: .leading, spacing: 0) {
-                                HStack (alignment: .top) {
-                                    Text(statusViewModel?.account.displayNameWithoutEmojis ?? "")
-                                        .foregroundColor(.mainTextColor)
-                                        .font(.footnote)
-                                        .fontWeight(.bold)
-
-                                    Spacer()
-                                }
-
-                                MarkdownFormattedText(status.content.asMarkdown, withFontSize: 14, andWidth: contentWidth)
-                                    .environment(\.openURL, OpenURLAction { url in .handled })
+                        
+                        HStack(alignment: .center) {
+                            ForEach(self.photosAttachment, id: \.id) { photoAttachment in
+                                ImageUploadView(photoAttachment: photoAttachment)
                             }
                         }
                         .padding(8)
-                        .background(Color.selectedRowColor)
+                        
+                        if let status = self.statusViewModel {
+                            HStack (alignment: .top) {                            
+                                UserAvatar(accountAvatar: status.account.avatar, size: .comment)
+                                
+                                VStack (alignment: .leading, spacing: 0) {
+                                    HStack (alignment: .top) {
+                                        Text(statusViewModel?.account.displayNameWithoutEmojis ?? "")
+                                            .foregroundColor(.mainTextColor)
+                                            .font(.footnote)
+                                            .fontWeight(.bold)
+                                        
+                                        Spacer()
+                                    }
+                                    
+                                    MarkdownFormattedText(status.content.asMarkdown, withFontSize: 14, andWidth: contentWidth)
+                                        .environment(\.openURL, OpenURLAction { url in .handled })
+                                }
+                            }
+                            .padding(8)
+                            .background(Color.selectedRowColor)
+                        }
+                        
+                        Spacer()
                     }
-
-                    Spacer()
                 }
-            }
-            .frame(alignment: .topLeading)
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button {
-                        Task {
-                            await self.publishStatus()
+                .frame(alignment: .topLeading)
+                .toolbar {
+                    ToolbarItem(placement: .primaryAction) {
+                        Button {
+                            Task {
+                                await self.publishStatus()
+                                dismiss()
+                            }
+                        } label: {
+                            Text("Publish")
+                                .foregroundColor(.white)
+                        }
+                        .disabled(self.publishDisabled)
+                        .buttonStyle(.borderedProminent)
+                        .tint(.accentColor)
+                    }
+                    
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Cancel", role: .cancel) {
                             dismiss()
                         }
-                    } label: {
-                        Text("Publish")
-                            .foregroundColor(.white)
-                    }
-                    .disabled(self.publishDisabled)
-                    .buttonStyle(.borderedProminent)
-                    .tint(.accentColor)
-                }
-
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel", role: .cancel) {
-                        dismiss()
                     }
                 }
-            }
-            .onChange(of: self.selectedItems) { selectedItem in
-                Task {
-                    await self.loadPhotos()
+                .onChange(of: self.selectedItems) { selectedItem in
+                    Task {
+                        await self.loadPhotos()
+                    }
                 }
+                .photosPicker(isPresented: $photosPickerVisible, selection: $selectedItems, maxSelectionCount: 4, matching: .images)
+                .navigationBarTitle(Text("Compose"), displayMode: .inline)
             }
-            .photosPicker(isPresented: $photosPickerVisible, selection: $selectedItems, maxSelectionCount: 4, matching: .images)
-            .navigationBarTitle(Text("Compose"), displayMode: .inline)
+            .withAppRouteur()
+            .withOverlayDestinations(overlayDestinations: $routerPath.presentedOverlay)
         }
+        .interactiveDismissDisabled(!self.text.isEmpty)
     }
     
     private func isPublishButtonDisabled() -> Bool {
@@ -156,7 +158,7 @@ struct ComposeView: View {
         }
         
         // When status is not a comment, then photo is required.
-        if self.statusViewModel == nil && self.mediaAttachments.isEmpty {
+        if self.statusViewModel == nil && self.photosAttachment.hasUploadedPhotos() == false {
             return true
         }
         
@@ -166,13 +168,12 @@ struct ComposeView: View {
     private func loadPhotos() async {
         do {
             self.photosAreUploading = true
-            self.photosData = []
-            self.mediaAttachments = []
+            self.photosAttachment = []
             self.publishDisabled = self.isPublishButtonDisabled()
             
             for item in self.selectedItems {
-                if let data = try await item.loadTransferable(type: Data.self) {
-                    self.photosData.append(data)
+                if let photoData = try await item.loadTransferable(type: Data.self) {
+                    self.photosAttachment.append(PhotoAttachment(photosPickerItem: item, photoData: photoData))
                 }
             }
             
@@ -187,16 +188,15 @@ struct ComposeView: View {
     }
     
     private func upload() async {
-        for (index, photoData) in self.photosData.enumerated() {
+        for (index, photoAttachment) in self.photosAttachment.enumerated() {
             do {
-                if let mediaAttachment = try await self.client.media?.upload(data: photoData,
+                if let mediaAttachment = try await self.client.media?.upload(data: photoAttachment.photoData,
                                                                              fileName: "file-\(index).jpg",
-                                                                             mimeType: "image/jpeg",
-                                                                             description: nil,
-                                                                             focus: nil) {
-                    self.mediaAttachments.append(mediaAttachment)
+                                                                             mimeType: "image/jpeg") {
+                    photoAttachment.uploadedAttachment = mediaAttachment
                 }
             } catch {
+                photoAttachment.error = error
                 ErrorService.shared.handle(error, message: "Error during post photo.", showToastr: true)
             }
         }
@@ -204,9 +204,8 @@ struct ComposeView: View {
     
     private func publishStatus() async {
         do {
-            if let newStatus = try await self.client.statuses?.new(status: Mastodon.Statuses.Components(inReplyToId: self.statusViewModel?.id,
-                                                                                                        text: self.text,
-                                                                                                        mediaIds: self.mediaAttachments.map({ $0.id }))) {
+            let status = self.createStatus()
+            if let newStatus = try await self.client.statuses?.new(status: status) {
                 ToastrService.shared.showSuccess("Status published", imageSystemName: "message.fill")
 
                 let statusModel = StatusModel(status: newStatus)
@@ -216,5 +215,11 @@ struct ComposeView: View {
         } catch {
             ErrorService.shared.handle(error, message: "Error during post status.", showToastr: true)
         }
+    }
+    
+    private func createStatus() -> Mastodon.Statuses.Components {
+        return Mastodon.Statuses.Components(inReplyToId: self.statusViewModel?.id,
+                                            text: self.text,
+                                            mediaIds: self.photosAttachment.getUploadedPhotoIds())
     }
 }

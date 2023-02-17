@@ -140,6 +140,9 @@
 		F8C5E56229892CC300ADF6A7 /* FirstAppear.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C5E56129892CC300ADF6A7 /* FirstAppear.swift */; };
 		F8CC95CE2970761D00C9C2AC /* TintColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CC95CD2970761D00C9C2AC /* TintColor.swift */; };
 		F8FA9917299F7DBD007AB130 /* Client+Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FA9916299F7DBD007AB130 /* Client+Media.swift */; };
+		F8FA9919299FA35A007AB130 /* PhotoAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FA9918299FA35A007AB130 /* PhotoAttachment.swift */; };
+		F8FA991C299FA8C2007AB130 /* ImageUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FA991B299FA8C2007AB130 /* ImageUploadView.swift */; };
+		F8FA991E299FAB92007AB130 /* PhotoEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FA991D299FAB92007AB130 /* PhotoEditorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -274,6 +277,9 @@
 		F8C937A929882CA90004D782 /* Vernissage-001.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-001.xcdatamodel"; sourceTree = "<group>"; };
 		F8CC95CD2970761D00C9C2AC /* TintColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TintColor.swift; sourceTree = "<group>"; };
 		F8FA9916299F7DBD007AB130 /* Client+Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+Media.swift"; sourceTree = "<group>"; };
+		F8FA9918299FA35A007AB130 /* PhotoAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAttachment.swift; sourceTree = "<group>"; };
+		F8FA991B299FA8C2007AB130 /* ImageUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadView.swift; sourceTree = "<group>"; };
+		F8FA991D299FAB92007AB130 /* PhotoEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -348,6 +354,7 @@
 				F876418C298AE5020057D362 /* PaginableStatusesView.swift */,
 				F88E4D47297E90CD0057491A /* TrendStatusesView.swift */,
 				F8B0885D29942E31002AB40A /* ThirdPartyView.swift */,
+				F8FA991D299FAB92007AB130 /* PhotoEditorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -382,6 +389,7 @@
 				F89D6C3E29716E41001DA3D4 /* Theme.swift */,
 				F86167C7297FE781004D1F67 /* AvatarShape.swift */,
 				F8764186298ABB520057D362 /* ViewState.swift */,
+				F8FA9918299FA35A007AB130 /* PhotoAttachment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -414,6 +422,7 @@
 		F83901A2295D863B00456AE2 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				F8FA991A299FA8A5007AB130 /* ComposeView */,
 				F8121CA6298A86B300B466C7 /* SignInView */,
 				F808641229756583009F035C /* NotificationsView */,
 				F89D6C4829718868001DA3D4 /* StatusView */,
@@ -607,6 +616,14 @@
 			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
+		F8FA991A299FA8A5007AB130 /* ComposeView */ = {
+			isa = PBXGroup;
+			children = (
+				F8FA991B299FA8C2007AB130 /* ImageUploadView.swift */,
+			);
+			path = ComposeView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -715,6 +732,7 @@
 				F85D4975296407F100751DF7 /* HomeTimelineService.swift in Sources */,
 				F80048062961850500E6868A /* StatusData+CoreDataProperties.swift in Sources */,
 				F88FAD21295F3944009B20C9 /* HomeFeedView.swift in Sources */,
+				F8FA991E299FAB92007AB130 /* PhotoEditorView.swift in Sources */,
 				F88C2475295C37BB0006098B /* CoreDataHandler.swift in Sources */,
 				F87AEB972986D16D00434FB6 /* AuthorisationError.swift in Sources */,
 				F8742FC429990AFB00E9642B /* ClientError.swift in Sources */,
@@ -746,6 +764,7 @@
 				F86B7223296C4BF500EE59EC /* ContentWarning.swift in Sources */,
 				F88E4D4A297EA0490057491A /* RouterPath.swift in Sources */,
 				F83901A6295D8EC000456AE2 /* LabelIcon.swift in Sources */,
+				F8FA991C299FA8C2007AB130 /* ImageUploadView.swift in Sources */,
 				F8B1E6512973FB7E00EE0D10 /* ToastrService.swift in Sources */,
 				F88E4D48297E90CD0057491A /* TrendStatusesView.swift in Sources */,
 				F89992CE296D92E7005994BF /* AttachmentModel.swift in Sources */,
@@ -758,6 +777,7 @@
 				F88C246E295C37B80006098B /* MainView.swift in Sources */,
 				F86B721E296C458700EE59EC /* BlurredImage.swift in Sources */,
 				F8B9B349298D4AA2009CC69C /* Client+Timeline.swift in Sources */,
+				F8FA9919299FA35A007AB130 /* PhotoAttachment.swift in Sources */,
 				F8B9B34B298D4ACE009CC69C /* Client+Tags.swift in Sources */,
 				F88C2478295C37BB0006098B /* Vernissage.xcdatamodeld in Sources */,
 				F88E4D52297EA6DA0057491A /* String+Markdown.swift in Sources */,

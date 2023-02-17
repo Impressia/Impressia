@@ -36,6 +36,8 @@ extension View {
                 SignInView()
             case .thirdParty:
                 ThirdPartyView()
+            case .photoEditor(let photoAttachment):
+                PhotoEditorView(photoAttachment: photoAttachment)
             }
         }
     }
