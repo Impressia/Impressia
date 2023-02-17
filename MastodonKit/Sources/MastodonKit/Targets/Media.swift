@@ -10,12 +10,12 @@ fileprivate let multipartBoundary = UUID().uuidString
 
 extension Mastodon {
     public enum Media {
-        case upload(Data, String)
+        case upload(Data, String, String, String?, CGPoint?)
     }
 }
 
 extension Mastodon.Media: TargetType {
-    fileprivate var apiPath: String { return "/api/v1/media" }
+    fileprivate var apiPath: String { return "/api/v2/media" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.
     public var path: String {
@@ -50,10 +50,19 @@ extension Mastodon.Media: TargetType {
     
     public var httpBody: Data? {
         switch self {
-        case .upload(let data, let mimeType):
-            return data.getMultipartFormDataBuilder(withBoundary: multipartBoundary)?
-                .addDataField(named: "file", data: data, mimeType: mimeType)
-                .build()
+        case .upload(let data, let fileName, let mimeType, let description, let focus):
+            let formDataBuilder = MultipartFormData(boundary: multipartBoundary)
+            formDataBuilder.addDataField(named: "file", fileName: fileName, data: data, mimeType: mimeType)
+
+            if let description {
+                formDataBuilder.addTextField(named: "description", value: description)
+            }
+
+            if let focus {
+                formDataBuilder.addTextField(named: "focus", value: "(\(focus.x), \(focus.y)")
+            }
+
+            return formDataBuilder.build()
         }
     }
 }

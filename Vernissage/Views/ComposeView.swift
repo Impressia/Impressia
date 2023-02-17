@@ -20,10 +20,13 @@ struct ComposeView: View {
     
     @State var statusViewModel: StatusModel?
     @State private var text = String.empty()
+    @State private var publishDisabled = true
     
+    @State private var photosAreUploading = false
     @State private var photosPickerVisible = false
     @State private var selectedItems: [PhotosPickerItem] = []
     @State private var photosData: [Data] = []
+    @State private var mediaAttachments: [UploadedAttachment] = []
 
     @FocusState private var focusedField: FocusField?
     
@@ -52,6 +55,9 @@ struct ComposeView: View {
                         .task {
                             self.focusedField = .content
                         }
+                        .onChange(of: self.text) { newValue in
+                            self.publishDisabled = self.isPublishButtonDisabled()
+                        }
                         .toolbar {
                             ToolbarItemGroup(placement: .keyboard) {
                                 HStack(alignment: .center) {
@@ -68,8 +74,6 @@ struct ComposeView: View {
                             }
                         }
                     
-                    
-                    
                     HStack(alignment: .center) {
                         ForEach(self.photosData, id: \.self) { photoData in
                             if let uiImage = UIImage(data: photoData) {
@@ -81,7 +85,6 @@ struct ComposeView: View {
                         }
                     }
                     .padding(8)
-
 
                     if let status = self.statusViewModel {
                         HStack (alignment: .top) {                            
@@ -115,13 +118,12 @@ struct ComposeView: View {
                         Task {
                             await self.publishStatus()
                             dismiss()
-                            ToastrService.shared.showSuccess("Status published", imageSystemName: "message.fill")
                         }
                     } label: {
                         Text("Publish")
                             .foregroundColor(.white)
                     }
-                    .disabled(self.text.isEmpty)
+                    .disabled(self.publishDisabled)
                     .buttonStyle(.borderedProminent)
                     .tint(.accentColor)
                 }
@@ -133,23 +135,8 @@ struct ComposeView: View {
                 }
             }
             .onChange(of: self.selectedItems) { selectedItem in
-                self.photosData = []
-
-                for item in self.selectedItems {
-                    item.loadTransferable(type: Data.self) { result in
-                        switch result {
-                        case .success(let data):
-                            if let data {
-                                self.photosData.append(data)
-                            } else {
-                                ToastrService.shared.showError(subtitle: "Cannot show image preview.")
-                            }
-                        case .failure(let error):
-                            ErrorService.shared.handle(error, message: "Cannot retreive image from library.", showToastr: true)
-                        }
-                    }
-                    
-                    self.focusedField = .content
+                Task {
+                    await self.loadPhotos()
                 }
             }
             .photosPicker(isPresented: $photosPickerVisible, selection: $selectedItems, maxSelectionCount: 4, matching: .images)
@@ -157,9 +144,71 @@ struct ComposeView: View {
         }
     }
     
+    private func isPublishButtonDisabled() -> Bool {
+        // Publish always disabled when there is not status text.
+        if self.text.isEmpty {
+            return true
+        }
+        
+        // When application is during uploading photos we cannot send new status.
+        if self.photosAreUploading == true {
+            return true
+        }
+        
+        // When status is not a comment, then photo is required.
+        if self.statusViewModel == nil && self.mediaAttachments.isEmpty {
+            return true
+        }
+        
+        return false
+    }
+    
+    private func loadPhotos() async {
+        do {
+            self.photosAreUploading = true
+            self.photosData = []
+            self.mediaAttachments = []
+            self.publishDisabled = self.isPublishButtonDisabled()
+            
+            for item in self.selectedItems {
+                if let data = try await item.loadTransferable(type: Data.self) {
+                    self.photosData.append(data)
+                }
+            }
+            
+            self.focusedField = .content
+            await self.upload()
+            
+            self.photosAreUploading = false
+            self.publishDisabled = self.isPublishButtonDisabled()
+        } catch {
+            ErrorService.shared.handle(error, message: "Cannot retreive image from library.", showToastr: true)
+        }
+    }
+    
+    private func upload() async {
+        for (index, photoData) in self.photosData.enumerated() {
+            do {
+                if let mediaAttachment = try await self.client.media?.upload(data: photoData,
+                                                                             fileName: "file-\(index).jpg",
+                                                                             mimeType: "image/jpeg",
+                                                                             description: nil,
+                                                                             focus: nil) {
+                    self.mediaAttachments.append(mediaAttachment)
+                }
+            } catch {
+                ErrorService.shared.handle(error, message: "Error during post photo.", showToastr: true)
+            }
+        }
+    }
+    
     private func publishStatus() async {
         do {
-            if let newStatus = try await self.client.statuses?.new(status:Mastodon.Statuses.Components(inReplyToId: self.statusViewModel?.id, text: self.text)) {
+            if let newStatus = try await self.client.statuses?.new(status: Mastodon.Statuses.Components(inReplyToId: self.statusViewModel?.id,
+                                                                                                        text: self.text,
+                                                                                                        mediaIds: self.mediaAttachments.map({ $0.id }))) {
+                ToastrService.shared.showSuccess("Status published", imageSystemName: "message.fill")
+
                 let statusModel = StatusModel(status: newStatus)
                 let commentModel = CommentModel(status: statusModel, showDivider: false)
                 self.applicationState.newComment = commentModel

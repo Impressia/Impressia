@@ -28,6 +28,7 @@ extension Client {
     public var tags: Tags? { return Tags(mastodonClient: self.mastodonClient) }
     public var notifications: Notifications? { return Notifications(mastodonClient: self.mastodonClient) }
     public var statuses: Statuses? { return Statuses(mastodonClient: self.mastodonClient) }
+    public var media: Media? { return Media(mastodonClient: self.mastodonClient) }
     public var accounts: Accounts? { return Accounts(mastodonClient: self.mastodonClient) }
     public var search: Search? { return Search(mastodonClient: self.mastodonClient) }
     public var instances: Instances { return Instances() }

@@ -35,7 +35,7 @@ public extension MastodonClientProtocol {
         
         request.httpMethod = target.method.rawValue
         request.httpBody = target.httpBody
-        
+                
         return request
     }
 }
