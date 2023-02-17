@@ -8,10 +8,10 @@ import Foundation
 
 public extension MastodonClientAuthenticated {
 
-    func statusesTrends(range: Mastodon.PixelfedTrends.TrendRange) async throws -> [Status] {
+    func statusesTrends(range: Mastodon.Trends.TrendRange) async throws -> [Status] {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.PixelfedTrends.statuses(range),
+            target: Mastodon.Trends.statuses(range, nil, nil),
             withBearerToken: token
         )
         

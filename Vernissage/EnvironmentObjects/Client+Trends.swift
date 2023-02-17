@@ -10,7 +10,7 @@ import MastodonKit
 /// Mastodon 'Trends'.
 extension Client {
     public class Trends: BaseClient {
-        public func statuses(range: Mastodon.PixelfedTrends.TrendRange) async throws -> [Status] {
+        public func statuses(range: Mastodon.Trends.TrendRange) async throws -> [Status] {
             return try await mastodonClient.statusesTrends(range: range)
         }
     }

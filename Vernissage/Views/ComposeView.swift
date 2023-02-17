@@ -48,6 +48,7 @@ struct ComposeView: View {
                     TextField("Type what's on your mind", text: $text)
                         .padding(8)
                         .focused($focusedField, equals: .content)
+                        .keyboardType(.twitter)
                         .task {
                             self.focusedField = .content
                         }
@@ -79,6 +80,7 @@ struct ComposeView: View {
                             }
                         }
                     }
+                    .padding(8)
 
 
                     if let status = self.statusViewModel {
