@@ -143,6 +143,7 @@
 		F8FA9919299FA35A007AB130 /* PhotoAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FA9918299FA35A007AB130 /* PhotoAttachment.swift */; };
 		F8FA991C299FA8C2007AB130 /* ImageUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FA991B299FA8C2007AB130 /* ImageUploadView.swift */; };
 		F8FA991E299FAB92007AB130 /* PhotoEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FA991D299FAB92007AB130 /* PhotoEditorView.swift */; };
+		F8FA9920299FDDC3007AB130 /* TextInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FA991F299FDDC3007AB130 /* TextInputField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -280,6 +281,7 @@
 		F8FA9918299FA35A007AB130 /* PhotoAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAttachment.swift; sourceTree = "<group>"; };
 		F8FA991B299FA8C2007AB130 /* ImageUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadView.swift; sourceTree = "<group>"; };
 		F8FA991D299FAB92007AB130 /* PhotoEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditorView.swift; sourceTree = "<group>"; };
+		F8FA991F299FDDC3007AB130 /* TextInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -447,6 +449,7 @@
 				F8764188298ABEC80057D362 /* ErrorView.swift */,
 				F876418A298AC1B80057D362 /* NoDataView.swift */,
 				F86FB554298BF83F000131F0 /* FavouriteTouch.swift */,
+				F8FA991F299FDDC3007AB130 /* TextInputField.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -824,6 +827,7 @@
 				F88FAD2D295F4AD7009B20C9 /* ApplicationState.swift in Sources */,
 				F88E4D54297EA7EE0057491A /* MarkdownFormattedText.swift in Sources */,
 				F866F6A1296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift in Sources */,
+				F8FA9920299FDDC3007AB130 /* TextInputField.swift in Sources */,
 				F86A4303299A9AF500DF7645 /* TipsStore.swift in Sources */,
 				F8C5E56229892CC300ADF6A7 /* FirstAppear.swift in Sources */,
 				F8C14394296AF21B001FE31D /* Double+Round.swift in Sources */,

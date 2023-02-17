@@ -79,7 +79,11 @@ struct ComposeView: View {
                         
                         HStack(alignment: .center) {
                             ForEach(self.photosAttachment, id: \.id) { photoAttachment in
-                                ImageUploadView(photoAttachment: photoAttachment)
+                                ImageUploadView(photoAttachment: photoAttachment) {
+                                    self.photosAttachment = self.photosAttachment.filter({ item in
+                                        item != photoAttachment
+                                    })
+                                }
                             }
                         }
                         .padding(8)

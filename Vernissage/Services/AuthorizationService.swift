@@ -204,7 +204,7 @@ public class AuthorizationService {
     ) async throws {
         dbAccount.username = account.username
         dbAccount.acct = account.acct
-        dbAccount.displayName = account.displayName
+        dbAccount.displayName = account.displayNameWithoutEmojis
         dbAccount.note = account.note
         dbAccount.url = account.url
         dbAccount.avatar = account.avatar
