@@ -15,26 +15,26 @@ struct PhotoEditorView: View {
     var body: some View {
         VStack(alignment: .leading) {
             if let uiImage = UIImage(data: photoAttachment.photoData) {
-                Form {
+                List {
                     Section(header: Text("Photo")) {
                         HStack {
                             Spacer()
                             Image(uiImage: uiImage)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
                                 .frame(maxHeight: 300)
-                                .clipShape(RoundedRectangle(cornerRadius: 5))
                             Spacer()
                         }
                     }
                     
                     Section(header: Text("Accessibility")) {
-                        TextInputField("Sescription for the visually impaired", text: $description)
+                        TextField("Sescription for the visually impaired", text: $description, axis: .vertical)
                             .keyboardType(.default)
-                            .lineLimit(4)
+                            .lineLimit(2...5)
                             .multilineTextAlignment(.leading)
                     }
-                }
+                }.listStyle(.grouped)
                 
                 Spacer()
             }
