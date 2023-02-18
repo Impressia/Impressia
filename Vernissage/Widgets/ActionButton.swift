@@ -21,19 +21,15 @@ struct ActionButton<Label>: View where Label: View {
         Button {
             Task {
                 HapticService.shared.touch()
-                defer {
-                    Task { @MainActor in
-                        withAnimation {
-                            self.isDuringAction = false
-                        }
-                    }
-                }
-                
                 withAnimation {
                     self.isDuringAction = true
                 }
 
                 await action()
+                
+                withAnimation {
+                    self.isDuringAction = false
+                }
             }
         } label: {
             if isDuringAction {

@@ -70,7 +70,7 @@ extension Mastodon.Media: TargetType {
         case .upload:
             return ["content-type": "multipart/form-data; boundary=\(multipartBoundary)"]
         case .update(_, _, _):
-            return nil
+            return [:].contentTypeApplicationJson
         }
     }
     
@@ -92,5 +92,4 @@ extension Mastodon.Media: TargetType {
             )
         }
     }
-    
 }

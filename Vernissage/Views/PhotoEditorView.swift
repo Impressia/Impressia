@@ -7,6 +7,7 @@
 import SwiftUI
 
 struct PhotoEditorView: View {
+    @EnvironmentObject var client: Client
     @Environment(\.dismiss) private var dismiss
     
     @State private var description: String = String.empty()
@@ -43,7 +44,7 @@ struct PhotoEditorView: View {
             self.hideKeyboard()
         }
         .onAppear {
-            self.description = self.photoAttachment.description
+            self.description = self.photoAttachment.uploadedAttachment?.description ?? String.empty()
         }
         .navigationBarTitle("Photo details")
         .navigationBarTitleDisplayMode(.inline)
@@ -55,15 +56,29 @@ struct PhotoEditorView: View {
     @ToolbarContentBuilder
     private func getTrailingToolbar() -> some ToolbarContent {
         ToolbarItem(placement: .navigationBarTrailing) {
-            Button {
-                HapticService.shared.touch()
-                self.photoAttachment.description = self.description
-                self.hideKeyboard()
-
-                self.dismiss()
+            ActionButton {
+                await self.update()
             } label: {
                 Text("Update")
             }.buttonStyle(.borderedProminent)
+        }
+    }
+    
+    private func update() async {
+        HapticService.shared.touch()
+        self.hideKeyboard()
+        
+        if let uploadedAttachment = self.photoAttachment.uploadedAttachment {
+            do {
+                let updated = try await self.client.media?.update(id: uploadedAttachment.id,
+                                                                  description: self.description,
+                                                                  focus: nil)
+                
+                self.photoAttachment.uploadedAttachment = updated
+                self.dismiss()
+            } catch {
+                ErrorService.shared.handle(error, message: "Cannot update attachment", showToastr: true)
+            }
         }
     }
 }

@@ -14,7 +14,6 @@ public class PhotoAttachment: ObservableObject, Identifiable, Equatable, Hashabl
     public let photosPickerItem: PhotosPickerItem
     public var photoData: Data
 
-    @Published public var description = String.empty()    
     @Published public var uploadedAttachment: UploadedAttachment?
     @Published public var error: Error?
     

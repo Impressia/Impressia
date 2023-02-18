@@ -133,18 +133,13 @@ struct ComposeView: View {
                 .frame(alignment: .topLeading)
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
-                        Button {
-                            Task {
-                                await self.publishStatus()
-                                dismiss()
-                            }
+                        ActionButton {
+                            await self.publishStatus()
                         } label: {
                             Text("Publish")
-                                .foregroundColor(.white)
                         }
                         .disabled(self.publishDisabled)
                         .buttonStyle(.borderedProminent)
-                        .tint(.accentColor)
                     }
                     
                     ToolbarItem(placement: .cancellationAction) {
@@ -212,11 +207,6 @@ struct ComposeView: View {
                         Image(systemName: "lock")
                         Text(" Followers")
                     }.tag(Mastodon.Statuses.Visibility.direct)
-                    
-                    HStack {
-                        Image(systemName: "tray.full")
-                        Text(" Private")
-                    }.tag(Mastodon.Statuses.Visibility.priv)
                 }.buttonStyle(.bordered)
             }
         }
@@ -305,6 +295,8 @@ struct ComposeView: View {
                 let statusModel = StatusModel(status: newStatus)
                 let commentModel = CommentModel(status: statusModel, showDivider: false)
                 self.applicationState.newComment = commentModel
+
+                dismiss()
             }
         } catch {
             ErrorService.shared.handle(error, message: "Error during post status.", showToastr: true)
