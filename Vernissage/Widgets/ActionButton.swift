@@ -7,14 +7,16 @@
 import SwiftUI
 
 struct ActionButton<Label>: View where Label: View {
+    @State public var showLoader: Bool
     @State private var isDuringAction = false
     
     private let action: () async -> Void
     private let label: () -> Label
     
-    public init(action: @escaping () async -> Void, @ViewBuilder label: @escaping () -> Label) {
+    public init(showLoader: Bool = true, action: @escaping () async -> Void, @ViewBuilder label: @escaping () -> Label) {
         self.action = action
         self.label = label
+        self.showLoader = showLoader
     }
     
     var body: some View {
@@ -32,14 +34,23 @@ struct ActionButton<Label>: View where Label: View {
                 }
             }
         } label: {
-            if isDuringAction {
-                LoadingIndicator(isVisible: .constant(true))
-                    .transition(.opacity)
+            if self.showLoader {
+                withLoader()
             } else {
                 label()
-                    .transition(.opacity)
             }
         }.disabled(isDuringAction)
+    }
+    
+    @ViewBuilder
+    private func withLoader() -> some View {
+        if isDuringAction {
+            LoadingIndicator(isVisible: .constant(true))
+                .transition(.opacity)
+        } else {
+            label()
+                .transition(.opacity)
+        }
     }
 }
 

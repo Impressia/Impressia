@@ -33,6 +33,7 @@ struct ComposeView: View {
     
     @State private var photosAreUploading = false
     @State private var photosPickerVisible = false
+    @State private var showPhoto: PhotoAttachment? = nil
 
     @State private var selectedItems: [PhotosPickerItem] = []
     @State private var photosAttachment: [PhotoAttachment] = []
@@ -94,9 +95,14 @@ struct ComposeView: View {
                         HStack(alignment: .center) {
                             ForEach(self.photosAttachment, id: \.id) { photoAttachment in
                                 ImageUploadView(photoAttachment: photoAttachment) {
+                                    self.showPhoto = photoAttachment
+                                } delete: {
                                     self.photosAttachment = self.photosAttachment.filter({ item in
                                         item != photoAttachment
                                     })
+                                    
+                                    self.publishDisabled = self.isPublishButtonDisabled()
+                                    self.interactiveDismissDisabled = self.isInteractiveDismissDisabled()
                                 }
                             }
                         }
@@ -133,7 +139,7 @@ struct ComposeView: View {
                 .frame(alignment: .topLeading)
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
-                        ActionButton {
+                        ActionButton(showLoader: false) {
                             await self.publishStatus()
                         } label: {
                             Text("Publish")
@@ -153,6 +159,9 @@ struct ComposeView: View {
                         await self.loadPhotos()
                     }
                 }
+                .sheet(item: $showPhoto, content: { item in
+                    PhotoEditorView(photoAttachment: item)
+                })
                 .photosPicker(isPresented: $photosPickerVisible, selection: $selectedItems, maxSelectionCount: 4, matching: .images)
                 .navigationBarTitle(Text("Compose"), displayMode: .inline)
             }

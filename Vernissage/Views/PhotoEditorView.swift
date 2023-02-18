@@ -14,53 +14,60 @@ struct PhotoEditorView: View {
     @ObservedObject public var photoAttachment: PhotoAttachment
         
     var body: some View {
-        VStack(alignment: .leading) {
-            if let uiImage = UIImage(data: photoAttachment.photoData) {
-                List {
-                    Section(header: Text("Photo")) {
-                        HStack {
-                            Spacer()
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .clipShape(RoundedRectangle(cornerRadius: 10))
-                                .frame(maxHeight: 300)
-                            Spacer()
+        NavigationView {
+            VStack(alignment: .leading) {
+                if let uiImage = UIImage(data: photoAttachment.photoData) {
+                    List {
+                        Section(header: Text("Photo")) {
+                            HStack {
+                                Spacer()
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    .frame(maxHeight: 300)
+                                Spacer()
+                            }
                         }
-                    }
+                        
+                        Section(header: Text("Accessibility")) {
+                            TextField("Sescription for the visually impaired", text: $description, axis: .vertical)
+                                .keyboardType(.default)
+                                .lineLimit(2...5)
+                                .multilineTextAlignment(.leading)
+                        }
+                    }.listStyle(.grouped)
                     
-                    Section(header: Text("Accessibility")) {
-                        TextField("Sescription for the visually impaired", text: $description, axis: .vertical)
-                            .keyboardType(.default)
-                            .lineLimit(2...5)
-                            .multilineTextAlignment(.leading)
-                    }
-                }.listStyle(.grouped)
-                
-                Spacer()
+                    Spacer()
+                }
             }
-        }
-        .onDisappear {
-            self.hideKeyboard()
-        }
-        .onAppear {
-            self.description = self.photoAttachment.uploadedAttachment?.description ?? String.empty()
-        }
-        .navigationBarTitle("Photo details")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            self.getTrailingToolbar()
+            .onDisappear {
+                self.hideKeyboard()
+            }
+            .onAppear {
+                self.description = self.photoAttachment.uploadedAttachment?.description ?? String.empty()
+            }
+            .navigationBarTitle(Text("Photo details"), displayMode: .inline)
+            .toolbar {
+                self.getTrailingToolbar()
+            }
         }
     }
     
     @ToolbarContentBuilder
     private func getTrailingToolbar() -> some ToolbarContent {
         ToolbarItem(placement: .navigationBarTrailing) {
-            ActionButton {
+            ActionButton(showLoader: false) {
                 await self.update()
             } label: {
                 Text("Update")
             }.buttonStyle(.borderedProminent)
+        }
+        
+        ToolbarItem(placement: .cancellationAction) {
+            Button("Cancel", role: .cancel) {
+                dismiss()
+            }
         }
     }
     

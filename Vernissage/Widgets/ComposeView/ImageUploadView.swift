@@ -11,10 +11,12 @@ struct ImageUploadView: View {
     @ObservedObject public var photoAttachment: PhotoAttachment
     
     private let delete: () -> Void
+    private let open: () -> Void
     
-    public init(photoAttachment: PhotoAttachment, delete: @escaping () -> Void) {
+    public init(photoAttachment: PhotoAttachment, open: @escaping () -> Void, delete: @escaping () -> Void) {
         self.photoAttachment = photoAttachment
         self.delete = delete
+        self.open = open
     }
     
     var body: some View {
@@ -51,7 +53,9 @@ struct ImageUploadView: View {
                     }
             } else {
                 Menu {
-                    NavigationLink(value: RouteurDestinations.photoEditor(photoAttachment: photoAttachment)) {
+                    Button {
+                        self.open()
+                    } label: {
                         Label("Edit", systemImage: "pencil")
                     }
                     
