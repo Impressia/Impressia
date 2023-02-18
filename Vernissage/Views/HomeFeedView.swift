@@ -152,11 +152,11 @@ struct HomeFeedView: View {
             return
         }
         
-        // View is scrolled up (loader is visible).
-        self.opacity = 1.0 - min((offset / 50.0), 1.0)
-        
-        // View is scrolled so high that we can hide view.
-        if offset > 170 {
+        if offset < 170 {
+            // View is scrolled up (loader is visible).
+            self.opacity = 1.0 - min((offset / 50.0), 1.0)
+        } else {
+            // View is scrolled so high that we can hide amount of new statuses.
             self.applicationState.amountOfNewStatuses = 0
             self.hideNewStatusesView()
         }
