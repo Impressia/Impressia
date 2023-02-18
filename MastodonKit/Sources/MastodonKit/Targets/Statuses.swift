@@ -14,6 +14,7 @@ extension Mastodon {
             case unlisted = "unlisted"
             case pub = "public"
         }
+
         case status(String)
         case context(String)
         case card(String)
@@ -38,9 +39,9 @@ extension Mastodon.Statuses {
         public let mediaIds: [String]
         public let visibility: Visibility
         public let sensitive: Bool
-        public let pollOptions: [String]
-        public let pollExpiresIn: Int
-        public let pollMultipleChoice: Bool
+        public let placeId: Int?
+        public let commentsDisabled: Bool
+        public let collectionIds: [Int]?
 
         public init(
             inReplyToId: EntityId? = nil,
@@ -49,18 +50,18 @@ extension Mastodon.Statuses {
             mediaIds: [String] = [],
             visibility: Visibility = .pub,
             sensitive: Bool = false,
-            pollOptions: [String] = [],
-            pollExpiresIn: Int = 0,
-            pollMultipleChoice: Bool = false) {
+            placeId: Int? = nil,
+            commentsDisabled: Bool = false,
+            collectionIds: [Int]? = nil) {
                 self.inReplyToId = inReplyToId
                 self.text = text
                 self.spoilerText = spoilerText
                 self.mediaIds = mediaIds
                 self.visibility = visibility
                 self.sensitive = sensitive
-                self.pollOptions = pollOptions
-                self.pollExpiresIn = pollExpiresIn
-                self.pollMultipleChoice = pollMultipleChoice
+                self.placeId = placeId
+                self.commentsDisabled = commentsDisabled
+                self.collectionIds = collectionIds
             }
     }
 }
@@ -73,6 +74,9 @@ extension Mastodon.Statuses: TargetType {
         let sensitive: Bool
         let spoilerText: String?
         let visibility: Visibility
+        let placeId: Int?
+        let commentsDisabled: Bool
+        let collectionIds: [Int]?
         
         enum CodingKeys: String, CodingKey {
             case status
@@ -81,6 +85,9 @@ extension Mastodon.Statuses: TargetType {
             case sensitive
             case spoilerText = "spoiler_text"
             case visibility
+            case placeId = "place_id"
+            case commentsDisabled = "comments_disabled"
+            case collectionIds = "collection_ids"
         }
         
         func encode(to encoder: Encoder) throws {
@@ -91,6 +98,9 @@ extension Mastodon.Statuses: TargetType {
             try container.encode(self.sensitive, forKey: Mastodon.Statuses.Request.CodingKeys.sensitive)
             try container.encodeIfPresent(self.spoilerText, forKey: Mastodon.Statuses.Request.CodingKeys.spoilerText)
             try container.encode(self.visibility, forKey: Mastodon.Statuses.Request.CodingKeys.visibility)
+            try container.encodeIfPresent(self.placeId, forKey: Mastodon.Statuses.Request.CodingKeys.placeId)
+            try container.encode(self.commentsDisabled, forKey: Mastodon.Statuses.Request.CodingKeys.commentsDisabled)
+            try container.encodeIfPresent(self.collectionIds, forKey: Mastodon.Statuses.Request.CodingKeys.collectionIds)
         }
     }
     
@@ -206,7 +216,10 @@ extension Mastodon.Statuses: TargetType {
                     mediaIds: components.mediaIds,
                     sensitive: components.sensitive,
                     spoilerText: components.spoilerText,
-                    visibility: components.visibility)
+                    visibility: components.visibility,
+                    placeId: components.placeId,
+                    commentsDisabled: components.commentsDisabled,
+                    collectionIds: components.collectionIds)
             )
 
         default:

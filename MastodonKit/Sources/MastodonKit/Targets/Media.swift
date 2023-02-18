@@ -28,7 +28,7 @@ extension Mastodon.Media: TargetType {
         func encode(to encoder: Encoder) throws {
             var container: KeyedEncodingContainer<Mastodon.Media.Request.CodingKeys> = encoder.container(keyedBy: Mastodon.Media.Request.CodingKeys.self)
             try container.encode(self.description, forKey: Mastodon.Media.Request.CodingKeys.description)
-            try container.encode(self.focus, forKey: Mastodon.Media.Request.CodingKeys.focus)
+            try container.encodeIfPresent(self.focus, forKey: Mastodon.Media.Request.CodingKeys.focus)
         }
     }
     

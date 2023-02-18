@@ -12,8 +12,9 @@ struct ComposeView: View {
     enum FocusField: Hashable {
         case unknown
         case content
+        case spoilerText
     }
-    
+           
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var routerPath: RouterPath
     @EnvironmentObject var client: Client
@@ -22,7 +23,13 @@ struct ComposeView: View {
     
     @State var statusViewModel: StatusModel?
     @State private var text = String.empty()
+    @State private var visibility = Mastodon.Statuses.Visibility.pub
+    @State private var isSensitive = false
+    @State private var spoilerText = String.empty()
+    @State private var commentsDisabled = false
+
     @State private var publishDisabled = true
+    @State private var interactiveDismissDisabled = false
     
     @State private var photosAreUploading = false
     @State private var photosPickerVisible = false
@@ -39,6 +46,16 @@ struct ComposeView: View {
             NavigationView {
                 ScrollView {
                     VStack (alignment: .leading){
+                        if self.isSensitive {
+                            TextField("Content warning", text: $spoilerText)
+                                .padding(8)
+                                .focused($focusedField, equals: .spoilerText)
+                                .keyboardType(.default)
+                                .background(Color.red)
+                                .foregroundColor(.white)
+                        }
+                        
+                        
                         if let accountData = applicationState.account {
                             HStack {
                                 UsernameRow(
@@ -51,30 +68,27 @@ struct ComposeView: View {
                             .padding(8)
                         }
                         
+                        if self.commentsDisabled {
+                            Text("Comments will be disabled")
+                                .textCase(.uppercase)
+                                .font(.caption2)
+                                .padding(.horizontal, 8)
+                                .foregroundColor(.lightGrayColor)
+                        }
+                        
                         TextField("Type what's on your mind", text: $text)
                             .padding(8)
                             .focused($focusedField, equals: .content)
-                            .keyboardType(.twitter)
-                            .task {
+                            .keyboardType(.default)
+                            .onFirstAppear {
                                 self.focusedField = .content
                             }
                             .onChange(of: self.text) { newValue in
                                 self.publishDisabled = self.isPublishButtonDisabled()
+                                self.interactiveDismissDisabled = self.isInteractiveDismissDisabled()
                             }
                             .toolbar {
-                                ToolbarItemGroup(placement: .keyboard) {
-                                    HStack(alignment: .center) {
-                                        Button {
-                                            hideKeyboard()
-                                            self.focusedField = .unknown
-                                            self.photosPickerVisible = true
-                                        } label: {
-                                            Image(systemName: "photo.on.rectangle.angled")
-                                        }
-                                        
-                                        Spacer()
-                                    }
-                                }
+                                self.keyboardToolbar()
                             }
                         
                         HStack(alignment: .center) {
@@ -113,6 +127,9 @@ struct ComposeView: View {
                         Spacer()
                     }
                 }
+                .onTapGesture {
+                    self.hideKeyboard()
+                }
                 .frame(alignment: .topLeading)
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
@@ -147,7 +164,62 @@ struct ComposeView: View {
             .withAppRouteur()
             .withOverlayDestinations(overlayDestinations: $routerPath.presentedOverlay)
         }
-        .interactiveDismissDisabled(!self.text.isEmpty)
+        .interactiveDismissDisabled(self.interactiveDismissDisabled)
+    }
+    
+    @ToolbarContentBuilder
+    private func keyboardToolbar() -> some ToolbarContent {
+        ToolbarItemGroup(placement: .keyboard) {
+            HStack(alignment: .center) {
+                Button {
+                    hideKeyboard()
+                    self.focusedField = .unknown
+                    self.photosPickerVisible = true
+                } label: {
+                    Image(systemName: "photo.on.rectangle.angled")
+                }
+
+                Button {
+                    withAnimation(.easeInOut) {
+                        self.isSensitive.toggle()
+                    }
+                } label: {
+                    Image(systemName: self.isSensitive ? "exclamationmark.square.fill" : "exclamationmark.square")
+                }
+                
+                Button {
+                    withAnimation(.easeInOut) {
+                        self.commentsDisabled.toggle()
+                    }
+                } label: {
+                    Image(systemName: self.commentsDisabled ? "person.2.slash" : "person.2.fill")
+                }
+                
+                Spacer()
+                
+                Picker("Post visibility", selection: $visibility) {
+                    HStack {
+                        Image(systemName: "globe.europe.africa")
+                        Text(" Everyone")
+                    }.tag(Mastodon.Statuses.Visibility.pub)
+                    
+                    HStack {
+                        Image(systemName: "lock.open")
+                        Text(" Unlisted")
+                    }.tag(Mastodon.Statuses.Visibility.unlisted)
+                        
+                    HStack {
+                        Image(systemName: "lock")
+                        Text(" Followers")
+                    }.tag(Mastodon.Statuses.Visibility.direct)
+                    
+                    HStack {
+                        Image(systemName: "tray.full")
+                        Text(" Private")
+                    }.tag(Mastodon.Statuses.Visibility.priv)
+                }.buttonStyle(.bordered)
+            }
+        }
     }
     
     private func isPublishButtonDisabled() -> Bool {
@@ -169,11 +241,28 @@ struct ComposeView: View {
         return false
     }
     
+    private func isInteractiveDismissDisabled() -> Bool {
+        if self.text.isEmpty == false {
+            return true
+        }
+        
+        if self.photosAreUploading == true {
+            return true
+        }
+        
+        if self.photosAttachment.hasUploadedPhotos() == true {
+            return true
+        }
+        
+        return false
+    }
+    
     private func loadPhotos() async {
         do {
             self.photosAreUploading = true
             self.photosAttachment = []
             self.publishDisabled = self.isPublishButtonDisabled()
+            self.interactiveDismissDisabled = self.isInteractiveDismissDisabled()
             
             for item in self.selectedItems {
                 if let photoData = try await item.loadTransferable(type: Data.self) {
@@ -186,6 +275,7 @@ struct ComposeView: View {
             
             self.photosAreUploading = false
             self.publishDisabled = self.isPublishButtonDisabled()
+            self.interactiveDismissDisabled = self.isInteractiveDismissDisabled()
         } catch {
             ErrorService.shared.handle(error, message: "Cannot retreive image from library.", showToastr: true)
         }
@@ -222,8 +312,13 @@ struct ComposeView: View {
     }
     
     private func createStatus() -> Mastodon.Statuses.Components {
+        // TODO: Missing fields: placeId, collectionIds.
         return Mastodon.Statuses.Components(inReplyToId: self.statusViewModel?.id,
                                             text: self.text,
-                                            mediaIds: self.photosAttachment.getUploadedPhotoIds())
+                                            spoilerText: self.isSensitive ? self.spoilerText : String.empty(),
+                                            mediaIds: self.photosAttachment.getUploadedPhotoIds(),
+                                            visibility: self.visibility,
+                                            sensitive: self.isSensitive,
+                                            commentsDisabled: self.commentsDisabled)
     }
 }
