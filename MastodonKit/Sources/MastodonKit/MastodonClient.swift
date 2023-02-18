@@ -97,6 +97,19 @@ public class MastodonClientAuthenticated: MastodonClientProtocol {
         self.urlSession = urlSession
     }
     
+    public func send(request: URLRequest) async throws {
+        let (data, response) = try await urlSession.data(for: request)
+        
+        guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
+            #if DEBUG
+                let json = String(data: data, encoding: .utf8)!
+                print(json)
+            #endif
+            
+            throw NetworkError.notSuccessResponse(response)
+        }
+    }
+    
     public func downloadJson<T>(_ type: T.Type, request: URLRequest) async throws -> T where T: Decodable {
         let (data, response) = try await urlSession.data(for: request)
         

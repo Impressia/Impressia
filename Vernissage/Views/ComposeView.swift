@@ -48,7 +48,7 @@ struct ComposeView: View {
                 ScrollView {
                     VStack (alignment: .leading){
                         if self.isSensitive {
-                            TextField("Content warning", text: $spoilerText)
+                            TextField("Write content warning", text: $spoilerText)
                                 .padding(8)
                                 .focused($focusedField, equals: .spoilerText)
                                 .keyboardType(.default)

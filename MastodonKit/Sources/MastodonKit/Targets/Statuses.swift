@@ -14,19 +14,21 @@ extension Mastodon {
             case pub = "public"
         }
 
-        case status(String)
-        case context(String)
-        case card(String)
+        case status(EntityId)
+        case context(EntityId)
+        case card(EntityId)
         case rebloggedBy(EntityId, MaxId?, SinceId?, MinId?, Limit?, Page?)
         case favouritedBy(EntityId, MaxId?, SinceId?, MinId?, Limit?, Page?)
         case new(Components)
-        case delete(String)
-        case reblog(String)
-        case unreblog(String)
-        case favourite(String)
-        case unfavourite(String)
-        case bookmark(String)
-        case unbookmark(String)
+        case delete(EntityId)
+        case reblog(EntityId)
+        case unreblog(EntityId)
+        case favourite(EntityId)
+        case unfavourite(EntityId)
+        case bookmark(EntityId)
+        case unbookmark(EntityId)
+        case pin(EntityId)
+        case unpin(EntityId)
     }
 }
 
@@ -134,6 +136,10 @@ extension Mastodon.Statuses: TargetType {
             return "\(apiPath)/\(id)/bookmark"
         case .unbookmark(let id):
             return "\(apiPath)/\(id)/unbookmark"
+        case .pin(let id):
+            return "\(apiPath)/\(id)/pin"
+        case .unpin(let id):
+            return "\(apiPath)/\(id)/unpin"
         }
     }
     
@@ -146,7 +152,9 @@ extension Mastodon.Statuses: TargetType {
                     .favourite(_),
                     .unfavourite(_),
                     .bookmark(_),
-                    .unbookmark(_):
+                    .unbookmark(_),
+                    .pin(_),
+                    .unpin(_):
             return .post
         case .delete(_):
             return .delete

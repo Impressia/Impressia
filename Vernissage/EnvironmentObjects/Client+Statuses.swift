@@ -23,6 +23,14 @@ extension Client {
             return try await mastodonClient.unfavourite(statusId: statusId)
         }
         
+        func pin(statusId: String) async throws -> Status? {
+            return try await mastodonClient.pin(statusId: statusId)
+        }
+        
+        func unpin(statusId: String) async throws -> Status? {
+            return try await mastodonClient.unpin(statusId: statusId)
+        }
+        
         func boost(statusId: String) async throws -> Status? {
             return try await mastodonClient.boost(statusId: statusId)
         }
@@ -41,6 +49,10 @@ extension Client {
         
         func new(status: Mastodon.Statuses.Components) async throws -> Status? {
             return try await mastodonClient.new(statusComponents: status)
+        }
+        
+        func delete(statusId: String) async throws {
+            try await mastodonClient.delete(statusId: statusId)
         }
         
         func comments(to statusId: String) async throws -> [CommentModel] {

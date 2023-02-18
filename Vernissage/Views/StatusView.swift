@@ -108,9 +108,11 @@ struct StatusView: View {
                             .foregroundColor(.lightGrayColor)
                             .font(.footnote)
                             
-                            InteractionRow(statusViewModel: statusViewModel)
-                                .foregroundColor(.accentColor)
-                                .padding(8)
+                            InteractionRow(statusViewModel: statusViewModel) {
+                                self.dismiss()
+                            }
+                            .foregroundColor(.accentColor)
+                            .padding(8)
                         }
                         .padding(8)
                                             
@@ -172,7 +174,7 @@ struct StatusView: View {
             if response.statusCode() == HTTPStatusCode.notFound, let accountId = self.applicationState.account?.id {
                 StatusDataHandler.shared.remove(accountId: accountId, statusId: self.statusId)
                 ErrorService.shared.handle(NetworkError.notSuccessResponse(response), message: "Status not existing anymore.", showToastr: true)
-                dismiss()
+                self.dismiss()
             }
         }
         catch {

@@ -76,6 +76,26 @@ public extension MastodonClientAuthenticated {
 
         return try await downloadJson(Status.self, request: request)
     }
+    
+    func pin(statusId: EntityId) async throws -> Status {
+        let request = try Self.request(
+            for: baseURL,
+            target: Mastodon.Statuses.pin(statusId),
+            withBearerToken: token
+        )
+
+        return try await downloadJson(Status.self, request: request)
+    }
+
+    func unpin(statusId: EntityId) async throws -> Status {
+        let request = try Self.request(
+            for: baseURL,
+            target: Mastodon.Statuses.unpin(statusId),
+            withBearerToken: token
+        )
+
+        return try await downloadJson(Status.self, request: request)
+    }
 
     func new(statusComponents: Mastodon.Statuses.Components) async throws -> Status {
         let request = try Self.request(
@@ -84,5 +104,14 @@ public extension MastodonClientAuthenticated {
             withBearerToken: token)
 
         return try await downloadJson(Status.self, request: request)
+    }
+    
+    func delete(statusId: EntityId) async throws {
+        let request = try Self.request(
+            for: baseURL,
+            target: Mastodon.Statuses.delete(statusId),
+            withBearerToken: token)
+
+        try await send(request: request)
     }
 }
