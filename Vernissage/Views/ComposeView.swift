@@ -77,8 +77,9 @@ struct ComposeView: View {
                                 .foregroundColor(.lightGrayColor)
                         }
                         
-                        TextField("Type what's on your mind", text: $text)
+                        TextField("Type what's on your mind", text: $text, axis: .vertical)
                             .padding(8)
+                            .lineLimit(2...12)
                             .focused($focusedField, equals: .content)
                             .keyboardType(.default)
                             .onFirstAppear {
@@ -186,6 +187,12 @@ struct ComposeView: View {
                 Button {
                     withAnimation(.easeInOut) {
                         self.isSensitive.toggle()
+                        
+                        if self.isSensitive {
+                            self.focusedField = .spoilerText
+                        } else {
+                            self.focusedField = .content
+                        }
                     }
                 } label: {
                     Image(systemName: self.isSensitive ? "exclamationmark.square.fill" : "exclamationmark.square")
