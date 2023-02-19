@@ -7,15 +7,6 @@
 import Foundation
 
 public extension MastodonClientAuthenticated {
-    func status(statusId: EntityId) async throws -> Status {
-        let request = try Self.request(
-            for: baseURL,
-            target: Mastodon.Statuses.status(statusId),
-            withBearerToken: token)
-        
-        return try await downloadJson(Status.self, request: request)
-    }
-
     func boost(statusId: EntityId) async throws -> Status {
         // TODO: Check whether the current user already boosted the status
         let request = try Self.request(

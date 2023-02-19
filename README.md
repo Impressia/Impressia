@@ -70,13 +70,15 @@ In pixelfed source code there is hardcoded application name. API always retruns 
  ],
 ```
 
-### ** Place is not available in the API**
+### **(fixed) Place is not available in the API**
 
 In the status response there is no information about place (even if we save place we cannot display it).
 That information is visible when using Pixelfed web app. 
 
 There is `place_id` field in status create endpoint.
 For search there is an endpoint: `https://{{host}}/api/v1.1/compose/search/location?q=wroc`.
+
+Fix: place is available when we add `_pf` to the query params.
 
 ### **(fixed) Trends are not availabe through the API**
 

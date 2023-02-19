@@ -32,7 +32,7 @@ struct CommentsSection: View {
                         
                         if self.applicationState.showInteractionStatusId == commentViewModel.status.id {
                             VStack (alignment: .leading, spacing: 0) {
-                                InteractionRow(statusViewModel: commentViewModel.status)
+                                InteractionRow(statusModel: commentViewModel.status)
                                     .foregroundColor(self.getInteractionRowTextColor())
                                     .padding(.horizontal, 16)
                                     .padding(.vertical, 8)

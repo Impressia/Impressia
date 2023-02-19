@@ -35,67 +35,12 @@ public class StatusModel: ObservableObject {
     public let tags: [Tag]
     public let application: BaseApplication?
     public let place: Place?
+    public let commentsDisabled: Bool
     
     public let reblogStatus: Status?
     
     @Published public var mediaAttachments: [AttachmentModel]
-    
-    public init(
-        id: EntityId,
-        content: Html,
-        uri: String,
-        account: Account,
-        application: BaseApplication,
-        url: URL? = nil,
-        inReplyToId: EntityId? = nil,
-        inReplyToAccount: EntityId? = nil,
-        reblog: Status? = nil,
-        createdAt: String? = nil,
-        reblogsCount: Int = 0,
-        favouritesCount: Int = 0,
-        repliesCount: Int = 0,
-        reblogged: Bool = false,
-        favourited: Bool = false,
-        sensitive: Bool = false,
-        bookmarked: Bool = false,
-        pinned: Bool = false,
-        muted: Bool = false,
-        spoilerText: String? = nil,
-        visibility: Status.Visibility = Status.Visibility.pub,
-        mediaAttachments: [AttachmentModel] = [],
-        card: PreviewCard? = nil,
-        mentions: [Mention] = [],
-        tags: [Tag] = [],
-        place: Place? = nil
-    ) {
-        self.id = id
-        self.content = content
-        self.uri = uri
-        self.url = url
-        self.account = account
-        self.application = application
-        self.inReplyToId = inReplyToId
-        self.inReplyToAccount = inReplyToAccount
-        self.createdAt = createdAt ?? Date().formatted(.iso8601)
-        self.reblogsCount = reblogsCount
-        self.favouritesCount = favouritesCount
-        self.repliesCount = repliesCount
-        self.reblogged = reblogged
-        self.favourited = favourited
-        self.sensitive = sensitive
-        self.bookmarked = bookmarked
-        self.pinned = pinned
-        self.muted = muted
-        self.spoilerText = spoilerText
-        self.visibility = visibility
-        self.mediaAttachments = mediaAttachments
-        self.card = card
-        self.mentions = mentions
-        self.tags = tags
-        self.place = place
-        self.reblogStatus = nil
-    }
-    
+        
     init(status: Status) {
         
         // If status has been rebloged we are saving orginal status here.
@@ -125,6 +70,7 @@ public class StatusModel: ObservableObject {
         self.tags = orginalStatus.tags
         self.application = orginalStatus.application
         self.place = orginalStatus.place
+        self.commentsDisabled = orginalStatus.commentsDisabled
         
         var mediaAttachments: [AttachmentModel] = []
         for item in orginalStatus.mediaAttachments {

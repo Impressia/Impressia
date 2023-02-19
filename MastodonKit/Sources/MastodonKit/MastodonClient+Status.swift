@@ -7,7 +7,15 @@
 import Foundation
 
 public extension MastodonClientAuthenticated {
-
+    func status(statusId: EntityId) async throws -> Status {
+        let request = try Self.request(
+            for: baseURL,
+            target: Mastodon.Statuses.status(statusId),
+            withBearerToken: token)
+        
+        return try await downloadJson(Status.self, request: request)
+    }
+    
     func favouritedBy(for statusId: String, page: Int = 1) async throws -> [Account] {
         let request = try Self.request(
             for: baseURL,

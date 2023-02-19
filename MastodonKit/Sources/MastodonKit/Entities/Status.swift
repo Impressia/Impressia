@@ -112,6 +112,9 @@ public class Status: Codable {
     /// If the current token has an authorized user: The filter and keywords that matched this status.
     public let filtered: FilterResult?
     
+    /// Information about enabled/disabled comments.
+    public let commentsDisabled: Bool
+    
     private enum CodingKeys: String, CodingKey {
         case id
         case uri
@@ -145,6 +148,7 @@ public class Status: Codable {
         case text
         case editedAt = "edited_at"
         case filtered
+        case commentsDisabled = "comments_disabled"
     }
 
     public required init(from decoder: Decoder) throws {
@@ -182,6 +186,7 @@ public class Status: Codable {
         self.text = try? container.decodeIfPresent(String.self, forKey: .text)
         self.editedAt = try? container.decodeIfPresent(String.self, forKey: .editedAt)
         self.filtered = try? container.decodeIfPresent(FilterResult.self, forKey: .filtered)
+        self.commentsDisabled = (try? container.decode(Bool.self, forKey: .commentsDisabled)) ?? false
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -264,5 +269,7 @@ public class Status: Codable {
         if let filtered {
             try container.encode(filtered, forKey: .filtered)
         }
+        
+        try container.encodeIfPresent(commentsDisabled, forKey: .commentsDisabled)
     }
 }

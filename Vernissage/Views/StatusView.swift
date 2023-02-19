@@ -108,7 +108,7 @@ struct StatusView: View {
                             .foregroundColor(.lightGrayColor)
                             .font(.footnote)
                             
-                            InteractionRow(statusViewModel: statusViewModel) {
+                            InteractionRow(statusModel: statusViewModel) {
                                 self.dismiss()
                             }
                             .foregroundColor(.accentColor)

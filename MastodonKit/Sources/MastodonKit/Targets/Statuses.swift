@@ -172,8 +172,11 @@ extension Mastodon.Statuses: TargetType {
         var minId: MinId? = nil
         var limit: Limit? = nil
         var page: Page? = nil
+        var pixelfedKey: Bool? = nil
 
         switch self {
+        case .status(_):
+            pixelfedKey = true
         case .favouritedBy(_, let _maxId, let _sinceId, let _minId, let _limit, let _page):
             maxId = _maxId
             sinceId = _sinceId
@@ -193,17 +196,25 @@ extension Mastodon.Statuses: TargetType {
         if let maxId {
             params.append(("max_id",  maxId))
         }
+
         if let sinceId {
             params.append(("since_id", sinceId))
         }
+
         if let minId {
             params.append(("min_id", minId))
         }
+
         if let limit {
             params.append(("limit", "\(limit)"))
         }
+
         if let page {
             params.append(("page", "\(page)"))
+        }
+        
+        if pixelfedKey != nil {
+            params.append(("_pe", "1"))
         }
         
         return params

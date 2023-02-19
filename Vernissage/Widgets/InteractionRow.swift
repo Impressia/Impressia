@@ -15,7 +15,7 @@ struct InteractionRow: View {
     @EnvironmentObject var client: Client
     @EnvironmentObject var routerPath: RouterPath
     
-    @State var statusViewModel: StatusModel
+    @State var statusModel: StatusModel
     
     @State private var repliesCount = 0
     @State private var reblogged = false
@@ -26,24 +26,26 @@ struct InteractionRow: View {
             
     private let delete: DeleteAction?
     
-    public init(statusViewModel: StatusModel, delete: DeleteAction? = nil) {
-        self.statusViewModel = statusViewModel
+    public init(statusModel: StatusModel, delete: DeleteAction? = nil) {
+        self.statusModel = statusModel
         self.delete = delete
     }
     
     var body: some View {
         HStack (alignment: .top) {
-            ActionButton {
-                self.routerPath.presentedSheet = .replyToStatusEditor(status: statusViewModel)
-            } label: {
-                HStack(alignment: .center) {
-                    Image(systemName: "message")
-                    Text("\(repliesCount)")
-                        .font(.caption)
+            if self.statusModel.commentsDisabled == false {
+                ActionButton {
+                    self.routerPath.presentedSheet = .replyToStatusEditor(status: statusModel)
+                } label: {
+                    HStack(alignment: .center) {
+                        Image(systemName: "message")
+                        Text("\(repliesCount)")
+                            .font(.caption)
+                    }
                 }
+                
+                Spacer()
             }
-            
-            Spacer()
             
             ActionButton {
                 await self.reboost()
@@ -78,15 +80,15 @@ struct InteractionRow: View {
             Spacer()
             
             Menu {
-                NavigationLink(value: RouteurDestinations.accounts(entityId: statusViewModel.id, listType: .reblogged)) {
+                NavigationLink(value: RouteurDestinations.accounts(entityId: statusModel.id, listType: .reblogged)) {
                     Label("Reboosted by", systemImage: "paperplane")
                 }
 
-                NavigationLink(value: RouteurDestinations.accounts(entityId: statusViewModel.id, listType: .favourited)) {
+                NavigationLink(value: RouteurDestinations.accounts(entityId: statusModel.id, listType: .favourited)) {
                     Label("Favourited by", systemImage: "hand.thumbsup")
                 }
 
-                if let url = statusViewModel.url {
+                if let url = statusModel.url {
                     Divider()
 
                     Link(destination: url) {
@@ -98,7 +100,7 @@ struct InteractionRow: View {
                     }
                 }
                 
-                if self.statusViewModel.account.id == self.applicationState.account?.id {
+                if self.statusModel.account.id == self.applicationState.account?.id {
                     Section(header: Text("Your post")) {
                         Button(role: .destructive) {
                             self.deleteStatus()
@@ -119,19 +121,19 @@ struct InteractionRow: View {
     }
     
     private func refreshCounters() {
-        self.repliesCount = self.statusViewModel.repliesCount
-        self.reblogged = self.statusViewModel.reblogged
-        self.reblogsCount = self.statusViewModel.reblogsCount
-        self.favourited = self.statusViewModel.favourited
-        self.favouritesCount = self.statusViewModel.favouritesCount
-        self.bookmarked = self.statusViewModel.bookmarked
+        self.repliesCount = self.statusModel.repliesCount
+        self.reblogged = self.statusModel.reblogged
+        self.reblogsCount = self.statusModel.reblogsCount
+        self.favourited = self.statusModel.favourited
+        self.favouritesCount = self.statusModel.favouritesCount
+        self.bookmarked = self.statusModel.bookmarked
     }
     
     private func reboost() async {
         do {
             let status = self.reblogged
-            ? try await self.client.statuses?.unboost(statusId: self.statusViewModel.id)
-            : try await self.client.statuses?.boost(statusId: self.statusViewModel.id)
+            ? try await self.client.statuses?.unboost(statusId: self.statusModel.id)
+            : try await self.client.statuses?.boost(statusId: self.statusModel.id)
 
             if let status {
                 self.reblogsCount = status.reblogsCount == self.reblogsCount
@@ -150,8 +152,8 @@ struct InteractionRow: View {
     private func favourite() async {
         do {
             let status = self.favourited
-            ? try await self.client.statuses?.unfavourite(statusId: self.statusViewModel.id)
-            : try await self.client.statuses?.favourite(statusId: self.statusViewModel.id)
+            ? try await self.client.statuses?.unfavourite(statusId: self.statusModel.id)
+            : try await self.client.statuses?.favourite(statusId: self.statusModel.id)
 
             if let status {
                 self.favouritesCount = status.favouritesCount == self.favouritesCount
@@ -170,8 +172,8 @@ struct InteractionRow: View {
     private func bookmark() async {
         do {
             _ = self.bookmarked
-            ? try await self.client.statuses?.unbookmark(statusId: self.statusViewModel.id)
-            : try await self.client.statuses?.bookmark(statusId: self.statusViewModel.id)
+            ? try await self.client.statuses?.unbookmark(statusId: self.statusModel.id)
+            : try await self.client.statuses?.bookmark(statusId: self.statusModel.id)
 
             self.bookmarked.toggle()
             ToastrService.shared.showSuccess(self.bookmarked ? "Bookmarked" : "Unbookmarked", imageSystemName: "bookmark.fill")
@@ -183,7 +185,7 @@ struct InteractionRow: View {
     private func deleteStatus() {
         Task {
             do {
-                try await self.client.statuses?.delete(statusId: self.statusViewModel.id)
+                try await self.client.statuses?.delete(statusId: self.statusModel.id)
                 ToastrService.shared.showSuccess("Post deleted", imageSystemName: "checkmark.circle.fill")
                 
                 self.delete?()
