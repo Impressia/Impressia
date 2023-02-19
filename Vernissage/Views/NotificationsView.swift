@@ -57,7 +57,9 @@ struct NotificationsView: View {
                 }
                 .listStyle(PlainListStyle())
                 .refreshable {
+                    HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
                     await self.loadNewNotifications()
+                    HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
                 }
             }
         case .error(let error):

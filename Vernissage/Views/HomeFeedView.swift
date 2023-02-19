@@ -97,10 +97,12 @@ struct HomeFeedView: View {
                 .opacity(self.opacity)
         }
         .refreshable {
+            HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
+            
             self.applicationState.amountOfNewStatuses = 0
-            Task {
-                await self.refreshData()
-            }
+            await self.refreshData()
+
+            HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
         }
         .onChange(of: self.applicationState.amountOfNewStatuses) { newValue in
             self.calculateOffset()

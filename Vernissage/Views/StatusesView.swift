@@ -83,7 +83,9 @@ struct StatusesView: View {
                 }
                 .refreshable {
                     do {
+                        HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
                         try await self.loadTopStatuses()
+                        HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
                     } catch {
                         ErrorService.shared.handle(error, message: "Loading statuses failed.", showToastr: !Task.isCancelled)
                     }
