@@ -14,7 +14,7 @@ struct LabelIcon: View {
         if let value {
             HStack(alignment: .center) {
                 Image(systemName: iconName)
-                    .frame(width: 30, alignment: .leading)
+                    .frame(width: 24, alignment: .center)
                 Text(value)
                     .font(.footnote)
             }
