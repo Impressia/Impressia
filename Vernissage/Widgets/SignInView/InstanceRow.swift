@@ -55,6 +55,21 @@ struct InstanceRow: View {
             
             Text(instance.description ?? "")
                 .font(.caption)
+            
+            if let stats = instance.stats {
+                HStack {
+                    Image(systemName: "person.2.fill")
+                    Text("\(stats.userCount) users")
+                    
+                    Image(systemName: "photo.stack.fill")
+                    Text("\(stats.statusCount) posts")
+
+                    Spacer()
+                }
+                .padding(.top, 4)
+                .foregroundColor(.lightGrayColor)
+                .font(.caption)
+            }
         }
     }
     

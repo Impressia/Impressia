@@ -47,6 +47,9 @@ public struct Instance: Codable {
     /// Main contact email.
     public let email: String?
     
+    /// Statistics about the instance.
+    public let stats: Stats?
+    
     enum CodingKeys: String, CodingKey {
         case uri
         case title
@@ -61,6 +64,7 @@ public struct Instance: Codable {
         case email
         case registrations
         case approvalRequired = "approval_required"
+        case stats
     }
     
     public init(from decoder: Decoder) throws {
@@ -79,5 +83,6 @@ public struct Instance: Codable {
         self.email = try? container.decodeIfPresent(String.self, forKey: .email)
         self.registrations = (try? container.decodeIfPresent(Bool.self, forKey: .registrations)) ?? false
         self.approvalRequired = (try? container.decodeIfPresent(Bool.self, forKey: .approvalRequired)) ?? false
+        self.stats = try? container.decodeIfPresent(Stats.self, forKey: .stats)
     }
 }
