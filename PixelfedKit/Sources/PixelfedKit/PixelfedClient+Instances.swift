@@ -6,9 +6,9 @@
 
 import Foundation
 
-public extension MastodonClient {
+public extension PixelfedClient {
     func readInstanceInformation() async throws -> Instance {
-        let request = try Self.request(for: baseURL, target: Mastodon.Instances.instance)
+        let request = try Self.request(for: baseURL, target: Pixelfed.Instances.instance)
         return try await downloadJson(Instance.self, request: request)
     }
 }

@@ -6,13 +6,13 @@
 
 import Foundation
 
-extension Mastodon {
+extension Pixelfed {
     public enum Bookmarks {
         case bookmarks(MaxId?, SinceId?, MinId?, Limit?, Page?)
     }
 }
 
-extension Mastodon.Bookmarks: TargetType {
+extension Pixelfed.Bookmarks: TargetType {
     fileprivate var apiPath: String { return "/api/v1/bookmarks" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.

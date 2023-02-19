@@ -6,7 +6,7 @@
 
 import Foundation
 
-extension Mastodon {
+extension Pixelfed {
     public enum Statuses {
         public enum Visibility: String, Encodable {
             case priv = "private"
@@ -32,7 +32,7 @@ extension Mastodon {
     }
 }
 
-extension Mastodon.Statuses {
+extension Pixelfed.Statuses {
     public struct Components {
         public let inReplyToId: EntityId?
         public let text: String
@@ -67,7 +67,7 @@ extension Mastodon.Statuses {
     }
 }
 
-extension Mastodon.Statuses: TargetType {
+extension Pixelfed.Statuses: TargetType {
     struct Request: Encodable {
         let status: String
         let inReplyToId: String?
@@ -92,16 +92,16 @@ extension Mastodon.Statuses: TargetType {
         }
         
         func encode(to encoder: Encoder) throws {
-            var container: KeyedEncodingContainer<Mastodon.Statuses.Request.CodingKeys> = encoder.container(keyedBy: Mastodon.Statuses.Request.CodingKeys.self)
-            try container.encode(self.status, forKey: Mastodon.Statuses.Request.CodingKeys.status)
-            try container.encode(self.inReplyToId, forKey: Mastodon.Statuses.Request.CodingKeys.inReplyToId)
-            try container.encode(self.mediaIds, forKey: Mastodon.Statuses.Request.CodingKeys.mediaIds)
-            try container.encode(self.sensitive, forKey: Mastodon.Statuses.Request.CodingKeys.sensitive)
-            try container.encodeIfPresent(self.spoilerText, forKey: Mastodon.Statuses.Request.CodingKeys.spoilerText)
-            try container.encode(self.visibility, forKey: Mastodon.Statuses.Request.CodingKeys.visibility)
-            try container.encodeIfPresent(self.placeId, forKey: Mastodon.Statuses.Request.CodingKeys.placeId)
-            try container.encode(self.commentsDisabled, forKey: Mastodon.Statuses.Request.CodingKeys.commentsDisabled)
-            try container.encodeIfPresent(self.collectionIds, forKey: Mastodon.Statuses.Request.CodingKeys.collectionIds)
+            var container: KeyedEncodingContainer<Pixelfed.Statuses.Request.CodingKeys> = encoder.container(keyedBy: Pixelfed.Statuses.Request.CodingKeys.self)
+            try container.encode(self.status, forKey: Pixelfed.Statuses.Request.CodingKeys.status)
+            try container.encode(self.inReplyToId, forKey: Pixelfed.Statuses.Request.CodingKeys.inReplyToId)
+            try container.encode(self.mediaIds, forKey: Pixelfed.Statuses.Request.CodingKeys.mediaIds)
+            try container.encode(self.sensitive, forKey: Pixelfed.Statuses.Request.CodingKeys.sensitive)
+            try container.encodeIfPresent(self.spoilerText, forKey: Pixelfed.Statuses.Request.CodingKeys.spoilerText)
+            try container.encode(self.visibility, forKey: Pixelfed.Statuses.Request.CodingKeys.visibility)
+            try container.encodeIfPresent(self.placeId, forKey: Pixelfed.Statuses.Request.CodingKeys.placeId)
+            try container.encode(self.commentsDisabled, forKey: Pixelfed.Statuses.Request.CodingKeys.commentsDisabled)
+            try container.encodeIfPresent(self.collectionIds, forKey: Pixelfed.Statuses.Request.CodingKeys.collectionIds)
         }
     }
     

@@ -96,7 +96,7 @@ public class HomeTimelineService {
             return 0
         }
         
-        let client = MastodonClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
+        let client = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
         var amountOfStatuses = 0
         var newestStatusId = newestStatus.id
         
@@ -124,7 +124,7 @@ public class HomeTimelineService {
         }
         
         // Retrieve statuses from API.
-        let client = MastodonClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
+        let client = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
         let statuses = try await client.getHomeTimeline(limit: 40)
         
         // Retrieve all statuses from database.
@@ -169,7 +169,7 @@ public class HomeTimelineService {
         }
                         
         // Retrieve statuses from API.
-        let client = MastodonClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
+        let client = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
         let statuses = try await client.getHomeTimeline(maxId: maxId, minId: minId, limit: 20)
 
         // Save statuses in database.

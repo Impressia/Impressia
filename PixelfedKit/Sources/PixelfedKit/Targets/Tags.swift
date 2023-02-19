@@ -6,7 +6,7 @@
 
 import Foundation
 
-extension Mastodon {
+extension Pixelfed {
     public enum Tags {
         case tag(Hashtag)
         case follow(Hashtag)
@@ -14,7 +14,7 @@ extension Mastodon {
     }
 }
 
-extension Mastodon.Tags: TargetType {
+extension Pixelfed.Tags: TargetType {
     fileprivate var apiPath: String { return "/api/v1/tags" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.

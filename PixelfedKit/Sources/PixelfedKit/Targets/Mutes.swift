@@ -6,13 +6,13 @@
 
 import Foundation
 
-extension Mastodon {
+extension Pixelfed {
     public enum Mutes {
         case mutes
     }
 }
 
-extension Mastodon.Mutes: TargetType {
+extension Pixelfed.Mutes: TargetType {
     fileprivate var apiPath: String { return "/api/v1/mutes" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.

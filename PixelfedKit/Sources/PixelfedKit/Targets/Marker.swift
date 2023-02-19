@@ -6,7 +6,7 @@
 
 import Foundation
 
-extension Mastodon {
+extension Pixelfed {
     public enum Markers {
         public enum Timeline: String, Encodable {
             case home
@@ -18,7 +18,7 @@ extension Mastodon {
     }
 }
 
-extension Mastodon.Markers: TargetType {
+extension Pixelfed.Markers: TargetType {
     fileprivate var apiPath: String { return "/api/v1/markers" }
 
     public var path: String {

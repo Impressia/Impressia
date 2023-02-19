@@ -6,7 +6,7 @@
 
 import Foundation
 
-extension Mastodon {
+extension Pixelfed {
     public enum Trends {
         case tags(TrendRange?, Offset?, Limit?)
         case statuses(TrendRange?, Offset?, Limit?)
@@ -14,7 +14,7 @@ extension Mastodon {
     }
 }
 
-extension Mastodon.Trends: TargetType {
+extension Pixelfed.Trends: TargetType {
     public enum TrendRange: String {
         case daily = "daily"
         case monthly = "monthly"

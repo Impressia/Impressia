@@ -6,11 +6,11 @@
     
 import Foundation
 
-public extension MastodonClientAuthenticated {
+public extension PixelfedClientAuthenticated {
     func verifyCredentials() async throws -> Account {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Account.verifyCredentials,
+            target: Pixelfed.Account.verifyCredentials,
             withBearerToken: token
         )
         
@@ -20,7 +20,7 @@ public extension MastodonClientAuthenticated {
     func account(for accountId: String) async throws -> Account {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Account.account(accountId),
+            target: Pixelfed.Account.account(accountId),
             withBearerToken: token
         )
         
@@ -30,7 +30,7 @@ public extension MastodonClientAuthenticated {
     func relationships(for accountId: String) async throws -> Relationship? {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Account.relationships([accountId]),
+            target: Pixelfed.Account.relationships([accountId]),
             withBearerToken: token
         )
                 
@@ -47,7 +47,7 @@ public extension MastodonClientAuthenticated {
                      limit: Int = 40) async throws -> [Status] {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Account.statuses(accountId, onlyMedia, excludeReplies, maxId, sinceId, minId, limit),
+            target: Pixelfed.Account.statuses(accountId, onlyMedia, excludeReplies, maxId, sinceId, minId, limit),
             withBearerToken: token
         )
         
@@ -57,7 +57,7 @@ public extension MastodonClientAuthenticated {
     func follow(for accountId: String) async throws -> Relationship {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Account.follow(accountId),
+            target: Pixelfed.Account.follow(accountId),
             withBearerToken: token
         )
         
@@ -67,7 +67,7 @@ public extension MastodonClientAuthenticated {
     func unfollow(for accountId: String) async throws -> Relationship {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Account.unfollow(accountId),
+            target: Pixelfed.Account.unfollow(accountId),
             withBearerToken: token
         )
         
@@ -77,7 +77,7 @@ public extension MastodonClientAuthenticated {
     func mute(for accountId: String) async throws -> Relationship {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Account.mute(accountId),
+            target: Pixelfed.Account.mute(accountId),
             withBearerToken: token
         )
         
@@ -87,7 +87,7 @@ public extension MastodonClientAuthenticated {
     func unmute(for accountId: String) async throws -> Relationship {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Account.unmute(accountId),
+            target: Pixelfed.Account.unmute(accountId),
             withBearerToken: token
         )
         
@@ -97,7 +97,7 @@ public extension MastodonClientAuthenticated {
     func block(for accountId: String) async throws -> Relationship {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Account.block(accountId),
+            target: Pixelfed.Account.block(accountId),
             withBearerToken: token
         )
         
@@ -107,7 +107,7 @@ public extension MastodonClientAuthenticated {
     func unblock(for accountId: String) async throws -> Relationship {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Account.unblock(accountId),
+            target: Pixelfed.Account.unblock(accountId),
             withBearerToken: token
         )
         
@@ -117,7 +117,7 @@ public extension MastodonClientAuthenticated {
     func followers(for accountId: String, page: Int = 1) async throws -> [Account] {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Account.followers(accountId, nil, nil, nil, nil, page),
+            target: Pixelfed.Account.followers(accountId, nil, nil, nil, nil, page),
             withBearerToken: token
         )
         
@@ -127,7 +127,7 @@ public extension MastodonClientAuthenticated {
     func following(for accountId: String, page: Int = 1) async throws -> [Account] {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Account.following(accountId, nil, nil, nil, nil, page),
+            target: Pixelfed.Account.following(accountId, nil, nil, nil, nil, page),
             withBearerToken: token
         )
 
@@ -141,7 +141,7 @@ public extension MastodonClientAuthenticated {
                     page: Page? = nil) async throws -> [Status] {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Favourites.favourites(maxId, sinceId, minId, limit, page),
+            target: Pixelfed.Favourites.favourites(maxId, sinceId, minId, limit, page),
             withBearerToken: token
         )
 
@@ -155,7 +155,7 @@ public extension MastodonClientAuthenticated {
                    page: Page? = nil) async throws -> [Status] {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Bookmarks.bookmarks(maxId, sinceId, minId, limit, page),
+            target: Pixelfed.Bookmarks.bookmarks(maxId, sinceId, minId, limit, page),
             withBearerToken: token
         )
 

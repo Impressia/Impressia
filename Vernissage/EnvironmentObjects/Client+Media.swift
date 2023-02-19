@@ -7,15 +7,15 @@
 import Foundation
 import PixelfedKit
 
-/// Mastodon 'Statuses'.
+/// Pixelfed 'Statuses'.
 extension Client {
     public class Media: BaseClient {
         func upload(data: Data, fileName: String, mimeType: String) async throws -> UploadedAttachment? {
-            return try await mastodonClient.upload(data: data, fileName: fileName, mimeType: mimeType)
+            return try await pixelfedClient.upload(data: data, fileName: fileName, mimeType: mimeType)
         }
         
         func update(id: String, description: String?, focus: CGPoint?) async throws -> UploadedAttachment? {
-            return try await mastodonClient.update(id: id, description: description, focus: focus)
+            return try await pixelfedClient.update(id: id, description: description, focus: focus)
         }
     }
 }

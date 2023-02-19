@@ -72,7 +72,7 @@ class RouterPath: ObservableObject {
     
     public func navigateToAccountFrom(acct: String, url: URL) async {
         Task {
-            let results = try? await Client.shared.search?.search(query: acct, resultsType: Mastodon.Search.ResultsType.accounts)
+            let results = try? await Client.shared.search?.search(query: acct, resultsType: Pixelfed.Search.ResultsType.accounts)
                         
             if let accountFromApi = results?.accounts.first {
                 navigate(to: .userProfile(accountId: accountFromApi.id,

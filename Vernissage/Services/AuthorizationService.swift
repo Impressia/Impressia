@@ -22,7 +22,7 @@ public class AuthorizationService {
         }
         
         // When we have at least one account then we have to verify access token.
-        let client = MastodonClient(baseURL: currentAccount.serverUrl).getAuthenticated(token: accessToken)
+        let client = PixelfedClient(baseURL: currentAccount.serverUrl).getAuthenticated(token: accessToken)
 
         do {
             let account = try await client.verifyCredentials()
@@ -49,7 +49,7 @@ public class AuthorizationService {
             throw AuthorisationError.badServerUrl
         }
         
-        let client = MastodonClient(baseURL: baseUrl)
+        let client = PixelfedClient(baseURL: baseUrl)
         
         // Verify address.
         _ = try await client.readInstanceInformation()
@@ -148,7 +148,7 @@ public class AuthorizationService {
     }
     
     private func refreshAccessToken(accountData: AccountData) async throws {
-        let client = MastodonClient(baseURL: accountData.serverUrl)
+        let client = PixelfedClient(baseURL: accountData.serverUrl)
         
         guard let refreshToken = accountData.refreshToken else {
             return
@@ -173,7 +173,7 @@ public class AuthorizationService {
                                     presentationContextProvider: ASWebAuthenticationPresentationContextProviding
     ) async throws {
 
-        let client = MastodonClient(baseURL: accountData.serverUrl)
+        let client = PixelfedClient(baseURL: accountData.serverUrl)
 
         // Create application (we will get clientId and clientSecret).
         let oAuthApp = Application(clientId: accountData.clientId,

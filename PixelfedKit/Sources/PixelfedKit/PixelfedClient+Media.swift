@@ -6,11 +6,11 @@
 
 import Foundation
 
-public extension MastodonClientAuthenticated {
+public extension PixelfedClientAuthenticated {
     func upload(data: Data, fileName: String, mimeType: String) async throws -> UploadedAttachment {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Media.upload(data, fileName, mimeType),
+            target: Pixelfed.Media.upload(data, fileName, mimeType),
             withBearerToken: token)
 
         return try await downloadJson(UploadedAttachment.self, request: request)
@@ -19,7 +19,7 @@ public extension MastodonClientAuthenticated {
     func update(id: EntityId, description: String?, focus: CGPoint?) async throws -> UploadedAttachment {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Media.update(id, description, focus),
+            target: Pixelfed.Media.update(id, description, focus),
             withBearerToken: token)
 
         let (data, response) = try await urlSession.data(for: request)

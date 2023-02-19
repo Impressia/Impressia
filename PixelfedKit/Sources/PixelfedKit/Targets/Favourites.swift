@@ -6,13 +6,13 @@
 
 import Foundation
 
-extension Mastodon {
+extension Pixelfed {
     public enum Favourites {
         case favourites(MaxId?, SinceId?, MinId?, Limit?, Page?)
     }
 }
 
-extension Mastodon.Favourites: TargetType {
+extension Pixelfed.Favourites: TargetType {
     fileprivate var apiPath: String { return "/api/v1/favourites" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.

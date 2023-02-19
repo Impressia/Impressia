@@ -6,15 +6,14 @@
     
 import Foundation
 
-public extension MastodonClientAuthenticated {
-
-    func search(query: String, type: Mastodon.Search.ResultsType) async throws -> SearchResults {
+public extension PixelfedClientAuthenticated {
+    func getContext(for statusId: String) async throws -> Context {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Search.search(query, type, false),
+            target: Pixelfed.Statuses.context(statusId),
             withBearerToken: token
         )
         
-        return try await downloadJson(SearchResults.self, request: request)
+        return try await downloadJson(Context.self, request: request)
     }
 }

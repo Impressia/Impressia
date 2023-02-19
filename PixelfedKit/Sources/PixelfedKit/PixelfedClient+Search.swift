@@ -3,18 +3,18 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the MIT License.
 //
-
+    
 import Foundation
 
-public extension MastodonClientAuthenticated {
+public extension PixelfedClientAuthenticated {
 
-    func statusesTrends(range: Mastodon.Trends.TrendRange) async throws -> [Status] {
+    func search(query: String, type: Pixelfed.Search.ResultsType) async throws -> SearchResults {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Trends.statuses(range, nil, nil),
+            target: Pixelfed.Search.search(query, type, false),
             withBearerToken: token
         )
         
-        return try await downloadJson([Status].self, request: request)
+        return try await downloadJson(SearchResults.self, request: request)
     }
 }

@@ -6,13 +6,13 @@
 
 import Foundation
 
-extension Mastodon {
+extension Pixelfed {
     public enum OAuth {
         case authenticate(Application, UsernameType, PasswordType, String?)
     }
 }
 
-extension Mastodon.OAuth: TargetType {
+extension Pixelfed.OAuth: TargetType {
     struct Request: Encodable {
         let clientId: String
         let clientSecret: String
@@ -31,13 +31,13 @@ extension Mastodon.OAuth: TargetType {
         }
         
         func encode(to encoder: Encoder) throws {
-            var container: KeyedEncodingContainer<Mastodon.OAuth.Request.CodingKeys> = encoder.container(keyedBy: Mastodon.OAuth.Request.CodingKeys.self)
-            try container.encode(self.clientId, forKey: Mastodon.OAuth.Request.CodingKeys.clientId)
-            try container.encode(self.clientSecret, forKey: Mastodon.OAuth.Request.CodingKeys.clientSecret)
-            try container.encode(self.grantType, forKey: Mastodon.OAuth.Request.CodingKeys.grantType)
-            try container.encode(self.username, forKey: Mastodon.OAuth.Request.CodingKeys.username)
-            try container.encode(self.password, forKey: Mastodon.OAuth.Request.CodingKeys.password)
-            try container.encode(self.scope, forKey: Mastodon.OAuth.Request.CodingKeys.scope)
+            var container: KeyedEncodingContainer<Pixelfed.OAuth.Request.CodingKeys> = encoder.container(keyedBy: Pixelfed.OAuth.Request.CodingKeys.self)
+            try container.encode(self.clientId, forKey: Pixelfed.OAuth.Request.CodingKeys.clientId)
+            try container.encode(self.clientSecret, forKey: Pixelfed.OAuth.Request.CodingKeys.clientSecret)
+            try container.encode(self.grantType, forKey: Pixelfed.OAuth.Request.CodingKeys.grantType)
+            try container.encode(self.username, forKey: Pixelfed.OAuth.Request.CodingKeys.username)
+            try container.encode(self.password, forKey: Pixelfed.OAuth.Request.CodingKeys.password)
+            try container.encode(self.scope, forKey: Pixelfed.OAuth.Request.CodingKeys.scope)
         }
     }
     

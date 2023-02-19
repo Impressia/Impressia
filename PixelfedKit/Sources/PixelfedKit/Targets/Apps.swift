@@ -6,13 +6,13 @@
 
 import Foundation
 
-extension Mastodon {
+extension Pixelfed {
     public enum Apps {
         case register(clientName: String, redirectUris: String, scopes: String?, website: String?)
     }
 }
 
-extension Mastodon.Apps: TargetType {
+extension Pixelfed.Apps: TargetType {
     struct Request: Encodable {
         let clientName: String
         let redirectUris: String
@@ -27,11 +27,11 @@ extension Mastodon.Apps: TargetType {
         }
         
         func encode(to encoder: Encoder) throws {
-            var container: KeyedEncodingContainer<Mastodon.Apps.Request.CodingKeys> = encoder.container(keyedBy: Mastodon.Apps.Request.CodingKeys.self)
-            try container.encode(self.clientName, forKey: Mastodon.Apps.Request.CodingKeys.clientName)
-            try container.encode(self.redirectUris, forKey: Mastodon.Apps.Request.CodingKeys.redirectUris)
-            try container.encode(self.scopes, forKey: Mastodon.Apps.Request.CodingKeys.scopes)
-            try container.encode(self.website, forKey: Mastodon.Apps.Request.CodingKeys.website)
+            var container: KeyedEncodingContainer<Pixelfed.Apps.Request.CodingKeys> = encoder.container(keyedBy: Pixelfed.Apps.Request.CodingKeys.self)
+            try container.encode(self.clientName, forKey: Pixelfed.Apps.Request.CodingKeys.clientName)
+            try container.encode(self.redirectUris, forKey: Pixelfed.Apps.Request.CodingKeys.redirectUris)
+            try container.encode(self.scopes, forKey: Pixelfed.Apps.Request.CodingKeys.scopes)
+            try container.encode(self.website, forKey: Pixelfed.Apps.Request.CodingKeys.website)
         }
     }
     

@@ -7,11 +7,11 @@
 import Foundation
 import PixelfedKit
 
-/// Mastodon 'Places'.
+/// Pixelfed 'Places'.
 extension Client {
     public class Places: BaseClient {
         public func search(query: String) async throws -> [Place] {
-            return try await mastodonClient.places(query: query)
+            return try await pixelfedClient.places(query: query)
         }
     }
 }

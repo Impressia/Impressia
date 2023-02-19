@@ -6,12 +6,12 @@
     
 import Foundation
 
-public extension MastodonClientAuthenticated {
+public extension PixelfedClientAuthenticated {
 
     func places(query: String) async throws -> [Place] {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Places.search(query),
+            target: Pixelfed.Places.search(query),
             withBearerToken: token
         )
         

@@ -6,12 +6,12 @@
 
 import Foundation
 
-/// Represents the software instance of Mastodon running on this domain.
+/// Represents the software instance of Pixelfed running on this domain.
 public struct Instance: Codable {
     /// The domain name of the instance.
     public let uri: String
         
-    /// The version of Mastodon installed on the instance.
+    /// The version of Pixelfed installed on the instance.
     public let version: String
     
     /// The title of the website.

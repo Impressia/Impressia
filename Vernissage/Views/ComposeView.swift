@@ -17,7 +17,7 @@ struct ComposeView: View {
     
     @State var statusViewModel: StatusModel?
     @State private var text = String.empty()
-    @State private var visibility = Mastodon.Statuses.Visibility.pub
+    @State private var visibility = Pixelfed.Statuses.Visibility.pub
     @State private var isSensitive = false
     @State private var spoilerText = String.empty()
     @State private var commentsDisabled = false
@@ -260,17 +260,17 @@ struct ComposeView: View {
                     HStack {
                         Image(systemName: "globe.europe.africa")
                         Text(" Everyone")
-                    }.tag(Mastodon.Statuses.Visibility.pub)
+                    }.tag(Pixelfed.Statuses.Visibility.pub)
                     
                     HStack {
                         Image(systemName: "lock.open")
                         Text(" Unlisted")
-                    }.tag(Mastodon.Statuses.Visibility.unlisted)
+                    }.tag(Pixelfed.Statuses.Visibility.unlisted)
                         
                     HStack {
                         Image(systemName: "lock")
                         Text(" Followers")
-                    }.tag(Mastodon.Statuses.Visibility.priv)
+                    }.tag(Pixelfed.Statuses.Visibility.priv)
                 }.buttonStyle(.bordered)
             }
         }
@@ -368,8 +368,8 @@ struct ComposeView: View {
         }
     }
     
-    private func createStatus() -> Mastodon.Statuses.Components {
-        return Mastodon.Statuses.Components(inReplyToId: self.statusViewModel?.id,
+    private func createStatus() -> Pixelfed.Statuses.Components {
+        return Pixelfed.Statuses.Components(inReplyToId: self.statusViewModel?.id,
                                             text: self.text,
                                             spoilerText: self.isSensitive ? self.spoilerText : String.empty(),
                                             mediaIds: self.photosAttachment.getUploadedPhotoIds(),

@@ -6,13 +6,13 @@
 
 import Foundation
 
-extension Mastodon {
+extension Pixelfed {
     public enum Blocks {
         case blocks
     }
 }
 
-extension Mastodon.Blocks: TargetType {
+extension Pixelfed.Blocks: TargetType {
     fileprivate var apiPath: String { return "/api/v1/blocks" }
     
     /// The path to be appended to `baseURL` to form the full `URL`.

@@ -7,15 +7,15 @@
 import Foundation
 import OAuthSwift
 
-public enum MastodonClientError: Swift.Error {
+public enum PixelfedClientError: Swift.Error {
     case oAuthCancelled
 }
 
-public protocol MastodonClientProtocol {
+public protocol PixelfedClientProtocol {
     static func request(for baseURL: URL, target: TargetType, withBearerToken token: String?) throws -> URLRequest
 }
 
-public extension MastodonClientProtocol {
+public extension PixelfedClientProtocol {
     static func request(for baseURL: URL, target: TargetType, withBearerToken token: String? = nil) throws -> URLRequest {
         
         var urlComponents = URLComponents(url: baseURL.appendingPathComponent(target.path), resolvingAgainstBaseURL: false)
@@ -40,7 +40,7 @@ public extension MastodonClientProtocol {
     }
 }
 
-public class MastodonClient: MastodonClientProtocol {
+public class PixelfedClient: PixelfedClientProtocol {
     
     let urlSession: URLSession
     let baseURL: URL
@@ -55,12 +55,12 @@ public class MastodonClient: MastodonClientProtocol {
         self.urlSession = urlSession
     }
     
-    public func getAuthenticated(token: Token) -> MastodonClientAuthenticated {
-        MastodonClientAuthenticated(baseURL: baseURL, urlSession: urlSession, token: token)
+    public func getAuthenticated(token: Token) -> PixelfedClientAuthenticated {
+        PixelfedClientAuthenticated(baseURL: baseURL, urlSession: urlSession, token: token)
     }
     
     deinit {
-        oAuthContinuation?.resume(throwing: MastodonClientError.oAuthCancelled)
+        oAuthContinuation?.resume(throwing: PixelfedClientError.oAuthCancelled)
         oAuthHandle?.cancel()
     }
     
@@ -85,7 +85,7 @@ public class MastodonClient: MastodonClientProtocol {
     }
 }
 
-public class MastodonClientAuthenticated: MastodonClientProtocol {
+public class PixelfedClientAuthenticated: PixelfedClientProtocol {
     
     public let token: Token
     public let baseURL: URL

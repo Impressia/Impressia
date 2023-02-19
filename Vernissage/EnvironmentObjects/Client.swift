@@ -11,38 +11,38 @@ public class Client: ObservableObject {
     public static let shared = Client()
     private init() { }
     
-    private var mastodonClient: MastodonClientAuthenticated?
+    private var pixelfedClient: PixelfedClientAuthenticated?
 
     func setAccount(account: AccountModel) {
         guard let accessToken = account.accessToken else {
             return
         }
         
-        self.mastodonClient = MastodonClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
+        self.pixelfedClient = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
     }
 }
 
 extension Client {
-    public var trends: Trends? { return Trends(mastodonClient: self.mastodonClient) }
-    public var publicTimeline: PublicTimeline? { return PublicTimeline(mastodonClient: self.mastodonClient) }
-    public var tags: Tags? { return Tags(mastodonClient: self.mastodonClient) }
-    public var notifications: Notifications? { return Notifications(mastodonClient: self.mastodonClient) }
-    public var statuses: Statuses? { return Statuses(mastodonClient: self.mastodonClient) }
-    public var media: Media? { return Media(mastodonClient: self.mastodonClient) }
-    public var accounts: Accounts? { return Accounts(mastodonClient: self.mastodonClient) }
-    public var search: Search? { return Search(mastodonClient: self.mastodonClient) }
-    public var places: Places? { return Places(mastodonClient: self.mastodonClient) }
+    public var trends: Trends? { return Trends(pixelfedClient: self.pixelfedClient) }
+    public var publicTimeline: PublicTimeline? { return PublicTimeline(pixelfedClient: self.pixelfedClient) }
+    public var tags: Tags? { return Tags(pixelfedClient: self.pixelfedClient) }
+    public var notifications: Notifications? { return Notifications(pixelfedClient: self.pixelfedClient) }
+    public var statuses: Statuses? { return Statuses(pixelfedClient: self.pixelfedClient) }
+    public var media: Media? { return Media(pixelfedClient: self.pixelfedClient) }
+    public var accounts: Accounts? { return Accounts(pixelfedClient: self.pixelfedClient) }
+    public var search: Search? { return Search(pixelfedClient: self.pixelfedClient) }
+    public var places: Places? { return Places(pixelfedClient: self.pixelfedClient) }
     public var instances: Instances { return Instances() }
 }
 
 public class BaseClient {
-    public var mastodonClient: MastodonClientAuthenticated
+    public var pixelfedClient: PixelfedClientAuthenticated
     
-    init?(mastodonClient: MastodonClientAuthenticated?) {
-        guard let mastodonClient else {
+    init?(pixelfedClient: PixelfedClientAuthenticated?) {
+        guard let pixelfedClient else {
             return nil
         }
 
-        self.mastodonClient = mastodonClient
+        self.pixelfedClient = pixelfedClient
     }
 }

@@ -6,12 +6,12 @@
 
 import Foundation
 
-public extension MastodonClientAuthenticated {
+public extension PixelfedClientAuthenticated {
 
     func tag(hashtag: String) async throws -> Tag {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Tags.tag(hashtag),
+            target: Pixelfed.Tags.tag(hashtag),
             withBearerToken: token
         )
         
@@ -21,7 +21,7 @@ public extension MastodonClientAuthenticated {
     func follow(hashtag: String) async throws -> Tag {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Tags.follow(hashtag),
+            target: Pixelfed.Tags.follow(hashtag),
             withBearerToken: token
         )
         
@@ -31,7 +31,7 @@ public extension MastodonClientAuthenticated {
     func unfollow(hashtag: String) async throws -> Tag {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Tags.unfollow(hashtag),
+            target: Pixelfed.Tags.unfollow(hashtag),
             withBearerToken: token
         )
         

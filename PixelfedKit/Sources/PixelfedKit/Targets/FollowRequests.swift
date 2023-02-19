@@ -6,7 +6,7 @@
 
 import Foundation
 
-extension Mastodon {
+extension Pixelfed {
     public enum FollowRequests {
         case followRequests
         case authorize(String)
@@ -14,7 +14,7 @@ extension Mastodon {
     }
 }
 
-extension Mastodon.FollowRequests: TargetType {
+extension Pixelfed.FollowRequests: TargetType {
     fileprivate var apiPath: String { return "/api/v1/follow_requests" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.

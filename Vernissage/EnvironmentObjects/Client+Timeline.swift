@@ -7,7 +7,7 @@
 import Foundation
 import PixelfedKit
 
-/// Mastodon 'Timeline'.
+/// Pixelfed 'Timeline'.
 extension Client {
     public class PublicTimeline: BaseClient {
         public func getStatuses(local: Bool,
@@ -16,7 +16,7 @@ extension Client {
                                 sinceId: String? = nil,
                                 minId: String? = nil,
                                 limit: Int = 40) async throws -> [Status] {
-            return try await mastodonClient.getPublicTimeline(local: local,
+            return try await pixelfedClient.getPublicTimeline(local: local,
                                                               remote: remote,
                                                               onlyMedia: true,
                                                               maxId: maxId,
@@ -32,7 +32,7 @@ extension Client {
                                    sinceId: String? = nil,
                                    minId: String? = nil,
                                    limit: Int = 40) async throws -> [Status] {
-            return try await mastodonClient.getTagTimeline(tag: tag,
+            return try await pixelfedClient.getTagTimeline(tag: tag,
                                                            local: local,
                                                            remote: remote,
                                                            onlyMedia: true,

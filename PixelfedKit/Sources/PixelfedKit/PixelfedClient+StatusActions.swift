@@ -6,12 +6,12 @@
 
 import Foundation
 
-public extension MastodonClientAuthenticated {
+public extension PixelfedClientAuthenticated {
     func boost(statusId: EntityId) async throws -> Status {
         // TODO: Check whether the current user already boosted the status
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Statuses.reblog(statusId),
+            target: Pixelfed.Statuses.reblog(statusId),
             withBearerToken: token
         )
                 
@@ -21,7 +21,7 @@ public extension MastodonClientAuthenticated {
     func unboost(statusId: EntityId) async throws -> Status {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Statuses.unreblog(statusId),
+            target: Pixelfed.Statuses.unreblog(statusId),
             withBearerToken: token
         )
         
@@ -31,7 +31,7 @@ public extension MastodonClientAuthenticated {
     func bookmark(statusId: EntityId) async throws -> Status {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Statuses.bookmark(statusId),
+            target: Pixelfed.Statuses.bookmark(statusId),
             withBearerToken: token
         )
 
@@ -41,7 +41,7 @@ public extension MastodonClientAuthenticated {
     func unbookmark(statusId: EntityId) async throws -> Status {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Statuses.unbookmark(statusId),
+            target: Pixelfed.Statuses.unbookmark(statusId),
             withBearerToken: token
         )
 
@@ -51,7 +51,7 @@ public extension MastodonClientAuthenticated {
     func favourite(statusId: EntityId) async throws -> Status {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Statuses.favourite(statusId),
+            target: Pixelfed.Statuses.favourite(statusId),
             withBearerToken: token
         )
 
@@ -61,7 +61,7 @@ public extension MastodonClientAuthenticated {
     func unfavourite(statusId: EntityId) async throws -> Status {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Statuses.unfavourite(statusId),
+            target: Pixelfed.Statuses.unfavourite(statusId),
             withBearerToken: token
         )
 
@@ -71,7 +71,7 @@ public extension MastodonClientAuthenticated {
     func pin(statusId: EntityId) async throws -> Status {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Statuses.pin(statusId),
+            target: Pixelfed.Statuses.pin(statusId),
             withBearerToken: token
         )
 
@@ -81,17 +81,17 @@ public extension MastodonClientAuthenticated {
     func unpin(statusId: EntityId) async throws -> Status {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Statuses.unpin(statusId),
+            target: Pixelfed.Statuses.unpin(statusId),
             withBearerToken: token
         )
 
         return try await downloadJson(Status.self, request: request)
     }
 
-    func new(statusComponents: Mastodon.Statuses.Components) async throws -> Status {
+    func new(statusComponents: Pixelfed.Statuses.Components) async throws -> Status {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Statuses.new(statusComponents),
+            target: Pixelfed.Statuses.new(statusComponents),
             withBearerToken: token)
 
         return try await downloadJson(Status.self, request: request)
@@ -100,7 +100,7 @@ public extension MastodonClientAuthenticated {
     func delete(statusId: EntityId) async throws {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Statuses.delete(statusId),
+            target: Pixelfed.Statuses.delete(statusId),
             withBearerToken: token)
 
         try await send(request: request)

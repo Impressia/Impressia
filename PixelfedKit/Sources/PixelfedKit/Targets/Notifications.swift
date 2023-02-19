@@ -6,7 +6,7 @@
 
 import Foundation
 
-extension Mastodon {
+extension Pixelfed {
     public enum Notifications {
         case notifications(MaxId?, SinceId?, MinId?, Limit?)
         case notification(String)
@@ -14,7 +14,7 @@ extension Mastodon {
     }
 }
 
-extension Mastodon.Notifications: TargetType {
+extension Pixelfed.Notifications: TargetType {
     fileprivate var apiPath: String { return "/api/v1/notifications" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.

@@ -7,52 +7,52 @@
 import Foundation
 import PixelfedKit
 
-/// Mastodon 'Statuses'.
+/// Pixelfed 'Statuses'.
 extension Client {
     public class Statuses: BaseClient {
         
         public func status(withId statusId: String) async throws -> Status {
-            return try await mastodonClient.status(statusId: statusId)
+            return try await pixelfedClient.status(statusId: statusId)
         }
         
         func favourite(statusId: String) async throws -> Status? {
-            return try await mastodonClient.favourite(statusId: statusId)
+            return try await pixelfedClient.favourite(statusId: statusId)
         }
         
         func unfavourite(statusId: String) async throws -> Status? {
-            return try await mastodonClient.unfavourite(statusId: statusId)
+            return try await pixelfedClient.unfavourite(statusId: statusId)
         }
         
         func pin(statusId: String) async throws -> Status? {
-            return try await mastodonClient.pin(statusId: statusId)
+            return try await pixelfedClient.pin(statusId: statusId)
         }
         
         func unpin(statusId: String) async throws -> Status? {
-            return try await mastodonClient.unpin(statusId: statusId)
+            return try await pixelfedClient.unpin(statusId: statusId)
         }
         
         func boost(statusId: String) async throws -> Status? {
-            return try await mastodonClient.boost(statusId: statusId)
+            return try await pixelfedClient.boost(statusId: statusId)
         }
         
         func unboost(statusId: String) async throws -> Status? {
-            return try await mastodonClient.unboost(statusId: statusId)
+            return try await pixelfedClient.unboost(statusId: statusId)
         }
         
         func bookmark(statusId: String) async throws -> Status? {
-            return try await mastodonClient.bookmark(statusId: statusId)
+            return try await pixelfedClient.bookmark(statusId: statusId)
         }
         
         func unbookmark(statusId: String) async throws -> Status? {
-            return try await mastodonClient.unbookmark(statusId: statusId)
+            return try await pixelfedClient.unbookmark(statusId: statusId)
         }
         
-        func new(status: Mastodon.Statuses.Components) async throws -> Status? {
-            return try await mastodonClient.new(statusComponents: status)
+        func new(status: Pixelfed.Statuses.Components) async throws -> Status? {
+            return try await pixelfedClient.new(statusComponents: status)
         }
         
         func delete(statusId: String) async throws {
-            try await mastodonClient.delete(statusId: statusId)
+            try await pixelfedClient.delete(statusId: statusId)
         }
         
         func comments(to statusId: String) async throws -> [CommentModel] {
@@ -64,15 +64,15 @@ extension Client {
         }
         
         public func favouritedBy(statusId: String, page: Int) async throws -> [Account] {
-            return try await mastodonClient.favouritedBy(for: statusId, page: page)
+            return try await pixelfedClient.favouritedBy(for: statusId, page: page)
         }
         
         public func rebloggedBy(statusId: String, page: Int) async throws -> [Account] {
-            return try await mastodonClient.rebloggedBy(for: statusId, page: page)
+            return try await pixelfedClient.rebloggedBy(for: statusId, page: page)
         }
         
         private func getCommentDescendants(to statusId: String, showDivider: Bool, to commentViewModels: inout [CommentModel]) async throws {
-            let context = try await mastodonClient.getContext(for: statusId)
+            let context = try await pixelfedClient.getContext(for: statusId)
             
             let descendants = context.descendants.toStatusViewModel()
             for status in descendants {

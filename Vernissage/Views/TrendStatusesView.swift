@@ -13,16 +13,16 @@ struct TrendStatusesView: View {
 
     @State public var accountId: String
 
-    @State private var tabSelectedValue: Mastodon.Trends.TrendRange = .daily
+    @State private var tabSelectedValue: Pixelfed.Trends.TrendRange = .daily
     @State private var statusViewModels: [StatusModel] = []
     @State private var state: ViewState = .loading
 
     var body: some View {
         ScrollView {
             Picker(selection: $tabSelectedValue, label: Text("")) {
-                Text("Daily").tag(Mastodon.Trends.TrendRange.daily)
-                Text("Monthly").tag(Mastodon.Trends.TrendRange.monthly)
-                Text("Yearly").tag(Mastodon.Trends.TrendRange.yearly)
+                Text("Daily").tag(Pixelfed.Trends.TrendRange.daily)
+                Text("Monthly").tag(Pixelfed.Trends.TrendRange.monthly)
+                Text("Yearly").tag(Pixelfed.Trends.TrendRange.yearly)
                 
             }
             .padding()

@@ -6,7 +6,7 @@
 
 import Foundation
 
-extension Mastodon {
+extension Pixelfed {
     public enum Timelines {
         case home(MaxId?, SinceId?, MinId?, Limit?)
         case pub(Bool, Bool, Bool, MaxId?, SinceId?, MinId?, Limit?)
@@ -14,7 +14,7 @@ extension Mastodon {
     }
 }
 
-extension Mastodon.Timelines: TargetType {
+extension Pixelfed.Timelines: TargetType {
     fileprivate var apiPath: String { return "/api/v1/timelines" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.

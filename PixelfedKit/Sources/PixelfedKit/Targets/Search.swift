@@ -6,14 +6,14 @@
 
 import Foundation
 
-extension Mastodon {
+extension Pixelfed {
     public enum Search {
         case search(SearchQuery, ResultsType, Bool)
     }
 }
 
 
-extension Mastodon.Search: TargetType {
+extension Pixelfed.Search: TargetType {
     public enum ResultsType: String {
         case accounts = "accounts"
         case hashtags = "hashtags"

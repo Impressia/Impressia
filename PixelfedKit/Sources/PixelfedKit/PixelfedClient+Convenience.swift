@@ -8,7 +8,7 @@ import Foundation
 import OAuthSwift
 import AuthenticationServices
 
-public extension MastodonClient {
+public extension PixelfedClient {
     
     /// Creates OAuth application in Pixelfed.
     func createApp(named name: String,
@@ -18,7 +18,7 @@ public extension MastodonClient {
         
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Apps.register(
+            target: Pixelfed.Apps.register(
                 clientName: name,
                 redirectUris: redirectUri,
                 scopes: scopes.reduce("") { $0 == "" ? $1 : $0 + " " + $1},
@@ -80,7 +80,7 @@ public extension MastodonClient {
             oAuthHandle = oauthClient?.authorize(
                 withCallbackURL: app.redirectUri,
                 scope: scope.joined(separator: " "),
-                state: "MASToDON_AUTH",
+                state: "PixELfed_AUTH",
                 completionHandler: { result in
                     switch result {
                     case let .success((credentials, _, _)):

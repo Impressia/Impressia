@@ -7,11 +7,11 @@
 import Foundation
 import PixelfedKit
 
-/// Mastodon 'Trends'.
+/// Pixelfed 'Trends'.
 extension Client {
     public class Trends: BaseClient {
-        public func statuses(range: Mastodon.Trends.TrendRange) async throws -> [Status] {
-            return try await mastodonClient.statusesTrends(range: range)
+        public func statuses(range: Pixelfed.Trends.TrendRange) async throws -> [Status] {
+            return try await pixelfedClient.statusesTrends(range: range)
         }
     }
 }

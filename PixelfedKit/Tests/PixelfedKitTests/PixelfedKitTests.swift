@@ -1,11 +1,11 @@
 import XCTest
-@testable import MastodonKit
+@testable import PixelfedKit
 
-final class MastodonKitTests: XCTestCase {
+final class PixelfedKitTests: XCTestCase {
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(MastodonKit().text, "Hello, World!")
+        // XCTAssertEqual(PixelfedKit().text, "Hello, World!")
     }
 }

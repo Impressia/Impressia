@@ -6,11 +6,11 @@
 
 import Foundation
 
-public extension MastodonClientAuthenticated {
+public extension PixelfedClientAuthenticated {
     func status(statusId: EntityId) async throws -> Status {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Statuses.status(statusId),
+            target: Pixelfed.Statuses.status(statusId),
             withBearerToken: token)
         
         return try await downloadJson(Status.self, request: request)
@@ -19,7 +19,7 @@ public extension MastodonClientAuthenticated {
     func favouritedBy(for statusId: String, page: Int = 1) async throws -> [Account] {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Statuses.favouritedBy(statusId, nil, nil, nil, nil, page),
+            target: Pixelfed.Statuses.favouritedBy(statusId, nil, nil, nil, nil, page),
             withBearerToken: token
         )
 
@@ -29,7 +29,7 @@ public extension MastodonClientAuthenticated {
     func rebloggedBy(for statusId: String, page: Int = 1) async throws -> [Account] {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Statuses.rebloggedBy(statusId, nil, nil, nil, nil, page),
+            target: Pixelfed.Statuses.rebloggedBy(statusId, nil, nil, nil, nil, page),
             withBearerToken: token
         )
         

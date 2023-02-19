@@ -6,14 +6,14 @@
 
 import Foundation
 
-extension Mastodon {
+extension Pixelfed {
     public enum Reports {
         case list
         case report(String, [String], String)
     }
 }
 
-extension Mastodon.Reports: TargetType {
+extension Pixelfed.Reports: TargetType {
     private struct Request: Encodable {
         let accountId: String
         let statusIds: [String]
@@ -26,10 +26,10 @@ extension Mastodon.Reports: TargetType {
         }
         
         func encode(to encoder: Encoder) throws {
-            var container: KeyedEncodingContainer<Mastodon.Reports.Request.CodingKeys> = encoder.container(keyedBy: Mastodon.Reports.Request.CodingKeys.self)
-            try container.encode(self.accountId, forKey: Mastodon.Reports.Request.CodingKeys.accountId)
-            try container.encode(self.statusIds, forKey: Mastodon.Reports.Request.CodingKeys.statusIds)
-            try container.encode(self.comment, forKey: Mastodon.Reports.Request.CodingKeys.comment)
+            var container: KeyedEncodingContainer<Pixelfed.Reports.Request.CodingKeys> = encoder.container(keyedBy: Pixelfed.Reports.Request.CodingKeys.self)
+            try container.encode(self.accountId, forKey: Pixelfed.Reports.Request.CodingKeys.accountId)
+            try container.encode(self.statusIds, forKey: Pixelfed.Reports.Request.CodingKeys.statusIds)
+            try container.encode(self.comment, forKey: Pixelfed.Reports.Request.CodingKeys.comment)
         }
     }
     

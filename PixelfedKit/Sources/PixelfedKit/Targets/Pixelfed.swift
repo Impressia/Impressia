@@ -6,5 +6,5 @@
 
 import Foundation
 
-public class Mastodon {    
+public class Pixelfed {    
 }

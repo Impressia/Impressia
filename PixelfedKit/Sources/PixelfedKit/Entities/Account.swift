@@ -6,7 +6,7 @@
 
 import Foundation
 
-/// Represents a user of Mastodon and their associated profile.
+/// Represents a user of Pixelfed and their associated profile.
 public struct Account: Codable {
     
     /// The account id.

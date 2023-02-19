@@ -6,7 +6,7 @@
 
 import Foundation
 
-extension Mastodon {
+extension Pixelfed {
     public enum Account {
         case account(EntityId)
         case verifyCredentials
@@ -24,7 +24,7 @@ extension Mastodon {
     }
 }
 
-extension Mastodon.Account: TargetType {
+extension Pixelfed.Account: TargetType {
     fileprivate var apiPath: String { return "/api/v1/accounts" }
 
     public var path: String {

@@ -6,7 +6,7 @@
 
 import Foundation
 
-public extension MastodonClientAuthenticated {
+public extension PixelfedClientAuthenticated {
      func getHomeTimeline(
         maxId: EntityId? = nil,
         sinceId: EntityId? = nil,
@@ -15,7 +15,7 @@ public extension MastodonClientAuthenticated {
 
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Timelines.home(maxId, sinceId, minId, limit),
+            target: Pixelfed.Timelines.home(maxId, sinceId, minId, limit),
             withBearerToken: token
         )
                     
@@ -32,7 +32,7 @@ public extension MastodonClientAuthenticated {
 
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Timelines.pub(local, remote, onlyMedia, maxId, sinceId, minId, limit),
+            target: Pixelfed.Timelines.pub(local, remote, onlyMedia, maxId, sinceId, minId, limit),
             withBearerToken: token
         )
         
@@ -51,27 +51,27 @@ public extension MastodonClientAuthenticated {
 
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Timelines.tag(tag, local, remote, onlyMedia, maxId, sinceId, minId, limit),
+            target: Pixelfed.Timelines.tag(tag, local, remote, onlyMedia, maxId, sinceId, minId, limit),
             withBearerToken: token
         )
         
         return try await downloadJson([Status].self, request: request)
     }
 
-    func setMarkers(_ markers: [Mastodon.Markers.Timeline: EntityId]) async throws -> Markers {
+    func setMarkers(_ markers: [Pixelfed.Markers.Timeline: EntityId]) async throws -> Markers {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Markers.set(markers),
+            target: Pixelfed.Markers.set(markers),
             withBearerToken: token
         )
 
         return try await downloadJson(Markers.self, request: request)
     }
 
-    func readMarkers(_ markers: Set<Mastodon.Markers.Timeline>) async throws -> Markers {
+    func readMarkers(_ markers: Set<Pixelfed.Markers.Timeline>) async throws -> Markers {
         let request = try Self.request(
             for: baseURL,
-            target: Mastodon.Markers.read(markers),
+            target: Pixelfed.Markers.read(markers),
             withBearerToken: token
         )
 

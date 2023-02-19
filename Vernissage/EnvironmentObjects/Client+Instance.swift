@@ -7,7 +7,7 @@
 import Foundation
 import PixelfedKit
 
-/// Mastodon 'Search'.
+/// Pixelfed 'Search'.
 extension Client {
     public class Instances {
         private let urlJson = URL(string: "https://raw.githubusercontent.com/VernissageApp/Home/main/instances.json")!
@@ -57,7 +57,7 @@ extension Client {
                     group.addTask {
                         do {
                             if let baseUrl = URL(string: url) {
-                                let client = MastodonClient(baseURL: baseUrl)
+                                let client = PixelfedClient(baseURL: baseUrl)
                                 return try await client.readInstanceInformation()
                             }
                             
@@ -80,7 +80,7 @@ extension Client {
         }
         
         func instance(url: URL) async throws -> Instance {
-            let client = MastodonClient(baseURL: url)
+            let client = PixelfedClient(baseURL: url)
             return try await client.readInstanceInformation()
         }
         

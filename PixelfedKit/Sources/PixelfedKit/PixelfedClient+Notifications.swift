@@ -6,14 +6,14 @@
 
 import Foundation
 
-public extension MastodonClientAuthenticated {
+public extension PixelfedClientAuthenticated {
     func notifications(maxId: MaxId? = nil,
                           sinceId: SinceId? = nil,
                           minId: MinId? = nil,
                           limit: Int? = nil
     ) async throws -> Linkable<[Notification]> {
         let request = try Self.request(for: baseURL,
-                                       target: Mastodon.Notifications.notifications(maxId, sinceId, minId, limit),
+                                       target: Pixelfed.Notifications.notifications(maxId, sinceId, minId, limit),
                                        withBearerToken: token)
 
         return try await downloadJsonWithLink([Notification].self, request: request)

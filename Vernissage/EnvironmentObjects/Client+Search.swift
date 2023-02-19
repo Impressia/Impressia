@@ -7,11 +7,11 @@
 import Foundation
 import PixelfedKit
 
-/// Mastodon 'Search'.
+/// Pixelfed 'Search'.
 extension Client {
     public class Search: BaseClient {
-        public func search(query: String, resultsType: Mastodon.Search.ResultsType) async throws -> SearchResults? {
-            return try await mastodonClient.search(query: query, type: resultsType)
+        public func search(query: String, resultsType: Pixelfed.Search.ResultsType) async throws -> SearchResults? {
+            return try await pixelfedClient.search(query: query, type: resultsType)
         }
     }
 }
