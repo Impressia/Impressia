@@ -98,10 +98,7 @@ struct HomeFeedView: View {
         }
         .refreshable {
             HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
-            
-            self.applicationState.amountOfNewStatuses = 0
             await self.refreshData()
-
             HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
         }
         .onChange(of: self.applicationState.amountOfNewStatuses) { newValue in
@@ -111,6 +108,7 @@ struct HomeFeedView: View {
         }
     }
     
+    @MainActor
     private func refreshData() async {
         do {
             if let account = self.applicationState.account {
@@ -118,6 +116,7 @@ struct HomeFeedView: View {
                     try await HomeTimelineService.shared.save(lastSeenStatusId: lastSeenStatusId, for: account)
                     
                     self.applicationState.lastSeenStatusId = lastSeenStatusId
+                    self.applicationState.amountOfNewStatuses = 0
                 }
             }
         } catch {
