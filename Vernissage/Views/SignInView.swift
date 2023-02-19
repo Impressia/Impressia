@@ -64,7 +64,7 @@ struct SignInView: View {
             
         }
         .onFirstAppear {
-            self.instances = await self.client.instances.instances(urls: self.client.instances.pixelfedInstances)
+            self.instances = await self.client.instances.instances()
         }
         .navigationBarTitle("Sign in to Pixelfed")
         .navigationBarTitleDisplayMode(.inline)

@@ -204,7 +204,7 @@ struct MainView: View {
     
     @ToolbarContentBuilder
     private func getTrailingToolbar() -> some ToolbarContent {
-        if viewMode == .local || viewMode == .home || viewMode == .federated {
+        if viewMode == .local || viewMode == .home || viewMode == .federated || viewMode == .trending {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     HapticService.shared.touch()

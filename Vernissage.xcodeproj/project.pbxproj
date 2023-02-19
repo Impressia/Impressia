@@ -113,6 +113,7 @@
 		F89992CE296D92E7005994BF /* AttachmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89992CD296D92E7005994BF /* AttachmentModel.swift */; };
 		F89A46DC296EAACE0062125F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89A46DB296EAACE0062125F /* SettingsView.swift */; };
 		F89A46DE296EABA20062125F /* StatusPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89A46DD296EABA20062125F /* StatusPlaceholder.swift */; };
+		F89AC00529A1F9B500F4159F /* Servers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89AC00429A1F9B500F4159F /* Servers.swift */; };
 		F89CEB802984198600A1376F /* AttachmentData+HighestImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89CEB7F2984198600A1376F /* AttachmentData+HighestImage.swift */; };
 		F89D6C3F29716E41001DA3D4 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C3E29716E41001DA3D4 /* Theme.swift */; };
 		F89D6C4229717FDC001DA3D4 /* AccountsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C4129717FDC001DA3D4 /* AccountsSection.swift */; };
@@ -250,6 +251,7 @@
 		F89992CD296D92E7005994BF /* AttachmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentModel.swift; sourceTree = "<group>"; };
 		F89A46DB296EAACE0062125F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		F89A46DD296EABA20062125F /* StatusPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPlaceholder.swift; sourceTree = "<group>"; };
+		F89AC00429A1F9B500F4159F /* Servers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Servers.swift; sourceTree = "<group>"; };
 		F89CEB7F2984198600A1376F /* AttachmentData+HighestImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttachmentData+HighestImage.swift"; sourceTree = "<group>"; };
 		F89D6C3E29716E41001DA3D4 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		F89D6C4129717FDC001DA3D4 /* AccountsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSection.swift; sourceTree = "<group>"; };
@@ -392,6 +394,7 @@
 				F86167C7297FE781004D1F67 /* AvatarShape.swift */,
 				F8764186298ABB520057D362 /* ViewState.swift */,
 				F8FA9918299FA35A007AB130 /* PhotoAttachment.swift */,
+				F89AC00429A1F9B500F4159F /* Servers.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -759,6 +762,7 @@
 				F85D497929640B9D00751DF7 /* ImagesCarousel.swift in Sources */,
 				F8C5E55F2988E92600ADF6A7 /* AccountModel.swift in Sources */,
 				F89D6C3F29716E41001DA3D4 /* Theme.swift in Sources */,
+				F89AC00529A1F9B500F4159F /* Servers.swift in Sources */,
 				F8CC95CE2970761D00C9C2AC /* TintColor.swift in Sources */,
 				F89992CC296D9231005994BF /* StatusModel.swift in Sources */,
 				F80048052961850500E6868A /* StatusData+CoreDataClass.swift in Sources */,

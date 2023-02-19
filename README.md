@@ -70,9 +70,9 @@ In pixelfed source code there is hardcoded application name. API always retruns 
  ],
 ```
 
-### ** (fixed) Place is not available in the API**
+### ** Place is not available in the API**
 
-In the status response there is no information about place.
+In the status response there is no information about place (even if we save place we cannot display it).
 That information is visible when using Pixelfed web app. 
 
 There is `place_id` field in status create endpoint.

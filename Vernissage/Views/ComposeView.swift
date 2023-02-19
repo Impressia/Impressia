@@ -48,12 +48,12 @@ struct ComposeView: View {
                 ScrollView {
                     VStack (alignment: .leading){
                         if self.isSensitive {
-                            TextField("Write content warning", text: $spoilerText)
+                            TextField("Write content warning", text: $spoilerText, axis: .vertical)
                                 .padding(8)
+                                .lineLimit(1...2)
                                 .focused($focusedField, equals: .spoilerText)
                                 .keyboardType(.default)
-                                .background(Color.red)
-                                .foregroundColor(.white)
+                                .background(Color.dangerColor.opacity(0.4))
                         }
                         
                         
