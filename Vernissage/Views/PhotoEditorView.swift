@@ -60,7 +60,7 @@ struct PhotoEditorView: View {
             ActionButton(showLoader: false) {
                 await self.update()
             } label: {
-                Text("Update")
+                Text("Save")
             }.buttonStyle(.borderedProminent)
         }
         

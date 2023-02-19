@@ -9,7 +9,7 @@ import Foundation
 extension Mastodon {
     public enum Statuses {
         public enum Visibility: String, Encodable {
-            case direct = "direct"
+            case priv = "private"
             case unlisted = "unlisted"
             case pub = "public"
         }

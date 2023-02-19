@@ -11,7 +11,7 @@ import Foundation
 public struct Place: Codable {
     
     /// Id of the entity.
-    public let id: Int32
+    public let id: Int
     
     /// City where picture has been taken.
     public let slug: String?

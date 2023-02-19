@@ -31,6 +31,7 @@ extension Client {
     public var media: Media? { return Media(mastodonClient: self.mastodonClient) }
     public var accounts: Accounts? { return Accounts(mastodonClient: self.mastodonClient) }
     public var search: Search? { return Search(mastodonClient: self.mastodonClient) }
+    public var places: Places? { return Places(mastodonClient: self.mastodonClient) }
     public var instances: Instances { return Instances() }
 }
 

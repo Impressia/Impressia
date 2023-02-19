@@ -9,12 +9,6 @@ import PhotosUI
 import MastodonKit
 
 struct ComposeView: View {
-    enum FocusField: Hashable {
-        case unknown
-        case content
-        case spoilerText
-    }
-           
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var routerPath: RouterPath
     @EnvironmentObject var client: Client
@@ -27,18 +21,38 @@ struct ComposeView: View {
     @State private var isSensitive = false
     @State private var spoilerText = String.empty()
     @State private var commentsDisabled = false
+    @State private var place: Place?
 
     @State private var publishDisabled = true
     @State private var interactiveDismissDisabled = false
     
     @State private var photosAreUploading = false
     @State private var photosPickerVisible = false
-    @State private var showPhoto: PhotoAttachment? = nil
-
+    
     @State private var selectedItems: [PhotosPickerItem] = []
     @State private var photosAttachment: [PhotoAttachment] = []
-
+    
     @FocusState private var focusedField: FocusField?
+    enum FocusField: Hashable {
+        case unknown
+        case content
+        case spoilerText
+    }
+    
+    @State private var showSheet: SheetType? = nil
+    enum SheetType: Identifiable {
+        case photoDetails(PhotoAttachment)
+        case placeSelector
+        
+        public var id: String {
+            switch self {
+            case .photoDetails:
+                return "photoDetails"
+            case .placeSelector:
+                return "placeSelector"
+            }
+        }
+    }
     
     private let contentWidth = Int(UIScreen.main.bounds.width) - 50
     
@@ -56,6 +70,16 @@ struct ComposeView: View {
                                 .background(Color.dangerColor.opacity(0.4))
                         }
                         
+                        if self.commentsDisabled {
+                            HStack {
+                                Spacer()
+                                Text("Comments will be disabled")
+                                    .textCase(.uppercase)
+                                    .font(.caption2)
+                                    .foregroundColor(.dangerColor)
+                            }
+                            .padding(.horizontal, 8)
+                        }
                         
                         if let accountData = applicationState.account {
                             HStack {
@@ -69,12 +93,17 @@ struct ComposeView: View {
                             .padding(8)
                         }
                         
-                        if self.commentsDisabled {
-                            Text("Comments will be disabled")
-                                .textCase(.uppercase)
-                                .font(.caption2)
-                                .padding(.horizontal, 8)
+                        if let name = self.place?.name, let country = self.place?.country {
+                            HStack {
+                                Group {
+                                    Image(systemName: "mappin.and.ellipse")
+                                    Text("\(name), \(country)")
+                                }
+                                .font(.caption)
                                 .foregroundColor(.lightGrayColor)
+                                Spacer()
+                            }
+                            .padding(.horizontal, 8)
                         }
                         
                         TextField("Type what's on your mind", text: $text, axis: .vertical)
@@ -96,7 +125,7 @@ struct ComposeView: View {
                         HStack(alignment: .center) {
                             ForEach(self.photosAttachment, id: \.id) { photoAttachment in
                                 ImageUploadView(photoAttachment: photoAttachment) {
-                                    self.showPhoto = photoAttachment
+                                    self.showSheet = .photoDetails(photoAttachment)
                                 } delete: {
                                     self.photosAttachment = self.photosAttachment.filter({ item in
                                         item != photoAttachment
@@ -160,8 +189,13 @@ struct ComposeView: View {
                         await self.loadPhotos()
                     }
                 }
-                .sheet(item: $showPhoto, content: { item in
-                    PhotoEditorView(photoAttachment: item)
+                .sheet(item: $showSheet, content: { sheetType in
+                    switch sheetType {
+                    case .photoDetails(let photoAttachment):
+                        PhotoEditorView(photoAttachment: photoAttachment)
+                    case .placeSelector:
+                        PlaceSelectorView(place: $place)
+                    }
                 })
                 .photosPicker(isPresented: $photosPickerVisible, selection: $selectedItems, maxSelectionCount: 4, matching: .images)
                 .navigationBarTitle(Text("Compose"), displayMode: .inline)
@@ -205,6 +239,18 @@ struct ComposeView: View {
                 } label: {
                     Image(systemName: self.commentsDisabled ? "person.2.slash" : "person.2.fill")
                 }
+
+                Button {
+                    if self.place != nil {
+                        withAnimation(.easeInOut) {
+                            self.place = nil
+                        }
+                    } else {
+                        self.showSheet = .placeSelector
+                    }
+                } label: {
+                    Image(systemName: self.place == nil ? "mappin.square" : "mappin.square.fill")
+                }
                 
                 Spacer()
                 
@@ -222,7 +268,7 @@ struct ComposeView: View {
                     HStack {
                         Image(systemName: "lock")
                         Text(" Followers")
-                    }.tag(Mastodon.Statuses.Visibility.direct)
+                    }.tag(Mastodon.Statuses.Visibility.priv)
                 }.buttonStyle(.bordered)
             }
         }
@@ -320,13 +366,13 @@ struct ComposeView: View {
     }
     
     private func createStatus() -> Mastodon.Statuses.Components {
-        // TODO: Missing fields: placeId, collectionIds.
         return Mastodon.Statuses.Components(inReplyToId: self.statusViewModel?.id,
                                             text: self.text,
                                             spoilerText: self.isSensitive ? self.spoilerText : String.empty(),
                                             mediaIds: self.photosAttachment.getUploadedPhotoIds(),
                                             visibility: self.visibility,
                                             sensitive: self.isSensitive,
+                                            placeId: self.place?.id,
                                             commentsDisabled: self.commentsDisabled)
     }
 }
