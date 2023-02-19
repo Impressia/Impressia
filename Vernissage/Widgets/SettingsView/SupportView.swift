@@ -26,6 +26,8 @@ struct SupportView: View {
                     }
                     Spacer()
                     Button(product.displayPrice) {
+                        HapticService.shared.fireHaptic(of: .buttonPress)
+
                         Task {
                             await tipsStore.purchase(product)
                         }

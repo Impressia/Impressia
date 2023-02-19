@@ -3,68 +3,49 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the MIT License.
 //
-    
+
 import CoreHaptics
+import UIKit
 
-public final class HapticService: ObservableObject {
-    public static let shared = HapticService()
-    
-    private let hapticEngine: CHHapticEngine?
-    private var needsToRestart = false
+public class HapticService {
+    public static let shared: HapticService = .init()
 
-    /// Fires a transient haptic event with the given intensity and sharpness (0-1).
-    public func touch(intensity: Float = 0.75, sharpness: Float = 0.5) {
-        do {
-            let event = CHHapticEvent(
-                eventType: .hapticTransient,
-                parameters: [
-                    CHHapticEventParameter(parameterID: .hapticIntensity, value: intensity),
-                    CHHapticEventParameter(parameterID: .hapticSharpness, value: sharpness)
-                ],
-                relativeTime: 0)
-            
-            let pattern = try CHHapticPattern(events: [event], parameters: [])
-            let player = try hapticEngine?.makePlayer(with: pattern)
-            
-            if needsToRestart {
-                try? start()
-            }
-            
-            try player?.start(atTime: CHHapticTimeImmediate)
-        } catch {
-            ErrorService.shared.handle(error, message: "Haptic service failed.")
-        }
+    public enum HapticType {
+        case buttonPress
+        case dataRefresh(intensity: CGFloat)
+        case notification(_ type: UINotificationFeedbackGenerator.FeedbackType)
+        case tabSelection
+        case timeline
     }
+
+    private let selectionGenerator = UISelectionFeedbackGenerator()
+    private let impactGenerator = UIImpactFeedbackGenerator(style: .heavy)
+    private let notificationGenerator = UINotificationFeedbackGenerator()
 
     private init() {
-        hapticEngine = try? CHHapticEngine()
-        hapticEngine?.resetHandler = resetHandler
-        hapticEngine?.stoppedHandler = restartHandler
-        hapticEngine?.playsHapticsOnly = true
-        try? start()
+        selectionGenerator.prepare()
+        impactGenerator.prepare()
     }
 
-    /// Stops the internal CHHapticEngine. Should be called when your app enters the background.
-    public func stop(completionHandler: CHHapticEngine.CompletionHandler? = nil) {
-        hapticEngine?.stop(completionHandler: completionHandler)
-    }
+    @MainActor
+    public func fireHaptic(of type: HapticType) {
+        guard supportsHaptics else { return }
 
-    /// Starts the internal CHHapticEngine. Should be called when your app enters the foreground.
-    public func start() throws {
-        try hapticEngine?.start()
-        needsToRestart = false
-    }
-
-    private func resetHandler() {
-        do {
-            try start()
-        } catch {
-            needsToRestart = true
+        switch type {
+        case .buttonPress:
+            impactGenerator.impactOccurred()
+        case let .dataRefresh(intensity):
+            impactGenerator.impactOccurred(intensity: intensity)
+        case let .notification(type):
+            notificationGenerator.notificationOccurred(type)
+        case .tabSelection:
+            selectionGenerator.selectionChanged()
+        case .timeline:
+            selectionGenerator.selectionChanged()
         }
     }
 
-    private func restartHandler(_ reasonForStopping: CHHapticEngine.StoppedReason? = nil) {
-        resetHandler()
+    public var supportsHaptics: Bool {
+        CHHapticEngine.capabilitiesForHardware().supportsHaptics
     }
-
 }

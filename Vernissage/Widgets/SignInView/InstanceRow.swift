@@ -9,6 +9,8 @@ import PixelfedKit
 import NukeUI
 
 struct InstanceRow: View {
+    @EnvironmentObject var routerPath: RouterPath
+
     private let instance: Instance
     private let action: (String) -> Void
     
@@ -46,6 +48,7 @@ struct InstanceRow: View {
                     Spacer()
 
                     Button("Sign in") {
+                        HapticService.shared.fireHaptic(of: .buttonPress)
                         self.action(instance.uri)
                     }
                     .buttonStyle(.borderedProminent)
@@ -53,8 +56,12 @@ struct InstanceRow: View {
                 }
             }
             
-            Text(instance.description ?? "")
-                .font(.caption)
+            if let description = instance.description {
+                MarkdownFormattedText(description.asMarkdown, withFontSize: 14)
+                    .environment(\.openURL, OpenURLAction { url in
+                        routerPath.handle(url: url)
+                    })
+            }
             
             if let stats = instance.stats {
                 HStack {

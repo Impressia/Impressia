@@ -33,7 +33,7 @@ struct ActionMenu<Label: View, Content: View>: View {
             }
         } primaryAction: {
             Task {
-                HapticService.shared.touch()
+                HapticService.shared.fireHaptic(of: .buttonPress)
                 defer {
                     Task { @MainActor in
                         withAnimation {

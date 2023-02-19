@@ -61,6 +61,8 @@ struct PlaceSelectorView: View {
                         
                         ForEach(self.places, id: \.id) { place in
                             Button {
+                                HapticService.shared.fireHaptic(of: .buttonPress)
+
                                 self.place = place
                                 self.dismiss()
                             } label: {

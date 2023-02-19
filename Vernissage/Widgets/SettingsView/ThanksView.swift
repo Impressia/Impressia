@@ -25,6 +25,8 @@ struct ThanksView: View {
                         .foregroundColor(.viewTextColor)
                     
                     Button("Close") {
+                        HapticService.shared.fireHaptic(of: .buttonPress)
+
                         withAnimation(.spring()) {
                             self.routerPath.presentedOverlay = nil
                         }

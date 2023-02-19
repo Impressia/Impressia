@@ -90,13 +90,9 @@ struct VernissageApp: App {
             }
             .navigationViewStyle(.stack)
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
-                try? HapticService.shared.start()
                 Task {
                     await self.loadInBackground()
                 }
-            }
-            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
-                HapticService.shared.stop()
             }
             .onReceive(timer) { time in
                 Task {

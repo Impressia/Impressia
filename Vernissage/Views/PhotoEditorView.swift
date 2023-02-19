@@ -72,7 +72,7 @@ struct PhotoEditorView: View {
     }
     
     private func update() async {
-        HapticService.shared.touch()
+        HapticService.shared.fireHaptic(of: .buttonPress)
         self.hideKeyboard()
         
         if let uploadedAttachment = self.photoAttachment.uploadedAttachment {

@@ -89,6 +89,7 @@ struct MainView: View {
         ToolbarItem(placement: .principal) {
             Menu {
                 Button {
+                    HapticService.shared.fireHaptic(of: .tabSelection)
                     viewMode = .home
                 } label: {
                     HStack {
@@ -98,6 +99,7 @@ struct MainView: View {
                 }
 
                 Button {
+                    HapticService.shared.fireHaptic(of: .tabSelection)
                     viewMode = .trending
                 } label: {
                     HStack {
@@ -107,6 +109,7 @@ struct MainView: View {
                 }
                 
                 Button {
+                    HapticService.shared.fireHaptic(of: .tabSelection)
                     viewMode = .local
                 } label: {
                     HStack {
@@ -116,6 +119,7 @@ struct MainView: View {
                 }
 
                 Button {
+                    HapticService.shared.fireHaptic(of: .tabSelection)
                     viewMode = .federated
                 } label: {
                     HStack {
@@ -127,6 +131,7 @@ struct MainView: View {
                 Divider()
 
                 Button {
+                    HapticService.shared.fireHaptic(of: .tabSelection)
                     viewMode = .profile
                 } label: {
                     HStack {
@@ -136,6 +141,7 @@ struct MainView: View {
                 }
                 
                 Button {
+                    HapticService.shared.fireHaptic(of: .tabSelection)
                     viewMode = .notifications
                 } label: {
                     HStack {
@@ -163,6 +169,7 @@ struct MainView: View {
             Menu {
                 ForEach(self.dbAccounts) { account in
                     Button {
+                        HapticService.shared.fireHaptic(of: .buttonPress)
                         self.tryToSwitch(account)
                     } label: {
                         if self.applicationState.account?.id == account.id {
@@ -176,7 +183,7 @@ struct MainView: View {
                 Divider()
                 
                 Button {
-                    HapticService.shared.touch()
+                    HapticService.shared.fireHaptic(of: .buttonPress)
                     self.routerPath.presentedSheet = .settings
                 } label: {
                     Label("Settings", systemImage: "gear")
@@ -208,7 +215,7 @@ struct MainView: View {
         if viewMode == .local || viewMode == .home || viewMode == .federated || viewMode == .trending {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    HapticService.shared.touch()
+                    HapticService.shared.fireHaptic(of: .buttonPress)
                     self.routerPath.presentedSheet = .newStatusEditor
                 } label: {
                     Image(systemName: "square.and.pencil")
@@ -238,8 +245,6 @@ struct MainView: View {
     }
     
     private func tryToSwitch(_ account: AccountData) {
-        HapticService.shared.touch()
-
         Task {
             // Verify access token correctness.
             let authorizationSession = AuthorizationSession()

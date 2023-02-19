@@ -36,6 +36,8 @@ struct SignInView: View {
                             .disableAutocorrection(true)
                         
                         Button("Sign in") {
+                            HapticService.shared.fireHaptic(of: .buttonPress)
+
                             let baseAddress = self.getServerAddress(uri: self.serverAddress)
                             self.signIn(baseAddress: baseAddress)
                         }

@@ -134,7 +134,7 @@ struct ImageRowAsync: View {
                 }
 
                 self.showThumbImage = true
-                HapticService.shared.touch()
+                HapticService.shared.fireHaptic(of: .buttonPress)
             }
     }
     

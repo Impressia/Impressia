@@ -24,7 +24,7 @@ public struct Instance: Codable {
     public let shortDescription: String?
     
     /// A  plain-text description defined by the admin.
-    public let description: String?
+    public let description: Html?
     
     /// The URL for the thumbnail image.
     public let thumbnail: URL?

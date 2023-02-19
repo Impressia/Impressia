@@ -22,7 +22,7 @@ struct ActionButton<Label>: View where Label: View {
     var body: some View {
         Button {
             Task {
-                HapticService.shared.touch()
+                HapticService.shared.fireHaptic(of: .buttonPress)
                 withAnimation {
                     self.isDuringAction = true
                 }

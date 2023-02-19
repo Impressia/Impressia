@@ -25,6 +25,7 @@ struct ImageUploadView: View {
             if photoAttachment.error != nil {
                 Menu {
                     Button(role: .destructive) {
+                        HapticService.shared.fireHaptic(of: .buttonPress)
                         self.delete()
                     } label: {
                         Label("Delete", systemImage: "trash")
@@ -54,12 +55,14 @@ struct ImageUploadView: View {
             } else {
                 Menu {
                     Button {
+                        HapticService.shared.fireHaptic(of: .buttonPress)
                         self.open()
                     } label: {
                         Label("Edit", systemImage: "pencil")
                     }
                     
                     Button(role: .destructive) {
+                        HapticService.shared.fireHaptic(of: .buttonPress)
                         self.delete()
                     } label: {
                         Label("Delete", systemImage: "trash")
