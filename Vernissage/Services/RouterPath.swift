@@ -6,7 +6,7 @@
     
 import SwiftUI
 import Foundation
-import MastodonKit
+import PixelfedKit
 
 enum RouteurDestinations: Hashable {
     case tag(hashTag: String)

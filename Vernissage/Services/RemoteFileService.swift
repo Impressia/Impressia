@@ -5,7 +5,7 @@
 //
     
 import Foundation
-import MastodonKit
+import PixelfedKit
 import Nuke
 
 public class RemoteFileService {

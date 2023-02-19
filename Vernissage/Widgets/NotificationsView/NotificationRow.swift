@@ -5,7 +5,7 @@
 //
 
 import SwiftUI
-import MastodonKit
+import PixelfedKit
 import NukeUI
 
 struct NotificationRow: View {
@@ -16,10 +16,10 @@ struct NotificationRow: View {
     @State private var image: SwiftUI.Image?
     
     private var attachment: MediaAttachment?
-    private var notification: MastodonKit.Notification
+    private var notification: PixelfedKit.Notification
     private let contentWidth = Int(UIScreen.main.bounds.width) - 150
     
-    public init(notification: MastodonKit.Notification) {
+    public init(notification: PixelfedKit.Notification) {
         self.notification = notification
         self.attachment = notification.status?.getAllImageMediaAttachments().first
         

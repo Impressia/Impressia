@@ -5,7 +5,7 @@
 //
     
 import SwiftUI
-import MastodonKit
+import PixelfedKit
 
 struct UserProfileStatuses: View {
     @EnvironmentObject private var applicationState: ApplicationState

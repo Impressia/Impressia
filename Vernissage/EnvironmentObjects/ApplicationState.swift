@@ -6,7 +6,7 @@
     
 import Foundation
 import SwiftUI
-import MastodonKit
+import PixelfedKit
 
 public class ApplicationState: ObservableObject {
     public static let shared = ApplicationState()

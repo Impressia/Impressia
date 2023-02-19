@@ -4,7 +4,6 @@
 //  Licensed under the MIT License.
 //
     
-
 import SwiftUI
 
 struct AvatarShapesSection: View {

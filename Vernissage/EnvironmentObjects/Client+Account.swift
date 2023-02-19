@@ -5,7 +5,7 @@
 //
 
 import Foundation
-import MastodonKit
+import PixelfedKit
 
 /// Mastodon 'Account'.
 extension Client {

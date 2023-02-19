@@ -5,7 +5,7 @@
 //
 
 import SwiftUI
-import MastodonKit
+import PixelfedKit
 
 struct StatusesView: View {
     public enum ListType: Hashable {

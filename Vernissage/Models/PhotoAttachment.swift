@@ -7,7 +7,7 @@
 import Foundation
 import PhotosUI
 import SwiftUI
-import MastodonKit
+import PixelfedKit
 
 public class PhotoAttachment: ObservableObject, Identifiable, Equatable, Hashable {
     public let id: String

@@ -5,7 +5,7 @@
 //
     
 import Foundation
-import MastodonKit
+import PixelfedKit
 
 public class Client: ObservableObject {
     public static let shared = Client()

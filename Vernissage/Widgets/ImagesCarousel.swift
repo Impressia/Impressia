@@ -5,7 +5,7 @@
 //
     
 import SwiftUI
-import MastodonKit
+import PixelfedKit
 
 struct ImagesCarousel: View {
     @State public var attachments: [AttachmentModel]

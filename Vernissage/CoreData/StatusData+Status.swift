@@ -5,7 +5,7 @@
 //
     
 import Foundation
-import MastodonKit
+import PixelfedKit
 
 extension StatusData {
     func copyFrom(_ status: Status) {

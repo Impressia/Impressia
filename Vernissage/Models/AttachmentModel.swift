@@ -5,7 +5,7 @@
 //
     
 import Foundation
-import MastodonKit
+import PixelfedKit
 
 public class AttachmentModel: ObservableObject {
     public let id: String

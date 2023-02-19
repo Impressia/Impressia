@@ -6,7 +6,7 @@
     
 import SwiftUI
 import PhotosUI
-import MastodonKit
+import PixelfedKit
 
 struct ComposeView: View {
     @EnvironmentObject var applicationState: ApplicationState

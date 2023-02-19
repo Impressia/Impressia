@@ -5,7 +5,7 @@
 //
 
 import SwiftUI
-import MastodonKit
+import PixelfedKit
 
 struct CommentBody: View {
     @EnvironmentObject var applicationState: ApplicationState

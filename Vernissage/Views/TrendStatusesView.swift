@@ -5,7 +5,7 @@
 //
 
 import SwiftUI
-import MastodonKit
+import PixelfedKit
 
 struct TrendStatusesView: View {
     @EnvironmentObject private var applicationState: ApplicationState

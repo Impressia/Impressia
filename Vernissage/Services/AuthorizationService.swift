@@ -5,7 +5,7 @@
 //
     
 import Foundation
-import MastodonKit
+import PixelfedKit
 import AuthenticationServices
 
 /// Srvice responsible for login user into the Pixelfed account.

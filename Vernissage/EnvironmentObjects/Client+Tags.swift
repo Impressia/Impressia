@@ -5,7 +5,7 @@
 //
     
 import Foundation
-import MastodonKit
+import PixelfedKit
 
 /// Mastodon 'Tags'.
 extension Client {

@@ -5,7 +5,7 @@
 //
 
 import Foundation
-import MastodonKit
+import PixelfedKit
 
 extension AttachmentData {
     func copyFrom(_ attachment: MediaAttachment) {

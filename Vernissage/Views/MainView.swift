@@ -7,7 +7,7 @@
 import SwiftUI
 import UIKit
 import CoreData
-import MastodonKit
+import PixelfedKit
 
 struct MainView: View {
     enum Sheet: String, Identifiable {

@@ -5,7 +5,7 @@
 //
 
 import SwiftUI
-import MastodonKit
+import PixelfedKit
 import OAuthSwift
 
 class SceneDelegate: NSObject, UISceneDelegate {

@@ -5,7 +5,7 @@
 //
 
 import Foundation
-import MastodonKit
+import PixelfedKit
 
 public class StatusModel: ObservableObject {
 

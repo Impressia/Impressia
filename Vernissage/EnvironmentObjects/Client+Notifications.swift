@@ -5,7 +5,7 @@
 //
 
 import Foundation
-import MastodonKit
+import PixelfedKit
 
 /// Mastodon 'Notifications'.
 extension Client {
@@ -14,7 +14,7 @@ extension Client {
                                   sinceId: SinceId? = nil,
                                   minId: MinId? = nil,
                                   limit: Int? = nil
-        ) async throws -> Linkable<[MastodonKit.Notification]> {
+        ) async throws -> Linkable<[PixelfedKit.Notification]> {
             return try await mastodonClient.notifications(maxId: maxId, sinceId: sinceId, minId: minId, limit: limit)
         }
     }

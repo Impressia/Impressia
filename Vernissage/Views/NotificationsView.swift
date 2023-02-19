@@ -5,14 +5,14 @@
 //
     
 import SwiftUI
-import MastodonKit
+import PixelfedKit
 
 struct NotificationsView: View {
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var client: Client
 
     @State var accountId: String
-    @State private var notifications: [MastodonKit.Notification] = []
+    @State private var notifications: [PixelfedKit.Notification] = []
     @State private var allItemsLoaded = false
     @State private var state: ViewState = .loading
     

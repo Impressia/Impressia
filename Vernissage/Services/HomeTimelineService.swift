@@ -6,7 +6,7 @@
     
 import Foundation
 import CoreData
-import MastodonKit
+import PixelfedKit
 
 /// Service responsible for managing home timeline.
 public class HomeTimelineService {

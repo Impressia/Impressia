@@ -6,7 +6,7 @@
 
 import Foundation
 import CoreData
-import MastodonKit
+import PixelfedKit
 
 class StatusDataHandler {
     public static let shared = StatusDataHandler()
