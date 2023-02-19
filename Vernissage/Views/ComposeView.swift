@@ -23,6 +23,7 @@ struct ComposeView: View {
     @State private var commentsDisabled = false
     @State private var place: Place?
 
+    @State private var photosAreAttached = false
     @State private var publishDisabled = true
     @State private var interactiveDismissDisabled = false
     
@@ -131,6 +132,7 @@ struct ComposeView: View {
                                         item != photoAttachment
                                     })
                                     
+                                    self.photosAreAttached = self.photosAttachment.hasUploadedPhotos()
                                     self.publishDisabled = self.isPublishButtonDisabled()
                                     self.interactiveDismissDisabled = self.isInteractiveDismissDisabled()
                                 }
@@ -215,7 +217,7 @@ struct ComposeView: View {
                     self.focusedField = .unknown
                     self.photosPickerVisible = true
                 } label: {
-                    Image(systemName: "photo.on.rectangle.angled")
+                    Image(systemName: self.photosAreAttached ? "photo.fill.on.rectangle.fill" : "photo.on.rectangle")
                 }
 
                 Button {
@@ -326,6 +328,7 @@ struct ComposeView: View {
             await self.upload()
             
             self.photosAreUploading = false
+            self.photosAreAttached = self.photosAttachment.hasUploadedPhotos()
             self.publishDisabled = self.isPublishButtonDisabled()
             self.interactiveDismissDisabled = self.isInteractiveDismissDisabled()
         } catch {

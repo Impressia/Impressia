@@ -148,6 +148,7 @@ struct MainView: View {
                     Text(navBarTitle)
                         .font(.headline)
                     Image(systemName: "chevron.down")
+                        .fontWeight(.semibold)
                         .font(.subheadline)
                 }
                 .frame(width: 150)
@@ -211,7 +212,9 @@ struct MainView: View {
                     self.routerPath.presentedSheet = .newStatusEditor
                 } label: {
                     Image(systemName: "square.and.pencil")
-                        .tint(.mainTextColor)
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(Color.accentColor, Color.mainTextColor)
+                        .fontWeight(.semibold)
                 }
             }
         }

@@ -13,6 +13,7 @@ struct PlaceSelectorView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var places: [Place] = []
+    @State private var showLoader = false
     @State private var query = String.empty()
     
     @Binding public var place: Place?
@@ -50,12 +51,20 @@ struct PlaceSelectorView: View {
                     }
                     
                     Section {
+                        if self.showLoader {
+                            HStack(alignment: .center) {
+                                Spacer()
+                                LoadingIndicator(isVisible: Binding.constant(true))
+                                Spacer()
+                            }
+                        }
+                        
                         ForEach(self.places, id: \.id) { place in
                             Button {
                                 self.place = place
                                 self.dismiss()
                             } label: {
-                                HStack {
+                                HStack(alignment: .center) {
                                     VStack(alignment: .leading) {
                                         Text(place.name ?? String.empty())
                                             .foregroundColor(.mainTextColor)
@@ -92,6 +101,8 @@ struct PlaceSelectorView: View {
     }
     
     private func searchPlaces() async {
+        self.showLoader = true
+
         do {
             if let placesFromApi = try await self.client.places?.search(query: self.query) {
                 self.places = placesFromApi
@@ -99,6 +110,8 @@ struct PlaceSelectorView: View {
         } catch {
             ErrorService.shared.handle(error, message: "Cannot download places.", showToastr: true)
         }
+        
+        self.showLoader = false
     }
 }
 
