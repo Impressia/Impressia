@@ -9,17 +9,11 @@ import SwiftUI
 struct ImagesViewer: View {
     @Environment(\.dismiss) private var dismiss
         
-    private var statusViewModel: StatusModel
-    private var selectedAttachmentId: String = String.empty()
-    private let image: Image?
-    private let closeDragDistance = 100.0
-    
-    // Opacity usied during close dialog animation.
-    @State private var opacity = 1.0
-    
-    // Zoom.
-    @State private var zoomScale = 1.0
-    
+    private let statusViewModel: StatusModel
+    private let selectedAttachmentId: String
+    private let image: Image
+    private let closeDragDistance = UIScreen.main.bounds.height / 1.8
+            
     // Magnification.
     @State private var currentMagnification = 0.0
     @State private var finalMagnification = 1.0
@@ -40,42 +34,32 @@ struct ImagesViewer: View {
            let uiImage = UIImage(data: data) {
             self.image = Image(uiImage: uiImage)
         } else {
-            self.image = nil
+            self.image = Image(systemName: "photo")
         }
     }
     
     var body: some View {
-        if let image = self.image {
-            image
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .tag(selectedAttachmentId)
-                .offset(currentOffset)
-                .rotationEffect(rotationAngle)
-                .scaleEffect(finalMagnification + currentMagnification)
-                .opacity(self.opacity)
-                .gesture(dragGesture)
-                .gesture(magnificationGesture)
-                .gesture(doubleTapGesture)
-                .gesture(tapGesture)
-        }
+        image
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .tag(selectedAttachmentId)
+            .offset(currentOffset)
+            .rotationEffect(rotationAngle)
+            .scaleEffect(finalMagnification + currentMagnification)
+            .gesture(dragGesture)
+            .gesture(magnificationGesture)
+            .gesture(doubleTapGesture)
+            .gesture(tapGesture)
     }
-    
-    private func close() {
-        withoutAnimation {
-            dismiss()
-        }
-    }
-    
+        
     @MainActor
     var magnificationGesture: some Gesture {
         MagnificationGesture()
             .onChanged { amount in
-                currentMagnification = (amount - 1) * self.finalMagnification
+                self.currentMagnification = (amount - 1) * self.finalMagnification
             }
             .onEnded { amount in
-                let finalMagnification = finalMagnification + currentMagnification
-                self.revertToPrecalculatedMagnification(magnification: finalMagnification)
+                self.revertToPrecalculatedMagnification()
             }
     }
     
@@ -84,15 +68,15 @@ struct ImagesViewer: View {
             .onEnded { _ in
                 withAnimation {
                     if self.finalMagnification == 1.0 {
-                        currentOffset = CGSize.zero
-                        accumulatedOffset = CGSize.zero
-                        currentMagnification = 0
-                        finalMagnification = 2.0
+                        self.currentOffset = CGSize.zero
+                        self.accumulatedOffset = CGSize.zero
+                        self.currentMagnification = 0
+                        self.finalMagnification = 2.0
                     } else {
-                        currentOffset = CGSize.zero
-                        accumulatedOffset = CGSize.zero
-                        currentMagnification = 0
-                        finalMagnification = 1.0
+                        self.currentOffset = CGSize.zero
+                        self.accumulatedOffset = CGSize.zero
+                        self.currentMagnification = 0
+                        self.finalMagnification = 1.0
                     }
                 }
             }
@@ -107,10 +91,6 @@ struct ImagesViewer: View {
                     // We can move image whatever we want.
                     self.currentOffset = CGSize(width: amount.translation.width + self.accumulatedOffset.width,
                                                 height: amount.translation.height + self.accumulatedOffset.height)
-
-                    // Changing opacity when we want to close.
-                    let pictureOpacity = (self.closeDragDistance - self.currentOffset.height) / self.closeDragDistance
-                    self.opacity = pictureOpacity >= 0 ? pictureOpacity : 0
                     
                     // Changing angle.
                     self.rotationAngle = Angle(degrees: Double(self.currentOffset.width / 30))
@@ -120,27 +100,36 @@ struct ImagesViewer: View {
                     self.currentOffset = CGSize(width: offsetWidth, height: 0)
                 }
             } .onEnded { amount in
-                self.accumulatedOffset = CGSize(width: (amount.translation.width / self.finalMagnification) + self.accumulatedOffset.width,
-                                                height: (amount.translation.height / self.finalMagnification) + self.accumulatedOffset.height)
+                self.accumulatedOffset = CGSize(width: (amount.predictedEndTranslation.width / self.finalMagnification) + self.accumulatedOffset.width,
+                                                height: (amount.predictedEndTranslation.height / self.finalMagnification) + self.accumulatedOffset.height)
                 
                 // Animations only for small images sizes,
                 if self.finalMagnification == 1.0 {
-                    if self.accumulatedOffset.height < closeDragDistance {
+                    // When we still are in range visible image then we have to only revert back image to starting position..
+                    if self.accumulatedOffset.height > -closeDragDistance && self.accumulatedOffset.height < closeDragDistance {
+                        withAnimation(.linear(duration: 0.1)) {
+                            self.currentOffset = self.accumulatedOffset
+                        }
+                        
                         // Revert back image offset.
-                        withAnimation {
+                        withAnimation(.linear(duration: 0.3).delay(0.1)) {
                             self.currentOffset = CGSize.zero
                             self.accumulatedOffset = CGSize.zero
-                            self.opacity = 1.0
                         }
                     } else {
                         // Close the screen.
-                        withAnimation {
-                            self.currentOffset = amount.predictedEndTranslation
+                        withAnimation(.linear(duration: 0.4)) {
+                            // We have to set end translations for sure outside the screen.
+                            self.currentOffset = CGSize(width: amount.predictedEndTranslation.width * 2, height: amount.predictedEndTranslation.height * 2)
+                            self.rotationAngle = Angle(degrees: Double(amount.predictedEndTranslation.width / 30))
                             self.accumulatedOffset = CGSize.zero
-                            self.opacity = 1.0
                         }
                         
-                        self.close()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                            withoutAnimation {
+                                self.dismiss()
+                            }
+                        }
                     }
                 } else {
                     self.moveToEdge()
@@ -152,35 +141,40 @@ struct ImagesViewer: View {
     
     var tapGesture: some Gesture {
         TapGesture().onEnded({ _ in
-            self.close()
+            withoutAnimation {
+                self.dismiss()
+            }
         })
     }
     
     @MainActor
-    private func revertToPrecalculatedMagnification(magnification: Double) {
+    private func revertToPrecalculatedMagnification() {
+        let magnification = self.finalMagnification + self.currentMagnification
+        
         if magnification < 1.0 {
             // When image is small we are returning to starting point.
             withAnimation {
-                finalMagnification = 1.0
-                currentMagnification = 0
+                self.finalMagnification = 1.0
+                self.currentMagnification = 0
                 
                 // Also we have to move image to orginal position.
-                currentOffset = CGSize.zero
+                self.currentOffset = CGSize.zero
             }
             
             HapticService.shared.fireHaptic(of: .animation)
         } else if magnification > 3.0 {
             // When image is magnified to much we are rturning to 1.5 maginification.
             withAnimation {
-                finalMagnification = 3.0
-                currentMagnification = 0
+                self.finalMagnification = 3.0
+                self.currentMagnification = 0
             }
             
             HapticService.shared.fireHaptic(of: .animation)
         } else {
-            finalMagnification = magnification
-            currentMagnification = 0
+            self.finalMagnification = magnification
+            self.currentMagnification = 0
 
+            // Verify if we have to move image to nearest edge.
             self.moveToEdge()
         }
     }
@@ -190,13 +184,17 @@ struct ImagesViewer: View {
         let maxEdgeDistance = ((UIScreen.main.bounds.width * self.finalMagnification) - UIScreen.main.bounds.width) / (2 * self.finalMagnification)
         
         if self.currentOffset.width > maxEdgeDistance {
-            self.currentOffset = CGSize(width: maxEdgeDistance, height: 0)
-            self.accumulatedOffset = self.currentOffset
+            withAnimation(.linear(duration: 0.15)) {
+                self.currentOffset = CGSize(width: maxEdgeDistance, height: 0)
+                self.accumulatedOffset = self.currentOffset
+            }
 
             HapticService.shared.fireHaptic(of: .animation)
         } else if self.currentOffset.width < -maxEdgeDistance {
-            self.currentOffset = CGSize(width: -maxEdgeDistance, height: 0)
-            self.accumulatedOffset = self.currentOffset
+            withAnimation(.linear(duration: 0.15)) {
+                self.currentOffset = CGSize(width: -maxEdgeDistance, height: 0)
+                self.accumulatedOffset = self.currentOffset
+            }
             
             HapticService.shared.fireHaptic(of: .animation)
         }
