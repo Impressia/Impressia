@@ -59,7 +59,7 @@ struct ImagesViewer: View {
     var magnificationGesture: some Gesture {
         MagnificationGesture()
             .onChanged { amount in
-                currentMagnification = amount - 1
+                currentMagnification = (amount - 1) * self.finalMagnification
             }
             .onEnded { amount in
                 let finalMagnification = finalMagnification + currentMagnification
@@ -103,9 +103,9 @@ struct ImagesViewer: View {
                     // Changing angle.
                     self.rotationAngle = Angle(degrees: Double(self.currentOffset.width / 30))
                 } else {
-                    // Bigger images we can move only horizontally.
-                    self.currentOffset = CGSize(width: amount.translation.width + self.accumulatedOffset.width, height: 0)
-                    print(currentOffset.width)
+                    // Bigger images we can move only horizontally (we have to include magnifications).
+                    let offsetWidth = (amount.translation.width / self.finalMagnification) + self.accumulatedOffset.width
+                    self.currentOffset = CGSize(width: offsetWidth, height: 0)
                 }
             } .onEnded { amount in
                 self.accumulatedOffset = CGSize(width: amount.translation.width + self.accumulatedOffset.width,
