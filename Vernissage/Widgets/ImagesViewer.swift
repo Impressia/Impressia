@@ -108,8 +108,8 @@ struct ImagesViewer: View {
                     self.currentOffset = CGSize(width: offsetWidth, height: 0)
                 }
             } .onEnded { amount in
-                self.accumulatedOffset = CGSize(width: amount.translation.width + self.accumulatedOffset.width,
-                                                height: amount.translation.height + self.accumulatedOffset.height)
+                self.accumulatedOffset = CGSize(width: (amount.translation.width / self.finalMagnification) + self.accumulatedOffset.width,
+                                                height: (amount.translation.height / self.finalMagnification) + self.accumulatedOffset.height)
                 
                 // Animations only for small images sizes,
                 if self.finalMagnification == 1.0 {
