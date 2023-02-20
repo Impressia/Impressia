@@ -32,12 +32,16 @@ struct StatusView: View {
     @State private var exifCreatedDate: String?
     @State private var exifLens: String?
     
+    @State var image: Image?
+    
     var body: some View {
         self.mainBody()
             .navigationBarTitle("Details")
+            // .overlay(ImageViewer(image: self.$image, viewerShown: self.$showImageViewer))
             .fullScreenCover(isPresented: $showImageViewer, content: {
                 if let statusViewModel = self.statusViewModel {
-                    ImagesViewer(statusViewModel: statusViewModel, selectedAttachmentId: selectedAttachmentId ?? String.empty())
+                    ImageViewer(image: self.$image, viewerShown: self.$showImageViewer)
+                    // ImagesViewer(statusViewModel: statusViewModel, selectedAttachmentId: selectedAttachmentId ?? String.empty())
                 }
             })
     }
@@ -62,7 +66,12 @@ struct StatusView: View {
                                        exifLens: $exifLens)
                         .onTapGesture {
                             withoutAnimation {
-                                self.showImageViewer.toggle()
+                                if let attachment = self.statusViewModel?.mediaAttachments.first(where: { $0.id == self.selectedAttachmentId }),
+                                   let data = attachment.data,
+                                   let uiImage = UIImage(data: data) {
+                                    self.image = Image(uiImage: uiImage)
+                                    self.showImageViewer.toggle()
+                                }
                             }
                         }
                         

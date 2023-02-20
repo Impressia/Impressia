@@ -324,6 +324,7 @@
 		F808641229756583009F035C /* NotificationsView */ = {
 			isa = PBXGroup;
 			children = (
+				F88FAD26295F400E009B20C9 /* NotificationsView.swift */,
 				F808641329756666009F035C /* NotificationRow.swift */,
 			);
 			path = NotificationsView;
@@ -332,6 +333,7 @@
 		F8121CA6298A86B300B466C7 /* SignInView */ = {
 			isa = PBXGroup;
 			children = (
+				F866F6A629604629002E8F88 /* SignInView.swift */,
 				F8121CA7298A86D600B466C7 /* InstanceRow.swift */,
 			);
 			path = SignInView;
@@ -348,19 +350,19 @@
 		F8341F93295C63E2009C8EE6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F88C2481295C3A4F0006098B /* StatusView.swift */,
+				F89D6C4029717FC0001DA3D4 /* SettingsView */,
+				F89D6C4729718822001DA3D4 /* UserProfileView */,
+				F808641229756583009F035C /* NotificationsView */,
+				F8121CA6298A86B300B466C7 /* SignInView */,
+				F89D6C4829718868001DA3D4 /* StatusView */,
+				F8FA991A299FA8A5007AB130 /* ComposeView */,
 				F88C246D295C37B80006098B /* MainView.swift */,
 				F88FAD20295F3944009B20C9 /* HomeFeedView.swift */,
-				F88FAD26295F400E009B20C9 /* NotificationsView.swift */,
-				F866F6A629604629002E8F88 /* SignInView.swift */,
-				F8A93D7D2965FD89001D8331 /* UserProfileView.swift */,
-				F85DBF8E296732E20069BF89 /* AccountsView.swift */,
-				F897978E29684BCB00B22335 /* LoadingView.swift */,
-				F88ABD9329687CA4004EF61E /* ComposeView.swift */,
-				F89A46DB296EAACE0062125F /* SettingsView.swift */,
+				F88E4D47297E90CD0057491A /* TrendStatusesView.swift */,
 				F88E4D41297E69FD0057491A /* StatusesView.swift */,
 				F876418C298AE5020057D362 /* PaginableStatusesView.swift */,
-				F88E4D47297E90CD0057491A /* TrendStatusesView.swift */,
+				F85DBF8E296732E20069BF89 /* AccountsView.swift */,
+				F897978E29684BCB00B22335 /* LoadingView.swift */,
 				F8B0885D29942E31002AB40A /* ThirdPartyView.swift */,
 				F8FA991D299FAB92007AB130 /* PhotoEditorView.swift */,
 				F89AC00629A208CC00F4159F /* PlaceSelectorView.swift */,
@@ -432,12 +434,6 @@
 		F83901A2295D863B00456AE2 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
-				F8FA991A299FA8A5007AB130 /* ComposeView */,
-				F8121CA6298A86B300B466C7 /* SignInView */,
-				F808641229756583009F035C /* NotificationsView */,
-				F89D6C4829718868001DA3D4 /* StatusView */,
-				F89D6C4729718822001DA3D4 /* UserProfileView */,
-				F89D6C4029717FC0001DA3D4 /* SettingsView */,
 				F83901A5295D8EC000456AE2 /* LabelIcon.swift */,
 				F85D4972296406E700751DF7 /* BottomRight.swift */,
 				F85D497629640A5200751DF7 /* ImageRow.swift */,
@@ -570,6 +566,7 @@
 		F89D6C4029717FC0001DA3D4 /* SettingsView */ = {
 			isa = PBXGroup;
 			children = (
+				F89A46DB296EAACE0062125F /* SettingsView.swift */,
 				F89D6C4129717FDC001DA3D4 /* AccountsSection.swift */,
 				F89D6C4329718092001DA3D4 /* AccentsSection.swift */,
 				F89D6C4529718193001DA3D4 /* ThemeSection.swift */,
@@ -584,6 +581,7 @@
 		F89D6C4729718822001DA3D4 /* UserProfileView */ = {
 			isa = PBXGroup;
 			children = (
+				F8A93D7D2965FD89001D8331 /* UserProfileView.swift */,
 				F86B7213296BFDCE00EE59EC /* UserProfileHeader.swift */,
 				F86B7215296BFFDA00EE59EC /* UserProfileStatuses.swift */,
 			);
@@ -593,6 +591,7 @@
 		F89D6C4829718868001DA3D4 /* StatusView */ = {
 			isa = PBXGroup;
 			children = (
+				F88C2481295C3A4F0006098B /* StatusView.swift */,
 				F85D497E296416C800751DF7 /* CommentsSection.swift */,
 				F89992C8296D6DC7005994BF /* CommentBody.swift */,
 				F89A46DD296EABA20062125F /* StatusPlaceholder.swift */,
@@ -631,6 +630,7 @@
 		F8FA991A299FA8A5007AB130 /* ComposeView */ = {
 			isa = PBXGroup;
 			children = (
+				F88ABD9329687CA4004EF61E /* ComposeView.swift */,
 				F8FA991B299FA8C2007AB130 /* ImageUploadView.swift */,
 			);
 			path = ComposeView;
