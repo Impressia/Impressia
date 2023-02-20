@@ -16,6 +16,7 @@ public class HapticService {
         case notification(_ type: UINotificationFeedbackGenerator.FeedbackType)
         case tabSelection
         case timeline
+        case animation
     }
 
     private let selectionGenerator = UISelectionFeedbackGenerator()
@@ -41,6 +42,8 @@ public class HapticService {
         case .tabSelection:
             selectionGenerator.selectionChanged()
         case .timeline:
+            selectionGenerator.selectionChanged()
+        case .animation:
             selectionGenerator.selectionChanged()
         }
     }

@@ -37,11 +37,9 @@ struct StatusView: View {
     var body: some View {
         self.mainBody()
             .navigationBarTitle("Details")
-            // .overlay(ImageViewer(image: self.$image, viewerShown: self.$showImageViewer))
             .fullScreenCover(isPresented: $showImageViewer, content: {
                 if let statusViewModel = self.statusViewModel {
-                    ImageViewer(image: self.$image, viewerShown: self.$showImageViewer)
-                    // ImagesViewer(statusViewModel: statusViewModel, selectedAttachmentId: selectedAttachmentId ?? String.empty())
+                    ImagesViewer(statusViewModel: statusViewModel, selectedAttachmentId: selectedAttachmentId ?? String.empty())
                 }
             })
     }
