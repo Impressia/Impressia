@@ -7,10 +7,11 @@
 import SwiftUI
 
 struct ImagesViewer: View {
-    @State var statusViewModel: StatusModel
-    @State var selectedAttachmentId: String = String.empty()
     @Environment(\.dismiss) private var dismiss
         
+    private var statusViewModel: StatusModel
+    private var selectedAttachmentId: String = String.empty()
+    private let image: Image?
     private let closeDragDistance = 100.0
     
     // Opacity usied during close dialog animation.
@@ -30,14 +31,25 @@ struct ImagesViewer: View {
     @State private var currentOffset = CGSize.zero
     @State private var accumulatedOffset = CGSize.zero
         
-    var body: some View {
-        if let attachment = self.statusViewModel.mediaAttachments.first(where: { $0.id == self.selectedAttachmentId }),
+    init(statusViewModel: StatusModel, selectedAttachmentId: String) {
+        self.statusViewModel = statusViewModel
+        self.selectedAttachmentId = selectedAttachmentId
+        
+        if let attachment = statusViewModel.mediaAttachments.first(where: { $0.id == selectedAttachmentId }),
            let data = attachment.data,
-           let image = UIImage(data: data) {
-            Image(uiImage: image)
+           let uiImage = UIImage(data: data) {
+            self.image = Image(uiImage: uiImage)
+        } else {
+            self.image = nil
+        }
+    }
+    
+    var body: some View {
+        if let image = self.image {
+            image
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .tag(attachment.id)
+                .tag(selectedAttachmentId)
                 .offset(currentOffset)
                 .rotationEffect(rotationAngle)
                 .scaleEffect(finalMagnification + currentMagnification)
@@ -95,7 +107,7 @@ struct ImagesViewer: View {
                     // We can move image whatever we want.
                     self.currentOffset = CGSize(width: amount.translation.width + self.accumulatedOffset.width,
                                                 height: amount.translation.height + self.accumulatedOffset.height)
-                    
+
                     // Changing opacity when we want to close.
                     let pictureOpacity = (self.closeDragDistance - self.currentOffset.height) / self.closeDragDistance
                     self.opacity = pictureOpacity >= 0 ? pictureOpacity : 0
@@ -115,14 +127,14 @@ struct ImagesViewer: View {
                 if self.finalMagnification == 1.0 {
                     if self.accumulatedOffset.height < closeDragDistance {
                         // Revert back image offset.
-                        withAnimation(.easeInOut) {
+                        withAnimation {
                             self.currentOffset = CGSize.zero
                             self.accumulatedOffset = CGSize.zero
                             self.opacity = 1.0
                         }
                     } else {
                         // Close the screen.
-                        withAnimation(.easeInOut) {
+                        withAnimation {
                             self.currentOffset = amount.predictedEndTranslation
                             self.accumulatedOffset = CGSize.zero
                             self.opacity = 1.0
@@ -148,7 +160,7 @@ struct ImagesViewer: View {
     private func revertToPrecalculatedMagnification(magnification: Double) {
         if magnification < 1.0 {
             // When image is small we are returning to starting point.
-            withAnimation(.default) {
+            withAnimation {
                 finalMagnification = 1.0
                 currentMagnification = 0
                 
@@ -159,7 +171,7 @@ struct ImagesViewer: View {
             HapticService.shared.fireHaptic(of: .animation)
         } else if magnification > 3.0 {
             // When image is magnified to much we are rturning to 1.5 maginification.
-            withAnimation(.default) {
+            withAnimation {
                 finalMagnification = 3.0
                 currentMagnification = 0
             }
