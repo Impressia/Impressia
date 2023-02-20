@@ -112,11 +112,13 @@ public class AuthorizationService {
             }
         }
         
-        // Set newly created account as current.
+        // Set newly created account as current (only when we create a first account).
         let defaultSettings = ApplicationSettingsHandler.shared.getDefaultSettings()
-        defaultSettings.currentAccount = accountData.id
+        if defaultSettings.currentAccount == nil {
+            defaultSettings.currentAccount = accountData.id
+        }
         
-        // Save account data in database and in application state.
+        // Save account/settings data in database.
         CoreDataHandler.shared.save()
         
         // Return account data.

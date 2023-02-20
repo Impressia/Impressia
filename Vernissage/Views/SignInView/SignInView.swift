@@ -18,11 +18,10 @@ struct SignInView: View {
     @State private var serverAddress: String = String.empty()
     @State private var instances: [Instance] = []
         
-    var onSignInStateChenge: ((_ applicationViewMode: ApplicationViewMode) -> Void)?
+    var onSignedIn: ((_ accountData: AccountData) -> Void)?
     
     var body: some View {
         List {
-            
             Section("Custom server address") {
                 VStack(alignment: .center) {
                     HStack(alignment: .center, spacing: 4) {
@@ -75,13 +74,11 @@ struct SignInView: View {
     private func signIn(baseAddress: String) {
         Task {
             do {
-                
                 let authorizationSession = AuthorizationSession()
-                try await AuthorizationService.shared.sign(in: baseAddress,
-                                                           session: authorizationSession) { accountData in
-                    DispatchQueue.main.async {
-                        self.applicationState.account = AccountModel(accountData: accountData)
-                        onSignInStateChenge?(.mainView)
+                try await AuthorizationService.shared.sign(in: baseAddress, session: authorizationSession) { accountData in
+                    onSignedIn?(accountData)
+                    
+                    DispatchQueue.main.sync {
                         dismiss()
                     }
                 }

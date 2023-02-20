@@ -34,8 +34,8 @@ struct VernissageApp: App {
                         .withAppRouteur()
                         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
                 case .signIn:
-                    SignInView { viewMode in
-                        applicationViewMode = viewMode
+                    SignInView { accountData in
+                        self.setApplicationState(accountData: accountData)
                     }
                     .withAppRouteur()
                     .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
@@ -75,17 +75,7 @@ struct VernissageApp: App {
                         return
                     }
                     
-                    Task { @MainActor in
-                        let accountModel = AccountModel(accountData: accountData)
-                        self.applicationState.account = accountModel
-                        self.applicationState.lastSeenStatusId = accountData.lastSeenStatusId
-                        self.applicationState.amountOfNewStatuses = 0
-                        self.client.setAccount(account: accountModel)
-                        self.applicationViewMode = .mainView
-                        
-                        // Check amount of newly added photos.
-                        await self.loadInBackground()
-                    }
+                    self.setApplicationState(accountData: accountData, checkNewPhotos: true)
                 }
             }
             .navigationViewStyle(.stack)
@@ -104,6 +94,23 @@ struct VernissageApp: App {
             }
             .onChange(of: applicationState.tintColor) { newValue in
                 self.tintColor = newValue.color()
+            }
+        }
+    }
+
+    private func setApplicationState(accountData: AccountData, checkNewPhotos: Bool = false) {
+        Task { @MainActor in
+            let accountModel = AccountModel(accountData: accountData)
+            self.applicationState.account = accountModel
+            self.client.setAccount(account: accountModel)
+            self.applicationState.lastSeenStatusId = accountData.lastSeenStatusId
+            self.applicationState.amountOfNewStatuses = 0
+            
+            self.applicationViewMode = .mainView
+            
+            // Check amount of newly added photos.
+            if checkNewPhotos {
+                await self.loadInBackground()
             }
         }
     }
