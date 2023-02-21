@@ -86,7 +86,8 @@ struct PlaceSelectorView: View {
                     }
                 }
             }
-            .navigationBarTitle(Text("Places"), displayMode: .inline)
+            .navigationTitle("Places")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 self.getTrailingToolbar()
             }

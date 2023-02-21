@@ -28,7 +28,7 @@ struct PaginableStatusesView: View {
 
     var body: some View {
         self.mainBody()
-            .navigationBarTitle(self.getTitle())
+            .navigationTitle(self.getTitle())
     }
     
     @ViewBuilder

@@ -200,7 +200,8 @@ struct ComposeView: View {
                     }
                 })
                 .photosPicker(isPresented: $photosPickerVisible, selection: $selectedItems, maxSelectionCount: 4, matching: .images)
-                .navigationBarTitle(Text("Compose"), displayMode: .inline)
+                .navigationTitle("Compose")
+                .navigationBarTitleDisplayMode(.inline)
             }
             .withAppRouteur()
             .withOverlayDestinations(overlayDestinations: $routerPath.presentedOverlay)

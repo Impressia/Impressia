@@ -15,14 +15,15 @@ struct SignInView: View {
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var client: Client
 
-    @State private var serverAddress: String = String.empty()
+    @State private var serverAddress = String.empty()
+    @State private var instructionsUrlString:String?
     @State private var instances: [Instance] = []
         
     var onSignedIn: ((_ accountData: AccountData) -> Void)?
     
     var body: some View {
         List {
-            Section("Custom server address") {
+            Section {
                 VStack(alignment: .center) {
                     HStack(alignment: .center, spacing: 4) {
                         TextField("Server address", text: $serverAddress)
@@ -44,9 +45,20 @@ struct SignInView: View {
                         .padding(.vertical, 4)
                     }
                 }
+            } header: {
+                Text("Enter server address")
+            } footer: {
+                if let instructionsUrlString = self.instructionsUrlString,
+                   let instructionsUrl = URL(string: instructionsUrlString) {
+                    HStack {
+                        Spacer()
+                        Link("How to join Pixelfed", destination: instructionsUrl)
+                            .font(.caption)
+                    }
+                }
             }
             
-            Section("Pixelfed servers") {
+            Section("Or choose Pixelfed server") {
                 if self.instances.isEmpty {
                     HStack {
                         Spacer()
@@ -62,12 +74,13 @@ struct SignInView: View {
                     }
                 }
             }
-            
         }
         .onFirstAppear {
-            self.instances = await self.client.instances.instances()
+            let metadata = await AppMetadataService.shared.metadata()
+            self.instances = await self.client.instances.instances(instanceUrls: metadata.instances)
+            self.instructionsUrlString = metadata.instructionsUrl
         }
-        .navigationBarTitle("Sign in to Pixelfed")
+        .navigationTitle("Sign in to Pixelfed")
         .navigationBarTitleDisplayMode(.inline)
     }
     

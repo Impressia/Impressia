@@ -31,7 +31,7 @@ struct StatusesView: View {
 
     var body: some View {
         self.mainBody()
-            .navigationBarTitle(self.getTitle())
+            .navigationTitle(self.getTitle())
             .toolbar {
                 // TODO: It seems like pixelfed is not supporting the endpoints.
                 // self.getTrailingToolbar()

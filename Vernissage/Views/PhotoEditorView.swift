@@ -47,7 +47,8 @@ struct PhotoEditorView: View {
             .onAppear {
                 self.description = self.photoAttachment.uploadedAttachment?.description ?? String.empty()
             }
-            .navigationBarTitle(Text("Photo details"), displayMode: .inline)
+            .navigationTitle("Photo details")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 self.getTrailingToolbar()
             }

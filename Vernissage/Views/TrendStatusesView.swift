@@ -41,7 +41,7 @@ struct TrendStatusesView: View {
             
             self.mainBody()
         }
-        .navigationBarTitle("Trends")
+        .navigationTitle("Trends")
     }
     
     @ViewBuilder

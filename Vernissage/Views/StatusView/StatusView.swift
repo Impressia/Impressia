@@ -36,7 +36,7 @@ struct StatusView: View {
     
     var body: some View {
         self.mainBody()
-            .navigationBarTitle("Details")
+            .navigationTitle("Details")
             .fullScreenCover(isPresented: $showImageViewer, content: {
                 if let statusViewModel = self.statusViewModel {
                     ImagesViewer(statusViewModel: statusViewModel, selectedAttachmentId: selectedAttachmentId ?? String.empty())

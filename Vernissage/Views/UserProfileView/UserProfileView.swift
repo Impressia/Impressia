@@ -21,7 +21,7 @@ struct UserProfileView: View {
     
     var body: some View {
         self.mainBody()
-            .navigationBarTitle(self.accountDisplayName ?? self.accountUserName)
+            .navigationTitle(self.accountDisplayName ?? self.accountUserName)
             .toolbar {
                 if let account = self.account {
                     if self.applicationState.account?.id != account.id {

@@ -58,7 +58,8 @@ struct SettingsView: View {
                 .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification), perform: { _ in
                     self.theme = applicationState.theme.colorScheme() ?? self.getSystemColorScheme()
                 })
-                .navigationBarTitle(Text("Settings"), displayMode: .inline)
+                .navigationTitle("Settings")
+                .navigationBarTitleDisplayMode(.inline)
                 .preferredColorScheme(self.theme)
             }
             .withAppRouteur()

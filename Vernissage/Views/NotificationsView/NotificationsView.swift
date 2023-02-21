@@ -23,7 +23,7 @@ struct NotificationsView: View {
     
     var body: some View {
         self.mainBody()
-            .navigationBarTitle("Notifications")
+            .navigationTitle("Notifications")
     }
     
     @ViewBuilder

@@ -37,7 +37,7 @@ struct MainView: View {
     
     var body: some View {
         self.getMainView()
-        .navigationBarTitle(navBarTitle)
+        .navigationTitle(navBarTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             self.getLeadingToolbar()
