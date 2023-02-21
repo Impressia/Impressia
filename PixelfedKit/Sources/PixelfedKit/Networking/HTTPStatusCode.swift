@@ -46,6 +46,9 @@ public enum HTTPStatusCode: Int, Error {
     /// - processing: This code indicates that the server has received and is processing the request, but no response is available yet.
     case processing = 102
     
+    /// - early hints:
+    case earlyHints = 103
+    
     //
     // Success - 2xx
     //
@@ -185,6 +188,9 @@ public enum HTTPStatusCode: Int, Error {
     /// - failedDependency: The request failed due to failure of a previous request (e.g., a PROPPATCH).
     case failedDependency = 424
     
+    /// - tooEarly:
+    case tooEarly = 425
+    
     /// - upgradeRequired: The client should switch to a different protocol such as TLS/1.0, given in the Upgrade header field.
     case upgradeRequired = 426
     
@@ -289,6 +295,143 @@ public extension HTTPURLResponse {
 
 extension HTTPStatusCode: LocalizedError {
     public var errorDescription: String? {
-        return String(self.rawValue)
+        switch self {
+        case .continue:
+            return "Continue (\(self.rawValue))"
+        case .switchingProtocols:
+            return "Switching protocols (\(self.rawValue))"
+        case .processing:
+            return "Processing (\(self.rawValue))"
+        case .earlyHints:
+            return "Early Hints (\(self.rawValue))"
+        case .ok:
+            return "OK (\(self.rawValue))"
+        case .created:
+            return "Created (\(self.rawValue))"
+        case .accepted:
+            return "Accepted (\(self.rawValue))"
+        case .nonAuthoritativeInformation:
+            return "Non-Authoritative Information (\(self.rawValue))"
+        case .noContent:
+            return "No Content (\(self.rawValue))"
+        case .resetContent:
+            return "Reset Content (\(self.rawValue))"
+        case .partialContent:
+            return "Partial Content (\(self.rawValue))"
+        case .multiStatus:
+            return "Multi-Status (\(self.rawValue))"
+        case .alreadyReported:
+            return "Already Reported (\(self.rawValue))"
+        case .IMUsed:
+            return "IM Used (\(self.rawValue))"
+        case .multipleChoices:
+            return "Multiple Choices (\(self.rawValue))"
+        case .movedPermanently:
+            return "Moved Permanently (\(self.rawValue))"
+        case .found:
+            return "Found (\(self.rawValue))"
+        case .seeOther:
+            return "See Other (\(self.rawValue))"
+        case .notModified:
+            return "Not Modified (\(self.rawValue))"
+        case .useProxy:
+            return "Use Proxy (\(self.rawValue))"
+        case .switchProxy:
+            return "Switch Proxy (\(self.rawValue))"
+        case .temporaryRedirect:
+            return "Temporary Redirect (\(self.rawValue))"
+        case .permenantRedirect:
+            return "Permanent Redirect (\(self.rawValue))"
+        case .badRequest:
+            return "Bad Request (\(self.rawValue))"
+        case .unauthorized:
+            return "Unauthorized (\(self.rawValue))"
+        case .paymentRequired:
+            return "Payment Required (\(self.rawValue))"
+        case .forbidden:
+            return "Forbidden (\(self.rawValue))"
+        case .notFound:
+            return "Not Found (\(self.rawValue))"
+        case .methodNotAllowed:
+            return "Method Not Allowed (\(self.rawValue))"
+        case .notAcceptable:
+            return "Not Acceptable (\(self.rawValue))"
+        case .proxyAuthenticationRequired:
+            return "Proxy Authentication Required (\(self.rawValue))"
+        case .requestTimeout:
+            return "Request Timeout (\(self.rawValue))"
+        case .conflict:
+            return "Conflict (\(self.rawValue))"
+        case .gone:
+            return "Gone (\(self.rawValue))"
+        case .lengthRequired:
+            return "Length Required (\(self.rawValue))"
+        case .preconditionFailed:
+            return "Precondition Failed (\(self.rawValue))"
+        case .payloadTooLarge:
+            return "Payload Too Large (\(self.rawValue))"
+        case .URITooLong:
+            return "URI Too Long (\(self.rawValue))"
+        case .unsupportedMediaType:
+            return "Unsupported Media Type (\(self.rawValue))"
+        case .rangeNotSatisfiable:
+            return "Range Not Satisfiable (\(self.rawValue))"
+        case .expectationFailed:
+            return "Expectation Failed (\(self.rawValue))"
+        case .teapot:
+            return "I'm a Teapot (\(self.rawValue))"
+        case .misdirectedRequest:
+            return "Misdirected Request (\(self.rawValue))"
+        case .unprocessableEntity:
+            return "Unprocessable Entity (\(self.rawValue))"
+        case .locked:
+            return "Locked (\(self.rawValue))"
+        case .failedDependency:
+            return "Failed Dependency (\(self.rawValue))"
+        case .tooEarly:
+            return "Too Early (\(self.rawValue))"
+        case .upgradeRequired:
+            return "Upgrade Required (\(self.rawValue))"
+        case .preconditionRequired:
+            return "Precondition Required (\(self.rawValue))"
+        case .tooManyRequests:
+            return "Too Many Requests (\(self.rawValue))"
+        case .requestHeaderFieldsTooLarge:
+            return "Request Header Fields Too Large (\(self.rawValue))"
+        case .noResponse:
+            return "No Response (\(self.rawValue))"
+        case .unavailableForLegalReasons:
+            return "Unavailable For Legal Reasons (\(self.rawValue))"
+        case .SSLCertificateError:
+            return "SSL Certificate Error (\(self.rawValue))"
+        case .SSLCertificateRequired:
+            return "SSL Certificate Required (\(self.rawValue))"
+        case .HTTPRequestSentToHTTPSPort:
+            return "HTTP Request Sent To HTTPS (\(self.rawValue))"
+        case .clientClosedRequest:
+            return "Client Closed Request (\(self.rawValue))"
+        case .internalServerError:
+            return "Internal Server Error (\(self.rawValue))"
+        case .notImplemented:
+            return "Not Implemented (\(self.rawValue))"
+        case .badGateway:
+            return "Bad Gateway (\(self.rawValue))"
+        case .serviceUnavailable:
+            return "Service Unavailable (\(self.rawValue))"
+        case .gatewayTimeout:
+            return "Gateway Timeout (\(self.rawValue))"
+        case .HTTPVersionNotSupported:
+            return "HTTP Version Not Supported (\(self.rawValue))"
+        case .variantAlsoNegotiates:
+            return "Variant Also Negotiates (\(self.rawValue))"
+        case .insufficientStorage:
+            return "Insufficient Storage (\(self.rawValue))"
+        case .loopDetected:
+            return "Loop Detected (\(self.rawValue))"
+        case .notExtended:
+            return "Not Extended (\(self.rawValue))"
+        case .networkAuthenticationRequired:
+            return "Network Authentication Required (\(self.rawValue))"
+        }
     }
 }

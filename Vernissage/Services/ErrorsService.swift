@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import PixelfedKit
 
 public class ErrorService {
     public static let shared = ErrorService()
@@ -12,7 +13,11 @@ public class ErrorService {
     
     public func handle(_ error: Error, message: String, showToastr: Bool = false) {
         if showToastr {
-            ToastrService.shared.showError(subtitle: message)
+            if error is NetworkError {
+                ToastrService.shared.showError(subtitle: "\(message) \(error.localizedDescription)")
+            } else {
+                ToastrService.shared.showError(subtitle: message)
+            }
         }
         
         print("Error ['\(message)']: \(error.localizedDescription)")

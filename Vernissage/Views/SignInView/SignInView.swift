@@ -99,7 +99,7 @@ struct SignInView: View {
                 ErrorService.shared.handle(error, message: error.localizedDescription, showToastr: true)
             }
             catch {
-                ErrorService.shared.handle(error, message: "Error during communication with server", showToastr: true)
+                ErrorService.shared.handle(error, message: "Error during communication with server.", showToastr: true)
             }
         }
     }

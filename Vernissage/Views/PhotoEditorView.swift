@@ -85,7 +85,7 @@ struct PhotoEditorView: View {
                 self.photoAttachment.uploadedAttachment = updated
                 self.dismiss()
             } catch {
-                ErrorService.shared.handle(error, message: "Cannot update attachment", showToastr: true)
+                ErrorService.shared.handle(error, message: "Cannot update attachment.", showToastr: true)
             }
         }
     }
