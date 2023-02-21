@@ -33,6 +33,8 @@ struct ImageUploadView: View {
                         Label("Try to upload", systemImage: "exclamationmark.arrow.triangle.2.circlepath")
                     }
                     
+                    Divider()
+                    
                     Button(role: .destructive) {
                         HapticService.shared.fireHaptic(of: .buttonPress)
                         self.delete()
@@ -69,6 +71,8 @@ struct ImageUploadView: View {
                     } label: {
                         Label("Edit", systemImage: "pencil")
                     }
+                    
+                    Divider()
                     
                     Button(role: .destructive) {
                         HapticService.shared.fireHaptic(of: .buttonPress)
