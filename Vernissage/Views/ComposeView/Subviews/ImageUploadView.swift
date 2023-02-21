@@ -12,11 +12,13 @@ struct ImageUploadView: View {
     
     private let delete: () -> Void
     private let open: () -> Void
+    private let upload: () -> Void
     
-    public init(photoAttachment: PhotoAttachment, open: @escaping () -> Void, delete: @escaping () -> Void) {
+    public init(photoAttachment: PhotoAttachment, open: @escaping () -> Void, delete: @escaping () -> Void, upload: @escaping () -> Void) {
         self.photoAttachment = photoAttachment
         self.delete = delete
         self.open = open
+        self.upload = upload
     }
     
     var body: some View {
@@ -24,6 +26,13 @@ struct ImageUploadView: View {
             
             if photoAttachment.error != nil {
                 Menu {
+                    Button {
+                        HapticService.shared.fireHaptic(of: .buttonPress)
+                        self.upload()
+                    } label: {
+                        Label("Try to upload", systemImage: "exclamationmark.arrow.triangle.2.circlepath")
+                    }
+                    
                     Button(role: .destructive) {
                         HapticService.shared.fireHaptic(of: .buttonPress)
                         self.delete()

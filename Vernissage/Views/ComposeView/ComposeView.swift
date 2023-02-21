@@ -177,6 +177,10 @@ struct ComposeView: View {
                                     self.photosAreAttached = self.photosAttachment.hasUploadedPhotos()
                                     self.publishDisabled = self.isPublishButtonDisabled()
                                     self.interactiveDismissDisabled = self.isInteractiveDismissDisabled()
+                                } upload: {
+                                    Task {
+                                        await self.upload(photoAttachment)
+                                    }
                                 }
                             }
                         }
@@ -363,17 +367,22 @@ struct ComposeView: View {
     }
     
     private func upload() async {
-        for (index, photoAttachment) in self.photosAttachment.enumerated() {
-            do {
-                if let mediaAttachment = try await self.client.media?.upload(data: photoAttachment.photoData,
-                                                                             fileName: "file-\(index).jpg",
-                                                                             mimeType: "image/jpeg") {
-                    photoAttachment.uploadedAttachment = mediaAttachment
-                }
-            } catch {
-                photoAttachment.error = error
-                ErrorService.shared.handle(error, message: "Error during post photo.", showToastr: true)
+        for photoAttachment in self.photosAttachment {
+            await self.upload(photoAttachment)
+        }
+    }
+    
+    private func upload(_ photoAttachment: PhotoAttachment) async {
+        do {
+            let fileIndex = String.randomString(length: 8)
+            if let mediaAttachment = try await self.client.media?.upload(data: photoAttachment.photoData,
+                                                                         fileName: "file-\(fileIndex).jpg",
+                                                                         mimeType: "image/jpeg") {
+                photoAttachment.uploadedAttachment = mediaAttachment
             }
+        } catch {
+            photoAttachment.error = error
+            ErrorService.shared.handle(error, message: "Error during post photo.", showToastr: true)
         }
     }
     
