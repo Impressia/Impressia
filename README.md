@@ -22,7 +22,17 @@ are attachments of another user in the response).
 
 Github issue: [https://github.com/pixelfed/pixelfed/issues/4196](https://github.com/pixelfed/pixelfed/issues/4196)
 
+### **Comments are not visible**
 
+API is not returning comments added directly to the status (account `amiko`)?
+
+`[GET] https://pxlmo.com/api/v1/statuses/533554842410484883/context`
+ 
+Web app is using endpoint: `https://pxlmo.com/api/v2/statuses/533554842410484883/replies?limit=3` for downloading statuses. 
+ 
+Comments are visible when we open status from another server (e.g. from https://pixelfed.social), because they are transfered
+with the status via ActivityPub.
+ 
 ### **Follow/unfollow hashtags is not available through the API**
 
 Pixelfed uses endpoint (POST): https://pixelfed.social/api/local/discover/tag/subscribe, with body:

@@ -73,7 +73,7 @@ public class StatusModel: ObservableObject {
         self.commentsDisabled = orginalStatus.commentsDisabled
         
         var mediaAttachments: [AttachmentModel] = []
-        for item in orginalStatus.mediaAttachments {
+        for item in orginalStatus.getAllImageMediaAttachments() {
             mediaAttachments.append(AttachmentModel(attachment: item))
         }
         
@@ -108,7 +108,7 @@ public extension StatusModel {
 }
 
 public extension [Status] {
-    func toStatusViewModel() -> [StatusModel] {
+    func toStatusModels() -> [StatusModel] {
         self
             .sorted(by: { lhs, rhs in
                 lhs.id < rhs.id

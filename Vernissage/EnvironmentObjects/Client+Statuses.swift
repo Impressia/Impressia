@@ -74,7 +74,7 @@ extension Client {
         private func getCommentDescendants(to statusId: String, showDivider: Bool, to commentViewModels: inout [CommentModel]) async throws {
             let context = try await pixelfedClient.getContext(for: statusId)
             
-            let descendants = context.descendants.toStatusViewModel()
+            let descendants = context.descendants.toStatusModels()
             for status in descendants {
                 commentViewModels.append(CommentModel(status: status, showDivider: showDivider))
                 
