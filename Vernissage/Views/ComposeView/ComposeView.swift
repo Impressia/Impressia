@@ -17,7 +17,6 @@ struct ComposeView: View {
     
     @State var statusViewModel: StatusModel?
     @State private var text = String.empty()
-    @State private var visibility = Pixelfed.Statuses.Visibility.pub
     @State private var isSensitive = false
     @State private var spoilerText = String.empty()
     @State private var commentsDisabled = false
@@ -32,6 +31,10 @@ struct ComposeView: View {
     
     @State private var selectedItems: [PhotosPickerItem] = []
     @State private var photosAttachment: [PhotoAttachment] = []
+    
+    @State private var visibility = Pixelfed.Statuses.Visibility.pub
+    @State private var visibilityText = "Everyone"
+    @State private var visibilityImage = "globe.europe.africa"
     
     @FocusState private var focusedField: FocusField?
     enum FocusField: Hashable {
@@ -91,24 +94,63 @@ struct ComposeView: View {
                                     accountUsername: accountData.username)
                                 Spacer()
                             }
-                            .padding(8)
+                            .padding(.horizontal, 8)
                         }
-                        
-                        if let name = self.place?.name, let country = self.place?.country {
-                            HStack {
+                            
+                        HStack {
+                            if let name = self.place?.name, let country = self.place?.country {
                                 Group {
                                     Image(systemName: "mappin.and.ellipse")
                                     Text("\(name), \(country)")
                                 }
-                                .font(.caption)
                                 .foregroundColor(.lightGrayColor)
-                                Spacer()
                             }
-                            .padding(.horizontal, 8)
+                            
+                            Spacer()
+                            
+                            Menu {
+                                Button {
+                                    self.visibility = .pub
+                                    self.visibilityText = "Everyone"
+                                    self.visibilityImage = "globe.europe.africa"
+                                } label: {
+                                    Label("Everyone", systemImage: "globe.europe.africa")
+                                }
+                                
+                                Button {
+                                    self.visibility = .unlisted
+                                    self.visibilityText = "Unlisted"
+                                    self.visibilityImage = "lock.open"
+                                } label: {
+                                    Label("Unlisted", systemImage: "lock.open")
+                                }
+                                
+                                Button {
+                                    self.visibility = .priv
+                                    self.visibilityText = "Followers"
+                                    self.visibilityImage = "lock"
+                                } label: {
+                                    Label("Followers", systemImage: "lock")
+                                }
+                            } label: {
+                                HStack {
+                                    Label(self.visibilityText, systemImage: self.visibilityImage)
+                                    Image(systemName: "chevron.down")
+                                }
+                                .padding(.vertical, 4)
+                                .padding(.horizontal, 8)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(Color.accentColor, lineWidth: 1)
+                                )
+                            }
                         }
+                        .font(.footnote)
+                        .padding(.horizontal, 8)
+                        
                         
                         TextField("Type what's on your mind", text: $text, axis: .vertical)
-                            .padding(8)
+                            .padding(.horizontal, 8)
                             .lineLimit(2...12)
                             .focused($focusedField, equals: .content)
                             .keyboardType(.default)
@@ -256,23 +298,6 @@ struct ComposeView: View {
                 }
                 
                 Spacer()
-                
-                Picker("Post visibility", selection: $visibility) {
-                    HStack {
-                        Image(systemName: "globe.europe.africa")
-                        Text(" Everyone")
-                    }.tag(Pixelfed.Statuses.Visibility.pub)
-                    
-                    HStack {
-                        Image(systemName: "lock.open")
-                        Text(" Unlisted")
-                    }.tag(Pixelfed.Statuses.Visibility.unlisted)
-                        
-                    HStack {
-                        Image(systemName: "lock")
-                        Text(" Followers")
-                    }.tag(Pixelfed.Statuses.Visibility.priv)
-                }.buttonStyle(.bordered)
             }
         }
     }
