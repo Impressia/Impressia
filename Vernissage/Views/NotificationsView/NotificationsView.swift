@@ -86,10 +86,10 @@ struct NotificationsView: View {
             }
         } catch {
             if !Task.isCancelled {
-                ErrorService.shared.handle(error, message: "Error during download notifications from server.", showToastr: true)
+                ErrorService.shared.handle(error, message: "Notifications not retrieved.", showToastr: true)
                 self.state = .error(error)
             } else {
-                ErrorService.shared.handle(error, message: "Error during download notifications from server.", showToastr: false)
+                ErrorService.shared.handle(error, message: "Notifications not retrieved.", showToastr: false)
             }
         }
     }

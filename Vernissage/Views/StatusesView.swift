@@ -252,7 +252,7 @@ struct StatusesView: View {
             self.tag = try await self.client.tags?.follow(tag: hashtag)
             ToastrService.shared.showSuccess("You are following the tag.", imageSystemName: "number.square.fill")
         } catch {
-            ErrorService.shared.handle(error, message: "Error during following tag.", showToastr: true)
+            ErrorService.shared.handle(error, message: "Follow tag failed.", showToastr: true)
         }
     }
     
@@ -261,7 +261,7 @@ struct StatusesView: View {
             self.tag = try await self.client.tags?.unfollow(tag: hashtag)
             ToastrService.shared.showSuccess("Tag has been unfollowed.", imageSystemName: "number.square")
         } catch {
-            ErrorService.shared.handle(error, message: "Error during unfollowing tag.", showToastr: true)
+            ErrorService.shared.handle(error, message: "Unfollow tag failed.", showToastr: true)
         }
     }
 }

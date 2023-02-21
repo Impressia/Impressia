@@ -134,10 +134,10 @@ struct HomeFeedView: View {
             self.state = .loaded
         } catch {
             if !Task.isCancelled {
-                ErrorService.shared.handle(error, message: "Error during download statuses from server.", showToastr: true)
+                ErrorService.shared.handle(error, message: "Statuses not retrieved.", showToastr: true)
                 self.state = .error(error)
             } else {
-                ErrorService.shared.handle(error, message: "Error during download statuses from server.", showToastr: false)
+                ErrorService.shared.handle(error, message: "Statuses not retrieved.", showToastr: false)
             }
         }
     }

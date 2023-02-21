@@ -16,12 +16,13 @@ public class ToastrService {
         let drop = Drop(
             title: title,
             subtitle: subtitle,
+            subtitleNumberOfLines: 2,
             icon: self.createImage(systemName: imageSystemName, color: ApplicationState.shared.tintColor.uiColor()),
             action: .init {
                 Drops.hideCurrent()
             },
             position: .top,
-            duration: 2.0,
+            duration: 3.0,
             accessibility: ""
         )
         
@@ -30,14 +31,15 @@ public class ToastrService {
     
     public func showError(title: String = "Unexpected error", imageSystemName: String = "ant.circle.fill", subtitle: String? = nil) {
         let drop = Drop(
-            title: "Unexpected error",
+            title: title,
             subtitle: subtitle,
+            subtitleNumberOfLines: 2,
             icon: self.createImage(systemName: imageSystemName, color: Color.red.toUIColor()),
             action: .init {
                 Drops.hideCurrent()
             },
             position: .top,
-            duration: 2.0,
+            duration: 3.0,
             accessibility: ""
         )
         

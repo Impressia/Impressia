@@ -135,11 +135,11 @@ public class AuthorizationService {
                         try await self.refreshAccessToken(accountData: account)
 
                         #if DEBUG
-                            ToastrService.shared.showSuccess("New access tokens has been retrieved", imageSystemName: "key.fill")
+                            ToastrService.shared.showSuccess("New access tokens has been retrieved.", imageSystemName: "key.fill")
                         #endif
                     } catch {
                         #if DEBUG
-                            ErrorService.shared.handle(error, message: "Error during refreshing access token for account '\(account.acct)'.", showToastr: true)
+                            ErrorService.shared.handle(error, message: "Refresh token failed: '\(account.acct)'.", showToastr: true)
                         #else
                             ErrorService.shared.handle(error, message: "Error during refreshing access token for account '\(account.acct)'.")
                         #endif
@@ -231,10 +231,6 @@ public class AuthorizationService {
                 ErrorService.shared.handle(error, message: "Avatar has not been downloaded.")
             }
         }
-        
-        // We have to be sure that account id is saved as default account.
-        let defaultSettings = ApplicationSettingsHandler.shared.getDefaultSettings()
-        defaultSettings.currentAccount = dbAccount.id
         
         // Save account data in database and in application state.
         CoreDataHandler.shared.save()

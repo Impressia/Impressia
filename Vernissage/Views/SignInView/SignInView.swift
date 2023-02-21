@@ -99,16 +99,19 @@ struct SignInView: View {
                 ErrorService.shared.handle(error, message: error.localizedDescription, showToastr: true)
             }
             catch {
-                ErrorService.shared.handle(error, message: "Error during communication with server.", showToastr: true)
+                ErrorService.shared.handle(error, message: "Communication with server failed.", showToastr: true)
             }
         }
     }
     
     private func getServerAddress(uri: String) -> String {
-        if !uri.starts(with: "https://") {
-            return "https://\(uri)"
+        var address = uri.trimmingCharacters(in: .whitespacesAndNewlines)
+        address = address.trimmingCharacters(in: CharacterSet.init(charactersIn: "/\\"))
+        
+        if !address.starts(with: "https://") {
+            return "https://\(address)"
         }
         
-        return uri
+        return address
     }
 }

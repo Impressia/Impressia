@@ -101,10 +101,10 @@ struct AccountsView: View {
             self.state = .loaded
         } catch {
             if !Task.isCancelled {
-                ErrorService.shared.handle(error, message: "Error during download followers from server.", showToastr: true)
+                ErrorService.shared.handle(error, message: "Followers not retrieved.", showToastr: true)
                 self.state = .error(error)
             } else {
-                ErrorService.shared.handle(error, message: "Error during download followers from server.", showToastr: false)
+                ErrorService.shared.handle(error, message: "Followers not retrieved.", showToastr: false)
             }
         }
     }

@@ -186,10 +186,10 @@ struct StatusView: View {
         }
         catch {
             if !Task.isCancelled {
-                ErrorService.shared.handle(error, message: "Error during download status from server.", showToastr: true)
+                ErrorService.shared.handle(error, message: "Status not retreived.", showToastr: true)
                 self.state = .loaded
             } else {
-                ErrorService.shared.handle(error, message: "Error during download status from server.", showToastr: false)
+                ErrorService.shared.handle(error, message: "Status not retreived.", showToastr: false)
             }
         }
     }
