@@ -48,7 +48,7 @@ struct StatusView: View {
     private func mainBody() -> some View {
         switch state {
         case .loading:
-            StatusPlaceholder(imageHeight: self.getImageHeight(), imageBlurhash: self.imageBlurhash)
+            StatusPlaceholderView(imageHeight: self.getImageHeight(), imageBlurhash: self.imageBlurhash)
                 .task {
                     await self.loadData()
                 }
@@ -123,7 +123,7 @@ struct StatusView: View {
                         }
                         .padding(8)
                                             
-                        CommentsSection(statusId: statusViewModel.id)
+                        CommentsSectionView(statusId: statusViewModel.id)
                     }
                 }
             }

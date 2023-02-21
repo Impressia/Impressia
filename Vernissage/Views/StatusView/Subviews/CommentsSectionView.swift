@@ -7,7 +7,7 @@
 import SwiftUI
 import PixelfedKit
 
-struct CommentsSection: View {
+struct CommentsSectionView: View {
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var client: Client
@@ -28,7 +28,7 @@ struct CommentsSection: View {
                                 .padding(0)
                         }
                                                 
-                        CommentBody(statusViewModel: commentViewModel.status)
+                        CommentBodyView(statusViewModel: commentViewModel.status)
                         
                         if self.applicationState.showInteractionStatusId == commentViewModel.status.id {
                             VStack (alignment: .leading, spacing: 0) {

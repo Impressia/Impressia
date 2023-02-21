@@ -6,7 +6,7 @@
     
 import SwiftUI
 
-struct StatusPlaceholder: View {
+struct StatusPlaceholderView: View {
     @State var imageHeight: Double
     @State var imageBlurhash: String?
     

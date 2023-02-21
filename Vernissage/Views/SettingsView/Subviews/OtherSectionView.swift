@@ -6,7 +6,7 @@
 
 import SwiftUI
 
-struct OtherSection: View {
+struct OtherSectionView: View {
     var body: some View {
         Section("Other") {
             NavigationLink(value: RouteurDestinations.thirdParty) {

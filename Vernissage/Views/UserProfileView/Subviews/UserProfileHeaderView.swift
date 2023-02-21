@@ -7,7 +7,7 @@
 import SwiftUI
 import PixelfedKit
 
-struct UserProfileHeader: View {
+struct UserProfileHeaderView: View {
     @EnvironmentObject private var applicationState: ApplicationState
     @EnvironmentObject private var client: Client
     @EnvironmentObject private var routerPath: RouterPath

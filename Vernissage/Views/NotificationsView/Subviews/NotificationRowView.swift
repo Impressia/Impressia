@@ -8,7 +8,7 @@ import SwiftUI
 import PixelfedKit
 import NukeUI
 
-struct NotificationRow: View {
+struct NotificationRowView: View {
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var routerPath: RouterPath
     @EnvironmentObject var client: Client

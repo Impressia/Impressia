@@ -6,7 +6,7 @@
     
 import SwiftUI
 
-struct ThemeSection: View {
+struct ThemeSectionView: View {
     @EnvironmentObject var applicationState: ApplicationState
     @Environment(\.colorScheme) var colorScheme
     

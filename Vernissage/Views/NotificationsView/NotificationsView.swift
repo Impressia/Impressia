@@ -40,7 +40,7 @@ struct NotificationsView: View {
             } else {
                 List {
                     ForEach(notifications, id: \.id) { notification in
-                        NotificationRow(notification: notification)
+                        NotificationRowView(notification: notification)
                     }
                     
                     if allItemsLoaded == false {

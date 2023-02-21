@@ -23,22 +23,22 @@ struct SettingsView: View {
             NavigationView {
                 List {
                     // Accounts.
-                    AccountsSection()
+                    AccountsSectionView()
                     
                     // Themes.
-                    ThemeSection()
+                    ThemeSectionView()
                     
                     // Accents.
-                    AccentsSection()
+                    AccentsSectionView()
                     
                     // Avatar shapes.
-                    AvatarShapesSection()
+                    AvatarShapesSectionView()
                     
                     // Support.
                     SupportView()
                     
                     // Other.
-                    OtherSection()
+                    OtherSectionView()
                     
                     // Version.
                     self.version()

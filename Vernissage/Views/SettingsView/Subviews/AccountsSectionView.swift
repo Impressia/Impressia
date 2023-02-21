@@ -6,7 +6,7 @@
 
 import SwiftUI
 
-struct AccountsSection: View {
+struct AccountsSectionView: View {
     @EnvironmentObject var applicationState: ApplicationState
 
     @State private var accounts: [AccountData] = []

@@ -8,7 +8,7 @@ import SwiftUI
 import PixelfedKit
 import NukeUI
 
-struct InstanceRow: View {
+struct InstanceRowView: View {
     @EnvironmentObject var routerPath: RouterPath
 
     private let instance: Instance

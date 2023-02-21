@@ -56,7 +56,7 @@ struct SignInView: View {
                 }
                 
                 ForEach(self.instances, id: \.uri) { instance in                    
-                    InstanceRow(instance: instance) { uri in
+                    InstanceRowView(instance: instance) { uri in
                         let baseAddress = self.getServerAddress(uri: uri)
                         self.signIn(baseAddress: baseAddress)
                     }

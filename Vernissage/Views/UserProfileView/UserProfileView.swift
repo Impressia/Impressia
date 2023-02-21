@@ -44,8 +44,8 @@ struct UserProfileView: View {
         case .loaded:
             if let account = self.account {
                 ScrollView {
-                    UserProfileHeader(account: account, relationship: relationship)
-                    UserProfileStatuses(accountId: account.id)
+                    UserProfileHeaderView(account: account, relationship: relationship)
+                    UserProfileStatusesView(accountId: account.id)
                 }
             }
         case .error(let error):

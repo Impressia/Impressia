@@ -6,7 +6,7 @@
     
 import SwiftUI
 
-struct AvatarShapesSection: View {
+struct AvatarShapesSectionView: View {
     @EnvironmentObject var applicationState: ApplicationState
 
     var body: some View {

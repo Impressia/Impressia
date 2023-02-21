@@ -6,7 +6,7 @@
 
 import SwiftUI
 
-struct AccentsSection: View {
+struct AccentsSectionView: View {
     @EnvironmentObject var applicationState: ApplicationState
     
     private let accentColors1: [TintColor] = [.accentColor1, .accentColor2, .accentColor3, .accentColor4, .accentColor5]

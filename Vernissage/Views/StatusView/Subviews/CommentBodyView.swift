@@ -7,7 +7,7 @@
 import SwiftUI
 import PixelfedKit
 
-struct CommentBody: View {
+struct CommentBodyView: View {
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var routerPath: RouterPath
 
