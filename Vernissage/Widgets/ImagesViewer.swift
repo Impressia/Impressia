@@ -96,8 +96,11 @@ struct ImagesViewer: View {
                     self.rotationAngle = Angle(degrees: Double(self.currentOffset.width / 30))
                 } else {
                     // Bigger images we can move only horizontally (we have to include magnifications).
-                    let offsetWidth = (amount.translation.width / self.finalMagnification) + self.accumulatedOffset.width
-                    self.currentOffset = CGSize(width: offsetWidth, height: 0)
+                    let offsetWidth = (amount.predictedEndTranslation.width / self.finalMagnification) + self.accumulatedOffset.width
+                    
+                    withAnimation(.spring()) {
+                        self.currentOffset = CGSize(width: offsetWidth, height: 0)
+                    }
                 }
             } .onEnded { amount in
                 self.accumulatedOffset = CGSize(width: (amount.predictedEndTranslation.width / self.finalMagnification) + self.accumulatedOffset.width,
@@ -115,6 +118,7 @@ struct ImagesViewer: View {
                         withAnimation(.linear(duration: 0.3).delay(0.1)) {
                             self.currentOffset = CGSize.zero
                             self.accumulatedOffset = CGSize.zero
+                            self.rotationAngle = Angle.zero
                         }
                     } else {
                         // Close the screen.
@@ -134,8 +138,6 @@ struct ImagesViewer: View {
                 } else {
                     self.moveToEdge()
                 }
-                
-                self.rotationAngle = Angle.zero
             }
     }
     
