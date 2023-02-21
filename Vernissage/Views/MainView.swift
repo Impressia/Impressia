@@ -97,16 +97,6 @@ struct MainView: View {
                         Image(systemName: "house")
                     }
                 }
-
-                Button {
-                    HapticService.shared.fireHaptic(of: .tabSelection)
-                    viewMode = .trending
-                } label: {
-                    HStack {
-                        Text(self.getViewTitle(viewMode: .trending))
-                        Image(systemName: "chart.line.uptrend.xyaxis")
-                    }
-                }
                 
                 Button {
                     HapticService.shared.fireHaptic(of: .tabSelection)
@@ -114,7 +104,7 @@ struct MainView: View {
                 } label: {
                     HStack {
                         Text(self.getViewTitle(viewMode: .local))
-                        Image(systemName: "text.redaction")
+                        Image(systemName: "building")
                     }
                 }
 
@@ -125,6 +115,18 @@ struct MainView: View {
                     HStack {
                         Text(self.getViewTitle(viewMode: .federated))
                         Image(systemName: "globe.europe.africa")
+                    }
+                }
+                
+                Divider()
+                
+                Button {
+                    HapticService.shared.fireHaptic(of: .tabSelection)
+                    viewMode = .trending
+                } label: {
+                    HStack {
+                        Text(self.getViewTitle(viewMode: .trending))
+                        Image(systemName: "chart.line.uptrend.xyaxis")
                     }
                 }
                 
