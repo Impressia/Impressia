@@ -9,12 +9,7 @@ import UIKit
 import CoreData
 import PixelfedKit
 
-struct MainView: View {
-    enum Sheet: String, Identifiable {
-        case settings, compose
-        var id: String { rawValue }
-    }
-    
+struct MainView: View {    
     @Environment(\.managedObjectContext) private var viewContext
 
     @EnvironmentObject var applicationState: ApplicationState
