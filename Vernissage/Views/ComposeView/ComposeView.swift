@@ -98,16 +98,6 @@ struct ComposeView: View {
                         }
                             
                         HStack {
-                            if let name = self.place?.name, let country = self.place?.country {
-                                Group {
-                                    Image(systemName: "mappin.and.ellipse")
-                                    Text("\(name), \(country)")
-                                }
-                                .foregroundColor(.lightGrayColor)
-                            }
-                            
-                            Spacer()
-                            
                             Menu {
                                 Button {
                                     self.visibility = .pub
@@ -144,6 +134,17 @@ struct ComposeView: View {
                                         .stroke(Color.accentColor, lineWidth: 1)
                                 )
                             }
+                            
+                            Spacer()
+                            
+                            if let name = self.place?.name, let country = self.place?.country {
+                                Group {
+                                    Image(systemName: "mappin.and.ellipse")
+                                    Text("\(name), \(country)")
+                                }
+                                .foregroundColor(.lightGrayColor)
+                                .padding(.trailing, 8)
+                            }
                         }
                         .font(.footnote)
                         .padding(.horizontal, 8)
@@ -166,20 +167,22 @@ struct ComposeView: View {
                             }
                         
                         HStack(alignment: .center) {
-                            ForEach(self.photosAttachment, id: \.id) { photoAttachment in
-                                ImageUploadView(photoAttachment: photoAttachment) {
-                                    self.showSheet = .photoDetails(photoAttachment)
-                                } delete: {
-                                    self.photosAttachment = self.photosAttachment.filter({ item in
-                                        item != photoAttachment
-                                    })
-                                    
-                                    self.photosAreAttached = self.photosAttachment.hasUploadedPhotos()
-                                    self.publishDisabled = self.isPublishButtonDisabled()
-                                    self.interactiveDismissDisabled = self.isInteractiveDismissDisabled()
-                                } upload: {
-                                    Task {
-                                        await self.upload(photoAttachment)
+                            LazyVGrid(columns: [GridItem(.adaptive(minimum:80))]) {
+                                ForEach(self.photosAttachment, id: \.id) { photoAttachment in
+                                    ImageUploadView(photoAttachment: photoAttachment) {
+                                        self.showSheet = .photoDetails(photoAttachment)
+                                    } delete: {
+                                        self.photosAttachment = self.photosAttachment.filter({ item in
+                                            item != photoAttachment
+                                        })
+                                        
+                                        self.photosAreAttached = self.photosAttachment.hasUploadedPhotos()
+                                        self.publishDisabled = self.isPublishButtonDisabled()
+                                        self.interactiveDismissDisabled = self.isInteractiveDismissDisabled()
+                                    } upload: {
+                                        Task {
+                                            await self.upload(photoAttachment)
+                                        }
                                     }
                                 }
                             }
@@ -245,7 +248,10 @@ struct ComposeView: View {
                         PlaceSelectorView(place: $place)
                     }
                 })
-                .photosPicker(isPresented: $photosPickerVisible, selection: $selectedItems, maxSelectionCount: 4, matching: .images)
+                .photosPicker(isPresented: $photosPickerVisible,
+                              selection: $selectedItems,
+                              maxSelectionCount: self.applicationState.statusMaxMediaAttachments,
+                              matching: .images)
                 .navigationTitle("Compose")
                 .navigationBarTitleDisplayMode(.inline)
             }
@@ -302,6 +308,9 @@ struct ComposeView: View {
                 }
                 
                 Spacer()
+                
+                Text("\(self.applicationState.statusMaxCharacters - text.string.utf16.count)")
+                  .foregroundColor(.lightGrayColor)
             }
         }
     }

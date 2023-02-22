@@ -258,11 +258,17 @@ struct MainView: View {
 
                 Task { @MainActor in
                     let accountModel = AccountModel(accountData: accountData)
-                    self.applicationState.account = accountModel
+                    let instance = try? await self.client.instances.instance(url: accountModel.serverUrl)
+
+                    // Refresh client state.
                     self.client.setAccount(account: accountModel)
-                    self.applicationState.lastSeenStatusId = account.lastSeenStatusId
-                    self.applicationState.amountOfNewStatuses = 0
                     
+                    // Refresh application state.
+                    self.applicationState.changeApplicationState(accountModel: accountModel,
+                                                                 instance: instance,
+                                                                 lastSeenStatusId: accountData.lastSeenStatusId)
+
+                    // Set account as default (application will open this account after restart).
                     ApplicationSettingsHandler.shared.setAccountAsDefault(accountData: accountData)
                 }
             }

@@ -101,11 +101,17 @@ struct VernissageApp: App {
     private func setApplicationState(accountData: AccountData, checkNewPhotos: Bool = false) {
         Task { @MainActor in
             let accountModel = AccountModel(accountData: accountData)
-            self.applicationState.account = accountModel
+            let instance = try? await self.client.instances.instance(url: accountModel.serverUrl)
+
+            // Refresh client state.
             self.client.setAccount(account: accountModel)
-            self.applicationState.lastSeenStatusId = accountData.lastSeenStatusId
-            self.applicationState.amountOfNewStatuses = 0
             
+            // Refresh application state.
+            self.applicationState.changeApplicationState(accountModel: accountModel,
+                                                         instance: instance,
+                                                         lastSeenStatusId: accountData.lastSeenStatusId)
+            
+            // Change view displayed by application.
             self.applicationViewMode = .mainView
             
             // Check amount of newly added photos.
