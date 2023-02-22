@@ -176,11 +176,16 @@ struct ComposeView: View {
                                             item != photoAttachment
                                         })
                                         
+                                        self.selectedItems = self.selectedItems.filter({ item in
+                                            item != photoAttachment.photosPickerItem
+                                        })
+                                        
                                         self.photosAreAttached = self.photosAttachment.hasUploadedPhotos()
                                         self.publishDisabled = self.isPublishButtonDisabled()
                                         self.interactiveDismissDisabled = self.isInteractiveDismissDisabled()
                                     } upload: {
                                         Task {
+                                            photoAttachment.error = nil
                                             await self.upload(photoAttachment)
                                         }
                                     }
@@ -353,19 +358,37 @@ struct ComposeView: View {
     private func loadPhotos() async {
         do {
             self.photosAreUploading = true
-            self.photosAttachment = []
             self.publishDisabled = self.isPublishButtonDisabled()
             self.interactiveDismissDisabled = self.isInteractiveDismissDisabled()
             
+            // We have to create list with existing photos.
+            var temporaryPhotosAttachment: [PhotoAttachment] = []
             for item in self.selectedItems {
-                if let photoData = try await item.loadTransferable(type: Data.self) {
-                    self.photosAttachment.append(PhotoAttachment(photosPickerItem: item, photoData: photoData))
+                if let photoAttachment = self.photosAttachment.first(where: { $0.photosPickerItem == item }) {
+                    temporaryPhotosAttachment.append(photoAttachment)
+                    continue
+                }
+                
+                temporaryPhotosAttachment.append(PhotoAttachment(photosPickerItem: item))
+            }
+            
+            // We can show new list on the screen.
+            self.photosAttachment = temporaryPhotosAttachment
+            
+            // Now we have to get from photos images as JPEG.
+            for item in self.photosAttachment.filter({ $0.photoData == nil }) {
+                if let photoData = try await item.photosPickerItem.loadTransferable(type: Data.self) {
+                    item.photoData = photoData
                 }
             }
             
+            // Open again the keyboard.
             self.focusedField = .content
+            
+            // Upload images which hasn't been uploaded yet.
             await self.upload()
             
+            // Change state of the screen.
             self.photosAreUploading = false
             self.photosAreAttached = self.photosAttachment.hasUploadedPhotos()
             self.publishDisabled = self.isPublishButtonDisabled()
@@ -383,8 +406,12 @@ struct ComposeView: View {
     
     private func upload(_ photoAttachment: PhotoAttachment) async {
         do {
+            guard let photoData = photoAttachment.photoData, photoAttachment.uploadedAttachment == nil else {
+                return
+            }
+            
             let fileIndex = String.randomString(length: 8)
-            if let mediaAttachment = try await self.client.media?.upload(data: photoAttachment.photoData,
+            if let mediaAttachment = try await self.client.media?.upload(data: photoData,
                                                                          fileName: "file-\(fileIndex).jpg",
                                                                          mimeType: "image/jpeg") {
                 photoAttachment.uploadedAttachment = mediaAttachment

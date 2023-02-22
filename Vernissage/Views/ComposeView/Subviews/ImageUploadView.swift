@@ -22,71 +22,75 @@ struct ImageUploadView: View {
     }
     
     var body: some View {
-        if let uiImage = UIImage(data: photoAttachment.photoData) {
-            
-            if photoAttachment.error != nil {
-                Menu {
-                    Button {
-                        HapticService.shared.fireHaptic(of: .buttonPress)
-                        self.upload()
-                    } label: {
-                        Label("Try to upload", systemImage: "exclamationmark.arrow.triangle.2.circlepath")
-                    }
-                    
-                    Divider()
-                    
-                    Button(role: .destructive) {
-                        HapticService.shared.fireHaptic(of: .buttonPress)
-                        self.delete()
-                    } label: {
-                        Label("Delete", systemImage: "trash")
-                            .tint(.red)
-                    }
+        if photoAttachment.error != nil {
+            Menu {
+                Button {
+                    HapticService.shared.fireHaptic(of: .buttonPress)
+                    self.upload()
                 } label: {
-                    ZStack {
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .blur(radius: 10)
-                            .frame(width: 80, height: 80)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                        
-                            Image(systemName: "exclamationmark.triangle.fill")
-                        }
+                    Label("Try to upload", systemImage: "exclamationmark.arrow.triangle.2.circlepath")
                 }
-            } else if photoAttachment.uploadedAttachment == nil {
+                
+                Divider()
+                
+                Button(role: .destructive) {
+                    HapticService.shared.fireHaptic(of: .buttonPress)
+                    self.delete()
+                } label: {
+                    Label("Delete", systemImage: "trash")
+                        .tint(.red)
+                }
+            } label: {
                 ZStack {
-                    Image(uiImage: uiImage)
-                        .resizable()
+                    self.imageView()
                         .blur(radius: 10)
-                        .frame(width: 80, height: 80)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                     
-                        LoadingIndicator(isVisible: Binding.constant(true))
+                        Image(systemName: "exclamationmark.triangle.fill")
                     }
-            } else {
-                Menu {
-                    Button {
-                        HapticService.shared.fireHaptic(of: .buttonPress)
-                        self.open()
-                    } label: {
-                        Label("Edit", systemImage: "pencil")
-                    }
-                    
-                    Divider()
-                    
-                    Button(role: .destructive) {
-                        HapticService.shared.fireHaptic(of: .buttonPress)
-                        self.delete()
-                    } label: {
-                        Label("Delete", systemImage: "trash")
-                    }
-                } label: {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .frame(width: 80, height: 80)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                }
             }
+        } else if photoAttachment.uploadedAttachment == nil {
+            ZStack {
+                self.imageView()
+                    .blur(radius: 10)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                
+                    LoadingIndicator(isVisible: Binding.constant(true))
+                }
+        } else {
+            Menu {
+                Button {
+                    HapticService.shared.fireHaptic(of: .buttonPress)
+                    self.open()
+                } label: {
+                    Label("Edit", systemImage: "pencil")
+                }
+                
+                Divider()
+                
+                Button(role: .destructive) {
+                    HapticService.shared.fireHaptic(of: .buttonPress)
+                    self.delete()
+                } label: {
+                    Label("Delete", systemImage: "trash")
+                }
+            } label: {
+                self.imageView()
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func imageView() -> some View {
+        if let photoData = self.photoAttachment.photoData, let uiImage =  UIImage(data: photoData) {
+            Image(uiImage: uiImage)
+                .resizable()
+                .frame(width: 80, height: 80)
+        } else {
+            Rectangle()
+                .frame(width: 80, height: 80)
+                .background(Color.lightGrayColor)
         }
     }
 }

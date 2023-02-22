@@ -12,15 +12,14 @@ import PixelfedKit
 public class PhotoAttachment: ObservableObject, Identifiable, Equatable, Hashable {
     public let id: String
     public let photosPickerItem: PhotosPickerItem
-    public var photoData: Data
-
+    
+    @Published public var photoData: Data?
     @Published public var uploadedAttachment: UploadedAttachment?
     @Published public var error: Error?
     
-    init(photosPickerItem: PhotosPickerItem, photoData: Data) {
+    init(photosPickerItem: PhotosPickerItem) {
         self.id = UUID().uuidString
         self.photosPickerItem = photosPickerItem
-        self.photoData = photoData
     }
     
     public static func == (lhs: PhotoAttachment, rhs: PhotoAttachment) -> Bool {
