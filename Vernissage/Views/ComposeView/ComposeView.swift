@@ -159,8 +159,7 @@ struct ComposeView: View {
                                 self.focusedField = .content
                             }
                             .onChange(of: self.text) { newValue in
-                                self.publishDisabled = self.isPublishButtonDisabled()
-                                self.interactiveDismissDisabled = self.isInteractiveDismissDisabled()
+                                self.refreshScreenState()
                             }
                             .toolbar {
                                 self.keyboardToolbar()
@@ -180,13 +179,12 @@ struct ComposeView: View {
                                             item != photoAttachment.photosPickerItem
                                         })
                                         
-                                        self.photosAreAttached = self.photosAttachment.hasUploadedPhotos()
-                                        self.publishDisabled = self.isPublishButtonDisabled()
-                                        self.interactiveDismissDisabled = self.isInteractiveDismissDisabled()
+                                        self.refreshScreenState()
                                     } upload: {
                                         Task {
                                             photoAttachment.error = nil
                                             await self.upload(photoAttachment)
+                                            self.refreshScreenState()
                                         }
                                     }
                                 }
@@ -390,12 +388,16 @@ struct ComposeView: View {
             
             // Change state of the screen.
             self.photosAreUploading = false
-            self.photosAreAttached = self.photosAttachment.hasUploadedPhotos()
-            self.publishDisabled = self.isPublishButtonDisabled()
-            self.interactiveDismissDisabled = self.isInteractiveDismissDisabled()
+            self.refreshScreenState()
         } catch {
             ErrorService.shared.handle(error, message: "Cannot retreive image from library.", showToastr: true)
         }
+    }
+    
+    private func refreshScreenState() {
+        self.photosAreAttached = self.photosAttachment.hasUploadedPhotos()
+        self.publishDisabled = self.isPublishButtonDisabled()
+        self.interactiveDismissDisabled = self.isInteractiveDismissDisabled()
     }
     
     private func upload() async {
