@@ -124,6 +124,7 @@ struct HomeFeedView: View {
         }
     }
     
+    @MainActor
     private func loadData() async {
         do {
             if let account = self.applicationState.account {
