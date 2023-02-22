@@ -14,8 +14,8 @@ public class ApplicationState: ObservableObject {
 
     /// Class with default variables.
     private class Defaults {
-        let statusMaxCharacters = 2000
-        let statusMaxMediaAttachments = 10
+        let statusMaxCharacters = 500
+        let statusMaxMediaAttachments = 4
         let statusCharactersReservedPerUrl = 23
     }
     

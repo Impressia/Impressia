@@ -81,12 +81,12 @@ struct VernissageApp: App {
             .navigationViewStyle(.stack)
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                 Task {
-                    await self.loadInBackground()
+                    await self.calculateNewPhotosInBackground()
                 }
             }
             .onReceive(timer) { time in
                 Task {
-                    await self.loadInBackground()
+                    await self.calculateNewPhotosInBackground()
                 }
             }
             .onChange(of: applicationState.theme) { newValue in
@@ -116,7 +116,7 @@ struct VernissageApp: App {
             
             // Check amount of newly added photos.
             if checkNewPhotos {
-                await self.loadInBackground()
+                await self.calculateNewPhotosInBackground()
             }
         }
     }
@@ -172,7 +172,7 @@ struct VernissageApp: App {
         CoreDataHandler.shared.save()
     }
     
-    private func loadInBackground() async {
+    private func calculateNewPhotosInBackground() async {
         if let account = self.applicationState.account {
             self.applicationState.amountOfNewStatuses = await HomeTimelineService.shared.amountOfNewStatuses(for: account)
         }
