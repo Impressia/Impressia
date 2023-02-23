@@ -129,9 +129,19 @@ struct AccountsView: View {
         case .following:
             return try await self.client.accounts?.following(account: self.entityId, page: page) ?? []
         case .favourited:
-            return try await self.client.statuses?.favouritedBy(statusId: self.entityId, page: page) ?? []
+            // TODO: Workaround for not working paging for favourites/reblogged issues: https://github.com/pixelfed/pixelfed/issues/4182.
+            if page == 1 {
+                return try await self.client.statuses?.favouritedBy(statusId: self.entityId, limit: 40, page: page) ?? []
+            } else {
+                return []
+            }
         case .reblogged:
-            return try await self.client.statuses?.rebloggedBy(statusId: self.entityId, page: page) ?? []
+            // TODO: Workaround for not working paging for favourites/reblogged issues: https://github.com/pixelfed/pixelfed/issues/4182.
+            if page == 1 {
+                return try await self.client.statuses?.rebloggedBy(statusId: self.entityId, limit: 40, page: page) ?? []
+            } else {
+                return []
+            }
         }
     }
     

@@ -63,12 +63,12 @@ extension Client {
             return commentViewModels
         }
         
-        public func favouritedBy(statusId: String, page: Int) async throws -> [Account] {
-            return try await pixelfedClient.favouritedBy(for: statusId, page: page)
+        public func favouritedBy(statusId: String, limit: Int, page: Int) async throws -> [Account] {
+            return try await pixelfedClient.favouritedBy(for: statusId, limit: limit, page: page)
         }
         
-        public func rebloggedBy(statusId: String, page: Int) async throws -> [Account] {
-            return try await pixelfedClient.rebloggedBy(for: statusId, page: page)
+        public func rebloggedBy(statusId: String, limit: Int, page: Int) async throws -> [Account] {
+            return try await pixelfedClient.rebloggedBy(for: statusId, limit: limit, page: page)
         }
         
         private func getCommentDescendants(to statusId: String, showDivider: Bool, to commentViewModels: inout [CommentModel]) async throws {

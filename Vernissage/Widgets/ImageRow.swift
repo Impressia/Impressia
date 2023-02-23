@@ -132,8 +132,14 @@ struct ImageRow: View {
                 let size = ImageSizeService.shared.calculate(for: attachmentData.url,
                                                              width: downloadedImage.size.width,
                                                              height: downloadedImage.size.height)
-                self.imageWidth = size.width
-                self.imageHeight = size.height
+                
+                if self.imageHeight != size.height || self.imageWidth != size.width {
+                    withAnimation(.linear) {
+                        self.imageWidth = size.width
+                        self.imageHeight = size.height
+                    }
+                }
+
                 self.uiImage = downloadedImage
                 
                 HomeTimelineService.shared.update(attachment: attachmentData, withData: imageData, imageWidth: size.width, imageHeight: size.height)
