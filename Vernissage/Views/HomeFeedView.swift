@@ -113,6 +113,9 @@ struct HomeFeedView: View {
             HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
             await self.refreshData()
             HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
+
+            // Reset taskId to nil, this prevent refreshing when user click status details and come back to list.
+            self.taskId = nil
         }
         .onChange(of: self.applicationState.amountOfNewStatuses) { newValue in
             self.calculateOffset()
