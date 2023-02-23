@@ -100,6 +100,7 @@ public class HomeTimelineService {
         var amountOfStatuses = 0
         var newestStatusId = newestStatus.id
         
+        // There can be more then 40 newest statuses, that's why we have to sometimes send more then one request.
         while(true) {
             do {
                 let downloadedStatuses = try await client.getHomeTimeline(minId: newestStatusId, limit: 40)

@@ -19,6 +19,7 @@ struct HomeFeedView: View {
     
     @State private var allItemsLoaded = false
     @State private var state: ViewState = .loading
+    @State private var taskId: UUID = .init()
 
     @State private var opacity = 0.0
     @State private var offset = -50.0
@@ -97,6 +98,13 @@ struct HomeFeedView: View {
                 .opacity(self.opacity)
         }
         .refreshable {
+            // This is workaround of cancellation task when other SwiftUI states are changed.
+            // When user is pull to refresh we are precalculating opacity of the amount of status indicator,
+            // and this causes that refreshable is canceled, issue:
+            // (https://stackoverflow.com/questions/74977787/why-is-async-task-cancelled-in-a-refreshable-modifier-on-a-scrollview-ios-16)
+            taskId = .init()
+        }
+        .task(id: self.taskId) {
             HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
             await self.refreshData()
             HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
@@ -108,7 +116,6 @@ struct HomeFeedView: View {
         }
     }
     
-    @MainActor
     private func refreshData() async {
         do {
             if let account = self.applicationState.account {
@@ -124,7 +131,6 @@ struct HomeFeedView: View {
         }
     }
     
-    @MainActor
     private func loadData() async {
         do {
             if let account = self.applicationState.account {
