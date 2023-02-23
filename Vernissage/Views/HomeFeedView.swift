@@ -19,7 +19,7 @@ struct HomeFeedView: View {
     
     @State private var allItemsLoaded = false
     @State private var state: ViewState = .loading
-    @State private var taskId: UUID = .init()
+    @State private var taskId: UUID? = nil
 
     @State private var opacity = 0.0
     @State private var offset = -50.0
@@ -105,6 +105,11 @@ struct HomeFeedView: View {
             taskId = .init()
         }
         .task(id: self.taskId) {
+            // We have to run task only after refresing the list by the user.
+            guard self.taskId != nil else {
+                return
+            }
+
             HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
             await self.refreshData()
             HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
