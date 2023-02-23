@@ -189,8 +189,8 @@ struct MainView: View {
                 if let avatarData = self.applicationState.account?.avatarData, let uiImage = UIImage(data: avatarData) {
                     Image(uiImage: uiImage)
                         .resizable()
-                        .clipShape(self.applicationState.avatarShape.shape())
                         .frame(width: 32.0, height: 32.0)
+                        .clipShape(self.applicationState.avatarShape.shape())
                 } else {
                     Image(systemName: "person")
                         .resizable()
