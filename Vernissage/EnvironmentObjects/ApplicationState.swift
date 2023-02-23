@@ -70,4 +70,14 @@ public class ApplicationState: ObservableObject {
             self.statusCharactersReservedPerUrl = ApplicationState.defaults.statusCharactersReservedPerUrl
         }
     }
+    
+    public func clearApplicationState() {
+        self.account = nil
+        self.lastSeenStatusId = nil
+        self.amountOfNewStatuses = 0
+        
+        self.statusMaxCharacters = ApplicationState.defaults.statusMaxCharacters
+        self.statusMaxMediaAttachments = ApplicationState.defaults.statusMaxMediaAttachments
+        self.statusCharactersReservedPerUrl = ApplicationState.defaults.statusCharactersReservedPerUrl
+    }
 }

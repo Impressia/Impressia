@@ -20,6 +20,10 @@ public class Client: ObservableObject {
         
         self.pixelfedClient = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
     }
+    
+    func clearAccount() {
+        self.pixelfedClient = nil
+    }
 }
 
 extension Client {

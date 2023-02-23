@@ -150,7 +150,7 @@ struct ComposeView: View {
                         .padding(.horizontal, 8)
                         
                         
-                        TextField("Type what's on your mind", text: $text, axis: .vertical)
+                        TextField(self.placeholder(), text: $text, axis: .vertical)
                             .padding(.horizontal, 8)
                             .lineLimit(2...12)
                             .focused($focusedField, equals: .content)
@@ -310,12 +310,29 @@ struct ComposeView: View {
                     Image(systemName: self.place == nil ? "mappin.square" : "mappin.square.fill")
                 }
                 
+                Button {
+                    self.text.append("#")
+                } label: {
+                    Image(systemName: "number")
+                }
+
+                Button {
+                    self.text.append("@")
+                } label: {
+                    Image(systemName: "at")
+                }
+                
                 Spacer()
                 
                 Text("\(self.applicationState.statusMaxCharacters - text.string.utf16.count)")
                   .foregroundColor(.lightGrayColor)
             }
+            .font(.callout)
         }
+    }
+    
+    private func placeholder() -> String {
+        self.statusViewModel == nil ? "Attach photography and type what's on your mind" : "Type what's on your mind"
     }
     
     private func isPublishButtonDisabled() -> Bool {

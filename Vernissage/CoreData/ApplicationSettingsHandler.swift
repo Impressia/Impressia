@@ -34,9 +34,9 @@ class ApplicationSettingsHandler {
         }
     }
     
-    func setAccountAsDefault(accountData: AccountData) {
+    func setAccountAsDefault(accountData: AccountData?) {
         let defaultSettings = self.getDefaultSettings()
-        defaultSettings.currentAccount = accountData.id
+        defaultSettings.currentAccount = accountData?.id
         CoreDataHandler.shared.save()
     }
 

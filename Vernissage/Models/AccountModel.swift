@@ -6,7 +6,8 @@
     
 import Foundation
 
-public class AccountModel: ObservableObject {
+public class AccountModel: ObservableObject, Identifiable {
+    public let id: String
     public let accessToken: String?
     public let refreshToken: String?
     public let acct: String
@@ -20,7 +21,6 @@ public class AccountModel: ObservableObject {
     public let followersCount: Int32
     public let followingCount: Int32
     public let header: URL?
-    public let id: String
     public let locked: Bool
     public let note: String?
     public let serverUrl: URL
@@ -51,5 +51,11 @@ public class AccountModel: ObservableObject {
         self.url = accountData.url
         self.username = accountData.username
         self.lastSeenStatusId = accountData.lastSeenStatusId
+    }
+}
+
+extension AccountModel: Equatable {
+    public static func == (lhs: AccountModel, rhs: AccountModel) -> Bool {
+        lhs.id == rhs.id
     }
 }

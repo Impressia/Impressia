@@ -8,8 +8,15 @@ import SwiftUI
 
 struct AccountsSectionView: View {
     @EnvironmentObject var applicationState: ApplicationState
+    @EnvironmentObject var client: Client
 
-    @State private var accounts: [AccountData] = []
+    @State private var accounts: [AccountModel]
+    private var dbAccounts: [AccountData]
+    
+    init() {
+        self.dbAccounts = AccountDataHandler.shared.getAccountsData()
+        self.accounts = self.dbAccounts.map({ AccountModel(accountData: $0) })
+    }
     
     var body: some View {
         Section("Accounts") {
@@ -25,7 +32,7 @@ struct AccountsSectionView: View {
                             .foregroundColor(self.applicationState.tintColor.color())
                     }
                 }
-                .deleteDisabled(self.applicationState.account?.id == account.id)
+                .deleteDisabled(self.deleteDisabled(for: account))
             }
             .onDelete(perform: delete)
             
@@ -37,15 +44,39 @@ struct AccountsSectionView: View {
                 }
             }
         }
-        .task {
-            self.accounts = AccountDataHandler.shared.getAccountsData()
-        }
     }
     
-    func delete(at offsets: IndexSet) {
+    private func deleteDisabled(for account: AccountModel) -> Bool {
+        self.applicationState.account?.id == account.id && self.accounts.count > 1
+    }
+    
+    private func delete(at offsets: IndexSet) {
         let accountsToDelete = offsets.map { self.accounts[$0] }
+        var shouldClearApplicationState = false
+        
+        // Delete from database.
         for account in accountsToDelete {
-            AccountDataHandler.shared.remove(accountData: account)
+            // Check if we are deleting active user.
+            if account.id == self.applicationState.account?.id {
+                shouldClearApplicationState = true
+            }
+            
+            if let dbAccount = self.dbAccounts.first(where: {$0.id == account.id }) {
+                AccountDataHandler.shared.remove(accountData: dbAccount)
+            }
+        }
+        
+        // Delete from local state.
+        self.accounts.remove(atOffsets: offsets)
+        
+        // When we are deleting active user then we have to switch to sing in view.
+        if shouldClearApplicationState {
+            // We have to do this after animation of deleting row is ended.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                ApplicationSettingsHandler.shared.setAccountAsDefault(accountData: nil)
+                self.applicationState.clearApplicationState()
+                self.client.clearAccount()
+            }
         }
     }
 }

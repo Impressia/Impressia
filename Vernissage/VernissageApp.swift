@@ -95,6 +95,11 @@ struct VernissageApp: App {
             .onChange(of: applicationState.tintColor) { newValue in
                 self.tintColor = newValue.color()
             }
+            .onChange(of: applicationState.account) { newValue in
+                if newValue == nil {
+                    self.applicationViewMode = .signIn
+                }
+            }
         }
     }
 

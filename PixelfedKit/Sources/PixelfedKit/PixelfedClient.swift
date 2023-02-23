@@ -12,11 +12,11 @@ public enum PixelfedClientError: Swift.Error {
 }
 
 public protocol PixelfedClientProtocol {
-    static func request(for baseURL: URL, target: TargetType, withBearerToken token: String?) throws -> URLRequest
+    static func request(for baseURL: URL, target: TargetType, withBearerToken token: String?, timeoutInterval: Double?) throws -> URLRequest
 }
 
 public extension PixelfedClientProtocol {
-    static func request(for baseURL: URL, target: TargetType, withBearerToken token: String? = nil) throws -> URLRequest {
+    static func request(for baseURL: URL, target: TargetType, withBearerToken token: String? = nil, timeoutInterval: Double? = nil) throws -> URLRequest {
         
         var urlComponents = URLComponents(url: baseURL.appendingPathComponent(target.path), resolvingAgainstBaseURL: false)
         urlComponents?.queryItems = target.queryItems?.map { URLQueryItem(name: $0.0, value: $0.1) }
@@ -24,6 +24,10 @@ public extension PixelfedClientProtocol {
         guard let url = urlComponents?.url else { throw NetworkingError.cannotCreateUrlRequest }
         
         var request = URLRequest(url: url)
+        
+        if let timeoutInterval {
+            request.timeoutInterval = timeoutInterval
+        }
         
         target.headers?.forEach { header in
             request.setValue(header.1, forHTTPHeaderField: header.0)

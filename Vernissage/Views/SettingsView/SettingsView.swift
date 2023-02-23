@@ -47,7 +47,7 @@ struct SettingsView: View {
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
                         Button("Close", role: .cancel) {
-                            dismiss()
+                            self.dismiss()
                         }
                     }
                 }
@@ -68,6 +68,11 @@ struct SettingsView: View {
         .onChange(of: self.applicationState.theme) { newValue in
             // Change theme of current modal screen (unformtunatelly it's not changed autmatically.
             self.theme = self.applicationState.theme.colorScheme() ?? self.getSystemColorScheme()
+        }
+        .onChange(of: applicationState.account) { newValue in
+            if newValue == nil {
+                self.dismiss()
+            }
         }
         .onChange(of: tipsStore.status) { status in
             if status == .successful {

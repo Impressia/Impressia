@@ -8,7 +8,6 @@ import SwiftUI
 import StoreKit
 
 struct SupportView: View {
-    
     @EnvironmentObject var tipsStore: TipsStore
     
     var body: some View {
