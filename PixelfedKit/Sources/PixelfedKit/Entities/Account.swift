@@ -22,7 +22,7 @@ public struct Account: Codable {
     public let displayName: String?
     
     /// The profile’s bio or description.
-    public let note: String?
+    public let note: Html?
     
     /// The location of the user’s profile page.
     public let url: URL?

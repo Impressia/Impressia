@@ -7,7 +7,6 @@
 import Foundation
 
 public typealias EntityId = String
-public typealias Html = String
 public typealias SearchQuery = String
 
 public typealias ClientId = String

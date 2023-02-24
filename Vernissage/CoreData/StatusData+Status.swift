@@ -27,7 +27,7 @@ extension StatusData {
             self.applicationName = status.application?.name
             self.applicationWebsite = status.application?.website
             self.bookmarked = status.bookmarked
-            self.content = status.content
+            self.content = status.content.htmlValue
             self.favourited = status.favourited
             self.favouritesCount = Int32(status.favouritesCount)
             self.inReplyToAccount = status.inReplyToAccount

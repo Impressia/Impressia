@@ -91,8 +91,6 @@
 		F88E4D48297E90CD0057491A /* TrendStatusesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88E4D47297E90CD0057491A /* TrendStatusesView.swift */; };
 		F88E4D4A297EA0490057491A /* RouterPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88E4D49297EA0490057491A /* RouterPath.swift */; };
 		F88E4D4D297EA4290057491A /* EmojiText in Frameworks */ = {isa = PBXBuildFile; productRef = F88E4D4C297EA4290057491A /* EmojiText */; };
-		F88E4D50297EA5230057491A /* HTML2Markdown in Frameworks */ = {isa = PBXBuildFile; productRef = F88E4D4F297EA5230057491A /* HTML2Markdown */; };
-		F88E4D52297EA6DA0057491A /* String+Markdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88E4D51297EA6DA0057491A /* String+Markdown.swift */; };
 		F88E4D54297EA7EE0057491A /* MarkdownFormattedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88E4D53297EA7EE0057491A /* MarkdownFormattedText.swift */; };
 		F88E4D56297EAD6E0057491A /* AppRouteur.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88E4D55297EAD6E0057491A /* AppRouteur.swift */; };
 		F88FAD21295F3944009B20C9 /* HomeFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD20295F3944009B20C9 /* HomeFeedView.swift */; };
@@ -234,7 +232,6 @@
 		F88E4D43297E82EB0057491A /* Status+MediaAttachmentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Status+MediaAttachmentType.swift"; sourceTree = "<group>"; };
 		F88E4D47297E90CD0057491A /* TrendStatusesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendStatusesView.swift; sourceTree = "<group>"; };
 		F88E4D49297EA0490057491A /* RouterPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterPath.swift; sourceTree = "<group>"; };
-		F88E4D51297EA6DA0057491A /* String+Markdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Markdown.swift"; sourceTree = "<group>"; };
 		F88E4D53297EA7EE0057491A /* MarkdownFormattedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownFormattedText.swift; sourceTree = "<group>"; };
 		F88E4D55297EAD6E0057491A /* AppRouteur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouteur.swift; sourceTree = "<group>"; };
 		F88FAD20295F3944009B20C9 /* HomeFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedView.swift; sourceTree = "<group>"; };
@@ -307,7 +304,6 @@
 				F8210DD92966BB7E001D9973 /* NukeUI in Frameworks */,
 				F85E132529741F05006A051D /* ActivityIndicatorView in Frameworks */,
 				F8B1E64F2973F61400EE0D10 /* Drops in Frameworks */,
-				F88E4D50297EA5230057491A /* HTML2Markdown in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,7 +376,6 @@
 				F8341F8F295C636C009C8EE6 /* Data+Exif.swift */,
 				F85D49862964334100751DF7 /* String+Date.swift */,
 				F8C14391296AF0B3001FE31D /* String+Exif.swift */,
-				F88E4D51297EA6DA0057491A /* String+Markdown.swift */,
 				F898DE6F2972868A004B4A6A /* String+Empty.swift */,
 				F8AD061229A565620042F111 /* String+Random.swift */,
 				F8210DE42966E160001D9973 /* Color+SystemColors.swift */,
@@ -713,7 +708,6 @@
 				F8B1E64E2973F61400EE0D10 /* Drops */,
 				F85E132429741F05006A051D /* ActivityIndicatorView */,
 				F88E4D4C297EA4290057491A /* EmojiText */,
-				F88E4D4F297EA5230057491A /* HTML2Markdown */,
 				F83E00EC29A2237C005D25A3 /* PixelfedKit */,
 			);
 			productName = Vernissage;
@@ -749,7 +743,6 @@
 				F8B1E64D2973F61400EE0D10 /* XCRemoteSwiftPackageReference "Drops" */,
 				F85E132329741F05006A051D /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
 				F88E4D4B297EA4290057491A /* XCRemoteSwiftPackageReference "EmojiText" */,
-				F88E4D4E297EA5230057491A /* XCRemoteSwiftPackageReference "HTML2Markdown" */,
 			);
 			productRefGroup = F88C2469295C37B80006098B /* Products */;
 			projectDirPath = "";
@@ -850,7 +843,6 @@
 				F8B9B34B298D4ACE009CC69C /* Client+Tags.swift in Sources */,
 				F88C2478295C37BB0006098B /* Vernissage.xcdatamodeld in Sources */,
 				F8AD061329A565620042F111 /* String+Random.swift in Sources */,
-				F88E4D52297EA6DA0057491A /* String+Markdown.swift in Sources */,
 				F898DE7229728CB2004B4A6A /* CommentModel.swift in Sources */,
 				F89A46DE296EABA20062125F /* StatusPlaceholderView.swift in Sources */,
 				F88C2482295C3A4F0006098B /* StatusView.swift in Sources */,
@@ -1150,14 +1142,6 @@
 				minimumVersion = 1.3.0;
 			};
 		};
-		F88E4D4E297EA5230057491A /* XCRemoteSwiftPackageReference "HTML2Markdown" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://gitlab.com/mflint/HTML2Markdown";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		F8B1E64D2973F61400EE0D10 /* XCRemoteSwiftPackageReference "Drops" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/omaralbeik/Drops";
@@ -1197,11 +1181,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F88E4D4B297EA4290057491A /* XCRemoteSwiftPackageReference "EmojiText" */;
 			productName = EmojiText;
-		};
-		F88E4D4F297EA5230057491A /* HTML2Markdown */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F88E4D4E297EA5230057491A /* XCRemoteSwiftPackageReference "HTML2Markdown" */;
-			productName = HTML2Markdown;
 		};
 		F8B1E64E2973F61400EE0D10 /* Drops */ = {
 			isa = XCSwiftPackageProductDependency;

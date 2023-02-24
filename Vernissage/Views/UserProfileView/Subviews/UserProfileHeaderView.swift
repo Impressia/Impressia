@@ -73,7 +73,7 @@ struct UserProfileHeaderView: View {
                 }
             }
             
-            if let note = account.note, !note.isEmpty {
+            if let note = account.note, !note.asMarkdown.isEmpty {
                 MarkdownFormattedText(note.asMarkdown, withFontSize: 14, andWidth: Int(UIScreen.main.bounds.width) - 16)
                     .environment(\.openURL, OpenURLAction { url in
                         routerPath.handle(url: url)

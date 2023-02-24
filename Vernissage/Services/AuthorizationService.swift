@@ -81,7 +81,7 @@ public class AuthorizationService {
         accountData.username = account.username
         accountData.acct = account.acct
         accountData.displayName = account.displayNameWithoutEmojis
-        accountData.note = account.note
+        accountData.note = account.note?.htmlValue
         accountData.url = account.url
         accountData.avatar = account.avatar
         accountData.header = account.header
@@ -207,7 +207,7 @@ public class AuthorizationService {
         dbAccount.username = account.username
         dbAccount.acct = account.acct
         dbAccount.displayName = account.displayNameWithoutEmojis
-        dbAccount.note = account.note
+        dbAccount.note = account.note?.htmlValue
         dbAccount.url = account.url
         dbAccount.avatar = account.avatar
         dbAccount.header = account.header

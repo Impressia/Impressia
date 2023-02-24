@@ -75,7 +75,7 @@ public struct Instance: Codable {
         self.title = try? container.decodeIfPresent(String.self, forKey: .title)
         self.sourceUrl = try? container.decodeIfPresent(URL.self, forKey: .sourceUrl)
         self.shortDescription = try? container.decodeIfPresent(String.self, forKey: .shortDescription)
-        self.description = try? container.decodeIfPresent(String.self, forKey: .description)
+        self.description = try? container.decodeIfPresent(Html.self, forKey: .description)
         self.thumbnail = try? container.decodeIfPresent(URL.self, forKey: .thumbnail)
         self.languages = try? container.decodeIfPresent([String].self, forKey: .languages)
         self.configuration = try? container.decodeIfPresent(Configuration.self, forKey: .configuration)

@@ -158,7 +158,7 @@ public class Status: Codable {
         self.uri = try container.decode(String.self, forKey: .uri)
         self.url = try? container.decode(URL.self, forKey: .url)
         self.account = try container.decode(Account.self, forKey: .account)
-        self.content = try container.decode(Html.self, forKey: .content)
+        self.content = (try? container.decode(Html.self, forKey: .content)) ?? Html("")
         self.createdAt = try container.decode(String.self, forKey: .createdAt)
         self.inReplyToId = try? container.decode(EntityId.self, forKey: .inReplyToId)
         self.inReplyToAccount = try? container.decode(EntityId.self, forKey: .inReplyToAccount)
