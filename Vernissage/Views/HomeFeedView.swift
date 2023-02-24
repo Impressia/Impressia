@@ -26,6 +26,8 @@ struct HomeFeedView: View {
     
     @FetchRequest var dbStatuses: FetchedResults<StatusData>
     
+    private let pullToRefreshViewHigh: CGFloat = 170
+    
     init(accountId: String) {
         _dbStatuses = FetchRequest<StatusData>(
             sortDescriptors: [SortDescriptor(\.id, order: .reverse)],
@@ -168,7 +170,7 @@ struct HomeFeedView: View {
             return
         }
         
-        if offset < 170 {
+        if offset < self.pullToRefreshViewHigh {
             // View is scrolled up (loader is visible).
             self.opacity = 1.0 - min((offset / 50.0), 1.0)
         } else {

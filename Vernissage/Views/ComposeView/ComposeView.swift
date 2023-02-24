@@ -332,7 +332,7 @@ struct ComposeView: View {
     }
     
     private func placeholder() -> String {
-        self.statusViewModel == nil ? "Attach photography and type what's on your mind" : "Type what's on your mind"
+        self.statusViewModel == nil ? "Attach a photo and type what's on your mind" : "Type what's on your mind"
     }
     
     private func isPublishButtonDisabled() -> Bool {

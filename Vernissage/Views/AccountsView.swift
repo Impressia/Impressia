@@ -38,7 +38,7 @@ struct AccountsView: View {
         case .loading:
             LoadingIndicator()
                 .task {
-                    await self.loadAccounts(page: self.downloadedPage)
+                    await self.loadData(page: self.downloadedPage)
                 }
         case .loaded:
             if self.accounts.isEmpty {
@@ -64,7 +64,7 @@ struct AccountsView: View {
                             LoadingIndicator()
                                 .task {
                                     self.downloadedPage = self.downloadedPage + 1
-                                    await self.loadAccounts(page: self.downloadedPage)
+                                    await self.loadData(page: self.downloadedPage)
                                 }
                             Spacer()
                         }
@@ -80,33 +80,36 @@ struct AccountsView: View {
                 self.downloadedPage = 1
                 self.allItemsLoaded = false
                 self.accounts = []
-                await self.loadAccounts(page: self.downloadedPage)
+                await self.loadData(page: self.downloadedPage)
             }
             .padding()
         }
     }
     
-    private func loadAccounts(page: Int) async {
+    private func loadData(page: Int) async {
         do {
-            let accountsFromApi = try await self.loadFromApi(page: page)
-
-            if accountsFromApi.isEmpty {
-                self.allItemsLoaded = true
-                return
-            }
-            
-            await self.downloadAvatars(accounts: accountsFromApi)
-            self.accounts.append(contentsOf: accountsFromApi)
-            
+            try await self.loadAccounts(page: page)
             self.state = .loaded
         } catch {
             if !Task.isCancelled {
-                ErrorService.shared.handle(error, message: "Followers not retrieved.", showToastr: true)
+                ErrorService.shared.handle(error, message: "Accounts not retrieved.", showToastr: true)
                 self.state = .error(error)
             } else {
-                ErrorService.shared.handle(error, message: "Followers not retrieved.", showToastr: false)
+                ErrorService.shared.handle(error, message: "Accounts not retrieved.", showToastr: false)
             }
         }
+    }
+    
+    private func loadAccounts(page: Int) async throws {
+        let accountsFromApi = try await self.loadFromApi(page: page)
+
+        if accountsFromApi.isEmpty {
+            self.allItemsLoaded = true
+            return
+        }
+        
+        await self.downloadAvatars(accounts: accountsFromApi)
+        self.accounts.append(contentsOf: accountsFromApi)
     }
     
     private func getTitle() -> String {
