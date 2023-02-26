@@ -170,10 +170,13 @@ struct StatusView: View {
                 self.selectedAttachmentId = statusModel.mediaAttachments.first?.id ?? String.empty()
                 
                 // If we have status in database then we can update data.
+                // TODO: It seems that Pixelfed didn't support status edit, thus we don't need to update status.
+                /*
                 if let accountData = self.applicationState.account,
                    let statusDataFromDatabase = StatusDataHandler.shared.getStatusData(accountId: accountData.id, statusId: self.statusId) {
                     _ = try await HomeTimelineService.shared.update(status: statusDataFromDatabase, basedOn: status, for: accountData)
                 }
+                */
             }
             
             self.state = .loaded
