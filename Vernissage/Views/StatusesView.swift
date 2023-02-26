@@ -209,7 +209,7 @@ struct StatusesView: View {
         case .local:
             return "Local"
         case .federated:
-            return "Federeted"
+            return "Federated"
         case .favourites:
             return "Favourites"
         case .bookmarks:

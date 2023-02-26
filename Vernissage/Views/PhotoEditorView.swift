@@ -31,7 +31,7 @@ struct PhotoEditorView: View {
                         }
                         
                         Section(header: Text("Accessibility")) {
-                            TextField("Sescription for the visually impaired", text: $description, axis: .vertical)
+                            TextField("Description for the visually impaired", text: $description, axis: .vertical)
                                 .keyboardType(.default)
                                 .lineLimit(3...6)
                                 .multilineTextAlignment(.leading)
