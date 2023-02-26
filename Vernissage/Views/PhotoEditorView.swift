@@ -16,7 +16,7 @@ struct PhotoEditorView: View {
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
-                if let photoData = photoAttachment.photoData, let uiImage = UIImage(data: photoData) {
+                if let data = photoAttachment.photoData, let uiImage = UIImage(data: data) {
                     List {
                         Section(header: Text("Photo")) {
                             HStack {

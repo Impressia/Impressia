@@ -7,6 +7,7 @@
 import SwiftUI
 import PhotosUI
 import PixelfedKit
+import UIKit
 
 struct ComposeView: View {
     @EnvironmentObject var applicationState: ApplicationState
@@ -392,8 +393,8 @@ struct ComposeView: View {
             
             // Now we have to get from photos images as JPEG.
             for item in self.photosAttachment.filter({ $0.photoData == nil }) {
-                if let photoData = try await item.photosPickerItem.loadTransferable(type: Data.self) {
-                    item.photoData = photoData
+                if var imageFileTransferable = try await item.photosPickerItem.loadTransferable(type: ImageFileTranseferable.self) {
+                    item.photoData = imageFileTransferable.data
                 }
             }
             
@@ -425,12 +426,21 @@ struct ComposeView: View {
     
     private func upload(_ photoAttachment: PhotoAttachment) async {
         do {
+            // We have to have binary data and image shouldn't be uploaded yet.
             guard let photoData = photoAttachment.photoData, photoAttachment.uploadedAttachment == nil else {
                 return
             }
             
+            guard let image = UIImage(data: photoData) else {
+                return
+            }
+            
+            guard let data = self.getJpegData(image: image) else {
+                return
+            }
+            
             let fileIndex = String.randomString(length: 8)
-            if let mediaAttachment = try await self.client.media?.upload(data: photoData,
+            if let mediaAttachment = try await self.client.media?.upload(data: data,
                                                                          fileName: "file-\(fileIndex).jpg",
                                                                          mimeType: "image/jpeg") {
                 photoAttachment.uploadedAttachment = mediaAttachment
@@ -438,6 +448,18 @@ struct ComposeView: View {
         } catch {
             photoAttachment.error = error
             ErrorService.shared.handle(error, message: "Error during post photo.", showToastr: true)
+        }
+    }
+    
+    private func getJpegData(image: UIImage) -> Data? {
+        // API don't support images over 5K.
+        if image.size.height > 5000 || image.size.width > 5000 {
+            return image
+                .resized(to: .init(width: image.size.width / 4, height: image.size.height / 4))
+                .jpegData(compressionQuality: 0.80)
+        } else {
+            return image
+                .jpegData(compressionQuality: 0.80)
         }
     }
     

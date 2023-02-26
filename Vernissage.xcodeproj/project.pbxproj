@@ -142,6 +142,8 @@
 		F8C5E55F2988E92600ADF6A7 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C5E55E2988E92600ADF6A7 /* AccountModel.swift */; };
 		F8C5E56229892CC300ADF6A7 /* FirstAppear.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C5E56129892CC300ADF6A7 /* FirstAppear.swift */; };
 		F8CC95CE2970761D00C9C2AC /* TintColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CC95CD2970761D00C9C2AC /* TintColor.swift */; };
+		F8CEEDF829ABADDD00DBED66 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CEEDF729ABADDD00DBED66 /* UIImage+Size.swift */; };
+		F8CEEDFA29ABAFD200DBED66 /* ImageFileTranseferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CEEDF929ABAFD200DBED66 /* ImageFileTranseferable.swift */; };
 		F8FA9917299F7DBD007AB130 /* Client+Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FA9916299F7DBD007AB130 /* Client+Media.swift */; };
 		F8FA9919299FA35A007AB130 /* PhotoAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FA9918299FA35A007AB130 /* PhotoAttachment.swift */; };
 		F8FA991C299FA8C2007AB130 /* ImageUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FA991B299FA8C2007AB130 /* ImageUploadView.swift */; };
@@ -284,6 +286,8 @@
 		F8C5E56129892CC300ADF6A7 /* FirstAppear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAppear.swift; sourceTree = "<group>"; };
 		F8C937A929882CA90004D782 /* Vernissage-001.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-001.xcdatamodel"; sourceTree = "<group>"; };
 		F8CC95CD2970761D00C9C2AC /* TintColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TintColor.swift; sourceTree = "<group>"; };
+		F8CEEDF729ABADDD00DBED66 /* UIImage+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Size.swift"; sourceTree = "<group>"; };
+		F8CEEDF929ABAFD200DBED66 /* ImageFileTranseferable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileTranseferable.swift; sourceTree = "<group>"; };
 		F8FA9916299F7DBD007AB130 /* Client+Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+Media.swift"; sourceTree = "<group>"; };
 		F8FA9918299FA35A007AB130 /* PhotoAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAttachment.swift; sourceTree = "<group>"; };
 		F8FA991B299FA8C2007AB130 /* ImageUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadView.swift; sourceTree = "<group>"; };
@@ -382,6 +386,7 @@
 				F8210DE62966E1D1001D9973 /* Color+Assets.swift */,
 				F8C14393296AF21B001FE31D /* Double+Round.swift */,
 				F8984E4C296B648000A2610F /* UIImage+Blurhash.swift */,
+				F8CEEDF729ABADDD00DBED66 /* UIImage+Size.swift */,
 				F8996DEA2971D29D0043EEC6 /* View+Transition.swift */,
 				F88E4D43297E82EB0057491A /* Status+MediaAttachmentType.swift */,
 			);
@@ -402,6 +407,7 @@
 				F8764186298ABB520057D362 /* ViewState.swift */,
 				F8FA9918299FA35A007AB130 /* PhotoAttachment.swift */,
 				F89AC00429A1F9B500F4159F /* AppMetadata.swift */,
+				F8CEEDF929ABAFD200DBED66 /* ImageFileTranseferable.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -827,6 +833,7 @@
 				F83901A6295D8EC000456AE2 /* LabelIcon.swift in Sources */,
 				F8FA991C299FA8C2007AB130 /* ImageUploadView.swift in Sources */,
 				F8B1E6512973FB7E00EE0D10 /* ToastrService.swift in Sources */,
+				F8CEEDF829ABADDD00DBED66 /* UIImage+Size.swift in Sources */,
 				F88E4D48297E90CD0057491A /* TrendStatusesView.swift in Sources */,
 				F89992CE296D92E7005994BF /* AttachmentModel.swift in Sources */,
 				F800480A2961EA1900E6868A /* AttachmentDataHandler.swift in Sources */,
@@ -872,6 +879,7 @@
 				F85E1320297409CD006A051D /* ErrorsService.swift in Sources */,
 				F88C246C295C37B80006098B /* VernissageApp.swift in Sources */,
 				F8121CA8298A86D600B466C7 /* InstanceRowView.swift in Sources */,
+				F8CEEDFA29ABAFD200DBED66 /* ImageFileTranseferable.swift in Sources */,
 				F802884F297AEED5000BDD51 /* DatabaseError.swift in Sources */,
 				F86A4307299AA5E900DF7645 /* ThanksView.swift in Sources */,
 				F85D4971296402DC00751DF7 /* AuthorizationService.swift in Sources */,
@@ -1027,7 +1035,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 33;
+				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
@@ -1064,7 +1072,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 33;
+				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
