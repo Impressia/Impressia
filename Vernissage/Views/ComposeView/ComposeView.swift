@@ -18,6 +18,7 @@ struct ComposeView: View {
     
     @StateObject private var textFieldViewModel: TextFieldViewModel
     
+    @State private var isKeyboardPresented = false
     @State private var isSensitive = false
     @State private var spoilerText = String.empty()
     @State private var commentsDisabled = false
@@ -76,9 +77,13 @@ struct ComposeView: View {
             NavigationView {
                 ZStack(alignment: .bottom) {
                     self.composeBody()
-                    VStack(alignment: .leading, spacing: 0) {
-                        self.autocompleteToolbar()
-                        self.keyboardToolbar()
+                    
+                    if self.isKeyboardPresented {
+                        VStack(alignment: .leading, spacing: 0) {
+                            self.autocompleteToolbar()
+                            self.keyboardToolbar()
+                        }
+                        .transition(.opacity)
                     }
                 }
                 .frame(alignment: .topLeading)
@@ -118,6 +123,11 @@ struct ComposeView: View {
                         PlaceSelectorView(place: $place)
                     }
                 })
+                .onReceive(keyboardPublisher) { value in
+                    withAnimation {
+                        self.isKeyboardPresented = value
+                    }
+                }
                 .photosPicker(isPresented: $photosPickerVisible,
                               selection: $selectedItems,
                               maxSelectionCount: self.applicationState.statusMaxMediaAttachments,

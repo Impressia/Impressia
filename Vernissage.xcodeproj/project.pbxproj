@@ -79,6 +79,7 @@
 		F8864CE929ACAF820020C534 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8864CE829ACAF820020C534 /* TextView.swift */; };
 		F8864CEB29ACBAA80020C534 /* TextFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8864CEA29ACBAA80020C534 /* TextFieldViewModel.swift */; };
 		F8864CEF29ACE90B0020C534 /* UIFont+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8864CEE29ACE90B0020C534 /* UIFont+Font.swift */; };
+		F8864CF129ACFFB80020C534 /* View+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8864CF029ACFFB80020C534 /* View+Keyboard.swift */; };
 		F886F257297859E300879356 /* CacheImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F886F256297859E300879356 /* CacheImageService.swift */; };
 		F88ABD9229686F1C004EF61E /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88ABD9129686F1C004EF61E /* MemoryCache.swift */; };
 		F88ABD9429687CA4004EF61E /* ComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88ABD9329687CA4004EF61E /* ComposeView.swift */; };
@@ -224,6 +225,7 @@
 		F8864CE829ACAF820020C534 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		F8864CEA29ACBAA80020C534 /* TextFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldViewModel.swift; sourceTree = "<group>"; };
 		F8864CEE29ACE90B0020C534 /* UIFont+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Font.swift"; sourceTree = "<group>"; };
+		F8864CF029ACFFB80020C534 /* View+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Keyboard.swift"; sourceTree = "<group>"; };
 		F886F256297859E300879356 /* CacheImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheImageService.swift; sourceTree = "<group>"; };
 		F88ABD9129686F1C004EF61E /* MemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
 		F88ABD9329687CA4004EF61E /* ComposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeView.swift; sourceTree = "<group>"; };
@@ -396,6 +398,7 @@
 				F8996DEA2971D29D0043EEC6 /* View+Transition.swift */,
 				F88E4D43297E82EB0057491A /* Status+MediaAttachmentType.swift */,
 				F8864CEE29ACE90B0020C534 /* UIFont+Font.swift */,
+				F8864CF029ACFFB80020C534 /* View+Keyboard.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -805,6 +808,7 @@
 				F88FAD2B295F43B8009B20C9 /* AccountData+CoreDataProperties.swift in Sources */,
 				F85D4975296407F100751DF7 /* HomeTimelineService.swift in Sources */,
 				F80048062961850500E6868A /* StatusData+CoreDataProperties.swift in Sources */,
+				F8864CF129ACFFB80020C534 /* View+Keyboard.swift in Sources */,
 				F88FAD21295F3944009B20C9 /* HomeFeedView.swift in Sources */,
 				F8FA991E299FAB92007AB130 /* PhotoEditorView.swift in Sources */,
 				F88C2475295C37BB0006098B /* CoreDataHandler.swift in Sources */,
@@ -1047,7 +1051,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 39;
 				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
@@ -1084,7 +1088,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 39;
 				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
