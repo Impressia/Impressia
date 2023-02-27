@@ -60,6 +60,7 @@ struct ComposeView: View {
     }
     
     private let contentWidth = Int(UIScreen.main.bounds.width) - 50
+    private let keyboardFontSize = 14.0
     
     var body: some View {
         NavigationStack {
@@ -328,7 +329,7 @@ struct ComposeView: View {
                 Text("\(self.applicationState.statusMaxCharacters - text.string.utf16.count)")
                   .foregroundColor(.lightGrayColor)
             }
-            .font(.callout)
+            .font(.system(size: self.keyboardFontSize))
         }
     }
     
