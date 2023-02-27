@@ -9,7 +9,7 @@ import SwiftUI
 import PixelfedKit
 
 @MainActor
-public class TextFieldViewModel: NSObject, ObservableObject {
+public class TextModel: NSObject, ObservableObject {
     var client: Client?
     var textView: UITextView?
 
@@ -120,7 +120,9 @@ public class TextFieldViewModel: NSObject, ObservableObject {
                     text.removeAttribute(.link, range: range)
                 }
             }
-        } catch { }
+        } catch {
+            ErrorService.shared.handle(error, message: "Error during composing attribute string.")
+        }
     }
     
     private func loadAutoCompleteResults(query: String) {
@@ -145,7 +147,9 @@ public class TextFieldViewModel: NSObject, ObservableObject {
                 default:
                     break
                 }
-            } catch { }
+            } catch {
+                ErrorService.shared.handle(error, message: "Error during downloading autocomplete.")
+            }
         }
     }
     

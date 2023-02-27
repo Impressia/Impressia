@@ -16,7 +16,7 @@ struct ComposeView: View {
 
     @Environment(\.dismiss) private var dismiss
     
-    @StateObject private var textFieldViewModel: TextFieldViewModel
+    @StateObject private var textModel: TextModel
     
     @State private var isKeyboardPresented = false
     @State private var isSensitive = false
@@ -66,7 +66,7 @@ struct ComposeView: View {
     private let keyboardFontTextSize = 16.0
 
     public init(statusViewModel: StatusModel? = nil) {
-        _textFieldViewModel = StateObject(wrappedValue: .init())
+        _textModel = StateObject(wrappedValue: .init())
         self.statusViewModel = statusViewModel
     }
     
@@ -103,9 +103,9 @@ struct ComposeView: View {
                     }
                 }
                 .onAppear {
-                    self.textFieldViewModel.client = self.client
+                    self.textModel.client = self.client
                 }
-                .onChange(of: self.textFieldViewModel.text) { newValue in
+                .onChange(of: self.textModel.text) { newValue in
                     self.refreshScreenState()
                 }
                 .onChange(of: self.selectedItems) { selectedItem in
@@ -226,8 +226,8 @@ struct ComposeView: View {
     
     @ViewBuilder
     private func statusTextView() -> some View {
-        TextView($textFieldViewModel.text, getTextView: { textView in
-            self.textFieldViewModel.textView = textView
+        TextView($textModel.text, getTextView: { textView in
+            self.textModel.textView = textView
         })
         .placeholder(self.placeholder())
         .padding(.horizontal, 8)
@@ -335,27 +335,27 @@ struct ComposeView: View {
     
     @ViewBuilder
     private func autocompleteToolbar() -> some View {
-        if !textFieldViewModel.mentionsSuggestions.isEmpty || !textFieldViewModel.tagsSuggestions.isEmpty {
+        if !textModel.mentionsSuggestions.isEmpty || !textModel.tagsSuggestions.isEmpty {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack {
-                    if !textFieldViewModel.mentionsSuggestions.isEmpty {
-                        ForEach(textFieldViewModel.mentionsSuggestions, id: \.id) { account in
+                    if !textModel.mentionsSuggestions.isEmpty {
+                        ForEach(textModel.mentionsSuggestions, id: \.id) { account in
                             Button {
-                                textFieldViewModel.selectMentionSuggestion(account: account)
+                                textModel.selectMentionSuggestion(account: account)
                             } label: {
                                 UsernameRow(
                                     accountId: account.id,
                                     accountAvatar: account.avatar,
                                     accountDisplayName: account.displayNameWithoutEmojis,
                                     accountUsername: account.acct,
-                                    size: .mini)
+                                    size: .comment)
                                 .padding(.trailing, 8)
                             }
                         }
                     } else {
-                        ForEach(textFieldViewModel.tagsSuggestions, id: \.url) { tag in
+                        ForEach(textModel.tagsSuggestions, id: \.url) { tag in
                             Button {
-                                textFieldViewModel.selectHashtagSuggestion(tag: tag)
+                                textModel.selectHashtagSuggestion(tag: tag)
                             } label: {
                                 Text("#\(tag.name)")
                                     .font(.callout)
@@ -420,20 +420,20 @@ struct ComposeView: View {
                 }
                 
                 Button {
-                    self.textFieldViewModel.append(content: "#")
+                    self.textModel.append(content: "#")
                 } label: {
                     Image(systemName: "number")
                 }
                 
                 Button {
-                    self.textFieldViewModel.append(content: "@")
+                    self.textModel.append(content: "@")
                 } label: {
                     Image(systemName: "at")
                 }
                 
                 Spacer()
                 
-                Text("\(self.applicationState.statusMaxCharacters - textFieldViewModel.text.string.utf16.count)")
+                Text("\(self.applicationState.statusMaxCharacters - textModel.text.string.utf16.count)")
                     .foregroundColor(.lightGrayColor)
                     .font(.system(size: self.keyboardFontTextSize))
             }
@@ -449,7 +449,7 @@ struct ComposeView: View {
     
     private func isPublishButtonDisabled() -> Bool {
         // Publish always disabled when there is not status text.
-        if self.textFieldViewModel.text.string.isEmpty {
+        if self.textModel.text.string.isEmpty {
             return true
         }
         
@@ -467,7 +467,7 @@ struct ComposeView: View {
     }
     
     private func isInteractiveDismissDisabled() -> Bool {
-        if self.textFieldViewModel.text.string.isEmpty == false {
+        if self.textModel.text.string.isEmpty == false {
             return true
         }
         
@@ -597,7 +597,7 @@ struct ComposeView: View {
     
     private func createStatus() -> Pixelfed.Statuses.Components {
         return Pixelfed.Statuses.Components(inReplyToId: self.statusViewModel?.id,
-                                            text: self.textFieldViewModel.text.string,
+                                            text: self.textModel.text.string,
                                             spoilerText: self.isSensitive ? self.spoilerText : String.empty(),
                                             mediaIds: self.photosAttachment.getUploadedPhotoIds(),
                                             visibility: self.visibility,

@@ -77,7 +77,7 @@
 		F87AEB942986C51B00434FB6 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87AEB932986C51B00434FB6 /* AppConstants.swift */; };
 		F87AEB972986D16D00434FB6 /* AuthorisationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87AEB962986D16D00434FB6 /* AuthorisationError.swift */; };
 		F8864CE929ACAF820020C534 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8864CE829ACAF820020C534 /* TextView.swift */; };
-		F8864CEB29ACBAA80020C534 /* TextFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8864CEA29ACBAA80020C534 /* TextFieldViewModel.swift */; };
+		F8864CEB29ACBAA80020C534 /* TextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8864CEA29ACBAA80020C534 /* TextModel.swift */; };
 		F8864CEF29ACE90B0020C534 /* UIFont+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8864CEE29ACE90B0020C534 /* UIFont+Font.swift */; };
 		F8864CF129ACFFB80020C534 /* View+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8864CF029ACFFB80020C534 /* View+Keyboard.swift */; };
 		F886F257297859E300879356 /* CacheImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F886F256297859E300879356 /* CacheImageService.swift */; };
@@ -223,7 +223,7 @@
 		F87AEB932986C51B00434FB6 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		F87AEB962986D16D00434FB6 /* AuthorisationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorisationError.swift; sourceTree = "<group>"; };
 		F8864CE829ACAF820020C534 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
-		F8864CEA29ACBAA80020C534 /* TextFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldViewModel.swift; sourceTree = "<group>"; };
+		F8864CEA29ACBAA80020C534 /* TextModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModel.swift; sourceTree = "<group>"; };
 		F8864CEE29ACE90B0020C534 /* UIFont+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Font.swift"; sourceTree = "<group>"; };
 		F8864CF029ACFFB80020C534 /* View+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Keyboard.swift"; sourceTree = "<group>"; };
 		F886F256297859E300879356 /* CacheImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheImageService.swift; sourceTree = "<group>"; };
@@ -450,6 +450,7 @@
 		F83901A2295D863B00456AE2 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				F8864CF229AD05420020C534 /* TextView */,
 				F83901A5295D8EC000456AE2 /* LabelIcon.swift */,
 				F85D4972296406E700751DF7 /* BottomRight.swift */,
 				F85D497629640A5200751DF7 /* ImageRow.swift */,
@@ -470,7 +471,6 @@
 				F876418A298AC1B80057D362 /* NoDataView.swift */,
 				F86FB554298BF83F000131F0 /* FavouriteTouch.swift */,
 				F8FA991F299FDDC3007AB130 /* TextInputField.swift */,
-				F8864CE829ACAF820020C534 /* TextView.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -538,6 +538,15 @@
 				F8FA991B299FA8C2007AB130 /* ImageUploadView.swift */,
 			);
 			path = Subviews;
+			sourceTree = "<group>";
+		};
+		F8864CF229AD05420020C534 /* TextView */ = {
+			isa = PBXGroup;
+			children = (
+				F8864CEA29ACBAA80020C534 /* TextModel.swift */,
+				F8864CE829ACAF820020C534 /* TextView.swift */,
+			);
+			path = TextView;
 			sourceTree = "<group>";
 		};
 		F88ABD9029686F00004EF61E /* Cache */ = {
@@ -698,7 +707,6 @@
 			children = (
 				F878842029A494E3003CFAD2 /* Subviews */,
 				F88ABD9329687CA4004EF61E /* ComposeView.swift */,
-				F8864CEA29ACBAA80020C534 /* TextFieldViewModel.swift */,
 			);
 			path = ComposeView;
 			sourceTree = "<group>";
@@ -913,7 +921,7 @@
 				F8FA9920299FDDC3007AB130 /* TextInputField.swift in Sources */,
 				F86A4303299A9AF500DF7645 /* TipsStore.swift in Sources */,
 				F8C5E56229892CC300ADF6A7 /* FirstAppear.swift in Sources */,
-				F8864CEB29ACBAA80020C534 /* TextFieldViewModel.swift in Sources */,
+				F8864CEB29ACBAA80020C534 /* TextModel.swift in Sources */,
 				F8C14394296AF21B001FE31D /* Double+Round.swift in Sources */,
 				F83CBEFB298298A1002972C8 /* ImageCarouselPicture.swift in Sources */,
 				F89A46DC296EAACE0062125F /* SettingsView.swift in Sources */,
@@ -1051,7 +1059,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 39;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
@@ -1088,7 +1096,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 39;
+				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
