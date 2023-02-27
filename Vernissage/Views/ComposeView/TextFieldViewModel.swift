@@ -6,42 +6,47 @@
 
 import Foundation
 import SwiftUI
+import PixelfedKit
 
 @MainActor
 public class TextFieldViewModel: NSObject, ObservableObject {
-   
+    var client: Client?
     var textView: UITextView?
 
     var selectedRange: NSRange {
-      get {
-        guard let textView else {
-          return .init(location: 0, length: 0)
-        }
+        get {
+            guard let textView else {
+                return .init(location: 0, length: 0)
+            }
           
-        return textView.selectedRange
-      }
-      set {
-        textView?.selectedRange = newValue
-      }
+            return textView.selectedRange
+        }
+        set {
+            textView?.selectedRange = newValue
+        }
     }
 
     var markedTextRange: UITextRange? {
-      guard let textView else {
-        return nil
-      }
-      return textView.markedTextRange
+        guard let textView else {
+            return nil
+        }
+
+        return textView.markedTextRange
     }
+    
+    @Published var mentionsSuggestions: [Account] = []
+    @Published var tagsSuggestions: [Tag] = []
     
     @Published var text = NSMutableAttributedString(string: "") {
-      didSet {
-        let range = selectedRange
-        processText()
-        // checkEmbed()
-        textView?.attributedText = text
-        selectedRange = range
-      }
+        didSet {
+            let range = selectedRange
+            processText()
+            textView?.attributedText = text
+            selectedRange = range
+        }
     }
     
+    private var currentSuggestionRange: NSRange?
     private var urlLengthAdjustments: Int = 0
     private let maxLengthOfUrl = 23
 
@@ -57,7 +62,7 @@ public class TextFieldViewModel: NSObject, ObservableObject {
         guard markedTextRange == nil else { return }
 
         text.addAttributes([.foregroundColor: UIColor(Color.label),
-                            .font: UIFont.systemFont(ofSize: TextView.bodyFontSize),
+                            .font: UIFont.preferredFont(from: .body),
                             .backgroundColor: UIColor.clear,
                             .underlineColor: UIColor.clear],
                            range: NSMakeRange(0, text.string.utf16.count))
@@ -77,21 +82,21 @@ public class TextFieldViewModel: NSObject, ObservableObject {
 
             let urlRanges = urlRegex.matches(in: text.string, options: [], range: range).map { $0.range }
 
-            // var foundSuggestionRange = false
+            var foundSuggestionRange = false
             for nsRange in ranges {
                 text.addAttributes([.foregroundColor: UIColor(.accentColor)], range: nsRange)
                 
-//                if selectedRange.location == (nsRange.location + nsRange.length),
-//                   let range = Range(nsRange, in: text.string) {
-//                    foundSuggestionRange = true
-//                    currentSuggestionRange = nsRange
-//                    loadAutoCompleteResults(query: String(text.string[range]))
-//                }
+                if selectedRange.location == (nsRange.location + nsRange.length),
+                   let range = Range(nsRange, in: text.string) {
+                    foundSuggestionRange = true
+                    currentSuggestionRange = nsRange
+                    loadAutoCompleteResults(query: String(text.string[range]))
+                }
             }
 
-//            if !foundSuggestionRange || ranges.isEmpty {
-//                resetAutoCompletion()
-//            }
+            if !foundSuggestionRange || ranges.isEmpty {
+                resetAutoCompletion()
+            }
 
             var totalUrlLength = 0
             var numUrls = 0
@@ -116,7 +121,58 @@ public class TextFieldViewModel: NSObject, ObservableObject {
                 }
             }
         } catch { }
+    }
+    
+    private func loadAutoCompleteResults(query: String) {
+        guard let client, query.utf8.count > 1 else { return }
+        var query = query
+        Task {
+            do {
+                var results: SearchResults?
+                switch query.first {
+                case "#":
+                    query.removeFirst()
+                    results = try await client.search?.search(query: query, resultsType: .hashtags)
+                    withAnimation {
+                        tagsSuggestions = results?.hashtags ?? []
+                    }
+                case "@":
+                    query.removeFirst()
+                    results = try await client.search?.search(query: query, resultsType: .accounts)
+                    withAnimation {
+                        mentionsSuggestions = results?.accounts ?? []
+                    }
+                default:
+                    break
+                }
+            } catch { }
+        }
+    }
+    
+    private func resetAutoCompletion() {
+        tagsSuggestions = []
+        mentionsSuggestions = []
+        currentSuggestionRange = nil
+    }
+    
+    func selectMentionSuggestion(account: Account) {
+        if let range = currentSuggestionRange {
+            replaceTextWith(text: "@\(account.acct) ", inRange: range)
+        }
+    }
 
+    func selectHashtagSuggestion(tag: Tag) {
+        if let range = currentSuggestionRange {
+            replaceTextWith(text: "#\(tag.name) ", inRange: range)
+        }
+    }
+    
+    func replaceTextWith(text: String, inRange: NSRange) {
+        let string = self.text
+        string.mutableString.deleteCharacters(in: inRange)
+        string.mutableString.insert(text, at: inRange.location)
+        self.text = string
+        selectedRange = NSRange(location: inRange.location + text.utf16.count, length: 0)
     }
 }
 

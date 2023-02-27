@@ -130,8 +130,8 @@ extension TextView.Representable {
             super.init()
 
             textView.delegate = self
-
-            textView.font = .systemFont(ofSize: TextView.bodyFontSize)
+            
+            textView.font = UIFont.preferredFont(from: .body)
             textView.adjustsFontForContentSizeCategory = true
             textView.autocapitalizationType = .sentences
             textView.autocorrectionType = .yes

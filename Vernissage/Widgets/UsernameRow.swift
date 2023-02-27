@@ -12,10 +12,11 @@ struct UsernameRow: View {
     @State public var accountAvatar: URL?
     @State public var accountDisplayName: String?
     @State public var accountUsername: String
+    @State public var size: UserAvatar.Size?
 
     var body: some View {
         HStack (alignment: .center) {
-            UserAvatar(accountAvatar: accountAvatar, size: .list)
+            UserAvatar(accountAvatar: accountAvatar, size: size ?? .list)
             
             VStack (alignment: .leading) {
                 Text(accountDisplayName ?? accountUsername)
