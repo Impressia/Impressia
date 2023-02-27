@@ -164,7 +164,6 @@ struct VernissageApp: App {
     
     private func refreshAccessTokens() async {
         let defaultSettings = ApplicationSettingsHandler.shared.getDefaultSettings()
-        print(defaultSettings.lastRefreshTokens)
         
         // Run refreshing access tokens once per day.
         guard let refreshTokenDate = Calendar.current.date(byAdding: .day, value: 1, to: defaultSettings.lastRefreshTokens), refreshTokenDate < Date.now else {

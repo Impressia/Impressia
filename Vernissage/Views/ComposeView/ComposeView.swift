@@ -68,8 +68,6 @@ struct ComposeView: View {
     public init(statusViewModel: StatusModel? = nil) {
         _textFieldViewModel = StateObject(wrappedValue: .init())
         self.statusViewModel = statusViewModel
-        
-        print(self.statusViewModel?.id ?? "<nil>")
     }
     
     var body: some View {
