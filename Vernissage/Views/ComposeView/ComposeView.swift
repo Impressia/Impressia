@@ -453,13 +453,17 @@ struct ComposeView: View {
     
     private func getJpegData(image: UIImage) -> Data? {
         // API don't support images over 5K.
-        if image.size.height > 5000 || image.size.width > 5000 {
+        if image.size.height > 10_000 || image.size.width > 10_000 {
             return image
                 .resized(to: .init(width: image.size.width / 4, height: image.size.height / 4))
-                .jpegData(compressionQuality: 0.80)
+                .jpegData(compressionQuality: 0.90)
+        } else if image.size.height > 5000 || image.size.width > 5000 {
+            return image
+                .resized(to: .init(width: image.size.width / 2, height: image.size.height / 2))
+                .jpegData(compressionQuality: 0.90)
         } else {
             return image
-                .jpegData(compressionQuality: 0.80)
+                .jpegData(compressionQuality: 0.90)
         }
     }
     
