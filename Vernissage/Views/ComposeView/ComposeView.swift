@@ -17,7 +17,7 @@ struct ComposeView: View {
     @Environment(\.dismiss) private var dismiss
     
     @State var statusViewModel: StatusModel?
-    @State private var text = String.empty()
+    
     @State private var isSensitive = false
     @State private var spoilerText = String.empty()
     @State private var commentsDisabled = false
@@ -60,167 +60,171 @@ struct ComposeView: View {
     }
     
     private let contentWidth = Int(UIScreen.main.bounds.width) - 50
-    private let keyboardFontSize = 14.0
+    private let keyboardFontSize = 22.0
+    
+    @StateObject private var textFieldViewModel: TextFieldViewModel
+
+    public init(statusViewModel: StatusModel? = nil) {
+        _textFieldViewModel = StateObject(wrappedValue: .init())
+        self.statusViewModel = statusViewModel
+    }
     
     var body: some View {
         NavigationStack {
             NavigationView {
-                ScrollView {
-                    VStack (alignment: .leading){
-                        if self.isSensitive {
-                            TextField("Write content warning", text: $spoilerText, axis: .vertical)
-                                .padding(8)
-                                .lineLimit(1...2)
-                                .focused($focusedField, equals: .spoilerText)
-                                .keyboardType(.default)
-                                .background(Color.dangerColor.opacity(0.4))
-                        }
-                        
-                        if self.commentsDisabled {
-                            HStack {
-                                Spacer()
-                                Text("Comments will be disabled")
-                                    .textCase(.uppercase)
-                                    .font(.caption2)
-                                    .foregroundColor(.dangerColor)
+                ZStack(alignment: .bottom) {
+                    
+                    ScrollView {
+                        VStack (alignment: .leading){
+                            if self.isSensitive {
+                                TextField("Write content warning", text: $spoilerText, axis: .vertical)
+                                    .padding(8)
+                                    .lineLimit(1...2)
+                                    .focused($focusedField, equals: .spoilerText)
+                                    .keyboardType(.default)
+                                    .background(Color.dangerColor.opacity(0.4))
                             }
-                            .padding(.horizontal, 8)
-                        }
-                        
-                        if let accountData = applicationState.account {
-                            HStack {
-                                UsernameRow(
-                                    accountId: accountData.id,
-                                    accountAvatar: accountData.avatar,
-                                    accountDisplayName: accountData.displayName,
-                                    accountUsername: accountData.username)
-                                Spacer()
-                            }
-                            .padding(.horizontal, 8)
-                        }
                             
-                        HStack {
-                            Menu {
-                                Button {
-                                    self.visibility = .pub
-                                    self.visibilityText = "Everyone"
-                                    self.visibilityImage = "globe.europe.africa"
-                                } label: {
-                                    Label("Everyone", systemImage: "globe.europe.africa")
-                                }
-                                
-                                Button {
-                                    self.visibility = .unlisted
-                                    self.visibilityText = "Unlisted"
-                                    self.visibilityImage = "lock.open"
-                                } label: {
-                                    Label("Unlisted", systemImage: "lock.open")
-                                }
-                                
-                                Button {
-                                    self.visibility = .priv
-                                    self.visibilityText = "Followers"
-                                    self.visibilityImage = "lock"
-                                } label: {
-                                    Label("Followers", systemImage: "lock")
-                                }
-                            } label: {
+                            if self.commentsDisabled {
                                 HStack {
-                                    Label(self.visibilityText, systemImage: self.visibilityImage)
-                                    Image(systemName: "chevron.down")
+                                    Spacer()
+                                    Text("Comments will be disabled")
+                                        .textCase(.uppercase)
+                                        .font(.caption2)
+                                        .foregroundColor(.dangerColor)
                                 }
-                                .padding(.vertical, 4)
                                 .padding(.horizontal, 8)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .stroke(Color.accentColor, lineWidth: 1)
-                                )
                             }
                             
-                            Spacer()
-                            
-                            if let name = self.place?.name, let country = self.place?.country {
-                                Group {
-                                    Image(systemName: "mappin.and.ellipse")
-                                    Text("\(name), \(country)")
+                            if let accountData = applicationState.account {
+                                HStack {
+                                    UsernameRow(
+                                        accountId: accountData.id,
+                                        accountAvatar: accountData.avatar,
+                                        accountDisplayName: accountData.displayName,
+                                        accountUsername: accountData.username)
+                                    Spacer()
                                 }
-                                .foregroundColor(.lightGrayColor)
-                                .padding(.trailing, 8)
+                                .padding(.horizontal, 8)
                             }
-                        }
-                        .font(.footnote)
-                        .padding(.horizontal, 8)
-                        
-                        
-                        TextField(self.placeholder(), text: $text, axis: .vertical)
+                            
+                            HStack {
+                                Menu {
+                                    Button {
+                                        self.visibility = .pub
+                                        self.visibilityText = "Everyone"
+                                        self.visibilityImage = "globe.europe.africa"
+                                    } label: {
+                                        Label("Everyone", systemImage: "globe.europe.africa")
+                                    }
+                                    
+                                    Button {
+                                        self.visibility = .unlisted
+                                        self.visibilityText = "Unlisted"
+                                        self.visibilityImage = "lock.open"
+                                    } label: {
+                                        Label("Unlisted", systemImage: "lock.open")
+                                    }
+                                    
+                                    Button {
+                                        self.visibility = .priv
+                                        self.visibilityText = "Followers"
+                                        self.visibilityImage = "lock"
+                                    } label: {
+                                        Label("Followers", systemImage: "lock")
+                                    }
+                                } label: {
+                                    HStack {
+                                        Label(self.visibilityText, systemImage: self.visibilityImage)
+                                        Image(systemName: "chevron.down")
+                                    }
+                                    .padding(.vertical, 4)
+                                    .padding(.horizontal, 8)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .stroke(Color.accentColor, lineWidth: 1)
+                                    )
+                                }
+                                
+                                Spacer()
+                                
+                                if let name = self.place?.name, let country = self.place?.country {
+                                    Group {
+                                        Image(systemName: "mappin.and.ellipse")
+                                        Text("\(name), \(country)")
+                                    }
+                                    .foregroundColor(.lightGrayColor)
+                                    .padding(.trailing, 8)
+                                }
+                            }
+                            .font(.footnote)
                             .padding(.horizontal, 8)
-                            .lineLimit(2...12)
+                            
+                            
+                            TextView($textFieldViewModel.text, getTextView: { textView in
+                                self.textFieldViewModel.textView = textView
+                            })
+                            .placeholder(self.placeholder())
+                            .padding(.horizontal, 8)
                             .focused($focusedField, equals: .content)
-                            .keyboardType(.default)
                             .onFirstAppear {
                                 self.focusedField = .content
                             }
-                            .onChange(of: self.text) { newValue in
-                                self.refreshScreenState()
-                            }
-                            .toolbar {
-                                self.keyboardToolbar()
-                            }
-                        
-                        HStack(alignment: .center) {
-                            LazyVGrid(columns: [GridItem(.adaptive(minimum:80))]) {
-                                ForEach(self.photosAttachment, id: \.id) { photoAttachment in
-                                    ImageUploadView(photoAttachment: photoAttachment) {
-                                        self.showSheet = .photoDetails(photoAttachment)
-                                    } delete: {
-                                        self.photosAttachment = self.photosAttachment.filter({ item in
-                                            item != photoAttachment
-                                        })
-                                        
-                                        self.selectedItems = self.selectedItems.filter({ item in
-                                            item != photoAttachment.photosPickerItem
-                                        })
-                                        
-                                        self.refreshScreenState()
-                                    } upload: {
-                                        Task {
-                                            photoAttachment.error = nil
-                                            await self.upload(photoAttachment)
+                            
+                            HStack(alignment: .center) {
+                                LazyVGrid(columns: [GridItem(.adaptive(minimum:80))]) {
+                                    ForEach(self.photosAttachment, id: \.id) { photoAttachment in
+                                        ImageUploadView(photoAttachment: photoAttachment) {
+                                            self.showSheet = .photoDetails(photoAttachment)
+                                        } delete: {
+                                            self.photosAttachment = self.photosAttachment.filter({ item in
+                                                item != photoAttachment
+                                            })
+                                            
+                                            self.selectedItems = self.selectedItems.filter({ item in
+                                                item != photoAttachment.photosPickerItem
+                                            })
+                                            
                                             self.refreshScreenState()
+                                        } upload: {
+                                            Task {
+                                                photoAttachment.error = nil
+                                                await self.upload(photoAttachment)
+                                                self.refreshScreenState()
+                                            }
                                         }
                                     }
                                 }
                             }
-                        }
-                        .padding(8)
-                        
-                        if let status = self.statusViewModel {
-                            HStack (alignment: .top) {                            
-                                UserAvatar(accountAvatar: status.account.avatar, size: .comment)
-                                
-                                VStack (alignment: .leading, spacing: 0) {
-                                    HStack (alignment: .top) {
-                                        Text(statusViewModel?.account.displayNameWithoutEmojis ?? "")
-                                            .foregroundColor(.mainTextColor)
-                                            .font(.footnote)
-                                            .fontWeight(.bold)
-                                        
-                                        Spacer()
-                                    }
-                                    
-                                    MarkdownFormattedText(status.content.asMarkdown, withFontSize: 14, andWidth: contentWidth)
-                                        .environment(\.openURL, OpenURLAction { url in .handled })
-                                }
-                            }
                             .padding(8)
-                            .background(Color.selectedRowColor)
+                            
+                            if let status = self.statusViewModel {
+                                HStack (alignment: .top) {
+                                    UserAvatar(accountAvatar: status.account.avatar, size: .comment)
+                                    
+                                    VStack (alignment: .leading, spacing: 0) {
+                                        HStack (alignment: .top) {
+                                            Text(statusViewModel?.account.displayNameWithoutEmojis ?? "")
+                                                .foregroundColor(.mainTextColor)
+                                                .font(.footnote)
+                                                .fontWeight(.bold)
+                                            
+                                            Spacer()
+                                        }
+                                        
+                                        MarkdownFormattedText(status.content.asMarkdown, withFontSize: 14, andWidth: contentWidth)
+                                            .environment(\.openURL, OpenURLAction { url in .handled })
+                                    }
+                                }
+                                .padding(8)
+                                .background(Color.selectedRowColor)
+                            }
+                            
+                            Spacer()
                         }
-                        
-                        Spacer()
                     }
-                }
-                .onTapGesture {
-                    self.hideKeyboard()
+                 
+                    self.keyboardToolbar()
                 }
                 .frame(alignment: .topLeading)
                 .toolbar {
@@ -239,6 +243,9 @@ struct ComposeView: View {
                             dismiss()
                         }
                     }
+                }
+                .onChange(of: self.textFieldViewModel.text) { newValue in
+                    self.refreshScreenState()
                 }
                 .onChange(of: self.selectedItems) { selectedItem in
                     Task {
@@ -266,10 +273,12 @@ struct ComposeView: View {
         .interactiveDismissDisabled(self.interactiveDismissDisabled)
     }
     
-    @ToolbarContentBuilder
-    private func keyboardToolbar() -> some ToolbarContent {
-        ToolbarItemGroup(placement: .keyboard) {
-            HStack(alignment: .center) {
+    private func keyboardToolbar() -> some View {
+        VStack(spacing: 0) {
+            Divider()
+            HStack(alignment: .center, spacing: 22) {
+                
+                
                 Button {
                     hideKeyboard()
                     self.focusedField = .unknown
@@ -277,7 +286,7 @@ struct ComposeView: View {
                 } label: {
                     Image(systemName: self.photosAreAttached ? "photo.fill.on.rectangle.fill" : "photo.on.rectangle")
                 }
-
+                
                 Button {
                     withAnimation(.easeInOut) {
                         self.isSensitive.toggle()
@@ -299,7 +308,7 @@ struct ComposeView: View {
                 } label: {
                     Image(systemName: self.commentsDisabled ? "person.2.slash" : "person.2.fill")
                 }
-
+                
                 Button {
                     if self.place != nil {
                         withAnimation(.easeInOut) {
@@ -313,24 +322,27 @@ struct ComposeView: View {
                 }
                 
                 Button {
-                    self.text.append("#")
+                    self.textFieldViewModel.append(content: "#")
                 } label: {
                     Image(systemName: "number")
                 }
-
+                
                 Button {
-                    self.text.append("@")
+                    self.textFieldViewModel.append(content: "@")
                 } label: {
                     Image(systemName: "at")
                 }
                 
                 Spacer()
                 
-                Text("\(self.applicationState.statusMaxCharacters - text.string.utf16.count)")
-                  .foregroundColor(.lightGrayColor)
+                Text("\(self.applicationState.statusMaxCharacters - textFieldViewModel.text.string.utf16.count)")
+                    .foregroundColor(.lightGrayColor)
+                    .font(.system(size: 16.0))
             }
+            .padding(8)
             .font(.system(size: self.keyboardFontSize))
         }
+        .background(Color.keyboardToolbarColor)
     }
     
     private func placeholder() -> String {
@@ -339,7 +351,7 @@ struct ComposeView: View {
     
     private func isPublishButtonDisabled() -> Bool {
         // Publish always disabled when there is not status text.
-        if self.text.isEmpty {
+        if self.textFieldViewModel.text.string.isEmpty {
             return true
         }
         
@@ -357,7 +369,7 @@ struct ComposeView: View {
     }
     
     private func isInteractiveDismissDisabled() -> Bool {
-        if self.text.isEmpty == false {
+        if self.textFieldViewModel.text.string.isEmpty == false {
             return true
         }
         
@@ -394,8 +406,8 @@ struct ComposeView: View {
             
             // Now we have to get from photos images as JPEG.
             for item in self.photosAttachment.filter({ $0.photoData == nil }) {
-                if var imageFileTransferable = try await item.photosPickerItem.loadTransferable(type: ImageFileTranseferable.self) {
-                    item.photoData = imageFileTransferable.data
+                if let data = try await item.photosPickerItem.loadTransferable(type: Data.self) {
+                    item.photoData = data
                 }
             }
             
@@ -487,7 +499,7 @@ struct ComposeView: View {
     
     private func createStatus() -> Pixelfed.Statuses.Components {
         return Pixelfed.Statuses.Components(inReplyToId: self.statusViewModel?.id,
-                                            text: self.text,
+                                            text: self.textFieldViewModel.text.string,
                                             spoilerText: self.isSensitive ? self.spoilerText : String.empty(),
                                             mediaIds: self.photosAttachment.getUploadedPhotoIds(),
                                             visibility: self.visibility,

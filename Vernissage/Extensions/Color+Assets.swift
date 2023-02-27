@@ -14,6 +14,7 @@ extension Color {
     static let mainTextColor = Color("MainTextColor")
     static let selectedRowColor = Color("SelectedRowColor")
     static let viewBackgroundColor = Color("ViewBackgroundColor")
+    static let keyboardToolbarColor = Color("KeyboardToolbar")
     static let viewTextColor = Color("ViewTextColor")
     static let accentColor1 = Color("AccentColor1")
     static let accentColor2 = Color("AccentColor2")

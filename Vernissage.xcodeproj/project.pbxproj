@@ -76,6 +76,8 @@
 		F87AEB922986C44E00434FB6 /* AuthorizationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87AEB912986C44E00434FB6 /* AuthorizationSession.swift */; };
 		F87AEB942986C51B00434FB6 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87AEB932986C51B00434FB6 /* AppConstants.swift */; };
 		F87AEB972986D16D00434FB6 /* AuthorisationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87AEB962986D16D00434FB6 /* AuthorisationError.swift */; };
+		F8864CE929ACAF820020C534 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8864CE829ACAF820020C534 /* TextView.swift */; };
+		F8864CEB29ACBAA80020C534 /* TextFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8864CEA29ACBAA80020C534 /* TextFieldViewModel.swift */; };
 		F886F257297859E300879356 /* CacheImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F886F256297859E300879356 /* CacheImageService.swift */; };
 		F88ABD9229686F1C004EF61E /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88ABD9129686F1C004EF61E /* MemoryCache.swift */; };
 		F88ABD9429687CA4004EF61E /* ComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88ABD9329687CA4004EF61E /* ComposeView.swift */; };
@@ -218,6 +220,8 @@
 		F87AEB912986C44E00434FB6 /* AuthorizationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSession.swift; sourceTree = "<group>"; };
 		F87AEB932986C51B00434FB6 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		F87AEB962986D16D00434FB6 /* AuthorisationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorisationError.swift; sourceTree = "<group>"; };
+		F8864CE829ACAF820020C534 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		F8864CEA29ACBAA80020C534 /* TextFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldViewModel.swift; sourceTree = "<group>"; };
 		F886F256297859E300879356 /* CacheImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheImageService.swift; sourceTree = "<group>"; };
 		F88ABD9129686F1C004EF61E /* MemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
 		F88ABD9329687CA4004EF61E /* ComposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeView.swift; sourceTree = "<group>"; };
@@ -460,6 +464,7 @@
 				F876418A298AC1B80057D362 /* NoDataView.swift */,
 				F86FB554298BF83F000131F0 /* FavouriteTouch.swift */,
 				F8FA991F299FDDC3007AB130 /* TextInputField.swift */,
+				F8864CE829ACAF820020C534 /* TextView.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -687,6 +692,7 @@
 			children = (
 				F878842029A494E3003CFAD2 /* Subviews */,
 				F88ABD9329687CA4004EF61E /* ComposeView.swift */,
+				F8864CEA29ACBAA80020C534 /* TextFieldViewModel.swift */,
 			);
 			path = ComposeView;
 			sourceTree = "<group>";
@@ -822,6 +828,7 @@
 				F85D497929640B9D00751DF7 /* ImagesCarousel.swift in Sources */,
 				F8C5E55F2988E92600ADF6A7 /* AccountModel.swift in Sources */,
 				F89D6C3F29716E41001DA3D4 /* Theme.swift in Sources */,
+				F8864CE929ACAF820020C534 /* TextView.swift in Sources */,
 				F89AC00529A1F9B500F4159F /* AppMetadata.swift in Sources */,
 				F8CC95CE2970761D00C9C2AC /* TintColor.swift in Sources */,
 				F89992CC296D9231005994BF /* StatusModel.swift in Sources */,
@@ -898,6 +905,7 @@
 				F8FA9920299FDDC3007AB130 /* TextInputField.swift in Sources */,
 				F86A4303299A9AF500DF7645 /* TipsStore.swift in Sources */,
 				F8C5E56229892CC300ADF6A7 /* FirstAppear.swift in Sources */,
+				F8864CEB29ACBAA80020C534 /* TextFieldViewModel.swift in Sources */,
 				F8C14394296AF21B001FE31D /* Double+Round.swift in Sources */,
 				F83CBEFB298298A1002972C8 /* ImageCarouselPicture.swift in Sources */,
 				F89A46DC296EAACE0062125F /* SettingsView.swift in Sources */,
@@ -1035,7 +1043,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 36;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
@@ -1072,7 +1080,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 36;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
