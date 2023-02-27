@@ -351,6 +351,7 @@ struct ComposeView: View {
                                     size: .comment)
                                 .padding(.trailing, 8)
                             }
+                            Divider()
                         }
                     } else {
                         ForEach(textModel.tagsSuggestions, id: \.url) { tag in
@@ -361,6 +362,7 @@ struct ComposeView: View {
                                     .font(.callout)
                                     .foregroundColor(self.applicationState.tintColor.color())
                             }
+                            Divider()
                         }
                     }
                 }
