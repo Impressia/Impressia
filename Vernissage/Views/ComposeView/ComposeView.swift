@@ -572,18 +572,26 @@ struct ComposeView: View {
     }
     
     private func getJpegData(image: UIImage) -> Data? {
+#if targetEnvironment(simulator)
+        // For testing purposes.
+        let converted = image.convertToExtendedSRGBJpeg()
+        let filePath = URL.temporaryDirectory.appending(path: "\(UUID().uuidString).jpg")
+        try? converted?.write(to: filePath)
+        print(filePath.string)
+#endif
+        
         // API don't support images over 5K.
         if image.size.height > 10_000 || image.size.width > 10_000 {
             return image
                 .resized(to: .init(width: image.size.width / 4, height: image.size.height / 4))
-                .jpegData(compressionQuality: 0.90)
+                .convertToExtendedSRGBJpeg()
         } else if image.size.height > 5000 || image.size.width > 5000 {
             return image
                 .resized(to: .init(width: image.size.width / 2, height: image.size.height / 2))
-                .jpegData(compressionQuality: 0.90)
+                .convertToExtendedSRGBJpeg()
         } else {
             return image
-                .jpegData(compressionQuality: 0.90)
+                .convertToExtendedSRGBJpeg()
         }
     }
     
