@@ -10,14 +10,9 @@ struct AccountsSectionView: View {
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var client: Client
 
-    @State private var accounts: [AccountModel]
-    private var dbAccounts: [AccountData]
-    
-    init() {
-        self.dbAccounts = AccountDataHandler.shared.getAccountsData()
-        self.accounts = self.dbAccounts.map({ AccountModel(accountData: $0) })
-    }
-    
+    @State private var accounts: [AccountModel] = []
+    @State private var dbAccounts: [AccountData] = []
+        
     var body: some View {
         Section("Accounts") {
             ForEach(self.accounts) { account in
@@ -43,6 +38,10 @@ struct AccountsSectionView: View {
                     Image(systemName: "person.crop.circle.badge.plus")
                 }
             }
+        }
+        .onAppear {
+            self.dbAccounts = AccountDataHandler.shared.getAccountsData()
+            self.accounts = self.dbAccounts.map({ AccountModel(accountData: $0) })
         }
     }
     

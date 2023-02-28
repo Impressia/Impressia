@@ -80,9 +80,11 @@ struct VernissageApp: App {
             }
             .navigationViewStyle(.stack)
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
-                Task {
-                    // Refresh indicator of new photos when application is become active.
-                    await self.calculateNewPhotosInBackground()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    Task {
+                        // Refresh indicator of new photos when application is become active.
+                        await self.calculateNewPhotosInBackground()
+                    }
                 }
             }
             .onReceive(timer) { time in
