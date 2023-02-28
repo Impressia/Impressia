@@ -26,10 +26,10 @@ public class AuthorizationService {
 
         do {
             let account = try await client.verifyCredentials()
-            try await self.update(account: currentAccount,
-                                  basedOn: account,
-                                  accessToken: accessToken,
-                                  refreshToken: currentAccount.refreshToken)
+            await self.update(accountId: currentAccount.id,
+                              basedOn: account,
+                              accessToken: accessToken,
+                              refreshToken: currentAccount.refreshToken)
 
             result(currentAccount)
         } catch {
@@ -165,10 +165,10 @@ public class AuthorizationService {
         
         // Get account information from server.
         let account = try await authenticatedClient.verifyCredentials()
-        try await self.update(account: accountData,
-                              basedOn: account,
-                              accessToken: oAuthSwiftCredential.oauthToken,
-                              refreshToken: oAuthSwiftCredential.oauthRefreshToken)
+        await self.update(accountId: accountData.id,
+                          basedOn: account,
+                          accessToken: oAuthSwiftCredential.oauthToken,
+                          refreshToken: oAuthSwiftCredential.oauthRefreshToken)
     }
     
     private func refreshCredentials(for accountData: AccountData,
@@ -193,17 +193,21 @@ public class AuthorizationService {
         
         // Get account information from server.
         let account = try await authenticatedClient.verifyCredentials()
-        try await self.update(account: accountData,
-                              basedOn: account,
-                              accessToken: oAuthSwiftCredential.oauthToken,
-                              refreshToken: oAuthSwiftCredential.oauthRefreshToken)
+        await self.update(accountId: accountData.id,
+                          basedOn: account,
+                          accessToken: oAuthSwiftCredential.oauthToken,
+                          refreshToken: oAuthSwiftCredential.oauthRefreshToken)
     }
     
-    private func update(account dbAccount: AccountData,
+    private func update(accountId: String,
                         basedOn account: Account,
                         accessToken: String,
                         refreshToken: String?
-    ) async throws {
+    ) async {
+        guard let dbAccount = AccountDataHandler.shared.getAccountData(accountId: accountId) else {
+            return
+        }
+        
         dbAccount.username = account.username
         dbAccount.acct = account.acct
         dbAccount.displayName = account.displayNameWithoutEmojis

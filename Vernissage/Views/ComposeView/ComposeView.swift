@@ -64,6 +64,7 @@ struct ComposeView: View {
     private let contentWidth = Int(UIScreen.main.bounds.width) - 50
     private let keyboardFontImageSize = 20.0
     private let keyboardFontTextSize = 16.0
+    private let autocompleteFontTextSize = 12.0
 
     public init(statusViewModel: StatusModel? = nil) {
         _textModel = StateObject(wrappedValue: .init())
@@ -343,12 +344,18 @@ struct ComposeView: View {
                             Button {
                                 textModel.selectMentionSuggestion(account: account)
                             } label: {
-                                UsernameRow(
-                                    accountId: account.id,
-                                    accountAvatar: account.avatar,
-                                    accountDisplayName: account.displayNameWithoutEmojis,
-                                    accountUsername: account.acct,
-                                    size: .comment)
+                                HStack (alignment: .center) {
+                                    UserAvatar(accountAvatar: account.avatar, size: .comment)
+                                    
+                                    VStack (alignment: .leading) {
+                                        Text(account.displayNameWithoutEmojis)
+                                            .foregroundColor(.mainTextColor)
+                                        Text("@\(account.acct)")
+                                            .foregroundColor(.lightGrayColor)
+                                    }
+                                    .padding(.leading, 8)
+                                }
+                                .font(.system(size: self.autocompleteFontTextSize))
                                 .padding(.trailing, 8)
                             }
                             Divider()
@@ -359,7 +366,7 @@ struct ComposeView: View {
                                 textModel.selectHashtagSuggestion(tag: tag)
                             } label: {
                                 Text("#\(tag.name)")
-                                    .font(.callout)
+                                    .font(.system(size: self.autocompleteFontTextSize))
                                     .foregroundColor(self.applicationState.tintColor.color())
                             }
                             Divider()
