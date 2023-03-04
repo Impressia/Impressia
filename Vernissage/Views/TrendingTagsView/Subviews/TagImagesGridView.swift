@@ -13,30 +13,28 @@ struct TagImagesGridView: View {
     @EnvironmentObject var routerPath: RouterPath
     
     private let hashtag: String
-    private let photoUrls: [PhotoUrl]
+
+    @State private var photoUrls: [PhotoUrl] = [
+        PhotoUrl(id: UUID().uuidString),
+        PhotoUrl(id: UUID().uuidString),
+        PhotoUrl(id: UUID().uuidString),
+        PhotoUrl(id: UUID().uuidString),
+        PhotoUrl(id: UUID().uuidString)
+    ]
     
     init(hashtag: String) {
         self.hashtag = hashtag
-        self.photoUrls = [
-            PhotoUrl(id: UUID().uuidString),
-            PhotoUrl(id: UUID().uuidString),
-            PhotoUrl(id: UUID().uuidString),
-            PhotoUrl(id: UUID().uuidString),
-            PhotoUrl(id: UUID().uuidString)
-        ]
     }
     
     var body: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum:80))]) {
             ForEach(self.photoUrls) { photoUrl in
                 ImageGrid(photoUrl: photoUrl)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .frame(width: 80, height: 80)
-                    .id(photoUrl.id)
             }
             
             Text("more...")
                 .foregroundColor(.accentColor)
+                .fontWeight(.bold)
                 .padding(10)
                 .onTapGesture {
                     self.routerPath.navigate(to: .tag(hashTag: hashtag))
@@ -58,24 +56,26 @@ struct TagImagesGridView: View {
                 limit: 10) ?? []
 
             let statusesWithImages = statusesFromApi.getStatusesWithImagesOnly()
-            
-            var index = 0
-            for status in statusesWithImages {
-                if let mediaAttachment = status.getAllImageMediaAttachments().first {
-                    self.photoUrls[index].statusId = status.id
-                    self.photoUrls[index].url = mediaAttachment.url
-                    self.photoUrls[index].blurhash = mediaAttachment.blurhash
-                    
-                    index = index + 1
-                }
-                
-                if index == 5 {
-                    break;
-                }
-            }
-            
+            self.updatePhotos(statusesWithImages: statusesWithImages)
         } catch {
             ErrorService.shared.handle(error, message: "Loading tags failed.", showToastr: !Task.isCancelled)
+        }
+    }
+    
+    private func updatePhotos(statusesWithImages: [Status]) {
+        var index = 0
+        for status in statusesWithImages {
+            if let mediaAttachment = status.getAllImageMediaAttachments().first {
+                self.photoUrls[index].statusId = status.id
+                self.photoUrls[index].url = mediaAttachment.url
+                self.photoUrls[index].blurhash = mediaAttachment.blurhash
+                
+                index = index + 1
+            }
+            
+            if index == 5 {
+                break;
+            }
         }
     }
 }

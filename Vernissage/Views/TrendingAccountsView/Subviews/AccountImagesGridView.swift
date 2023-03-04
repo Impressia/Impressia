@@ -13,28 +13,26 @@ struct AccountImagesGridView: View {
     @EnvironmentObject var routerPath: RouterPath
     
     private let account: Account
-    private var photoUrls: [PhotoUrl]
+    
+    @State private var photoUrls: [PhotoUrl] = [
+        PhotoUrl(id: UUID().uuidString),
+        PhotoUrl(id: UUID().uuidString),
+        PhotoUrl(id: UUID().uuidString)
+    ]
     
     init(account: Account) {
         self.account = account
-        self.photoUrls = [
-            PhotoUrl(id: UUID().uuidString),
-            PhotoUrl(id: UUID().uuidString),
-            PhotoUrl(id: UUID().uuidString)
-        ]
     }
     
     var body: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum:140))]) {
             ForEach(self.photoUrls) { photoUrl in
                 ImageGrid(photoUrl: photoUrl)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .frame(width: 140, height: 140)
-                    .id(photoUrl.id)
             }
             
             Text("more...")
                 .foregroundColor(.accentColor)
+                .fontWeight(.bold)
                 .padding(10)
                 .onTapGesture {
                     self.routerPath.navigate(to: .userProfile(accountId: account.id,

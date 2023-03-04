@@ -37,7 +37,7 @@ struct TrendingTagsView: View {
                     ForEach(self.tags, id: \.id) { tag in
                         Section(header: Text(tag.name).font(.headline)) {
                             TagImagesGridView(hashtag: tag.hashtag)
-                                .id(UUID().uuidString)
+                                // .id(UUID().uuidString)
                         }
                     }
                 }

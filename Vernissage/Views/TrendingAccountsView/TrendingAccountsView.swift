@@ -37,6 +37,7 @@ struct TrendingAccountsView: View {
                     ForEach(self.accounts, id: \.id) { account in
                         Section {
                             AccountImagesGridView(account: account)
+                                // .id(UUID().uuidString)
                         } header: {
                             HStack {
                                 UsernameRow(
@@ -46,7 +47,8 @@ struct TrendingAccountsView: View {
                                     accountUsername: account.acct)
                                 Spacer()
                             }
-                            .padding(.horizontal, 8)
+                            .listRowInsets(EdgeInsets())
+                            .padding(.vertical, 12)
                         }
                     }
                 }

@@ -10,22 +10,23 @@ import NukeUI
 struct ImageGrid: View {
     @EnvironmentObject var routerPath: RouterPath
     @StateObject var photoUrl: PhotoUrl
-    
+        
     var body: some View {
         if let url = photoUrl.url {
             LazyImage(url: url) { state in
                 if let image = state.image {
                     image
                         .aspectRatio(contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
                         .onTapGesture {
                             if let statusId = self.photoUrl.statusId {
                                 self.routerPath.navigate(to: .status(id: statusId))
                             }
                         }
                 } else if state.isLoading {
-                    placeholder()
+                    self.placeholder()
                 } else {
-                    placeholder()
+                    self.placeholder()
                 }
             }
             .priority(.high)
@@ -36,15 +37,9 @@ struct ImageGrid: View {
     
     @ViewBuilder
     private func placeholder() -> some View {
-        if let imageBlurhash = photoUrl.blurhash, let uiImage = UIImage(blurHash: imageBlurhash, size: CGSize(width: 32, height: 32)) {
-            Image(uiImage: uiImage)
-                .resizable()
-                .animatePlaceholder(isLoading: .constant(true))
-        } else {
-            Rectangle()
-                .fill(Color.placeholderText)
-                .redacted(reason: .placeholder)
-                .animatePlaceholder(isLoading: .constant(true))
-        }
+        Image("ImagePlaceholder")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 }
