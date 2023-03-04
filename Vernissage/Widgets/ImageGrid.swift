@@ -8,6 +8,7 @@ import SwiftUI
 import NukeUI
 
 struct ImageGrid: View {
+    @EnvironmentObject var routerPath: RouterPath
     @StateObject var photoUrl: PhotoUrl
     
     var body: some View {
@@ -16,6 +17,11 @@ struct ImageGrid: View {
                 if let image = state.image {
                     image
                         .aspectRatio(contentMode: .fit)
+                        .onTapGesture {
+                            if let statusId = self.photoUrl.statusId {
+                                self.routerPath.navigate(to: .status(id: statusId))
+                            }
+                        }
                 } else if state.isLoading {
                     placeholder()
                 } else {
@@ -33,10 +39,12 @@ struct ImageGrid: View {
         if let imageBlurhash = photoUrl.blurhash, let uiImage = UIImage(blurHash: imageBlurhash, size: CGSize(width: 32, height: 32)) {
             Image(uiImage: uiImage)
                 .resizable()
+                .animatePlaceholder(isLoading: .constant(true))
         } else {
             Rectangle()
                 .fill(Color.placeholderText)
                 .redacted(reason: .placeholder)
+                .animatePlaceholder(isLoading: .constant(true))
         }
     }
 }

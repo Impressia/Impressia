@@ -8,6 +8,8 @@ import Foundation
 
 public class PhotoUrl: ObservableObject, Identifiable {
     public var id: String
+
+    @Published public var statusId: String?
     @Published public var url: URL?
     @Published public var blurhash: String?
     

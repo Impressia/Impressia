@@ -35,11 +35,12 @@ struct TagImagesGridView: View {
                     .id(photoUrl.id)
             }
             
-            Button {
-                self.routerPath.navigate(to: .tag(hashTag: hashtag))
-            } label: {
-                Text("more...")
-            }
+            Text("more...")
+                .foregroundColor(.accentColor)
+                .padding(10)
+                .onTapGesture {
+                    self.routerPath.navigate(to: .tag(hashTag: hashtag))
+                }
         }
         .onFirstAppear {
             Task {
@@ -61,6 +62,7 @@ struct TagImagesGridView: View {
             var index = 0
             for status in statusesWithImages {
                 if let mediaAttachment = status.getAllImageMediaAttachments().first {
+                    self.photoUrls[index].statusId = status.id
                     self.photoUrls[index].url = mediaAttachment.url
                     self.photoUrls[index].blurhash = mediaAttachment.blurhash
                     

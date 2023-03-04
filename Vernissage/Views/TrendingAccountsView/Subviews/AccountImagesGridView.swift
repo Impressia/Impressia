@@ -33,13 +33,14 @@ struct AccountImagesGridView: View {
                     .id(photoUrl.id)
             }
             
-            Button {
-                self.routerPath.navigate(to: .userProfile(accountId: account.id,
-                                                          accountDisplayName: account.displayNameWithoutEmojis,
-                                                          accountUserName: account.acct))
-            } label: {
-                Text("more...")
-            }
+            Text("more...")
+                .foregroundColor(.accentColor)
+                .padding(10)
+                .onTapGesture {
+                    self.routerPath.navigate(to: .userProfile(accountId: account.id,
+                                                              accountDisplayName: account.displayNameWithoutEmojis,
+                                                              accountUserName: account.acct))
+                }
         }
         .onFirstAppear {
             self.loadData()
@@ -53,6 +54,7 @@ struct AccountImagesGridView: View {
             var index = 0
             for status in statusesWithImages {
                 if let mediaAttachment = status.getAllImageMediaAttachments().first {
+                    self.photoUrls[index].statusId = status.id
                     self.photoUrls[index].url = mediaAttachment.url
                     self.photoUrls[index].blurhash = mediaAttachment.blurhash
                     
