@@ -13,6 +13,7 @@ struct AccountImagesGridView: View {
     @EnvironmentObject var routerPath: RouterPath
     
     private let account: Account
+    private let maxImages = 3
     
     @State private var photoUrls: [PhotoUrl] = [
         PhotoUrl(id: UUID().uuidString),
@@ -25,7 +26,7 @@ struct AccountImagesGridView: View {
     }
     
     var body: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum:140))]) {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 140))]) {
             ForEach(self.photoUrls) { photoUrl in
                 ImageGrid(photoUrl: photoUrl)
             }
@@ -59,7 +60,7 @@ struct AccountImagesGridView: View {
                     index = index + 1
                 }
                 
-                if index == 3 {
+                if index == self.maxImages {
                     break;
                 }
             }

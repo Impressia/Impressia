@@ -47,6 +47,7 @@ struct TrendingAccountsView: View {
                                     accountUsername: account.acct)
                                 Spacer()
                             }
+                            .textCase(.none)
                             .listRowInsets(EdgeInsets())
                             .padding(.vertical, 12)
                         }

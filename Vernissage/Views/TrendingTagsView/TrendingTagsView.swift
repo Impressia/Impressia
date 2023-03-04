@@ -35,9 +35,15 @@ struct TrendingTagsView: View {
             } else {
                 List {
                     ForEach(self.tags, id: \.id) { tag in
-                        Section(header: Text(tag.name).font(.headline)) {
+                        Section {
                             TagImagesGridView(hashtag: tag.hashtag)
                                 // .id(UUID().uuidString)
+                        } header: {
+                            HStack {
+                                Text(tag.name).font(.headline)
+                                Spacer()
+                                Text("\(tag.total) posts").font(.caption)
+                            }
                         }
                     }
                 }
