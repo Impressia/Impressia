@@ -429,13 +429,13 @@ struct ComposeView: View {
                 }
                 
                 Button {
-                    self.textModel.append(content: "#")
+                    self.textModel.insertAtCursorPosition(content: "#")
                 } label: {
                     Image(systemName: "number")
                 }
                 
                 Button {
-                    self.textModel.append(content: "@")
+                    self.textModel.insertAtCursorPosition(content: "@")
                 } label: {
                     Image(systemName: "at")
                 }

@@ -58,6 +58,13 @@ public class TextModel: NSObject, ObservableObject {
         selectedRange.location += content.utf16.count
     }
     
+    public func insertAtCursorPosition(content: String) {
+        let string = self.text
+        string.mutableString.insert(content, at: self.selectedRange.location)
+        self.text = string
+        selectedRange = NSRange(location: self.selectedRange.location + content.utf16.count, length: 0)
+    }
+    
     private func processText() {
         guard markedTextRange == nil else { return }
 
