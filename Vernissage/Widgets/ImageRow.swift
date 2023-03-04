@@ -60,16 +60,16 @@ struct ImageRow: View {
                             Image(uiImage: uiImage)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .onTapGesture{
-                                    self.navigateToStatus()
-                                }
-                                .onLongPressGesture(minimumDuration: 0.2) {
+                                .onTapGesture(count: 2) {
                                     Task {
                                         try? await self.client.statuses?.favourite(statusId: self.status.id)
                                     }
 
                                     self.showThumbImage = true
                                     HapticService.shared.fireHaptic(of: .buttonPress)
+                                }
+                                .onTapGesture{
+                                    self.navigateToStatus()
                                 }
                             
                             if showThumbImage {

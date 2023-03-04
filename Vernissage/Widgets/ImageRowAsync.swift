@@ -119,6 +119,14 @@ struct ImageRowAsync: View {
     
     private func imageView(image: NukeUI.Image) -> some View {
         image
+            .onTapGesture(count: 2) {
+                Task {
+                    try? await self.client.statuses?.favourite(statusId: self.statusViewModel.id)
+                }
+
+                self.showThumbImage = true
+                HapticService.shared.fireHaptic(of: .buttonPress)
+            }
             .onTapGesture{
                 self.routerPath.navigate(to: .status(
                     id: statusViewModel.id,
@@ -127,14 +135,6 @@ struct ImageRowAsync: View {
                     metaImageWidth: statusViewModel.getImageWidth(),
                     metaImageHeight: statusViewModel.getImageHeight()
                 ))
-            }
-            .onLongPressGesture(minimumDuration: 0.2) {
-                Task {
-                    try? await self.client.statuses?.favourite(statusId: self.statusViewModel.id)
-                }
-
-                self.showThumbImage = true
-                HapticService.shared.fireHaptic(of: .buttonPress)
             }
     }
     
