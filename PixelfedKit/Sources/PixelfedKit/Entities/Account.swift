@@ -85,6 +85,9 @@ public struct Account: Codable {
     /// NULLABLE String (ISO 8601 Date), or null if no statuses
     public let lastStatusAt: String?
     
+    /// Recent photos send by the user.
+    public let recentPosts: [Status]?
+    
     private enum CodingKeys: String, CodingKey {
         case id
         case username
@@ -111,6 +114,7 @@ public struct Account: Codable {
         case suspended
         case limited
         case lastStatusAt = "last_status_at"
+        case recentPosts = "recent_posts"
     }
 }
 

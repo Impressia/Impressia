@@ -31,6 +31,6 @@ public struct TagHistory: Codable {
     /// The counted usage of the tag within that day.
     public let uses: String
     
-    /// he total of accounts using the tag within that day (cast from an integer).
+    /// The total of accounts using the tag within that day (cast from an integer).
     public let accounts: String
 }

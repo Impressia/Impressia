@@ -38,6 +38,10 @@ extension View {
                 ThirdPartyView()
             case .photoEditor(let photoAttachment):
                 PhotoEditorView(photoAttachment: photoAttachment)
+            case .trendingTags:
+                TrendingTagsView()
+            case .trendingAccounts:
+                TrendingAccountsView()
             }
         }
     }

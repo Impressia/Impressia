@@ -19,6 +19,8 @@ enum RouteurDestinations: Hashable {
     case signIn
     case thirdParty
     case photoEditor(photoAttachment: PhotoAttachment)
+    case trendingTags
+    case trendingAccounts
 }
 
 enum SheetDestinations: Identifiable {

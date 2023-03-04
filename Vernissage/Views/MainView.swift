@@ -27,7 +27,7 @@ struct MainView: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\.acct, order: .forward)]) var dbAccounts: FetchedResults<AccountData>
     
     private enum ViewMode {
-        case home, local, federated, profile, notifications, trending
+        case home, local, federated, profile, notifications, trendingPhotos, trendingTags, trendingAccounts
     }
     
     var body: some View {
@@ -55,8 +55,14 @@ struct MainView: View {
         case .home:
             HomeFeedView(accountId: applicationState.account?.id ?? String.empty())
                 .id(applicationState.account?.id ?? String.empty())
-        case .trending:
+        case .trendingPhotos:
             TrendStatusesView(accountId: applicationState.account?.id ?? String.empty())
+                .id(applicationState.account?.id ?? String.empty())
+        case .trendingTags:
+            TrendingTagsView()
+                .id(applicationState.account?.id ?? String.empty())
+        case .trendingAccounts:
+            TrendingAccountsView()
                 .id(applicationState.account?.id ?? String.empty())
         case .local:
             StatusesView(listType: .local)
@@ -115,12 +121,39 @@ struct MainView: View {
                 
                 Divider()
                 
-                Button {
-                    HapticService.shared.fireHaptic(of: .tabSelection)
-                    viewMode = .trending
+                Menu {
+                    Button {
+                        HapticService.shared.fireHaptic(of: .tabSelection)
+                        viewMode = .trendingPhotos
+                    } label: {
+                        HStack {
+                            Text(self.getViewTitle(viewMode: .trendingPhotos))
+                            Image(systemName: "photo.stack")
+                        }
+                    }
+                    
+                    Button {
+                        HapticService.shared.fireHaptic(of: .tabSelection)
+                        viewMode = .trendingTags
+                    } label: {
+                        HStack {
+                            Text(self.getViewTitle(viewMode: .trendingTags))
+                            Image(systemName: "tag")
+                        }
+                    }
+                    
+                    Button {
+                        HapticService.shared.fireHaptic(of: .tabSelection)
+                        viewMode = .trendingAccounts
+                    } label: {
+                        HStack {
+                            Text(self.getViewTitle(viewMode: .trendingAccounts))
+                            Image(systemName: "person.3")
+                        }
+                    }
                 } label: {
                     HStack {
-                        Text(self.getViewTitle(viewMode: .trending))
+                        Text("Trending")
                         Image(systemName: "chart.line.uptrend.xyaxis")
                     }
                 }
@@ -209,7 +242,7 @@ struct MainView: View {
     
     @ToolbarContentBuilder
     private func getTrailingToolbar() -> some ToolbarContent {
-        if viewMode == .local || viewMode == .home || viewMode == .federated || viewMode == .trending {
+        if viewMode == .local || viewMode == .home || viewMode == .federated || viewMode == .trendingPhotos {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     HapticService.shared.fireHaptic(of: .buttonPress)
@@ -228,8 +261,12 @@ struct MainView: View {
         switch viewMode {
         case .home:
             return "Home"
-        case .trending:
-            return "Trending"
+        case .trendingPhotos:
+            return "Photos"
+        case .trendingTags:
+            return "Tags"
+        case .trendingAccounts:
+            return "Accounts"
         case .local:
             return "Local"
         case .federated:
