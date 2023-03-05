@@ -8,11 +8,21 @@ import SwiftUI
 import NukeUI
 
 struct ImageGrid: View {
+    @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var routerPath: RouterPath
     @StateObject var photoUrl: PhotoUrl
         
     var body: some View {
-        if let url = photoUrl.url {
+        if self.photoUrl.sensitive && !self.applicationState.showSensitive {
+            BlurredImage(blurhash: self.photoUrl.blurhash)
+                .aspectRatio(contentMode: .fit)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .onTapGesture {
+                    if let statusId = self.photoUrl.statusId {
+                        self.routerPath.navigate(to: .status(id: statusId))
+                    }
+                }
+        } else if let url = photoUrl.url {
             LazyImage(url: url) { state in
                 if let image = state.image {
                     image

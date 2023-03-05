@@ -56,6 +56,7 @@ struct AccountImagesGridView: View {
                     self.photoUrls[index].statusId = status.id
                     self.photoUrls[index].url = mediaAttachment.url
                     self.photoUrls[index].blurhash = mediaAttachment.blurhash
+                    self.photoUrls[index].sensitive = status.sensitive
                     
                     index = index + 1
                 }
