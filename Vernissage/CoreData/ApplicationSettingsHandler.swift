@@ -62,4 +62,40 @@ class ApplicationSettingsHandler {
         let context = CoreDataHandler.shared.container.viewContext
         return ApplicationSettings(context: context)
     }
+    
+    func setHapticTabSelectionEnabled(value: Bool) {
+        let defaultSettings = self.getDefaultSettings()
+        defaultSettings.hapticTabSelectionEnabled = value
+        CoreDataHandler.shared.save()
+    }
+    
+    func setHapticRefreshEnabled(value: Bool) {
+        let defaultSettings = self.getDefaultSettings()
+        defaultSettings.hapticRefreshEnabled = value
+        CoreDataHandler.shared.save()
+    }
+    
+    func setHapticAnimationEnabled(value: Bool) {
+        let defaultSettings = self.getDefaultSettings()
+        defaultSettings.hapticAnimationEnabled = value
+        CoreDataHandler.shared.save()
+    }
+    
+    func setHapticNotificationEnabled(value: Bool) {
+        let defaultSettings = self.getDefaultSettings()
+        defaultSettings.hapticNotificationEnabled = value
+        CoreDataHandler.shared.save()
+    }
+    
+    func setHapticButtonPressEnabled(value: Bool) {
+        let defaultSettings = self.getDefaultSettings()
+        defaultSettings.hapticButtonPressEnabled = value
+        CoreDataHandler.shared.save()
+    }
+    
+    func setShowSensitive(value: Bool) {
+        let defaultSettings = self.getDefaultSettings()
+        defaultSettings.showSensitive = value
+        CoreDataHandler.shared.save()
+    }
 }

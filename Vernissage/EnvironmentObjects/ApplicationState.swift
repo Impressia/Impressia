@@ -55,6 +55,24 @@ public class ApplicationState: ObservableObject {
     /// Status id for showed interaction row.
     @Published var showInteractionStatusId = String.empty()
     
+    /// Should we fire haptic when user change tabs.
+    @Published var hapticTabSelectionEnabled = true
+    
+    /// Should we fire haptic when user refresh list.
+    @Published var hapticRefreshEnabled = true
+    
+    /// Should we fire haptic when user tap button.
+    @Published var hapticButtonPressEnabled = true
+    
+    /// Should we fire haptic when animation is finished.
+    @Published var hapticAnimationEnabled = true
+
+    /// Should we fire haptic when notification occures.
+    @Published var hapticNotificationEnabled = true
+
+    /// Should sensitive photos without mask.
+    @Published var showSensitive = false
+    
     public func changeApplicationState(accountModel: AccountModel, instance: Instance?, lastSeenStatusId: String?) {
         self.account = accountModel
         self.lastSeenStatusId = lastSeenStatusId

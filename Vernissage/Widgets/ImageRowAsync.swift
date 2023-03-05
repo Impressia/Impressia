@@ -51,7 +51,7 @@ struct ImageRowAsync: View {
             ZStack {
                 LazyImage(url: attachment.url) { state in
                     if let image = state.image {
-                        if self.statusViewModel.sensitive {
+                        if self.statusViewModel.sensitive && !self.applicationState.showSensitive {
                             ZStack {
                                 ContentWarning(blurhash: attachment.blurhash, spoilerText: self.statusViewModel.spoilerText) {
                                     self.imageView(image: image)

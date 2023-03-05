@@ -15,7 +15,6 @@ public class HapticService {
         case dataRefresh(intensity: CGFloat)
         case notification(_ type: UINotificationFeedbackGenerator.FeedbackType)
         case tabSelection
-        case timeline
         case animation
     }
 
@@ -34,17 +33,25 @@ public class HapticService {
 
         switch type {
         case .buttonPress:
-            impactGenerator.impactOccurred()
+            if ApplicationState.shared.hapticButtonPressEnabled {
+                impactGenerator.impactOccurred()
+            }
         case let .dataRefresh(intensity):
-            impactGenerator.impactOccurred(intensity: intensity)
+            if ApplicationState.shared.hapticRefreshEnabled {
+                impactGenerator.impactOccurred(intensity: intensity)
+            }
         case let .notification(type):
-            notificationGenerator.notificationOccurred(type)
+            if ApplicationState.shared.hapticNotificationEnabled {
+                notificationGenerator.notificationOccurred(type)
+            }
         case .tabSelection:
-            selectionGenerator.selectionChanged()
-        case .timeline:
-            selectionGenerator.selectionChanged()
+            if ApplicationState.shared.hapticTabSelectionEnabled {
+                selectionGenerator.selectionChanged()
+            }
         case .animation:
-            selectionGenerator.selectionChanged()
+            if ApplicationState.shared.hapticAnimationEnabled {
+                selectionGenerator.selectionChanged()
+            }
         }
     }
 

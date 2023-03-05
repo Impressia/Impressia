@@ -46,7 +46,7 @@ struct ImageRow: View {
         if let attachmentData {
             if let uiImage {
                 ZStack {
-                    if self.status.sensitive {
+                    if self.status.sensitive && !self.applicationState.showSensitive {
                         ContentWarning(blurhash: attachmentData.blurhash, spoilerText: self.status.spoilerText) {
                             Image(uiImage: uiImage)
                                 .resizable()

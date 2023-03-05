@@ -34,6 +34,12 @@ struct SettingsView: View {
                     // Avatar shapes.
                     AvatarShapesSectionView()
                     
+                    // Media settings view.
+                    MediaSettingsView()
+                    
+                    // Haptics.
+                    HapticsSectionView()
+                    
                     // Support.
                     SupportView()
                     

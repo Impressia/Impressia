@@ -18,6 +18,14 @@ extension ApplicationSettings {
     @NSManaged public var tintColor: Int32
     @NSManaged public var avatarShape: Int32
     @NSManaged public var lastRefreshTokens: Date
+    
+    @NSManaged public var hapticTabSelectionEnabled: Bool
+    @NSManaged public var hapticRefreshEnabled: Bool
+    @NSManaged public var hapticButtonPressEnabled: Bool
+    @NSManaged public var hapticAnimationEnabled: Bool
+    @NSManaged public var hapticNotificationEnabled: Bool
+    
+    @NSManaged public var showSensitive: Bool
 }
 
 extension ApplicationSettings : Identifiable {
