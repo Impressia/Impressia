@@ -19,15 +19,12 @@ struct HomeFeedView: View {
     
     @State private var allItemsLoaded = false
     @State private var state: ViewState = .loading
-    @State private var taskId: UUID? = nil
 
     @State private var opacity = 0.0
     @State private var offset = -50.0
     
     @FetchRequest var dbStatuses: FetchedResults<StatusData>
-    
-    private let pullToRefreshViewHigh: CGFloat = 170
-    
+        
     init(accountId: String) {
         _dbStatuses = FetchRequest<StatusData>(
             sortDescriptors: [SortDescriptor(\.id, order: .reverse)],
@@ -60,10 +57,6 @@ struct HomeFeedView: View {
     private func timeline() -> some View {
         ZStack {
             ScrollView {
-                // Offset reader for hiding top pill with amount of new photos.
-                self.offsetReader()
-                
-                // VStack with all photos from database.
                 LazyVStack {
                     ForEach(dbStatuses, id: \.self) { item in
                         if self.shouldUpToDateBeVisible(statusId: item.id) {
@@ -90,34 +83,15 @@ struct HomeFeedView: View {
                     }
                 }
             }
-            .coordinateSpace(name: "frameLayer")
-            .onPreferenceChange(OffsetPreferenceKey.self) {(offset) in
-                self.calculateOpacity(offset: offset)
-            }
             
             self.newPhotosView()
                 .offset(y: self.offset)
                 .opacity(self.opacity)
         }
         .refreshable {
-            // This is workaround of cancellation task when other SwiftUI states are changed.
-            // When user is pull to refresh we are precalculating opacity of the amount of status indicator,
-            // and this causes that refreshable is canceled, issue:
-            // (https://stackoverflow.com/questions/74977787/why-is-async-task-cancelled-in-a-refreshable-modifier-on-a-scrollview-ios-16)
-            taskId = .init()
-        }
-        .task(id: self.taskId) {
-            // We have to run task only after refresing the list by the user.
-            guard self.taskId != nil else {
-                return
-            }
-
             HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
             await self.refreshData()
             HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
-
-            // Reset taskId to nil, this prevent refreshing when user click status details and come back to list.
-            self.taskId = nil
         }
         .onChange(of: self.applicationState.amountOfNewStatuses) { newValue in
             self.calculateOffset()
@@ -128,6 +102,7 @@ struct HomeFeedView: View {
     
     private func refreshData() async {
         do {
+            print("start...")
             if let account = self.applicationState.account {
                 if let lastSeenStatusId = try await HomeTimelineService.shared.loadOnTop(for: account) {
                     try await HomeTimelineService.shared.save(lastSeenStatusId: lastSeenStatusId, for: account)
@@ -136,6 +111,7 @@ struct HomeFeedView: View {
                     self.applicationState.amountOfNewStatuses = 0
                 }
             }
+            print("end...")
         } catch {
             ErrorService.shared.handle(error, message: "Error during download statuses from server.", showToastr: !Task.isCancelled)
         }
@@ -158,28 +134,7 @@ struct HomeFeedView: View {
             }
         }
     }
-    
-    private func calculateOpacity(offset: CGFloat) {
-        if self.applicationState.amountOfNewStatuses == 0 {
-            return
-        }
         
-        // View is scrolled down.
-        if offset <= 0 {
-            self.opacity = 1.0
-            return
-        }
-        
-        if offset < self.pullToRefreshViewHigh {
-            // View is scrolled up (loader is visible).
-            self.opacity = 1.0 - min((offset / 50.0), 1.0)
-        } else {
-            // View is scrolled so high that we can hide amount of new statuses.
-            self.applicationState.amountOfNewStatuses = 0
-            self.hideNewStatusesView()
-        }
-    }
-    
     private func calculateOffset() {
         if self.applicationState.amountOfNewStatuses > 0 {
             withAnimation(.easeIn) {
@@ -205,19 +160,7 @@ struct HomeFeedView: View {
     private func shouldUpToDateBeVisible(statusId: String) -> Bool {
         return self.applicationState.lastSeenStatusId != dbStatuses.first?.id && self.applicationState.lastSeenStatusId == statusId
     }
-    
-    @ViewBuilder
-    private func offsetReader() -> some View {
-      GeometryReader { proxy in
-        Color.clear
-          .preference(
-            key: OffsetPreferenceKey.self,
-            value: proxy.frame(in: .named("frameLayer")).minY
-          )
-      }
-      .frame(height: 0)
-    }
-    
+        
     @ViewBuilder
     private func upToDatePlaceholder() -> some View {
         VStack(alignment: .center) {
@@ -239,19 +182,23 @@ struct HomeFeedView: View {
     private func newPhotosView() -> some View {
         VStack(alignment: .trailing, spacing: 4) {
             HStack {
-                Image(systemName: "arrow.up")
-                Text("\(self.applicationState.amountOfNewStatuses) New \(self.applicationState.amountOfNewStatuses == 1 ? "Photo" : "Photos")")
-            }
-            .padding(12)
-            .font(.footnote)
-            .fontWeight(.light)
-            .foregroundColor(Color.white)
-            .background(.ultraThinMaterial)
-            .clipShape(Capsule())
+                Spacer()
 
+                HStack {
+                    Image(systemName: "arrow.up")
+                    Text("\(self.applicationState.amountOfNewStatuses)")
+                }
+                .padding(12)
+                .font(.footnote)
+                .fontWeight(.light)
+                .foregroundColor(Color.white)
+                .background(.ultraThinMaterial)
+                .clipShape(Capsule())
+            }
+            
             Spacer()
         }
-        .padding(.top, 4)
-        .padding(.trailing, 4)
+        .padding(.top, 10)
+        .padding(.trailing, 6)
     }
 }
