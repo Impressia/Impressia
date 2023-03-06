@@ -22,13 +22,13 @@ struct SearchView: View {
                 HStack {
                     TextField("Search...", text: $query)
                         .padding(8)
-//                        .focused($focusedField, equals: .search)
+                        .focused($focusedField, equals: .search)
                         .keyboardType(.default)
                         .autocapitalization(.none)
                         .autocorrectionDisabled()
-//                        .onAppear() {
-//                            self.focusedField = .search
-//                        }
+                        .onAppear() {
+                            self.focusedField = .search
+                        }
                     
                     Spacer()
                     
@@ -40,9 +40,6 @@ struct SearchView: View {
                     }
                     .buttonStyle(.bordered)
                 }
-            }
-            .onDisappear {
-                self.focusedField = .unknown
             }
             
             if self.query.isEmpty == false {
@@ -66,6 +63,10 @@ struct SearchView: View {
                     }
                 }
             }
+        }
+        .onTapGesture {
+            self.focusedField = .unknown
+            hideKeyboard()
         }
          .navigationTitle("Search")
     }

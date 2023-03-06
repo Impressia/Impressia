@@ -93,8 +93,7 @@ struct MainView: View {
         ToolbarItem(placement: .principal) {
             Menu {
                 Button {
-                    HapticService.shared.fireHaptic(of: .tabSelection)
-                    viewMode = .home
+                    self.switchView(to: .home)
                 } label: {
                     HStack {
                         Text(self.getViewTitle(viewMode: .home))
@@ -103,8 +102,7 @@ struct MainView: View {
                 }
                 
                 Button {
-                    HapticService.shared.fireHaptic(of: .tabSelection)
-                    viewMode = .local
+                    self.switchView(to: .local)
                 } label: {
                     HStack {
                         Text(self.getViewTitle(viewMode: .local))
@@ -113,8 +111,7 @@ struct MainView: View {
                 }
 
                 Button {
-                    HapticService.shared.fireHaptic(of: .tabSelection)
-                    viewMode = .federated
+                    self.switchView(to: .federated)
                 } label: {
                     HStack {
                         Text(self.getViewTitle(viewMode: .federated))
@@ -123,8 +120,7 @@ struct MainView: View {
                 }
                 
                 Button {
-                    HapticService.shared.fireHaptic(of: .tabSelection)
-                    viewMode = .search
+                    self.switchView(to: .search)
                 } label: {
                     HStack {
                         Text(self.getViewTitle(viewMode: .search))
@@ -136,8 +132,7 @@ struct MainView: View {
                 
                 Menu {
                     Button {
-                        HapticService.shared.fireHaptic(of: .tabSelection)
-                        viewMode = .trendingPhotos
+                        self.switchView(to: .trendingPhotos)
                     } label: {
                         HStack {
                             Text(self.getViewTitle(viewMode: .trendingPhotos))
@@ -146,8 +141,7 @@ struct MainView: View {
                     }
                     
                     Button {
-                        HapticService.shared.fireHaptic(of: .tabSelection)
-                        viewMode = .trendingTags
+                        self.switchView(to: .trendingTags)
                     } label: {
                         HStack {
                             Text(self.getViewTitle(viewMode: .trendingTags))
@@ -156,8 +150,7 @@ struct MainView: View {
                     }
                     
                     Button {
-                        HapticService.shared.fireHaptic(of: .tabSelection)
-                        viewMode = .trendingAccounts
+                        self.switchView(to: .trendingAccounts)
                     } label: {
                         HStack {
                             Text(self.getViewTitle(viewMode: .trendingAccounts))
@@ -174,8 +167,7 @@ struct MainView: View {
                 Divider()
 
                 Button {
-                    HapticService.shared.fireHaptic(of: .tabSelection)
-                    viewMode = .profile
+                    self.switchView(to: .profile)
                 } label: {
                     HStack {
                         Text(self.getViewTitle(viewMode: .profile))
@@ -184,8 +176,7 @@ struct MainView: View {
                 }
                 
                 Button {
-                    HapticService.shared.fireHaptic(of: .tabSelection)
-                    viewMode = .notifications
+                    self.switchView(to: .notifications)
                 } label: {
                     HStack {
                         Text(self.getViewTitle(viewMode: .notifications))
@@ -290,6 +281,19 @@ struct MainView: View {
             return "Notifications"
         case .search:
             return "Search"
+        }
+    }
+    
+    private func switchView(to newViewMode: ViewMode) {
+        HapticService.shared.fireHaptic(of: .tabSelection)
+        
+        if viewMode == .search {
+            hideKeyboard()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.viewMode = newViewMode
+            }
+        } else {
+            self.viewMode = newViewMode
         }
     }
     
