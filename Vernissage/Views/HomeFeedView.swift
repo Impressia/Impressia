@@ -102,7 +102,6 @@ struct HomeFeedView: View {
     
     private func refreshData() async {
         do {
-            print("start...")
             if let account = self.applicationState.account {
                 if let lastSeenStatusId = try await HomeTimelineService.shared.loadOnTop(for: account) {
                     try await HomeTimelineService.shared.save(lastSeenStatusId: lastSeenStatusId, for: account)
@@ -111,7 +110,6 @@ struct HomeFeedView: View {
                     self.applicationState.amountOfNewStatuses = 0
                 }
             }
-            print("end...")
         } catch {
             ErrorService.shared.handle(error, message: "Error during download statuses from server.", showToastr: !Task.isCancelled)
         }
