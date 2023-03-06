@@ -27,7 +27,7 @@ struct MainView: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\.acct, order: .forward)]) var dbAccounts: FetchedResults<AccountData>
     
     private enum ViewMode {
-        case home, local, federated, profile, notifications, trendingPhotos, trendingTags, trendingAccounts
+        case home, local, federated, profile, notifications, trendingPhotos, trendingTags, trendingAccounts, search
     }
     
     var body: some View {
@@ -82,6 +82,9 @@ struct MainView: View {
                 NotificationsView(accountId: accountData.id)
                     .id(applicationState.account?.id ?? String.empty())
             }
+        case .search:
+            SearchView()
+                .id(applicationState.account?.id ?? String.empty())
         }
     }
     
@@ -116,6 +119,16 @@ struct MainView: View {
                     HStack {
                         Text(self.getViewTitle(viewMode: .federated))
                         Image(systemName: "globe.europe.africa")
+                    }
+                }
+                
+                Button {
+                    HapticService.shared.fireHaptic(of: .tabSelection)
+                    viewMode = .search
+                } label: {
+                    HStack {
+                        Text(self.getViewTitle(viewMode: .search))
+                        Image(systemName: "magnifyingglass")
                     }
                 }
                 
@@ -166,7 +179,7 @@ struct MainView: View {
                 } label: {
                     HStack {
                         Text(self.getViewTitle(viewMode: .profile))
-                        Image(systemName: "person")
+                        Image(systemName: "person.crop.circle")
                     }
                 }
                 
@@ -242,7 +255,7 @@ struct MainView: View {
     
     @ToolbarContentBuilder
     private func getTrailingToolbar() -> some ToolbarContent {
-        if viewMode == .local || viewMode == .home || viewMode == .federated || viewMode == .trendingPhotos {
+        if viewMode == .local || viewMode == .home || viewMode == .federated || viewMode == .trendingPhotos || viewMode == .search {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     HapticService.shared.fireHaptic(of: .buttonPress)
@@ -275,6 +288,8 @@ struct MainView: View {
             return "Profile"
         case .notifications:
             return "Notifications"
+        case .search:
+            return "Search"
         }
     }
     

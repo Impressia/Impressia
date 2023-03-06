@@ -42,6 +42,8 @@ extension View {
                 TrendingTagsView()
             case .trendingAccounts:
                 TrendingAccountsView()
+            case .search:
+                SearchView()
             }
         }
     }
