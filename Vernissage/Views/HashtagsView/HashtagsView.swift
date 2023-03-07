@@ -8,12 +8,19 @@ import SwiftUI
 import PixelfedKit
 import Foundation
 
-struct TrendingTagsView: View {
+struct HashtagsView: View {
+    public enum ListType: Hashable {
+        case trending
+        case search(query: String)
+    }
+    
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var client: Client
     @EnvironmentObject var routerPath: RouterPath
 
-    @State private var tags: [TagTrend] = []
+    @State public var listType: ListType
+    
+    @State private var tags: [HashtagModel] = []
     @State private var state: ViewState = .loading
     
     var body: some View {
@@ -42,7 +49,9 @@ struct TrendingTagsView: View {
                             HStack {
                                 Text(tag.name).font(.headline)
                                 Spacer()
-                                Text("\(tag.total) posts").font(.caption)
+                                if let total = tag.total {
+                                    Text("\(total) posts").font(.caption)
+                                }
                             }
                         }
                     }
@@ -61,7 +70,7 @@ struct TrendingTagsView: View {
     
     private func loadData() async {
         do {
-            try await self.loadTags()
+            self.tags = try await self.loadTags()
             self.state = .loaded
         } catch {
             if !Task.isCancelled {
@@ -73,8 +82,14 @@ struct TrendingTagsView: View {
         }
     }
     
-    private func loadTags() async throws {
-        let tagsFromApi = try await self.client.trends?.tags()
-        self.tags = tagsFromApi ?? []
+    private func loadTags() async throws -> [HashtagModel] {
+        switch self.listType {
+        case .trending:
+            let tagsFromApi = try await self.client.trends?.tags()
+            return tagsFromApi?.map({ tagTrend in HashtagModel(tagTrend: tagTrend) }) ?? []
+        case .search(let query):
+            let results = try await self.client.search?.search(query: query, resultsType: .hashtags, limit: 40)
+            return results?.hashtags.map({ tag in HashtagModel(tag: tag) }) ?? []
+        }
     }
 }

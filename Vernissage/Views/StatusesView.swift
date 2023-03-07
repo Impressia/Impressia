@@ -20,6 +20,8 @@ struct StatusesView: View {
     @EnvironmentObject private var client: Client
     @EnvironmentObject private var routerPath: RouterPath
 
+    @Environment(\.dismiss) private var dismiss
+    
     @State public var listType: ListType
 
     @State private var allItemsLoaded = false
@@ -193,6 +195,14 @@ struct StatusesView: View {
                 minId: minId,
                 limit: self.defaultLimit) ?? []
         case .hashtag(let tag):
+            let hashtagsFromApi = try await self.client.search?.search(query: tag, resultsType: .hashtags)
+            guard let hashtagsFromApi = hashtagsFromApi, hashtagsFromApi.hashtags.isEmpty == false else {
+                ToastrService.shared.showError(title: "Hashtag not exists", imageSystemName: "exclamationmark.octagon")
+                dismiss()
+                
+                return []
+            }
+            
             return try await self.client.publicTimeline?.getTagStatuses(
                 tag: tag,
                 local: false,

@@ -32,7 +32,7 @@ struct UserProfileHeaderView: View {
                 
                 Spacer()
                 
-                NavigationLink(value: RouteurDestinations.accounts(entityId: account.id, listType: .followers)) {
+                NavigationLink(value: RouteurDestinations.accounts(listType: .followers(entityId: account.id))) {
                     VStack(alignment: .center) {
                         Text("\(account.followersCount)")
                             .font(.title3)
@@ -44,7 +44,7 @@ struct UserProfileHeaderView: View {
                                 
                 Spacer()
                 
-                NavigationLink(value: RouteurDestinations.accounts(entityId: account.id, listType: .following)) {
+                NavigationLink(value: RouteurDestinations.accounts(listType: .following(entityId: account.id))) {
                     VStack(alignment: .center) {
                         Text("\(account.followingCount)")
                             .font(.title3)

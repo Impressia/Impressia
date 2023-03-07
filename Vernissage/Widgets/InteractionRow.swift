@@ -80,11 +80,11 @@ struct InteractionRow: View {
             Spacer()
             
             Menu {
-                NavigationLink(value: RouteurDestinations.accounts(entityId: statusModel.id, listType: .reblogged)) {
+                NavigationLink(value: RouteurDestinations.accounts(listType: .reblogged(entityId: statusModel.id))) {
                     Label("Reboosted by", systemImage: "paperplane")
                 }
 
-                NavigationLink(value: RouteurDestinations.accounts(entityId: statusModel.id, listType: .favourited)) {
+                NavigationLink(value: RouteurDestinations.accounts(listType: .favourited(entityId: statusModel.id))) {
                     Label("Favourited by", systemImage: "hand.thumbsup")
                 }
 

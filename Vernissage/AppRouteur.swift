@@ -30,16 +30,16 @@ extension View {
                     accountId: accountId,
                     accountDisplayName: accountDisplayName,
                     accountUserName: accountUserName)
-            case .accounts(let entityId, let listType):
-                AccountsView(entityId: entityId, listType: listType)
+            case .accounts(let listType):
+                AccountsView(listType: listType)
             case .signIn:
                 SignInView()
             case .thirdParty:
                 ThirdPartyView()
             case .photoEditor(let photoAttachment):
                 PhotoEditorView(photoAttachment: photoAttachment)
-            case .trendingTags:
-                TrendingTagsView()
+            case .hashtags(let listType):
+                HashtagsView(listType: listType)
             case .trendingAccounts:
                 TrendingAccountsView()
             case .search:

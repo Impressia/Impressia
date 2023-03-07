@@ -13,7 +13,7 @@ public struct Tag: Codable {
     public let name: String
     
     /// A link to the hashtag on the instance.
-    public let url: URL?
+    public let url: String?
     
     /// Usage statistics for given days (typically the past week).
     public let history: [TagHistory]?

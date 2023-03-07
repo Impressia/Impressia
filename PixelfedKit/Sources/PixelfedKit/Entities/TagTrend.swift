@@ -19,7 +19,7 @@ public struct TagTrend: Codable {
     public let hashtag: String
     
     /// A link to the hashtag on the instance.
-    public let url: URL?
+    public let url: String?
     
     /// Total uses of hashtag.
     public let total: Int

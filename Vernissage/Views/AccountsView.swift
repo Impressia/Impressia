@@ -9,17 +9,17 @@ import PixelfedKit
 import Foundation
 
 struct AccountsView: View {
-    public enum ListType {
-        case followers
-        case following
-        case reblogged
-        case favourited
+    public enum ListType: Hashable {
+        case followers(entityId: String)
+        case following(entityId: String)
+        case reblogged(entityId: String)
+        case favourited(entityId: String)
+        case search(query: String)
     }
     
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var client: Client
 
-    @State var entityId: String
     @State var listType: ListType
 
     @State private var accounts: [Account] = []
@@ -122,26 +122,36 @@ struct AccountsView: View {
             return "Favourited by"
         case .reblogged:
             return "Reboosted by"
+        case .search(let query):
+            return query
         }
     }
     
     private func loadFromApi(page: Int) async throws -> [Account] {
         switch self.listType {
-        case .followers:
-            return try await self.client.accounts?.followers(account: self.entityId, page: page) ?? []
-        case .following:
-            return try await self.client.accounts?.following(account: self.entityId, page: page) ?? []
-        case .favourited:
+        case .followers(let entityId):
+            return try await self.client.accounts?.followers(account: entityId, page: page) ?? []
+        case .following(let entityId):
+            return try await self.client.accounts?.following(account: entityId, page: page) ?? []
+        case .favourited(let entityId):
             // TODO: Workaround for not working paging for favourites/reblogged issues: https://github.com/pixelfed/pixelfed/issues/4182.
             if page == 1 {
-                return try await self.client.statuses?.favouritedBy(statusId: self.entityId, limit: 40, page: page) ?? []
+                return try await self.client.statuses?.favouritedBy(statusId: entityId, limit: 40, page: page) ?? []
             } else {
                 return []
             }
-        case .reblogged:
+        case .reblogged(let entityId):
             // TODO: Workaround for not working paging for favourites/reblogged issues: https://github.com/pixelfed/pixelfed/issues/4182.
             if page == 1 {
-                return try await self.client.statuses?.rebloggedBy(statusId: self.entityId, limit: 40, page: page) ?? []
+                return try await self.client.statuses?.rebloggedBy(statusId: entityId, limit: 40, page: page) ?? []
+            } else {
+                return []
+            }
+        case .search(let query):
+            // TODO: Workaround for not working paging for favourites/reblogged issues: https://github.com/pixelfed/pixelfed/issues/4182.
+            if page == 1 {
+                let results = try await self.client.search?.search(query: query, resultsType: .accounts, limit: 40, page: page)
+                return results?.accounts ?? []
             } else {
                 return []
             }

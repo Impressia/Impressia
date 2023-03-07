@@ -7,7 +7,8 @@
 import SwiftUI
 
 struct SearchView: View {
-    
+    @EnvironmentObject var routerPath: RouterPath
+
     @State private var query = String.empty()
     
     @FocusState private var focusedField: FocusField?
@@ -44,30 +45,26 @@ struct SearchView: View {
             
             if self.query.isEmpty == false {
                 Section {
-                    NavigationLink(value: RouteurDestinations.search) {
-                        Label("Users with \"\(query)\"", systemImage: "person.3.sequence")
+                    NavigationLink(value: RouteurDestinations.accounts(listType: .search(query: self.query))) {
+                        Label("Users with \"\(self.query)\"", systemImage: "person.3.sequence")
                     }
                     
-                    NavigationLink(value: RouteurDestinations.search) {
-                        Label("Go to user \"\(query)\"", systemImage: "person.crop.circle")
+                    NavigationLink(value: RouteurDestinations.userProfile(accountId: "", accountDisplayName: "", accountUserName: self.query)) {
+                        Label("Go to user \"@\(self.query)\"", systemImage: "person.crop.circle")
                     }
                 }
                 
                 Section {
-                    NavigationLink(value: RouteurDestinations.search) {
-                        Label("Hashtags with \"\(query)\"", systemImage: "tag")
+                    NavigationLink(value: RouteurDestinations.hashtags(listType: .search(query: self.query))) {
+                        Label("Hashtags with \"\(self.query)\"", systemImage: "tag")
                     }
-                    
-                    NavigationLink(value: RouteurDestinations.search) {
-                        Label("Hashtags with \"\(query)\"", systemImage: "tag.circle")
+                                        
+                    NavigationLink(value: RouteurDestinations.statuses(listType: .hashtag(tag: self.query))) {
+                        Label("Go to hashtag \"#\(self.query)\"", systemImage: "tag.circle")
                     }
                 }
             }
         }
-        .onTapGesture {
-            self.focusedField = .unknown
-            hideKeyboard()
-        }
-         .navigationTitle("Search")
+        .navigationTitle("Search")
     }
 }

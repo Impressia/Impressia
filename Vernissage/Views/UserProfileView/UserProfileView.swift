@@ -11,6 +11,8 @@ struct UserProfileView: View {
     @EnvironmentObject private var applicationState: ApplicationState
     @EnvironmentObject private var client: Client
     
+    @Environment(\.dismiss) private var dismiss
+    
     @State public var accountId: String
     @State public var accountDisplayName: String?
     @State public var accountUserName: String
@@ -59,6 +61,18 @@ struct UserProfileView: View {
     
     private func loadData() async {
         do {
+            if self.accountId.isEmpty {
+                let accountsFromApi = try await self.client.search?.search(query: self.accountUserName, resultsType: .accounts)
+                if let accountFromApi = accountsFromApi?.accounts.first {
+                    self.accountId = accountFromApi.id
+                } else {
+                    ToastrService.shared.showError(title: "Account not exists", imageSystemName: "exclamationmark.octagon")
+                    dismiss()
+                    
+                    return
+                }
+            }
+            
             async let relationshipTask = self.client.accounts?.relationships(withId: self.accountId)
             async let accountTask = self.client.accounts?.account(withId: self.accountId)
             

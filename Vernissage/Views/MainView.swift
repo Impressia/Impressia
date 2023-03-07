@@ -59,7 +59,7 @@ struct MainView: View {
             TrendStatusesView(accountId: applicationState.account?.id ?? String.empty())
                 .id(applicationState.account?.id ?? String.empty())
         case .trendingTags:
-            TrendingTagsView()
+            HashtagsView(listType: .trending)
                 .id(applicationState.account?.id ?? String.empty())
         case .trendingAccounts:
             TrendingAccountsView()

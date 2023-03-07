@@ -15,11 +15,11 @@ enum RouteurDestinations: Hashable {
     case bookmarks
     case favourites
     case userProfile(accountId: String, accountDisplayName: String?, accountUserName: String)
-    case accounts(entityId: String, listType: AccountsView.ListType)
+    case accounts(listType: AccountsView.ListType)
     case signIn
     case thirdParty
     case photoEditor(photoAttachment: PhotoAttachment)
-    case trendingTags
+    case hashtags(listType: HashtagsView.ListType)
     case trendingAccounts
     case search
 }
