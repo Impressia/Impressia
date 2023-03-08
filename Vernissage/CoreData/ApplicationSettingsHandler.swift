@@ -98,4 +98,10 @@ class ApplicationSettingsHandler {
         defaultSettings.showSensitive = value
         CoreDataHandler.shared.save()
     }
+    
+    func setShowPhotoDescription(value: Bool) {
+        let defaultSettings = self.getDefaultSettings()
+        defaultSettings.showPhotoDescription = value
+        CoreDataHandler.shared.save()
+    }
 }

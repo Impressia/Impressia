@@ -146,6 +146,9 @@ struct VernissageApp: App {
         if let avatarShape = AvatarShape(rawValue: Int(defaultSettings.avatarShape)) {
             self.applicationState.avatarShape = avatarShape
         }
+        
+        self.applicationState.showSensitive = defaultSettings.showSensitive
+        self.applicationState.showPhotoDescription = defaultSettings.showPhotoDescription
     }
     
     private func setImagePipelines() {

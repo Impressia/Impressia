@@ -26,6 +26,7 @@ extension ApplicationSettings {
     @NSManaged public var hapticNotificationEnabled: Bool
     
     @NSManaged public var showSensitive: Bool
+    @NSManaged public var showPhotoDescription: Bool
 }
 
 extension ApplicationSettings : Identifiable {

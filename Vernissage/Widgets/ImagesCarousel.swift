@@ -19,19 +19,22 @@ struct ImagesCarousel: View {
     @Binding public var exifExposure: String?
     @Binding public var exifCreatedDate: String?
     @Binding public var exifLens: String?
+    @Binding public var description: String?
     
     init(attachments: [AttachmentModel],
          selectedAttachmentId: Binding<String?>,
          exifCamera: Binding<String?>,
          exifExposure: Binding<String?>,
          exifCreatedDate: Binding<String?>,
-         exifLens: Binding<String?>
+         exifLens: Binding<String?>,
+         description: Binding<String?>
     ) {
         _selectedAttachmentId = selectedAttachmentId
         _exifCamera = exifCamera
         _exifExposure = exifExposure
         _exifCreatedDate = exifCreatedDate
         _exifLens = exifLens
+        _description = description
         
         self.attachments = attachments
         self.selected = String.empty()
@@ -85,6 +88,7 @@ struct ImagesCarousel: View {
                 self.exifExposure = attachment.exifExposure
                 self.exifCreatedDate = attachment.exifCreatedDate
                 self.exifLens = attachment.exifLens
+                self.description = attachment.description
             }
         })
         .onAppear {

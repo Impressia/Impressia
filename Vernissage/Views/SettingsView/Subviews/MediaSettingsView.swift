@@ -11,6 +11,7 @@ struct MediaSettingsView: View {
     @Environment(\.colorScheme) var colorScheme
     
     @State var showSensitive = true
+    @State var showPhotoDescription = true
     
     var body: some View {
         Section("Media settings") {
@@ -20,10 +21,17 @@ struct MediaSettingsView: View {
                     self.applicationState.showSensitive = newValue
                     ApplicationSettingsHandler.shared.setShowSensitive(value: newValue)
                 }
+            
+            Toggle("Show photo description", isOn: $showPhotoDescription)
+                .onChange(of: showPhotoDescription) { newValue in
+                    self.applicationState.showPhotoDescription = newValue
+                    ApplicationSettingsHandler.shared.setShowPhotoDescription(value: newValue)
+                }
         }
         .onAppear {
             let defaultSettings = ApplicationSettingsHandler.shared.getDefaultSettings()
             self.showSensitive = defaultSettings.showSensitive
+            self.showPhotoDescription = defaultSettings.showPhotoDescription
         }
     }
 }

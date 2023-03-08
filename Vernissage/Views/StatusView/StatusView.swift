@@ -31,6 +31,7 @@ struct StatusView: View {
     @State private var exifExposure: String?
     @State private var exifCreatedDate: String?
     @State private var exifLens: String?
+    @State private var description: String?
     
     @State var image: Image?
     
@@ -61,7 +62,8 @@ struct StatusView: View {
                                        exifCamera: $exifCamera,
                                        exifExposure: $exifExposure,
                                        exifCreatedDate: $exifCreatedDate,
-                                       exifLens: $exifLens)
+                                       exifLens: $exifLens,
+                                       description: $description)
                         .onTapGesture {
                             withoutAnimation {
                                 if let attachment = self.statusViewModel?.mediaAttachments.first(where: { $0.id == self.selectedAttachmentId }),
@@ -100,6 +102,10 @@ struct StatusView: View {
                                 LabelIcon(iconName: "camera.aperture", value: self.exifLens)
                                 LabelIcon(iconName: "timelapse", value: self.exifExposure)
                                 LabelIcon(iconName: "calendar", value: self.exifCreatedDate?.toDate(.isoDateTimeSec)?.formatted())
+                                
+                                if self.applicationState.showPhotoDescription {
+                                    LabelIcon(iconName: "eye.trianglebadge.exclamationmark", value: self.description)
+                                }
                             }
                             .padding(.bottom, 2)
                             .foregroundColor(.lightGrayColor)

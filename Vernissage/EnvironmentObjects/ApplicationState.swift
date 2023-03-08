@@ -73,6 +73,9 @@ public class ApplicationState: ObservableObject {
     /// Should sensitive photos without mask.
     @Published var showSensitive = false
     
+    /// Should photo description for visually impaired be displayed.
+    @Published var showPhotoDescription = false
+    
     public func changeApplicationState(accountModel: AccountModel, instance: Instance?, lastSeenStatusId: String?) {
         self.account = accountModel
         self.lastSeenStatusId = lastSeenStatusId
