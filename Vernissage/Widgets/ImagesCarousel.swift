@@ -14,7 +14,7 @@ struct ImagesCarousel: View {
     @State private var selected: String
     @State private var heightWasPrecalculated: Bool
     
-    @Binding public var selectedAttachmentId: String?
+    @Binding public var selectedAttachment: AttachmentModel?
     @Binding public var exifCamera: String?
     @Binding public var exifExposure: String?
     @Binding public var exifCreatedDate: String?
@@ -22,14 +22,14 @@ struct ImagesCarousel: View {
     @Binding public var description: String?
     
     init(attachments: [AttachmentModel],
-         selectedAttachmentId: Binding<String?>,
+         selectedAttachment: Binding<AttachmentModel?>,
          exifCamera: Binding<String?>,
          exifExposure: Binding<String?>,
          exifCreatedDate: Binding<String?>,
          exifLens: Binding<String?>,
          description: Binding<String?>
     ) {
-        _selectedAttachmentId = selectedAttachmentId
+        _selectedAttachment = selectedAttachment
         _exifCamera = exifCamera
         _exifExposure = exifExposure
         _exifCreatedDate = exifCreatedDate
@@ -81,9 +81,8 @@ struct ImagesCarousel: View {
         .frame(height: self.imageHeight)
         .tabViewStyle(PageTabViewStyle())
         .onChange(of: selected, perform: { index in
-            self.selectedAttachmentId = selected
-
             if let attachment = attachments.first(where: { item in item.id == index }) {
+                self.selectedAttachment = attachment
                 self.exifCamera = attachment.exifCamera
                 self.exifExposure = attachment.exifExposure
                 self.exifCreatedDate = attachment.exifCreatedDate

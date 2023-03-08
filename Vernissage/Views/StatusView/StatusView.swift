@@ -21,27 +21,23 @@ struct StatusView: View {
     @State var imageWidth: Int32?
     @State var imageHeight: Int32?
 
-    @State private var showImageViewer = false
     @State private var state: ViewState = .loading
     
     @State private var statusViewModel: StatusModel?
     
-    @State private var selectedAttachmentId: String?
+    @State private var selectedAttachmentModel: AttachmentModel?
+    @State private var tappedAttachmentModel: AttachmentModel?
     @State private var exifCamera: String?
     @State private var exifExposure: String?
     @State private var exifCreatedDate: String?
     @State private var exifLens: String?
     @State private var description: String?
-    
-    @State var image: Image?
-    
+        
     var body: some View {
         self.mainBody()
             .navigationTitle("Details")
-            .fullScreenCover(isPresented: $showImageViewer, content: {
-                if let statusViewModel = self.statusViewModel {
-                    ImagesViewer(statusViewModel: statusViewModel, selectedAttachmentId: selectedAttachmentId ?? String.empty())
-                }
+            .fullScreenCover(item: $tappedAttachmentModel, content: { attachmentModel in
+                ImagesViewer(attachmentModel: attachmentModel)
             })
     }
     
@@ -58,7 +54,7 @@ struct StatusView: View {
                 ScrollView {
                     VStack (alignment: .leading) {
                         ImagesCarousel(attachments: statusViewModel.mediaAttachments,
-                                       selectedAttachmentId: $selectedAttachmentId,
+                                       selectedAttachment: $selectedAttachmentModel,
                                        exifCamera: $exifCamera,
                                        exifExposure: $exifExposure,
                                        exifCreatedDate: $exifCreatedDate,
@@ -66,12 +62,7 @@ struct StatusView: View {
                                        description: $description)
                         .onTapGesture {
                             withoutAnimation {
-                                if let attachment = self.statusViewModel?.mediaAttachments.first(where: { $0.id == self.selectedAttachmentId }),
-                                   let data = attachment.data,
-                                   let uiImage = UIImage(data: data) {
-                                    self.image = Image(uiImage: uiImage)
-                                    self.showImageViewer.toggle()
-                                }
+                                self.tappedAttachmentModel = self.selectedAttachmentModel
                             }
                         }
                         
@@ -173,7 +164,6 @@ struct StatusView: View {
                 }
                 
                 self.statusViewModel = statusModel
-                self.selectedAttachmentId = statusModel.mediaAttachments.first?.id ?? String.empty()
                 
                 // If we have status in database then we can update data.
                 // TODO: It seems that Pixelfed didn't support status edit, thus we don't need to update status.

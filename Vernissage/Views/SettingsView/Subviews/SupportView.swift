@@ -18,7 +18,6 @@ struct SupportView: View {
                         .font(.title)
                     VStack(alignment: .leading) {
                         Text(product.displayName)
-                            .font(.caption)
                         Text(product.description)
                             .font(.footnote)
                             .foregroundColor(.lightGrayColor)

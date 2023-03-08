@@ -16,17 +16,31 @@ struct MediaSettingsView: View {
     var body: some View {
         Section("Media settings") {
             
-            Toggle("Always show NSFW (sensitive)", isOn: $showSensitive)
-                .onChange(of: showSensitive) { newValue in
-                    self.applicationState.showSensitive = newValue
-                    ApplicationSettingsHandler.shared.setShowSensitive(value: newValue)
+            Toggle(isOn: $showSensitive) {
+                VStack(alignment: .leading) {
+                    Text("Always show NSFW")
+                    Text("Force show all NFSW (sensitive) media without warnings")
+                        .font(.footnote)
+                        .foregroundColor(.lightGrayColor)
                 }
+            }
+            .onChange(of: showSensitive) { newValue in
+                self.applicationState.showSensitive = newValue
+                ApplicationSettingsHandler.shared.setShowSensitive(value: newValue)
+            }
             
-            Toggle("Show photo description", isOn: $showPhotoDescription)
-                .onChange(of: showPhotoDescription) { newValue in
-                    self.applicationState.showPhotoDescription = newValue
-                    ApplicationSettingsHandler.shared.setShowPhotoDescription(value: newValue)
+            Toggle(isOn: $showPhotoDescription) {
+                VStack(alignment: .leading) {
+                    Text("Show alternative text")
+                    Text("Show alternative text if present on status details screen")
+                        .font(.footnote)
+                        .foregroundColor(.lightGrayColor)
                 }
+            }
+            .onChange(of: showPhotoDescription) { newValue in
+                self.applicationState.showPhotoDescription = newValue
+                ApplicationSettingsHandler.shared.setShowPhotoDescription(value: newValue)
+            }
         }
         .onAppear {
             let defaultSettings = ApplicationSettingsHandler.shared.getDefaultSettings()

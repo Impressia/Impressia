@@ -23,9 +23,13 @@ extension Status {
     func getAllImageMediaAttachments() -> [MediaAttachment] {
         if let reblog = self.reblog {
             // If status is rebloged the we have to check if orginal status contains image.
-            return reblog.mediaAttachments.filter { mediaAttachment in mediaAttachment.type == .image }
+            return reblog.mediaAttachments
+                .sorted(by: { (lhs, rhs) in lhs.id < rhs.id })
+                .filter { mediaAttachment in mediaAttachment.type == .image }
         }
         
-        return self.mediaAttachments.filter { mediaAttachment in mediaAttachment.type == .image }
+        return self.mediaAttachments
+            .sorted(by: { (lhs, rhs) in lhs.id < rhs.id })
+            .filter { mediaAttachment in mediaAttachment.type == .image }
     }
 }

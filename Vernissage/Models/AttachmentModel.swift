@@ -7,7 +7,7 @@
 import Foundation
 import PixelfedKit
 
-public class AttachmentModel: ObservableObject {
+public class AttachmentModel: ObservableObject, Identifiable {
     public let id: String
     public let type: MediaAttachment.MediaAttachmentType
     public let url: URL

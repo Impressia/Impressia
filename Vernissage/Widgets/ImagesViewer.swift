@@ -8,9 +8,8 @@ import SwiftUI
 
 struct ImagesViewer: View {
     @Environment(\.dismiss) private var dismiss
-        
-    private let statusViewModel: StatusModel
-    private let selectedAttachmentId: String
+
+    private let attachmentModel: AttachmentModel
     private let image: Image
     private let closeDragDistance = UIScreen.main.bounds.height / 1.8
     private let imageHeight: Double
@@ -27,13 +26,10 @@ struct ImagesViewer: View {
     @State private var currentOffset = CGSize.zero
     @State private var accumulatedOffset = CGSize.zero
             
-    init(statusViewModel: StatusModel, selectedAttachmentId: String) {
-        self.statusViewModel = statusViewModel
-        self.selectedAttachmentId = selectedAttachmentId
+    init(attachmentModel: AttachmentModel) {
+        self.attachmentModel = attachmentModel
         
-        if let attachment = statusViewModel.mediaAttachments.first(where: { $0.id == selectedAttachmentId }),
-           let data = attachment.data,
-           let uiImage = UIImage(data: data) {
+        if let data = attachmentModel.data, let uiImage = UIImage(data: data) {
             self.image = Image(uiImage: uiImage)
             self.imageHeight = uiImage.size.height
             self.imageWidth = uiImage.size.width
@@ -48,7 +44,7 @@ struct ImagesViewer: View {
         image
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .tag(selectedAttachmentId)
+            .tag(attachmentModel.id)
             .offset(currentOffset)
             .rotationEffect(rotationAngle)
             .scaleEffect(finalMagnification + currentMagnification)
