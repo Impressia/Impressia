@@ -11,7 +11,7 @@ struct LabelIcon: View {
     let value: String?
     
     var body: some View {
-        if let value {
+        if let value, value.isEmpty == false {
             HStack(alignment: .center) {
                 Image(systemName: iconName)
                     .frame(width: 24, alignment: .center)
