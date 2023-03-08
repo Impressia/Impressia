@@ -155,6 +155,7 @@
 		F8C5E55F2988E92600ADF6A7 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C5E55E2988E92600ADF6A7 /* AccountModel.swift */; };
 		F8C5E56229892CC300ADF6A7 /* FirstAppear.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C5E56129892CC300ADF6A7 /* FirstAppear.swift */; };
 		F8CAE63E29B8902D001E0372 /* ClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CAE63D29B8902D001E0372 /* ClearButton.swift */; };
+		F8CAE64029B8E6E1001E0372 /* UIApplication+Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CAE63F29B8E6E1001E0372 /* UIApplication+Window.swift */; };
 		F8CC95CE2970761D00C9C2AC /* TintColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CC95CD2970761D00C9C2AC /* TintColor.swift */; };
 		F8CEEDF829ABADDD00DBED66 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CEEDF729ABADDD00DBED66 /* UIImage+Size.swift */; };
 		F8CEEDFA29ABAFD200DBED66 /* ImageFileTranseferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CEEDF929ABAFD200DBED66 /* ImageFileTranseferable.swift */; };
@@ -315,6 +316,7 @@
 		F8C5E56129892CC300ADF6A7 /* FirstAppear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAppear.swift; sourceTree = "<group>"; };
 		F8C937A929882CA90004D782 /* Vernissage-001.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-001.xcdatamodel"; sourceTree = "<group>"; };
 		F8CAE63D29B8902D001E0372 /* ClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButton.swift; sourceTree = "<group>"; };
+		F8CAE63F29B8E6E1001E0372 /* UIApplication+Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Window.swift"; sourceTree = "<group>"; };
 		F8CC95CD2970761D00C9C2AC /* TintColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TintColor.swift; sourceTree = "<group>"; };
 		F8CEEDF729ABADDD00DBED66 /* UIImage+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Size.swift"; sourceTree = "<group>"; };
 		F8CEEDF929ABAFD200DBED66 /* ImageFileTranseferable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileTranseferable.swift; sourceTree = "<group>"; };
@@ -424,6 +426,7 @@
 				F88E4D43297E82EB0057491A /* Status+MediaAttachmentType.swift */,
 				F8864CEE29ACE90B0020C534 /* UIFont+Font.swift */,
 				F8864CF029ACFFB80020C534 /* View+Keyboard.swift */,
+				F8CAE63F29B8E6E1001E0372 /* UIApplication+Window.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -843,6 +846,7 @@
 				F886F257297859E300879356 /* CacheImageService.swift in Sources */,
 				F8B08862299435C9002AB40A /* SupportView.swift in Sources */,
 				F8984E4D296B648000A2610F /* UIImage+Blurhash.swift in Sources */,
+				F8CAE64029B8E6E1001E0372 /* UIApplication+Window.swift in Sources */,
 				F897978A2968314A00B22335 /* LoadingIndicator.swift in Sources */,
 				F8B9B351298D4B34009CC69C /* Client+Account.swift in Sources */,
 				F8210DE52966E160001D9973 /* Color+SystemColors.swift in Sources */,

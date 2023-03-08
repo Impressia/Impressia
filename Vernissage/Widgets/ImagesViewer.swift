@@ -13,6 +13,8 @@ struct ImagesViewer: View {
     private let selectedAttachmentId: String
     private let image: Image
     private let closeDragDistance = UIScreen.main.bounds.height / 1.8
+    private let imageHeight: Double
+    private let imageWidth: Double
             
     // Magnification.
     @State private var currentMagnification = 0.0
@@ -24,7 +26,7 @@ struct ImagesViewer: View {
     // Draging.
     @State private var currentOffset = CGSize.zero
     @State private var accumulatedOffset = CGSize.zero
-        
+            
     init(statusViewModel: StatusModel, selectedAttachmentId: String) {
         self.statusViewModel = statusViewModel
         self.selectedAttachmentId = selectedAttachmentId
@@ -33,8 +35,12 @@ struct ImagesViewer: View {
            let data = attachment.data,
            let uiImage = UIImage(data: data) {
             self.image = Image(uiImage: uiImage)
+            self.imageHeight = uiImage.size.height
+            self.imageWidth = uiImage.size.width
         } else {
             self.image = Image(systemName: "photo")
+            self.imageHeight = 200
+            self.imageWidth = 200
         }
     }
     
@@ -50,6 +56,12 @@ struct ImagesViewer: View {
             .gesture(magnificationGesture)
             .gesture(doubleTapGesture)
             .gesture(tapGesture)
+            .onAppear {
+                self.currentOffset = self.calculateStartingOffset()
+                withAnimation {
+                    self.currentOffset = CGSize.zero
+                }
+            }
     }
         
     @MainActor
@@ -143,8 +155,14 @@ struct ImagesViewer: View {
     
     var tapGesture: some Gesture {
         TapGesture().onEnded({ _ in
-            withoutAnimation {
-                self.dismiss()
+            withAnimation {
+                self.currentOffset = self.calculateStartingOffset()
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                withoutAnimation {
+                    self.dismiss()
+                }
             }
         })
     }
@@ -200,5 +218,31 @@ struct ImagesViewer: View {
             
             HapticService.shared.fireHaptic(of: .animation)
         }
+    }
+    
+    private func calculateStartingOffset() -> CGSize {
+        let imageOnScreenHeight = self.calculateHeight(width: self.imageWidth, height: self.imageHeight)
+        let emptySpace = -(UIScreen.main.bounds.height - imageOnScreenHeight)
+        let topMargin = self.calculateTopMargin()
+
+        return CGSize(width: 0, height: (emptySpace / 2) + topMargin)
+    }
+    
+    private func calculateTopMargin() -> CGFloat {
+        let safeAreaTop = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 20.0
+        
+        /// I cannot figure out nothing super efficient ;/.
+        if safeAreaTop == 20.0 {
+            return safeAreaTop + 34
+        } else if safeAreaTop == 47.0 {
+            return safeAreaTop + 38
+        } else {
+            return safeAreaTop + 26
+        }
+    }
+        
+    private func calculateHeight(width: Double, height: Double) -> CGFloat {
+        let divider = width / UIScreen.main.bounds.size.width
+        return height / divider
     }
 }
