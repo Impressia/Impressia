@@ -40,8 +40,8 @@ extension View {
                 PhotoEditorView(photoAttachment: photoAttachment)
             case .hashtags(let listType):
                 HashtagsView(listType: listType)
-            case .trendingAccounts:
-                TrendingAccountsView()
+            case .accountsPhoto(let listType):
+                AccountsPhotoView(listType: listType)
             case .search:
                 SearchView()
             }

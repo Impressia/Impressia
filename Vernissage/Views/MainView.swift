@@ -62,7 +62,7 @@ struct MainView: View {
             HashtagsView(listType: .trending)
                 .id(applicationState.account?.id ?? String.empty())
         case .trendingAccounts:
-            TrendingAccountsView()
+            AccountsPhotoView(listType: .trending)
                 .id(applicationState.account?.id ?? String.empty())
         case .local:
             StatusesView(listType: .local)
@@ -203,8 +203,7 @@ struct MainView: View {
             Menu {
                 ForEach(self.dbAccounts) { account in
                     Button {
-                        HapticService.shared.fireHaptic(of: .buttonPress)
-                        self.tryToSwitch(account)
+                        self.switchAccounts(account)
                     } label: {
                         if self.applicationState.account?.id == account.id {
                             Label(account.displayName ?? account.acct, systemImage: "checkmark")
@@ -294,6 +293,19 @@ struct MainView: View {
             }
         } else {
             self.viewMode = newViewMode
+        }
+    }
+    
+    private func switchAccounts(_ account: AccountData) {
+        HapticService.shared.fireHaptic(of: .buttonPress)
+        
+        if viewMode == .search {
+            hideKeyboard()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.tryToSwitch(account)
+            }
+        } else {
+            self.tryToSwitch(account)
         }
     }
     

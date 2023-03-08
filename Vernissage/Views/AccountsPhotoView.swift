@@ -8,11 +8,18 @@ import SwiftUI
 import PixelfedKit
 import Foundation
 
-struct TrendingAccountsView: View {
+struct AccountsPhotoView: View {
+    public enum ListType: Hashable {
+        case trending
+        case search(query: String)
+    }
+    
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var client: Client
     @EnvironmentObject var routerPath: RouterPath
 
+    @State public var listType: ListType
+    
     @State private var accounts: [Account] = []
     @State private var state: ViewState = .loading
     
@@ -36,8 +43,9 @@ struct TrendingAccountsView: View {
                 List {
                     ForEach(self.accounts, id: \.id) { account in
                         Section {
-                            AccountImagesGridView(account: account)
-                                // .id(UUID().uuidString)
+                            ImagesGrid(gridType: .account(accountId: account.id,
+                                                          accountDisplayName: account.displayNameWithoutEmojis,
+                                                          accountUserName: account.acct))
                         } header: {
                             HStack {
                                 UsernameRow(
@@ -50,6 +58,11 @@ struct TrendingAccountsView: View {
                             .textCase(.none)
                             .listRowInsets(EdgeInsets())
                             .padding(.vertical, 12)
+                            .onTapGesture {
+                                self.routerPath.navigate(to: .userProfile(accountId: account.id,
+                                                                          accountDisplayName: account.displayNameWithoutEmojis,
+                                                                          accountUserName: account.acct))
+                            }
                         }
                     }
                 }
@@ -67,14 +80,8 @@ struct TrendingAccountsView: View {
     
     private func loadData() async {
         do {
-            try await self.loadAccounts()
+            self.accounts = try await self.loadAccounts()
             self.state = .loaded
-        } catch NetworkError.notSuccessResponse(let response) {
-            // TODO: This code can be removed when other Pixelfed server will support trending accounts.
-            if response.statusCode() == HTTPStatusCode.notFound {
-                self.accounts = []
-                self.state = .loaded
-            }
         } catch {
             if !Task.isCancelled {
                 ErrorService.shared.handle(error, message: "Accounts not retrieved.", showToastr: true)
@@ -85,8 +92,23 @@ struct TrendingAccountsView: View {
         }
     }
     
-    private func loadAccounts() async throws {
-        let accountsFromApi = try await self.client.trends?.accounts()
-        self.accounts = accountsFromApi ?? []
+    private func loadAccounts() async throws -> [Account] {
+        switch self.listType {
+        case .trending:
+            do {
+                let accountsFromApi = try await self.client.trends?.accounts()
+                return accountsFromApi ?? []
+            } catch NetworkError.notSuccessResponse(let response) {
+                // TODO: This code can be removed when other Pixelfed server will support trending accounts.
+                if response.statusCode() == HTTPStatusCode.notFound {
+                    return []
+                }
+                
+                throw NetworkError.notSuccessResponse(response)
+            }
+        case .search(let query):
+            let results = try await self.client.search?.search(query: query, resultsType: .accounts, limit: 40, page: 1)
+            return results?.accounts ?? []
+        }
     }
 }

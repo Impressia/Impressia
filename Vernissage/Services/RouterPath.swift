@@ -20,7 +20,7 @@ enum RouteurDestinations: Hashable {
     case thirdParty
     case photoEditor(photoAttachment: PhotoAttachment)
     case hashtags(listType: HashtagsView.ListType)
-    case trendingAccounts
+    case accountsPhoto(listType: AccountsPhotoView.ListType)
     case search
 }
 

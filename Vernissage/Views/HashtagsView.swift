@@ -43,8 +43,7 @@ struct HashtagsView: View {
                 List {
                     ForEach(self.tags, id: \.id) { tag in
                         Section {
-                            TagImagesGridView(hashtag: tag.hashtag)
-                                // .id(UUID().uuidString)
+                            ImagesGrid(gridType: .hashtag(name: tag.hashtag))
                         } header: {
                             HStack {
                                 Text(tag.name).font(.headline)
@@ -52,6 +51,9 @@ struct HashtagsView: View {
                                 if let total = tag.total {
                                     Text("\(total) posts").font(.caption)
                                 }
+                            }
+                            .onTapGesture {
+                                self.routerPath.navigate(to: .tag(hashTag: tag.hashtag))
                             }
                         }
                     }

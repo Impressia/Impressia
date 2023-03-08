@@ -20,32 +20,22 @@ struct SearchView: View {
     var body: some View {
         List {
             Section {
-                HStack {
-                    TextField("Search...", text: $query)
-                        .padding(8)
-                        .focused($focusedField, equals: .search)
-                        .keyboardType(.default)
-                        .autocapitalization(.none)
-                        .autocorrectionDisabled()
-                        .onAppear() {
-                            self.focusedField = .search
-                        }
-                    
-                    Spacer()
-                    
-                    Button {
-                        
-                    } label: {
-                        Text("Search")
-                        
+                TextField("Search...", text: $query)
+                    .padding(8)
+                    .focused($focusedField, equals: .search)
+                    .keyboardType(.default)
+                    .autocapitalization(.none)
+                    .autocorrectionDisabled()
+                    .clearButton(text: $query)
+                    .onAppear() {
+                        self.focusedField = .search
                     }
-                    .buttonStyle(.bordered)
-                }
+                    .buttonStyle(PlainButtonStyle())
             }
             
             if self.query.isEmpty == false {
                 Section {
-                    NavigationLink(value: RouteurDestinations.accounts(listType: .search(query: self.query))) {
+                    NavigationLink(value: RouteurDestinations.accountsPhoto(listType: .search(query: self.query))) {
                         Label("Users with \"\(self.query)\"", systemImage: "person.3.sequence")
                     }
                     

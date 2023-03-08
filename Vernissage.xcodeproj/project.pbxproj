@@ -85,8 +85,7 @@
 		F886F257297859E300879356 /* CacheImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F886F256297859E300879356 /* CacheImageService.swift */; };
 		F88AB05329B3613900345EDE /* PhotoUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88AB05229B3613900345EDE /* PhotoUrl.swift */; };
 		F88AB05529B3626300345EDE /* ImageGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88AB05429B3626300345EDE /* ImageGrid.swift */; };
-		F88AB05829B36B8200345EDE /* TrendingAccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88AB05729B36B8200345EDE /* TrendingAccountsView.swift */; };
-		F88AB05D29B371B500345EDE /* AccountImagesGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88AB05B29B371B500345EDE /* AccountImagesGridView.swift */; };
+		F88AB05829B36B8200345EDE /* AccountsPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88AB05729B36B8200345EDE /* AccountsPhotoView.swift */; };
 		F88ABD9229686F1C004EF61E /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88ABD9129686F1C004EF61E /* MemoryCache.swift */; };
 		F88ABD9429687CA4004EF61E /* ComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88ABD9329687CA4004EF61E /* ComposeView.swift */; };
 		F88C246C295C37B80006098B /* VernissageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C246B295C37B80006098B /* VernissageApp.swift */; };
@@ -134,7 +133,7 @@
 		F8A93D7E2965FD89001D8331 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A93D7D2965FD89001D8331 /* UserProfileView.swift */; };
 		F8AD061329A565620042F111 /* String+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD061229A565620042F111 /* String+Random.swift */; };
 		F8AFF7C129B259150087D083 /* HashtagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AFF7C029B259150087D083 /* HashtagsView.swift */; };
-		F8AFF7C429B25EF40087D083 /* TagImagesGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AFF7C329B25EF40087D083 /* TagImagesGridView.swift */; };
+		F8AFF7C429B25EF40087D083 /* ImagesGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AFF7C329B25EF40087D083 /* ImagesGrid.swift */; };
 		F8B05ACB29B489B100857221 /* HapticsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B05ACA29B489B100857221 /* HapticsSectionView.swift */; };
 		F8B05ACE29B48E2F00857221 /* MediaSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B05ACD29B48E2F00857221 /* MediaSettingsView.swift */; };
 		F8B0885E29942E31002AB40A /* ThirdPartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B0885D29942E31002AB40A /* ThirdPartyView.swift */; };
@@ -155,6 +154,7 @@
 		F8C14394296AF21B001FE31D /* Double+Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C14393296AF21B001FE31D /* Double+Round.swift */; };
 		F8C5E55F2988E92600ADF6A7 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C5E55E2988E92600ADF6A7 /* AccountModel.swift */; };
 		F8C5E56229892CC300ADF6A7 /* FirstAppear.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C5E56129892CC300ADF6A7 /* FirstAppear.swift */; };
+		F8CAE63E29B8902D001E0372 /* ClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CAE63D29B8902D001E0372 /* ClearButton.swift */; };
 		F8CC95CE2970761D00C9C2AC /* TintColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CC95CD2970761D00C9C2AC /* TintColor.swift */; };
 		F8CEEDF829ABADDD00DBED66 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CEEDF729ABADDD00DBED66 /* UIImage+Size.swift */; };
 		F8CEEDFA29ABAFD200DBED66 /* ImageFileTranseferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CEEDF929ABAFD200DBED66 /* ImageFileTranseferable.swift */; };
@@ -241,8 +241,7 @@
 		F886F256297859E300879356 /* CacheImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheImageService.swift; sourceTree = "<group>"; };
 		F88AB05229B3613900345EDE /* PhotoUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoUrl.swift; sourceTree = "<group>"; };
 		F88AB05429B3626300345EDE /* ImageGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGrid.swift; sourceTree = "<group>"; };
-		F88AB05729B36B8200345EDE /* TrendingAccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingAccountsView.swift; sourceTree = "<group>"; };
-		F88AB05B29B371B500345EDE /* AccountImagesGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountImagesGridView.swift; sourceTree = "<group>"; };
+		F88AB05729B36B8200345EDE /* AccountsPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsPhotoView.swift; sourceTree = "<group>"; };
 		F88ABD9129686F1C004EF61E /* MemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
 		F88ABD9329687CA4004EF61E /* ComposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeView.swift; sourceTree = "<group>"; };
 		F88ABD9529687D4D004EF61E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -292,7 +291,7 @@
 		F8A93D7D2965FD89001D8331 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		F8AD061229A565620042F111 /* String+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Random.swift"; sourceTree = "<group>"; };
 		F8AFF7C029B259150087D083 /* HashtagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagsView.swift; sourceTree = "<group>"; };
-		F8AFF7C329B25EF40087D083 /* TagImagesGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagImagesGridView.swift; sourceTree = "<group>"; };
+		F8AFF7C329B25EF40087D083 /* ImagesGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesGrid.swift; sourceTree = "<group>"; };
 		F8B05AC929B488C600857221 /* Vernissage-003.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-003.xcdatamodel"; sourceTree = "<group>"; };
 		F8B05ACA29B489B100857221 /* HapticsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsSectionView.swift; sourceTree = "<group>"; };
 		F8B05ACC29B48DD000857221 /* Vernissage-004.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-004.xcdatamodel"; sourceTree = "<group>"; };
@@ -315,6 +314,7 @@
 		F8C5E55E2988E92600ADF6A7 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		F8C5E56129892CC300ADF6A7 /* FirstAppear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAppear.swift; sourceTree = "<group>"; };
 		F8C937A929882CA90004D782 /* Vernissage-001.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-001.xcdatamodel"; sourceTree = "<group>"; };
+		F8CAE63D29B8902D001E0372 /* ClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButton.swift; sourceTree = "<group>"; };
 		F8CC95CD2970761D00C9C2AC /* TintColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TintColor.swift; sourceTree = "<group>"; };
 		F8CEEDF729ABADDD00DBED66 /* UIImage+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Size.swift"; sourceTree = "<group>"; };
 		F8CEEDF929ABAFD200DBED66 /* ImageFileTranseferable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileTranseferable.swift; sourceTree = "<group>"; };
@@ -384,9 +384,6 @@
 		F8341F93295C63E2009C8EE6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F883401E29B62AD100C3E096 /* SearchView */,
-				F88AB05629B36B7700345EDE /* TrendingAccountsView */,
-				F8AFF7BF29B258FC0087D083 /* HashtagsView */,
 				F89D6C4029717FC0001DA3D4 /* SettingsView */,
 				F89D6C4729718822001DA3D4 /* UserProfileView */,
 				F808641229756583009F035C /* NotificationsView */,
@@ -395,7 +392,10 @@
 				F8FA991A299FA8A5007AB130 /* ComposeView */,
 				F88C246D295C37B80006098B /* MainView.swift */,
 				F88FAD20295F3944009B20C9 /* HomeFeedView.swift */,
+				F88AB05729B36B8200345EDE /* AccountsPhotoView.swift */,
 				F88E4D47297E90CD0057491A /* TrendStatusesView.swift */,
+				F883401F29B62AE900C3E096 /* SearchView.swift */,
+				F8AFF7C029B259150087D083 /* HashtagsView.swift */,
 				F88E4D41297E69FD0057491A /* StatusesView.swift */,
 				F876418C298AE5020057D362 /* PaginableStatusesView.swift */,
 				F85DBF8E296732E20069BF89 /* AccountsView.swift */,
@@ -489,6 +489,7 @@
 				F897978729681B9C00B22335 /* UserAvatar.swift */,
 				F89797892968314A00B22335 /* LoadingIndicator.swift */,
 				F88AB05429B3626300345EDE /* ImageGrid.swift */,
+				F8AFF7C329B25EF40087D083 /* ImagesGrid.swift */,
 				F86B7217296C27C100EE59EC /* ActionButton.swift */,
 				F86B721D296C458700EE59EC /* BlurredImage.swift */,
 				F86B7222296C4BF500EE59EC /* ContentWarning.swift */,
@@ -570,14 +571,6 @@
 			path = Subviews;
 			sourceTree = "<group>";
 		};
-		F883401E29B62AD100C3E096 /* SearchView */ = {
-			isa = PBXGroup;
-			children = (
-				F883401F29B62AE900C3E096 /* SearchView.swift */,
-			);
-			path = SearchView;
-			sourceTree = "<group>";
-		};
 		F8864CF229AD05420020C534 /* TextView */ = {
 			isa = PBXGroup;
 			children = (
@@ -585,23 +578,6 @@
 				F8864CE829ACAF820020C534 /* TextView.swift */,
 			);
 			path = TextView;
-			sourceTree = "<group>";
-		};
-		F88AB05629B36B7700345EDE /* TrendingAccountsView */ = {
-			isa = PBXGroup;
-			children = (
-				F88AB05929B3719300345EDE /* Subviews */,
-				F88AB05729B36B8200345EDE /* TrendingAccountsView.swift */,
-			);
-			path = TrendingAccountsView;
-			sourceTree = "<group>";
-		};
-		F88AB05929B3719300345EDE /* Subviews */ = {
-			isa = PBXGroup;
-			children = (
-				F88AB05B29B371B500345EDE /* AccountImagesGridView.swift */,
-			);
-			path = Subviews;
 			sourceTree = "<group>";
 		};
 		F88ABD9029686F00004EF61E /* Cache */ = {
@@ -729,23 +705,6 @@
 			path = StatusView;
 			sourceTree = "<group>";
 		};
-		F8AFF7BF29B258FC0087D083 /* HashtagsView */ = {
-			isa = PBXGroup;
-			children = (
-				F8AFF7C229B25ED60087D083 /* Subviews */,
-				F8AFF7C029B259150087D083 /* HashtagsView.swift */,
-			);
-			path = HashtagsView;
-			sourceTree = "<group>";
-		};
-		F8AFF7C229B25ED60087D083 /* Subviews */ = {
-			isa = PBXGroup;
-			children = (
-				F8AFF7C329B25EF40087D083 /* TagImagesGridView.swift */,
-			);
-			path = Subviews;
-			sourceTree = "<group>";
-		};
 		F8B9B354298D4B88009CC69C /* EnvironmentObjects */ = {
 			isa = PBXGroup;
 			children = (
@@ -770,6 +729,7 @@
 			isa = PBXGroup;
 			children = (
 				F8C5E56129892CC300ADF6A7 /* FirstAppear.swift */,
+				F8CAE63D29B8902D001E0372 /* ClearButton.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -886,6 +846,7 @@
 				F897978A2968314A00B22335 /* LoadingIndicator.swift in Sources */,
 				F8B9B351298D4B34009CC69C /* Client+Account.swift in Sources */,
 				F8210DE52966E160001D9973 /* Color+SystemColors.swift in Sources */,
+				F8CAE63E29B8902D001E0372 /* ClearButton.swift in Sources */,
 				F8B05ACB29B489B100857221 /* HapticsSectionView.swift in Sources */,
 				F88FAD2B295F43B8009B20C9 /* AccountData+CoreDataProperties.swift in Sources */,
 				F85D4975296407F100751DF7 /* HomeTimelineService.swift in Sources */,
@@ -942,7 +903,7 @@
 				F8A93D7E2965FD89001D8331 /* UserProfileView.swift in Sources */,
 				F88C246E295C37B80006098B /* MainView.swift in Sources */,
 				F89AC00729A208CC00F4159F /* PlaceSelectorView.swift in Sources */,
-				F8AFF7C429B25EF40087D083 /* TagImagesGridView.swift in Sources */,
+				F8AFF7C429B25EF40087D083 /* ImagesGrid.swift in Sources */,
 				F86B721E296C458700EE59EC /* BlurredImage.swift in Sources */,
 				F8B9B349298D4AA2009CC69C /* Client+Timeline.swift in Sources */,
 				F8FA9919299FA35A007AB130 /* PhotoAttachment.swift in Sources */,
@@ -955,7 +916,6 @@
 				F88C2482295C3A4F0006098B /* StatusView.swift in Sources */,
 				F866F6A329604161002E8F88 /* AccountDataHandler.swift in Sources */,
 				F8996DEB2971D29D0043EEC6 /* View+Transition.swift in Sources */,
-				F88AB05D29B371B500345EDE /* AccountImagesGridView.swift in Sources */,
 				F876418B298AC1B80057D362 /* NoDataView.swift in Sources */,
 				F89D6C4629718193001DA3D4 /* ThemeSectionView.swift in Sources */,
 				F85D497F296416C800751DF7 /* CommentsSectionView.swift in Sources */,
@@ -984,7 +944,7 @@
 				F8CEEDFA29ABAFD200DBED66 /* ImageFileTranseferable.swift in Sources */,
 				F802884F297AEED5000BDD51 /* DatabaseError.swift in Sources */,
 				F86A4307299AA5E900DF7645 /* ThanksView.swift in Sources */,
-				F88AB05829B36B8200345EDE /* TrendingAccountsView.swift in Sources */,
+				F88AB05829B36B8200345EDE /* AccountsPhotoView.swift in Sources */,
 				F85D4971296402DC00751DF7 /* AuthorizationService.swift in Sources */,
 				F8B9B356298D4C1E009CC69C /* Client+Instance.swift in Sources */,
 				F88AB05329B3613900345EDE /* PhotoUrl.swift in Sources */,
@@ -1141,7 +1101,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 55;
+				CURRENT_PROJECT_VERSION = 56;
 				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
@@ -1178,7 +1138,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 55;
+				CURRENT_PROJECT_VERSION = 56;
 				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;

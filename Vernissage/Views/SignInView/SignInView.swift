@@ -34,6 +34,7 @@ struct SignInView: View {
                             .textInputAutocapitalization(.never)
                             .keyboardType(.URL)
                             .disableAutocorrection(true)
+                            .clearButton(text: $serverAddress)
                         
                         Button("Sign in") {
                             HapticService.shared.fireHaptic(of: .buttonPress)
@@ -45,6 +46,8 @@ struct SignInView: View {
                         .padding(.vertical, 4)
                     }
                 }
+                .buttonStyle(PlainButtonStyle())
+
             } header: {
                 Text("Enter server address")
             } footer: {
