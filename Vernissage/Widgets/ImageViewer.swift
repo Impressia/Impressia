@@ -6,7 +6,7 @@
 
 import SwiftUI
 
-struct ImagesViewer: View {
+struct ImageViewer: View {
     @Environment(\.dismiss) private var dismiss
 
     private let attachmentModel: AttachmentModel
@@ -217,23 +217,29 @@ struct ImagesViewer: View {
     }
     
     private func calculateStartingOffset() -> CGSize {
+        // Image size on the screen.
         let imageOnScreenHeight = self.calculateHeight(width: self.imageWidth, height: self.imageHeight)
-        let emptySpace = -(UIScreen.main.bounds.height - imageOnScreenHeight)
-        let topMargin = self.calculateTopMargin()
-
-        return CGSize(width: 0, height: (emptySpace / 2) + topMargin)
+        
+        // Calculate full space for image.
+        let safeAreaInsetsTop = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 20.0
+        let safeAreaInsetsBottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 20.0
+        let spaceForNavigationBar = self.spaceForNavigationBar()
+        let spaceForImage = UIScreen.main.bounds.height - safeAreaInsetsTop - safeAreaInsetsBottom - spaceForNavigationBar
+        
+        // Calculate empty space.
+        let emptySpace = spaceForImage - imageOnScreenHeight
+        
+        // Calculate image shift.
+        return CGSize(width: 0, height: -(emptySpace / 2))
     }
     
-    private func calculateTopMargin() -> CGFloat {
-        let safeAreaTop = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 20.0
-        
-        /// I cannot figure out nothing super efficient ;/.
-        if safeAreaTop == 20.0 {
-            return safeAreaTop + 34
-        } else if safeAreaTop == 47.0 {
-            return safeAreaTop + 38
+    private func spaceForNavigationBar() -> CGFloat {
+        if UIScreen.main.bounds.height == 852.0 || UIScreen.main.bounds.height == 932.0 {
+            // iPhone 14 Pro, iPhone 14 Pro Max
+            return 78.0
         } else {
-            return safeAreaTop + 26
+            // iPhone SE, iPhone 12 Pro, iPhone 12 Pro Max, iPhone 13 Pro, iPhone 13 Pro Max
+            return 88.0
         }
     }
         

@@ -37,7 +37,7 @@ struct StatusView: View {
         self.mainBody()
             .navigationTitle("Details")
             .fullScreenCover(item: $tappedAttachmentModel, content: { attachmentModel in
-                ImagesViewer(attachmentModel: attachmentModel)
+                ImageViewer(attachmentModel: attachmentModel)
             })
     }
     

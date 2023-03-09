@@ -25,7 +25,7 @@ struct AccountsPhotoView: View {
     
     var body: some View {
         self.mainBody()
-            .navigationTitle("Tags")
+            .navigationTitle("Accounts")
     }
     
     @ViewBuilder

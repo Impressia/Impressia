@@ -129,7 +129,7 @@
 		F89D6C4229717FDC001DA3D4 /* AccountsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C4129717FDC001DA3D4 /* AccountsSectionView.swift */; };
 		F89D6C4429718092001DA3D4 /* AccentsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C4329718092001DA3D4 /* AccentsSectionView.swift */; };
 		F89D6C4629718193001DA3D4 /* ThemeSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C4529718193001DA3D4 /* ThemeSectionView.swift */; };
-		F89D6C4A297196FF001DA3D4 /* ImagesViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C49297196FF001DA3D4 /* ImagesViewer.swift */; };
+		F89D6C4A297196FF001DA3D4 /* ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C49297196FF001DA3D4 /* ImageViewer.swift */; };
 		F8A93D7E2965FD89001D8331 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A93D7D2965FD89001D8331 /* UserProfileView.swift */; };
 		F8AD061329A565620042F111 /* String+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD061229A565620042F111 /* String+Random.swift */; };
 		F8AFF7C129B259150087D083 /* HashtagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AFF7C029B259150087D083 /* HashtagsView.swift */; };
@@ -287,7 +287,7 @@
 		F89D6C4129717FDC001DA3D4 /* AccountsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSectionView.swift; sourceTree = "<group>"; };
 		F89D6C4329718092001DA3D4 /* AccentsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentsSectionView.swift; sourceTree = "<group>"; };
 		F89D6C4529718193001DA3D4 /* ThemeSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSectionView.swift; sourceTree = "<group>"; };
-		F89D6C49297196FF001DA3D4 /* ImagesViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesViewer.swift; sourceTree = "<group>"; };
+		F89D6C49297196FF001DA3D4 /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
 		F89F0605299139F6003DC875 /* Vernissage-002.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-002.xcdatamodel"; sourceTree = "<group>"; };
 		F8A93D7D2965FD89001D8331 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		F8AD061229A565620042F111 /* String+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Random.swift"; sourceTree = "<group>"; };
@@ -497,7 +497,7 @@
 				F86B7217296C27C100EE59EC /* ActionButton.swift */,
 				F86B721D296C458700EE59EC /* BlurredImage.swift */,
 				F86B7222296C4BF500EE59EC /* ContentWarning.swift */,
-				F89D6C49297196FF001DA3D4 /* ImagesViewer.swift */,
+				F89D6C49297196FF001DA3D4 /* ImageViewer.swift */,
 				F857F9FC297D8ED3002C109C /* ActionMenu.swift */,
 				F88E4D53297EA7EE0057491A /* MarkdownFormattedText.swift */,
 				F8764188298ABEC80057D362 /* ErrorView.swift */,
@@ -904,7 +904,7 @@
 				F80048032961850500E6868A /* AttachmentData+CoreDataClass.swift in Sources */,
 				F897978D2968369600B22335 /* HapticService.swift in Sources */,
 				F8341F90295C636C009C8EE6 /* Data+Exif.swift in Sources */,
-				F89D6C4A297196FF001DA3D4 /* ImagesViewer.swift in Sources */,
+				F89D6C4A297196FF001DA3D4 /* ImageViewer.swift in Sources */,
 				F8A93D7E2965FD89001D8331 /* UserProfileView.swift in Sources */,
 				F88C246E295C37B80006098B /* MainView.swift in Sources */,
 				F89AC00729A208CC00F4159F /* PlaceSelectorView.swift in Sources */,
@@ -1106,7 +1106,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 59;
+				CURRENT_PROJECT_VERSION = 60;
 				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
@@ -1143,7 +1143,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 59;
+				CURRENT_PROJECT_VERSION = 60;
 				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
