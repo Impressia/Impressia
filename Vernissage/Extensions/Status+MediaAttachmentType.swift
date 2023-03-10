@@ -24,12 +24,12 @@ extension Status {
         if let reblog = self.reblog {
             // If status is rebloged the we have to check if orginal status contains image.
             return reblog.mediaAttachments
-                .sorted(by: { (lhs, rhs) in lhs.id < rhs.id })
                 .filter { mediaAttachment in mediaAttachment.type == .image }
+                .sorted(by: { (lhs, rhs) in lhs.id < rhs.id })
         }
         
         return self.mediaAttachments
-            .sorted(by: { (lhs, rhs) in lhs.id < rhs.id })
             .filter { mediaAttachment in mediaAttachment.type == .image }
+            .sorted(by: { (lhs, rhs) in lhs.id < rhs.id })
     }
 }

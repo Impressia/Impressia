@@ -65,7 +65,7 @@ struct UserProfileStatusesView: View {
         let statuses = try await self.client.accounts?.statuses(createdBy: self.accountId, limit: self.defaultLimit) ?? []
         var inPlaceStatuses: [StatusModel] = []
 
-        for item in statuses {
+        for item in statuses.getStatusesWithImagesOnly() {
             inPlaceStatuses.append(StatusModel(status: item))
         }
         
@@ -86,7 +86,7 @@ struct UserProfileStatusesView: View {
             }
             
             var inPlaceStatuses: [StatusModel] = []
-            for item in previousStatuses {
+            for item in previousStatuses.getStatusesWithImagesOnly() {
                 inPlaceStatuses.append(StatusModel(status: item))
             }
             

@@ -41,7 +41,7 @@ struct ImageRowAsync: View {
             self.heightWasPrecalculated = true
         } else {
             self.imageWidth = UIScreen.main.bounds.width
-            self.imageHeight = UIScreen.main.bounds.width * 0.75
+            self.imageHeight = UIScreen.main.bounds.width
             heightWasPrecalculated = false
         }
     }
@@ -147,8 +147,13 @@ struct ImageRowAsync: View {
             let size = ImageSizeService.shared.calculate(for: attachment.url,
                                                          width: imageResponse.image.size.width,
                                                          height: imageResponse.image.size.height)
-            self.imageWidth = size.width
-            self.imageHeight = size.height
+            
+            if self.imageHeight != size.height || self.imageWidth != size.width {
+                withAnimation(.linear) {
+                    self.imageWidth = size.width
+                    self.imageHeight = size.height
+                }
+            }
         }
     }
 }
