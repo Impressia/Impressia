@@ -12,6 +12,8 @@ public class ImageFetcher {
     public static let shared = ImageFetcher()
     private init() { }
         
+    private let maxImageSize = 1000.0
+    
     func fetchWidgetEntries(length: Int = 6) async throws -> [WidgetEntry] {
         let defaultSettings = ApplicationSettingsHandler.shared.getDefaultSettings()
         guard let accountId = defaultSettings.currentAccount else {
@@ -80,11 +82,23 @@ public class ImageFetcher {
         do {
             let (data, response) = try await URLSession.shared.data(from: url)
             
-            if (response as? HTTPURLResponse)?.status?.responseType == .success {
-                return UIImage(data: data)?.resized(toWidth: 1200)
+            guard (response as? HTTPURLResponse)?.status?.responseType == .success else {
+                return nil
             }
             
-            return nil
+            guard let uiImage = UIImage(data: data) else {
+                return nil
+            }
+            
+            if uiImage.size.width < self.maxImageSize && uiImage.size.height < self.maxImageSize {
+                return uiImage
+            }
+            
+            if uiImage.size.width > uiImage.size.height {
+                return uiImage.resized(toWidth: self.maxImageSize)
+            } else {
+                return uiImage.resized(toHeight: self.maxImageSize)
+            }
         } catch {
             return nil
         }
