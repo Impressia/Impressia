@@ -104,6 +104,12 @@ struct VernissageApp: App {
                     self.applicationViewMode = .signIn
                 }
             }
+            .onChange(of: applicationState.showStatusId) { newValue in
+                if let statusId = newValue {
+                    self.routerPath.navigate(to: .status(id: statusId))
+                    self.applicationState.showStatusId = nil
+                }
+            }
         }
     }
 

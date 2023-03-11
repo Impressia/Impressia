@@ -48,6 +48,39 @@
 		F85E132529741F05006A051D /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = F85E132429741F05006A051D /* ActivityIndicatorView */; };
 		F86167C6297FE6CC004D1F67 /* AvatarShapesSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86167C5297FE6CC004D1F67 /* AvatarShapesSectionView.swift */; };
 		F86167C8297FE781004D1F67 /* AvatarShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86167C7297FE781004D1F67 /* AvatarShape.swift */; };
+		F864F75F29BB91B400B13921 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F864F75E29BB91B400B13921 /* WidgetKit.framework */; };
+		F864F76129BB91B400B13921 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F864F76029BB91B400B13921 /* SwiftUI.framework */; };
+		F864F76429BB91B400B13921 /* VernissageWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F76329BB91B400B13921 /* VernissageWidgetBundle.swift */; };
+		F864F76629BB91B400B13921 /* VernissageWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F76529BB91B400B13921 /* VernissageWidget.swift */; };
+		F864F76829BB91B600B13921 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F864F76729BB91B600B13921 /* Assets.xcassets */; };
+		F864F76C29BB91B600B13921 /* VernissageWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F864F75D29BB91B400B13921 /* VernissageWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F864F77529BB92CE00B13921 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F77329BB929A00B13921 /* Provider.swift */; };
+		F864F77629BB92CE00B13921 /* VernissageWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F77129BB924D00B13921 /* VernissageWidgetEntryView.swift */; };
+		F864F77829BB930000B13921 /* WidgetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F77729BB930000B13921 /* WidgetEntry.swift */; };
+		F864F77A29BB94A800B13921 /* PixelfedKit in Frameworks */ = {isa = PBXBuildFile; productRef = F864F77929BB94A800B13921 /* PixelfedKit */; };
+		F864F77C29BB982100B13921 /* ImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F77B29BB982100B13921 /* ImageFetcher.swift */; };
+		F864F77D29BB9A4600B13921 /* AttachmentData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80047FF2961850500E6868A /* AttachmentData+CoreDataClass.swift */; };
+		F864F77E29BB9A4900B13921 /* AttachmentData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048002961850500E6868A /* AttachmentData+CoreDataProperties.swift */; };
+		F864F78229BB9A6500B13921 /* StatusData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048012961850500E6868A /* StatusData+CoreDataClass.swift */; };
+		F864F78329BB9A6800B13921 /* StatusData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048022961850500E6868A /* StatusData+CoreDataProperties.swift */; };
+		F864F78429BB9A6E00B13921 /* ApplicationSettings+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F69E296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift */; };
+		F864F78529BB9A7100B13921 /* ApplicationSettings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F69F296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift */; };
+		F864F78629BB9A7400B13921 /* AccountData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD28295F43B8009B20C9 /* AccountData+CoreDataClass.swift */; };
+		F864F78729BB9A7700B13921 /* AccountData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD29295F43B8009B20C9 /* AccountData+CoreDataProperties.swift */; };
+		F864F78829BB9A7B00B13921 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C2474295C37BB0006098B /* CoreDataHandler.swift */; };
+		F864F78929BB9A7D00B13921 /* AccountDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F6A229604161002E8F88 /* AccountDataHandler.swift */; };
+		F864F78A29BB9A8000B13921 /* ApplicationSettingsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F6A429604194002E8F88 /* ApplicationSettingsHandler.swift */; };
+		F864F78B29BB9A8300B13921 /* StatusDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048072961E6DE00E6868A /* StatusDataHandler.swift */; };
+		F864F78C29BB9A8500B13921 /* AttachmentDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048092961EA1900E6868A /* AttachmentDataHandler.swift */; };
+		F864F78E29BB9B2F00B13921 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C3E29716E41001DA3D4 /* Theme.swift */; };
+		F864F78F29BB9B3100B13921 /* AvatarShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86167C7297FE781004D1F67 /* AvatarShape.swift */; };
+		F864F79029BB9B3300B13921 /* TintColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CC95CD2970761D00C9C2AC /* TintColor.swift */; };
+		F864F79D29BB9D3400B13921 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87AEB932986C51B00434FB6 /* AppConstants.swift */; };
+		F864F79F29BB9E6A00B13921 /* TintColor+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F79E29BB9E6A00B13921 /* TintColor+Color.swift */; };
+		F864F7A129BB9E8F00B13921 /* AvatarShape+Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F7A029BB9E8F00B13921 /* AvatarShape+Shape.swift */; };
+		F864F7A329BB9EC700B13921 /* Theme+ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F7A229BB9EC700B13921 /* Theme+ColorScheme.swift */; };
+		F864F7A529BBA01D00B13921 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F7A429BBA01D00B13921 /* CoreDataError.swift */; };
+		F864F7A629BBA01D00B13921 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F7A429BBA01D00B13921 /* CoreDataError.swift */; };
 		F866F6A0296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F69E296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift */; };
 		F866F6A1296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F69F296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift */; };
 		F866F6A329604161002E8F88 /* AccountDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F6A229604161002E8F88 /* AccountDataHandler.swift */; };
@@ -159,12 +192,41 @@
 		F8CC95CE2970761D00C9C2AC /* TintColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CC95CD2970761D00C9C2AC /* TintColor.swift */; };
 		F8CEEDF829ABADDD00DBED66 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CEEDF729ABADDD00DBED66 /* UIImage+Size.swift */; };
 		F8CEEDFA29ABAFD200DBED66 /* ImageFileTranseferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CEEDF929ABAFD200DBED66 /* ImageFileTranseferable.swift */; };
+		F8F6E44229BC58F20004795E /* Vernissage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F88C2476295C37BB0006098B /* Vernissage.xcdatamodeld */; };
+		F8F6E44C29BCC1F70004795E /* SmallWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6E44629BCC0DC0004795E /* SmallWidgetView.swift */; };
+		F8F6E44D29BCC1F90004795E /* MediumWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6E44829BCC0F00004795E /* MediumWidgetView.swift */; };
+		F8F6E44E29BCC1FB0004795E /* LargeWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6E44A29BCC0FF0004795E /* LargeWidgetView.swift */; };
+		F8F6E45129BCE9190004795E /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6E45029BCE9190004795E /* UIImage+Resize.swift */; };
 		F8FA9917299F7DBD007AB130 /* Client+Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FA9916299F7DBD007AB130 /* Client+Media.swift */; };
 		F8FA9919299FA35A007AB130 /* PhotoAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FA9918299FA35A007AB130 /* PhotoAttachment.swift */; };
 		F8FA991C299FA8C2007AB130 /* ImageUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FA991B299FA8C2007AB130 /* ImageUploadView.swift */; };
 		F8FA991E299FAB92007AB130 /* PhotoEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FA991D299FAB92007AB130 /* PhotoEditorView.swift */; };
 		F8FA9920299FDDC3007AB130 /* TextInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FA991F299FDDC3007AB130 /* TextInputField.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F864F76A29BB91B600B13921 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F88C2460295C37B80006098B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F864F75C29BB91B400B13921;
+			remoteInfo = VernissageWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F864F76D29BB91B600B13921 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F864F76C29BB91B600B13921 /* VernissageWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		F80047FF2961850500E6868A /* AttachmentData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttachmentData+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -204,6 +266,21 @@
 		F85E131F297409CD006A051D /* ErrorsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorsService.swift; sourceTree = "<group>"; };
 		F86167C5297FE6CC004D1F67 /* AvatarShapesSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarShapesSectionView.swift; sourceTree = "<group>"; };
 		F86167C7297FE781004D1F67 /* AvatarShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarShape.swift; sourceTree = "<group>"; };
+		F864F75D29BB91B400B13921 /* VernissageWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VernissageWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F864F75E29BB91B400B13921 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		F864F76029BB91B400B13921 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		F864F76329BB91B400B13921 /* VernissageWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VernissageWidgetBundle.swift; sourceTree = "<group>"; };
+		F864F76529BB91B400B13921 /* VernissageWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VernissageWidget.swift; sourceTree = "<group>"; };
+		F864F76729BB91B600B13921 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F864F76929BB91B600B13921 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F864F77129BB924D00B13921 /* VernissageWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VernissageWidgetEntryView.swift; sourceTree = "<group>"; };
+		F864F77329BB929A00B13921 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		F864F77729BB930000B13921 /* WidgetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetEntry.swift; sourceTree = "<group>"; };
+		F864F77B29BB982100B13921 /* ImageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetcher.swift; sourceTree = "<group>"; };
+		F864F79E29BB9E6A00B13921 /* TintColor+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TintColor+Color.swift"; sourceTree = "<group>"; };
+		F864F7A029BB9E8F00B13921 /* AvatarShape+Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AvatarShape+Shape.swift"; sourceTree = "<group>"; };
+		F864F7A229BB9EC700B13921 /* Theme+ColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+ColorScheme.swift"; sourceTree = "<group>"; };
+		F864F7A429BBA01D00B13921 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		F866F69E296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplicationSettings+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F866F69F296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplicationSettings+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F866F6A229604161002E8F88 /* AccountDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDataHandler.swift; sourceTree = "<group>"; };
@@ -321,6 +398,12 @@
 		F8CC95CD2970761D00C9C2AC /* TintColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TintColor.swift; sourceTree = "<group>"; };
 		F8CEEDF729ABADDD00DBED66 /* UIImage+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Size.swift"; sourceTree = "<group>"; };
 		F8CEEDF929ABAFD200DBED66 /* ImageFileTranseferable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileTranseferable.swift; sourceTree = "<group>"; };
+		F8F6E44329BC5CAA0004795E /* VernissageWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VernissageWidgetExtension.entitlements; sourceTree = "<group>"; };
+		F8F6E44429BC5CC50004795E /* Vernissage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Vernissage.entitlements; sourceTree = "<group>"; };
+		F8F6E44629BCC0DC0004795E /* SmallWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallWidgetView.swift; sourceTree = "<group>"; };
+		F8F6E44829BCC0F00004795E /* MediumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumWidgetView.swift; sourceTree = "<group>"; };
+		F8F6E44A29BCC0FF0004795E /* LargeWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeWidgetView.swift; sourceTree = "<group>"; };
+		F8F6E45029BCE9190004795E /* UIImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
 		F8FA9916299F7DBD007AB130 /* Client+Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+Media.swift"; sourceTree = "<group>"; };
 		F8FA9918299FA35A007AB130 /* PhotoAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAttachment.swift; sourceTree = "<group>"; };
 		F8FA991B299FA8C2007AB130 /* ImageUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadView.swift; sourceTree = "<group>"; };
@@ -329,6 +412,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F864F75A29BB91B400B13921 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F864F76129BB91B400B13921 /* SwiftUI.framework in Frameworks */,
+				F864F77A29BB94A800B13921 /* PixelfedKit in Frameworks */,
+				F864F75F29BB91B400B13921 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F88C2465295C37B80006098B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -428,6 +521,9 @@
 				F8864CEE29ACE90B0020C534 /* UIFont+Font.swift */,
 				F8864CF029ACFFB80020C534 /* View+Keyboard.swift */,
 				F8CAE63F29B8E6E1001E0372 /* UIApplication+Window.swift */,
+				F864F79E29BB9E6A00B13921 /* TintColor+Color.swift */,
+				F864F7A029BB9E8F00B13921 /* AvatarShape+Shape.swift */,
+				F864F7A229BB9EC700B13921 /* Theme+ColorScheme.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -440,9 +536,6 @@
 				F898DE7129728CB2004B4A6A /* CommentModel.swift */,
 				F8C5E55E2988E92600ADF6A7 /* AccountModel.swift */,
 				F866F6AD29606367002E8F88 /* ApplicationViewMode.swift */,
-				F8CC95CD2970761D00C9C2AC /* TintColor.swift */,
-				F89D6C3E29716E41001DA3D4 /* Theme.swift */,
-				F86167C7297FE781004D1F67 /* AvatarShape.swift */,
 				F8764186298ABB520057D362 /* ViewState.swift */,
 				F8FA9918299FA35A007AB130 /* PhotoAttachment.swift */,
 				F89AC00429A1F9B500F4159F /* AppMetadata.swift */,
@@ -456,6 +549,7 @@
 		F8341F96295C6427009C8EE6 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				F88C2476295C37BB0006098B /* Vernissage.xcdatamodeld */,
 				F80047FF2961850500E6868A /* AttachmentData+CoreDataClass.swift */,
 				F80048002961850500E6868A /* AttachmentData+CoreDataProperties.swift */,
 				F85D498229642FAC00751DF7 /* AttachmentData+Comperable.swift */,
@@ -474,6 +568,7 @@
 				F866F6A429604194002E8F88 /* ApplicationSettingsHandler.swift */,
 				F80048072961E6DE00E6868A /* StatusDataHandler.swift */,
 				F80048092961EA1900E6868A /* AttachmentDataHandler.swift */,
+				F864F7A429BBA01D00B13921 /* CoreDataError.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -506,6 +601,34 @@
 				F8FA991F299FDDC3007AB130 /* TextInputField.swift */,
 			);
 			path = Widgets;
+			sourceTree = "<group>";
+		};
+		F864F76229BB91B400B13921 /* VernissageWidget */ = {
+			isa = PBXGroup;
+			children = (
+				F8F6E44F29BCE9030004795E /* Extensions */,
+				F8F6E44529BCC0C90004795E /* Views */,
+				F864F77B29BB982100B13921 /* ImageFetcher.swift */,
+				F864F77729BB930000B13921 /* WidgetEntry.swift */,
+				F864F77329BB929A00B13921 /* Provider.swift */,
+				F864F76329BB91B400B13921 /* VernissageWidgetBundle.swift */,
+				F864F77129BB924D00B13921 /* VernissageWidgetEntryView.swift */,
+				F864F76529BB91B400B13921 /* VernissageWidget.swift */,
+				F864F76729BB91B600B13921 /* Assets.xcassets */,
+				F864F76929BB91B600B13921 /* Info.plist */,
+			);
+			path = VernissageWidget;
+			sourceTree = "<group>";
+		};
+		F864F79C29BB9D2400B13921 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F8CC95CD2970761D00C9C2AC /* TintColor.swift */,
+				F86167C7297FE781004D1F67 /* AvatarShape.swift */,
+				F89D6C3E29716E41001DA3D4 /* Theme.swift */,
+				F87AEB932986C51B00434FB6 /* AppConstants.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		F86B721F296C498B00EE59EC /* Styles */ = {
@@ -595,9 +718,13 @@
 		F88C245F295C37B80006098B = {
 			isa = PBXGroup;
 			children = (
+				F8F6E44329BC5CAA0004795E /* VernissageWidgetExtension.entitlements */,
 				F837269429A221420098D3C4 /* PixelfedKit */,
 				F88ABD9529687D4D004EF61E /* README.md */,
+				F864F79C29BB9D2400B13921 /* Models */,
+				F8341F96295C6427009C8EE6 /* CoreData */,
 				F88C246A295C37B80006098B /* Vernissage */,
+				F864F76229BB91B400B13921 /* VernissageWidget */,
 				F88C2469295C37B80006098B /* Products */,
 				F89992C5296D3DF8005994BF /* Frameworks */,
 			);
@@ -607,6 +734,7 @@
 			isa = PBXGroup;
 			children = (
 				F88C2468295C37B80006098B /* Vernissage.app */,
+				F864F75D29BB91B400B13921 /* VernissageWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -614,6 +742,7 @@
 		F88C246A295C37B80006098B /* Vernissage */ = {
 			isa = PBXGroup;
 			children = (
+				F8F6E44429BC5CC50004795E /* Vernissage.entitlements */,
 				F866F6A829604FFF002E8F88 /* Info.plist */,
 				F802884D297AEEAA000BDD51 /* Errors */,
 				F86B721F296C498B00EE59EC /* Styles */,
@@ -623,18 +752,15 @@
 				F88FAD30295F5010009B20C9 /* Services */,
 				F8C5E56029892C8A00ADF6A7 /* ViewModifiers */,
 				F83901A2295D863B00456AE2 /* Widgets */,
-				F8341F96295C6427009C8EE6 /* CoreData */,
 				F8341F95295C640C009C8EE6 /* Models */,
 				F8B9B354298D4B88009CC69C /* EnvironmentObjects */,
 				F8341F94295C63FE009C8EE6 /* Extensions */,
 				F8341F93295C63E2009C8EE6 /* Views */,
 				F88C246B295C37B80006098B /* VernissageApp.swift */,
 				F88E4D55297EAD6E0057491A /* AppRouteur.swift */,
-				F87AEB932986C51B00434FB6 /* AppConstants.swift */,
 				F86A4300299A97F500DF7645 /* ProductIdentifiers.swift */,
 				F866F6A929605AFA002E8F88 /* SceneDelegate.swift */,
 				F88C246F295C37BB0006098B /* Assets.xcassets */,
-				F88C2476295C37BB0006098B /* Vernissage.xcdatamodeld */,
 				F88C2471295C37BB0006098B /* Preview Content */,
 				F86A42FE299A8C5500DF7645 /* InAppPurchaseStoreKitConfiguration.storekit */,
 			);
@@ -652,12 +778,12 @@
 		F88FAD30295F5010009B20C9 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				F85E131F297409CD006A051D /* ErrorsService.swift */,
+				F8B1E6502973FB7E00EE0D10 /* ToastrService.swift */,
 				F88FAD31295F5029009B20C9 /* RemoteFileService.swift */,
 				F85D4970296402DC00751DF7 /* AuthorizationService.swift */,
 				F87AEB912986C44E00434FB6 /* AuthorizationSession.swift */,
 				F85D4974296407F100751DF7 /* HomeTimelineService.swift */,
-				F8B1E6502973FB7E00EE0D10 /* ToastrService.swift */,
-				F85E131F297409CD006A051D /* ErrorsService.swift */,
 				F886F256297859E300879356 /* CacheImageService.swift */,
 				F88E4D49297EA0490057491A /* RouterPath.swift */,
 				F829193B2983012400367CE2 /* ImageSizeService.swift */,
@@ -678,6 +804,8 @@
 			isa = PBXGroup;
 			children = (
 				F86A42FC299A8B8E00DF7645 /* StoreKit.framework */,
+				F864F75E29BB91B400B13921 /* WidgetKit.framework */,
+				F864F76029BB91B400B13921 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -738,6 +866,24 @@
 			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
+		F8F6E44529BCC0C90004795E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F8F6E44629BCC0DC0004795E /* SmallWidgetView.swift */,
+				F8F6E44829BCC0F00004795E /* MediumWidgetView.swift */,
+				F8F6E44A29BCC0FF0004795E /* LargeWidgetView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F8F6E44F29BCE9030004795E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F8F6E45029BCE9190004795E /* UIImage+Resize.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		F8FA991A299FA8A5007AB130 /* ComposeView */ = {
 			isa = PBXGroup;
 			children = (
@@ -750,6 +896,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		F864F75C29BB91B400B13921 /* VernissageWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F864F77029BB91B600B13921 /* Build configuration list for PBXNativeTarget "VernissageWidgetExtension" */;
+			buildPhases = (
+				F864F75929BB91B400B13921 /* Sources */,
+				F864F75A29BB91B400B13921 /* Frameworks */,
+				F864F75B29BB91B400B13921 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VernissageWidgetExtension;
+			packageProductDependencies = (
+				F864F77929BB94A800B13921 /* PixelfedKit */,
+			);
+			productName = VernissageWidgetExtension;
+			productReference = F864F75D29BB91B400B13921 /* VernissageWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		F88C2467295C37B80006098B /* Vernissage */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F88C247B295C37BB0006098B /* Build configuration list for PBXNativeTarget "Vernissage" */;
@@ -757,10 +923,12 @@
 				F88C2464295C37B80006098B /* Sources */,
 				F88C2465295C37B80006098B /* Frameworks */,
 				F88C2466295C37B80006098B /* Resources */,
+				F864F76D29BB91B600B13921 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F864F76B29BB91B600B13921 /* PBXTargetDependency */,
 			);
 			name = Vernissage;
 			packageProductDependencies = (
@@ -786,6 +954,9 @@
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
+					F864F75C29BB91B400B13921 = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					F88C2467295C37B80006098B = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -811,11 +982,20 @@
 			projectRoot = "";
 			targets = (
 				F88C2467295C37B80006098B /* Vernissage */,
+				F864F75C29BB91B400B13921 /* VernissageWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		F864F75B29BB91B400B13921 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F864F76829BB91B600B13921 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F88C2466295C37B80006098B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -829,6 +1009,42 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		F864F75929BB91B400B13921 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F864F77829BB930000B13921 /* WidgetEntry.swift in Sources */,
+				F864F77529BB92CE00B13921 /* Provider.swift in Sources */,
+				F864F77629BB92CE00B13921 /* VernissageWidgetEntryView.swift in Sources */,
+				F864F79D29BB9D3400B13921 /* AppConstants.swift in Sources */,
+				F864F77C29BB982100B13921 /* ImageFetcher.swift in Sources */,
+				F8F6E44229BC58F20004795E /* Vernissage.xcdatamodeld in Sources */,
+				F8F6E44C29BCC1F70004795E /* SmallWidgetView.swift in Sources */,
+				F864F76629BB91B400B13921 /* VernissageWidget.swift in Sources */,
+				F8F6E44D29BCC1F90004795E /* MediumWidgetView.swift in Sources */,
+				F864F79029BB9B3300B13921 /* TintColor.swift in Sources */,
+				F8F6E44E29BCC1FB0004795E /* LargeWidgetView.swift in Sources */,
+				F864F76429BB91B400B13921 /* VernissageWidgetBundle.swift in Sources */,
+				F864F78F29BB9B3100B13921 /* AvatarShape.swift in Sources */,
+				F864F78E29BB9B2F00B13921 /* Theme.swift in Sources */,
+				F864F77D29BB9A4600B13921 /* AttachmentData+CoreDataClass.swift in Sources */,
+				F864F7A629BBA01D00B13921 /* CoreDataError.swift in Sources */,
+				F864F77E29BB9A4900B13921 /* AttachmentData+CoreDataProperties.swift in Sources */,
+				F864F78229BB9A6500B13921 /* StatusData+CoreDataClass.swift in Sources */,
+				F864F78329BB9A6800B13921 /* StatusData+CoreDataProperties.swift in Sources */,
+				F864F78429BB9A6E00B13921 /* ApplicationSettings+CoreDataClass.swift in Sources */,
+				F864F78629BB9A7400B13921 /* AccountData+CoreDataClass.swift in Sources */,
+				F864F78529BB9A7100B13921 /* ApplicationSettings+CoreDataProperties.swift in Sources */,
+				F864F78729BB9A7700B13921 /* AccountData+CoreDataProperties.swift in Sources */,
+				F864F78829BB9A7B00B13921 /* CoreDataHandler.swift in Sources */,
+				F8F6E45129BCE9190004795E /* UIImage+Resize.swift in Sources */,
+				F864F78929BB9A7D00B13921 /* AccountDataHandler.swift in Sources */,
+				F864F78A29BB9A8000B13921 /* ApplicationSettingsHandler.swift in Sources */,
+				F864F78C29BB9A8500B13921 /* AttachmentDataHandler.swift in Sources */,
+				F864F78B29BB9A8300B13921 /* StatusDataHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F88C2464295C37B80006098B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -843,6 +1059,7 @@
 				F80048082961E6DE00E6868A /* StatusDataHandler.swift in Sources */,
 				F866F6A0296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift in Sources */,
 				F8764189298ABEC80057D362 /* ErrorView.swift in Sources */,
+				F864F7A129BB9E8F00B13921 /* AvatarShape+Shape.swift in Sources */,
 				F8210DEA2966E4F9001D9973 /* AnimatePlaceholderModifier.swift in Sources */,
 				F886F257297859E300879356 /* CacheImageService.swift in Sources */,
 				F8B08862299435C9002AB40A /* SupportView.swift in Sources */,
@@ -907,6 +1124,7 @@
 				F89D6C4A297196FF001DA3D4 /* ImageViewer.swift in Sources */,
 				F8A93D7E2965FD89001D8331 /* UserProfileView.swift in Sources */,
 				F88C246E295C37B80006098B /* MainView.swift in Sources */,
+				F864F7A329BB9EC700B13921 /* Theme+ColorScheme.swift in Sources */,
 				F89AC00729A208CC00F4159F /* PlaceSelectorView.swift in Sources */,
 				F8AFF7C429B25EF40087D083 /* ImagesGrid.swift in Sources */,
 				F86B721E296C458700EE59EC /* BlurredImage.swift in Sources */,
@@ -933,6 +1151,7 @@
 				F85D49852964301800751DF7 /* StatusData+Attachments.swift in Sources */,
 				F8B9B34D298D4AE4009CC69C /* Client+Notifications.swift in Sources */,
 				F8764187298ABB520057D362 /* ViewState.swift in Sources */,
+				F864F79F29BB9E6A00B13921 /* TintColor+Color.swift in Sources */,
 				F8210DE72966E1D1001D9973 /* Color+Assets.swift in Sources */,
 				F88ABD9429687CA4004EF61E /* ComposeView.swift in Sources */,
 				F89CEB802984198600A1376F /* AttachmentData+HighestImage.swift in Sources */,
@@ -967,6 +1186,7 @@
 				F8FA9920299FDDC3007AB130 /* TextInputField.swift in Sources */,
 				F86A4303299A9AF500DF7645 /* TipsStore.swift in Sources */,
 				F8C5E56229892CC300ADF6A7 /* FirstAppear.swift in Sources */,
+				F864F7A529BBA01D00B13921 /* CoreDataError.swift in Sources */,
 				F8864CEB29ACBAA80020C534 /* TextModel.swift in Sources */,
 				F8C14394296AF21B001FE31D /* Double+Round.swift in Sources */,
 				F83CBEFB298298A1002972C8 /* ImageCarouselPicture.swift in Sources */,
@@ -984,7 +1204,72 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		F864F76B29BB91B600B13921 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F864F75C29BB91B400B13921 /* VernissageWidgetExtension */;
+			targetProxy = F864F76A29BB91B600B13921 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		F864F76E29BB91B600B13921 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = VernissageWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 63;
+				DEVELOPMENT_TEAM = B2U9FEKYP8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = VernissageWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = VernissageWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		F864F76F29BB91B600B13921 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = VernissageWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 63;
+				DEVELOPMENT_TEAM = B2U9FEKYP8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = VernissageWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = VernissageWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 		F88C2479295C37BB0006098B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1102,11 +1387,13 @@
 		F88C247C295C37BB0006098B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Vernissage/Vernissage.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 61;
+				CURRENT_PROJECT_VERSION = 63;
 				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
@@ -1114,7 +1401,6 @@
 				INFOPLIST_FILE = Vernissage/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Vernissage;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1140,10 +1426,12 @@
 		F88C247D295C37BB0006098B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Vernissage/Vernissage.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 61;
+				CURRENT_PROJECT_VERSION = 63;
 				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
@@ -1151,7 +1439,6 @@
 				INFOPLIST_FILE = Vernissage/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Vernissage;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1176,6 +1463,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F864F77029BB91B600B13921 /* Build configuration list for PBXNativeTarget "VernissageWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F864F76E29BB91B600B13921 /* Debug */,
+				F864F76F29BB91B600B13921 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F88C2463295C37B80006098B /* Build configuration list for PBXProject "Vernissage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1255,6 +1551,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F85E132329741F05006A051D /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */;
 			productName = ActivityIndicatorView;
+		};
+		F864F77929BB94A800B13921 /* PixelfedKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PixelfedKit;
 		};
 		F88E4D4C297EA4290057491A /* EmojiText */ = {
 			isa = XCSwiftPackageProductDependency;

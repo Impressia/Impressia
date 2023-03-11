@@ -16,6 +16,11 @@ class SceneDelegate: NSObject, UISceneDelegate {
         
         if url.host == AppConstants.oauthCallbackPart {
             OAuthSwift.handle(url: url)
+        } else if url.host == AppConstants.statusCallbackPart {
+            let statusId = url.string.replacingOccurrences(of: "\(AppConstants.statusUri)/", with: "")
+            if statusId.isEmpty == false {
+                ApplicationState.shared.showStatusId = statusId
+            }
         }
     }
 }

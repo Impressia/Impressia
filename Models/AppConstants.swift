@@ -12,7 +12,11 @@ public struct AppConstants {
     public static let oauthCallbackPart = "oauth-callback"
     public static let oauthRedirectUri = "\(AppConstants.oauthScheme)://\(oauthCallbackPart)/pixelfed"
     public static let oauthScopes = ["read", "write", "follow", "push"]
-  
+
+    public static let statusScheme = "status-vernissage"
+    public static let statusCallbackPart = "statuses"
+    public static let statusUri = "\(AppConstants.statusScheme)://\(statusCallbackPart)"
+    
     public static let imagePipelineCacheName = "dev.mczachurski.Vernissage.DataCache"
     public static let coreDataPersistantContainerName = "Vernissage"
 }

@@ -4,11 +4,10 @@
 //  Licensed under the MIT License.
 //
     
+import Foundation
 import SwiftUI
 
-public enum Theme: Int {
-    case system, light, dark
-    
+extension Theme {
     public func colorScheme() -> ColorScheme? {
         switch self {
         case .system:

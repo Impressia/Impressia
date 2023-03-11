@@ -23,7 +23,7 @@ class StatusDataHandler {
         do {
             return try context.fetch(fetchRequest)
         } catch {
-            ErrorService.shared.handle(error, message: "Error during fetching status (getStatusData).")
+            CoreDataError.shared.handle(error, message: "Error during fetching status (getStatusData).")
             return []
         }
     }
@@ -41,7 +41,7 @@ class StatusDataHandler {
         do {
             return try context.fetch(fetchRequest).first
         } catch {
-            ErrorService.shared.handle(error, message: "Error during fetching status (getStatusData).")
+            CoreDataError.shared.handle(error, message: "Error during fetching status (getStatusData).")
             return nil
         }
     }
@@ -60,7 +60,7 @@ class StatusDataHandler {
             let statuses = try context.fetch(fetchRequest)
             return statuses.first
         } catch {
-            ErrorService.shared.handle(error, message: "Error during fetching maximum status (getMaximumStatus).")
+            CoreDataError.shared.handle(error, message: "Error during fetching maximum status (getMaximumStatus).")
             return nil
         }
     }
@@ -79,7 +79,7 @@ class StatusDataHandler {
             let statuses = try context.fetch(fetchRequest)
             return statuses.first
         } catch {
-            ErrorService.shared.handle(error, message: "Error during fetching minimum status (getMinimumtatus).")
+            CoreDataError.shared.handle(error, message: "Error during fetching minimum status (getMinimumtatus).")
             return nil
         }
     }
@@ -96,7 +96,7 @@ class StatusDataHandler {
         do {
             try context.save()
         } catch {
-            ErrorService.shared.handle(error, message: "Error during deleting status (remove).")
+            CoreDataError.shared.handle(error, message: "Error during deleting status (remove).")
         }
     }
     
@@ -110,7 +110,7 @@ class StatusDataHandler {
         do {
             try context.save()
         } catch {
-            ErrorService.shared.handle(error, message: "Error during deleting status (remove).")
+            CoreDataError.shared.handle(error, message: "Error during deleting status (remove).")
         }
     }
     

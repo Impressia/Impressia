@@ -17,7 +17,7 @@ public class ToastrService {
             title: title,
             subtitle: subtitle,
             subtitleNumberOfLines: 2,
-            icon: self.createImage(systemName: imageSystemName, color: ApplicationState.shared.tintColor.uiColor()),
+            icon: self.createImage(systemName: imageSystemName, color: UIColor(Color.accentColor)),
             action: .init {
                 Drops.hideCurrent()
             },
@@ -34,7 +34,7 @@ public class ToastrService {
             title: title,
             subtitle: subtitle,
             subtitleNumberOfLines: 2,
-            icon: self.createImage(systemName: imageSystemName, color: Color.red.toUIColor()),
+            icon: self.createImage(systemName: imageSystemName, color: UIColor(Color.red)),
             action: .init {
                 Drops.hideCurrent()
             },

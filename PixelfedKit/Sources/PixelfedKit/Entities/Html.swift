@@ -38,7 +38,13 @@ public struct Html: Codable {
     }
     
     private func parseToMarkdown(html: String) throws -> String {
-        let dom = try HTMLParser().parse(html: html)
+        
+        // Fix issue: https://github.com/VernissageApp/Home/issues/11
+        let mutatedHtml = html
+            .replacingOccurrences(of: "<br />\n", with: "<br />")
+            .replacingOccurrences(of: "<br/>\n", with: "<br />")
+            
+        let dom = try HTMLParser().parse(html: mutatedHtml)
         return dom.toMarkdown()
             // Add space between hashtags and mentions that follow each other
             .replacingOccurrences(of: ")[", with: ") [")

@@ -17,7 +17,7 @@ class AccountDataHandler {
         do {
             return try context.fetch(fetchRequest)
         } catch {
-            ErrorService.shared.handle(error, message: "Accounts cannot be retrieved (getAccountsData).")
+            CoreDataError.shared.handle(error, message: "Accounts cannot be retrieved (getAccountsData).")
             return []
         }
     }
@@ -47,7 +47,7 @@ class AccountDataHandler {
         do {
             return try context.fetch(fetchRequest).first
         } catch {
-            ErrorService.shared.handle(error, message: "Error during fetching status (getAccountData).")
+            CoreDataError.shared.handle(error, message: "Error during fetching status (getAccountData).")
             return nil
         }
     }
@@ -59,7 +59,7 @@ class AccountDataHandler {
         do {
             try context.save()
         } catch {
-            ErrorService.shared.handle(error, message: "Error during deleting account data (remove).")
+            CoreDataError.shared.handle(error, message: "Error during deleting account data (remove).")
         }
     }
     

@@ -18,7 +18,7 @@ class ApplicationSettingsHandler {
         do {
             settingsList = try context.fetch(fetchRequest)
         } catch {
-            ErrorService.shared.handle(error, message: "Error during fetching application settings.")
+            CoreDataError.shared.handle(error, message: "Error during fetching application settings.")
         }
 
         if let settings = settingsList.first {
@@ -56,11 +56,6 @@ class ApplicationSettingsHandler {
         let defaultSettings = self.getDefaultSettings()
         defaultSettings.avatarShape = Int32(avatarShape.rawValue)
         CoreDataHandler.shared.save()
-    }
-    
-    private func createApplicationSettingsEntity() -> ApplicationSettings {
-        let context = CoreDataHandler.shared.container.viewContext
-        return ApplicationSettings(context: context)
     }
     
     func setHapticTabSelectionEnabled(value: Bool) {
@@ -103,5 +98,10 @@ class ApplicationSettingsHandler {
         let defaultSettings = self.getDefaultSettings()
         defaultSettings.showPhotoDescription = value
         CoreDataHandler.shared.save()
+    }
+    
+    private func createApplicationSettingsEntity() -> ApplicationSettings {
+        let context = CoreDataHandler.shared.container.viewContext
+        return ApplicationSettings(context: context)
     }
 }
