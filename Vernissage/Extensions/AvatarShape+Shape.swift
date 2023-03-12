@@ -13,7 +13,7 @@ extension AvatarShape {
         case .circle:
             return AnyShape(Circle())
         case .roundedRectangle:
-            return AnyShape(RoundedRectangle(cornerRadius: 5))
+            return AnyShape(RoundedRectangle(cornerRadius: 5.0))
         }
     }
 }

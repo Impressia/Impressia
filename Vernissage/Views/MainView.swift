@@ -205,12 +205,12 @@ struct MainView: View {
                     Button {
                         self.switchAccounts(account)
                     } label: {
-                        if self.applicationState.account?.id == account.id {
-                            Label(account.displayName ?? account.acct, systemImage: "checkmark")
-                        } else {
+                        HStack {
                             Text(account.displayName ?? account.acct)
+                            self.getAvatarImage(avatarUrl: account.avatar, avatarData: account.avatarData)
                         }
                     }
+                    .disabled(account.id == self.applicationState.account?.id)
                 }
 
                 Divider()
@@ -222,23 +222,8 @@ struct MainView: View {
                     Label("Settings", systemImage: "gear")
                 }
             } label: {
-                if let avatarData = self.applicationState.account?.avatarData, let uiImage = UIImage(data: avatarData) {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .frame(width: 32.0, height: 32.0)
-                        .clipShape(self.applicationState.avatarShape.shape())
-                } else {
-                    Image(systemName: "person")
-                        .resizable()
-                        .frame(width: 16, height: 16)
-                        .foregroundColor(.white)
-                        .padding(8)
-                        .background(Color.lightGrayColor)
-                        .clipShape(AvatarShape.circle.shape())
-                        .background(
-                            AvatarShape.circle.shape()
-                        )
-                }
+                self.getAvatarImage(avatarUrl: self.applicationState.account?.avatar,
+                                    avatarData: self.applicationState.account?.avatarData)
             }
         }
     }
@@ -257,6 +242,32 @@ struct MainView: View {
                         .fontWeight(.semibold)
                 }
             }
+        }
+    }
+    
+    @ViewBuilder
+    private func getAvatarImage(avatarUrl: URL?, avatarData: Data?) -> some View {
+        if let avatarData,
+           let uiImage = UIImage(data: avatarData)?.roundedAvatar(avatarShape: self.applicationState.avatarShape) {
+            Image(uiImage: uiImage)
+                .resizable()
+                .frame(width: 32.0, height: 32.0)
+                .clipShape(self.applicationState.avatarShape.shape())
+        } else if let avatarUrl {
+            AsyncImage(url: avatarUrl)
+                .frame(width: 32.0, height: 32.0)
+                .clipShape(self.applicationState.avatarShape.shape())
+        } else {
+            Image(systemName: "person")
+                .resizable()
+                .frame(width: 16, height: 16)
+                .foregroundColor(.white)
+                .padding(8)
+                .background(Color.lightGrayColor)
+                .clipShape(AvatarShape.circle.shape())
+                .background(
+                    AvatarShape.circle.shape()
+                )
         }
     }
     
