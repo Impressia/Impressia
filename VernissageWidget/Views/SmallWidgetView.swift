@@ -28,11 +28,11 @@ struct SmallWidgetView: View {
                     .resizable()
                     .clipShape(Circle())
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 22, height: 22)
+                    .frame(width: 16, height: 16)
                     .overlay(
                         Circle()
-                            .stroke(Color.white, lineWidth: 1)
-                            .frame(width: 22, height: 22)
+                            .stroke(Color.white.opacity(0.6), lineWidth: 1)
+                            .frame(width: 16, height: 16)
                     )
                     .shadow(radius: 4)
                 
