@@ -34,12 +34,12 @@ struct LargeWidgetView: View {
                             .stroke(Color.white.opacity(0.6), lineWidth: 1)
                             .frame(width: 24, height: 24)
                     )
-                    .shadow(radius: 4)
+                    .shadow(color: .black, radius: 2)
 
                 Text(entry.displayName ?? "")
                     .foregroundColor(.white)
                     .fontWeight(.semibold)
-                    .shadow(radius: 8)
+                    .shadow(color: .black, radius: 2)
                 Spacer()
             }
             .padding(.leading, 8)

@@ -34,7 +34,7 @@ struct SmallWidgetView: View {
                             .stroke(Color.white.opacity(0.6), lineWidth: 1)
                             .frame(width: 16, height: 16)
                     )
-                    .shadow(radius: 4)
+                    .shadow(color: .black, radius: 2)
                 
                 Spacer()
             }
