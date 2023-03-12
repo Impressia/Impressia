@@ -64,6 +64,7 @@ public class CoreDataHandler {
             }
         })
 
+        container.viewContext.automaticallyMergesChangesFromParent = true
         return container
     }()
     

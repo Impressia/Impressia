@@ -71,7 +71,7 @@ public class ImageFetcher {
     }
     
     func placeholder() -> WidgetEntry {
-        WidgetEntry(date: Date(), image: nil, avatar: nil, displayName: "John Misiakiewiczowicz", statusId: "123321")
+        WidgetEntry(date: Date(), image: nil, avatar: nil, displayName: "Caroline Rick", statusId: "")
     }
     
     private func getImage(url: URL?) async -> UIImage? {
