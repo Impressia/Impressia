@@ -621,6 +621,8 @@
 		F864F76229BB91B400B13921 /* VernissageWidget */ = {
 			isa = PBXGroup;
 			children = (
+				F8F6E44329BC5CAA0004795E /* VernissageWidgetExtension.entitlements */,
+				F864F76929BB91B600B13921 /* Info.plist */,
 				F8F6E44F29BCE9030004795E /* Extensions */,
 				F8F6E44529BCC0C90004795E /* Views */,
 				F864F77B29BB982100B13921 /* ImageFetcher.swift */,
@@ -630,7 +632,6 @@
 				F864F77129BB924D00B13921 /* VernissageWidgetEntryView.swift */,
 				F864F76529BB91B400B13921 /* VernissageWidget.swift */,
 				F864F76729BB91B600B13921 /* Assets.xcassets */,
-				F864F76929BB91B600B13921 /* Info.plist */,
 			);
 			path = VernissageWidget;
 			sourceTree = "<group>";
@@ -733,7 +734,6 @@
 		F88C245F295C37B80006098B = {
 			isa = PBXGroup;
 			children = (
-				F8F6E44329BC5CAA0004795E /* VernissageWidgetExtension.entitlements */,
 				F837269429A221420098D3C4 /* PixelfedKit */,
 				F88ABD9529687D4D004EF61E /* README.md */,
 				F835081F29BEF88600DE3247 /* Localization */,
@@ -1250,7 +1250,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = VernissageWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = VernissageWidget/VernissageWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 69;
@@ -1279,7 +1279,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = VernissageWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = VernissageWidget/VernissageWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 69;
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
