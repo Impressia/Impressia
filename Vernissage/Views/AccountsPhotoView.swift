@@ -25,7 +25,7 @@ struct AccountsPhotoView: View {
     
     var body: some View {
         self.mainBody()
-            .navigationTitle("Accounts")
+            .navigationTitle("trendingAccounts.navigationBar.title")
     }
     
     @ViewBuilder
@@ -38,7 +38,7 @@ struct AccountsPhotoView: View {
                 }
         case .loaded:
             if self.accounts.isEmpty {
-                NoDataView(imageSystemName: "person.3.sequence", text: "Unfortunately, there is no one here.")
+                NoDataView(imageSystemName: "person.3.sequence", text: "trendingAccounts.title.noAccounts")
             } else {
                 List {
                     ForEach(self.accounts, id: \.id) { account in
@@ -84,10 +84,10 @@ struct AccountsPhotoView: View {
             self.state = .loaded
         } catch {
             if !Task.isCancelled {
-                ErrorService.shared.handle(error, message: "Accounts not retrieved.", showToastr: true)
+                ErrorService.shared.handle(error, message: "trendingAccounts.error.loadingAccountsFailed", showToastr: true)
                 self.state = .error(error)
             } else {
-                ErrorService.shared.handle(error, message: "Accounts not retrieved.", showToastr: false)
+                ErrorService.shared.handle(error, message: "trendingAccounts.error.loadingAccountsFailed", showToastr: false)
             }
         }
     }

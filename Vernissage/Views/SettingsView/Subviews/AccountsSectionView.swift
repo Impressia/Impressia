@@ -14,7 +14,7 @@ struct AccountsSectionView: View {
     @State private var dbAccounts: [AccountData] = []
         
     var body: some View {
-        Section("Accounts") {
+        Section("settings.title.accounts") {
             ForEach(self.accounts) { account in
                 HStack(alignment: .center) {
                     UsernameRow(accountId: account.id,
@@ -33,7 +33,7 @@ struct AccountsSectionView: View {
             
             NavigationLink(value: RouteurDestinations.signIn) {
                 HStack {
-                    Text("New account")
+                    Text("settings.title.newAccount", comment: "New account")
                     Spacer()
                     Image(systemName: "person.crop.circle.badge.plus")
                 }

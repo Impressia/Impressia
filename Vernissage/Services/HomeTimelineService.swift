@@ -108,10 +108,13 @@ public class HomeTimelineService {
                     break
                 }
                 
-                amountOfStatuses = amountOfStatuses + downloadedStatuses.count
+                // We have to include in the counter only statuses with images.
+                let statusesWithImagesOnly = downloadedStatuses.getStatusesWithImagesOnly()
+                
+                amountOfStatuses = amountOfStatuses + statusesWithImagesOnly.count
                 newestStatusId = firstStatus.id
             } catch {
-                ErrorService.shared.handle(error, message: "Error during downloading new statuses for amountof new statuses.")
+                ErrorService.shared.handle(error, message: "Error during downloading new statuses for amount of new statuses.")
                 break
             }
         }

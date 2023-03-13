@@ -8,20 +8,20 @@ import SwiftUI
 
 struct OtherSectionView: View {
     var body: some View {
-        Section("Other") {
+        Section("settings.title.other") {
             NavigationLink(value: RouteurDestinations.thirdParty) {
-                Text("Third party")
+                Text("settings.title.thirdParty", comment: "Third party")
             }
             
             HStack {
-                Text("Report a bug")
+                Text("settings.title.reportBug", comment: "Report a bug")
                 Spacer()
-                Link("Issues on Github", destination: URL(string: "https://github.com/VernissageApp/Home/issues")!)
+                Link(NSLocalizedString("settings.title.githubIssues", comment: "Issues on GitHub"), destination: URL(string: "https://github.com/VernissageApp/Home/issues")!)
                     .font(.footnote)
             }
             
             HStack {
-                Text("Follow me on Mastodon")
+                Text("settings.title.follow", comment: "Follow me on Mastodon")
                 Spacer()
                 Link("@mczachurski", destination: URL(string: "https://mastodon.social/@mczachurski")!)
                     .font(.footnote)

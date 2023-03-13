@@ -70,7 +70,7 @@ struct ImagesGrid: View {
             let statusesWithImages = statusesFromApi.getStatusesWithImagesOnly()
             self.updatePhotos(statusesWithImages: statusesWithImages)
         } catch {
-            ErrorService.shared.handle(error, message: "Loading tags failed.", showToastr: !Task.isCancelled)
+            ErrorService.shared.handle(error, message: "global.error.errorDuringDataLoad", showToastr: !Task.isCancelled)
         }
     }
     

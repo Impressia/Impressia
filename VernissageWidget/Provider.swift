@@ -31,13 +31,13 @@ struct Provider: TimelineProvider {
             let currentDate = Date()
             let widgetEntries = await self.getWidgetEntries()
             
-            let nextUpdateDate = Calendar.current.date(byAdding: .hour, value: 1, to: currentDate)!
+            let nextUpdateDate = Calendar.current.date(byAdding: .hour, value: 2, to: currentDate)!
             let timeline = Timeline(entries: widgetEntries, policy: .after(nextUpdateDate))
             completion(timeline)
         }
     }
     
-    func getWidgetEntries(length: Int = 6) async -> [WidgetEntry] {
+    func getWidgetEntries(length: Int = 8) async -> [WidgetEntry] {
         do {
             return try await ImageFetcher.shared.fetchWidgetEntries(length: length)
         } catch {

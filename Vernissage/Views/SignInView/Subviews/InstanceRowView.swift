@@ -47,7 +47,7 @@ struct InstanceRowView: View {
                     
                     Spacer()
 
-                    Button("Sign in") {
+                    Button(NSLocalizedString("signin.title.signIn", comment: "Sign in")) {
                         HapticService.shared.fireHaptic(of: .buttonPress)
                         self.action(instance.uri)
                     }
@@ -66,10 +66,10 @@ struct InstanceRowView: View {
             if let stats = instance.stats {
                 HStack {
                     Image(systemName: "person.2.fill")
-                    Text("\(stats.userCount) users")
+                    Text(String(format: NSLocalizedString("signin.title.amountOfUsers", comment: "users"), stats.userCount))
                     
                     Image(systemName: "photo.stack.fill")
-                    Text("\(stats.statusCount) posts")
+                    Text(String(format: NSLocalizedString("signin.title.amountOStatuses", comment: "statuses"), stats.statusCount))
 
                     Spacer()
                 }

@@ -41,7 +41,7 @@ struct PaginableStatusesView: View {
                 }
         case .loaded:
             if self.statusViewModels.isEmpty {
-                NoDataView(imageSystemName: "photo.on.rectangle.angled", text: "Unfortunately, there are no photos here.")
+                NoDataView(imageSystemName: "photo.on.rectangle.angled", text: "statuses.title.noPhotos")
             } else {
                 ScrollView {
                     LazyVStack(alignment: .center) {
@@ -66,7 +66,7 @@ struct PaginableStatusesView: View {
                                         do {
                                             try await self.loadMoreStatuses()
                                         } catch {
-                                            ErrorService.shared.handle(error, message: "Loading more statuses failed.", showToastr: !Task.isCancelled)
+                                            ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
                                         }
                                     }
                                 Spacer()
@@ -92,7 +92,7 @@ struct PaginableStatusesView: View {
             try await self.loadStatuses()
             self.state = .loaded
         } catch {
-            ErrorService.shared.handle(error, message: "Loading statuses failed.", showToastr: !Task.isCancelled)
+            ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
             self.state = .error(error)
         }
     }
@@ -144,12 +144,12 @@ struct PaginableStatusesView: View {
         }
     }
     
-    private func getTitle() -> String {
+    private func getTitle() -> LocalizedStringKey {
         switch self.listType {
         case .favourites:
-            return "Favourites"
+            return "statuses.navigationBar.favourites"
         case .bookmarks:
-            return "Bookmarks"
+            return "statuses.navigationBar.bookmarks"
         }
     }
 }

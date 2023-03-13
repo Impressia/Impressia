@@ -17,27 +17,27 @@ struct HapticsSectionView: View {
     @State var hapticNotificationEnabled = true
     
     var body: some View {
-        Section("Haptics") {
+        Section("settings.title.haptics") {
             
-            Toggle("Tab selection", isOn: $hapticTabSelectionEnabled)
+            Toggle("settings.title.hapticsTabSelection", isOn: $hapticTabSelectionEnabled)
                 .onChange(of: hapticTabSelectionEnabled) { newValue in
                     self.applicationState.hapticTabSelectionEnabled = newValue
                     ApplicationSettingsHandler.shared.setHapticTabSelectionEnabled(value: newValue)
                 }
             
-            Toggle("Button press", isOn: $hapticButtonPressEnabled)
+            Toggle("settings.title.hapticsButtonPress", isOn: $hapticButtonPressEnabled)
                 .onChange(of: hapticButtonPressEnabled) { newValue in
                     self.applicationState.hapticButtonPressEnabled = newValue
                     ApplicationSettingsHandler.shared.setHapticButtonPressEnabled(value: newValue)
                 }
             
-            Toggle("List refresh", isOn: $hapticRefreshEnabled)
+            Toggle("settings.title.hapticsListRefresh", isOn: $hapticRefreshEnabled)
                 .onChange(of: hapticRefreshEnabled) { newValue in
                     self.applicationState.hapticRefreshEnabled = newValue
                     ApplicationSettingsHandler.shared.setHapticRefreshEnabled(value: newValue)
                 }
             
-            Toggle("Animation finished", isOn: $hapticAnimationEnabled)
+            Toggle("settings.title.hapticsAnimationFinished", isOn: $hapticAnimationEnabled)
                 .onChange(of: hapticAnimationEnabled) { newValue in
                     self.applicationState.hapticAnimationEnabled = newValue
                     ApplicationSettingsHandler.shared.setHapticAnimationEnabled(value: newValue)

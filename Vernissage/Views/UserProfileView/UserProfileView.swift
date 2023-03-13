@@ -66,7 +66,7 @@ struct UserProfileView: View {
                 if let accountFromApi = accountsFromApi?.accounts.first {
                     self.accountId = accountFromApi.id
                 } else {
-                    ToastrService.shared.showError(title: "Account not exists", imageSystemName: "exclamationmark.octagon")
+                    ToastrService.shared.showError(title: "userProfile.error.notExists", imageSystemName: "exclamationmark.octagon")
                     dismiss()
                     
                     return
@@ -81,7 +81,7 @@ struct UserProfileView: View {
             
             self.state = .loaded
         } catch {
-            ErrorService.shared.handle(error, message: "Error during download account from server.", showToastr: !Task.isCancelled)
+            ErrorService.shared.handle(error, message: "userProfile.error.loadingAccountFailed", showToastr: !Task.isCancelled)
             self.state = .error(error)
         }
     }
@@ -92,11 +92,11 @@ struct UserProfileView: View {
             Menu (content: {
                 if let accountUrl = account.url {
                     Link(destination: accountUrl) {
-                        Label("Open in browser", systemImage: "safari")
+                        Label(NSLocalizedString("userProfile.title.openInBrowser", comment: "Open in browser"), systemImage: "safari")
                     }
                     
                     ShareLink(item: accountUrl) {
-                        Label("Share", systemImage: "square.and.arrow.up")
+                        Label(NSLocalizedString("userProfile.title.share", comment: "Share"), systemImage: "square.and.arrow.up")
                     }
                     
                     Divider()
@@ -108,9 +108,9 @@ struct UserProfileView: View {
                     }
                 } label: {
                     if self.relationship?.muting == true {
-                        Label("Unute", systemImage: "message.and.waveform.fill")
+                        Label(NSLocalizedString("userProfile.title.unmute", comment: "Unute"), systemImage: "message.and.waveform.fill")
                     } else {
-                        Label("Mute", systemImage: "message.and.waveform")
+                        Label(NSLocalizedString("userProfile.title.mute", comment: "Mute"), systemImage: "message.and.waveform")
                     }
                 }
                 
@@ -120,9 +120,9 @@ struct UserProfileView: View {
                     }
                 } label: {
                     if self.relationship?.blocking == true {
-                        Label("Unblock", systemImage: "hand.raised.fill")
+                        Label(NSLocalizedString("userProfile.title.unblock", comment: "Unblock"), systemImage: "hand.raised.fill")
                     } else {
-                        Label("Block", systemImage: "hand.raised")
+                        Label(NSLocalizedString("userProfile.title.block", comment: "Block"), systemImage: "hand.raised")
                     }
                 }
                 
@@ -141,22 +141,22 @@ struct UserProfileView: View {
             Menu (content: {
                 if let accountUrl = account.url {
                     Link(destination: accountUrl) {
-                        Label("Open in browser", systemImage: "safari")
+                        Label(NSLocalizedString("userProfile.title.openInBrowser", comment: "Open in browser"), systemImage: "safari")
                     }
                     
                     ShareLink(item: accountUrl) {
-                        Label("Share", systemImage: "square.and.arrow.up")
+                        Label(NSLocalizedString("userProfile.title.share", comment: "Share"), systemImage: "square.and.arrow.up")
                     }
                     
                     Divider()
                 }
                 
                 NavigationLink(value: RouteurDestinations.favourites) {
-                    Label("Favourites", systemImage: "hand.thumbsup")
+                    Label(NSLocalizedString("userProfile.title.favourites", comment: "Favourites"), systemImage: "hand.thumbsup")
                 }
                 
                 NavigationLink(value: RouteurDestinations.bookmarks) {
-                    Label("Bookmarks", systemImage: "bookmark")
+                    Label(NSLocalizedString("userProfile.title.bookmarks", comment: "Bookmarks"), systemImage: "bookmark")
                 }
                 
             }, label: {
@@ -179,7 +179,7 @@ struct UserProfileView: View {
                 }
             }
         } catch {
-            ErrorService.shared.handle(error, message: "Muting/unmuting action failed.", showToastr: true)
+            ErrorService.shared.handle(error, message: "userProfile.error.mute", showToastr: true)
         }
     }
     
@@ -195,7 +195,7 @@ struct UserProfileView: View {
                 }
             }
         } catch {
-            ErrorService.shared.handle(error, message: "Block/unblock action failed.", showToastr: true)
+            ErrorService.shared.handle(error, message: "userProfile.error.block", showToastr: true)
         }
     }
 }

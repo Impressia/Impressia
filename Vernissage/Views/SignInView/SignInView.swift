@@ -26,7 +26,7 @@ struct SignInView: View {
             Section {
                 VStack(alignment: .center) {
                     HStack(alignment: .center, spacing: 4) {
-                        TextField("Server address", text: $serverAddress)
+                        TextField("signin.title.serverAddress", text: $serverAddress)
                             .onSubmit {
                                 let baseAddress = self.getServerAddress(uri: self.serverAddress)
                                 self.signIn(baseAddress: baseAddress)
@@ -36,7 +36,7 @@ struct SignInView: View {
                             .disableAutocorrection(true)
                             .clearButton(text: $serverAddress)
                         
-                        Button("Sign in") {
+                        Button(NSLocalizedString("signin.title.signIn", comment: "Sign in")) {
                             HapticService.shared.fireHaptic(of: .buttonPress)
 
                             let baseAddress = self.getServerAddress(uri: self.serverAddress)
@@ -49,19 +49,19 @@ struct SignInView: View {
                 .buttonStyle(PlainButtonStyle())
 
             } header: {
-                Text("Enter server address")
+                Text("signin.title.enterServerAddress", comment: "Enter server address")
             } footer: {
                 if let instructionsUrlString = self.instructionsUrlString,
                    let instructionsUrl = URL(string: instructionsUrlString) {
                     HStack {
                         Spacer()
-                        Link("How to join Pixelfed", destination: instructionsUrl)
+                        Link(NSLocalizedString("signin.title.howToJoinLink", comment: "How to join Pixelfed"), destination: instructionsUrl)
                             .font(.caption)
                     }
                 }
             }
             
-            Section("Or choose Pixelfed server") {
+            Section("signin.title.chooseServer") {
                 if self.instances.isEmpty {
                     HStack {
                         Spacer()
@@ -83,7 +83,7 @@ struct SignInView: View {
             self.instances = await self.client.instances.instances(instanceUrls: metadata.instances)
             self.instructionsUrlString = metadata.instructionsUrl
         }
-        .navigationTitle("Sign in to Pixelfed")
+        .navigationTitle("signin.navigationBar.title")
         .navigationBarTitleDisplayMode(.inline)
     }
     
@@ -102,7 +102,7 @@ struct SignInView: View {
                 ErrorService.shared.handle(error, message: error.localizedDescription, showToastr: true)
             }
             catch {
-                ErrorService.shared.handle(error, message: "Communication with server failed.", showToastr: true)
+                ErrorService.shared.handle(error, message: "signin.error.communicationFailed", showToastr: true)
             }
         }
     }

@@ -14,7 +14,7 @@ public class ToastrService {
     
     public func showSuccess(_ title: String, imageSystemName: String, subtitle: String? = nil) {
         let drop = Drop(
-            title: title,
+            title: NSLocalizedString(title, comment: "Success displayed to the user."),
             subtitle: subtitle,
             subtitleNumberOfLines: 2,
             icon: self.createImage(systemName: imageSystemName, color: UIColor(Color.accentColor)),
@@ -29,9 +29,9 @@ public class ToastrService {
         Drops.show(drop)
     }
     
-    public func showError(title: String = "Unexpected error", imageSystemName: String = "ant.circle.fill", subtitle: String? = nil) {
+    public func showError(title: String = "global.error.unexpected", imageSystemName: String = "ant.circle.fill", subtitle: String? = nil) {
         let drop = Drop(
-            title: title,
+            title: NSLocalizedString(title, comment: "Error displayed to the user."),
             subtitle: subtitle,
             subtitleNumberOfLines: 2,
             icon: self.createImage(systemName: imageSystemName, color: UIColor(Color.red)),

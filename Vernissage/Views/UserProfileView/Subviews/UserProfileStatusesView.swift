@@ -42,7 +42,7 @@ struct UserProfileStatusesView: View {
                                 do {
                                     try await self.loadMoreStatuses()
                                 } catch {
-                                    ErrorService.shared.handle(error, message: "Loading more statuses failed.", showToastr: true)
+                                    ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadStatuses", showToastr: true)
                                 }
                             }
                         Spacer()
@@ -56,7 +56,7 @@ struct UserProfileStatusesView: View {
             do {
                 try await self.loadStatuses()
             } catch {
-                ErrorService.shared.handle(error, message: "Loading statuses failed.", showToastr: !Task.isCancelled)
+                ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadStatuses", showToastr: !Task.isCancelled)
             }
         }
     }

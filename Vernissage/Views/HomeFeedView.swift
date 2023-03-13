@@ -40,7 +40,7 @@ struct HomeFeedView: View {
                 }
         case .loaded:
             if self.dbStatuses.isEmpty {
-                NoDataView(imageSystemName: "photo.on.rectangle.angled", text: "Unfortunately, there are no photos here.")
+                NoDataView(imageSystemName: "photo.on.rectangle.angled", text: "home.title.noPhotos")
             } else {
                 self.timeline()
             }
@@ -77,7 +77,7 @@ struct HomeFeedView: View {
                                         }
                                     }
                                 } catch {
-                                    ErrorService.shared.handle(error, message: "Error during download statuses from server.", showToastr: !Task.isCancelled)
+                                    ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadStatuses", showToastr: !Task.isCancelled)
                                 }
                             }
                     }
@@ -111,7 +111,7 @@ struct HomeFeedView: View {
                 }
             }
         } catch {
-            ErrorService.shared.handle(error, message: "Error during download statuses from server.", showToastr: !Task.isCancelled)
+            ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadStatuses", showToastr: !Task.isCancelled)
         }
     }
     
@@ -125,10 +125,10 @@ struct HomeFeedView: View {
             self.state = .loaded
         } catch {
             if !Task.isCancelled {
-                ErrorService.shared.handle(error, message: "Statuses not retrieved.", showToastr: true)
+                ErrorService.shared.handle(error, message: "global.error.statusesNotRetrieved", showToastr: true)
                 self.state = .error(error)
             } else {
-                ErrorService.shared.handle(error, message: "Statuses not retrieved.", showToastr: false)
+                ErrorService.shared.handle(error, message: "global.error.statusesNotRetrieved", showToastr: false)
             }
         }
     }
@@ -167,7 +167,7 @@ struct HomeFeedView: View {
                 .frame(width: 64, height: 64)
                 .fontWeight(.ultraLight)
                 .foregroundColor(.accentColor.opacity(0.6))
-            Text("You're all caught up")
+            Text("home.title.allCaughtUp", comment: "You're all caught up")
                 .font(.title2)
                 .fontWeight(.thin)
                 .foregroundColor(Color.mainTextColor.opacity(0.6))

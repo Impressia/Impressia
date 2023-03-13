@@ -185,7 +185,7 @@ extension TextView.Representable.Coordinator {
 public extension TextView {
     /// Specify a placeholder text
     /// - Parameter placeholder: The placeholder text
-    func placeholder(_ placeholder: String) -> TextView {
+    func placeholder(_ placeholder: LocalizedStringKey) -> TextView {
         self.placeholder(placeholder) { $0 }
     }
 
@@ -197,7 +197,7 @@ public extension TextView {
     ///         .placeholder("placeholder") { view in
     ///             view.foregroundColor(.red)
     ///         }
-    func placeholder<V: View>(_ placeholder: String, _ configure: (Text) -> V) -> TextView {
+    func placeholder<V: View>(_ placeholder: LocalizedStringKey, _ configure: (Text) -> V) -> TextView {
         var view = self
         let text = Text(placeholder)
         view.placeholderView = AnyView(configure(text))

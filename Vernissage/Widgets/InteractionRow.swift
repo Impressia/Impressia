@@ -81,31 +81,31 @@ struct InteractionRow: View {
             
             Menu {
                 NavigationLink(value: RouteurDestinations.accounts(listType: .reblogged(entityId: statusModel.id))) {
-                    Label("Reboosted by", systemImage: "paperplane")
+                    Label("status.title.reboostedBy", systemImage: "paperplane")
                 }
 
                 NavigationLink(value: RouteurDestinations.accounts(listType: .favourited(entityId: statusModel.id))) {
-                    Label("Favourited by", systemImage: "hand.thumbsup")
+                    Label("status.title.favouritedBy", systemImage: "hand.thumbsup")
                 }
 
                 if let url = statusModel.url {
                     Divider()
 
                     Link(destination: url) {
-                        Label("Open in browser", systemImage: "safari")
+                        Label("status.title.openInBrowser", systemImage: "safari")
                     }
 
                     ShareLink(item: url) {
-                        Label("Share post", systemImage: "square.and.arrow.up")
+                        Label("status.title.shareStatus", systemImage: "square.and.arrow.up")
                     }
                 }
                 
                 if self.statusModel.account.id == self.applicationState.account?.id {
-                    Section(header: Text("Your post")) {
+                    Section(header: Text("status.title.yourStatus", comment: "Your post")) {
                         Button(role: .destructive) {
                             self.deleteStatus()
                         } label: {
-                            Label("Delete", systemImage: "trash")
+                            Label("status.title.delete", systemImage: "trash")
                         }
                     }
                 }
@@ -143,9 +143,11 @@ struct InteractionRow: View {
                 self.reblogged = status.reblogged
             }
 
-            ToastrService.shared.showSuccess(self.reblogged ? "Reboosted" : "Unreboosted", imageSystemName: "paperplane.fill")
+            ToastrService.shared.showSuccess(self.reblogged
+                                             ? NSLocalizedString("status.title.reboosted", comment: "Reboosted")
+                                             : NSLocalizedString("status.title.unreboosted", comment: "Unreboosted"), imageSystemName: "paperplane.fill")
         } catch {
-            ErrorService.shared.handle(error, message: "Reboost action failed.", showToastr: true)
+            ErrorService.shared.handle(error, message: "status.error.reboostFailed", showToastr: true)
         }
     }
     
@@ -163,9 +165,11 @@ struct InteractionRow: View {
                 self.favourited = status.favourited
             }
             
-            ToastrService.shared.showSuccess(self.favourited ? "Favourited" : "Unfavourited", imageSystemName: "hand.thumbsup.fill")
+            ToastrService.shared.showSuccess(self.favourited
+                                             ? NSLocalizedString("status.title.favourited", comment: "Favourited")
+                                             : NSLocalizedString("status.title.unfavourited", comment: "Unfavourited"), imageSystemName: "hand.thumbsup.fill")
         } catch {
-            ErrorService.shared.handle(error, message: "Favourite action failed.", showToastr: true)
+            ErrorService.shared.handle(error, message: "status.error.favouriteFailed", showToastr: true)
         }
     }
     
@@ -176,9 +180,11 @@ struct InteractionRow: View {
             : try await self.client.statuses?.bookmark(statusId: self.statusModel.id)
 
             self.bookmarked.toggle()
-            ToastrService.shared.showSuccess(self.bookmarked ? "Bookmarked" : "Unbookmarked", imageSystemName: "bookmark.fill")
+            ToastrService.shared.showSuccess(self.bookmarked
+                                             ? NSLocalizedString("status.title.bookmarked", comment: "Bookmarked")
+                                             : NSLocalizedString("status.title.unbookmarked", comment: "Unbookmarked"), imageSystemName: "bookmark.fill")
         } catch {
-            ErrorService.shared.handle(error, message: "Bookmark action failed.", showToastr: true)
+            ErrorService.shared.handle(error, message: "status.error.bookmarkFailed", showToastr: true)
         }
     }
     
@@ -186,11 +192,11 @@ struct InteractionRow: View {
         Task {
             do {
                 try await self.client.statuses?.delete(statusId: self.statusModel.id)
-                ToastrService.shared.showSuccess("Post deleted", imageSystemName: "checkmark.circle.fill")
+                ToastrService.shared.showSuccess("status.title.statusDeleted", imageSystemName: "checkmark.circle.fill")
                 
                 self.delete?()
             } catch {
-                ErrorService.shared.handle(error, message: "Delete action failed.", showToastr: true)
+                ErrorService.shared.handle(error, message: "status.error.deleteFailed", showToastr: true)
             }
         }
     }

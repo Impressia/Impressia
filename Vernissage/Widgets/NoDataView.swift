@@ -9,9 +9,9 @@ import SwiftUI
 struct NoDataView: View {
     
     private let imageSystemName: String
-    private let text: String
+    private let text: LocalizedStringKey
     
-    init(imageSystemName: String, text: String) {
+    init(imageSystemName: String, text: LocalizedStringKey) {
         self.imageSystemName = imageSystemName
         self.text = text
     }
@@ -21,7 +21,7 @@ struct NoDataView: View {
             Image(systemName: self.imageSystemName)
                 .font(.largeTitle)
                 .padding(.bottom, 4)
-            Text(self.text)
+            Text(self.text, comment: "No data message")
                 .font(.title3)
         }
         .foregroundColor(.lightGrayColor)

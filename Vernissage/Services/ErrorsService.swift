@@ -21,6 +21,7 @@ public class ErrorService {
             }
         }
         
-        print("Error ['\(message)']: \(error.localizedDescription)")
+        let localizedMessage = NSLocalizedString(message, comment: "Error message")
+        print("Error ['\(localizedMessage)']: \(error.localizedDescription)")
     }
 }

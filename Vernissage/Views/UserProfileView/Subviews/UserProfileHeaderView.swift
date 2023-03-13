@@ -25,7 +25,7 @@ struct UserProfileHeaderView: View {
                 VStack(alignment: .center) {
                     Text("\(account.statusesCount)")
                         .font(.title3)
-                    Text("Posts")
+                    Text("userProfile.title.posts", comment: "Posts")
                         .font(.subheadline)
                         .opacity(0.6)
                 }
@@ -36,7 +36,7 @@ struct UserProfileHeaderView: View {
                     VStack(alignment: .center) {
                         Text("\(account.followersCount)")
                             .font(.title3)
-                        Text("Followers")
+                        Text("userProfile.title.followers", comment: "Followers")
                             .font(.subheadline)
                             .opacity(0.6)
                     }
@@ -48,7 +48,7 @@ struct UserProfileHeaderView: View {
                     VStack(alignment: .center) {
                         Text("\(account.followingCount)")
                             .font(.title3)
-                        Text("Following")
+                        Text("userProfile.title.following", comment: "Following")
                             .font(.subheadline)
                             .opacity(0.6)
                     }
@@ -80,7 +80,7 @@ struct UserProfileHeaderView: View {
                     })
             }
             
-            Text("Joined \(account.createdAt.toRelative(.isoDateTimeMilliSec))")
+            Text(String(format: NSLocalizedString("userProfile.title.joined", comment: "Joined"), account.createdAt.toRelative(.isoDateTimeMilliSec)))
                 .foregroundColor(.lightGrayColor.opacity(0.5))
                 .font(.footnote)
             
@@ -95,7 +95,7 @@ struct UserProfileHeaderView: View {
         } label: {
             HStack {
                 Image(systemName: relationship?.following == true ? "person.badge.minus" : "person.badge.plus")
-                Text(relationship?.following == true ? "Unfollow" : (relationship?.followedBy == true ? "Follow back" : "Follow"))
+                Text(relationship?.following == true ? "userProfile.title.unfollow" : (relationship?.followedBy == true ? "userProfile.title.followBack" : "userProfile.title.follow"), comment: "Follow/unfollow actions")
             }
         }
         .buttonStyle(.borderedProminent)
@@ -114,7 +114,7 @@ struct UserProfileHeaderView: View {
                 }
             }
         } catch {
-            ErrorService.shared.handle(error, message: "Relationship action failed.", showToastr: true)
+            ErrorService.shared.handle(error, message: "userProfile.error.relationship", showToastr: true)
         }
     }
 }

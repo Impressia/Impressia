@@ -30,7 +30,7 @@ struct PlaceSelectorView: View {
                 List {
                     Section {
                         HStack {
-                            TextField("Search...", text: $query)
+                            TextField("placeSelector.title.search", text: $query)
                                 .padding(8)
                                 .focused($focusedField, equals: .search)
                                 .keyboardType(.default)
@@ -43,7 +43,7 @@ struct PlaceSelectorView: View {
                                     await self.searchPlaces()
                                 }
                             } label: {
-                                Text("Search")
+                                Text("placeSelector.title.buttonSearch", comment: "Search")
                                     
                             }
                             .buttonStyle(.bordered)
@@ -86,7 +86,7 @@ struct PlaceSelectorView: View {
                     }
                 }
             }
-            .navigationTitle("Places")
+            .navigationTitle("placeSelector.navigationBar.title")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 self.getTrailingToolbar()
@@ -97,7 +97,7 @@ struct PlaceSelectorView: View {
     @ToolbarContentBuilder
     private func getTrailingToolbar() -> some ToolbarContent {
         ToolbarItem(placement: .cancellationAction) {
-            Button("Cancel", role: .cancel) {
+            Button(NSLocalizedString("placeSelector.title.cancel", comment: "Cancel"), role: .cancel) {
                 self.dismiss()
             }
         }
@@ -111,7 +111,7 @@ struct PlaceSelectorView: View {
                 self.places = placesFromApi
             }
         } catch {
-            ErrorService.shared.handle(error, message: "Cannot download places.", showToastr: true)
+            ErrorService.shared.handle(error, message: "placeSelector.error.loadingPlacesFailed", showToastr: true)
         }
         
         self.showLoader = false

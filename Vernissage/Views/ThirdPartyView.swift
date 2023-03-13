@@ -69,7 +69,7 @@ struct ThirdPartyView: View {
                 .font(.footnote)
             }
         }
-        .navigationTitle("Third party")
+        .navigationTitle("thirdParty.navigationBar.title")
         .navigationBarTitleDisplayMode(.inline)
     }
 }

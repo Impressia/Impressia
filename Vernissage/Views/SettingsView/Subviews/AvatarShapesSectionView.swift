@@ -10,7 +10,7 @@ struct AvatarShapesSectionView: View {
     @EnvironmentObject var applicationState: ApplicationState
 
     var body: some View {
-        Section("Avatar") {
+        Section("settings.title.avatar") {
             Button {
                 self.applicationState.avatarShape = .circle
                 ApplicationSettingsHandler.shared.setDefaultAvatarShape(avatarShape: .circle)
@@ -22,7 +22,7 @@ struct AvatarShapesSectionView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 32, height: 32)
                     
-                    Text("Circle")
+                    Text("settings.title.circle", comment: "Circle")
                         .foregroundColor(.label)
                     Spacer()
                     
@@ -44,7 +44,7 @@ struct AvatarShapesSectionView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 32, height: 32)
 
-                    Text("Rounded rectangle")
+                    Text("settings.title.rounderRectangle", comment: "Rounded rectangle")
                         .foregroundColor(.label)
                     Spacer()
                     

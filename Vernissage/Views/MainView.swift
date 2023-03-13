@@ -17,7 +17,7 @@ struct MainView: View {
     @EnvironmentObject var routerPath: RouterPath
     @EnvironmentObject var tipsStore: TipsStore
     
-    @State private var navBarTitle: String = "Home"
+    @State private var navBarTitle: LocalizedStringKey = "mainview.tab.homeTimeline"
     @State private var viewMode: ViewMode = .home {
         didSet {
             self.navBarTitle = self.getViewTitle(viewMode: viewMode)
@@ -159,7 +159,7 @@ struct MainView: View {
                     }
                 } label: {
                     HStack {
-                        Text("Trending")
+                        Text("mainview.tab.trending", comment: "Trending menu section")
                         Image(systemName: "chart.line.uptrend.xyaxis")
                     }
                 }
@@ -185,7 +185,7 @@ struct MainView: View {
                 }
             } label: {
                 HStack {
-                    Text(navBarTitle)
+                    Text(navBarTitle, comment: "Navbar title")
                         .font(.headline)
                     Image(systemName: "chevron.down")
                         .fontWeight(.semibold)
@@ -219,7 +219,7 @@ struct MainView: View {
                     HapticService.shared.fireHaptic(of: .buttonPress)
                     self.routerPath.presentedSheet = .settings
                 } label: {
-                    Label("Settings", systemImage: "gear")
+                    Label("mainview.menu.settings", systemImage: "gear")
                 }
             } label: {
                 self.getAvatarImage(avatarUrl: self.applicationState.account?.avatar,
@@ -271,26 +271,26 @@ struct MainView: View {
         }
     }
     
-    private func getViewTitle(viewMode: ViewMode) -> String {
+    private func getViewTitle(viewMode: ViewMode) -> LocalizedStringKey {
         switch viewMode {
         case .home:
-            return "Home"
+            return "mainview.tab.homeTimeline"
         case .trendingPhotos:
-            return "Photos"
+            return "mainview.tab.trendingPhotos"
         case .trendingTags:
-            return "Tags"
+            return "mainview.tab.trendingTags"
         case .trendingAccounts:
-            return "Accounts"
+            return "mainview.tab.trendingAccounts"
         case .local:
-            return "Local"
+            return "mainview.tab.localTimeline"
         case .federated:
-            return "Federated"
+            return "mainview.tab.federatedTimeline"
         case .profile:
-            return "Profile"
+            return "mainview.tab.userProfile"
         case .notifications:
-            return "Notifications"
+            return "mainview.tab.notifications"
         case .search:
-            return "Search"
+            return "mainview.tab.search"
         }
     }
     
@@ -326,7 +326,7 @@ struct MainView: View {
             let authorizationSession = AuthorizationSession()
             await AuthorizationService.shared.verifyAccount(session: authorizationSession, currentAccount: account) { accountData in
                 guard let accountData = accountData else {
-                    ToastrService.shared.showError(subtitle: "Cannot switch accounts.")
+                    ToastrService.shared.showError(subtitle: "mainview.error.switchAccounts")
                     return
                 }
 

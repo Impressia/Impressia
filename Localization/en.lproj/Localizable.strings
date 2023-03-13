@@ -1,0 +1,231 @@
+// MARK: Common strings.
+"global.title.contentWarning" = "Sensitive content";
+"global.title.seePost" = "See post";
+"global.title.seePost" = "Refresh";
+
+// MARK: Global errors.
+"global.error.unexpected" = "Unexpected error.";
+"global.error.statusesNotRetrieved" = "Statuses not retrieved.";
+"global.error.errorDuringDownloadStatuses" = "Error during download statuses from server.";
+"global.error.errorDuringDownloadHashtag" = "Error during download tag from server.";
+"global.error.hashtagNotExists" = "Hashtag not exists.";
+"global.error.errorDuringImageDownload" = "Cannot download image.";
+"global.error.canceledImageDownload" = "Download image has been canceled.";
+"global.error.errorDuringDataLoad" = "Loading data failed.";
+
+// MARK: Main view (main navigation bar).
+"mainview.tab.homeTimeline" = "Home";
+"mainview.tab.localTimeline" = "Local";
+"mainview.tab.federatedTimeline" = "Federated";
+"mainview.tab.trendingPhotos" = "Photos";
+"mainview.tab.trendingTags" = "Tags";
+"mainview.tab.trendingAccounts" = "Accounts";
+"mainview.tab.userProfile" = "Profile";
+"mainview.tab.notifications" = "Notifications";
+"mainview.tab.search" = "Search";
+"mainview.tab.trending" = "Trending";
+
+// MARK: Main view (leading navigation bar).
+"mainview.menu.settings" = "Settings";
+
+// MARK: Main view (error notifications).
+"mainview.error.switchAccounts" = "Cannot switch accounts.";
+
+// MARK: Home timeline.
+"home.title.allCaughtUp" = "You're all caught up";
+"home.title.noPhotos" = "Unfortunately, there are no photos here.";
+
+// MARK: Statuses timeline (local/federated/favourite/bookmarks etc.).
+"statuses.navigationBar.localTimeline" = "Local";
+"statuses.navigationBar.federatedTimeline" = "Federated";
+"statuses.navigationBar.favourites" = "Favourites";
+"statuses.navigationBar.bookmarks" = "Bookmarks";
+"statuses.title.noPhotos" = "Unfortunately, there are no photos here.";
+"statuses.title.tagFollowed" = "You are following the tag.";
+"statuses.title.tagUnfollowed" = "Tag has been unfollowed.";
+"statuses.error.loadingStatusesFailed" = "Loading statuses failed.";
+"statuses.error.tagFollowFailed" = "Follow tag failed.";
+"statuses.error.tagUnfollowFailed" = "Unfollow tag failed.";
+
+// Mark: Search view.
+"search.navigationBar.title" = "Search";
+"search.title.placeholder" = "Search...";
+"search.title.usersWith" = "Users with %@";
+"search.title.goToUser" = "Go to user %@";
+"search.title.hashtagWith" = "Hashtags with %@";
+"search.title.goToHashtag" = "Go to hashtag %@";
+
+// Mark: Trending statuses.
+"trendingStatuses.navigationBar.title" = "Photos";
+"trendingStatuses.title.daily" = "Daily";
+"trendingStatuses.title.monthly" = "Monthly";
+"trendingStatuses.title.yearly" = "Yearly";
+"trendingStatuses.error.loadingStatusesFailed" = "Loading statuses failed.";
+"trendingStatuses.title.noPhotos" = "Unfortunately, there are no photos here.";
+
+// Mark: Trending tags.
+"trendingTags.navigationBar.title" = "Tags";
+"trendingTags.title.noTags" = "Unfortunately, there are no tags here.";
+"trendingTags.title.amountOfPosts" = "%d posts";
+"trendingTags.error.loadingTagsFailed" = "Loading tags failed.";
+
+// Mark: Trending accounts.
+"trendingAccounts.navigationBar.title" = "Accounts";
+"trendingAccounts.title.noAccounts" = "Unfortunately, there is no one here.";
+"trendingAccounts.error.loadingAccountsFailed" = "Loading accounts failed.";
+
+// Mark: User profile view.
+"userProfile.title.openInBrowser" = "Open in browser";
+"userProfile.title.share" = "Share";
+"userProfile.title.unmute" = "Unmute";
+"userProfile.title.mute" = "Mute";
+"userProfile.title.unblock" = "Unblock";
+"userProfile.title.block" = "Block";
+"userProfile.title.favourites" = "Favourites";
+"userProfile.title.bookmarks" = "Bookmarks";
+"userProfile.title.posts" = "Posts";
+"userProfile.title.followers" = "Followers";
+"userProfile.title.following" = "Following";
+"userProfile.title.joined" = "Joined %@";
+"userProfile.title.unfollow" = "Unfollow";
+"userProfile.title.followBack" = "Follow back";
+"userProfile.title.follow" = "Follow";
+"userProfile.error.notExists" = "Account not exists.";
+"userProfile.error.loadingAccountFailed" = "Error during download account from server.";
+"userProfile.error.muting" = "Muting/unmuting action failed.";
+"userProfile.error.block" = "Block/unblock action failed.";
+"userProfile.error.relationship" = "Relationship action failed.";
+
+// Mark: Notifications view.
+"notifications.navigationBar.title" = "Notifications";
+"notifications.title.noNotifications" = "Unfortunately, there is nothing here.";
+"notifications.title.followedYou" = "followed you";
+"notifications.title.mentionedYou" = "mentioned you";
+"notifications.title.boosted" = "boosted";
+"notifications.title.favourited" = "favourited";
+"notifications.title.postedStatus" = "posted status";
+"notifications.title.followRequest" = "follow request";
+"notifications.title.poll" = "poll";
+"notifications.title.updatedStatus" = "updated status";
+"notifications.title.signedUp" = "signed up";
+"notifications.title.newReport" = "new report";
+"notifications.error.loadingNotificationsFailed" = "Loading notifications failed.";
+
+// Mark: Compose view.
+"compose.navigationBar.title" = "Compose";
+"compose.title.everyone" = "Everyone";
+"compose.title.unlisted" = "Unlisted";
+"compose.title.followers" = "Followers";
+"compose.title.attachPhotoFull" = "Attach a photo and type what's on your mind";
+"compose.title.attachPhotoMini" = "Type what's on your mind";
+"compose.title.publish" = "Publish";
+"compose.title.cancel" = "Cancel";
+"compose.title.writeContentWarning" = "Write content warning";
+"compose.title.commentsWillBeDisabled" = "Comments will be disabled";
+"compose.title.statusPublished" = "Status published";
+"compose.title.tryToUpload" = "Try to upload";
+"compose.title.delete" = "Delete";
+"compose.title.edit" = "Edit";
+"compose.error.loadingPhotosFailed" = "Cannot retreive image from library.";
+"compose.error.postingPhotoFailed" = "Error during posting photo.";
+"compose.error.postingStatusFailed" = "Error during posting status.";
+
+// Mark: Photo editor view.
+"photoEdit.navigationBar.title" = "Photo details";
+"photoEdit.title.photo" = "Photo";
+"photoEdit.title.accessibility" = "Accessibility";
+"photoEdit.title.accessibilityDescription" = "Description for the visually impaired";
+"photoEdit.title.save" = "Save";
+"photoEdit.title.cancel" = "Cancel";
+"photoEdit.error.updatePhotoFailed" = "Error during updating photo.";
+
+// Mark: Place selector view.
+"placeSelector.navigationBar.title" = "Places";
+"placeSelector.title.search" = "Search...";
+"placeSelector.title.buttonSearch" = "Search";
+"placeSelector.title.cancel" = "Cancel";
+"placeSelector.error.loadingPlacesFailed" = "Loading notifications failed.";
+
+// Mark: Settings view.
+"settings.navigationBar.title" = "Settings";
+"settings.title.close" = "Close";
+"settings.title.version" = "Version";
+"settings.title.accounts" = "Accounts";
+"settings.title.newAccount" = "New account";
+"settings.title.accent" = "Accent";
+"settings.title.theme" = "Theme";
+"settings.title.system" = "System";
+"settings.title.light" = "Light";
+"settings.title.dark" = "Dark";
+"settings.title.avatar" = "Avatar";
+"settings.title.circle" = "Circle";
+"settings.title.rounderRectangle" = "Rounded rectangle";
+"settings.title.other" = "Other";
+"settings.title.thirdParty" = "Third party";
+"settings.title.reportBug" = "Report a bug";
+"settings.title.githubIssues" = "Issues on Github";
+"settings.title.follow" = "Follow me on Mastodon";
+"settings.title.support" = "Support";
+"settings.title.thankYouTitle" = "Thank you 💕";
+"settings.title.thankYouMessage" = "Thanks for your purchase. Purchases both big and small help us keep our dream of providing the best quality products to our customers. We hope you’re loving Vernissage.";
+"settings.title.thankYouClose" = "Close";
+"settings.title.haptics" = "Haptics";
+"settings.title.hapticsTabSelection" = "Tab selection";
+"settings.title.hapticsButtonPress" = "Button press";
+"settings.title.hapticsListRefresh" = "List refresh";
+"settings.title.hapticsAnimationFinished" = "Animation finished";
+"settings.title.mediaSettings" = "Media settings";
+"settings.title.alwaysShowSensitiveTitle" = "Always show NSFW";
+"settings.title.alwaysShowSensitiveDescription" = "Force show all NFSW (sensitive) media without warnings";
+"settings.title.alwaysShowAltTitle" = "Show alternative text";
+"settings.title.alwaysShowAltDescription" = "Show alternative text if present on status details screen";
+
+// Mark: Signin view.
+"signin.navigationBar.title" = "Sign in to Pixelfed";
+"signin.title.serverAddress" = "Server address";
+"signin.title.signIn" = "Sign in";
+"signin.title.enterServerAddress" = "Enter server address";
+"signin.title.howToJoinLink" = "How to join Pixelfed";
+"signin.title.chooseServer" = "Or choose Pixelfed server";
+"signin.title.amountOfUsers" = "%d users";
+"signin.title.amountOStatuses" = "%d statuses";
+"signin.error.communicationFailed" = "Communication with server failed.";
+
+// Mark: Status view.
+"status.navigationBar.title" = "Details";
+"status.title.uploaded" = "Uploaded";
+"status.title.via" = "via %@";
+"status.title.reboostedBy" = "Reboosted by";
+"status.title.favouritedBy" = "Favourited by";
+"status.title.openInBrowser" = "Open in browser";
+"status.title.shareStatus" = "Share status";
+"status.title.yourStatus" = "Your status";
+"status.title.delete" = "Delete";
+"status.title.reboosted" = "Reboosted";
+"status.title.unreboosted" = "Unreboosted";
+"status.title.favourited" = "Favourited";
+"status.title.unfavourited" = "Unfavourited";
+"status.title.bookmarked" = "Bookmarked";
+"status.title.unbookmarked" = "Unbookmarked";
+"status.title.statusDeleted" = "Status deleted";
+"status.error.loadingStatusFailed" = "Loading status failed.";
+"status.error.notFound" = "Status not existing anymore.";
+"status.error.loadingCommentsFailed" = "Comments cannot be downloaded.";
+"status.error.reboostFailed" = "Reboost action failed.";
+"status.error.favouriteFailed" = "Favourite action failed.";
+"status.error.bookmarkFailed" = "Bookmark action failed.";
+"status.error.deleteFailed" = "Delete action failed.";
+
+// Mark: Accounts view.
+"accounts.navigationBar.followers" = "Followers";
+"accounts.navigationBar.following" = "Following";
+"accounts.navigationBar.favouritedBy" = "Favourited by";
+"accounts.navigationBar.reboostedBy" = "Reboosted by";
+"accounts.title.noAccounts" = "Unfortunately, there is no one here.";
+"accounts.error.loadingAccountsFailed" = "Loading accounts failed.";
+
+// Mark: Third party view.
+"thirdParty.navigationBar.title" = "Third party";
+
+// Mark: Widget view.
+"widget.title.description" = "Widget with photos from Pixelfed.";

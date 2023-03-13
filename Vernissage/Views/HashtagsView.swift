@@ -25,7 +25,7 @@ struct HashtagsView: View {
     
     var body: some View {
         self.mainBody()
-            .navigationTitle("Tags")
+            .navigationTitle("trendingTags.navigationBar.title")
     }
     
     @ViewBuilder
@@ -38,7 +38,7 @@ struct HashtagsView: View {
                 }
         case .loaded:
             if self.tags.isEmpty {
-                NoDataView(imageSystemName: "person.3.sequence", text: "Unfortunately, there is no one here.")
+                NoDataView(imageSystemName: "person.3.sequence", text: "trendingTags.title.noTags")
             } else {
                 List {
                     ForEach(self.tags, id: \.id) { tag in
@@ -49,7 +49,8 @@ struct HashtagsView: View {
                                 Text(tag.name).font(.headline)
                                 Spacer()
                                 if let total = tag.total {
-                                    Text("\(total) posts").font(.caption)
+                                    Text(String(format: NSLocalizedString("trendingTags.title.amountOfPosts", comment: "Amount of posts"), total))
+                                        .font(.caption)
                                 }
                             }
                             .onTapGesture {
@@ -76,10 +77,10 @@ struct HashtagsView: View {
             self.state = .loaded
         } catch {
             if !Task.isCancelled {
-                ErrorService.shared.handle(error, message: "Tags not retrieved.", showToastr: true)
+                ErrorService.shared.handle(error, message: "trendingTags.error.loadingTagsFailed", showToastr: true)
                 self.state = .error(error)
             } else {
-                ErrorService.shared.handle(error, message: "Tags not retrieved.", showToastr: false)
+                ErrorService.shared.handle(error, message: "trendingTags.error.loadingTagsFailed", showToastr: false)
             }
         }
     }

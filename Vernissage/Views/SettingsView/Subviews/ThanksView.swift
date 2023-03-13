@@ -14,17 +14,17 @@ struct ThanksView: View {
             Spacer()
             VStack {
                 Group {
-                    Text("Thank you 💕")
+                    Text("settings.title.thankYouTitle", comment: "Thank you 💕")
                         .font(.title3)
                         .fontWeight(.bold)
                         .foregroundColor(.viewTextColor)
                         .padding(.top, 8)
-                    Text("Thanks for your purchase. Purchases both big and small help us keep our dream of providing the best quality products to our customers. We hope you’re loving Vernissage.")
+                    Text("settings.title.thankYouMessage", comment: "Thank you message")
                         .font(.footnote)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.viewTextColor)
                     
-                    Button("Close") {
+                    Button(NSLocalizedString("settings.title.thankYouClose", comment: "Close")) {
                         HapticService.shared.fireHaptic(of: .buttonPress)
 
                         withAnimation(.spring()) {

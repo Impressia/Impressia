@@ -20,9 +20,9 @@ struct TrendStatusesView: View {
     var body: some View {
         ScrollView {
             Picker(selection: $tabSelectedValue, label: Text("")) {
-                Text("Daily").tag(Pixelfed.Trends.TrendRange.daily)
-                Text("Monthly").tag(Pixelfed.Trends.TrendRange.monthly)
-                Text("Yearly").tag(Pixelfed.Trends.TrendRange.yearly)
+                Text("trendingStatuses.title.daily", comment: "Daily").tag(Pixelfed.Trends.TrendRange.daily)
+                Text("trendingStatuses.title.monthly", comment: "Monthly").tag(Pixelfed.Trends.TrendRange.monthly)
+                Text("trendingStatuses.title.yearly", comment: "Yearly").tag(Pixelfed.Trends.TrendRange.yearly)
                 
             }
             .padding()
@@ -34,14 +34,14 @@ struct TrendStatusesView: View {
                         self.statusViewModels = []
                         try await self.loadStatuses()
                     } catch {
-                        ErrorService.shared.handle(error, message: "Loading statuses failed.", showToastr: !Task.isCancelled)
+                        ErrorService.shared.handle(error, message: "trendingStatuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
                     }
                 }
             }
             
             self.mainBody()
         }
-        .navigationTitle("Trends")
+        .navigationTitle("trendingStatuses.navigationBar.title")
     }
     
     @ViewBuilder
@@ -55,16 +55,16 @@ struct TrendStatusesView: View {
                         self.state = .loaded
                     } catch {
                         if !Task.isCancelled {
-                            ErrorService.shared.handle(error, message: "Loading statuses failed.", showToastr: true)
+                            ErrorService.shared.handle(error, message: "trendingStatuses.error.loadingStatusesFailed", showToastr: true)
                             self.state = .error(error)
                         } else {
-                            ErrorService.shared.handle(error, message: "Loading statuses failed.", showToastr: false)
+                            ErrorService.shared.handle(error, message: "trendingStatuses.error.loadingStatusesFailed", showToastr: false)
                         }
                     }
                 }
         case .loaded:
             if self.statusViewModels.isEmpty {
-                NoDataView(imageSystemName: "photo.on.rectangle.angled", text: "Unfortunately, there are no photos here.")
+                NoDataView(imageSystemName: "photo.on.rectangle.angled", text: "trendingStatuses.title.noPhotos")
             } else {
                 LazyVStack(alignment: .center) {
                     ForEach(self.statusViewModels, id: \.id) { item in
@@ -86,7 +86,7 @@ struct TrendStatusesView: View {
                         try await self.loadStatuses()
                         HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
                     } catch {
-                        ErrorService.shared.handle(error, message: "Loading statuses failed.", showToastr: !Task.isCancelled)
+                        ErrorService.shared.handle(error, message: "trendingStatuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
                     }
                 }
             }
@@ -99,10 +99,10 @@ struct TrendStatusesView: View {
                     self.state = .loaded
                 } catch {
                     if !Task.isCancelled {
-                        ErrorService.shared.handle(error, message: "Loading statuses failed.", showToastr: true)
+                        ErrorService.shared.handle(error, message: "trendingStatuses.error.loadingStatusesFailed", showToastr: true)
                         self.state = .error(error)
                     } else {
-                        ErrorService.shared.handle(error, message: "Loading statuses failed.", showToastr: false)
+                        ErrorService.shared.handle(error, message: "trendingStatuses.error.loadingStatusesFailed", showToastr: false)
                     }
                 }
             }

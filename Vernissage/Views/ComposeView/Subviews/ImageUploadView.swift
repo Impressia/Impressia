@@ -28,7 +28,7 @@ struct ImageUploadView: View {
                     HapticService.shared.fireHaptic(of: .buttonPress)
                     self.upload()
                 } label: {
-                    Label("Try to upload", systemImage: "exclamationmark.arrow.triangle.2.circlepath")
+                    Label("compose.title.tryToUpload", systemImage: "exclamationmark.arrow.triangle.2.circlepath")
                 }
                 
                 Divider()
@@ -37,7 +37,7 @@ struct ImageUploadView: View {
                     HapticService.shared.fireHaptic(of: .buttonPress)
                     self.delete()
                 } label: {
-                    Label("Delete", systemImage: "trash")
+                    Label("compose.title.delete", systemImage: "trash")
                         .tint(.red)
                 }
             } label: {
@@ -63,7 +63,7 @@ struct ImageUploadView: View {
                     HapticService.shared.fireHaptic(of: .buttonPress)
                     self.open()
                 } label: {
-                    Label("Edit", systemImage: "pencil")
+                    Label("compose.title.edit", systemImage: "pencil")
                 }
                 
                 Divider()
@@ -72,7 +72,7 @@ struct ImageUploadView: View {
                     HapticService.shared.fireHaptic(of: .buttonPress)
                     self.delete()
                 } label: {
-                    Label("Delete", systemImage: "trash")
+                    Label("compose.title.delete", systemImage: "trash")
                 }
             } label: {
                 self.imageView()

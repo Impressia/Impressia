@@ -50,7 +50,7 @@ struct StatusesView: View {
                 }
         case .loaded:
             if self.statusViewModels.isEmpty {
-                NoDataView(imageSystemName: "photo.on.rectangle.angled", text: "Unfortunately, there are no photos here.")
+                NoDataView(imageSystemName: "photo.on.rectangle.angled", text: "statuses.title.noPhotos")
             } else {
                 ScrollView {
                     LazyVStack(alignment: .center) {
@@ -75,7 +75,7 @@ struct StatusesView: View {
                                         do {
                                             try await self.loadMoreStatuses()
                                         } catch {
-                                            ErrorService.shared.handle(error, message: "Loading more statuses failed.", showToastr: !Task.isCancelled)
+                                            ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
                                         }
                                     }
                                 Spacer()
@@ -89,7 +89,7 @@ struct StatusesView: View {
                         try await self.loadTopStatuses()
                         HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
                     } catch {
-                        ErrorService.shared.handle(error, message: "Loading statuses failed.", showToastr: !Task.isCancelled)
+                        ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
                     }
                 }
             }
@@ -112,7 +112,7 @@ struct StatusesView: View {
             
             self.state = .loaded
         } catch {
-            ErrorService.shared.handle(error, message: "Loading statuses failed.", showToastr: !Task.isCancelled)
+            ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
             self.state = .error(error)
         }
     }
@@ -197,7 +197,7 @@ struct StatusesView: View {
         case .hashtag(let tag):
             let hashtagsFromApi = try await self.client.search?.search(query: tag, resultsType: .hashtags)
             guard let hashtagsFromApi = hashtagsFromApi, hashtagsFromApi.hashtags.isEmpty == false else {
-                ToastrService.shared.showError(title: "Hashtag not exists", imageSystemName: "exclamationmark.octagon")
+                ToastrService.shared.showError(title: "global.error.hashtagNotExists", imageSystemName: "exclamationmark.octagon")
                 dismiss()
                 
                 return []
@@ -214,16 +214,16 @@ struct StatusesView: View {
         }
     }
     
-    private func getTitle() -> String {
+    private func getTitle() -> LocalizedStringKey {
         switch self.listType {
         case .local:
-            return "Local"
+            return "statuses.navigationBar.localTimeline"
         case .federated:
-            return "Federated"
+            return "statuses.navigationBar.federatedTimeline"
         case .favourites:
-            return "Favourites"
+            return "statuses.navigationBar.favourites"
         case .bookmarks:
-            return "Bookmarks"
+            return "statuses.navigationBar.bookmarks"
         case .hashtag(let tag):
             return "#\(tag)"
         }
@@ -253,25 +253,25 @@ struct StatusesView: View {
         do {
             self.tag = try await self.client.tags?.get(tag: hashtag)
         } catch {
-            ErrorService.shared.handle(error, message: "Error during loading tag from server.", showToastr: false)
+            ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadHashtag", showToastr: false)
         }
     }
     
     private func follow(hashtag: String) async {
         do {
             self.tag = try await self.client.tags?.follow(tag: hashtag)
-            ToastrService.shared.showSuccess("You are following the tag.", imageSystemName: "number.square.fill")
+            ToastrService.shared.showSuccess("statuses.title.tagFollowed", imageSystemName: "number.square.fill")
         } catch {
-            ErrorService.shared.handle(error, message: "Follow tag failed.", showToastr: true)
+            ErrorService.shared.handle(error, message: "statuses.error.tagFollowFailed", showToastr: true)
         }
     }
     
     private func unfollow(hashtag: String) async {
         do {
             self.tag = try await self.client.tags?.unfollow(tag: hashtag)
-            ToastrService.shared.showSuccess("Tag has been unfollowed.", imageSystemName: "number.square")
+            ToastrService.shared.showSuccess("statuses.title.tagUnfollowed", imageSystemName: "number.square")
         } catch {
-            ErrorService.shared.handle(error, message: "Unfollow tag failed.", showToastr: true)
+            ErrorService.shared.handle(error, message: "statuses.error.tagUnfollowFailed", showToastr: true)
         }
     }
 }

@@ -11,13 +11,13 @@ struct ThemeSectionView: View {
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        Section("Theme") {
+        Section("settings.title.theme") {
             Button {
                 self.applicationState.theme = .system
                 ApplicationSettingsHandler.shared.setDefaultTheme(theme: .system)
             } label: {
                 HStack {
-                    Text("System")
+                    Text("settings.title.system", comment: "System")
                         .foregroundColor(.label)
                     Spacer()
                     if self.applicationState.theme == .system {
@@ -31,7 +31,7 @@ struct ThemeSectionView: View {
                 ApplicationSettingsHandler.shared.setDefaultTheme(theme: .light)
             } label: {
                 HStack {
-                    Text("Light")
+                    Text("settings.title.light", comment: "Light")
                         .foregroundColor(.label)
                     Spacer()
                     if self.applicationState.theme == .light {
@@ -45,7 +45,7 @@ struct ThemeSectionView: View {
                 ApplicationSettingsHandler.shared.setDefaultTheme(theme: .dark)
             } label: {
                 HStack {
-                    Text("Dark")
+                    Text("settings.title.dark", comment: "Dark")
                         .foregroundColor(.label)
                     Spacer()
                     if self.applicationState.theme == .dark {

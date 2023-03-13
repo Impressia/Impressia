@@ -148,10 +148,10 @@ struct ImageRow: View {
             }
         } catch {
             if !Task.isCancelled {
-                ErrorService.shared.handle(error, message: "Cannot download the image.")
+                ErrorService.shared.handle(error, message: "global.error.errorDuringImageDownload")
                 self.error = error
             } else {
-                ErrorService.shared.handle(error, message: "Download image has been canceled.")
+                ErrorService.shared.handle(error, message: "global.error.canceledImageDownload")
                 self.cancelled = true
             }
         }

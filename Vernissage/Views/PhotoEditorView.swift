@@ -18,7 +18,7 @@ struct PhotoEditorView: View {
             VStack(alignment: .leading) {
                 if let data = photoAttachment.photoData, let uiImage = UIImage(data: data) {
                     List {
-                        Section(header: Text("Photo")) {
+                        Section(header: Text("photoEdit.title.photo")) {
                             HStack {
                                 Spacer()
                                 Image(uiImage: uiImage)
@@ -30,8 +30,8 @@ struct PhotoEditorView: View {
                             }
                         }
                         
-                        Section(header: Text("Accessibility")) {
-                            TextField("Description for the visually impaired", text: $description, axis: .vertical)
+                        Section(header: Text("photoEdit.title.accessibility")) {
+                            TextField("photoEdit.title.accessibilityDescription", text: $description, axis: .vertical)
                                 .keyboardType(.default)
                                 .lineLimit(3...6)
                                 .multilineTextAlignment(.leading)
@@ -47,7 +47,7 @@ struct PhotoEditorView: View {
             .onAppear {
                 self.description = self.photoAttachment.uploadedAttachment?.description ?? String.empty()
             }
-            .navigationTitle("Photo details")
+            .navigationTitle("photoEdit.navigationBar.title")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 self.getTrailingToolbar()
@@ -61,12 +61,12 @@ struct PhotoEditorView: View {
             ActionButton(showLoader: false) {
                 await self.update()
             } label: {
-                Text("Save")
+                Text("photoEdit.title.save", comment: "Save")
             }.buttonStyle(.borderedProminent)
         }
         
         ToolbarItem(placement: .cancellationAction) {
-            Button("Cancel", role: .cancel) {
+            Button(NSLocalizedString("photoEdit.title.cancel", comment: "Cancel"), role: .cancel) {
                 dismiss()
             }
         }
@@ -85,7 +85,7 @@ struct PhotoEditorView: View {
                 self.photoAttachment.uploadedAttachment = updated
                 self.dismiss()
             } catch {
-                ErrorService.shared.handle(error, message: "Cannot update attachment.", showToastr: true)
+                ErrorService.shared.handle(error, message: "photoEdit.error.updatePhotoFailed", showToastr: true)
             }
         }
     }

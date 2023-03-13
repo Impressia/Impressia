@@ -14,12 +14,12 @@ struct MediaSettingsView: View {
     @State var showPhotoDescription = true
     
     var body: some View {
-        Section("Media settings") {
+        Section("settings.title.mediaSettings") {
             
             Toggle(isOn: $showSensitive) {
                 VStack(alignment: .leading) {
-                    Text("Always show NSFW")
-                    Text("Force show all NFSW (sensitive) media without warnings")
+                    Text("settings.title.alwaysShowSensitiveTitle", comment: "Always show NSFW")
+                    Text("settings.title.alwaysShowSensitiveDescription", comment: "Force show all NFSW (sensitive) media without warnings")
                         .font(.footnote)
                         .foregroundColor(.lightGrayColor)
                 }
@@ -31,8 +31,8 @@ struct MediaSettingsView: View {
             
             Toggle(isOn: $showPhotoDescription) {
                 VStack(alignment: .leading) {
-                    Text("Show alternative text")
-                    Text("Show alternative text if present on status details screen")
+                    Text("settings.title.alwaysShowAltTitle", comment: "Show alternative text")
+                    Text("settings.title.alwaysShowAltDescription", comment: "Show alternative text if present on status details screen")
                         .font(.footnote)
                         .foregroundColor(.lightGrayColor)
                 }

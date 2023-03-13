@@ -11,7 +11,7 @@ struct SupportView: View {
     @EnvironmentObject var tipsStore: TipsStore
     
     var body: some View {
-        Section("Support") {
+        Section("settings.title.support") {
             ForEach(tipsStore.items) { product in
                 HStack(alignment: .center) {
                     Text(self.getIcon(for: product))

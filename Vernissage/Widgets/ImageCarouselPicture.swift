@@ -30,7 +30,7 @@ struct ImageCarouselPicture: View {
                             self.onImageDownloaded(attachment, imageData)
                         }
                     } catch {
-                        ErrorService.shared.handle(error, message: "Cannot download image for status")
+                        ErrorService.shared.handle(error, message: "global.error.errorDuringImageDownload")
                     }
                 }
         }

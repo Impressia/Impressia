@@ -58,7 +58,7 @@ struct NotificationRowView: View {
                         .font(.footnote)
                 }
 
-                Text(self.getTitle())
+                Text(self.getTitle(), comment: "Notification type")
                     .foregroundColor(.lightGrayColor)
                     .font(.footnote)
                     .fontWeight(.light)
@@ -154,28 +154,28 @@ struct NotificationRowView: View {
         }
     }
     
-    private func getTitle() -> String {
+    private func getTitle() -> LocalizedStringKey {
         switch notification.type {
         case .follow:
-            return "followed you"
+            return "notifications.title.followedYou"
         case .mention:
-            return "mentioned you"
+            return "notifications.title.mentionedYou"
         case .reblog:
-            return "boosted"
+            return "notifications.title.boosted"
         case .favourite:
-            return "favourited"
+            return "notifications.title.favourited"
         case .status:
-            return "posted status"
+            return "notifications.title.postedStatus"
         case .followRequest:
-            return "follow request"
+            return "notifications.title.followRequest"
         case .poll:
-            return "poll"
+            return "notifications.title.poll"
         case .update:
-            return "updated post"
+            return "notifications.title.updatedStatus"
         case .adminSignUp:
-            return "signed up"
+            return "notifications.title.signedUp"
         case .adminReport:
-            return "new report"
+            return "notifications.title.newReport"
         }
     }
     

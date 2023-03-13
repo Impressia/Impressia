@@ -52,7 +52,7 @@ struct SettingsView: View {
                 .frame(alignment: .topLeading)
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
-                        Button("Close", role: .cancel) {
+                        Button(NSLocalizedString("settings.title.close", comment: "Close"), role: .cancel) {
                             self.dismiss()
                         }
                     }
@@ -64,7 +64,7 @@ struct SettingsView: View {
                 .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification), perform: { _ in
                     self.theme = applicationState.theme.colorScheme() ?? self.getSystemColorScheme()
                 })
-                .navigationTitle("Settings")
+                .navigationTitle("settings.navigationBar.title")
                 .navigationBarTitleDisplayMode(.inline)
                 .preferredColorScheme(self.theme)
             }
@@ -95,7 +95,7 @@ struct SettingsView: View {
     private func version() -> some View {
         Section() {
             HStack {
-                Text("Version")
+                Text("settings.title.version", comment: "Version")
                 Spacer()
                 Text("\(appVersion ?? String.empty()) (\(appBundleVersion ?? String.empty()))")
                     .foregroundColor(.accentColor)

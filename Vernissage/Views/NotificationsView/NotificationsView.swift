@@ -23,7 +23,7 @@ struct NotificationsView: View {
     
     var body: some View {
         self.mainBody()
-            .navigationTitle("Notifications")
+            .navigationTitle("notifications.navigationBar.title")
     }
     
     @ViewBuilder
@@ -36,7 +36,7 @@ struct NotificationsView: View {
                 }
         case .loaded:
             if self.notifications.isEmpty {
-                NoDataView(imageSystemName: "bell", text: "Unfortunately, there is nothing here.")
+                NoDataView(imageSystemName: "bell", text: "notifications.title.noNotifications")
             } else {
                 List {
                     ForEach(notifications, id: \.id) { notification in
@@ -86,10 +86,10 @@ struct NotificationsView: View {
             }
         } catch {
             if !Task.isCancelled {
-                ErrorService.shared.handle(error, message: "Notifications not retrieved.", showToastr: true)
+                ErrorService.shared.handle(error, message: "notifications.error.loadingNotificationsFailed", showToastr: true)
                 self.state = .error(error)
             } else {
-                ErrorService.shared.handle(error, message: "Notifications not retrieved.", showToastr: false)
+                ErrorService.shared.handle(error, message: "notifications.error.loadingNotificationsFailed", showToastr: false)
             }
         }
     }
@@ -106,7 +106,7 @@ struct NotificationsView: View {
                 self.notifications.append(contentsOf: linkable.data)
             }
         } catch {
-            ErrorService.shared.handle(error, message: "Error during download notifications from server.", showToastr: !Task.isCancelled)
+            ErrorService.shared.handle(error, message: "notifications.error.loadingNotificationsFailed", showToastr: !Task.isCancelled)
         }
     }
     
@@ -122,7 +122,7 @@ struct NotificationsView: View {
                 self.notifications.insert(contentsOf: linkable.data, at: 0)
             }
         } catch {
-            ErrorService.shared.handle(error, message: "Error during download notifications from server.", showToastr: !Task.isCancelled)
+            ErrorService.shared.handle(error, message: "notifications.error.loadingNotificationsFailed", showToastr: !Task.isCancelled)
         }
     }
 }

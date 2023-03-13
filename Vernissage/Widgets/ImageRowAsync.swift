@@ -82,7 +82,7 @@ struct ImageRowAsync: View {
                             
                             VStack(alignment: .center) {
                                 Spacer()
-                                Text("Cannot download image")
+                                Text("global.error.errorDuringImageDownload", comment: "Cannot download image")
                                     .foregroundColor(.systemBackground)
                                 Spacer()
                             }

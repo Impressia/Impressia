@@ -14,7 +14,7 @@ public class ImageFetcher {
         
     private let maxImageSize = 1000.0
     
-    func fetchWidgetEntries(length: Int = 6) async throws -> [WidgetEntry] {
+    func fetchWidgetEntries(length: Int = 8) async throws -> [WidgetEntry] {
         let defaultSettings = ApplicationSettingsHandler.shared.getDefaultSettings()
         guard let accountId = defaultSettings.currentAccount else {
             return [self.placeholder()]
@@ -29,7 +29,7 @@ public class ImageFetcher {
         }
                 
         let client = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
-        let statuses = try await client.getHomeTimeline(limit: 10)
+        let statuses = try await client.getHomeTimeline(limit: 20)
         var widgetEntries: [WidgetEntry] = []
         
         for status in statuses {
@@ -54,7 +54,7 @@ public class ImageFetcher {
                 continue
             }
             
-            let displayDate = Calendar.current.date(byAdding: .minute, value: widgetEntries.count * 10, to: Date())
+            let displayDate = Calendar.current.date(byAdding: .minute, value: widgetEntries.count * 15, to: Date())
 
             widgetEntries.append(WidgetEntry(date: displayDate ?? Date(),
                                              image: uiImage,

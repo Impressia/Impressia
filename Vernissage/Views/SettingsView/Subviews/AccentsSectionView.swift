@@ -13,7 +13,7 @@ struct AccentsSectionView: View {
     private let accentColors2: [TintColor] = [.accentColor6, .accentColor7, .accentColor8, .accentColor9, .accentColor10]
     
     var body: some View {
-        Section("Accent") {
+        Section("settings.title.accent") {
             VStack(alignment: .leading) {
                 HStack(alignment: .center) {
                     ForEach(accentColors1, id: \.self) { color in

@@ -35,7 +35,7 @@ struct StatusView: View {
         
     var body: some View {
         self.mainBody()
-            .navigationTitle("Details")
+            .navigationTitle("status.navigationBar.title")
             .fullScreenCover(item: $tappedAttachmentModel, content: { attachmentModel in
                 ImageViewer(attachmentModel: attachmentModel)
             })
@@ -102,11 +102,11 @@ struct StatusView: View {
                             .foregroundColor(.lightGrayColor)
                             
                             HStack {
-                                Text("Uploaded")
+                                Text("status.title.uploaded", comment: "Uploaded")
                                 Text(statusViewModel.createdAt.toRelative(.isoDateTimeMilliSec))
                                     .padding(.horizontal, -4)
                                 if let applicationName = statusViewModel.application?.name {
-                                    Text("via \(applicationName)")
+                                    Text(String(format: NSLocalizedString("status.title.via", comment: "via"), applicationName))
                                 }
                             }
                             .foregroundColor(.lightGrayColor)
@@ -179,16 +179,16 @@ struct StatusView: View {
         } catch NetworkError.notSuccessResponse(let response) {
             if response.statusCode() == HTTPStatusCode.notFound, let accountId = self.applicationState.account?.id {
                 StatusDataHandler.shared.remove(accountId: accountId, statusId: self.statusId)
-                ErrorService.shared.handle(NetworkError.notSuccessResponse(response), message: "Status not existing anymore.", showToastr: true)
+                ErrorService.shared.handle(NetworkError.notSuccessResponse(response), message: "status.error.notFound", showToastr: true)
                 self.dismiss()
             }
         }
         catch {
             if !Task.isCancelled {
-                ErrorService.shared.handle(error, message: "Status not retreived.", showToastr: true)
+                ErrorService.shared.handle(error, message: "status.error.loadingStatusFailed", showToastr: true)
                 self.state = .loaded
             } else {
-                ErrorService.shared.handle(error, message: "Status not retreived.", showToastr: false)
+                ErrorService.shared.handle(error, message: "status.error.loadingStatusFailed", showToastr: false)
             }
         }
     }

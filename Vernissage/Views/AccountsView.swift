@@ -42,7 +42,7 @@ struct AccountsView: View {
                 }
         case .loaded:
             if self.accounts.isEmpty {
-                NoDataView(imageSystemName: "person.3.sequence", text: "Unfortunately, there is no one here.")
+                NoDataView(imageSystemName: "person.3.sequence", text: "accounts.title.noAccounts")
             } else {
                 List {
                     ForEach(accounts, id: \.id) { account in
@@ -92,10 +92,10 @@ struct AccountsView: View {
             self.state = .loaded
         } catch {
             if !Task.isCancelled {
-                ErrorService.shared.handle(error, message: "Accounts not retrieved.", showToastr: true)
+                ErrorService.shared.handle(error, message: "accounts.error.loadingAccountsFailed", showToastr: true)
                 self.state = .error(error)
             } else {
-                ErrorService.shared.handle(error, message: "Accounts not retrieved.", showToastr: false)
+                ErrorService.shared.handle(error, message: "accounts.error.loadingAccountsFailed", showToastr: false)
             }
         }
     }
@@ -115,13 +115,13 @@ struct AccountsView: View {
     private func getTitle() -> String {
         switch self.listType {
         case .followers:
-            return "Followers"
+            return NSLocalizedString("accounts.navigationBar.followers", comment: "Followers")
         case .following:
-            return "Following"
+            return NSLocalizedString("accounts.navigationBar.following", comment: "Following")
         case .favourited:
-            return "Favourited by"
+            return NSLocalizedString("accounts.navigationBar.favouritedBy", comment: "Favourited by")
         case .reblogged:
-            return "Reboosted by"
+            return NSLocalizedString("accounts.navigationBar.reboostedBy", comment: "Reboosted by")
         case .search(let query):
             return query
         }

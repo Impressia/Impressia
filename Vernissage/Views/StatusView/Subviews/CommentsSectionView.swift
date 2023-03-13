@@ -69,7 +69,7 @@ struct CommentsSectionView: View {
         do {
             self.commentViewModels = try await self.client.statuses?.comments(to: statusId) ?? []
         } catch {
-            ErrorService.shared.handle(error, message: "Comments cannot be downloaded.", showToastr: !Task.isCancelled)
+            ErrorService.shared.handle(error, message: "status.error.loadingCommentsFailed", showToastr: !Task.isCancelled)
         }
     }
 }

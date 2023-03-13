@@ -20,7 +20,7 @@ struct SearchView: View {
     var body: some View {
         List {
             Section {
-                TextField("Search...", text: $query)
+                TextField("search.title.placeholder", text: $query)
                     .padding(8)
                     .focused($focusedField, equals: .search)
                     .keyboardType(.default)
@@ -36,25 +36,29 @@ struct SearchView: View {
             if self.query.isEmpty == false {
                 Section {
                     NavigationLink(value: RouteurDestinations.accountsPhoto(listType: .search(query: self.query))) {
-                        Label("Users with \"\(self.query)\"", systemImage: "person.3.sequence")
+                        Label(String(format: NSLocalizedString("search.title.usersWith", comment: "Users with "), self.query),
+                              systemImage: "person.3.sequence")
                     }
                     
                     NavigationLink(value: RouteurDestinations.userProfile(accountId: "", accountDisplayName: "", accountUserName: self.query)) {
-                        Label("Go to user \"@\(self.query)\"", systemImage: "person.crop.circle")
+                        Label(String(format: NSLocalizedString("search.title.goToUser", comment: "Go to user "), "\"@\(self.query)\""),
+                              systemImage: "person.crop.circle")
                     }
                 }
                 
                 Section {
                     NavigationLink(value: RouteurDestinations.hashtags(listType: .search(query: self.query))) {
-                        Label("Hashtags with \"\(self.query)\"", systemImage: "tag")
+                        Label(String(format: NSLocalizedString("search.title.hashtagWith", comment: "Hashtags with "), self.query),
+                              systemImage: "tag")
                     }
                                         
                     NavigationLink(value: RouteurDestinations.statuses(listType: .hashtag(tag: self.query))) {
-                        Label("Go to hashtag \"#\(self.query)\"", systemImage: "tag.circle")
+                        Label(String(format: NSLocalizedString("search.title.goToHashtag", comment: "Go to hashtag "), "\"#\(self.query)\""),
+                              systemImage: "tag.circle")
                     }
                 }
             }
         }
-        .navigationTitle("Search")
+        .navigationTitle("search.navigationBar.title")
     }
 }

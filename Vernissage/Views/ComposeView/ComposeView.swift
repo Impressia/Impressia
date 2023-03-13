@@ -35,7 +35,7 @@ struct ComposeView: View {
     @State private var photosAttachment: [PhotoAttachment] = []
     
     @State private var visibility = Pixelfed.Statuses.Visibility.pub
-    @State private var visibilityText = "Everyone"
+    @State private var visibilityText: LocalizedStringKey = "compose.title.everyone"
     @State private var visibilityImage = "globe.europe.africa"
     
     @FocusState private var focusedField: FocusField?
@@ -91,14 +91,14 @@ struct ComposeView: View {
                         ActionButton(showLoader: false) {
                             await self.publishStatus()
                         } label: {
-                            Text("Publish")
+                            Text("compose.title.publish", comment: "Publish")
                         }
                         .disabled(self.publishDisabled)
                         .buttonStyle(.borderedProminent)
                     }
                     
                     ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel", role: .cancel) {
+                        Button(NSLocalizedString("compose.title.cancel", comment: "Cancel"), role: .cancel) {
                             dismiss()
                         }
                     }
@@ -131,7 +131,7 @@ struct ComposeView: View {
                               selection: $selectedItems,
                               maxSelectionCount: self.applicationState.statusMaxMediaAttachments,
                               matching: .images)
-                .navigationTitle("Compose")
+                .navigationTitle("compose.navigationBar.title")
                 .navigationBarTitleDisplayMode(.inline)
             }
             .withAppRouteur()
@@ -256,7 +256,7 @@ struct ComposeView: View {
     @ViewBuilder
     private func contentWarningView() -> some View {
         if self.isSensitive {
-            TextField("Write content warning", text: $spoilerText, axis: .vertical)
+            TextField("compose.title.writeContentWarning", text: $spoilerText, axis: .vertical)
                 .padding(8)
                 .lineLimit(1...2)
                 .focused($focusedField, equals: .spoilerText)
@@ -270,7 +270,7 @@ struct ComposeView: View {
         if self.commentsDisabled {
             HStack {
                 Spacer()
-                Text("Comments will be disabled")
+                Text("compose.title.commentsWillBeDisabled")
                     .textCase(.uppercase)
                     .font(.caption2)
                     .foregroundColor(.dangerColor)
@@ -285,26 +285,26 @@ struct ComposeView: View {
             Menu {
                 Button {
                     self.visibility = .pub
-                    self.visibilityText = "Everyone"
+                    self.visibilityText = "compose.title.everyone"
                     self.visibilityImage = "globe.europe.africa"
                 } label: {
-                    Label("Everyone", systemImage: "globe.europe.africa")
+                    Label("compose.title.everyone", systemImage: "globe.europe.africa")
                 }
                 
                 Button {
                     self.visibility = .unlisted
-                    self.visibilityText = "Unlisted"
+                    self.visibilityText = "compose.title.unlisted"
                     self.visibilityImage = "lock.open"
                 } label: {
-                    Label("Unlisted", systemImage: "lock.open")
+                    Label("compose.title.unlisted", systemImage: "lock.open")
                 }
                 
                 Button {
                     self.visibility = .priv
-                    self.visibilityText = "Followers"
+                    self.visibilityText = "compose.title.followers"
                     self.visibilityImage = "lock"
                 } label: {
-                    Label("Followers", systemImage: "lock")
+                    Label("compose.title.followers", systemImage: "lock")
                 }
             } label: {
                 HStack {
@@ -452,8 +452,8 @@ struct ComposeView: View {
         .background(Color.keyboardToolbarColor)
     }
     
-    private func placeholder() -> String {
-        self.statusViewModel == nil ? "Attach a photo and type what's on your mind" : "Type what's on your mind"
+    private func placeholder() -> LocalizedStringKey {
+        self.statusViewModel == nil ? "compose.title.attachPhotoFull" : "compose.title.attachPhotoMini"
     }
     
     private func isPublishButtonDisabled() -> Bool {
@@ -528,7 +528,7 @@ struct ComposeView: View {
             self.photosAreUploading = false
             self.refreshScreenState()
         } catch {
-            ErrorService.shared.handle(error, message: "Cannot retreive image from library.", showToastr: true)
+            ErrorService.shared.handle(error, message: "compose.error.loadingPhotosFailed", showToastr: true)
         }
     }
     
@@ -567,7 +567,7 @@ struct ComposeView: View {
             }
         } catch {
             photoAttachment.error = error
-            ErrorService.shared.handle(error, message: "Error during post photo.", showToastr: true)
+            ErrorService.shared.handle(error, message: "compose.error.postingPhotoFailed", showToastr: true)
         }
     }
     
@@ -599,7 +599,7 @@ struct ComposeView: View {
         do {
             let status = self.createStatus()
             if let newStatus = try await self.client.statuses?.new(status: status) {
-                ToastrService.shared.showSuccess("Status published", imageSystemName: "message.fill")
+                ToastrService.shared.showSuccess("compose.title.statusPublished", imageSystemName: "message.fill")
 
                 let statusModel = StatusModel(status: newStatus)
                 let commentModel = CommentModel(status: statusModel, showDivider: false)
@@ -608,7 +608,7 @@ struct ComposeView: View {
                 dismiss()
             }
         } catch {
-            ErrorService.shared.handle(error, message: "Error during post status.", showToastr: true)
+            ErrorService.shared.handle(error, message: "compose.error.postingStatusFailed", showToastr: true)
         }
     }
     

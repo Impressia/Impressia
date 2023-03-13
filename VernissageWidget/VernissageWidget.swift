@@ -15,7 +15,7 @@ struct VernissageWidget: Widget {
             VernissageWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("Vernissage")
-        .description("Widget with photos from Pixelfed.")
+        .description("widget.title.description")
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
 }

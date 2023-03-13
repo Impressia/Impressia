@@ -49,7 +49,7 @@ struct ContentWarning<Content: View>: View {
                     Image(systemName: "eye.slash.fill")
                         .font(.title2)
                         .shadow(color: Color.systemBackground, radius: 0.3)
-                    Text("Sensitive content")
+                    Text("global.title.contentWarning", comment: "Sensitive content")
                         .font(.title2)
                         .shadow(color: Color.systemBackground, radius: 0.3)
                     if let spoilerText {
@@ -63,7 +63,7 @@ struct ContentWarning<Content: View>: View {
                             self.showSensitive = true
                         }
                     } label: {
-                        Text("See post")
+                        Text("global.title.seePost", comment: "See post")
                             .shadow(color: Color.systemBackground, radius: 0.3)
                     }
                     .buttonStyle(.bordered)
