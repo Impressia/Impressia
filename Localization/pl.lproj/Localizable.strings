@@ -1,7 +1,7 @@
 // MARK: Common strings.
 "global.title.contentWarning" = "Wrażliwe treści";
 "global.title.seePost" = "Pokaż zdjęcie";
-"global.title.seePost" = "Odśwież";
+"global.title.refresh" = "Odśwież";
 
 // MARK: Global errors.
 "global.error.unexpected" = "Wystąpił nieoczekiwany błąd.";
@@ -208,6 +208,13 @@
 "status.title.bookmarked" = "Dodane do zakładek";
 "status.title.unbookmarked" = "Usunięte z zakładek";
 "status.title.statusDeleted" = "Status usunięty";
+"status.title.reboost" = "Podbij";
+"status.title.unreboost" = "Cofnij podbicie";
+"status.title.favourite" = "Polub";
+"status.title.unfavourite" = "Cofnij polubienie";
+"status.title.bookmark" = "Dodaj do zakładek";
+"status.title.unbookmark" = "Usuń z zakładek";
+"status.title.comment" = "Skomentuj";
 "status.error.loadingStatusFailed" = "Błąd podczas wczytywanie statusu.";
 "status.error.notFound" = "Status już nie istnieje.";
 "status.error.loadingCommentsFailed" =" Błąd podczas wczytywanie komentarzy.";

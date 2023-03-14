@@ -1,7 +1,7 @@
 // MARK: Common strings.
 "global.title.contentWarning" = "Sensitive content";
 "global.title.seePost" = "See post";
-"global.title.seePost" = "Refresh";
+"global.title.refresh" = "Refresh";
 
 // MARK: Global errors.
 "global.error.unexpected" = "Unexpected error.";
@@ -208,6 +208,13 @@
 "status.title.bookmarked" = "Bookmarked";
 "status.title.unbookmarked" = "Unbookmarked";
 "status.title.statusDeleted" = "Status deleted";
+"status.title.reboost" = "Reboost";
+"status.title.unreboost" = "Unreboost";
+"status.title.favourite" = "Favourite";
+"status.title.unfavourite" = "Unfavourite";
+"status.title.bookmark" = "Bookmark";
+"status.title.unbookmark" = "Unbookmark";
+"status.title.comment" = "Comment";
 "status.error.loadingStatusFailed" = "Loading status failed.";
 "status.error.notFound" = "Status not existing anymore.";
 "status.error.loadingCommentsFailed" = "Comments cannot be downloaded.";

@@ -63,6 +63,11 @@ struct ImageRowAsync: View {
                                     }
                                 }
                             }
+                            .onAppear {
+                                if let uiImage = state.imageResponse?.image {
+                                    self.recalculateSizeOfDownloadedImage(uiImage: uiImage)
+                                }
+                            }
                         } else {
                             ZStack {
                                 self.imageView(image: image)
@@ -71,6 +76,11 @@ struct ImageRowAsync: View {
                                     FavouriteTouch {
                                         self.showThumbImage = false
                                     }
+                                }
+                            }
+                            .onAppear {
+                                if let uiImage = state.imageResponse?.image {
+                                    self.recalculateSizeOfDownloadedImage(uiImage: uiImage)
                                 }
                             }
                         }
@@ -96,9 +106,6 @@ struct ImageRowAsync: View {
                     }
                 }
                 .priority(.high)
-                .onSuccess { imageResponse in
-                    self.recalculateSizeOfDownloadedImage(imageResponse: imageResponse)
-                }
                     
                 if let count = self.statusViewModel.mediaAttachments.count, count > 1 {
                     BottomRight {
@@ -117,8 +124,10 @@ struct ImageRowAsync: View {
         }
     }
     
-    private func imageView(image: NukeUI.Image) -> some View {
+    private func imageView(image: Image) -> some View {
         image
+            .resizable()
+            .aspectRatio(contentMode: .fit)
             .onTapGesture(count: 2) {
                 Task {
                     try? await self.client.statuses?.favourite(statusId: self.statusViewModel.id)
@@ -136,18 +145,19 @@ struct ImageRowAsync: View {
                     metaImageHeight: statusViewModel.getImageHeight()
                 ))
             }
+            .imageContextMenu(client: self.client, statusModel: self.statusViewModel)
     }
     
-    private func recalculateSizeOfDownloadedImage(imageResponse: ImageResponse) {
+    private func recalculateSizeOfDownloadedImage(uiImage: UIImage) {
         guard heightWasPrecalculated == false else {
             return
         }
 
         if let attachment = statusViewModel.mediaAttachments.first {
             let size = ImageSizeService.shared.calculate(for: attachment.url,
-                                                         width: imageResponse.image.size.width,
-                                                         height: imageResponse.image.size.height)
-            
+                                                         width: uiImage.size.width,
+                                                         height: uiImage.size.height)
+
             if self.imageHeight != size.height || self.imageWidth != size.width {
                 withAnimation(.linear) {
                     self.imageWidth = size.width

@@ -47,30 +47,20 @@ struct ImageRow: View {
             if let uiImage {
                 ZStack {
                     if self.status.sensitive && !self.applicationState.showSensitive {
-                        ContentWarning(blurhash: attachmentData.blurhash, spoilerText: self.status.spoilerText) {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .onTapGesture{
-                                    self.navigateToStatus()
+                        ZStack {
+                            ContentWarning(blurhash: attachmentData.blurhash, spoilerText: self.status.spoilerText) {
+                                self.imageView(uiImage: uiImage)
+                                
+                                if showThumbImage {
+                                    FavouriteTouch {
+                                        self.showThumbImage = false
+                                    }
                                 }
+                            }
                         }
                     } else {
                         ZStack {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .onTapGesture(count: 2) {
-                                    Task {
-                                        try? await self.client.statuses?.favourite(statusId: self.status.id)
-                                    }
-
-                                    self.showThumbImage = true
-                                    HapticService.shared.fireHaptic(of: .buttonPress)
-                                }
-                                .onTapGesture{
-                                    self.navigateToStatus()
-                                }
+                            self.imageView(uiImage: uiImage)
                             
                             if showThumbImage {
                                 FavouriteTouch {
@@ -122,6 +112,24 @@ struct ImageRow: View {
                 }
             }
         }
+    }
+    
+    private func imageView(uiImage: UIImage) -> some View {
+        Image(uiImage: uiImage)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .onTapGesture(count: 2) {
+                Task {
+                    try? await self.client.statuses?.favourite(statusId: self.status.id)
+                }
+
+                self.showThumbImage = true
+                HapticService.shared.fireHaptic(of: .buttonPress)
+            }
+            .onTapGesture{
+                self.navigateToStatus()
+            }
+            .imageContextMenu(client: self.client, statusData: self.status)
     }
     
     private func downloadImage(attachmentData: AttachmentData) async {

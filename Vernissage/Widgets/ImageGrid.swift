@@ -26,6 +26,7 @@ struct ImageGrid: View {
             LazyImage(url: url) { state in
                 if let image = state.image {
                     image
+                        .resizable()
                         .aspectRatio(contentMode: .fit)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .onTapGesture {

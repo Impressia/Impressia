@@ -26,7 +26,7 @@ struct ErrorView: View {
                         await refreshAction()
                     }
                 } label: {
-                    Text("Refresh")
+                    Text("global.title.refresh", comment: "Refresh")
                 }
             }
         }

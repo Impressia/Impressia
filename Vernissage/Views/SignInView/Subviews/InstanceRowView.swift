@@ -25,8 +25,9 @@ struct InstanceRowView: View {
                 LazyImage(url: instance.thumbnail) { state in
                     if let image = state.image {
                         image
-                            .clipShape(RoundedRectangle(cornerRadius: 4))
+                            .resizable()
                             .aspectRatio(contentMode: .fit)
+                            .clipShape(RoundedRectangle(cornerRadius: 4))
                     } else if state.isLoading {
                         placeholderView
                     } else {

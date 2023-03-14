@@ -47,8 +47,9 @@ struct UserAvatar: View {
                 LazyImage(url: accountAvatar) { state in
                     if let image = state.image {
                         image
-                            .clipShape(applicationState.avatarShape.shape())
+                            .resizable()
                             .aspectRatio(contentMode: .fit)
+                            .clipShape(applicationState.avatarShape.shape())
                     } else if state.isLoading {
                         placeholderView
                     } else {
