@@ -229,3 +229,11 @@
 
 // Mark: Widget view.
 "widget.title.description" = "Widget with photos from Pixelfed.";
+
+// Mark: In-app purchases.
+"purchase.donut.title" = "Donut";
+"purchase.donut.description" = "Treat me to a doughnut.";
+"purchase.cofee.title" = "Cofee";
+"purchase.cofee.description" = "Treat me to a coffe.";
+"purchase.cake.title" = "Cofee & cake";
+"purchase.cake.description" = "Treat me to a coffe and cake.";

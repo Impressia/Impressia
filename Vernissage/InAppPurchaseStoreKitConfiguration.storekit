@@ -13,6 +13,11 @@
           "description" : "Treat me to a doughnut.",
           "displayName" : "Donut",
           "locale" : "en_US"
+        },
+        {
+          "description" : "Poczęstuj mnie pączkiem.",
+          "displayName" : "Pączek",
+          "locale" : "pl"
         }
       ],
       "productID" : "dev.mczachurski.Vernissage.donut",
@@ -28,6 +33,11 @@
           "description" : "Treat me to a coffe.",
           "displayName" : "Cofee",
           "locale" : "en_US"
+        },
+        {
+          "description" : "Poczęstuj mnie kawą.",
+          "displayName" : "Kawa",
+          "locale" : "pl"
         }
       ],
       "productID" : "dev.mczachurski.Vernissage.cofee",
@@ -43,6 +53,11 @@
           "description" : "Treat me to a coffe and cake.",
           "displayName" : "Cofee & cake",
           "locale" : "en_US"
+        },
+        {
+          "description" : "Poczęstuj mnie kawą i ciastkiem.",
+          "displayName" : "Kawa z ciastkiem",
+          "locale" : "pl"
         }
       ],
       "productID" : "dev.mczachurski.Vernissage.cake",
