@@ -10,7 +10,9 @@ import NukeUI
 struct ImageGrid: View {
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var routerPath: RouterPath
+
     @StateObject var photoUrl: PhotoUrl
+    @State var maxHeight = 120.0
         
     var body: some View {
         if self.photoUrl.sensitive && !self.applicationState.showSensitive {
@@ -27,8 +29,10 @@ struct ImageGrid: View {
                 if let image = state.image {
                     image
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: self.maxHeight, height: self.maxHeight)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .clipped()
                         .onTapGesture {
                             if let statusId = self.photoUrl.statusId {
                                 self.routerPath.navigate(to: .status(id: statusId))

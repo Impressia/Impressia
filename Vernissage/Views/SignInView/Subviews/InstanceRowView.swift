@@ -26,8 +26,10 @@ struct InstanceRowView: View {
                     if let image = state.image {
                         image
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 50, height: 50)
                             .clipShape(RoundedRectangle(cornerRadius: 4))
+                            .clipped()
                     } else if state.isLoading {
                         placeholderView
                     } else {

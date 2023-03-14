@@ -34,7 +34,7 @@ struct ImagesGrid: View {
         ScrollView(.horizontal) {
             LazyHGrid(rows: [GridItem(.fixed(self.maxHeight))]) {
                 ForEach(self.photoUrls) { photoUrl in
-                    ImageGrid(photoUrl: photoUrl)
+                    ImageGrid(photoUrl: photoUrl, maxHeight: self.maxHeight)
                 }
                 
                 Text("more...")
