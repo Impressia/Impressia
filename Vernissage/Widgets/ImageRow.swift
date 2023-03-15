@@ -37,7 +37,7 @@ struct ImageRow: View {
             self.imageHeight = size.height
         } else {
             self.uiImage = nil
-            self.imageHeight = UIScreen.main.bounds.width * 0.75
+            self.imageHeight = UIScreen.main.bounds.width
             self.imageWidth = UIScreen.main.bounds.width
         }
     }
