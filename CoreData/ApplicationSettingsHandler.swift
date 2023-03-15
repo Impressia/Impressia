@@ -10,7 +10,7 @@ class ApplicationSettingsHandler {
     public static let shared = ApplicationSettingsHandler()
     private init() { }
     
-    func getDefaultSettings() -> ApplicationSettings {
+    func get() -> ApplicationSettings {
         var settingsList: [ApplicationSettings] = []
 
         let context = CoreDataHandler.shared.container.viewContext
@@ -34,69 +34,69 @@ class ApplicationSettingsHandler {
         }
     }
     
-    func setAccountAsDefault(accountData: AccountData?) {
-        let defaultSettings = self.getDefaultSettings()
+    func set(accountData: AccountData?) {
+        let defaultSettings = self.get()
         defaultSettings.currentAccount = accountData?.id
         CoreDataHandler.shared.save()
     }
 
-    func setDefaultTintColor(tintColor: TintColor) {
-        let defaultSettings = self.getDefaultSettings()
+    func set(tintColor: TintColor) {
+        let defaultSettings = self.get()
         defaultSettings.tintColor = Int32(tintColor.rawValue)
         CoreDataHandler.shared.save()
     }
 
-    func setDefaultTheme(theme: Theme) {
-        let defaultSettings = self.getDefaultSettings()
+    func set(theme: Theme) {
+        let defaultSettings = self.get()
         defaultSettings.theme = Int32(theme.rawValue)
         CoreDataHandler.shared.save()
     }
     
-    func setDefaultAvatarShape(avatarShape: AvatarShape) {
-        let defaultSettings = self.getDefaultSettings()
+    func set(avatarShape: AvatarShape) {
+        let defaultSettings = self.get()
         defaultSettings.avatarShape = Int32(avatarShape.rawValue)
         CoreDataHandler.shared.save()
     }
     
-    func setHapticTabSelectionEnabled(value: Bool) {
-        let defaultSettings = self.getDefaultSettings()
-        defaultSettings.hapticTabSelectionEnabled = value
+    func set(hapticTabSelectionEnabled: Bool) {
+        let defaultSettings = self.get()
+        defaultSettings.hapticTabSelectionEnabled = hapticTabSelectionEnabled
         CoreDataHandler.shared.save()
     }
     
-    func setHapticRefreshEnabled(value: Bool) {
-        let defaultSettings = self.getDefaultSettings()
-        defaultSettings.hapticRefreshEnabled = value
+    func set(hapticRefreshEnabled: Bool) {
+        let defaultSettings = self.get()
+        defaultSettings.hapticRefreshEnabled = hapticRefreshEnabled
         CoreDataHandler.shared.save()
     }
     
-    func setHapticAnimationEnabled(value: Bool) {
-        let defaultSettings = self.getDefaultSettings()
-        defaultSettings.hapticAnimationEnabled = value
+    func set(hapticAnimationEnabled: Bool) {
+        let defaultSettings = self.get()
+        defaultSettings.hapticAnimationEnabled = hapticAnimationEnabled
         CoreDataHandler.shared.save()
     }
     
-    func setHapticNotificationEnabled(value: Bool) {
-        let defaultSettings = self.getDefaultSettings()
-        defaultSettings.hapticNotificationEnabled = value
+    func set(hapticNotificationEnabled: Bool) {
+        let defaultSettings = self.get()
+        defaultSettings.hapticNotificationEnabled = hapticNotificationEnabled
         CoreDataHandler.shared.save()
     }
     
-    func setHapticButtonPressEnabled(value: Bool) {
-        let defaultSettings = self.getDefaultSettings()
-        defaultSettings.hapticButtonPressEnabled = value
+    func set(hapticButtonPressEnabled: Bool) {
+        let defaultSettings = self.get()
+        defaultSettings.hapticButtonPressEnabled = hapticButtonPressEnabled
         CoreDataHandler.shared.save()
     }
     
-    func setShowSensitive(value: Bool) {
-        let defaultSettings = self.getDefaultSettings()
-        defaultSettings.showSensitive = value
+    func set(showSensitive: Bool) {
+        let defaultSettings = self.get()
+        defaultSettings.showSensitive = showSensitive
         CoreDataHandler.shared.save()
     }
     
-    func setShowPhotoDescription(value: Bool) {
-        let defaultSettings = self.getDefaultSettings()
-        defaultSettings.showPhotoDescription = value
+    func set(showPhotoDescription: Bool) {
+        let defaultSettings = self.get()
+        defaultSettings.showPhotoDescription = showPhotoDescription
         CoreDataHandler.shared.save()
     }
     

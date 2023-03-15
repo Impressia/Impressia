@@ -15,7 +15,7 @@ public class ImageFetcher {
     private let maxImageSize = 1000.0
     
     func fetchWidgetEntries(length: Int = 8) async throws -> [WidgetEntry] {
-        let defaultSettings = ApplicationSettingsHandler.shared.getDefaultSettings()
+        let defaultSettings = ApplicationSettingsHandler.shared.get()
         guard let accountId = defaultSettings.currentAccount else {
             return [self.placeholder()]
         }

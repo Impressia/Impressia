@@ -30,5 +30,4 @@ extension ApplicationSettings {
 }
 
 extension ApplicationSettings : Identifiable {
-
 }

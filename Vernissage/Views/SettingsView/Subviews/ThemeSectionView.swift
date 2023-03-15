@@ -14,7 +14,7 @@ struct ThemeSectionView: View {
         Section("settings.title.theme") {
             Button {
                 self.applicationState.theme = .system
-                ApplicationSettingsHandler.shared.setDefaultTheme(theme: .system)
+                ApplicationSettingsHandler.shared.set(theme: .system)
             } label: {
                 HStack {
                     Text("settings.title.system", comment: "System")
@@ -28,7 +28,7 @@ struct ThemeSectionView: View {
 
             Button {
                 self.applicationState.theme = .light
-                ApplicationSettingsHandler.shared.setDefaultTheme(theme: .light)
+                ApplicationSettingsHandler.shared.set(theme: .light)
             } label: {
                 HStack {
                     Text("settings.title.light", comment: "Light")
@@ -42,7 +42,7 @@ struct ThemeSectionView: View {
 
             Button {
                 self.applicationState.theme = .dark
-                ApplicationSettingsHandler.shared.setDefaultTheme(theme: .dark)
+                ApplicationSettingsHandler.shared.set(theme: .dark)
             } label: {
                 HStack {
                     Text("settings.title.dark", comment: "Dark")

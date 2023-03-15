@@ -86,6 +86,7 @@ struct ImageUploadView: View {
         if let photoData = self.photoAttachment.photoData, let uiImage =  UIImage(data: photoData) {
             Image(uiImage: uiImage)
                 .resizable()
+                .aspectRatio(contentMode: .fill)
                 .frame(width: 80, height: 80)
         } else {
             Rectangle()

@@ -15,9 +15,9 @@ extension AuthorisationError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .badServerUrl:
-            return NSLocalizedString("Bad url to server.", comment: "User enter bad URL to server.")
+            return NSLocalizedString("global.error.badUrlServer", comment: "User enter bad URL to server.")
         case .accessTokenNotFound:
-            return NSLocalizedString("Acess token not found.", comment: "Access token is not saved in account model.")
+            return NSLocalizedString("global.error.accessTokenNotFound", comment: "Access token is not saved in account model.")
         }
     }
 }

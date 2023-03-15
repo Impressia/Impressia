@@ -24,7 +24,7 @@ class AccountDataHandler {
     
     func getCurrentAccountData(viewContext: NSManagedObjectContext? = nil) -> AccountData? {
         let accounts = self.getAccountsData(viewContext: viewContext)
-        let defaultSettings = ApplicationSettingsHandler.shared.getDefaultSettings()
+        let defaultSettings = ApplicationSettingsHandler.shared.get()
         
         let currentAccount = accounts.first { accountData in
             accountData.id == defaultSettings.currentAccount

@@ -23,7 +23,7 @@ struct AccentsSectionView: View {
                                 .frame(width: 36, height: 36)
                                 .onTapGesture {
                                     self.applicationState.tintColor = color
-                                    ApplicationSettingsHandler.shared.setDefaultTintColor(tintColor: color)
+                                    ApplicationSettingsHandler.shared.set(tintColor: color)
                                 }
                             if color == self.applicationState.tintColor {
                                 Image(systemName: "checkmark")
@@ -47,7 +47,7 @@ struct AccentsSectionView: View {
                                 .frame(width: 36, height: 36)
                                 .onTapGesture {
                                     self.applicationState.tintColor = color
-                                    ApplicationSettingsHandler.shared.setDefaultTintColor(tintColor: color)
+                                    ApplicationSettingsHandler.shared.set(tintColor: color)
                                 }
                             if color == self.applicationState.tintColor {
                                 Image(systemName: "checkmark")

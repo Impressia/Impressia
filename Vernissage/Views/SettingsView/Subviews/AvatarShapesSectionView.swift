@@ -13,7 +13,7 @@ struct AvatarShapesSectionView: View {
         Section("settings.title.avatar") {
             Button {
                 self.applicationState.avatarShape = .circle
-                ApplicationSettingsHandler.shared.setDefaultAvatarShape(avatarShape: .circle)
+                ApplicationSettingsHandler.shared.set(avatarShape: .circle)
             } label: {
                 HStack {
                     Image("Avatar")
@@ -35,7 +35,7 @@ struct AvatarShapesSectionView: View {
 
             Button {
                 self.applicationState.avatarShape = .roundedRectangle
-                ApplicationSettingsHandler.shared.setDefaultAvatarShape(avatarShape: .roundedRectangle)
+                ApplicationSettingsHandler.shared.set(avatarShape: .roundedRectangle)
             } label: {
                 HStack {
                     Image("Avatar")

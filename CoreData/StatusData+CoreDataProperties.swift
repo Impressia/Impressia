@@ -65,5 +65,4 @@ extension StatusData {
 }
 
 extension StatusData : Identifiable {
-
 }

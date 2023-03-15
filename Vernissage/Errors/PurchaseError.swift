@@ -16,7 +16,7 @@ extension PurchaseError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .failedVerification:
-            return NSLocalizedString("Purchase verification failed.", comment: "Something went wrong during purchase verification.")
+            return NSLocalizedString("global.error.errorDuringPurchaseVerification", comment: "Something went wrong during purchase verification.")
         case .system(let error):
             return error.localizedDescription
         }

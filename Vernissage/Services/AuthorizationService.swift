@@ -113,7 +113,7 @@ public class AuthorizationService {
         }
         
         // Set newly created account as current (only when we create a first account).
-        let defaultSettings = ApplicationSettingsHandler.shared.getDefaultSettings()
+        let defaultSettings = ApplicationSettingsHandler.shared.get()
         if defaultSettings.currentAccount == nil {
             defaultSettings.currentAccount = accountData.id
         }

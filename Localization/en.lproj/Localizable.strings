@@ -12,6 +12,11 @@
 "global.error.errorDuringImageDownload" = "Cannot download image.";
 "global.error.canceledImageDownload" = "Download image has been canceled.";
 "global.error.errorDuringDataLoad" = "Loading data failed.";
+"global.error.errorDuringUserRead" = "Cannot retrieve user account.";
+"global.error.badUrlServer" = "Bad url to server.";
+"global.error.accessTokenNotFound" = "Access token not found.";
+"global.error.errorDuringDownloadStatus" = "Error during download status from server.";
+"global.error.errorDuringPurchaseVerification" = "Purchase verification failed.";
 
 // MARK: Main view (main navigation bar).
 "mainview.tab.homeTimeline" = "Home";

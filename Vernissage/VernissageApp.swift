@@ -137,7 +137,7 @@ struct VernissageApp: App {
     }
     
     private func loadUserPreferences() {
-        let defaultSettings = ApplicationSettingsHandler.shared.getDefaultSettings()
+        let defaultSettings = ApplicationSettingsHandler.shared.get()
         
         if let tintColor = TintColor(rawValue: Int(defaultSettings.tintColor)) {
             self.applicationState.tintColor = tintColor
@@ -174,7 +174,7 @@ struct VernissageApp: App {
     }
     
     private func refreshAccessTokens() async {
-        let defaultSettings = ApplicationSettingsHandler.shared.getDefaultSettings()
+        let defaultSettings = ApplicationSettingsHandler.shared.get()
         
         // Run refreshing access tokens once per day.
         guard let refreshTokenDate = Calendar.current.date(byAdding: .day, value: 1, to: defaultSettings.lastRefreshTokens), refreshTokenDate < Date.now else {

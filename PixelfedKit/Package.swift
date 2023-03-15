@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "PixelfedKit",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v16),
         .macOS(.v12),

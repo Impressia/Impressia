@@ -9,5 +9,4 @@ import CoreData
 
 @objc(AttachmentData)
 public class AttachmentData: NSManagedObject {
-
 }

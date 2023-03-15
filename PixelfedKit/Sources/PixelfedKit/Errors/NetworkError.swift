@@ -17,9 +17,15 @@ extension NetworkError: LocalizedError {
         case .notSuccessResponse(let response):
             let statusCode = response.statusCode()
 
-            return NSLocalizedString("Server response: '\(statusCode?.localizedDescription ?? "unknown")'.", comment: "It's error returned from remote server. Request URL: '\(response.url?.string ?? "unknown")'.")
+            let localizedString = NSLocalizedString("global.error.notSuccessResponse",
+                                                    bundle: Bundle.module,
+                                                    comment: "It's error returned from remote server. Request URL: '\(response.url?.string ?? "unknown")'.")
+
+            return String(format: localizedString, statusCode?.localizedDescription ?? "unknown")
         case .unknownError:
-            return NSLocalizedString("Unkonwn network error.", comment: "Response doesn't contains any information about request status.")
+            return NSLocalizedString("global.error.unknownError",
+                                     bundle: Bundle.module,
+                                     comment: "Response doesn't contains any information about request status.")
         }
     }
 }

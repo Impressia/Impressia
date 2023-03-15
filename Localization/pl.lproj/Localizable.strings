@@ -12,6 +12,11 @@
 "global.error.errorDuringImageDownload" = "Błąd podczas pobierania zdjęcia.";
 "global.error.canceledImageDownload" = "Pobieranie zdjęcia zostało anulowane.";
 "global.error.errorDuringDataLoad" = "Błąd podczas pobierania danych.";
+"global.error.errorDuringUserRead" = "Błąd podczas odczytu danych użytkownika.";
+"global.error.badUrlServer" = "Niepoprawny adres serwera.";
+"global.error.accessTokenNotFound" = "Brak tokenu dostępu.";
+"global.error.errorDuringDownloadStatus" = "Błąd podczas pobierania statusu.";
+"global.error.errorDuringPurchaseVerification" = "Błąd podczas weryfikacji płatności.";
 
 // MARK: Main view (main navigation bar).
 "mainview.tab.homeTimeline" = "Główna";
@@ -220,7 +225,7 @@
 "status.error.loadingCommentsFailed" =" Błąd podczas wczytywanie komentarzy.";
 "status.error.reboostFailed" = "Błąd podczas podbijania.";
 "status.error.favouriteFailed" = "Błąd podczas polubiania.";
-"status.error.bookmarkFailed" = "Błąd podczas dodawania/uzuwania z zakładek.";
+"status.error.bookmarkFailed" = "Błąd podczas dodawania/usuwania z zakładek.";
 "status.error.deleteFailed" = "Błąd podczas usuwania.";
 
 // Mark: Accounts view.

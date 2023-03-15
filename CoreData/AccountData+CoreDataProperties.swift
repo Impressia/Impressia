@@ -51,9 +51,7 @@ extension AccountData {
 
     @objc(removeStatuses:)
     @NSManaged public func removeFromStatuses(_ values: NSSet)
-
 }
 
 extension AccountData : Identifiable {
-
 }

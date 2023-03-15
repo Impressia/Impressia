@@ -9,5 +9,4 @@ import CoreData
 
 @objc(StatusData)
 public class StatusData: NSManagedObject {
-
 }

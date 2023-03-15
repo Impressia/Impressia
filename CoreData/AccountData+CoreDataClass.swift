@@ -9,5 +9,4 @@ import CoreData
 
 @objc(AccountData)
 public class AccountData: NSManagedObject {
-
 }

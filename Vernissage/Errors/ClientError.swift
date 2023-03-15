@@ -14,7 +14,7 @@ extension ClientError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .cannotRetrieveStatus:
-            return NSLocalizedString("Cannot retrieve status", comment: "Status cannot be downloaded from server.")
+            return NSLocalizedString("global.error.errorDuringDownloadStatus", comment: "Status cannot be downloaded from server.")
         }
     }
 }

@@ -26,7 +26,7 @@ struct MediaSettingsView: View {
             }
             .onChange(of: showSensitive) { newValue in
                 self.applicationState.showSensitive = newValue
-                ApplicationSettingsHandler.shared.setShowSensitive(value: newValue)
+                ApplicationSettingsHandler.shared.set(showSensitive: newValue)
             }
             
             Toggle(isOn: $showPhotoDescription) {
@@ -39,11 +39,11 @@ struct MediaSettingsView: View {
             }
             .onChange(of: showPhotoDescription) { newValue in
                 self.applicationState.showPhotoDescription = newValue
-                ApplicationSettingsHandler.shared.setShowPhotoDescription(value: newValue)
+                ApplicationSettingsHandler.shared.set(showPhotoDescription: newValue)
             }
         }
         .onAppear {
-            let defaultSettings = ApplicationSettingsHandler.shared.getDefaultSettings()
+            let defaultSettings = ApplicationSettingsHandler.shared.get()
             self.showSensitive = defaultSettings.showSensitive
             self.showPhotoDescription = defaultSettings.showPhotoDescription
         }

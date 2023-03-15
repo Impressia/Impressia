@@ -14,7 +14,7 @@ extension DatabaseError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .cannotDownloadAccount:
-            return NSLocalizedString("Cannot retrieve user account.", comment: "User acount cannot be downloaded from Core Data.")
+            return NSLocalizedString("global.error.errorDuringUserRead", comment: "User acount cannot be downloaded from Core Data.")
         }
     }
 }

@@ -22,35 +22,35 @@ struct HapticsSectionView: View {
             Toggle("settings.title.hapticsTabSelection", isOn: $hapticTabSelectionEnabled)
                 .onChange(of: hapticTabSelectionEnabled) { newValue in
                     self.applicationState.hapticTabSelectionEnabled = newValue
-                    ApplicationSettingsHandler.shared.setHapticTabSelectionEnabled(value: newValue)
+                    ApplicationSettingsHandler.shared.set(hapticTabSelectionEnabled: newValue)
                 }
             
             Toggle("settings.title.hapticsButtonPress", isOn: $hapticButtonPressEnabled)
                 .onChange(of: hapticButtonPressEnabled) { newValue in
                     self.applicationState.hapticButtonPressEnabled = newValue
-                    ApplicationSettingsHandler.shared.setHapticButtonPressEnabled(value: newValue)
+                    ApplicationSettingsHandler.shared.set(hapticButtonPressEnabled: newValue)
                 }
             
             Toggle("settings.title.hapticsListRefresh", isOn: $hapticRefreshEnabled)
                 .onChange(of: hapticRefreshEnabled) { newValue in
                     self.applicationState.hapticRefreshEnabled = newValue
-                    ApplicationSettingsHandler.shared.setHapticRefreshEnabled(value: newValue)
+                    ApplicationSettingsHandler.shared.set(hapticRefreshEnabled: newValue)
                 }
             
             Toggle("settings.title.hapticsAnimationFinished", isOn: $hapticAnimationEnabled)
                 .onChange(of: hapticAnimationEnabled) { newValue in
                     self.applicationState.hapticAnimationEnabled = newValue
-                    ApplicationSettingsHandler.shared.setHapticAnimationEnabled(value: newValue)
+                    ApplicationSettingsHandler.shared.set(hapticAnimationEnabled: newValue)
                 }
             
 //            Toggle("Notification", isOn: $hapticNotificationEnabled)
 //                .onChange(of: hapticNotificationEnabled) { newValue in
 //                    self.applicationState.hapticNotificationEnabled = newValue
-//                    ApplicationSettingsHandler.shared.setHapticNotificationEnabled(value: newValue)
+//                    ApplicationSettingsHandler.shared.set(hapticNotificationEnabled: newValue)
 //                }
         }
         .onAppear {
-            let defaultSettings = ApplicationSettingsHandler.shared.getDefaultSettings()
+            let defaultSettings = ApplicationSettingsHandler.shared.get()
             self.hapticTabSelectionEnabled = defaultSettings.hapticTabSelectionEnabled
             self.hapticButtonPressEnabled = defaultSettings.hapticButtonPressEnabled
             self.hapticRefreshEnabled = defaultSettings.hapticRefreshEnabled

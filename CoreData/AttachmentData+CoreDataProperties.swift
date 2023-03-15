@@ -33,5 +33,4 @@ extension AttachmentData {
 }
 
 extension AttachmentData : Identifiable {
-
 }

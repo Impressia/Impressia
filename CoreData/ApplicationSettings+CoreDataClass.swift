@@ -9,5 +9,4 @@ import CoreData
 
 @objc(ApplicationSettings)
 public class ApplicationSettings: NSManagedObject {
-
 }

@@ -343,7 +343,7 @@ struct MainView: View {
                                                                  lastSeenStatusId: accountData.lastSeenStatusId)
 
                     // Set account as default (application will open this account after restart).
-                    ApplicationSettingsHandler.shared.setAccountAsDefault(accountData: accountData)
+                    ApplicationSettingsHandler.shared.set(accountData: accountData)
                 }
             }
         }

@@ -38,11 +38,14 @@ public struct Html: Codable {
     }
     
     private func parseToMarkdown(html: String) throws -> String {
-        
-        // Fix issue: https://github.com/VernissageApp/Home/issues/11
         let mutatedHtml = html
+            // Fix issue: https://github.com/VernissageApp/Home/issues/11
+            // First we have to replace <br />/n into single <br /> (new line is skipped by HTML but this causes empty space in HTML2Markdown.
             .replacingOccurrences(of: "<br />\n", with: "<br />")
             .replacingOccurrences(of: "<br/>\n", with: "<br />")
+            // Fix issue: https://github.com/VernissageApp/Home/issues/10
+            // When we replace all <br />\n into single <br /> then we have to change the remaining \n into <br />
+            .replacingOccurrences(of: "\n", with: "<br />")
             
         let dom = try HTMLParser().parse(html: mutatedHtml)
         return dom.toMarkdown()
