@@ -169,14 +169,12 @@ struct StatusesView: View {
         case .local:
             return try await self.client.publicTimeline?.getStatuses(
                 local: true,
-                remote: false,
                 maxId: maxId,
                 sinceId: sinceId,
                 minId: minId,
                 limit: self.defaultLimit) ?? []
         case .federated:
             return try await self.client.publicTimeline?.getStatuses(
-                local: false,
                 remote: true,
                 maxId: maxId,
                 sinceId: sinceId,
@@ -205,8 +203,6 @@ struct StatusesView: View {
             
             return try await self.client.publicTimeline?.getTagStatuses(
                 tag: tag,
-                local: false,
-                remote: true,
                 maxId: maxId,
                 sinceId: sinceId,
                 minId: minId,

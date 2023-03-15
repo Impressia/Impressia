@@ -9,8 +9,8 @@ import Foundation
 extension Pixelfed {
     public enum Timelines {
         case home(MaxId?, SinceId?, MinId?, Limit?)
-        case pub(Bool, Bool, Bool, MaxId?, SinceId?, MinId?, Limit?)
-        case tag(String, Bool, Bool, Bool, MaxId?, SinceId?, MinId?, Limit?)
+        case pub(Bool?, Bool?, Bool?, MaxId?, SinceId?, MinId?, Limit?)
+        case tag(String, Bool?, Bool?, Bool?, MaxId?, SinceId?, MinId?, Limit?)
     }
 }
 

@@ -10,8 +10,8 @@ import PixelfedKit
 /// Pixelfed 'Timeline'.
 extension Client {
     public class PublicTimeline: BaseClient {
-        public func getStatuses(local: Bool,
-                                remote: Bool,
+        public func getStatuses(local: Bool? = nil,
+                                remote: Bool? = nil,
                                 maxId: String? = nil,
                                 sinceId: String? = nil,
                                 minId: String? = nil,
@@ -26,8 +26,8 @@ extension Client {
         }
         
         public func getTagStatuses(tag: String,
-                                   local: Bool,
-                                   remote: Bool,
+                                   local: Bool? = nil,
+                                   remote: Bool? = nil,
                                    maxId: String? = nil,
                                    sinceId: String? = nil,
                                    minId: String? = nil,

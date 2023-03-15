@@ -113,7 +113,6 @@ struct ImagesGrid: View {
             return try await self.client.publicTimeline?.getTagStatuses(
                 tag: name,
                 local: true,
-                remote: false,
                 limit: 10) ?? []
         case .account(let accountId, _, _):
             return try await self.client.accounts?.statuses(createdBy: accountId, onlyMedia: true, limit: 10) ?? []

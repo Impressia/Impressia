@@ -22,8 +22,8 @@ public extension PixelfedClientAuthenticated {
         return try await downloadJson([Status].self, request: request)
     }
 
-    func getPublicTimeline(local: Bool = false,
-                           remote: Bool = false,
+    func getPublicTimeline(local: Bool? = nil,
+                           remote: Bool? = nil,
                            onlyMedia: Bool = true,
                            maxId: EntityId? = nil,
                            sinceId: EntityId? = nil,
@@ -41,8 +41,8 @@ public extension PixelfedClientAuthenticated {
     }
 
     func getTagTimeline(tag: String,
-                        local: Bool = false,
-                        remote: Bool = false,
+                        local: Bool? = nil,
+                        remote: Bool? = nil,
                         onlyMedia: Bool = true,
                         maxId: EntityId? = nil,
                         sinceId: EntityId? = nil,
