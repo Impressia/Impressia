@@ -73,6 +73,7 @@ public class HomeTimelineService {
         return statusData
     }
     
+    @MainActor
     public func update(attachment: AttachmentData, withData imageData: Data, imageWidth: Double, imageHeight: Double) {
         attachment.data = imageData
         attachment.metaImageWidth = Int32(imageWidth)

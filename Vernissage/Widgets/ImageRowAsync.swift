@@ -6,164 +6,63 @@
     
 import SwiftUI
 import PixelfedKit
-import NukeUI
 
 struct ImageRowAsync: View {
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var client: Client
-    @EnvironmentObject var routerPath: RouterPath
+    private let statusViewModel: StatusModel
+    private let firstAttachment: AttachmentModel?
 
-    @State public var statusViewModel: StatusModel
-
+    @State private var selected: String
     @State private var imageHeight: Double
     @State private var imageWidth: Double
-    @State private var heightWasPrecalculated: Bool
-    @State private var showThumbImage = false
     
     init(statusViewModel: StatusModel) {
         self.statusViewModel = statusViewModel
+        self.firstAttachment = statusViewModel.mediaAttachments.first
+        self.selected = String.empty()
         
         // Calculate size of frame (first from cache, then from metadata).
-        if let firstAttachment = statusViewModel.mediaAttachments.first,
-           let size = ImageSizeService.shared.get(for: firstAttachment.url) {
+        if let firstAttachment, let size = ImageSizeService.shared.get(for: firstAttachment.url) {
             self.imageWidth = size.width
             self.imageHeight = size.height
-            
-            self.heightWasPrecalculated = true
-        } else if let firstAttachment = statusViewModel.mediaAttachments.first,
+        } else if let firstAttachment,
            let imgHeight = (firstAttachment.meta as? ImageMetadata)?.original?.height,
            let imgWidth = (firstAttachment.meta as? ImageMetadata)?.original?.width {
             
             let size = ImageSizeService.shared.calculate(for: firstAttachment.url, width: imgWidth, height: imgHeight)
             self.imageWidth = size.width
             self.imageHeight = size.height
-
-            self.heightWasPrecalculated = true
         } else {
             self.imageWidth = UIScreen.main.bounds.width
             self.imageHeight = UIScreen.main.bounds.width
-            heightWasPrecalculated = false
         }
     }
     
     var body: some View {
-        if let attachment = statusViewModel.mediaAttachments.first {
-            ZStack {
-                LazyImage(url: attachment.url) { state in
-                    if let image = state.image {
-                        if self.statusViewModel.sensitive && !self.applicationState.showSensitive {
-                            ZStack {
-                                ContentWarning(blurhash: attachment.blurhash, spoilerText: self.statusViewModel.spoilerText) {
-                                    self.imageView(image: image)
-                                }
-                                
-                                if showThumbImage {
-                                    FavouriteTouch {
-                                        self.showThumbImage = false
-                                    }
-                                }
-                            }
-                            .onAppear {
-                                if let uiImage = state.imageResponse?.image {
-                                    self.recalculateSizeOfDownloadedImage(uiImage: uiImage)
-                                }
-                            }
-                        } else {
-                            ZStack {
-                                self.imageView(image: image)
-                                
-                                if showThumbImage {
-                                    FavouriteTouch {
-                                        self.showThumbImage = false
-                                    }
-                                }
-                            }
-                            .onAppear {
-                                if let uiImage = state.imageResponse?.image {
-                                    self.recalculateSizeOfDownloadedImage(uiImage: uiImage)
-                                }
-                            }
-                        }
-                    } else if state.error != nil {
-                        ZStack {
-                            Rectangle()
-                                .fill(Color.placeholderText)
-                                .scaledToFill()
-                            
-                            VStack(alignment: .center) {
-                                Spacer()
-                                Text("global.error.errorDuringImageDownload", comment: "Cannot download image")
-                                    .foregroundColor(.systemBackground)
-                                Spacer()
-                            }
-                        }
-                        .frame(width: self.imageWidth, height: self.imageHeight)
-                    } else {
-                        VStack(alignment: .center) {
-                            BlurredImage(blurhash: attachment.blurhash)
-                        }
-                        .frame(width: self.imageWidth, height: self.imageHeight)
+        TabView(selection: $selected) {
+            ForEach(statusViewModel.mediaAttachments, id: \.id) { attachment in
+                ImageRowItemAsync(statusViewModel: self.statusViewModel, attachment: attachment) { (imageWidth, imageHeight) in
+                    // When we download image and calculate real size we have to change view size (only when image is now visible).
+                    if attachment.id == self.selected {
+                        self.imageWidth = imageWidth
+                        self.imageHeight = imageHeight
                     }
                 }
-                .priority(.high)
-                    
-                if let count = self.statusViewModel.mediaAttachments.count, count > 1 {
-                    BottomRight {
-                        Text("1 / \(count)")
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 3)
-                            .font(.caption2)
-                            .foregroundColor(.black)
-                            .background(.ultraThinMaterial, in: Capsule())
-                    }.padding()
-                }
-            }
-            .frame(width: self.imageWidth, height: self.imageHeight)
-        } else {
-            EmptyView()
-        }
-    }
-    
-    private func imageView(image: Image) -> some View {
-        image
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .onTapGesture(count: 2) {
-                Task {
-                    try? await self.client.statuses?.favourite(statusId: self.statusViewModel.id)
-                }
-
-                self.showThumbImage = true
-                HapticService.shared.fireHaptic(of: .buttonPress)
-            }
-            .onTapGesture{
-                self.routerPath.navigate(to: .status(
-                    id: statusViewModel.id,
-                    blurhash: statusViewModel.mediaAttachments.first?.blurhash,
-                    highestImageUrl: statusViewModel.mediaAttachments.getHighestImage()?.url,
-                    metaImageWidth: statusViewModel.getImageWidth(),
-                    metaImageHeight: statusViewModel.getImageHeight()
-                ))
-            }
-            .imageContextMenu(client: self.client, statusModel: self.statusViewModel)
-    }
-    
-    private func recalculateSizeOfDownloadedImage(uiImage: UIImage) {
-        guard heightWasPrecalculated == false else {
-            return
-        }
-
-        if let attachment = statusViewModel.mediaAttachments.first {
-            let size = ImageSizeService.shared.calculate(for: attachment.url,
-                                                         width: uiImage.size.width,
-                                                         height: uiImage.size.height)
-
-            if self.imageHeight != size.height || self.imageWidth != size.width {
-                withAnimation(.linear) {
-                    self.imageWidth = size.width
-                    self.imageHeight = size.height
-                }
+                .tag(attachment.id)
             }
         }
+        .onChange(of: selected, perform: { attachmentId in
+            if let attachment = self.statusViewModel.mediaAttachments.first(where: { item in item.id == attachmentId }) {
+                if let size = ImageSizeService.shared.get(for: attachment.url) {
+                    if size.width != self.imageWidth || size.height != self.imageHeight {
+                        withAnimation(.linear) {
+                            self.imageWidth = size.width
+                            self.imageHeight = size.height
+                        }
+                    }
+                }
+            }
+        })
+        .frame(width: self.imageWidth, height: self.imageHeight)
+        .tabViewStyle(PageTabViewStyle())
     }
 }

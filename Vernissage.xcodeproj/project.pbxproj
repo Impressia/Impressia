@@ -144,6 +144,8 @@
 		F88FAD2B295F43B8009B20C9 /* AccountData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD29295F43B8009B20C9 /* AccountData+CoreDataProperties.swift */; };
 		F88FAD2D295F4AD7009B20C9 /* ApplicationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD2C295F4AD7009B20C9 /* ApplicationState.swift */; };
 		F88FAD32295F5029009B20C9 /* RemoteFileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88FAD31295F5029009B20C9 /* RemoteFileService.swift */; };
+		F891E7CE29C35BF50022C449 /* ImageRowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F891E7CD29C35BF50022C449 /* ImageRowItem.swift */; };
+		F891E7D029C368750022C449 /* ImageRowItemAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = F891E7CF29C368750022C449 /* ImageRowItemAsync.swift */; };
 		F897978829681B9C00B22335 /* UserAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F897978729681B9C00B22335 /* UserAvatar.swift */; };
 		F897978A2968314A00B22335 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89797892968314A00B22335 /* LoadingIndicator.swift */; };
 		F897978D2968369600B22335 /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F897978C2968369600B22335 /* HapticService.swift */; };
@@ -351,6 +353,8 @@
 		F88FAD29295F43B8009B20C9 /* AccountData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F88FAD2C295F4AD7009B20C9 /* ApplicationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationState.swift; sourceTree = "<group>"; };
 		F88FAD31295F5029009B20C9 /* RemoteFileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFileService.swift; sourceTree = "<group>"; };
+		F891E7CD29C35BF50022C449 /* ImageRowItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRowItem.swift; sourceTree = "<group>"; };
+		F891E7CF29C368750022C449 /* ImageRowItemAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRowItemAsync.swift; sourceTree = "<group>"; };
 		F897978729681B9C00B22335 /* UserAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatar.swift; sourceTree = "<group>"; };
 		F89797892968314A00B22335 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		F897978C2968369600B22335 /* HapticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticService.swift; sourceTree = "<group>"; };
@@ -600,7 +604,9 @@
 				F83901A5295D8EC000456AE2 /* LabelIcon.swift */,
 				F85D4972296406E700751DF7 /* BottomRight.swift */,
 				F85D497629640A5200751DF7 /* ImageRow.swift */,
+				F891E7CD29C35BF50022C449 /* ImageRowItem.swift */,
 				F8210DCE2966B600001D9973 /* ImageRowAsync.swift */,
+				F891E7CF29C368750022C449 /* ImageRowItemAsync.swift */,
 				F85D497829640B9D00751DF7 /* ImagesCarousel.swift */,
 				F83CBEFA298298A1002972C8 /* ImageCarouselPicture.swift */,
 				F85D497A29640C8200751DF7 /* UsernameRow.swift */,
@@ -1133,6 +1139,7 @@
 				F8CC95CE2970761D00C9C2AC /* TintColor.swift in Sources */,
 				F89992CC296D9231005994BF /* StatusModel.swift in Sources */,
 				F80048052961850500E6868A /* StatusData+CoreDataClass.swift in Sources */,
+				F891E7CE29C35BF50022C449 /* ImageRowItem.swift in Sources */,
 				F86B7221296C49A300EE59EC /* EmptyButtonStyle.swift in Sources */,
 				F80048042961850500E6868A /* AttachmentData+CoreDataProperties.swift in Sources */,
 				F86B7223296C4BF500EE59EC /* ContentWarning.swift in Sources */,
@@ -1145,6 +1152,7 @@
 				F89992CE296D92E7005994BF /* AttachmentModel.swift in Sources */,
 				F800480A2961EA1900E6868A /* AttachmentDataHandler.swift in Sources */,
 				F80048032961850500E6868A /* AttachmentData+CoreDataClass.swift in Sources */,
+				F891E7D029C368750022C449 /* ImageRowItemAsync.swift in Sources */,
 				F897978D2968369600B22335 /* HapticService.swift in Sources */,
 				F8341F90295C636C009C8EE6 /* Data+Exif.swift in Sources */,
 				F89D6C4A297196FF001DA3D4 /* ImageViewer.swift in Sources */,
@@ -1261,7 +1269,7 @@
 				CODE_SIGN_ENTITLEMENTS = VernissageWidget/VernissageWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 73;
+				CURRENT_PROJECT_VERSION = 74;
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VernissageWidget/Info.plist;
@@ -1289,7 +1297,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = VernissageWidget/VernissageWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 73;
+				CURRENT_PROJECT_VERSION = 74;
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VernissageWidget/Info.plist;
@@ -1435,7 +1443,7 @@
 				CODE_SIGN_ENTITLEMENTS = Vernissage/Vernissage.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 73;
+				CURRENT_PROJECT_VERSION = 74;
 				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
@@ -1473,7 +1481,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Vernissage/Vernissage.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 73;
+				CURRENT_PROJECT_VERSION = 74;
 				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
