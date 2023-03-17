@@ -126,7 +126,7 @@ struct ImageRowItem: View {
                                                              width: downloadedImage.size.width,
                                                              height: downloadedImage.size.height)
                                 
-                self.uiImage = UIImage(data: imageData)
+                self.uiImage = downloadedImage
                 self.onImageDownloaded(size.width, size.height)
                 
                 HomeTimelineService.shared.update(attachment: attachmentData, withData: imageData, imageWidth: size.width, imageHeight: size.height)

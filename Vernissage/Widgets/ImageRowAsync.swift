@@ -42,7 +42,7 @@ struct ImageRowAsync: View {
             ImageRowItemAsync(statusViewModel: self.statusViewModel, attachment: firstAttachment) { (imageWidth, imageHeight) in
                 // When we download image and calculate real size we have to change view size.
                 if imageWidth != self.imageWidth || imageHeight != self.imageHeight {
-                    withAnimation(.linear) {
+                    withAnimation(.linear(duration: 0.4)) {
                         self.imageWidth = imageWidth
                         self.imageHeight = imageHeight
                     }
@@ -56,7 +56,7 @@ struct ImageRowAsync: View {
                         // When we download image and calculate real size we have to change view size (only when image is now visible).
                         if attachment.id == self.selected {
                             if imageWidth != self.imageWidth || imageHeight != self.imageHeight {
-                                withAnimation(.linear) {
+                                withAnimation(.linear(duration: 0.4)) {
                                     self.imageWidth = imageWidth
                                     self.imageHeight = imageHeight
                                 }
@@ -70,7 +70,7 @@ struct ImageRowAsync: View {
                 if let attachment = self.statusViewModel.mediaAttachments.first(where: { item in item.id == attachmentId }) {
                     if let size = ImageSizeService.shared.get(for: attachment.url) {
                         if size.width != self.imageWidth || size.height != self.imageHeight {
-                            withAnimation(.linear) {
+                            withAnimation(.linear(duration: 0.4)) {
                                 self.imageWidth = size.width
                                 self.imageHeight = size.height
                             }

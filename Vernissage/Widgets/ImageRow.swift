@@ -42,7 +42,7 @@ struct ImageRow: View {
             ImageRowItem(status: self.status, attachmentData: firstAttachment) { (imageWidth, imageHeight) in
                 // When we download image and calculate real size we have to change view size.
                 if imageWidth != self.imageWidth || imageHeight != self.imageHeight {
-                    withAnimation(.linear) {
+                    withAnimation(.linear(duration: 0.4)) {
                         self.imageWidth = imageWidth
                         self.imageHeight = imageHeight
                     }
@@ -56,7 +56,7 @@ struct ImageRow: View {
                         // When we download image and calculate real size we have to change view size (only when image is now visible).
                         if attachmentData.id == self.selected {
                             if imageWidth != self.imageWidth || imageHeight != self.imageHeight {
-                                withAnimation(.linear) {
+                                withAnimation(.linear(duration: 0.4)) {
                                     self.imageWidth = imageWidth
                                     self.imageHeight = imageHeight
                                 }
@@ -72,7 +72,7 @@ struct ImageRow: View {
                     let doubleImageHeight = Double(attachment.metaImageHeight)
                     
                     if doubleImageWidth != self.imageWidth || doubleImageHeight != self.imageHeight {
-                        withAnimation(.linear) {
+                        withAnimation(.linear(duration: 0.4)) {
                             self.imageWidth = doubleImageWidth
                             self.imageHeight = doubleImageHeight
                         }
