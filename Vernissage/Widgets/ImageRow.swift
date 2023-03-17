@@ -38,32 +38,49 @@ struct ImageRow: View {
     }
     
     var body: some View {
-        TabView(selection: $selected) {
-            ForEach(self.attachmentsData, id: \.id) { attachmentData in
-                ImageRowItem(status: self.status, attachmentData: attachmentData) { (imageWidth, imageHeight) in
-                    // When we download image and calculate real size we have to change view size (only when image is now visible).
-                    if attachmentData.id == self.selected {
+        if self.attachmentsData.count == 1, let firstAttachment = self.firstAttachment {
+            ImageRowItem(status: self.status, attachmentData: firstAttachment) { (imageWidth, imageHeight) in
+                // When we download image and calculate real size we have to change view size.
+                if imageWidth != self.imageWidth || imageHeight != self.imageHeight {
+                    withAnimation(.linear) {
                         self.imageWidth = imageWidth
                         self.imageHeight = imageHeight
                     }
                 }
-                .tag(attachmentData.id)
             }
-        }
-        .onChange(of: selected, perform: { attachmentId in
-            if let attachment = attachmentsData.first(where: { item in item.id == attachmentId }) {
-                let doubleImageWidth = Double(attachment.metaImageWidth)
-                let doubleImageHeight = Double(attachment.metaImageHeight)
-                
-                if doubleImageWidth != self.imageWidth || doubleImageHeight != self.imageHeight {
-                    withAnimation(.linear) {
-                        self.imageWidth = doubleImageWidth
-                        self.imageHeight = doubleImageHeight
+            .frame(width: self.imageWidth, height: self.imageHeight)
+        } else {
+            TabView(selection: $selected) {
+                ForEach(self.attachmentsData, id: \.id) { attachmentData in
+                    ImageRowItem(status: self.status, attachmentData: attachmentData) { (imageWidth, imageHeight) in
+                        // When we download image and calculate real size we have to change view size (only when image is now visible).
+                        if attachmentData.id == self.selected {
+                            if imageWidth != self.imageWidth || imageHeight != self.imageHeight {
+                                withAnimation(.linear) {
+                                    self.imageWidth = imageWidth
+                                    self.imageHeight = imageHeight
+                                }
+                            }
+                        }
                     }
+                    .tag(attachmentData.id)
                 }
             }
-        })
-        .frame(width: self.imageWidth, height: self.imageHeight)
-        .tabViewStyle(PageTabViewStyle())
+            .onChange(of: selected, perform: { attachmentId in
+                if let attachment = attachmentsData.first(where: { item in item.id == attachmentId }) {
+                    let doubleImageWidth = Double(attachment.metaImageWidth)
+                    let doubleImageHeight = Double(attachment.metaImageHeight)
+                    
+                    if doubleImageWidth != self.imageWidth || doubleImageHeight != self.imageHeight {
+                        withAnimation(.linear) {
+                            self.imageWidth = doubleImageWidth
+                            self.imageHeight = doubleImageHeight
+                        }
+                    }
+                }
+            })
+            .frame(width: self.imageWidth, height: self.imageHeight)
+            .tabViewStyle(PageTabViewStyle())
+        }
     }
 }

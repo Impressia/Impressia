@@ -17,6 +17,7 @@ struct ImageRowItemAsync: View {
     private var attachment: AttachmentModel
     
     @State private var showThumbImage = false
+    @State private var opacity = 0.0
     
     private let onImageDownloaded: (Double, Double) -> Void
     
@@ -42,6 +43,10 @@ struct ImageRowItemAsync: View {
                         }
                     }
                     .onAppear {
+                        withAnimation {
+                            self.opacity = 1.0
+                        }
+                        
                         if let uiImage = state.imageResponse?.image {
                             self.recalculateSizeOfDownloadedImage(uiImage: uiImage)
                         }
@@ -57,6 +62,10 @@ struct ImageRowItemAsync: View {
                         }
                     }
                     .onAppear {
+                        withAnimation {
+                            self.opacity = 1.0
+                        }
+
                         if let uiImage = state.imageResponse?.image {
                             self.recalculateSizeOfDownloadedImage(uiImage: uiImage)
                         }
@@ -89,6 +98,7 @@ struct ImageRowItemAsync: View {
         image
             .resizable()
             .aspectRatio(contentMode: .fit)
+            .opacity(self.opacity)
             .onTapGesture(count: 2) {
                 Task {
                     try? await self.client.statuses?.favourite(statusId: self.statusViewModel.id)

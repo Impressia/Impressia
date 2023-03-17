@@ -38,31 +38,48 @@ struct ImageRowAsync: View {
     }
     
     var body: some View {
-        TabView(selection: $selected) {
-            ForEach(statusViewModel.mediaAttachments, id: \.id) { attachment in
-                ImageRowItemAsync(statusViewModel: self.statusViewModel, attachment: attachment) { (imageWidth, imageHeight) in
-                    // When we download image and calculate real size we have to change view size (only when image is now visible).
-                    if attachment.id == self.selected {
+        if statusViewModel.mediaAttachments.count == 1, let firstAttachment = self.firstAttachment {
+            ImageRowItemAsync(statusViewModel: self.statusViewModel, attachment: firstAttachment) { (imageWidth, imageHeight) in
+                // When we download image and calculate real size we have to change view size.
+                if imageWidth != self.imageWidth || imageHeight != self.imageHeight {
+                    withAnimation(.linear) {
                         self.imageWidth = imageWidth
                         self.imageHeight = imageHeight
                     }
                 }
-                .tag(attachment.id)
             }
-        }
-        .onChange(of: selected, perform: { attachmentId in
-            if let attachment = self.statusViewModel.mediaAttachments.first(where: { item in item.id == attachmentId }) {
-                if let size = ImageSizeService.shared.get(for: attachment.url) {
-                    if size.width != self.imageWidth || size.height != self.imageHeight {
-                        withAnimation(.linear) {
-                            self.imageWidth = size.width
-                            self.imageHeight = size.height
+            .frame(width: self.imageWidth, height: self.imageHeight)
+        } else {
+            TabView(selection: $selected) {
+                ForEach(statusViewModel.mediaAttachments, id: \.id) { attachment in
+                    ImageRowItemAsync(statusViewModel: self.statusViewModel, attachment: attachment) { (imageWidth, imageHeight) in
+                        // When we download image and calculate real size we have to change view size (only when image is now visible).
+                        if attachment.id == self.selected {
+                            if imageWidth != self.imageWidth || imageHeight != self.imageHeight {
+                                withAnimation(.linear) {
+                                    self.imageWidth = imageWidth
+                                    self.imageHeight = imageHeight
+                                }
+                            }
+                        }
+                    }
+                    .tag(attachment.id)
+                }
+            }
+            .onChange(of: selected, perform: { attachmentId in
+                if let attachment = self.statusViewModel.mediaAttachments.first(where: { item in item.id == attachmentId }) {
+                    if let size = ImageSizeService.shared.get(for: attachment.url) {
+                        if size.width != self.imageWidth || size.height != self.imageHeight {
+                            withAnimation(.linear) {
+                                self.imageWidth = size.width
+                                self.imageHeight = size.height
+                            }
                         }
                     }
                 }
-            }
-        })
-        .frame(width: self.imageWidth, height: self.imageHeight)
-        .tabViewStyle(PageTabViewStyle())
+            })
+            .frame(width: self.imageWidth, height: self.imageHeight)
+            .tabViewStyle(PageTabViewStyle())
+        }
     }
 }

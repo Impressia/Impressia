@@ -18,6 +18,7 @@ struct ImageRowItem: View {
     @State private var showThumbImage = false
     @State private var cancelled = true
     @State private var error: Error?
+    @State private var opacity = 0.0
     
     private let onImageDownloaded: (Double, Double) -> Void
     
@@ -46,6 +47,11 @@ struct ImageRowItem: View {
                             }
                         }
                     }
+                    .onAppear {
+                        withAnimation {
+                            self.opacity = 1.0
+                        }
+                    }
                 } else {
                     ZStack {
                         self.imageView(uiImage: uiImage)
@@ -54,6 +60,11 @@ struct ImageRowItem: View {
                             FavouriteTouch {
                                 self.showThumbImage = false
                             }
+                        }
+                    }
+                    .onAppear {
+                        withAnimation {
+                            self.opacity = 1.0
                         }
                     }
                 }
@@ -91,6 +102,7 @@ struct ImageRowItem: View {
         Image(uiImage: uiImage)
             .resizable()
             .aspectRatio(contentMode: .fit)
+            .opacity(self.opacity)
             .onTapGesture(count: 2) {
                 Task {
                     try? await self.client.statuses?.favourite(statusId: self.status.id)
