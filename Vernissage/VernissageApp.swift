@@ -54,8 +54,8 @@ struct VernissageApp: App {
             .tint(self.tintColor)
             .preferredColorScheme(self.theme)
             .task {
-                UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.label
-                UIPageControl.appearance().pageIndicatorTintColor = UIColor.secondaryLabel
+                UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.white.withAlphaComponent(0.7)
+                UIPageControl.appearance().pageIndicatorTintColor = UIColor.white.withAlphaComponent(0.4)
                 
                 // Set custom configurations for Nuke image/data loaders.
                 self.setImagePipelines()
