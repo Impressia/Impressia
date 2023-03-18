@@ -42,6 +42,9 @@ public class ApplicationState: ObservableObject {
     
     /// Model for newly created comment.
     @Published var newComment: CommentModel?
+
+    /// Active icon name.
+    @Published var activeIcon = "Default"
     
     /// Tint color in whole application.
     @Published var tintColor = TintColor.accentColor2

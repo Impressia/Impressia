@@ -17,16 +17,16 @@ struct SettingsView: View {
     @State private var theme: ColorScheme?
     @State private var appVersion: String?
     @State private var appBundleVersion: String?
-        
+            
     var body: some View {
         NavigationStack {
             NavigationView {
                 List {
                     // Accounts.
                     AccountsSectionView()
-                    
-                    // Themes.
-                    ThemeSectionView()
+                                
+                    // General.
+                    GeneralSectionView()
                     
                     // Accents.
                     AccentsSectionView()

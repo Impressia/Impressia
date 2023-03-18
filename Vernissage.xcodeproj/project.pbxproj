@@ -166,7 +166,7 @@
 		F89D6C3F29716E41001DA3D4 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C3E29716E41001DA3D4 /* Theme.swift */; };
 		F89D6C4229717FDC001DA3D4 /* AccountsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C4129717FDC001DA3D4 /* AccountsSectionView.swift */; };
 		F89D6C4429718092001DA3D4 /* AccentsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C4329718092001DA3D4 /* AccentsSectionView.swift */; };
-		F89D6C4629718193001DA3D4 /* ThemeSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C4529718193001DA3D4 /* ThemeSectionView.swift */; };
+		F89D6C4629718193001DA3D4 /* GeneralSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C4529718193001DA3D4 /* GeneralSectionView.swift */; };
 		F89D6C4A297196FF001DA3D4 /* ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C49297196FF001DA3D4 /* ImageViewer.swift */; };
 		F8A93D7E2965FD89001D8331 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A93D7D2965FD89001D8331 /* UserProfileView.swift */; };
 		F8AD061329A565620042F111 /* String+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD061229A565620042F111 /* String+Random.swift */; };
@@ -375,7 +375,7 @@
 		F89D6C3E29716E41001DA3D4 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		F89D6C4129717FDC001DA3D4 /* AccountsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsSectionView.swift; sourceTree = "<group>"; };
 		F89D6C4329718092001DA3D4 /* AccentsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccentsSectionView.swift; sourceTree = "<group>"; };
-		F89D6C4529718193001DA3D4 /* ThemeSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSectionView.swift; sourceTree = "<group>"; };
+		F89D6C4529718193001DA3D4 /* GeneralSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSectionView.swift; sourceTree = "<group>"; };
 		F89D6C49297196FF001DA3D4 /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
 		F89F0605299139F6003DC875 /* Vernissage-002.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-002.xcdatamodel"; sourceTree = "<group>"; };
 		F8A93D7D2965FD89001D8331 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
@@ -412,6 +412,7 @@
 		F8CEEDF929ABAFD200DBED66 /* ImageFileTranseferable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileTranseferable.swift; sourceTree = "<group>"; };
 		F8E9391E29C0BCFA002BB3B8 /* ImageContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageContextMenu.swift; sourceTree = "<group>"; };
 		F8E9392029C0DA7E002BB3B8 /* LazyImageState+ImageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LazyImageState+ImageResponse.swift"; sourceTree = "<group>"; };
+		F8EF371429C624DA00669F45 /* Vernissage-006.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-006.xcdatamodel"; sourceTree = "<group>"; };
 		F8F6E44329BC5CAA0004795E /* VernissageWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VernissageWidgetExtension.entitlements; sourceTree = "<group>"; };
 		F8F6E44429BC5CC50004795E /* Vernissage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Vernissage.entitlements; sourceTree = "<group>"; };
 		F8F6E44629BCC0DC0004795E /* SmallWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallWidgetView.swift; sourceTree = "<group>"; };
@@ -671,7 +672,7 @@
 			children = (
 				F89D6C4129717FDC001DA3D4 /* AccountsSectionView.swift */,
 				F89D6C4329718092001DA3D4 /* AccentsSectionView.swift */,
-				F89D6C4529718193001DA3D4 /* ThemeSectionView.swift */,
+				F89D6C4529718193001DA3D4 /* GeneralSectionView.swift */,
 				F86167C5297FE6CC004D1F67 /* AvatarShapesSectionView.swift */,
 				F8B0885F29943498002AB40A /* OtherSectionView.swift */,
 				F8B08861299435C9002AB40A /* SupportView.swift */,
@@ -1175,7 +1176,7 @@
 				F8996DEB2971D29D0043EEC6 /* View+Transition.swift in Sources */,
 				F876418B298AC1B80057D362 /* NoDataView.swift in Sources */,
 				F8E9392129C0DA7E002BB3B8 /* LazyImageState+ImageResponse.swift in Sources */,
-				F89D6C4629718193001DA3D4 /* ThemeSectionView.swift in Sources */,
+				F89D6C4629718193001DA3D4 /* GeneralSectionView.swift in Sources */,
 				F85D497F296416C800751DF7 /* CommentsSectionView.swift in Sources */,
 				F866F6A529604194002E8F88 /* ApplicationSettingsHandler.swift in Sources */,
 				F89AC00929A20C5C00F4159F /* Client+Places.swift in Sources */,
@@ -1438,8 +1439,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "Violet Blue Pride";
+				ASSETCATALOG_COMPILER_APPICON_NAME = Default;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Vernissage/Vernissage.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -1477,8 +1480,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "Violet Blue Pride";
+				ASSETCATALOG_COMPILER_APPICON_NAME = Default;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Vernissage/Vernissage.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 76;
@@ -1622,6 +1627,7 @@
 		F88C2476295C37BB0006098B /* Vernissage.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				F8EF371429C624DA00669F45 /* Vernissage-006.xcdatamodel */,
 				F8CAE64129B8F1AF001E0372 /* Vernissage-005.xcdatamodel */,
 				F8B05ACC29B48DD000857221 /* Vernissage-004.xcdatamodel */,
 				F8B05AC929B488C600857221 /* Vernissage-003.xcdatamodel */,
@@ -1629,7 +1635,7 @@
 				F8C937A929882CA90004D782 /* Vernissage-001.xcdatamodel */,
 				F88C2477295C37BB0006098B /* Vernissage.xcdatamodel */,
 			);
-			currentVersion = F8CAE64129B8F1AF001E0372 /* Vernissage-005.xcdatamodel */;
+			currentVersion = F8EF371429C624DA00669F45 /* Vernissage-006.xcdatamodel */;
 			path = Vernissage.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

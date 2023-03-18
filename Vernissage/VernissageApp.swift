@@ -153,6 +153,7 @@ struct VernissageApp: App {
             self.applicationState.avatarShape = avatarShape
         }
         
+        self.applicationState.activeIcon = defaultSettings.activeIcon
         self.applicationState.showSensitive = defaultSettings.showSensitive
         self.applicationState.showPhotoDescription = defaultSettings.showPhotoDescription
     }

@@ -184,6 +184,8 @@
 "settings.title.alwaysShowSensitiveDescription" = "Force show all NFSW (sensitive) media without warnings";
 "settings.title.alwaysShowAltTitle" = "Show alternative text";
 "settings.title.alwaysShowAltDescription" = "Show alternative text if present on status details screen";
+"settings.title.general" = "General";
+"settings.title.applicationIcon" = "Application icon";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Sign in to Pixelfed";

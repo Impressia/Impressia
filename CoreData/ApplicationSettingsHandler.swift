@@ -100,6 +100,12 @@ class ApplicationSettingsHandler {
         CoreDataHandler.shared.save()
     }
     
+    func set(activeIcon: String) {
+        let defaultSettings = self.get()
+        defaultSettings.activeIcon = activeIcon
+        CoreDataHandler.shared.save()
+    }
+    
     private func createApplicationSettingsEntity() -> ApplicationSettings {
         let context = CoreDataHandler.shared.container.viewContext
         return ApplicationSettings(context: context)

@@ -184,6 +184,8 @@
 "settings.title.alwaysShowSensitiveDescription" = "Wymuś pokazywanie statusów NFSW (czułych) bez ostrzeżeń";
 "settings.title.alwaysShowAltTitle" = "Pokaż tekst alternatywny";
 "settings.title.alwaysShowAltDescription" = "Pokaż alternatywny tekst, jeśli jest obecny na szczegółach statusu";
+"settings.title.general" = "Ogólne";
+"settings.title.applicationIcon" = "Ikona aplikacji";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Zaloguj się do Pixelfed";
