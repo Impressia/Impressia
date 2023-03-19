@@ -169,7 +169,7 @@
 "settings.title.thirdParty" = "Third party";
 "settings.title.reportBug" = "Report a bug";
 "settings.title.githubIssues" = "Issues on Github";
-"settings.title.follow" = "Follow me on Mastodon";
+"settings.title.follow" = "Follow me";
 "settings.title.support" = "Support";
 "settings.title.thankYouTitle" = "Thank you 💕";
 "settings.title.thankYouMessage" = "Thanks for your purchase. Purchases both big and small help us keep our dream of providing the best quality products to our customers. We hope you’re loving Vernissage.";
@@ -186,6 +186,12 @@
 "settings.title.alwaysShowAltDescription" = "Show alternative text if present on status details screen";
 "settings.title.general" = "General";
 "settings.title.applicationIcon" = "Application icon";
+"settings.title.followVernissage" = "Follow Vernissage";
+"settings.title.mastodonAccount" = "Mastodon account";
+"settings.title.pixelfedAccount" = "Pixelfed account";
+"settings.title.openPage" = "Open";
+"settings.title.privacyPolicy" = "Privacy policy";
+"settings.title.terms" = "Terms & Conditions";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Sign in to Pixelfed";

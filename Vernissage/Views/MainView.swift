@@ -237,8 +237,7 @@ struct MainView: View {
                     self.routerPath.presentedSheet = .newStatusEditor
                 } label: {
                     Image(systemName: "square.and.pencil")
-                        .symbolRenderingMode(.palette)
-                        .foregroundStyle(Color.accentColor, Color.mainTextColor)
+                        .foregroundColor(Color.mainTextColor)
                         .fontWeight(.semibold)
                 }
             }

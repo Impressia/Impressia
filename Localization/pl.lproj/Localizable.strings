@@ -169,7 +169,7 @@
 "settings.title.thirdParty" = "Zewnętrzne biblioteki";
 "settings.title.reportBug" = "Zgłoś błąd";
 "settings.title.githubIssues" = "Błędy na Github";
-"settings.title.follow" = "Obserwuj mnie na Mastodon";
+"settings.title.follow" = "Obserwuj mnie";
 "settings.title.support" = "Wsparcie";
 "settings.title.thankYouTitle" = "Dziękuję 💕";
 "settings.title.thankYouMessage" = "Dziękujemy za twój zakup. Zakupy zarówno te duże, jak i te małe pomagają nam w realizacji marzenia o dostarczaniu naszym klientom produktów najwyższej jakości. Mamy nadzieję, że Vernissage spełnia Twoje oczekiwania.";
@@ -186,6 +186,12 @@
 "settings.title.alwaysShowAltDescription" = "Pokaż alternatywny tekst, jeśli jest obecny na szczegółach statusu";
 "settings.title.general" = "Ogólne";
 "settings.title.applicationIcon" = "Ikona aplikacji";
+"settings.title.followVernissage" = "Obserwuj Vernissage";
+"settings.title.mastodonAccount" = "Konto Mastodon";
+"settings.title.pixelfedAccount" = "Konto Pixelfed";
+"settings.title.openPage" = "Otwórz";
+"settings.title.privacyPolicy" = "Polityka prywatności";
+"settings.title.terms" = "Zasady i warunki";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Zaloguj się do Pixelfed";

@@ -25,6 +25,7 @@ struct GeneralSectionView: View {
                     HStack {
                         Image("\(icon)-Preview")
                         Text(icon.replacing("-", with: " "))
+                            .font(.subheadline)
                     }
                     .tag(icon)
                 }
