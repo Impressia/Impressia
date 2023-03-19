@@ -37,7 +37,7 @@ private struct ImageContextMenu: ViewModifier {
                             await self.reboost()
                         }
                     } label: {
-                        Label("status.title.reboost", systemImage: "paperplane")
+                        Label("status.title.reboost", image: "custom.rocket")
                     }
 
                     Button {
@@ -74,7 +74,7 @@ private struct ImageContextMenu: ViewModifier {
     private func reboost() async {
         do {
             _ = try await self.client.statuses?.boost(statusId: self.id)
-            ToastrService.shared.showSuccess(NSLocalizedString("status.title.reboosted", comment: "Reboosted"), imageSystemName: "paperplane.fill")
+            ToastrService.shared.showSuccess(NSLocalizedString("status.title.reboosted", comment: "Reboosted"), imageName: "custom.rocket.fill")
         } catch {
             ErrorService.shared.handle(error, message: "status.error.reboostFailed", showToastr: true)
         }

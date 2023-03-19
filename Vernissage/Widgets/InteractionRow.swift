@@ -51,7 +51,7 @@ struct InteractionRow: View {
                 await self.reboost()
             } label: {
                 HStack(alignment: .center) {
-                    Image(systemName: self.reblogged ? "paperplane.fill" : "paperplane")
+                    Image(self.reblogged ? "custom.rocket.fill" : "custom.rocket")
                     Text("\(self.reblogsCount)")
                         .font(.caption)
                 }
@@ -81,7 +81,7 @@ struct InteractionRow: View {
             
             Menu {
                 NavigationLink(value: RouteurDestinations.accounts(listType: .reblogged(entityId: statusModel.id))) {
-                    Label("status.title.reboostedBy", systemImage: "paperplane")
+                    Label("status.title.reboostedBy", image: "custom.rocket")
                 }
 
                 NavigationLink(value: RouteurDestinations.accounts(listType: .favourited(entityId: statusModel.id))) {
@@ -145,7 +145,7 @@ struct InteractionRow: View {
 
             ToastrService.shared.showSuccess(self.reblogged
                                              ? NSLocalizedString("status.title.reboosted", comment: "Reboosted")
-                                             : NSLocalizedString("status.title.unreboosted", comment: "Unreboosted"), imageSystemName: "paperplane.fill")
+                                             : NSLocalizedString("status.title.unreboosted", comment: "Unreboosted"), imageName: "custom.rocket.fill")
         } catch {
             ErrorService.shared.handle(error, message: "status.error.reboostFailed", showToastr: true)
         }

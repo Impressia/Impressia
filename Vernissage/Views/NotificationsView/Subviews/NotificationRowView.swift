@@ -143,7 +143,7 @@ struct NotificationRowView: View {
                         .strokeBorder(Color.white.opacity(0.85), lineWidth: 2)
                         .background(Circle().fill(self.getColor().opacity(0.85)))
                         .frame(width: 28, height: 28)
-                    Image(systemName: self.getImage())
+                    self.getImage()
                         .foregroundColor(.white)
                         .font(.caption)
                         .fontWeight(.bold)
@@ -179,28 +179,28 @@ struct NotificationRowView: View {
         }
     }
     
-    private func getImage() -> String {
+    private func getImage() -> Image {
         switch notification.type {
         case .follow:
-            return "person.badge.plus"
+            return Image(systemName: "person.badge.plus")
         case .mention:
-            return "at"
+            return Image(systemName: "at")
         case .reblog:
-            return "paperplane"
+            return Image("custom.rocket")
         case .favourite:
-            return "hand.thumbsup"
+            return Image(systemName: "hand.thumbsup")
         case .status:
-            return "photo.on.rectangle.angled"
+            return Image(systemName: "photo.on.rectangle.angled")
         case .followRequest:
-            return "person.badge.clock"
+            return Image(systemName: "person.badge.clock")
         case .poll:
-            return "checklist"
+            return Image(systemName: "checklist")
         case .update:
-            return "text.below.photo"
+            return Image(systemName: "text.below.photo")
         case .adminSignUp:
-            return "person.badge.key"
+            return Image(systemName: "person.badge.key")
         case .adminReport:
-            return "exclamationmark.bubble"
+            return Image(systemName: "exclamationmark.bubble")
         }
     }
     

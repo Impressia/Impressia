@@ -139,7 +139,7 @@ struct StatusView: View {
             HStack(alignment: .center, spacing: 4) {
                 UserAvatar(accountAvatar: reblogStatus.account.avatar, size: .mini)
                 Text(reblogStatus.account.displayNameWithoutEmojis)
-                Image(systemName: "paperplane")
+                Image("custom.rocket")
                     .padding(.trailing, 8)
             }
             .font(.footnote)
