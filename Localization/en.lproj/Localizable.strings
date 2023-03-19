@@ -202,21 +202,21 @@
 "status.navigationBar.title" = "Details";
 "status.title.uploaded" = "Uploaded";
 "status.title.via" = "via %@";
-"status.title.reboostedBy" = "Reboosted by";
+"status.title.reboostedBy" = "Boosted by";
 "status.title.favouritedBy" = "Favourited by";
 "status.title.openInBrowser" = "Open in browser";
 "status.title.shareStatus" = "Share status";
 "status.title.yourStatus" = "Your status";
 "status.title.delete" = "Delete";
-"status.title.reboosted" = "Reboosted";
-"status.title.unreboosted" = "Unreboosted";
+"status.title.reboosted" = "Boosted";
+"status.title.unreboosted" = "Unboosted";
 "status.title.favourited" = "Favourited";
 "status.title.unfavourited" = "Unfavourited";
 "status.title.bookmarked" = "Bookmarked";
 "status.title.unbookmarked" = "Unbookmarked";
 "status.title.statusDeleted" = "Status deleted";
-"status.title.reboost" = "Reboost";
-"status.title.unreboost" = "Unreboost";
+"status.title.reboost" = "Boost";
+"status.title.unreboost" = "Unboost";
 "status.title.favourite" = "Favourite";
 "status.title.unfavourite" = "Unfavourite";
 "status.title.bookmark" = "Bookmark";
@@ -225,7 +225,7 @@
 "status.error.loadingStatusFailed" = "Loading status failed.";
 "status.error.notFound" = "Status not existing anymore.";
 "status.error.loadingCommentsFailed" = "Comments cannot be downloaded.";
-"status.error.reboostFailed" = "Reboost action failed.";
+"status.error.reboostFailed" = "Boost action failed.";
 "status.error.favouriteFailed" = "Favourite action failed.";
 "status.error.bookmarkFailed" = "Bookmark action failed.";
 "status.error.deleteFailed" = "Delete action failed.";
@@ -234,7 +234,7 @@
 "accounts.navigationBar.followers" = "Followers";
 "accounts.navigationBar.following" = "Following";
 "accounts.navigationBar.favouritedBy" = "Favourited by";
-"accounts.navigationBar.reboostedBy" = "Reboosted by";
+"accounts.navigationBar.reboostedBy" = "Boosted by";
 "accounts.title.noAccounts" = "Unfortunately, there is no one here.";
 "accounts.error.loadingAccountsFailed" = "Loading accounts failed.";
 
