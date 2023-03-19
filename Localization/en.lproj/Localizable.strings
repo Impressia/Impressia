@@ -8,7 +8,7 @@
 "global.error.statusesNotRetrieved" = "Statuses not retrieved.";
 "global.error.errorDuringDownloadStatuses" = "Error during download statuses from server.";
 "global.error.errorDuringDownloadHashtag" = "Error during download tag from server.";
-"global.error.hashtagNotExists" = "Hashtag not exists.";
+"global.error.hashtagNotExists" = "Hashtag does not exists.";
 "global.error.errorDuringImageDownload" = "Cannot download image.";
 "global.error.canceledImageDownload" = "Download image has been canceled.";
 "global.error.errorDuringDataLoad" = "Loading data failed.";
@@ -95,7 +95,7 @@
 "userProfile.title.unfollow" = "Unfollow";
 "userProfile.title.followBack" = "Follow back";
 "userProfile.title.follow" = "Follow";
-"userProfile.error.notExists" = "Account not exists.";
+"userProfile.error.notExists" = "Account does not exists.";
 "userProfile.error.loadingAccountFailed" = "Error during download account from server.";
 "userProfile.error.muting" = "Muting/unmuting action failed.";
 "userProfile.error.block" = "Block/unblock action failed.";
