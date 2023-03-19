@@ -9,7 +9,7 @@ import SwiftUI
 struct GeneralSectionView: View {
     @EnvironmentObject var applicationState: ApplicationState
         
-    private let customIconNames = ["Default", "Blue", "Violet", "Pride"]
+    private let customIconNames = ["Default", "Blue", "Violet", "Orange", "Pride", "Blue-Camera", "Violet-Camera", "Orange-Camera", "Pride-Camera"]
     private let themeNames: [(theme: Theme, name: LocalizedStringKey)] = [
         (Theme.system, "settings.title.system"),
         (Theme.light, "settings.title.light"),
@@ -24,7 +24,7 @@ struct GeneralSectionView: View {
                 ForEach(self.customIconNames, id: \.self) { icon in
                     HStack {
                         Image("\(icon)-Preview")
-                        Text(icon)
+                        Text(icon.replacing("-", with: " "))
                     }
                     .tag(icon)
                 }
