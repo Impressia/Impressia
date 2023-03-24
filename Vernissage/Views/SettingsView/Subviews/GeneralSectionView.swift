@@ -35,7 +35,7 @@ struct GeneralSectionView: View {
             .pickerStyle(.navigationLink)
             .onChange(of: self.applicationState.activeIcon) { iconName in
                 ApplicationSettingsHandler.shared.set(activeIcon: iconName)
-                UIApplication.shared.setAlternateIconName(iconName)
+                UIApplication.shared.setAlternateIconName(iconName == "Default" ? nil : iconName)
             }
             
             // Application theme.
