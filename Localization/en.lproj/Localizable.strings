@@ -100,6 +100,7 @@
 "userProfile.error.muting" = "Muting/unmuting action failed.";
 "userProfile.error.block" = "Block/unblock action failed.";
 "userProfile.error.relationship" = "Relationship action failed.";
+"userProfile.title.edit" = "Edit";
 
 // Mark: Notifications view.
 "notifications.navigationBar.title" = "Notifications";
@@ -257,3 +258,11 @@
 "purchase.cofee.description" = "Treat me to a coffe.";
 "purchase.cake.title" = "Cofee & cake";
 "purchase.cake.description" = "Treat me to a coffe and cake.";
+
+// Mark: Edit profile.
+"editProfile.navigationBar.title" = "Edit profile";
+"editProfile.title.displayName" = "Display name";
+"editProfile.title.bio" = "Bio";
+"editProfile.title.save" = "Save";
+"editProfile.title.accountSaved" = "Profile has been updated.";
+"editProfile.error.saveAccountFailed" = "Saving profile failed.";

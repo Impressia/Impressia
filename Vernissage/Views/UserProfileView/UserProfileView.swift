@@ -159,6 +159,14 @@ struct UserProfileView: View {
                     Label(NSLocalizedString("userProfile.title.bookmarks", comment: "Bookmarks"), systemImage: "bookmark")
                 }
                 
+                if let account = self.account {
+                    Divider()
+                    
+                    NavigationLink(value: RouteurDestinations.editProfile(account: account)) {
+                        Label(NSLocalizedString("userProfile.title.edit", comment: "Edit profile"), systemImage: "pencil")
+                    }
+                }
+                
             }, label: {
                 Image(systemName: "gear")
                     .tint(.mainTextColor)

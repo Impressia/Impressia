@@ -11,7 +11,7 @@ public struct Html: Codable {
     public var htmlValue: String = ""
     public var asMarkdown: String = ""
     
-    init(_ htmlValue: String) {
+    public init(_ htmlValue: String) {
         do {
             self.htmlValue = htmlValue
             self.asMarkdown = try self.parseToMarkdown(html: htmlValue)

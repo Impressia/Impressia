@@ -6,6 +6,8 @@
 
 import Foundation
 
+fileprivate let multipartBoundary = UUID().uuidString
+
 extension Pixelfed {
     public enum Account {
         case account(EntityId)
@@ -21,6 +23,7 @@ extension Pixelfed {
         case unmute(EntityId)
         case relationships([EntityId])
         case search(SearchQuery, Int)
+        case updateCredentials(String, String, Data?)
     }
 }
 
@@ -55,6 +58,8 @@ extension Pixelfed.Account: TargetType {
             return "\(apiPath)/relationships"
         case .search(_, _):
             return "\(apiPath)/search"
+        case .updateCredentials(_, _, _):
+            return "\(apiPath)/update_credentials"
         }
     }
     
@@ -62,6 +67,8 @@ extension Pixelfed.Account: TargetType {
         switch self {
         case .follow(_), .unfollow(_), .block(_), .unblock(_), .mute(_), .unmute(_):
             return .post
+        case .updateCredentials(_, _, _):
+            return .patch
         default:
             return .get
         }
@@ -107,6 +114,11 @@ extension Pixelfed.Account: TargetType {
             minId = _minId
             limit = _limit
             page = _page
+        case .updateCredentials(let displayName, let bio, _):
+            return [
+                ("display_name", displayName),
+                ("note", bio)
+            ]
         default:
             return nil
         }
@@ -131,10 +143,30 @@ extension Pixelfed.Account: TargetType {
     }
     
     public var headers: [String: String]? {
-        [:].contentTypeApplicationJson
+        switch self {
+        case .updateCredentials(_, _, let image):
+            if image != nil {
+                return ["content-type": "multipart/form-data; boundary=\(multipartBoundary)"]
+            } else {
+                return ["content-type": "application/x-www-form-urlencoded"]
+            }
+        default:
+            return [:].contentTypeApplicationJson
+        }
     }
     
     public var httpBody: Data? {
-        nil
+        switch self {
+        case .updateCredentials(_, _, let image):
+            if let image {
+                let formDataBuilder = MultipartFormData(boundary: multipartBoundary)
+                formDataBuilder.addDataField(named: "file", fileName: "avatar.jpg", data: image, mimeType: "image/jpeg")
+                return formDataBuilder.build()
+            } else {
+                return nil
+            }
+        default:
+            return nil
+        }
     }
 }

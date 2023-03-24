@@ -87,6 +87,13 @@ struct HomeFeedView: View {
             self.newPhotosView()
                 .offset(y: self.offset)
                 .opacity(self.opacity)
+                .onTapGesture {
+                    Task {
+                        HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
+                        await self.refreshData()
+                        HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
+                    }
+                }
         }
         .refreshable {
             HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))

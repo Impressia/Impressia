@@ -135,3 +135,15 @@ extension Account {
         return name.split(separator: " ", omittingEmptySubsequences: true).joined(separator: " ")
     }
 }
+
+extension Account: Equatable {
+    public static func == (lhs: Account, rhs: Account) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+
+extension Account: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(self.id)
+    }
+}

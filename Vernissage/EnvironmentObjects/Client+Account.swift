@@ -82,5 +82,9 @@ extension Client {
                               page: Int? = nil) async throws -> [Status] {
             return try await pixelfedClient.bookmarks(limit: limit, page: page)
         }
+        
+        func update(displayName: String, bio: String, image: Data?) async throws -> Account {
+            return try await pixelfedClient.update(displayName: displayName, bio: bio, image: image)
+        }
     }
 }
