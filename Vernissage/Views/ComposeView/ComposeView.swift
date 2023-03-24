@@ -555,7 +555,7 @@ struct ComposeView: View {
                 return
             }
             
-            guard let data = self.getJpegData(image: image) else {
+            guard let data = image.getJpegData() else {
                 return
             }
             
@@ -570,31 +570,7 @@ struct ComposeView: View {
             ErrorService.shared.handle(error, message: "compose.error.postingPhotoFailed", showToastr: true)
         }
     }
-    
-    private func getJpegData(image: UIImage) -> Data? {
-#if targetEnvironment(simulator)
-        // For testing purposes.
-        let converted = image.convertToExtendedSRGBJpeg()
-        let filePath = URL.temporaryDirectory.appending(path: "\(UUID().uuidString).jpg")
-        try? converted?.write(to: filePath)
-        print(filePath.string)
-#endif
         
-        // API don't support images over 5K.
-        if image.size.height > 10_000 || image.size.width > 10_000 {
-            return image
-                .resized(to: .init(width: image.size.width / 4, height: image.size.height / 4))
-                .convertToExtendedSRGBJpeg()
-        } else if image.size.height > 5000 || image.size.width > 5000 {
-            return image
-                .resized(to: .init(width: image.size.width / 2, height: image.size.height / 2))
-                .convertToExtendedSRGBJpeg()
-        } else {
-            return image
-                .convertToExtendedSRGBJpeg()
-        }
-    }
-    
     private func publishStatus() async {
         do {
             let status = self.createStatus()

@@ -266,3 +266,4 @@
 "editProfile.title.save" = "Save";
 "editProfile.title.accountSaved" = "Profile has been updated.";
 "editProfile.error.saveAccountFailed" = "Saving profile failed.";
+"editProfile.error.loadingAvatarFailed" = "Loading avatar failed.";

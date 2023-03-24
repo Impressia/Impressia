@@ -266,3 +266,4 @@
 "editProfile.title.save" = "Zapisz";
 "editProfile.title.accountSaved" = "Profil zaktualizowano.";
 "editProfile.error.saveAccountFailed" = "Błąd podczas aktualizacji profilu.";
+"editProfile.error.loadingAvatarFailed" = "Błąd podczas wczytywania zdjęcia.";
