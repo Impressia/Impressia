@@ -22,6 +22,9 @@ struct EditProfileView: View {
     @State private var avatarData: Data?
     
     private let account: Account
+    private let bioMaxLength = 200
+    private let displayNameMaxLength = 30
+    private let websiteMaxLength = 120
     
     init(account: Account) {
         self.account = account
@@ -64,8 +67,20 @@ struct EditProfileView: View {
                     }
                     
                     Text("@\(self.account.acct)")
-                        .font(.subheadline)
+                        .font(.headline)
                         .foregroundColor(.lightGrayColor)
+                    
+                    if self.avatarData != nil {
+                        HStack {
+                            Image(systemName: "info.circle")
+                                .font(.body)
+                                .foregroundColor(.accentColor)
+                            Text("editProfile.title.photoInfo")
+                                .font(.footnote)
+                                .foregroundColor(.lightGrayColor)
+                        }
+                        .padding(.top, 4)
+                    }
                 }
                 
                 Spacer()
@@ -74,21 +89,50 @@ struct EditProfileView: View {
             .listRowBackground(Color(UIColor.systemGroupedBackground))
             .listRowSeparator(Visibility.hidden)
 
-            
-            Section("editProfile.title.displayName") {
+            Section {
                 TextField("", text: $displayName)
+                    .onChange(of: self.displayName, perform: { newValue in
+                        self.displayName = String(self.displayName.prefix(self.displayNameMaxLength))
+                    })
+            } header: {
+                Text("editProfile.title.displayName", comment: "Display name")
+            } footer: {
+                HStack {
+                    Spacer()
+                    Text("\(self.displayName.count)/\(self.displayNameMaxLength)")
+                }
             }
             
-            Section("editProfile.title.bio") {
+            Section {
                 TextField("", text: $bio, axis: .vertical)
                     .lineLimit(5, reservesSpace: true)
+                    .onChange(of: self.bio, perform: { newValue in
+                        self.bio = String(self.bio.prefix(self.bioMaxLength))
+                    })
+            } header: {
+                Text("editProfile.title.bio", comment: "Bio")
+            } footer: {
+                HStack {
+                    Spacer()
+                    Text("\(self.bio.count)/\(self.bioMaxLength)")
+                }
             }
             
-            Section("editProfile.title.website") {
+            Section {
                 TextField("", text: $website)
                     .autocapitalization(.none)
                     .keyboardType(.URL)
                     .autocorrectionDisabled()
+                    .onChange(of: self.website, perform: { newValue in
+                        self.website = String(self.website.prefix(self.websiteMaxLength))
+                    })
+            } header: {
+                Text("editProfile.title.website", comment: "Website")
+            } footer: {
+                HStack {
+                    Spacer()
+                    Text("\(self.website.count)/\(self.websiteMaxLength)")
+                }
             }
         }
         .toolbar {
@@ -123,12 +167,26 @@ struct EditProfileView: View {
                       matching: .images)
     }
     
+    @MainActor
     private func saveProfile() async {
         do {
-            let savedAccount = try await self.client.accounts?.update(displayName: self.displayName,
-                                                                      bio: self.bio,
-                                                                      website: self.website,
-                                                                      image: self.avatarData)
+            _ = try await self.client.accounts?.update(displayName: self.displayName,
+                                                       bio: self.bio,
+                                                       website: self.website,
+                                                       image: nil)
+
+            if let avatarData = self.avatarData {
+                _ = try await self.client.accounts?.avatar(image: avatarData)
+                
+                if let accountData = AccountDataHandler.shared.getAccountData(accountId: self.account.id) {
+                    accountData.avatarData = avatarData
+                    self.applicationState.account?.avatarData = avatarData
+                    CoreDataHandler.shared.save()
+                }
+            }
+            
+            let savedAccount = try await self.client.accounts?.account(withId: self.account.id)
+            // self.applicationState.account?.avatar,
             self.applicationState.updatedProfile = savedAccount
 
             ToastrService.shared.showSuccess("editProfile.title.accountSaved", imageSystemName: "person.crop.circle")
@@ -162,7 +220,9 @@ struct EditProfileView: View {
                 return
             }
 
-            self.avatarData = data
+            withAnimation(.linear) {
+                self.avatarData = data
+            }
             
             self.saveDisabled = false
         } catch {

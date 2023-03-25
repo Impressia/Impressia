@@ -170,4 +170,13 @@ public extension PixelfedClientAuthenticated {
                 
         return try await downloadJson(Account.self, request: request)
     }
+    
+    func avatar(image: Data?) async throws -> Account {
+        let request = try Self.request(
+            for: baseURL,
+            target: Pixelfed.Account.updateAvatar(image),
+            withBearerToken: token)
+                
+        return try await downloadJson(Account.self, request: request)
+    }
 }

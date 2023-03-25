@@ -12,7 +12,6 @@ public class AccountModel: ObservableObject, Identifiable {
     public let refreshToken: String?
     public let acct: String
     public let avatar: URL?
-    public let avatarData: Data?
     public let clientId: String
     public let clientSecret: String
     public let clientVapidKey: String
@@ -28,6 +27,8 @@ public class AccountModel: ObservableObject, Identifiable {
     public let url: URL?
     public let username: String
     public let lastSeenStatusId: String?
+    
+    @Published public var avatarData: Data?
     
     init(accountData: AccountData) {
         self.accessToken = accountData.accessToken

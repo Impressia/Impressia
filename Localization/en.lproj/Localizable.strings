@@ -266,5 +266,6 @@
 "editProfile.title.website" = "Website";
 "editProfile.title.save" = "Save";
 "editProfile.title.accountSaved" = "Profile has been updated.";
+"editProfile.title.photoInfo" = "The changed photo will be visible in the app and on the website with a small delay.";
 "editProfile.error.saveAccountFailed" = "Saving profile failed.";
 "editProfile.error.loadingAvatarFailed" = "Loading avatar failed.";

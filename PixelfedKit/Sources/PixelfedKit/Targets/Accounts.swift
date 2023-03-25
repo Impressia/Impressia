@@ -22,6 +22,7 @@ extension Pixelfed {
         case relationships([EntityId])
         case search(SearchQuery, Int)
         case updateCredentials(String, String, String, Data?)
+        case updateAvatar(Data?)
     }
 }
 
@@ -59,6 +60,8 @@ extension Pixelfed.Account: TargetType {
             return "\(apiPath)/search"
         case .updateCredentials(_, _, _, _):
             return "\(apiPath)/update_credentials"
+        case .updateAvatar(_):
+            return "\(apiPath)/update_credentials"
         }
     }
     
@@ -66,8 +69,10 @@ extension Pixelfed.Account: TargetType {
         switch self {
         case .follow(_), .unfollow(_), .block(_), .unblock(_), .mute(_), .unmute(_):
             return .post
-        case .updateCredentials(_, _, _, _):
-            return .patch
+        case .updateCredentials(_, _, _, _), .updateAvatar(_):
+            // Mastodon API uses PATCH, however in Pixelfed we have to use POST: https://github.com/pixelfed/pixelfed/issues/4250
+            // Also it seems that we have to speparatelly save text fields and avatar(?).
+            return .post
         default:
             return .get
         }
@@ -113,19 +118,10 @@ extension Pixelfed.Account: TargetType {
             minId = _minId
             limit = _limit
             page = _page
-        case .updateCredentials(let displayName, let bio, let website, let image):
-            if image == nil {
-                return [
-                    ("display_name", displayName),
-                    ("note", bio),
-                    ("website", website),
-                    ("_pe", "1")
-                ]
-            } else {
-                return [
-                    ("_pe", "1")
-                ]
-            }
+        case .updateCredentials(_, _, _, _), .updateAvatar(_):
+            return [
+                ("_pe", "1")
+            ]
         case .account(_), .verifyCredentials:
             return [
                 ("_pe", "1")
@@ -155,12 +151,8 @@ extension Pixelfed.Account: TargetType {
     
     public var headers: [String: String]? {
         switch self {
-        case .updateCredentials(_, _, _, let image):
-            if image != nil {
-                return ["content-type": "multipart/form-data; boundary=\(multipartBoundary)"]
-            } else {
-                return ["content-type": "application/x-www-form-urlencoded"]
-            }
+        case .updateCredentials(_, _, _, _), .updateAvatar(_):
+            return ["content-type": "multipart/form-data; boundary=\(multipartBoundary)"]
         default:
             return [:].contentTypeApplicationJson
         }
@@ -169,18 +161,25 @@ extension Pixelfed.Account: TargetType {
     public var httpBody: Data? {
         switch self {
         case .updateCredentials(let displayName, let bio, let website, let image):
-            if let image {
-                let formDataBuilder = MultipartFormData(boundary: multipartBoundary)
-                
-                formDataBuilder.addTextField(named: "display_name", value: displayName)
-                formDataBuilder.addTextField(named: "note", value: bio)
-                formDataBuilder.addTextField(named: "website", value: website)
-                formDataBuilder.addDataField(named: "avatar", fileName: "avatar.jpg", data: image, mimeType: "image/jpeg")
+            let formDataBuilder = MultipartFormData(boundary: multipartBoundary)
+            
+            formDataBuilder.addTextField(named: "display_name", value: displayName)
+            formDataBuilder.addTextField(named: "note", value: bio)
+            formDataBuilder.addTextField(named: "website", value: website)
 
-                return formDataBuilder.build()
-            } else {
-                return nil
+            if let image {
+                formDataBuilder.addDataField(named: "avatar", fileName: "avatar.jpg", data: image, mimeType: "image/jpeg")
             }
+
+            return formDataBuilder.build()
+        case .updateAvatar(let image):
+            let formDataBuilder = MultipartFormData(boundary: multipartBoundary)
+            
+            if let image {
+                formDataBuilder.addDataField(named: "avatar", fileName: "avatar.jpg", data: image, mimeType: "image/jpeg")
+            }
+
+            return formDataBuilder.build()
         default:
             return nil
         }

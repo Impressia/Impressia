@@ -86,5 +86,9 @@ extension Client {
         func update(displayName: String, bio: String, website: String, image: Data?) async throws -> Account {
             return try await pixelfedClient.update(displayName: displayName, bio: bio, website: website, image: image)
         }
+        
+        func avatar(image: Data?) async throws -> Account {
+            return try await pixelfedClient.avatar(image: image)
+        }
     }
 }
