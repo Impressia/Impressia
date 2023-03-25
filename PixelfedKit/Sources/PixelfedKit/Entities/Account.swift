@@ -81,6 +81,9 @@ public struct Account: Codable {
     /// An extra attribute returned only when an account is silenced. If true, indicates that the account should be hidden behind a warning screen.
     public let limited: Bool?
     
+    /// User website.
+    public let website: String?
+    
     /// When the most recent status was posted.
     /// NULLABLE String (ISO 8601 Date), or null if no statuses
     public let lastStatusAt: String?
@@ -115,6 +118,7 @@ public struct Account: Codable {
         case limited
         case lastStatusAt = "last_status_at"
         case recentPosts = "recent_posts"
+        case website
     }
 }
 

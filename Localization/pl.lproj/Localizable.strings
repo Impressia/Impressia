@@ -263,6 +263,7 @@
 "editProfile.navigationBar.title" = "Edutuj profil";
 "editProfile.title.displayName" = "Wyświetlana nazwa";
 "editProfile.title.bio" = "Bio";
+"editProfile.title.website" = "Strona";
 "editProfile.title.save" = "Zapisz";
 "editProfile.title.accountSaved" = "Profil zaktualizowano.";
 "editProfile.error.saveAccountFailed" = "Błąd podczas aktualizacji profilu.";

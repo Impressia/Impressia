@@ -18,6 +18,7 @@ struct EditProfileView: View {
     @State private var saveDisabled = false
     @State private var displayName: String = ""
     @State private var bio: String = ""
+    @State private var website: String = ""
     @State private var avatarData: Data?
     
     private let account: Account
@@ -28,45 +29,51 @@ struct EditProfileView: View {
 
     var body: some View {
         Form {
-            Section {
-                HStack {
-                    Spacer()
-                    VStack {
-                        ZStack {
-                            if let avatarData, let uiAvatar = UIImage(data: avatarData) {
-                                Image(uiImage: uiAvatar)
-                                    .resizable()
-                                    .clipShape(applicationState.avatarShape.shape())
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 96, height: 96)
-                            } else {
-                                UserAvatar(accountAvatar: account.avatar, size: .profile)
-                            }
-
-                            BottomRight {
-                                Button {
-                                    self.photosPickerVisible = true
-                                } label: {
-                                    Image(systemName: "person.crop.circle.badge.plus")
-                                        .font(.title)
-                                        .foregroundColor(.accentColor)
-                                }
-                                .buttonStyle(PlainButtonStyle())
-                            }
-                            .frame(width: 96, height: 96)
+            HStack {
+                Spacer()
+                VStack {
+                    ZStack {
+                        if let avatarData, let uiAvatar = UIImage(data: avatarData) {
+                            Image(uiImage: uiAvatar)
+                                .resizable()
+                                .clipShape(applicationState.avatarShape.shape())
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 120, height: 120)
+                        } else {
+                            UserAvatar(accountAvatar: account.avatar, size: .large)
                         }
                         
-                        Text("@\(self.account.acct)")
-                            .font(.subheadline)
-                            .foregroundColor(.lightGrayColor)
+                        LoadingIndicator(isVisible: $saveDisabled)
+
+                        BottomRight {
+                            Button {
+                                self.photosPickerVisible = true
+                            } label: {
+                                ZStack {
+                                    Circle()
+                                        .foregroundColor(.accentColor.opacity(0.8))
+                                        .frame(width: 40, height: 40)
+                                    Image(systemName: "person.crop.circle.badge.plus")
+                                        .font(.title2)
+                                        .foregroundColor(.white)
+                                }
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                        .frame(width: 130, height: 130)
                     }
                     
-                    Spacer()
+                    Text("@\(self.account.acct)")
+                        .font(.subheadline)
+                        .foregroundColor(.lightGrayColor)
                 }
+                
+                Spacer()
             }
-            .padding(0)
+            .padding(-10)
             .listRowBackground(Color(UIColor.systemGroupedBackground))
             .listRowSeparator(Visibility.hidden)
+
             
             Section("editProfile.title.displayName") {
                 TextField("", text: $displayName)
@@ -75,6 +82,13 @@ struct EditProfileView: View {
             Section("editProfile.title.bio") {
                 TextField("", text: $bio, axis: .vertical)
                     .lineLimit(5, reservesSpace: true)
+            }
+            
+            Section("editProfile.title.website") {
+                TextField("", text: $website)
+                    .autocapitalization(.none)
+                    .keyboardType(.URL)
+                    .autocorrectionDisabled()
             }
         }
         .toolbar {
@@ -91,6 +105,7 @@ struct EditProfileView: View {
         .navigationTitle("editProfile.navigationBar.title")
         .onAppear {
             self.displayName = self.account.displayName ?? String.empty()
+            self.website = self.account.website ?? String.empty()
             
             let markdownBio = self.account.note?.asMarkdown ?? String.empty()
             if let attributedString = try? AttributedString(markdown: markdownBio) {
@@ -110,7 +125,12 @@ struct EditProfileView: View {
     
     private func saveProfile() async {
         do {
-            _ = try await self.client.accounts?.update(displayName: self.displayName, bio: self.bio, image: self.avatarData)
+            let savedAccount = try await self.client.accounts?.update(displayName: self.displayName,
+                                                                      bio: self.bio,
+                                                                      website: self.website,
+                                                                      image: self.avatarData)
+            self.applicationState.updatedProfile = savedAccount
+
             ToastrService.shared.showSuccess("editProfile.title.accountSaved", imageSystemName: "person.crop.circle")
             dismiss()
         } catch {
@@ -137,7 +157,7 @@ struct EditProfileView: View {
             }
             
             guard let data = image
-                .resized(to: .init(width: 400, height: 400))
+                .resized(to: .init(width: 800, height: 800))
                 .getJpegData() else {
                 return
             }

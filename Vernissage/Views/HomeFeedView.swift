@@ -13,6 +13,7 @@ private struct OffsetPreferenceKey: PreferenceKey {
 
 struct HomeFeedView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.refresh) private var refresh
     
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var routerPath: RouterPath
@@ -89,9 +90,7 @@ struct HomeFeedView: View {
                 .opacity(self.opacity)
                 .onTapGesture {
                     Task {
-                        HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
-                        await self.refreshData()
-                        HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
+                        await self.refresh?()
                     }
                 }
         }

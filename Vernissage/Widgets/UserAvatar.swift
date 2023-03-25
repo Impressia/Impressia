@@ -11,7 +11,7 @@ struct UserAvatar: View {
     @EnvironmentObject var applicationState: ApplicationState
     
     public enum Size {
-        case mini, list, comment, profile
+        case mini, list, comment, profile, large
       
         public var size: CGSize {
             switch self {
@@ -23,6 +23,8 @@ struct UserAvatar: View {
                 return .init(width: 48, height: 48)
             case .profile:
                 return .init(width: 96, height: 96)
+            case .large:
+                return .init(width: 120, height: 120)
             }
         }
     }

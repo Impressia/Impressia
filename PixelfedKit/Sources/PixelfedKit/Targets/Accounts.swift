@@ -6,8 +6,6 @@
 
 import Foundation
 
-fileprivate let multipartBoundary = UUID().uuidString
-
 extension Pixelfed {
     public enum Account {
         case account(EntityId)
@@ -23,12 +21,13 @@ extension Pixelfed {
         case unmute(EntityId)
         case relationships([EntityId])
         case search(SearchQuery, Int)
-        case updateCredentials(String, String, Data?)
+        case updateCredentials(String, String, String, Data?)
     }
 }
 
 extension Pixelfed.Account: TargetType {
-    fileprivate var apiPath: String { return "/api/v1/accounts" }
+    private var apiPath: String { return "/api/v1/accounts" }
+    private var multipartBoundary: String { "d76a15ab-d0d4-499a-a3c6-62a86d0d2a74" }
 
     public var path: String {
         switch self {
@@ -58,7 +57,7 @@ extension Pixelfed.Account: TargetType {
             return "\(apiPath)/relationships"
         case .search(_, _):
             return "\(apiPath)/search"
-        case .updateCredentials(_, _, _):
+        case .updateCredentials(_, _, _, _):
             return "\(apiPath)/update_credentials"
         }
     }
@@ -67,7 +66,7 @@ extension Pixelfed.Account: TargetType {
         switch self {
         case .follow(_), .unfollow(_), .block(_), .unblock(_), .mute(_), .unmute(_):
             return .post
-        case .updateCredentials(_, _, _):
+        case .updateCredentials(_, _, _, _):
             return .patch
         default:
             return .get
@@ -114,10 +113,22 @@ extension Pixelfed.Account: TargetType {
             minId = _minId
             limit = _limit
             page = _page
-        case .updateCredentials(let displayName, let bio, _):
+        case .updateCredentials(let displayName, let bio, let website, let image):
+            if image == nil {
+                return [
+                    ("display_name", displayName),
+                    ("note", bio),
+                    ("website", website),
+                    ("_pe", "1")
+                ]
+            } else {
+                return [
+                    ("_pe", "1")
+                ]
+            }
+        case .account(_), .verifyCredentials:
             return [
-                ("display_name", displayName),
-                ("note", bio)
+                ("_pe", "1")
             ]
         default:
             return nil
@@ -144,7 +155,7 @@ extension Pixelfed.Account: TargetType {
     
     public var headers: [String: String]? {
         switch self {
-        case .updateCredentials(_, _, let image):
+        case .updateCredentials(_, _, _, let image):
             if image != nil {
                 return ["content-type": "multipart/form-data; boundary=\(multipartBoundary)"]
             } else {
@@ -157,10 +168,15 @@ extension Pixelfed.Account: TargetType {
     
     public var httpBody: Data? {
         switch self {
-        case .updateCredentials(_, _, let image):
+        case .updateCredentials(let displayName, let bio, let website, let image):
             if let image {
                 let formDataBuilder = MultipartFormData(boundary: multipartBoundary)
-                formDataBuilder.addDataField(named: "file", fileName: "avatar.jpg", data: image, mimeType: "image/jpeg")
+                
+                formDataBuilder.addTextField(named: "display_name", value: displayName)
+                formDataBuilder.addTextField(named: "note", value: bio)
+                formDataBuilder.addTextField(named: "website", value: website)
+                formDataBuilder.addDataField(named: "avatar", fileName: "avatar.jpg", data: image, mimeType: "image/jpeg")
+
                 return formDataBuilder.build()
             } else {
                 return nil

@@ -82,6 +82,9 @@ public class ApplicationState: ObservableObject {
     /// Status which should be shown from URL.
     @Published var showStatusId: String? = nil
     
+    /// Updated user profile.
+    @Published var updatedProfile: Account?
+    
     public func changeApplicationState(accountModel: AccountModel, instance: Instance?, lastSeenStatusId: String?) {
         self.account = accountModel
         self.lastSeenStatusId = lastSeenStatusId

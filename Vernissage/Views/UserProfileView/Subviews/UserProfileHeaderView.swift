@@ -59,11 +59,11 @@ struct UserProfileHeaderView: View {
                 VStack(alignment: .leading) {
                     Text(account.displayNameWithoutEmojis)
                         .foregroundColor(.mainTextColor)
-                        .font(.footnote)
+                        .font(.title3)
                         .fontWeight(.bold)
                     Text("@\(account.acct)")
                         .foregroundColor(.lightGrayColor)
-                        .font(.footnote)
+                        .font(.subheadline)
                 }
                 
                 Spacer()
@@ -78,12 +78,22 @@ struct UserProfileHeaderView: View {
                     .environment(\.openURL, OpenURLAction { url in
                         routerPath.handle(url: url)
                     })
+                    .padding(.vertical, 4)
+            }
+            
+            if let website = account.website, let url = URL(string: website) {
+                HStack {
+                    Image(systemName: "link")
+                    Link(website, destination: url)
+                    Spacer()
+                }
+                .padding(.bottom, 2)
+                .font(.footnote)
             }
             
             Text(String(format: NSLocalizedString("userProfile.title.joined", comment: "Joined"), account.createdAt.toRelative(.isoDateTimeMilliSec)))
                 .foregroundColor(.lightGrayColor.opacity(0.5))
                 .font(.footnote)
-            
         }
         .padding()
     }

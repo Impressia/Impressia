@@ -20,6 +20,7 @@ struct UserProfileView: View {
     @State private var account: Account? = nil
     @State private var relationship: Relationship? = nil
     @State private var state: ViewState = .loading
+    @State private var viewId = UUID().uuidString
     
     var body: some View {
         self.mainBody()
@@ -47,7 +48,16 @@ struct UserProfileView: View {
             if let account = self.account {
                 ScrollView {
                     UserProfileHeaderView(account: account, relationship: relationship)
+                        .id(self.viewId)
                     UserProfileStatusesView(accountId: account.id)
+                }
+                .onAppear {
+                    if let updatedProfile = self.applicationState.updatedProfile {
+                        self.account = nil
+                        self.account = updatedProfile
+                        self.applicationState.updatedProfile = nil
+                        self.viewId = UUID().uuidString
+                    }
                 }
             }
         case .error(let error):

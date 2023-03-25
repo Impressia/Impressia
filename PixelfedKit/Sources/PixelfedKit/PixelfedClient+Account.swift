@@ -162,10 +162,10 @@ public extension PixelfedClientAuthenticated {
         return try await downloadJson([Status].self, request: request)
     }
     
-    func update(displayName: String, bio: String, image: Data?) async throws -> Account {
+    func update(displayName: String, bio: String, website: String, image: Data?) async throws -> Account {
         let request = try Self.request(
             for: baseURL,
-            target: Pixelfed.Account.updateCredentials(displayName, bio, image),
+            target: Pixelfed.Account.updateCredentials(displayName, bio, website, image),
             withBearerToken: token)
                 
         return try await downloadJson(Account.self, request: request)
