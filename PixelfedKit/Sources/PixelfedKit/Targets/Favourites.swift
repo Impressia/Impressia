@@ -13,7 +13,7 @@ extension Pixelfed {
 }
 
 extension Pixelfed.Favourites: TargetType {
-    fileprivate var apiPath: String { return "/api/v1/favourites" }
+    private var apiPath: String { return "/api/v1/favourites" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.
     public var path: String {

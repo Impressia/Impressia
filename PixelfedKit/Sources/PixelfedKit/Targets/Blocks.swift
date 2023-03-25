@@ -13,7 +13,7 @@ extension Pixelfed {
 }
 
 extension Pixelfed.Blocks: TargetType {
-    fileprivate var apiPath: String { return "/api/v1/blocks" }
+    private var apiPath: String { return "/api/v1/blocks" }
     
     /// The path to be appended to `baseURL` to form the full `URL`.
     public var path: String {

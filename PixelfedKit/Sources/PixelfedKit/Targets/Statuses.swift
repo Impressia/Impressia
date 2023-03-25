@@ -105,7 +105,7 @@ extension Pixelfed.Statuses: TargetType {
         }
     }
     
-    fileprivate var apiPath: String { return "/api/v1/statuses" }
+    private var apiPath: String { return "/api/v1/statuses" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.
     public var path: String {

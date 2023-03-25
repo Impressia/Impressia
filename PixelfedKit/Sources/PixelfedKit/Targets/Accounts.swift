@@ -21,7 +21,7 @@ extension Pixelfed {
         case unmute(EntityId)
         case relationships([EntityId])
         case search(SearchQuery, Int)
-        case updateCredentials(String, String, String, Data?)
+        case updateCredentials(String, String, String, Bool, Data?)
         case updateAvatar(Data?)
     }
 }
@@ -58,7 +58,7 @@ extension Pixelfed.Account: TargetType {
             return "\(apiPath)/relationships"
         case .search(_, _):
             return "\(apiPath)/search"
-        case .updateCredentials(_, _, _, _):
+        case .updateCredentials(_, _, _, _, _):
             return "\(apiPath)/update_credentials"
         case .updateAvatar(_):
             return "\(apiPath)/update_credentials"
@@ -69,7 +69,7 @@ extension Pixelfed.Account: TargetType {
         switch self {
         case .follow(_), .unfollow(_), .block(_), .unblock(_), .mute(_), .unmute(_):
             return .post
-        case .updateCredentials(_, _, _, _), .updateAvatar(_):
+        case .updateCredentials(_, _, _, _, _), .updateAvatar(_):
             // Mastodon API uses PATCH, however in Pixelfed we have to use POST: https://github.com/pixelfed/pixelfed/issues/4250
             // Also it seems that we have to speparatelly save text fields and avatar(?).
             return .post
@@ -118,7 +118,7 @@ extension Pixelfed.Account: TargetType {
             minId = _minId
             limit = _limit
             page = _page
-        case .updateCredentials(_, _, _, _), .updateAvatar(_):
+        case .updateCredentials(_, _, _, _, _), .updateAvatar(_):
             return [
                 ("_pe", "1")
             ]
@@ -151,7 +151,7 @@ extension Pixelfed.Account: TargetType {
     
     public var headers: [String: String]? {
         switch self {
-        case .updateCredentials(_, _, _, _), .updateAvatar(_):
+        case .updateCredentials(_, _, _, _, _), .updateAvatar(_):
             return ["content-type": "multipart/form-data; boundary=\(multipartBoundary)"]
         default:
             return [:].contentTypeApplicationJson
@@ -160,12 +160,13 @@ extension Pixelfed.Account: TargetType {
     
     public var httpBody: Data? {
         switch self {
-        case .updateCredentials(let displayName, let bio, let website, let image):
+        case .updateCredentials(let displayName, let bio, let website, let locked, let image):
             let formDataBuilder = MultipartFormData(boundary: multipartBoundary)
             
             formDataBuilder.addTextField(named: "display_name", value: displayName)
             formDataBuilder.addTextField(named: "note", value: bio)
             formDataBuilder.addTextField(named: "website", value: website)
+            formDataBuilder.addTextField(named: "locked", value: locked ? "true" : "false")
 
             if let image {
                 formDataBuilder.addDataField(named: "avatar", fileName: "avatar.jpg", data: image, mimeType: "image/jpeg")

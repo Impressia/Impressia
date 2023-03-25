@@ -6,8 +6,6 @@
 
 import Foundation
 
-fileprivate let multipartBoundary = UUID().uuidString
-
 extension Pixelfed {
     public enum Media {
         case upload(Data, String, String)
@@ -33,7 +31,8 @@ extension Pixelfed.Media: TargetType {
     }
     
     
-    fileprivate var apiPath: String { return "/api" }
+    private var apiPath: String { return "/api" }
+    private var multipartBoundary: String { "b4673f7d-6f34-4413-a23c-e3783e0e7bdf" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.
     public var path: String {

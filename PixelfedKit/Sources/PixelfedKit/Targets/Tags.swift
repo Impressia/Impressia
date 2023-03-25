@@ -15,7 +15,7 @@ extension Pixelfed {
 }
 
 extension Pixelfed.Tags: TargetType {
-    fileprivate var apiPath: String { return "/api/v1/tags" }
+    private var apiPath: String { return "/api/v1/tags" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.
     public var path: String {

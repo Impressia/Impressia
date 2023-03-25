@@ -15,7 +15,7 @@ extension Pixelfed {
 }
 
 extension Pixelfed.Timelines: TargetType {
-    fileprivate var apiPath: String { return "/api/v1/timelines" }
+    private var apiPath: String { return "/api/v1/timelines" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.
     public var path: String {

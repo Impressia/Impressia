@@ -15,7 +15,7 @@ extension Pixelfed {
 }
 
 extension Pixelfed.Notifications: TargetType {
-    fileprivate var apiPath: String { return "/api/v1/notifications" }
+    private var apiPath: String { return "/api/v1/notifications" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.
     public var path: String {

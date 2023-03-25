@@ -19,6 +19,7 @@ struct EditProfileView: View {
     @State private var displayName: String = ""
     @State private var bio: String = ""
     @State private var website: String = ""
+    @State private var isPrivate = false
     @State private var avatarData: Data?
     
     private let account: Account
@@ -134,10 +135,17 @@ struct EditProfileView: View {
                     Text("\(self.website.count)/\(self.websiteMaxLength)")
                 }
             }
+            
+            Section {
+                Toggle("editProfile.title.privateAccount", isOn: $isPrivate)
+            } footer: {
+                Text("editProfile.title.privateAccountInfo", comment: "Private account info")
+            }
+
         }
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
-                ActionButton(showLoader: false) {
+                ActionButton(showLoader: true) {
                     await self.saveProfile()
                 } label: {
                     Text("editProfile.title.save", comment: "Save")
@@ -150,6 +158,7 @@ struct EditProfileView: View {
         .onAppear {
             self.displayName = self.account.displayName ?? String.empty()
             self.website = self.account.website ?? String.empty()
+            self.isPrivate = self.account.locked
             
             let markdownBio = self.account.note?.asMarkdown ?? String.empty()
             if let attributedString = try? AttributedString(markdown: markdownBio) {
@@ -173,6 +182,7 @@ struct EditProfileView: View {
             _ = try await self.client.accounts?.update(displayName: self.displayName,
                                                        bio: self.bio,
                                                        website: self.website,
+                                                       locked: self.isPrivate,
                                                        image: nil)
 
             if let avatarData = self.avatarData {

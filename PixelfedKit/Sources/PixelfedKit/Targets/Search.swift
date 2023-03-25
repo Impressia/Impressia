@@ -20,7 +20,7 @@ extension Pixelfed.Search: TargetType {
         case statuses = "statuses"
     }
     
-    fileprivate var apiPath: String { return "/api/v2/search" }
+    private var apiPath: String { return "/api/v2/search" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.
     public var path: String {

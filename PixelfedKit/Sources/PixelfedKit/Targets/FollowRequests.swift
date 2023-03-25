@@ -15,7 +15,7 @@ extension Pixelfed {
 }
 
 extension Pixelfed.FollowRequests: TargetType {
-    fileprivate var apiPath: String { return "/api/v1/follow_requests" }
+    private var apiPath: String { return "/api/v1/follow_requests" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.
     public var path: String {

@@ -19,7 +19,7 @@ extension Pixelfed {
 }
 
 extension Pixelfed.Markers: TargetType {
-    fileprivate var apiPath: String { return "/api/v1/markers" }
+    private var apiPath: String { return "/api/v1/markers" }
 
     public var path: String {
         return apiPath

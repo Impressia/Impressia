@@ -21,7 +21,7 @@ extension Pixelfed.Trends: TargetType {
         case yearly = "yearly"
     }
     
-    fileprivate var apiPath: String { return "/api/v1.1/discover" }
+    private var apiPath: String { return "/api/v1.1/discover" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.
     public var path: String {

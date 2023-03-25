@@ -41,7 +41,7 @@ extension Pixelfed.OAuth: TargetType {
         }
     }
     
-    fileprivate var apiPath: String { return "/oauth/token" }
+    private var apiPath: String { return "/oauth/token" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.
     public var path: String {

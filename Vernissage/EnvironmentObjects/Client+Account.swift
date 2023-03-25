@@ -83,8 +83,12 @@ extension Client {
             return try await pixelfedClient.bookmarks(limit: limit, page: page)
         }
         
-        func update(displayName: String, bio: String, website: String, image: Data?) async throws -> Account {
-            return try await pixelfedClient.update(displayName: displayName, bio: bio, website: website, image: image)
+        func update(displayName: String, bio: String, website: String, locked: Bool, image: Data?) async throws -> Account {
+            return try await pixelfedClient.update(displayName: displayName,
+                                                   bio: bio,
+                                                   website: website,
+                                                   locked: locked,
+                                                   image: image)
         }
         
         func avatar(image: Data?) async throws -> Account {
