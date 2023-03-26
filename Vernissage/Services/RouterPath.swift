@@ -22,7 +22,7 @@ enum RouteurDestinations: Hashable {
     case hashtags(listType: HashtagsView.ListType)
     case accountsPhoto(listType: AccountsPhotoView.ListType)
     case search
-    case editProfile(account: Account)
+    case editProfile
 }
 
 enum SheetDestinations: Identifiable {

@@ -271,3 +271,5 @@
 "editProfile.title.privateAccountInfo" = "Kiedy Twoje konto jest prywatne, tylko osoby, które zaakceptujesz mogą oglądać Twoje zdjęcia i filmy na Pixelfed. Nie wpłynie to na Twoich obecnych obserwujących.";
 "editProfile.error.saveAccountFailed" = "Błąd podczas aktualizacji profilu.";
 "editProfile.error.loadingAvatarFailed" = "Błąd podczas wczytywania zdjęcia.";
+"editProfile.error.noProfileData" = "Dane profilu nie mogą zostać wyświetlone.";
+"editProfile.error.loadingAccountFailed" = "Błąd podczas pobierania profilu użytkownika.";

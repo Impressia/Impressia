@@ -41,8 +41,8 @@ struct ThirdPartyView: View {
             
             Section("OAuth authrisation") {
                 VStack(alignment: .leading)  {
-                    Link("https://github.com/OAuthSwift/OAuthSwift.git",
-                         destination: URL(string: "https://github.com/OAuthSwift/OAuthSwift.git")!)
+                    Link("https://github.com/OAuthSwift/OAuthSwift",
+                         destination: URL(string: "https://github.com/OAuthSwift/OAuthSwift")!)
                     .padding(.bottom, 4)
                     Text("Swift based OAuth library for iOS and macOS.")
                 }
@@ -61,10 +61,20 @@ struct ThirdPartyView: View {
             
             Section("Loaders") {
                 VStack(alignment: .leading)  {
-                    Link("https://github.com/exyte/ActivityIndicatorView.git",
-                         destination: URL(string: "https://github.com/exyte/ActivityIndicatorView.git")!)
+                    Link("https://github.com/exyte/ActivityIndicatorView",
+                         destination: URL(string: "https://github.com/exyte/ActivityIndicatorView")!)
                     .padding(.bottom, 4)
                     Text("A number of preset loading indicators created with SwiftUI.")
+                }
+                .font(.footnote)
+            }
+            
+            Section("HTML String") {
+                VStack(alignment: .leading)  {
+                    Link("https://github.com/alexisakers/HTMLString",
+                         destination: URL(string: "https://github.com/alexisakers/HTMLString")!)
+                    .padding(.bottom, 4)
+                    Text("HTMLString is a library written in Swift that allows your program to add and remove HTML entities in Strings.")
                 }
                 .font(.footnote)
             }

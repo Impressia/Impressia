@@ -84,6 +84,9 @@ public struct Account: Codable {
     /// User website.
     public let website: String?
     
+    /// An extra attribute that contains source values to be used with API methods that verify credentials and update credentials.
+    public let source: Source?
+    
     /// When the most recent status was posted.
     /// NULLABLE String (ISO 8601 Date), or null if no statuses
     public let lastStatusAt: String?
@@ -119,6 +122,7 @@ public struct Account: Codable {
         case lastStatusAt = "last_status_at"
         case recentPosts = "recent_posts"
         case website
+        case source
     }
 }
 

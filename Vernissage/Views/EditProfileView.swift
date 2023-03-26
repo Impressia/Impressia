@@ -7,12 +7,14 @@
 import PhotosUI
 import SwiftUI
 import PixelfedKit
+import HTMLString
 
 struct EditProfileView: View {
     @EnvironmentObject private var applicationState: ApplicationState
     @EnvironmentObject private var client: Client
     @Environment(\.dismiss) private var dismiss
     
+    @State private var account: Account?
     @State private var photosPickerVisible = false
     @State private var selectedItems: [PhotosPickerItem] = []
     @State private var saveDisabled = false
@@ -21,17 +23,36 @@ struct EditProfileView: View {
     @State private var website: String = ""
     @State private var isPrivate = false
     @State private var avatarData: Data?
+    @State private var state: ViewState = .loading
     
-    private let account: Account
     private let bioMaxLength = 200
     private let displayNameMaxLength = 30
     private let websiteMaxLength = 120
-    
-    init(account: Account) {
-        self.account = account
-    }
 
     var body: some View {
+        switch state {
+        case .loading:
+            LoadingIndicator()
+                .task {
+                    await self.loadData()
+                }
+        case .loaded:
+            if let account = self.account {
+                self.editForm(account: account)
+            } else {
+                NoDataView(imageSystemName: "person.crop.circle", text: "editProfile.error.noProfileData")
+            }
+        case .error(let error):
+            ErrorView(error: error) {
+                self.state = .loading
+                await self.loadData()
+            }
+            .padding()
+        }
+    }
+    
+    @ViewBuilder
+    private func editForm(account: Account) -> some View {
         Form {
             HStack {
                 Spacer()
@@ -67,7 +88,7 @@ struct EditProfileView: View {
                         .frame(width: 130, height: 130)
                     }
                     
-                    Text("@\(self.account.acct)")
+                    Text("@\(account.acct)")
                         .font(.headline)
                         .foregroundColor(.lightGrayColor)
                     
@@ -146,7 +167,7 @@ struct EditProfileView: View {
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 ActionButton(showLoader: true) {
-                    await self.saveProfile()
+                    await self.saveProfile(account: account)
                 } label: {
                     Text("editProfile.title.save", comment: "Save")
                 }
@@ -156,13 +177,18 @@ struct EditProfileView: View {
         }
         .navigationTitle("editProfile.navigationBar.title")
         .onAppear {
-            self.displayName = self.account.displayName ?? String.empty()
-            self.website = self.account.website ?? String.empty()
-            self.isPrivate = self.account.locked
+            self.displayName = account.displayName ?? String.empty()
+            self.website = account.website ?? String.empty()
+            self.isPrivate = account.locked
             
-            let markdownBio = self.account.note?.asMarkdown ?? String.empty()
-            if let attributedString = try? AttributedString(markdown: markdownBio) {
-                self.bio = String(attributedString.characters)
+            // Bio should be set from source property (which is plain text).
+            if let note = account.source?.note {
+                self.bio = note.removingHTMLEntities()
+            } else {
+                let markdownBio = account.note?.asMarkdown ?? String.empty()
+                if let attributedString = try? AttributedString(markdown: markdownBio) {
+                    self.bio = String(attributedString.characters)
+                }
             }
         }
         .onChange(of: self.selectedItems) { selectedItem in
@@ -176,8 +202,22 @@ struct EditProfileView: View {
                       matching: .images)
     }
     
+    private func loadData() async {
+        do {
+            self.account = try await self.client.accounts?.pixelfedClient.verifyCredentials()
+            self.state = .loaded
+        } catch {
+            if !Task.isCancelled {
+                ErrorService.shared.handle(error, message: "editProfile.error.loadingAccountFailed", showToastr: true)
+                self.state = .error(error)
+            } else {
+                ErrorService.shared.handle(error, message: "editProfile.error.loadingAccountFailed", showToastr: false)
+            }
+        }
+    }
+    
     @MainActor
-    private func saveProfile() async {
+    private func saveProfile(account: Account) async {
         do {
             _ = try await self.client.accounts?.update(displayName: self.displayName,
                                                        bio: self.bio,
@@ -188,15 +228,14 @@ struct EditProfileView: View {
             if let avatarData = self.avatarData {
                 _ = try await self.client.accounts?.avatar(image: avatarData)
                 
-                if let accountData = AccountDataHandler.shared.getAccountData(accountId: self.account.id) {
+                if let accountData = AccountDataHandler.shared.getAccountData(accountId: account.id) {
                     accountData.avatarData = avatarData
                     self.applicationState.account?.avatarData = avatarData
                     CoreDataHandler.shared.save()
                 }
             }
             
-            let savedAccount = try await self.client.accounts?.account(withId: self.account.id)
-            // self.applicationState.account?.avatar,
+            let savedAccount = try await self.client.accounts?.account(withId: account.id)
             self.applicationState.updatedProfile = savedAccount
 
             ToastrService.shared.showSuccess("editProfile.title.accountSaved", imageSystemName: "person.crop.circle")

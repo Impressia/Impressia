@@ -44,8 +44,8 @@ extension View {
                 AccountsPhotoView(listType: listType)
             case .search:
                 SearchView()
-            case .editProfile(let account):
-                EditProfileView(account: account)
+            case .editProfile:
+                EditProfileView()
             }
         }
     }

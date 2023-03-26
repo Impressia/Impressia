@@ -268,6 +268,8 @@
 "editProfile.title.accountSaved" = "Profile has been updated.";
 "editProfile.title.photoInfo" = "The changed photo will be visible in the app and on the website with a small delay.";
 "editProfile.title.privateAccount" = "Private account";
-"editProfile.title.privateAccountInfo" = "When your account is private, only people you approve can see your photos and videos on pixelfed. Your existing followers won't be affected.";
+"editProfile.title.privateAccountInfo" = "When your account is private, only people you approve can see your photos and videos on Pixelfed. Your existing followers won't be affected.";
 "editProfile.error.saveAccountFailed" = "Saving profile failed.";
 "editProfile.error.loadingAvatarFailed" = "Loading avatar failed.";
+"editProfile.error.noProfileData" = "Profile data cannot be displayed.";
+"editProfile.error.loadingAccountFailed" = "Error during download account from server.";

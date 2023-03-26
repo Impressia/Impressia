@@ -162,6 +162,7 @@
 		F89AC00529A1F9B500F4159F /* AppMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89AC00429A1F9B500F4159F /* AppMetadata.swift */; };
 		F89AC00729A208CC00F4159F /* PlaceSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89AC00629A208CC00F4159F /* PlaceSelectorView.swift */; };
 		F89AC00929A20C5C00F4159F /* Client+Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89AC00829A20C5C00F4159F /* Client+Places.swift */; };
+		F89B5CC029D019B600549F2F /* HTMLString in Frameworks */ = {isa = PBXBuildFile; productRef = F89B5CBF29D019B600549F2F /* HTMLString */; };
 		F89CEB802984198600A1376F /* AttachmentData+HighestImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89CEB7F2984198600A1376F /* AttachmentData+HighestImage.swift */; };
 		F89D6C3F29716E41001DA3D4 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C3E29716E41001DA3D4 /* Theme.swift */; };
 		F89D6C4229717FDC001DA3D4 /* AccountsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C4129717FDC001DA3D4 /* AccountsSectionView.swift */; };
@@ -452,6 +453,7 @@
 				F83E00ED29A2237C005D25A3 /* PixelfedKit in Frameworks */,
 				F8210DD92966BB7E001D9973 /* NukeUI in Frameworks */,
 				F85E132529741F05006A051D /* ActivityIndicatorView in Frameworks */,
+				F89B5CC029D019B600549F2F /* HTMLString in Frameworks */,
 				F8B1E64F2973F61400EE0D10 /* Drops in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -974,6 +976,7 @@
 				F85E132429741F05006A051D /* ActivityIndicatorView */,
 				F88E4D4C297EA4290057491A /* EmojiText */,
 				F83E00EC29A2237C005D25A3 /* PixelfedKit */,
+				F89B5CBF29D019B600549F2F /* HTMLString */,
 			);
 			productName = Vernissage;
 			productReference = F88C2468295C37B80006098B /* Vernissage.app */;
@@ -1012,6 +1015,7 @@
 				F8B1E64D2973F61400EE0D10 /* XCRemoteSwiftPackageReference "Drops" */,
 				F85E132329741F05006A051D /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
 				F88E4D4B297EA4290057491A /* XCRemoteSwiftPackageReference "EmojiText" */,
+				F89B5CBE29D019B600549F2F /* XCRemoteSwiftPackageReference "HTMLString" */,
 			);
 			productRefGroup = F88C2469295C37B80006098B /* Products */;
 			projectDirPath = "";
@@ -1580,6 +1584,14 @@
 				minimumVersion = 2.6.0;
 			};
 		};
+		F89B5CBE29D019B600549F2F /* XCRemoteSwiftPackageReference "HTMLString" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alexaubry/HTMLString";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 		F8B1E64D2973F61400EE0D10 /* XCRemoteSwiftPackageReference "Drops" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/omaralbeik/Drops";
@@ -1623,6 +1635,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F88E4D4B297EA4290057491A /* XCRemoteSwiftPackageReference "EmojiText" */;
 			productName = EmojiText;
+		};
+		F89B5CBF29D019B600549F2F /* HTMLString */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F89B5CBE29D019B600549F2F /* XCRemoteSwiftPackageReference "HTMLString" */;
+			productName = HTMLString;
 		};
 		F8B1E64E2973F61400EE0D10 /* Drops */ = {
 			isa = XCSwiftPackageProductDependency;
