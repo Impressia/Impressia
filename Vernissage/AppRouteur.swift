@@ -46,6 +46,8 @@ extension View {
                 SearchView()
             case .editProfile:
                 EditProfileView()
+            case .instance:
+                InstanceView()
             }
         }
     }

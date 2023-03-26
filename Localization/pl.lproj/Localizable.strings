@@ -95,6 +95,7 @@
 "userProfile.title.unfollow" = "Przestań obserwować";
 "userProfile.title.followBack" = "Również obserwuj";
 "userProfile.title.follow" = "Obserwuj";
+"userProfile.title.instance" = "Informacje o instancji";
 "userProfile.error.notExists" = "Konto nie istnieje.";
 "userProfile.error.notExists" = "Błąd podczas pobierania danych użytkownika.";
 "userProfile.error.mute" = "Błąd podczas wyciszania użytkownika.";
@@ -273,3 +274,21 @@
 "editProfile.error.loadingAvatarFailed" = "Błąd podczas wczytywania zdjęcia.";
 "editProfile.error.noProfileData" = "Dane profilu nie mogą zostać wyświetlone.";
 "editProfile.error.loadingAccountFailed" = "Błąd podczas pobierania profilu użytkownika.";
+
+// Mark: Instance information.
+"instance.navigationBar.title" = "Instancja";
+"instance.title.instanceInfo" = "Informacja o instancji";
+"instance.title.name" = "Nazwa";
+"instance.title.address" = "Adres";
+"instance.title.email" = "Email";
+"instance.title.version" = "Wersja";
+"instance.title.users" = "Użytkownicy";
+"instance.title.posts" = "Postów";
+"instance.title.domains" = "Domen";
+"instance.title.registrations" = "Rejestracja";
+"instance.title.approvalRequired" = "Akeptowanie rejestracji";
+"instance.title.rules" = "Reguły instancji";
+"instance.title.contact" = "Kontakt";
+"instance.title.pixelfedAccount" = "Konto Pixelfed";
+"instance.error.noInstanceData" = "Dane instancji nie mogą zostać wyświetlone.";
+"instance.error.loadingDataFailed" = "Błąd podczas pobierania danych instancji.";

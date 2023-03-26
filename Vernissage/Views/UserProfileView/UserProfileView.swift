@@ -160,6 +160,12 @@ struct UserProfileView: View {
                     
                     Divider()
                 }
+
+                NavigationLink(value: RouteurDestinations.instance) {
+                    Label(NSLocalizedString("userProfile.title.instance", comment: "Instance information"), systemImage: "server.rack")
+                }
+                
+                Divider()
                 
                 NavigationLink(value: RouteurDestinations.favourites) {
                     Label(NSLocalizedString("userProfile.title.favourites", comment: "Favourites"), systemImage: "hand.thumbsup")

@@ -17,7 +17,6 @@ struct NotificationRowView: View {
     
     private var attachment: MediaAttachment?
     private var notification: PixelfedKit.Notification
-    private let contentWidth = Int(UIScreen.main.bounds.width) - 150
     
     public init(notification: PixelfedKit.Notification) {
         self.notification = notification
@@ -91,14 +90,16 @@ struct NotificationRowView: View {
                     }
                 case .mention:
                     if let status = self.notification.status {
-                        MarkdownFormattedText(status.content.asMarkdown, withFontSize: 12, andWidth: contentWidth)
+                        MarkdownFormattedText(status.content.asMarkdown)
+                            .font(.caption)
                             .environment(\.openURL, OpenURLAction { url in .handled })
                     } else {
                         EmptyView()
                     }
                 case .follow, .followRequest, .adminSignUp:
                     if let note = self.notification.account.note {
-                        MarkdownFormattedText(note.asMarkdown, withFontSize: 12, andWidth: contentWidth)
+                        MarkdownFormattedText(note.asMarkdown)
+                            .font(.caption)
                             .environment(\.openURL, OpenURLAction { url in .handled })
                     } else {
                         EmptyView()

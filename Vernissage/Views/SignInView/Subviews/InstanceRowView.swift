@@ -60,7 +60,8 @@ struct InstanceRowView: View {
             }
             
             if let description = instance.description {
-                MarkdownFormattedText(description.asMarkdown, withFontSize: 14)
+                MarkdownFormattedText(description.asMarkdown)
+                    .font(.subheadline)
                     .environment(\.openURL, OpenURLAction { url in
                         routerPath.handle(url: url)
                     })

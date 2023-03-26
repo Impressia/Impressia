@@ -12,7 +12,6 @@ struct CommentBodyView: View {
     @EnvironmentObject var routerPath: RouterPath
 
     @State var statusViewModel: StatusModel
-    private let contentWidth = Int(UIScreen.main.bounds.width) - 60
     
     var body: some View {
         HStack (alignment: .top) {
@@ -37,7 +36,8 @@ struct CommentBodyView: View {
                         .font(.footnote)
                 }
                 
-                MarkdownFormattedText(self.statusViewModel.content.asMarkdown, withFontSize: 14, andWidth: contentWidth)
+                MarkdownFormattedText(self.statusViewModel.content.asMarkdown)
+                    .font(.footnote)
                     .environment(\.openURL, OpenURLAction { url in .handled })
                     .padding(.top, 4)
                 

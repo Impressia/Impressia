@@ -23,6 +23,7 @@ enum RouteurDestinations: Hashable {
     case accountsPhoto(listType: AccountsPhotoView.ListType)
     case search
     case editProfile
+    case instance
 }
 
 enum SheetDestinations: Identifiable {

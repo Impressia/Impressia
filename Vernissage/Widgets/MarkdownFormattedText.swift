@@ -14,17 +14,12 @@ struct MarkdownFormattedText: View {
 
     private let markdown: String
     private let textView = UITextView()
-    private let fontSize: CGFloat
-    private let width: Int
 
-    init(_ markdown: String, withFontSize fontSize: CGFloat = 16, andWidth width: Int? = nil) {
+    init(_ markdown: String) {
         self.markdown = markdown
-        self.fontSize = fontSize
-        self.width = width ?? Int(UIScreen.main.bounds.width) - 16
     }
 
     var body: some View {
         EmojiText(markdown: markdown, emojis: [])
-            .font(.system(size: self.fontSize))
     }
 }

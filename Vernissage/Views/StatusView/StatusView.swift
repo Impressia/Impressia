@@ -80,6 +80,7 @@ struct StatusView: View {
                             }
                             
                             MarkdownFormattedText(statusViewModel.content.asMarkdown)
+                                .font(.callout)
                                 .environment(\.openURL, OpenURLAction { url in
                                     routerPath.handle(url: url)
                                 })

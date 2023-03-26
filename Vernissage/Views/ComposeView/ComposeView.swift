@@ -61,7 +61,6 @@ struct ComposeView: View {
     }
     
     private let statusViewModel: StatusModel?
-    private let contentWidth = Int(UIScreen.main.bounds.width) - 50
     private let keyboardFontImageSize = 20.0
     private let keyboardFontTextSize = 16.0
     private let autocompleteFontTextSize = 12.0
@@ -216,7 +215,8 @@ struct ComposeView: View {
                         Spacer()
                     }
                     
-                    MarkdownFormattedText(status.content.asMarkdown, withFontSize: 14, andWidth: contentWidth)
+                    MarkdownFormattedText(status.content.asMarkdown)
+                        .font(.subheadline)
                         .environment(\.openURL, OpenURLAction { url in .handled })
                 }
             }

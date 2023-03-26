@@ -95,6 +95,7 @@
 "userProfile.title.unfollow" = "Unfollow";
 "userProfile.title.followBack" = "Follow back";
 "userProfile.title.follow" = "Follow";
+"userProfile.title.instance" = "Instance information";
 "userProfile.error.notExists" = "Account does not exists.";
 "userProfile.error.loadingAccountFailed" = "Error during download account from server.";
 "userProfile.error.muting" = "Muting/unmuting action failed.";
@@ -273,3 +274,21 @@
 "editProfile.error.loadingAvatarFailed" = "Loading avatar failed.";
 "editProfile.error.noProfileData" = "Profile data cannot be displayed.";
 "editProfile.error.loadingAccountFailed" = "Error during download account from server.";
+
+// Mark: Instance information.
+"instance.navigationBar.title" = "Instance";
+"instance.title.instanceInfo" = "Instance info";
+"instance.title.name" = "Name";
+"instance.title.address" = "Address";
+"instance.title.email" = "Email";
+"instance.title.version" = "Version";
+"instance.title.users" = "Users";
+"instance.title.posts" = "Posts";
+"instance.title.domains" = "Domains";
+"instance.title.registrations" = "Registrations";
+"instance.title.approvalRequired" = "Approval required";
+"instance.title.rules" = "Instance rules";
+"instance.title.contact" = "Contact";
+"instance.title.pixelfedAccount" = "Pixelfed account";
+"instance.error.noInstanceData" = "Instance data cannot be displayed.";
+"instance.error.loadingDataFailed" = "Error during download instance data from server.";
