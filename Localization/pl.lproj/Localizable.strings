@@ -97,6 +97,12 @@
 "userProfile.title.follow" = "Obserwuj";
 "userProfile.title.instance" = "Informacje o instancji";
 "userProfile.error.notExists" = "Konto nie istnieje.";
+"userProfile.title.blocks" = "Zablokowane konta";
+"userProfile.title.mutes" = "Wyciszone konta";
+"userProfile.title.muted" = "Konto wyciszone";
+"userProfile.title.unmuted" = "Wyciszenie wyłączone";
+"userProfile.title.blocked" = "Konto zablokowane";
+"userProfile.title.unblocked" = "Konto odblokowane";
 "userProfile.error.notExists" = "Błąd podczas pobierania danych użytkownika.";
 "userProfile.error.mute" = "Błąd podczas wyciszania użytkownika.";
 "userProfile.error.block" = "Błąd podczas blokowania/odblokowywania użytkownika.";
@@ -243,6 +249,8 @@
 "accounts.navigationBar.following" = "Obserwowani";
 "accounts.navigationBar.favouritedBy" = "Polubione przez";
 "accounts.navigationBar.reboostedBy" = "Podbite przez";
+"accounts.navigationBar.blocked" = "Zablokowani";
+"accounts.navigationBar.mutes" = "Wyciszeni";
 "accounts.title.noAccounts" = "Niestety nie ma tutaj nikogo.";
 "accounts.error.loadingAccountsFailed" = "Błąd podczas wczytywania użytkownikow.";
 

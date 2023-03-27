@@ -13,10 +13,22 @@ struct UserProfileHeaderView: View {
     @EnvironmentObject private var routerPath: RouterPath
     
     @State var account: Account
-    @State var relationship: Relationship? = nil
+    @ObservedObject var relationship = RelationshipModel()
     
     var body: some View {
         VStack(alignment: .leading) {
+            HStack(alignment: .top) {
+                Spacer()
+                
+                if self.relationship.muting == true {
+                    TagWidget(value: "Muted", color: .accentColor, systemImage: "message.and.waveform.fill")
+                }
+                
+                if self.relationship.blocking == true {
+                    TagWidget(value: "Blocked", color: .dangerColor, systemImage: "hand.raised.fill")
+                }
+            }
+            
             HStack(alignment: .center) {
                 UserAvatar(accountAvatar: account.avatar, size: .profile)
                 
@@ -54,7 +66,7 @@ struct UserProfileHeaderView: View {
                     }
                 }.foregroundColor(.mainTextColor)
             }
-            
+                        
             HStack (alignment: .center) {
                 VStack(alignment: .leading) {
                     Text(account.displayNameWithoutEmojis)
@@ -72,7 +84,7 @@ struct UserProfileHeaderView: View {
                     self.otherAccountActionButtons()
                 }
             }
-            
+                        
             if let note = account.note, !note.asMarkdown.isEmpty {
                 MarkdownFormattedText(note.asMarkdown)
                     .font(.subheadline)
@@ -105,23 +117,23 @@ struct UserProfileHeaderView: View {
             await onRelationshipButtonTap()
         } label: {
             HStack {
-                Image(systemName: relationship?.following == true ? "person.badge.minus" : "person.badge.plus")
-                Text(relationship?.following == true ? "userProfile.title.unfollow" : (relationship?.followedBy == true ? "userProfile.title.followBack" : "userProfile.title.follow"), comment: "Follow/unfollow actions")
+                Image(systemName: relationship.following == true ? "person.badge.minus" : "person.badge.plus")
+                Text(relationship.following == true ? "userProfile.title.unfollow" : (relationship.followedBy == true ? "userProfile.title.followBack" : "userProfile.title.follow"), comment: "Follow/unfollow actions")
             }
         }
         .buttonStyle(.borderedProminent)
-        .tint(relationship?.following == true ? .dangerColor : .accentColor)
+        .tint(relationship.following == true ? .dangerColor : .accentColor)
     }
     
     private func onRelationshipButtonTap() async {
         do {
-            if self.relationship?.following == true {
+            if self.relationship.following == true {
                 if let relationship = try await self.client.accounts?.unfollow(account: self.account.id) {
-                    self.relationship = relationship
+                    self.relationship.following = relationship.following
                 }
             } else {
                 if let relationship = try await self.client.accounts?.follow(account: self.account.id) {
-                    self.relationship = relationship
+                    self.relationship.following = relationship.following
                 }
             }
         } catch {

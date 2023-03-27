@@ -14,6 +14,8 @@ struct AccountsView: View {
         case following(entityId: String)
         case reblogged(entityId: String)
         case favourited(entityId: String)
+        case blocks
+        case mutes
         case search(query: String)
     }
     
@@ -122,6 +124,10 @@ struct AccountsView: View {
             return NSLocalizedString("accounts.navigationBar.favouritedBy", comment: "Favourited by")
         case .reblogged:
             return NSLocalizedString("accounts.navigationBar.reboostedBy", comment: "Reboosted by")
+        case .blocks:
+            return NSLocalizedString("accounts.navigationBar.blocked", comment: "Blocked")
+        case .mutes:
+            return NSLocalizedString("accounts.navigationBar.mutes", comment: "Mutes")
         case .search(let query):
             return query
         }
@@ -144,6 +150,20 @@ struct AccountsView: View {
             // TODO: Workaround for not working paging for favourites/reblogged issues: https://github.com/pixelfed/pixelfed/issues/4182.
             if page == 1 {
                 return try await self.client.statuses?.rebloggedBy(statusId: entityId, limit: 40, page: page) ?? []
+            } else {
+                return []
+            }
+        case .blocks:
+            // TODO: Workaround for not working paging for favourites/reblogged issues: https://github.com/pixelfed/pixelfed/issues/4182.
+            if page == 1 {
+                return try await self.client.blocks?.blocks(limit: 40, page: page) ?? []
+            } else {
+                return []
+            }
+        case .mutes:
+            // TODO: Workaround for not working paging for favourites/reblogged issues: https://github.com/pixelfed/pixelfed/issues/4182.
+            if page == 1 {
+                return try await self.client.mutes?.mutes(limit: 40, page: page) ?? []
             } else {
                 return []
             }

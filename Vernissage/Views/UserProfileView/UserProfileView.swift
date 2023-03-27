@@ -17,8 +17,8 @@ struct UserProfileView: View {
     @State public var accountDisplayName: String?
     @State public var accountUserName: String
 
+    @StateObject private var relationship = RelationshipModel()
     @State private var account: Account? = nil
-    @State private var relationship: Relationship? = nil
     @State private var state: ViewState = .loading
     @State private var viewId = UUID().uuidString
     
@@ -87,7 +87,15 @@ struct UserProfileView: View {
             async let accountTask = self.client.accounts?.account(withId: self.accountId)
             
             // Wait for download account and relationships.
-            (self.relationship, self.account) = try await (relationshipTask, accountTask)
+            let (relationshipFromApi, accountFromApi) = try await (relationshipTask, accountTask)
+            
+            if let relationshipFromApi {
+                self.relationship.update(relationship: relationshipFromApi)
+            } else {
+                self.relationship.update(relationship: RelationshipModel())
+            }
+
+            self.account = accountFromApi
             
             self.state = .loaded
         } catch {
@@ -117,7 +125,7 @@ struct UserProfileView: View {
                         await onMuteAccount(account: account)
                     }
                 } label: {
-                    if self.relationship?.muting == true {
+                    if self.relationship.muting == true {
                         Label(NSLocalizedString("userProfile.title.unmute", comment: "Unute"), systemImage: "message.and.waveform.fill")
                     } else {
                         Label(NSLocalizedString("userProfile.title.mute", comment: "Mute"), systemImage: "message.and.waveform")
@@ -129,7 +137,7 @@ struct UserProfileView: View {
                         await onBlockAccount(account: account)
                     }
                 } label: {
-                    if self.relationship?.blocking == true {
+                    if self.relationship.blocking == true {
                         Label(NSLocalizedString("userProfile.title.unblock", comment: "Unblock"), systemImage: "hand.raised.fill")
                     } else {
                         Label(NSLocalizedString("userProfile.title.block", comment: "Block"), systemImage: "hand.raised")
@@ -164,6 +172,16 @@ struct UserProfileView: View {
                 NavigationLink(value: RouteurDestinations.instance) {
                     Label(NSLocalizedString("userProfile.title.instance", comment: "Instance information"), systemImage: "server.rack")
                 }
+
+                Divider()
+                
+                NavigationLink(value: RouteurDestinations.accounts(listType: .blocks)) {
+                    Label(NSLocalizedString("userProfile.title.blocks", comment: "Blocked accounts"), systemImage: "hand.raised.fill")
+                }
+                
+                NavigationLink(value: RouteurDestinations.accounts(listType: .mutes)) {
+                    Label(NSLocalizedString("userProfile.title.mutes", comment: "Muted accounts"), systemImage: "message.and.waveform.fill")
+                }
                 
                 Divider()
                 
@@ -190,13 +208,19 @@ struct UserProfileView: View {
     
     private func onMuteAccount(account: Account) async {
         do {
-            if self.relationship?.muting == true {
+            if self.relationship.muting == true {
                 if let relationship = try await self.client.accounts?.unmute(account: account.id) {
-                    self.relationship = relationship
+                    ToastrService.shared.showSuccess("userProfile.title.unmuted", imageSystemName: "message.and.waveform")
+                    withAnimation(.linear) {
+                        self.relationship.muting = relationship.muting
+                    }
                 }
             } else {
                 if let relationship = try await self.client.accounts?.mute(account: account.id) {
-                    self.relationship = relationship
+                    ToastrService.shared.showSuccess("userProfile.title.muted", imageSystemName: "message.and.waveform.fill")
+                    withAnimation(.linear) {
+                        self.relationship.muting = relationship.muting
+                    }
                 }
             }
         } catch {
@@ -206,13 +230,19 @@ struct UserProfileView: View {
     
     private func onBlockAccount(account: Account) async {
         do {
-            if self.relationship?.blocking == true {
+            if self.relationship.blocking == true {
                 if let relationship = try await self.client.accounts?.unblock(account: account.id) {
-                    self.relationship = relationship
+                    ToastrService.shared.showSuccess("userProfile.title.unblocked", imageSystemName: "hand.raised")
+                    withAnimation(.linear) {
+                        self.relationship.blocking = relationship.blocking
+                    }
                 }
             } else {
                 if let relationship = try await self.client.accounts?.block(account: account.id) {
-                    self.relationship = relationship
+                    ToastrService.shared.showSuccess("userProfile.title.blocked", imageSystemName: "hand.raised.fill")
+                    withAnimation(.linear) {
+                        self.relationship.blocking = relationship.blocking
+                    }
                 }
             }
         } catch {

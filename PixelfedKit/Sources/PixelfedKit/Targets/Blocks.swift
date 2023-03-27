@@ -8,7 +8,7 @@ import Foundation
 
 extension Pixelfed {
     public enum Blocks {
-        case blocks
+        case blocks(MaxId?, SinceId?, MinId?, Limit?, Page?)
     }
 }
 
@@ -33,10 +33,40 @@ extension Pixelfed.Blocks: TargetType {
     
     /// The parameters to be incoded in the request.
     public var queryItems: [(String, String)]? {
+        var params: [(String, String)] = []
+
+        var maxId: MaxId? = nil
+        var sinceId: SinceId? = nil
+        var minId: MinId? = nil
+        var limit: Limit? = nil
+        var page: Page? = nil
+
         switch self {
-        case .blocks:
-            return nil
+        case .blocks(let _maxId, let _sinceId, let _minId, let _limit, let _page):
+            maxId = _maxId
+            sinceId = _sinceId
+            minId = _minId
+            limit = _limit
+            page = _page
         }
+        
+        if let maxId {
+            params.append(("max_id",  maxId))
+        }
+        if let sinceId {
+            params.append(("since_id", sinceId))
+        }
+        if let minId {
+            params.append(("min_id", minId))
+        }
+        if let limit {
+            params.append(("limit", "\(limit)"))
+        }
+        if let page {
+            params.append(("page", "\(page)"))
+        }
+        
+        return params
     }
     
     public var headers: [String: String]? {

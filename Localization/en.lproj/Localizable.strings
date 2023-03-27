@@ -96,6 +96,12 @@
 "userProfile.title.followBack" = "Follow back";
 "userProfile.title.follow" = "Follow";
 "userProfile.title.instance" = "Instance information";
+"userProfile.title.blocks" = "Blocked accounts";
+"userProfile.title.mutes" = "Muted accounts";
+"userProfile.title.muted" = "Account muted";
+"userProfile.title.unmuted" = "Account unmuted";
+"userProfile.title.blocked" = "Account blocked";
+"userProfile.title.unblocked" = "Account unblocked";
 "userProfile.error.notExists" = "Account does not exists.";
 "userProfile.error.loadingAccountFailed" = "Error during download account from server.";
 "userProfile.error.muting" = "Muting/unmuting action failed.";
@@ -243,6 +249,8 @@
 "accounts.navigationBar.following" = "Following";
 "accounts.navigationBar.favouritedBy" = "Favourited by";
 "accounts.navigationBar.reboostedBy" = "Boosted by";
+"accounts.navigationBar.blocked" = "Blocked accounts";
+"accounts.navigationBar.mutes" = "Muted accounts";
 "accounts.title.noAccounts" = "Unfortunately, there is no one here.";
 "accounts.error.loadingAccountsFailed" = "Loading accounts failed.";
 
