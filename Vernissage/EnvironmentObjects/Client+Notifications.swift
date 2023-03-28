@@ -7,7 +7,6 @@
 import Foundation
 import PixelfedKit
 
-/// Pixelfed 'Notifications'.
 extension Client {
     public class Notifications: BaseClient {
         public func notifications(maxId: MaxId? = nil,

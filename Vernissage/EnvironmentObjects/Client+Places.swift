@@ -7,7 +7,6 @@
 import Foundation
 import PixelfedKit
 
-/// Pixelfed 'Places'.
 extension Client {
     public class Places: BaseClient {
         public func search(query: String) async throws -> [Place] {

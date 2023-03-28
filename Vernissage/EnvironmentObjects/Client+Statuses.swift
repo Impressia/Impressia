@@ -7,7 +7,6 @@
 import Foundation
 import PixelfedKit
 
-/// Pixelfed 'Statuses'.
 extension Client {
     public class Statuses: BaseClient {
         

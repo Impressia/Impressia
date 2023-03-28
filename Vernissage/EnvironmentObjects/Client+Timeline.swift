@@ -7,7 +7,6 @@
 import Foundation
 import PixelfedKit
 
-/// Pixelfed 'Timeline'.
 extension Client {
     public class PublicTimeline: BaseClient {
         public func getStatuses(local: Bool? = nil,

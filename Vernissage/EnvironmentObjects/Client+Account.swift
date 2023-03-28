@@ -7,7 +7,6 @@
 import Foundation
 import PixelfedKit
 
-/// Pixelfed 'Account'.
 extension Client {
     public class Accounts: BaseClient {
         

@@ -7,7 +7,6 @@
 import Foundation
 import PixelfedKit
 
-/// Pixelfed 'Trends'.
 extension Client {
     public class Blocks: BaseClient {
         public func blocks(maxId: String? = nil,

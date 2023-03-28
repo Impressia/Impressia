@@ -7,7 +7,6 @@
 import Foundation
 import PixelfedKit
 
-/// Pixelfed 'Trends'.
 extension Client {
     public class Trends: BaseClient {
         public func statuses(range: Pixelfed.Trends.TrendRange) async throws -> [Status] {

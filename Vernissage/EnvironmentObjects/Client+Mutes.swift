@@ -7,7 +7,6 @@
 import Foundation
 import PixelfedKit
 
-/// Pixelfed 'Trends'.
 extension Client {
     public class Mutes: BaseClient {
         public func mutes(maxId: String? = nil,

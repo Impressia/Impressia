@@ -7,7 +7,6 @@
 import Foundation
 import PixelfedKit
 
-/// Pixelfed 'Search'.
 extension Client {
     public class Instances {        
         func instances(instanceUrls: [String]) async -> [Instance] {

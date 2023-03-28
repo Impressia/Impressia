@@ -7,7 +7,6 @@
 import Foundation
 import PixelfedKit
 
-/// Pixelfed 'Search'.
 extension Client {
     public class Search: BaseClient {
         public func search(query: String, resultsType: Pixelfed.Search.ResultsType, limit: Int = 20, page: Int = 1) async throws -> SearchResults? {

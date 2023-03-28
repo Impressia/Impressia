@@ -7,7 +7,6 @@
 import Foundation
 import PixelfedKit
 
-/// Pixelfed 'Tags'.
 extension Client {
     public class Tags: BaseClient {
         public func get(tag: String) async throws -> Tag? {

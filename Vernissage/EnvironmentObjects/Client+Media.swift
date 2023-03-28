@@ -7,7 +7,6 @@
 import Foundation
 import PixelfedKit
 
-/// Pixelfed 'Statuses'.
 extension Client {
     public class Media: BaseClient {
         func upload(data: Data, fileName: String, mimeType: String) async throws -> UploadedAttachment? {
