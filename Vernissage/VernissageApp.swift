@@ -34,8 +34,8 @@ struct VernissageApp: App {
                         .withAppRouteur()
                         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
                 case .signIn:
-                    SignInView { accountData in
-                        self.setApplicationState(accountData: accountData)
+                    SignInView { accountModel in
+                        self.setApplicationState(accountModel: accountModel)
                     }
                     .withAppRouteur()
                     .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
@@ -91,6 +91,7 @@ struct VernissageApp: App {
         }
     }
     
+    @MainActor
     private func onApplicationStart() async {
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.white.withAlphaComponent(0.7)
         UIPageControl.appearance().pageIndicatorTintColor = UIColor.white.withAlphaComponent(0.4)
@@ -104,22 +105,29 @@ struct VernissageApp: App {
         // Refresh other access tokens.
         await self.refreshAccessTokens()
         
+        // When user doesn't exists then we have to open sign in view.
+        guard let currentAccount = AccountDataHandler.shared.getCurrentAccountData() else {
+            self.applicationViewMode = .signIn
+            return
+        }
+        
+        // Create model based on core data entity.
+        let accountModel = AccountModel(accountData: currentAccount)
+
         // Verify access token correctness.
         let authorizationSession = AuthorizationSession()
-        let currentAccount = AccountDataHandler.shared.getCurrentAccountData()
-        await AuthorizationService.shared.verifyAccount(session: authorizationSession, currentAccount: currentAccount) { accountData in
-            guard let accountData = accountData else {
+        await AuthorizationService.shared.verifyAccount(session: authorizationSession, accountModel: accountModel) { signedInAccountModel in
+            guard let signedInAccountModel else {
                 self.applicationViewMode = .signIn
                 return
             }
             
-            self.setApplicationState(accountData: accountData, checkNewPhotos: true)
+            self.setApplicationState(accountModel: signedInAccountModel, checkNewPhotos: true)
         }
     }
 
-    private func setApplicationState(accountData: AccountData, checkNewPhotos: Bool = false) {
+    private func setApplicationState(accountModel: AccountModel, checkNewPhotos: Bool = false) {
         Task { @MainActor in
-            let accountModel = AccountModel(accountData: accountData)
             let instance = try? await self.client.instances.instance(url: accountModel.serverUrl)
 
             // Refresh client state.
@@ -128,7 +136,7 @@ struct VernissageApp: App {
             // Refresh application state.
             self.applicationState.changeApplicationState(accountModel: accountModel,
                                                          instance: instance,
-                                                         lastSeenStatusId: accountData.lastSeenStatusId)
+                                                         lastSeenStatusId: accountModel.lastSeenStatusId)
             
             // Change view displayed by application.
             self.applicationViewMode = .mainView

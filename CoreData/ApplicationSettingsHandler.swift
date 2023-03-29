@@ -35,9 +35,9 @@ class ApplicationSettingsHandler {
         }
     }
     
-    func set(accountData: AccountData?) {
+    func set(accountId: String?) {
         let defaultSettings = self.get()
-        defaultSettings.currentAccount = accountData?.id
+        defaultSettings.currentAccount = accountId
         CoreDataHandler.shared.save()
     }
 

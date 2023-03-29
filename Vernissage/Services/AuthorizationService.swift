@@ -15,28 +15,28 @@ public class AuthorizationService {
     private init() { }
     
     /// Access token verification.
-    public func verifyAccount(session: AuthorizationSession, currentAccount: AccountData?, _ result: @escaping (AccountData?) -> Void) async {
+    public func verifyAccount(session: AuthorizationSession, accountModel: AccountModel, _ result: @escaping (AccountModel?) -> Void) async {
         // When we dont have even one account stored in database then we have to ask user to enter server and sign in.
-        guard let currentAccount, let accessToken = currentAccount.accessToken else {
+        guard let accessToken = accountModel.accessToken else {
             result(nil)
             return
         }
         
         // When we have at least one account then we have to verify access token.
-        let client = PixelfedClient(baseURL: currentAccount.serverUrl).getAuthenticated(token: accessToken)
+        let client = PixelfedClient(baseURL: accountModel.serverUrl).getAuthenticated(token: accessToken)
 
         do {
             let account = try await client.verifyCredentials()
-            await self.update(accountId: currentAccount.id,
-                              basedOn: account,
-                              accessToken: accessToken,
-                              refreshToken: currentAccount.refreshToken)
+            let signedInAccountModel = await self.update(accountId: accountModel.id,
+                                                         basedOn: account,
+                                                         accessToken: accessToken,
+                                                         refreshToken: accountModel.refreshToken)
 
-            result(currentAccount)
+            result(signedInAccountModel)
         } catch {
             do {
-                try await self.refreshCredentials(for: currentAccount, presentationContextProvider: session)
-                result(currentAccount)
+                let signedInAccountModel = try await self.refreshCredentials(for: accountModel, presentationContextProvider: session)
+                result(signedInAccountModel)
             } catch {
                 ErrorService.shared.handle(error, message: "Issues during refreshing credentials.", showToastr: true)
             }
@@ -44,7 +44,7 @@ public class AuthorizationService {
     }
     
     /// Sign in to the Pixelfed server.
-    public func sign(in serverAddress: String, session: AuthorizationSession, _ result: @escaping (AccountData) -> Void) async throws {
+    public func sign(in serverAddress: String, session: AuthorizationSession, _ result: @escaping (AccountModel) -> Void) async throws {
                 
         guard let baseUrl = URL(string: serverAddress) else {
             throw AuthorisationError.badServerUrl
@@ -124,7 +124,8 @@ public class AuthorizationService {
         CoreDataHandler.shared.save(viewContext: backgroundContext)
         
         // Return account data.
-        result(accountData)
+        let accountModel = AccountModel(accountData: accountData)
+        result(accountModel)
     }
         
     public func refreshAccessTokens() async {
@@ -134,7 +135,7 @@ public class AuthorizationService {
             for account in accounts {
                 group.addTask {
                     do {
-                        try await self.refreshAccessToken(accountData: account)
+                        _ = try await self.refreshAccessToken(accountData: account)
 
                         #if DEBUG
                             ToastrService.shared.showSuccess("New access tokens has been retrieved.", imageSystemName: "key.fill")
@@ -151,11 +152,11 @@ public class AuthorizationService {
         }
     }
     
-    private func refreshAccessToken(accountData: AccountData) async throws {
+    private func refreshAccessToken(accountData: AccountData) async throws -> AccountModel? {
         let client = PixelfedClient(baseURL: accountData.serverUrl)
         
         guard let refreshToken = accountData.refreshToken else {
-            return
+            return nil
         }
         
         let oAuthSwiftCredential = try await client.refreshToken(clientId: accountData.clientId,
@@ -167,21 +168,22 @@ public class AuthorizationService {
         
         // Get account information from server.
         let account = try await authenticatedClient.verifyCredentials()
-        await self.update(accountId: accountData.id,
-                          basedOn: account,
-                          accessToken: oAuthSwiftCredential.oauthToken,
-                          refreshToken: oAuthSwiftCredential.oauthRefreshToken)
+
+        return await self.update(accountId: accountData.id,
+                                 basedOn: account,
+                                 accessToken: oAuthSwiftCredential.oauthToken,
+                                 refreshToken: oAuthSwiftCredential.oauthRefreshToken)
     }
     
-    private func refreshCredentials(for accountData: AccountData,
+    private func refreshCredentials(for accountModel: AccountModel,
                                     presentationContextProvider: ASWebAuthenticationPresentationContextProviding
-    ) async throws {
+    ) async throws -> AccountModel? {
 
-        let client = PixelfedClient(baseURL: accountData.serverUrl)
+        let client = PixelfedClient(baseURL: accountModel.serverUrl)
 
         // Create application (we will get clientId and clientSecret).
-        let oAuthApp = Application(clientId: accountData.clientId,
-                                   clientSecret: accountData.clientSecret,
+        let oAuthApp = Application(clientId: accountModel.clientId,
+                                   clientSecret: accountModel.clientSecret,
                                    redirectUri: AppConstants.oauthRedirectUri)
         
         // Authorize a user (browser, we will get clientCode).
@@ -195,20 +197,21 @@ public class AuthorizationService {
         
         // Get account information from server.
         let account = try await authenticatedClient.verifyCredentials()
-        await self.update(accountId: accountData.id,
-                          basedOn: account,
-                          accessToken: oAuthSwiftCredential.oauthToken,
-                          refreshToken: oAuthSwiftCredential.oauthRefreshToken)
+
+        return await self.update(accountId: accountModel.id,
+                                 basedOn: account,
+                                 accessToken: oAuthSwiftCredential.oauthToken,
+                                 refreshToken: oAuthSwiftCredential.oauthRefreshToken)
     }
     
     private func update(accountId: String,
                         basedOn account: Account,
                         accessToken: String,
                         refreshToken: String?
-    ) async {
+    ) async -> AccountModel? {
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
         guard let dbAccount = AccountDataHandler.shared.getAccountData(accountId: accountId, viewContext: backgroundContext) else {
-            return
+            return nil
         }
         
         dbAccount.username = account.username
@@ -241,6 +244,8 @@ public class AuthorizationService {
         
         // Save account data in database and in application state.
         CoreDataHandler.shared.save(viewContext: backgroundContext)
+        
+        return AccountModel(accountData: dbAccount)
     }
     
     private func getAccountData(account: Account, backgroundContext: NSManagedObjectContext) -> AccountData {

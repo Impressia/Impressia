@@ -323,26 +323,27 @@ struct MainView: View {
         Task {
             // Verify access token correctness.
             let authorizationSession = AuthorizationSession()
-            await AuthorizationService.shared.verifyAccount(session: authorizationSession, currentAccount: account) { accountData in
-                guard let accountData = accountData else {
+            let accountModel = AccountModel(accountData: account)
+            
+            await AuthorizationService.shared.verifyAccount(session: authorizationSession, accountModel: accountModel) { signedInAccountModel in
+                guard let signedInAccountModel else {
                     ToastrService.shared.showError(subtitle: "mainview.error.switchAccounts")
                     return
                 }
 
                 Task { @MainActor in
-                    let accountModel = AccountModel(accountData: accountData)
-                    let instance = try? await self.client.instances.instance(url: accountModel.serverUrl)
+                    let instance = try? await self.client.instances.instance(url: signedInAccountModel.serverUrl)
 
                     // Refresh client state.
-                    self.client.setAccount(account: accountModel)
+                    self.client.setAccount(account: signedInAccountModel)
                     
                     // Refresh application state.
-                    self.applicationState.changeApplicationState(accountModel: accountModel,
+                    self.applicationState.changeApplicationState(accountModel: signedInAccountModel,
                                                                  instance: instance,
-                                                                 lastSeenStatusId: accountData.lastSeenStatusId)
+                                                                 lastSeenStatusId: signedInAccountModel.lastSeenStatusId)
 
                     // Set account as default (application will open this account after restart).
-                    ApplicationSettingsHandler.shared.set(accountData: accountData)
+                    ApplicationSettingsHandler.shared.set(accountId: signedInAccountModel.id)
                 }
             }
         }

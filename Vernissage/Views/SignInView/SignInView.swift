@@ -19,7 +19,7 @@ struct SignInView: View {
     @State private var instructionsUrlString:String?
     @State private var instances: [Instance] = []
         
-    var onSignedIn: ((_ accountData: AccountData) -> Void)?
+    var onSignedIn: ((_ accountModel: AccountModel) -> Void)?
     
     var body: some View {
         List {
@@ -91,8 +91,8 @@ struct SignInView: View {
         Task {
             do {
                 let authorizationSession = AuthorizationSession()
-                try await AuthorizationService.shared.sign(in: baseAddress, session: authorizationSession) { accountData in
-                    onSignedIn?(accountData)
+                try await AuthorizationService.shared.sign(in: baseAddress, session: authorizationSession) { accountModel in
+                    onSignedIn?(accountModel)
                     
                     DispatchQueue.main.sync {
                         dismiss()
