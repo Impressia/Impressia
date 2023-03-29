@@ -52,6 +52,7 @@ struct ImageRowItem: View {
                                 }
                         }
                     }
+                    .opacity(self.opacity)
                     .onAppear {
                         withAnimation {
                             self.opacity = 1.0
@@ -67,6 +68,7 @@ struct ImageRowItem: View {
                             }
                         }
                     }
+                    .opacity(self.opacity)
                     .onAppear {
                         withAnimation {
                             self.opacity = 1.0
@@ -107,7 +109,6 @@ struct ImageRowItem: View {
         Image(uiImage: uiImage)
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .opacity(self.opacity)
             .onTapGesture(count: 2) {
                 Task {
                     try? await self.client.statuses?.favourite(statusId: self.status.id)

@@ -66,6 +66,9 @@ struct ImageRow: View {
                     .tag(attachmentData.id)
                 }
             }
+            .onFirstAppear {
+                self.selected = self.attachmentsData.first?.id ?? String.empty()
+            }
             .onChange(of: selected, perform: { attachmentId in
                 if let attachment = attachmentsData.first(where: { item in item.id == attachmentId }) {
                     let doubleImageWidth = Double(attachment.metaImageWidth)
