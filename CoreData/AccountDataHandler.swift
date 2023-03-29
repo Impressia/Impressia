@@ -63,8 +63,8 @@ class AccountDataHandler {
         }
     }
     
-    func createAccountDataEntity() -> AccountData {
-        let context = CoreDataHandler.shared.container.viewContext
+    func createAccountDataEntity(viewContext: NSManagedObjectContext? = nil) -> AccountData {
+        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
         return AccountData(context: context)
     }
 }

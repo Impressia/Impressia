@@ -28,7 +28,7 @@ public class HomeTimelineService {
         let newStatuses = try await self.load(for: account, on: backgroundContext, maxId: oldestStatus.id)
         
         // Save data into database.
-        try backgroundContext.save()
+        CoreDataHandler.shared.save(viewContext: backgroundContext)
         
         // Return amount of newly downloaded statuses.
         return newStatuses.count
@@ -43,7 +43,7 @@ public class HomeTimelineService {
         let lastSeenStatusId = try await self.refresh(for: account, on: backgroundContext)
         
         // Save data into database.
-        try backgroundContext.save()
+        CoreDataHandler.shared.save(viewContext: backgroundContext)
         
         // Return id of last seen status.
         return lastSeenStatusId
@@ -59,7 +59,9 @@ public class HomeTimelineService {
         }
         
         accountDataFromDb.lastSeenStatusId = lastSeenStatusId
-        try backgroundContext.save()
+        
+        // Save data into database.
+        CoreDataHandler.shared.save(viewContext: backgroundContext)
     }
     
     public func update(status statusData: StatusData, basedOn status: Status, for account: AccountModel) async throws -> StatusData? {
@@ -68,7 +70,9 @@ public class HomeTimelineService {
                 
         // Update status data in database.
         self.copy(from: status, to: statusData, on: backgroundContext)
-        try backgroundContext.save()
+        
+        // Save data into database.
+        CoreDataHandler.shared.save(viewContext: backgroundContext)
         
         return statusData
     }
@@ -80,6 +84,7 @@ public class HomeTimelineService {
         attachment.metaImageHeight = Int32(imageHeight)
         self.setExifProperties(in: attachment, from: imageData)
         
+        // Save data into database.
         CoreDataHandler.shared.save()
     }
     

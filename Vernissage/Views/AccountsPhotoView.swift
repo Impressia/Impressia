@@ -40,32 +40,7 @@ struct AccountsPhotoView: View {
             if self.accounts.isEmpty {
                 NoDataView(imageSystemName: "person.3.sequence", text: "trendingAccounts.title.noAccounts")
             } else {
-                List {
-                    ForEach(self.accounts, id: \.id) { account in
-                        Section {
-                            ImagesGrid(gridType: .account(accountId: account.id,
-                                                          accountDisplayName: account.displayNameWithoutEmojis,
-                                                          accountUserName: account.acct))
-                        } header: {
-                            HStack {
-                                UsernameRow(
-                                    accountId: account.id,
-                                    accountAvatar: account.avatar,
-                                    accountDisplayName: account.displayNameWithoutEmojis,
-                                    accountUsername: account.acct)
-                                Spacer()
-                            }
-                            .textCase(.none)
-                            .listRowInsets(EdgeInsets())
-                            .padding(.vertical, 12)
-                            .onTapGesture {
-                                self.routerPath.navigate(to: .userProfile(accountId: account.id,
-                                                                          accountDisplayName: account.displayNameWithoutEmojis,
-                                                                          accountUserName: account.acct))
-                            }
-                        }
-                    }
-                }
+                self.list()
             }
         case .error(let error):
             ErrorView(error: error) {
@@ -75,6 +50,36 @@ struct AccountsPhotoView: View {
                 await self.loadData()
             }
             .padding()
+        }
+    }
+    
+    @ViewBuilder
+    private func list() -> some View {
+        List {
+            ForEach(self.accounts, id: \.id) { account in
+                Section {
+                    ImagesGrid(gridType: .account(accountId: account.id,
+                                                  accountDisplayName: account.displayNameWithoutEmojis,
+                                                  accountUserName: account.acct))
+                } header: {
+                    HStack {
+                        UsernameRow(
+                            accountId: account.id,
+                            accountAvatar: account.avatar,
+                            accountDisplayName: account.displayNameWithoutEmojis,
+                            accountUsername: account.acct)
+                        Spacer()
+                    }
+                    .textCase(.none)
+                    .listRowInsets(EdgeInsets())
+                    .padding(.vertical, 12)
+                    .onTapGesture {
+                        self.routerPath.navigate(to: .userProfile(accountId: account.id,
+                                                                  accountDisplayName: account.displayNameWithoutEmojis,
+                                                                  accountUserName: account.acct))
+                    }
+                }
+            }
         }
     }
     

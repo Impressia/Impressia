@@ -46,19 +46,7 @@ struct UserProfileView: View {
                 }
         case .loaded:
             if let account = self.account {
-                ScrollView {
-                    UserProfileHeaderView(account: account, relationship: relationship)
-                        .id(self.viewId)
-                    UserProfileStatusesView(accountId: account.id)
-                }
-                .onAppear {
-                    if let updatedProfile = self.applicationState.updatedProfile {
-                        self.account = nil
-                        self.account = updatedProfile
-                        self.applicationState.updatedProfile = nil
-                        self.viewId = UUID().uuidString
-                    }
-                }
+                self.accountView(account: account)
             }
         case .error(let error):
             ErrorView(error: error) {
@@ -66,6 +54,22 @@ struct UserProfileView: View {
                 await self.loadData()
             }
             .padding()
+        }
+    }
+    
+    private func accountView(account: Account) -> some View {
+        ScrollView {
+            UserProfileHeaderView(account: account, relationship: relationship)
+                .id(self.viewId)
+            UserProfileStatusesView(accountId: account.id)
+        }
+        .onAppear {
+            if let updatedProfile = self.applicationState.updatedProfile {
+                self.account = nil
+                self.account = updatedProfile
+                self.applicationState.updatedProfile = nil
+                self.viewId = UUID().uuidString
+            }
         }
     }
     

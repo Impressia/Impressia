@@ -6,6 +6,7 @@
     
 import Foundation
 import PixelfedKit
+import CoreData
 import AuthenticationServices
 
 /// Srvice responsible for login user into the Pixelfed account.
@@ -75,7 +76,8 @@ public class AuthorizationService {
         let account = try await authenticatedClient.verifyCredentials()
         
         // Get/create account object in database.
-        let accountData = self.getAccountData(account: account)
+        let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
+        let accountData = self.getAccountData(account: account, backgroundContext: backgroundContext)
 
         accountData.id = account.id
         accountData.username = account.username
@@ -113,13 +115,13 @@ public class AuthorizationService {
         }
         
         // Set newly created account as current (only when we create a first account).
-        let defaultSettings = ApplicationSettingsHandler.shared.get()
+        let defaultSettings = ApplicationSettingsHandler.shared.get(viewContext: backgroundContext)
         if defaultSettings.currentAccount == nil {
             defaultSettings.currentAccount = accountData.id
         }
         
         // Save account/settings data in database.
-        CoreDataHandler.shared.save()
+        CoreDataHandler.shared.save(viewContext: backgroundContext)
         
         // Return account data.
         result(accountData)
@@ -204,7 +206,8 @@ public class AuthorizationService {
                         accessToken: String,
                         refreshToken: String?
     ) async {
-        guard let dbAccount = AccountDataHandler.shared.getAccountData(accountId: accountId) else {
+        let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
+        guard let dbAccount = AccountDataHandler.shared.getAccountData(accountId: accountId, viewContext: backgroundContext) else {
             return
         }
         
@@ -237,14 +240,14 @@ public class AuthorizationService {
         }
         
         // Save account data in database and in application state.
-        CoreDataHandler.shared.save()
+        CoreDataHandler.shared.save(viewContext: backgroundContext)
     }
     
-    private func getAccountData(account: Account) -> AccountData {
-        if let accountFromDb = AccountDataHandler.shared.getAccountData(accountId: account.id) {
+    private func getAccountData(account: Account, backgroundContext: NSManagedObjectContext) -> AccountData {
+        if let accountFromDb = AccountDataHandler.shared.getAccountData(accountId: account.id, viewContext: backgroundContext) {
             return accountFromDb
         }
         
-        return AccountDataHandler.shared.createAccountDataEntity()
+        return AccountDataHandler.shared.createAccountDataEntity(viewContext: backgroundContext)
     }
 }

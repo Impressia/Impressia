@@ -72,22 +72,24 @@ public class CoreDataHandler {
         self.container.newBackgroundContext()
     }
     
-    public func save() {
-        let context = self.container.viewContext
+    public func save(viewContext: NSManagedObjectContext? = nil) {
+        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
         if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate.
-                // You should not use this function in a shipping application, although it may be useful during development.
+            context.performAndWait {
+                do {
+                    try context.save()
+                } catch {
+                    // Replace this implementation with code to handle the error appropriately.
+                    // fatalError() causes the application to generate a crash log and terminate.
+                    // You should not use this function in a shipping application, although it may be useful during development.
 
-                #if DEBUG
-                    let nserror = error as NSError
-                    fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-                #else
-                CoreDataError.shared.handle(error, message: "An error occurred while writing the data.")
-                #endif
+                    #if DEBUG
+                        let nserror = error as NSError
+                        fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                    #else
+                    CoreDataError.shared.handle(error, message: "An error occurred while writing the data.")
+                    #endif
+                }
             }
         }
     }

@@ -17,6 +17,12 @@ struct InstanceView: View {
     @State private var instance: Instance?
 
     var body: some View {
+        self.mainBody()
+            .navigationTitle("instance.navigationBar.title")
+    }
+    
+    @ViewBuilder
+    private func mainBody() -> some View {
         switch state {
         case .loading:
             LoadingIndicator()
@@ -101,7 +107,6 @@ struct InstanceView: View {
                 }
             }
         }
-        .navigationTitle("instance.navigationBar.title")
     }
     
     @ViewBuilder

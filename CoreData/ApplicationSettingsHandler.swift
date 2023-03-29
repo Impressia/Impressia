@@ -5,15 +5,16 @@
 //
 
 import Foundation
+import CoreData
 
 class ApplicationSettingsHandler {
     public static let shared = ApplicationSettingsHandler()
     private init() { }
     
-    func get() -> ApplicationSettings {
+    func get(viewContext: NSManagedObjectContext? = nil) -> ApplicationSettings {
         var settingsList: [ApplicationSettings] = []
 
-        let context = CoreDataHandler.shared.container.viewContext
+        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
         let fetchRequest = ApplicationSettings.fetchRequest()
         do {
             settingsList = try context.fetch(fetchRequest)
@@ -24,11 +25,11 @@ class ApplicationSettingsHandler {
         if let settings = settingsList.first {
             return settings
         } else {
-            let settings = self.createApplicationSettingsEntity()
+            let settings = self.createApplicationSettingsEntity(viewContext: context)
             settings.avatarShape = Int32(AvatarShape.circle.rawValue)
             settings.theme = Int32(Theme.system.rawValue)
             settings.tintColor = Int32(TintColor.accentColor2.rawValue)
-            CoreDataHandler.shared.save()
+            CoreDataHandler.shared.save(viewContext: context)
 
             return settings
         }
@@ -106,8 +107,8 @@ class ApplicationSettingsHandler {
         CoreDataHandler.shared.save()
     }
     
-    private func createApplicationSettingsEntity() -> ApplicationSettings {
-        let context = CoreDataHandler.shared.container.viewContext
+    private func createApplicationSettingsEntity(viewContext: NSManagedObjectContext? = nil) -> ApplicationSettings {
+        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
         return ApplicationSettings(context: context)
     }
 }

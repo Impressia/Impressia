@@ -43,37 +43,7 @@ struct PaginableStatusesView: View {
             if self.statusViewModels.isEmpty {
                 NoDataView(imageSystemName: "photo.on.rectangle.angled", text: "statuses.title.noPhotos")
             } else {
-                ScrollView {
-                    LazyVStack(alignment: .center) {
-                        ForEach(self.statusViewModels, id: \.id) { item in
-                            NavigationLink(value: RouteurDestinations.status(
-                                id: item.id,
-                                blurhash: item.mediaAttachments.first?.blurhash,
-                                highestImageUrl: item.mediaAttachments.getHighestImage()?.url,
-                                metaImageWidth: item.getImageWidth(),
-                                metaImageHeight: item.getImageHeight())
-                            ) {
-                                ImageRowAsync(statusViewModel: item)
-                            }
-                            .buttonStyle(EmptyButtonStyle())
-                        }
-                        
-                        if allItemsLoaded == false {
-                            HStack {
-                                Spacer()
-                                LoadingIndicator()
-                                    .task {
-                                        do {
-                                            try await self.loadMoreStatuses()
-                                        } catch {
-                                            ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
-                                        }
-                                    }
-                                Spacer()
-                            }
-                        }
-                    }
-                }
+                self.list()
             }
         case .error(let error):
             ErrorView(error: error) {
@@ -84,6 +54,32 @@ struct PaginableStatusesView: View {
                 await self.loadData()
             }
             .padding()
+        }
+    }
+    
+    @ViewBuilder
+    private func list() -> some View {
+        ScrollView {
+            LazyVStack(alignment: .center) {
+                ForEach(self.statusViewModels, id: \.id) { item in
+                    ImageRowAsync(statusViewModel: item)
+                }
+                
+                if allItemsLoaded == false {
+                    HStack {
+                        Spacer()
+                        LoadingIndicator()
+                            .task {
+                                do {
+                                    try await self.loadMoreStatuses()
+                                } catch {
+                                    ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
+                                }
+                            }
+                        Spacer()
+                    }
+                }
+            }
         }
     }
     

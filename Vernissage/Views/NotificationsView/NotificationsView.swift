@@ -38,29 +38,7 @@ struct NotificationsView: View {
             if self.notifications.isEmpty {
                 NoDataView(imageSystemName: "bell", text: "notifications.title.noNotifications")
             } else {
-                List {
-                    ForEach(notifications, id: \.id) { notification in
-                        NotificationRowView(notification: notification)
-                    }
-                    
-                    if allItemsLoaded == false {
-                        HStack {
-                            Spacer()
-                            LoadingIndicator()
-                                .task {
-                                    await self.loadMoreNotifications()
-                                }
-                            Spacer()
-                        }
-                        .listRowSeparator(.hidden)
-                    }
-                }
-                .listStyle(PlainListStyle())
-                .refreshable {
-                    HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
-                    await self.loadNewNotifications()
-                    HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
-                }
+                self.list()
             }
         case .error(let error):
             ErrorView(error: error) {
@@ -68,6 +46,33 @@ struct NotificationsView: View {
                 await self.loadMoreNotifications()
             }
             .padding()
+        }
+    }
+    
+    @ViewBuilder
+    private func list() -> some View {
+        List {
+            ForEach(notifications, id: \.id) { notification in
+                NotificationRowView(notification: notification)
+            }
+            
+            if allItemsLoaded == false {
+                HStack {
+                    Spacer()
+                    LoadingIndicator()
+                        .task {
+                            await self.loadMoreNotifications()
+                        }
+                    Spacer()
+                }
+                .listRowSeparator(.hidden)
+            }
+        }
+        .listStyle(PlainListStyle())
+        .refreshable {
+            HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
+            await self.loadNewNotifications()
+            HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
         }
     }
     

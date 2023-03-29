@@ -37,14 +37,19 @@ struct ImageRowItem: View {
             ZStack {
                 if self.status.sensitive && !self.applicationState.showSensitive {
                     ZStack {
-                        ContentWarning(blurhash: attachmentData.blurhash, spoilerText: self.status.spoilerText) {
+                        ContentWarning(spoilerText: self.status.spoilerText) {
                             self.imageView(uiImage: uiImage)
-                            
+
                             if showThumbImage {
                                 FavouriteTouch {
                                     self.showThumbImage = false
                                 }
                             }
+                        } blurred: {
+                            BlurredImage(blurhash: attachmentData.blurhash)
+                                .onTapGesture{
+                                    self.navigateToStatus()
+                                }
                         }
                     }
                     .onAppear {

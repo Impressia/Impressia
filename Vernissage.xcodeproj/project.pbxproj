@@ -203,6 +203,7 @@
 		F8CC95CE2970761D00C9C2AC /* TintColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CC95CD2970761D00C9C2AC /* TintColor.swift */; };
 		F8CEEDF829ABADDD00DBED66 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CEEDF729ABADDD00DBED66 /* UIImage+Size.swift */; };
 		F8CEEDFA29ABAFD200DBED66 /* ImageFileTranseferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CEEDF929ABAFD200DBED66 /* ImageFileTranseferable.swift */; };
+		F8D5444329D4066C002225D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D5444229D4066C002225D6 /* AppDelegate.swift */; };
 		F8E6D03329CDD52500416CCA /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E6D03229CDD52500416CCA /* EditProfileView.swift */; };
 		F8E6D03529CE161B00416CCA /* UIImage+Jpeg.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E6D03429CE161B00416CCA /* UIImage+Jpeg.swift */; };
 		F8E9391F29C0BCFA002BB3B8 /* ImageContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E9391E29C0BCFA002BB3B8 /* ImageContextMenu.swift */; };
@@ -424,6 +425,7 @@
 		F8CC95CD2970761D00C9C2AC /* TintColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TintColor.swift; sourceTree = "<group>"; };
 		F8CEEDF729ABADDD00DBED66 /* UIImage+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Size.swift"; sourceTree = "<group>"; };
 		F8CEEDF929ABAFD200DBED66 /* ImageFileTranseferable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileTranseferable.swift; sourceTree = "<group>"; };
+		F8D5444229D4066C002225D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8E6D03229CDD52500416CCA /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		F8E6D03429CE161B00416CCA /* UIImage+Jpeg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Jpeg.swift"; sourceTree = "<group>"; };
 		F8E9391E29C0BCFA002BB3B8 /* ImageContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageContextMenu.swift; sourceTree = "<group>"; };
@@ -808,6 +810,7 @@
 				F8341F94295C63FE009C8EE6 /* Extensions */,
 				F8341F93295C63E2009C8EE6 /* Views */,
 				F88C246B295C37B80006098B /* VernissageApp.swift */,
+				F8D5444229D4066C002225D6 /* AppDelegate.swift */,
 				F88E4D55297EAD6E0057491A /* AppRouteur.swift */,
 				F86A4300299A97F500DF7645 /* ProductIdentifiers.swift */,
 				F866F6A929605AFA002E8F88 /* SceneDelegate.swift */,
@@ -1232,6 +1235,7 @@
 				F873F14C29BDB67300DE72D1 /* UIImage+Rounded.swift in Sources */,
 				F8864CEF29ACE90B0020C534 /* UIFont+Font.swift in Sources */,
 				F8CEEDFA29ABAFD200DBED66 /* ImageFileTranseferable.swift in Sources */,
+				F8D5444329D4066C002225D6 /* AppDelegate.swift in Sources */,
 				F802884F297AEED5000BDD51 /* DatabaseError.swift in Sources */,
 				F86A4307299AA5E900DF7645 /* ThanksView.swift in Sources */,
 				F89B5CC229D01BF700549F2F /* InstanceView.swift in Sources */,
@@ -1304,7 +1308,7 @@
 				CODE_SIGN_ENTITLEMENTS = VernissageWidget/VernissageWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 86;
+				CURRENT_PROJECT_VERSION = 87;
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VernissageWidget/Info.plist;
@@ -1332,7 +1336,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = VernissageWidget/VernissageWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 86;
+				CURRENT_PROJECT_VERSION = 87;
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VernissageWidget/Info.plist;
@@ -1480,7 +1484,7 @@
 				CODE_SIGN_ENTITLEMENTS = Vernissage/Vernissage.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 86;
+				CURRENT_PROJECT_VERSION = 87;
 				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
@@ -1520,7 +1524,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Vernissage/Vernissage.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 86;
+				CURRENT_PROJECT_VERSION = 87;
 				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;

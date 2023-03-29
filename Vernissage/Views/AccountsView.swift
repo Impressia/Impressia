@@ -46,34 +46,7 @@ struct AccountsView: View {
             if self.accounts.isEmpty {
                 NoDataView(imageSystemName: "person.3.sequence", text: "accounts.title.noAccounts")
             } else {
-                List {
-                    ForEach(accounts, id: \.id) { account in
-                        NavigationLink(value: RouteurDestinations.userProfile(
-                            accountId: account.id,
-                            accountDisplayName: account.displayNameWithoutEmojis,
-                            accountUserName: account.acct)
-                        ) {
-                            UsernameRow(accountId: account.id,
-                                        accountAvatar: account.avatar,
-                                        accountDisplayName: account.displayNameWithoutEmojis,
-                                        accountUsername: account.acct)
-                        }
-                    }
-                    
-                    if allItemsLoaded == false {
-                        HStack {
-                            Spacer()
-                            LoadingIndicator()
-                                .task {
-                                    self.downloadedPage = self.downloadedPage + 1
-                                    await self.loadData(page: self.downloadedPage)
-                                }
-                            Spacer()
-                        }
-                        .listRowSeparator(.hidden)
-                    }
-                }
-                .listStyle(.plain)
+                self.list()
             }
         case .error(let error):
             ErrorView(error: error) {
@@ -86,6 +59,38 @@ struct AccountsView: View {
             }
             .padding()
         }
+    }
+    
+    @ViewBuilder
+    private func list() -> some View {
+        List {
+            ForEach(accounts, id: \.id) { account in
+                NavigationLink(value: RouteurDestinations.userProfile(
+                    accountId: account.id,
+                    accountDisplayName: account.displayNameWithoutEmojis,
+                    accountUserName: account.acct)
+                ) {
+                    UsernameRow(accountId: account.id,
+                                accountAvatar: account.avatar,
+                                accountDisplayName: account.displayNameWithoutEmojis,
+                                accountUsername: account.acct)
+                }
+            }
+            
+            if allItemsLoaded == false {
+                HStack {
+                    Spacer()
+                    LoadingIndicator()
+                        .task {
+                            self.downloadedPage = self.downloadedPage + 1
+                            await self.loadData(page: self.downloadedPage)
+                        }
+                    Spacer()
+                }
+                .listRowSeparator(.hidden)
+            }
+        }
+        .listStyle(.plain)
     }
     
     private func loadData(page: Int) async {

@@ -30,6 +30,12 @@ struct EditProfileView: View {
     private let websiteMaxLength = 120
 
     var body: some View {
+        self.mainBody()
+            .navigationTitle("editProfile.navigationBar.title")
+    }
+    
+    @ViewBuilder
+    private func mainBody() ->  some View {
         switch state {
         case .loading:
             LoadingIndicator()
@@ -175,7 +181,6 @@ struct EditProfileView: View {
                 .buttonStyle(.borderedProminent)
             }
         }
-        .navigationTitle("editProfile.navigationBar.title")
         .onAppear {
             self.displayName = account.displayName ?? String.empty()
             self.website = account.website ?? String.empty()

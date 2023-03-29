@@ -51,81 +51,8 @@ struct StatusView: View {
                 }
         case .loaded:
             if let statusViewModel = self.statusViewModel {
-                ScrollView {
-                    VStack (alignment: .leading) {
-                        ImagesCarousel(attachments: statusViewModel.mediaAttachments,
-                                       selectedAttachment: $selectedAttachmentModel,
-                                       exifCamera: $exifCamera,
-                                       exifExposure: $exifExposure,
-                                       exifCreatedDate: $exifCreatedDate,
-                                       exifLens: $exifLens,
-                                       description: $description)
-                        .onTapGesture {
-                            withoutAnimation {
-                                self.tappedAttachmentModel = self.selectedAttachmentModel
-                            }
-                        }
-                        
-                        VStack(alignment: .leading) {
-                            self.reblogInformation()
-
-                            UsernameRow(accountId: statusViewModel.account.id,
-                                        accountAvatar: statusViewModel.account.avatar,
-                                        accountDisplayName: statusViewModel.account.displayNameWithoutEmojis,
-                                        accountUsername: statusViewModel.account.acct)
-                            .onTapGesture {
-                                self.routerPath.navigate(to: .userProfile(accountId: statusViewModel.account.id,
-                                                                          accountDisplayName: statusViewModel.account.displayNameWithoutEmojis,
-                                                                          accountUserName: statusViewModel.account.acct))
-                            }
-                            
-                            MarkdownFormattedText(statusViewModel.content.asMarkdown)
-                                .font(.callout)
-                                .environment(\.openURL, OpenURLAction { url in
-                                    routerPath.handle(url: url)
-                                })
-
-                            VStack (alignment: .leading) {
-                                if let name = statusViewModel.place?.name, let country = statusViewModel.place?.country {
-                                    LabelIcon(iconName: "mappin.and.ellipse", value: "\(name), \(country)")
-                                }
-                                
-                                LabelIcon(iconName: "camera", value: self.exifCamera)
-                                LabelIcon(iconName: "camera.aperture", value: self.exifLens)
-                                LabelIcon(iconName: "timelapse", value: self.exifExposure)
-                                LabelIcon(iconName: "calendar", value: self.exifCreatedDate?.toDate(.isoDateTimeSec)?.formatted())
-                                
-                                if self.applicationState.showPhotoDescription {
-                                    LabelIcon(iconName: "eye.trianglebadge.exclamationmark", value: self.description)
-                                }
-                            }
-                            .padding(.bottom, 2)
-                            .foregroundColor(.lightGrayColor)
-                            
-                            HStack {
-                                Text("status.title.uploaded", comment: "Uploaded")
-                                Text(statusViewModel.createdAt.toRelative(.isoDateTimeMilliSec))
-                                    .padding(.horizontal, -4)
-                                if let applicationName = statusViewModel.application?.name {
-                                    Text(String(format: NSLocalizedString("status.title.via", comment: "via"), applicationName))
-                                }
-                            }
-                            .foregroundColor(.lightGrayColor)
-                            .font(.footnote)
-                            
-                            InteractionRow(statusModel: statusViewModel) {
-                                self.dismiss()
-                            }
-                            .foregroundColor(.accentColor)
-                            .padding(8)
-                        }
-                        .padding(8)
-                                            
-                        CommentsSectionView(statusId: statusViewModel.id)
-                    }
-                }
+                self.statusView(statusViewModel: statusViewModel)
             }
-
         case .error(let error):
             ErrorView(error: error) {
                 self.state = .loading
@@ -135,7 +62,85 @@ struct StatusView: View {
         }
     }
     
-    @ViewBuilder func reblogInformation() -> some View {
+    @ViewBuilder
+    private func statusView(statusViewModel: StatusModel) -> some View {
+        ScrollView {
+            VStack (alignment: .leading) {
+                ImagesCarousel(attachments: statusViewModel.mediaAttachments,
+                               selectedAttachment: $selectedAttachmentModel,
+                               exifCamera: $exifCamera,
+                               exifExposure: $exifExposure,
+                               exifCreatedDate: $exifCreatedDate,
+                               exifLens: $exifLens,
+                               description: $description)
+                .onTapGesture {
+                    withoutAnimation {
+                        self.tappedAttachmentModel = self.selectedAttachmentModel
+                    }
+                }
+                
+                VStack(alignment: .leading) {
+                    self.reblogInformation()
+
+                    UsernameRow(accountId: statusViewModel.account.id,
+                                accountAvatar: statusViewModel.account.avatar,
+                                accountDisplayName: statusViewModel.account.displayNameWithoutEmojis,
+                                accountUsername: statusViewModel.account.acct)
+                    .onTapGesture {
+                        self.routerPath.navigate(to: .userProfile(accountId: statusViewModel.account.id,
+                                                                  accountDisplayName: statusViewModel.account.displayNameWithoutEmojis,
+                                                                  accountUserName: statusViewModel.account.acct))
+                    }
+                    
+                    MarkdownFormattedText(statusViewModel.content.asMarkdown)
+                        .font(.callout)
+                        .environment(\.openURL, OpenURLAction { url in
+                            routerPath.handle(url: url)
+                        })
+
+                    VStack (alignment: .leading) {
+                        if let name = statusViewModel.place?.name, let country = statusViewModel.place?.country {
+                            LabelIcon(iconName: "mappin.and.ellipse", value: "\(name), \(country)")
+                        }
+                        
+                        LabelIcon(iconName: "camera", value: self.exifCamera)
+                        LabelIcon(iconName: "camera.aperture", value: self.exifLens)
+                        LabelIcon(iconName: "timelapse", value: self.exifExposure)
+                        LabelIcon(iconName: "calendar", value: self.exifCreatedDate?.toDate(.isoDateTimeSec)?.formatted())
+                        
+                        if self.applicationState.showPhotoDescription {
+                            LabelIcon(iconName: "eye.trianglebadge.exclamationmark", value: self.description)
+                        }
+                    }
+                    .padding(.bottom, 2)
+                    .foregroundColor(.lightGrayColor)
+                    
+                    HStack {
+                        Text("status.title.uploaded", comment: "Uploaded")
+                        Text(statusViewModel.createdAt.toRelative(.isoDateTimeMilliSec))
+                            .padding(.horizontal, -4)
+                        if let applicationName = statusViewModel.application?.name {
+                            Text(String(format: NSLocalizedString("status.title.via", comment: "via"), applicationName))
+                        }
+                    }
+                    .foregroundColor(.lightGrayColor)
+                    .font(.footnote)
+                    
+                    InteractionRow(statusModel: statusViewModel) {
+                        self.dismiss()
+                    }
+                    .foregroundColor(.accentColor)
+                    .padding(8)
+                }
+                .padding(8)
+                                    
+                CommentsSectionView(statusId: statusViewModel.id)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func reblogInformation() -> some View {
         if let reblogStatus = self.statusViewModel?.reblogStatus {
             HStack(alignment: .center, spacing: 4) {
                 UserAvatar(accountAvatar: reblogStatus.account.avatar, size: .mini)

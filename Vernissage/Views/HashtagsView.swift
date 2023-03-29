@@ -40,25 +40,7 @@ struct HashtagsView: View {
             if self.tags.isEmpty {
                 NoDataView(imageSystemName: "person.3.sequence", text: "trendingTags.title.noTags")
             } else {
-                List {
-                    ForEach(self.tags, id: \.id) { tag in
-                        Section {
-                            ImagesGrid(gridType: .hashtag(name: tag.hashtag))
-                        } header: {
-                            HStack {
-                                Text(tag.name).font(.headline)
-                                Spacer()
-                                if let total = tag.total {
-                                    Text(String(format: NSLocalizedString("trendingTags.title.amountOfPosts", comment: "Amount of posts"), total))
-                                        .font(.caption)
-                                }
-                            }
-                            .onTapGesture {
-                                self.routerPath.navigate(to: .tag(hashTag: tag.hashtag))
-                            }
-                        }
-                    }
-                }
+                self.list()
             }
         case .error(let error):
             ErrorView(error: error) {
@@ -68,6 +50,29 @@ struct HashtagsView: View {
                 await self.loadData()
             }
             .padding()
+        }
+    }
+    
+    @ViewBuilder
+    private func list() -> some View {
+        List {
+            ForEach(self.tags, id: \.id) { tag in
+                Section {
+                    ImagesGrid(gridType: .hashtag(name: tag.hashtag))
+                } header: {
+                    HStack {
+                        Text(tag.name).font(.headline)
+                        Spacer()
+                        if let total = tag.total {
+                            Text(String(format: NSLocalizedString("trendingTags.title.amountOfPosts", comment: "Amount of posts"), total))
+                                .font(.caption)
+                        }
+                    }
+                    .onTapGesture {
+                        self.routerPath.navigate(to: .tag(hashTag: tag.hashtag))
+                    }
+                }
+            }
         }
     }
     

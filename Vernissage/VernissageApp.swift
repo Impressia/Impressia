@@ -54,29 +54,7 @@ struct VernissageApp: App {
             .tint(self.tintColor)
             .preferredColorScheme(self.theme)
             .task {
-                UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.white.withAlphaComponent(0.7)
-                UIPageControl.appearance().pageIndicatorTintColor = UIColor.white.withAlphaComponent(0.4)
-                
-                // Set custom configurations for Nuke image/data loaders.
-                self.setImagePipelines()
-
-                // Load user preferences from database.
-                self.loadUserPreferences()
-                
-                // Refresh other access tokens.
-                await self.refreshAccessTokens()
-                
-                // Verify access token correctness.
-                let authorizationSession = AuthorizationSession()
-                let currentAccount = AccountDataHandler.shared.getCurrentAccountData()
-                await AuthorizationService.shared.verifyAccount(session: authorizationSession, currentAccount: currentAccount) { accountData in
-                    guard let accountData = accountData else {
-                        self.applicationViewMode = .signIn
-                        return
-                    }
-                    
-                    self.setApplicationState(accountData: accountData, checkNewPhotos: true)
-                }
+                await self.onApplicationStart()
             }
             .navigationViewStyle(.stack)
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
@@ -110,6 +88,32 @@ struct VernissageApp: App {
                     self.applicationState.showStatusId = nil
                 }
             }
+        }
+    }
+    
+    private func onApplicationStart() async {
+        UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.white.withAlphaComponent(0.7)
+        UIPageControl.appearance().pageIndicatorTintColor = UIColor.white.withAlphaComponent(0.4)
+        
+        // Set custom configurations for Nuke image/data loaders.
+        self.setImagePipelines()
+
+        // Load user preferences from database.
+        self.loadUserPreferences()
+        
+        // Refresh other access tokens.
+        await self.refreshAccessTokens()
+        
+        // Verify access token correctness.
+        let authorizationSession = AuthorizationSession()
+        let currentAccount = AccountDataHandler.shared.getCurrentAccountData()
+        await AuthorizationService.shared.verifyAccount(session: authorizationSession, currentAccount: currentAccount) { accountData in
+            guard let accountData = accountData else {
+                self.applicationViewMode = .signIn
+                return
+            }
+            
+            self.setApplicationState(accountData: accountData, checkNewPhotos: true)
         }
     }
 
@@ -195,15 +199,4 @@ struct VernissageApp: App {
             self.applicationState.amountOfNewStatuses = await HomeTimelineService.shared.amountOfNewStatuses(for: account)
         }
     }
-}
-
-class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication,
-                     configurationForConnecting connectingSceneSession: UISceneSession,
-                     options: UIScene.ConnectionOptions
-    ) -> UISceneConfiguration {
-        let sceneConfig: UISceneConfiguration = UISceneConfiguration(name: nil, sessionRole: connectingSceneSession.role)
-        sceneConfig.delegateClass = SceneDelegate.self
-        return sceneConfig
-     }
 }

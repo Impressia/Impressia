@@ -66,6 +66,9 @@ struct ImageRowAsync: View {
                     .tag(attachment.id)
                 }
             }
+            .onFirstAppear {
+                self.selected = statusViewModel.mediaAttachments.first?.id ?? String.empty()
+            }
             .onChange(of: selected, perform: { attachmentId in
                 if let attachment = self.statusViewModel.mediaAttachments.first(where: { item in item.id == attachmentId }) {
                     if let size = ImageSizeService.shared.get(for: attachment.url) {

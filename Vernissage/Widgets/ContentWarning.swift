@@ -6,24 +6,28 @@
     
 import SwiftUI
 
-struct ContentWarning<Content: View>: View {
-    private let blurhash: String?
+struct ContentWarning<Content: View, Blurred: View>: View {
     private let spoilerText: String?
-    private let content: Content
+    private let content: () -> Content
+    private let blurred: () -> Blurred
     
     @State private var showSensitive = false
     
-    init(blurhash: String?, spoilerText: String?, @ViewBuilder content: () -> Content) {
-        self.blurhash = blurhash
+    init(spoilerText: String?,
+         @ViewBuilder content: @escaping () -> Content,
+         @ViewBuilder blurred: @escaping () -> Blurred) {
+
         self.spoilerText = spoilerText
-        self.content = content()
+        self.content = content
+        self.blurred = blurred
     }
     
     var body: some View {
         if self.showSensitive {
             ZStack {
-                content
+                content()
                     .transition(.opacity)
+
                 VStack(alignment: .trailing) {
                     HStack(alignment: .top) {
                         Spacer()
@@ -35,7 +39,8 @@ struct ContentWarning<Content: View>: View {
                             Image(systemName: "eye.slash")
                                 .font(.title2)
                                 .shadow(color: Color.systemBackground, radius: 0.3)
-                        }.padding()
+                                .padding()
+                        }
                     }
                     Spacer()
                 }
@@ -43,7 +48,8 @@ struct ContentWarning<Content: View>: View {
             }
         } else {
             ZStack {
-                BlurredImage(blurhash: blurhash)
+                self.blurred()
+                
                 VStack(alignment: .center) {
                     Spacer()
                     Image(systemName: "eye.slash.fill")
@@ -72,14 +78,6 @@ struct ContentWarning<Content: View>: View {
                 .foregroundColor(.mainTextColor)
             }
             .transition(.opacity)
-        }
-    }
-}
-
-struct ContentWarning_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentWarning(blurhash: nil, spoilerText: "Spoiler") {
-            Image(systemName: "people")
         }
     }
 }

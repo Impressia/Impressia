@@ -68,16 +68,7 @@ struct TrendStatusesView: View {
             } else {
                 LazyVStack(alignment: .center) {
                     ForEach(self.statusViewModels, id: \.id) { item in
-                        NavigationLink(value: RouteurDestinations.status(
-                            id: item.id,
-                            blurhash: item.mediaAttachments.first?.blurhash,
-                            highestImageUrl: item.mediaAttachments.getHighestImage()?.url,
-                            metaImageWidth: item.getImageWidth(),
-                            metaImageHeight: item.getImageHeight())
-                        ) {
-                            ImageRowAsync(statusViewModel: item)
-                        }
-                        .buttonStyle(EmptyButtonStyle())
+                        ImageRowAsync(statusViewModel: item)
                     }
                 }
                 .refreshable {

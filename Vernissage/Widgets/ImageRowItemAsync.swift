@@ -32,8 +32,13 @@ struct ImageRowItemAsync: View {
             if let image = state.image {
                 if self.statusViewModel.sensitive && !self.applicationState.showSensitive {
                     ZStack {
-                        ContentWarning(blurhash: attachment.blurhash, spoilerText: self.statusViewModel.spoilerText) {
+                        ContentWarning(spoilerText: self.statusViewModel.spoilerText) {
                             self.imageView(image: image)
+                        } blurred: {
+                            BlurredImage(blurhash: attachment.blurhash)
+                                .onTapGesture {
+                                    self.navigateToStatus()
+                                }
                         }
                         
                         if showThumbImage {
@@ -42,13 +47,14 @@ struct ImageRowItemAsync: View {
                             }
                         }
                     }
+                    .opacity(self.opacity)
                     .onAppear {
-                        withAnimation {
-                            self.opacity = 1.0
-                        }
-                        
                         if let uiImage = state.imageResponse?.image {
                             self.recalculateSizeOfDownloadedImage(uiImage: uiImage)
+                        }
+                        
+                        withAnimation {
+                            self.opacity = 1.0
                         }
                     }
                 } else {
@@ -61,13 +67,14 @@ struct ImageRowItemAsync: View {
                             }
                         }
                     }
+                    .opacity(self.opacity)
                     .onAppear {
-                        withAnimation {
-                            self.opacity = 1.0
-                        }
-
                         if let uiImage = state.imageResponse?.image {
                             self.recalculateSizeOfDownloadedImage(uiImage: uiImage)
+                        }
+                        
+                        withAnimation {
+                            self.opacity = 1.0
                         }
                     }
                 }
@@ -87,6 +94,9 @@ struct ImageRowItemAsync: View {
             } else {
                 VStack(alignment: .center) {
                     BlurredImage(blurhash: attachment.blurhash)
+                        .onTapGesture {
+                            self.navigateToStatus()
+                        }
                 }
             }
         }
@@ -98,7 +108,6 @@ struct ImageRowItemAsync: View {
         image
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .opacity(self.opacity)
             .onTapGesture(count: 2) {
                 Task {
                     try? await self.client.statuses?.favourite(statusId: self.statusViewModel.id)
@@ -108,15 +117,19 @@ struct ImageRowItemAsync: View {
                 HapticService.shared.fireHaptic(of: .buttonPress)
             }
             .onTapGesture {
-                self.routerPath.navigate(to: .status(
-                    id: statusViewModel.id,
-                    blurhash: statusViewModel.mediaAttachments.first?.blurhash,
-                    highestImageUrl: statusViewModel.mediaAttachments.getHighestImage()?.url,
-                    metaImageWidth: statusViewModel.getImageWidth(),
-                    metaImageHeight: statusViewModel.getImageHeight()
-                ))
+                self.navigateToStatus()
             }
             .imageContextMenu(client: self.client, statusModel: self.statusViewModel)
+    }
+    
+    private func navigateToStatus() {
+        self.routerPath.navigate(to: .status(
+            id: statusViewModel.id,
+            blurhash: statusViewModel.mediaAttachments.first?.blurhash,
+            highestImageUrl: statusViewModel.mediaAttachments.getHighestImage()?.url,
+            metaImageWidth: statusViewModel.getImageWidth(),
+            metaImageHeight: statusViewModel.getImageHeight()
+        ))
     }
     
     private func recalculateSizeOfDownloadedImage(uiImage: UIImage) {
