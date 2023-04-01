@@ -200,6 +200,7 @@
 "settings.title.openPage" = "Otwórz";
 "settings.title.privacyPolicy" = "Polityka prywatności";
 "settings.title.terms" = "Zasady i warunki";
+"settings.title.sourceCode" = "Kod źródłowy";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Zaloguj się do Pixelfed";

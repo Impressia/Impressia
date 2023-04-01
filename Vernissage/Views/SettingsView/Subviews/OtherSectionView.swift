@@ -26,6 +26,13 @@ struct OtherSectionView: View {
                 Link(NSLocalizedString("settings.title.openPage", comment: "Open"), destination: URL(string: "https://mczachurski.dev/vernissage/terms.html")!)
                     .font(.footnote)
             }
+
+            HStack {
+                Text("settings.title.sourceCode", comment: "Source code")
+                Spacer()
+                Link(NSLocalizedString("settings.title.openPage", comment: "Open"), destination: URL(string: "https://github.com/VernissageApp/Vernissage")!)
+                    .font(.footnote)
+            }
             
             HStack {
                 Text("settings.title.reportBug", comment: "Report a bug")

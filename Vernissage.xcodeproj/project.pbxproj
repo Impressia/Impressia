@@ -773,6 +773,7 @@
 				F837269429A221420098D3C4 /* PixelfedKit */,
 				F88ABD9529687D4D004EF61E /* README.md */,
 				F844F42429D2DC39000DD896 /* LICENSE */,
+				F8CB3DF029D80B1E00CDAE5A /* Resources */,
 				F835081F29BEF88600DE3247 /* Localization */,
 				F864F79C29BB9D2400B13921 /* Models */,
 				F8341F96295C6427009C8EE6 /* CoreData */,
@@ -921,6 +922,13 @@
 				F8E9391E29C0BCFA002BB3B8 /* ImageContextMenu.swift */,
 			);
 			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
+		F8CB3DF029D80B1E00CDAE5A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		F8F6E44529BCC0C90004795E /* Views */ = {

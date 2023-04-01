@@ -78,6 +78,16 @@ struct ThirdPartyView: View {
                 }
                 .font(.footnote)
             }
+            
+            Section("Fleur De Leah") {
+                VStack(alignment: .leading)  {
+                    Link("https://fonts.google.com/specimen/Fleur+De+Leah?preview.text=Vernissage%20for&preview.text_type=custom",
+                         destination: URL(string: "https://fonts.google.com/specimen/Fleur+De+Leah?preview.text=Vernissage%20for&preview.text_type=custom")!)
+                    .padding(.bottom, 4)
+                    Text("Font used in the application in the icons and in the splash screen.")
+                }
+                .font(.footnote)
+            }
         }
         .navigationTitle("thirdParty.navigationBar.title")
         .navigationBarTitleDisplayMode(.inline)

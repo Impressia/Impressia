@@ -200,6 +200,7 @@
 "settings.title.openPage" = "Open";
 "settings.title.privacyPolicy" = "Privacy policy";
 "settings.title.terms" = "Terms & Conditions";
+"settings.title.sourceCode" = "Source code";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Sign in to Pixelfed";

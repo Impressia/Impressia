@@ -1,100 +1,18 @@
 # Vernissage
 
-## Font
+<img src="https://raw.githubusercontent.com/vernissageapp/vernissage/main/Resources/01.png" width="200" > <img src="https://raw.githubusercontent.com/vernissageapp/vernissage/main/Resources/04.png" width="200" > <img src="https://raw.githubusercontent.com/vernissageapp/vernissage/main/Resources/05.png" width="200" > <img src="https://raw.githubusercontent.com/vernissageapp/vernissage/main/Resources/06.png" width="200" >
 
-Font used in the application is: Fleur De Leah 
-https://fonts.google.com/specimen/Fleur+De+Leah?preview.text=Vernissage%20for&preview.text_type=custom
+Vernissage is a simple and intuitive Pixelfed client that is focused on showcasing and sharing photos.
+With Vernissage, you can browse through a timeline that is dedicated to photos only.
+This means that you won't find any other types of media in the app, so you can focus solely on discovering and enjoying beautiful photography.
 
+Our app features a clean and minimalistic interface that is designed to put the focus on the images.
+You can easily like and comment on photos, as well as follow other users to keep up with their latest posts.
 
-## Issues
+Vernissage is 100% free and open-source.
 
-### **There are some issues in bookmarks/favourites endpoints**
+So, whether you're a professional photographer, an amateur enthusiast, or simply someone who loves to discover and share stunning photos,
+Vernissage is the perfect app for you. Try it out today and join our growing community of passionate photo lovers.
 
-It seems like paging is not working in that endpoints (I've tried with page and max_id).
-
-Github issue: [https://github.com/pixelfed/pixelfed/issues/4182](https://github.com/pixelfed/pixelfed/issues/4182)
-
-### **Update media attachment endpoint returns array instead of sinle entity**
-
-On the https://pixelfed.social server, updating a single media attachment via the API (changing the description)
-returns a list of media attachments in the response instead of the updated media attachment (it looks like there
-are attachments of another user in the response).
-
-Github issue: [https://github.com/pixelfed/pixelfed/issues/4196](https://github.com/pixelfed/pixelfed/issues/4196)
-
-### **Comments are not visible**
-
-API is not returning comments added directly to the status (account `amiko`)?
-
-`[GET] https://pxlmo.com/api/v1/statuses/533554842410484883/context`
- 
-Web app is using endpoint: `https://pxlmo.com/api/v2/statuses/533554842410484883/replies?limit=3` for downloading statuses. 
- 
-Comments are visible when we open status from another server (e.g. from https://pixelfed.social), because they are transfered
-with the status via ActivityPub.
- 
-### **Follow/unfollow hashtags is not available through the API**
-
-Pixelfed uses endpoint (POST): https://pixelfed.social/api/local/discover/tag/subscribe, with body:
-
-```json
-{
-    "name": "streetphotography"
-}
-```
-
-### **Bookmark/unbookmark statuses from external servers is not working (404 as a respnse)**
-
-Here also Pixelfed uses different endpoing (POST):  https://pixelfed.social/i/bookmark, with body:
-
-```json
-{
-    "item":"524216615476909436"
-}
-```
-
-Even if we save bookmark on the web, we don't have reflected that information in statuses JSON. 
-
-### **Reboost is not working**
-
-Seems like reboost is working only from Pixelfed to Mastodon. When I'm following someone from Pixelfed
-from my pixelfed account I don't see his reboost on my Pixelfed home timeline.  
-
-
-### **Status doesn't contains information about bookmark status**
-
-In the status JSON we don't have information about bookmark status.
-
-### **Endpoint about instance information returns different JSON structure**
-
-API in Pixelfed (`/api/v1/instance`) returns JSON with diefferent structure then API specify.
-
-### **API always returns in the response `web` as an application**
-
-In pixelfed source code there is hardcoded application name. API always retruns `web`.
-
-```php
-'application'               => [
-    'name'      => 'web',
-    'website'   => null
- ],
-```
-
-### **(fixed) Place is not available in the API**
-
-In the status response there is no information about place (even if we save place we cannot display it).
-That information is visible when using Pixelfed web app. 
-
-There is `place_id` field in status create endpoint.
-For search there is an endpoint: `https://{{host}}/api/v1.1/compose/search/location?q=wroc`.
-
-Fix: place is available when we add `_pf` to the query params.
-
-### **(fixed) Trends are not availabe through the API**
-
-Pixelfed uses endpoint (GET): https://pixelfed.social/api/pixelfed/v2/discover/posts/trending?range=daily
-This endpoint is not working in different servers e.g.: https://pxlmo.com/api/pixelfed/v2/discover/posts/trending?range=daily
-
-Mastodon endpoint `/api/v1/trends/statuses` is not available (404 response). 
-
-Trends are available via: `/api/v1.1/discover/posts/trending`.
+## Contributing
+You can fork and clone repository. Change development team and bundle id. Do your changes and create a pull a request.
