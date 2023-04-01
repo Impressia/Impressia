@@ -81,8 +81,8 @@ struct ThirdPartyView: View {
             
             Section("Fleur De Leah") {
                 VStack(alignment: .leading)  {
-                    Link("https://fonts.google.com/specimen/Fleur+De+Leah?preview.text=Vernissage%20for&preview.text_type=custom",
-                         destination: URL(string: "https://fonts.google.com/specimen/Fleur+De+Leah?preview.text=Vernissage%20for&preview.text_type=custom")!)
+                    Link("https://fonts.google.com/specimen/Fleur+De+Leah",
+                         destination: URL(string: "https://fonts.google.com/specimen/Fleur+De+Leah")!)
                     .padding(.bottom, 4)
                     Text("Font used in the application in the icons and in the splash screen.")
                 }

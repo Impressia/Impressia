@@ -14,5 +14,10 @@ Vernissage is 100% free and open-source.
 So, whether you're a professional photographer, an amateur enthusiast, or simply someone who loves to discover and share stunning photos,
 Vernissage is the perfect app for you. Try it out today and join our growing community of passionate photo lovers.
 
+It's built entirely in SwiftUI.
+
 ## Contributing
-You can fork and clone repository. Change development team and bundle id. Do your changes and create a pull a request.
+You can fork and clone repository. Change development team and bundle id. Do your changes and create a pull a request 👍.
+
+Thank you in advance for any, even the smallest help, with the development of the project 💕!
+
