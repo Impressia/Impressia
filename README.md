@@ -1,6 +1,6 @@
 # Vernissage
 
-<img src="https://raw.githubusercontent.com/vernissageapp/vernissage/main/Resources/01.png" width="200" > <img src="https://raw.githubusercontent.com/vernissageapp/vernissage/main/Resources/04.png" width="200" > <img src="https://raw.githubusercontent.com/vernissageapp/vernissage/main/Resources/05.png" width="200" > <img src="https://raw.githubusercontent.com/vernissageapp/vernissage/main/Resources/06.png" width="200" >
+<img src="Resources/01.png" width="200" > <img src="Resources/04.png" width="200" > <img src="Resources/05.png" width="200" > <img src="Resources/06.png" width="200" >
 
 Vernissage is a simple and intuitive Pixelfed client that is focused on showcasing and sharing photos.
 With Vernissage, you can browse through a timeline that is dedicated to photos only.
