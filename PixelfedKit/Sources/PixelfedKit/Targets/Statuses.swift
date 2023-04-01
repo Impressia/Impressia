@@ -177,18 +177,18 @@ extension Pixelfed.Statuses: TargetType {
         switch self {
         case .status:
             pixelfedKey = true
-        case .favouritedBy(_, let _maxId, let _sinceId, let _minId, let _limit, let _page):
-            maxId = _maxId
-            sinceId = _sinceId
-            minId = _minId
-            limit = _limit
-            page = _page
-        case .rebloggedBy(_, let _maxId, let _sinceId, let _minId, let _limit, let _page):
-            maxId = _maxId
-            sinceId = _sinceId
-            minId = _minId
-            limit = _limit
-            page = _page
+        case .favouritedBy(_, let paramMaxId, let paramSinceId, let paramMinId, let paramLimit, let paramPage):
+            maxId = paramMaxId
+            sinceId = paramSinceId
+            minId = paramMinId
+            limit = paramLimit
+            page = paramPage
+        case .rebloggedBy(_, let paramMaxId, let paramSinceId, let paramMinId, let paramLimit, let paramPage):
+            maxId = paramMaxId
+            sinceId = paramSinceId
+            minId = paramMinId
+            limit = paramLimit
+            page = paramPage
         default:
             return nil
         }

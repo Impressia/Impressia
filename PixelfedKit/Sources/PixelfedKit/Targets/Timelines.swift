@@ -49,20 +49,20 @@ extension Pixelfed.Timelines: TargetType {
         var limit: Limit?
 
         switch self {
-        case .tag(_, let _local, let _remote, let _onlyMedia, let _maxId, let _sinceId, let _minId, let _limit),
-             .pub(let _local, let _remote, let _onlyMedia, let _maxId, let _sinceId, let _minId, let _limit):
-            local = _local
-            remote = _remote
-            onlyMedia = _onlyMedia
-            maxId = _maxId
-            sinceId = _sinceId
-            minId = _minId
-            limit = _limit
-        case .home(let _maxId, let _sinceId, let _minId, let _limit):
-            maxId = _maxId
-            sinceId = _sinceId
-            minId = _minId
-            limit = _limit
+        case .tag(_, let paramLocal, let paramRemote, let paramOnlyMedia, let paramMaxId, let paramSinceId, let paramMinId, let paramLimit),
+             .pub(let paramLocal, let paramRemote, let paramOnlyMedia, let paramMaxId, let paramSinceId, let paramMinId, let paramLimit):
+            local = paramLocal
+            remote = paramRemote
+            onlyMedia = paramOnlyMedia
+            maxId = paramMaxId
+            sinceId = paramSinceId
+            minId = paramMinId
+            limit = paramLimit
+        case .home(let paramMaxId, let paramSinceId, let paramMinId, let paramLimit):
+            maxId = paramMaxId
+            sinceId = paramSinceId
+            minId = paramMinId
+            limit = paramLimit
         }
 
         if let maxId {

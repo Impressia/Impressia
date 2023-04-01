@@ -55,6 +55,7 @@ class RouterPath: ObservableObject {
 
     public init() {}
 
+    // swiftlint:disable:next identifier_name
     public func navigate(to: RouteurDestinations) {
         path.append(to)
     }

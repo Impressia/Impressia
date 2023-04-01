@@ -52,18 +52,18 @@ extension Pixelfed.Trends: TargetType {
         var limit: Limit?
 
         switch self {
-        case .tags(let _trendRange, let _offset, let _limit):
-            trendRange = _trendRange
-            offset = _offset
-            limit = _limit
-        case .statuses(let _trendRange, let _offset, let _limit):
-            trendRange = _trendRange
-            offset = _offset
-            limit = _limit
-        case .accounts(let _trendRange, let _offset, let _limit):
-            trendRange = _trendRange
-            offset = _offset
-            limit = _limit
+        case .tags(let paramTrendRange, let paramOffset, let paramLimit):
+            trendRange = paramTrendRange
+            offset = paramOffset
+            limit = paramLimit
+        case .statuses(let paramTrendRange, let paramOffset, let paramLimit):
+            trendRange = paramTrendRange
+            offset = paramOffset
+            limit = paramLimit
+        case .accounts(let paramTrendRange, let paramOffset, let paramLimit):
+            trendRange = paramTrendRange
+            offset = paramOffset
+            limit = paramLimit
         }
 
         switch trendRange {

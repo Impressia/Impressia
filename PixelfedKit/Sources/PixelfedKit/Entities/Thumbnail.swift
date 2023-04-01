@@ -29,13 +29,13 @@ public struct Thumbnail: Codable {
 public struct ThumbnailVersions: Codable {
 
     /// The URL for the thumbnail image at 1x resolution.
-    public let x1: URL?
+    public let resolutionX1: URL?
 
     /// The URL for the thumbnail image at 2x resolution.
-    public let x2: URL?
+    public let resolutionX2: URL?
 
     private enum CodingKeys: String, CodingKey {
-        case x1 = "@1x"
-        case x2 = "@2x"
+        case resolutionX1 = "@1x"
+        case resolutionX2 = "@2x"
     }
 }

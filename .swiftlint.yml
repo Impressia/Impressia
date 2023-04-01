@@ -1,8 +1,6 @@
 disabled_rules:
   - shorthand_operator
-  - identifier_name
   - nesting
-  - for_where
 line_length: 180
 file_length: 1000
 type_body_length: 500

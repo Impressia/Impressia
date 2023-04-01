@@ -42,12 +42,12 @@ extension Pixelfed.Mutes: TargetType {
         var page: Page?
 
         switch self {
-        case .mutes(let _maxId, let _sinceId, let _minId, let _limit, let _page):
-            maxId = _maxId
-            sinceId = _sinceId
-            minId = _minId
-            limit = _limit
-            page = _page
+        case .mutes(let paramMaxId, let paramSinceId, let paramMinId, let paramLimit, let paramPage):
+            maxId = paramMaxId
+            sinceId = paramSinceId
+            minId = paramMinId
+            limit = paramLimit
+            page = paramPage
         }
 
         if let maxId {

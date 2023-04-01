@@ -23,12 +23,12 @@ extension UIImage {
 
         guard blurHash.count == 4 + 2 * numX * numY else { return nil }
 
-        let colours: [(Float, Float, Float)] = (0 ..< numX * numY).map { i in
-            if i == 0 {
+        let colours: [(Float, Float, Float)] = (0 ..< numX * numY).map { index in
+            if index == 0 {
                 let value = String(blurHash[2 ..< 6]).decode83()
                 return decodeDC(value)
             } else {
-                let value = String(blurHash[4 + i * 2 ..< 4 + i * 2 + 2]).decode83()
+                let value = String(blurHash[4 + index * 2 ..< 4 + index * 2 + 2]).decode83()
                 return decodeAC(value, maximumValue: maximumValue * punch)
             }
         }
@@ -40,29 +40,29 @@ extension UIImage {
         CFDataSetLength(data, bytesPerRow * height)
         guard let pixels = CFDataGetMutableBytePtr(data) else { return nil }
 
-        for y in 0 ..< height {
-            for x in 0 ..< width {
-                var r: Float = 0
-                var g: Float = 0
-                var b: Float = 0
+        for yPoint in 0 ..< height {
+            for xPoint in 0 ..< width {
+                var red: Float = 0
+                var green: Float = 0
+                var blue: Float = 0
 
-                for j in 0 ..< numY {
-                    for i in 0 ..< numX {
-                        let basis = cos(Float.pi * Float(x) * Float(i) / Float(width)) * cos(Float.pi * Float(y) * Float(j) / Float(height))
-                        let colour = colours[i + j * numX]
-                        r += colour.0 * basis
-                        g += colour.1 * basis
-                        b += colour.2 * basis
+                for jIndex in 0 ..< numY {
+                    for iIndex in 0 ..< numX {
+                        let basis = cos(Float.pi * Float(xPoint) * Float(iIndex) / Float(width)) * cos(Float.pi * Float(yPoint) * Float(jIndex) / Float(height))
+                        let colour = colours[iIndex + jIndex * numX]
+                        red += colour.0 * basis
+                        green += colour.1 * basis
+                        blue += colour.2 * basis
                     }
                 }
 
-                let intR = UInt8(linearTosRGB(r))
-                let intG = UInt8(linearTosRGB(g))
-                let intB = UInt8(linearTosRGB(b))
+                let intR = UInt8(linearTosRGB(red))
+                let intG = UInt8(linearTosRGB(green))
+                let intB = UInt8(linearTosRGB(blue))
 
-                pixels[3 * x + 0 + y * bytesPerRow] = intR
-                pixels[3 * x + 1 + y * bytesPerRow] = intG
-                pixels[3 * x + 2 + y * bytesPerRow] = intB
+                pixels[3 * xPoint + 0 + yPoint * bytesPerRow] = intR
+                pixels[3 * xPoint + 1 + yPoint * bytesPerRow] = intG
+                pixels[3 * xPoint + 2 + yPoint * bytesPerRow] = intB
             }
         }
 
@@ -102,13 +102,13 @@ private func signPow(_ value: Float, _ exp: Float) -> Float {
 }
 
 private func linearTosRGB(_ value: Float) -> Int {
-    let v = max(0, min(1, value))
-    if v <= 0.0031308 { return Int(v * 12.92 * 255 + 0.5) } else { return Int((1.055 * pow(v, 1 / 2.4) - 0.055) * 255 + 0.5) }
+    let maxV = max(0, min(1, value))
+    if maxV <= 0.0031308 { return Int(maxV * 12.92 * 255 + 0.5) } else { return Int((1.055 * pow(maxV, 1 / 2.4) - 0.055) * 255 + 0.5) }
 }
 
 private func sRGBToLinear<Type: BinaryInteger>(_ value: Type) -> Float {
-    let v = Float(Int64(value)) / 255
-    if v <= 0.04045 { return v / 12.92 } else { return pow((v + 0.055) / 1.055, 2.4) }
+    let floatV = Float(Int64(value)) / 255
+    if floatV <= 0.04045 { return floatV / 12.92 } else { return pow((floatV + 0.055) / 1.055, 2.4) }
 }
 
 private let encodeCharacters: [String] = {

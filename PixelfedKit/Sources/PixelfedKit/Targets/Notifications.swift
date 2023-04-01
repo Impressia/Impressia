@@ -49,11 +49,11 @@ extension Pixelfed.Notifications: TargetType {
         var limit: Limit?
 
         switch self {
-        case .notifications(let _maxId, let _sinceId, let _minId, let _limit):
-            maxId = _maxId
-            sinceId = _sinceId
-            minId = _minId
-            limit = _limit
+        case .notifications(let paramMaxId, let paramSinceId, let paramMinId, let paramLimit):
+            maxId = paramMaxId
+            sinceId = paramSinceId
+            minId = paramMinId
+            limit = paramLimit
         default: break
         }
 

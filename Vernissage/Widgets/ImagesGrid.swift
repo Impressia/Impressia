@@ -101,8 +101,8 @@ struct ImagesGrid: View {
 
         // Clear placeholders when there is small number of photos.
         if index < self.maxImages {
-            for i in (index...self.maxImages - 1).reversed() {
-                self.photoUrls.remove(at: i)
+            for position in (index...self.maxImages - 1).reversed() {
+                self.photoUrls.remove(at: position)
             }
         }
     }

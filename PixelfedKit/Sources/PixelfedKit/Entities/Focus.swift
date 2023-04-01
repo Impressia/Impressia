@@ -11,13 +11,13 @@ import Foundation
 public struct Focus: Codable {
 
     /// X position int he image.
-    public let x: Int
+    public let xPoint: Int
 
     /// Y position in the image.
-    public let y: Int
+    public let yPoint: Int
 
     private enum CodingKeys: String, CodingKey {
-        case x
-        case y
+        case xPoint = "x"
+        case yPoint = "y"
     }
 }

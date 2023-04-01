@@ -143,10 +143,8 @@ public class HomeTimelineService {
 
         // Remove statuses that are not in 40 downloaded once.
         var dbStatusesToRemove: [StatusData] = []
-        for dbStatus in dbStatuses {
-            if !statuses.contains(where: { status in status.id == dbStatus.id }) {
-                dbStatusesToRemove.append(dbStatus)
-            }
+        for dbStatus in dbStatuses where !statuses.contains(where: { status in status.id == dbStatus.id }) {
+            dbStatusesToRemove.append(dbStatus)
         }
 
         if !dbStatusesToRemove.isEmpty {
@@ -155,10 +153,8 @@ public class HomeTimelineService {
 
         // Add statuses which are not existing in database, but has been downloaded via API.
         var statusesToAdd: [Status] = []
-        for status in statuses {
-            if !dbStatuses.contains(where: { statusData in statusData.id == status.id }) {
-                statusesToAdd.append(status)
-            }
+        for status in statuses where !dbStatuses.contains(where: { statusData in statusData.id == status.id }) {
+            statusesToAdd.append(status)
         }
 
         // Save statuses in database.

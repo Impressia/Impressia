@@ -48,18 +48,26 @@ extension Pixelfed.Search: TargetType {
         var page: Page?
 
         switch self {
-        case .search(let _query, let _resultsType, let _resolveNonLocal, let _maxId, let _sinceId, let _minId, let _limit, let _page):
+        case .search(let paramQuery,
+                     let paramResultsType,
+                     let paramResolveNonLocal,
+                     let paramMaxId,
+                     let paramSinceId,
+                     let paramMinId,
+                     let paramLimit,
+                     let paramPage):
+
             params.append(contentsOf: [
-                ("q", _query),
-                ("type", _resultsType.rawValue),
-                ("resolve", _resolveNonLocal.asString)
+                ("q", paramQuery),
+                ("type", paramResultsType.rawValue),
+                ("resolve", paramResolveNonLocal.asString)
             ])
 
-            maxId = _maxId
-            sinceId = _sinceId
-            minId = _minId
-            limit = _limit
-            page = _page
+            maxId = paramMaxId
+            sinceId = paramSinceId
+            minId = paramMinId
+            limit = paramLimit
+            page = paramPage
         }
 
         if let maxId {

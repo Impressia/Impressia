@@ -56,6 +56,7 @@ public enum HTTPStatusCode: Int, Error {
 
     /// - ok: Standard response for successful HTTP requests.
     case ok = 200
+    // swiftlint:disable:previous identifier_name
 
     /// - created: The request has been fulfilled, resulting in the creation of a new resource.
     case created = 201
