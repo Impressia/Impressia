@@ -3,14 +3,14 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 import PixelfedKit
 
 struct UserProfileStatusesView: View {
     @EnvironmentObject private var applicationState: ApplicationState
     @EnvironmentObject private var client: Client
-    
+
     @State public var accountId: String
 
     @State private var allItemsLoaded = false
@@ -51,7 +51,7 @@ struct UserProfileStatusesView: View {
             }
         }
     }
-    
+
     private func loadStatuses() async throws {
         let statuses = try await self.client.accounts?.statuses(createdBy: self.accountId, limit: self.defaultLimit) ?? []
         var inPlaceStatuses: [StatusModel] = []
@@ -59,15 +59,15 @@ struct UserProfileStatusesView: View {
         for item in statuses.getStatusesWithImagesOnly() {
             inPlaceStatuses.append(StatusModel(status: item))
         }
-        
+
         self.firstLoadFinished = true
         self.statusViewModels.append(contentsOf: inPlaceStatuses)
-        
+
         if statuses.count < self.defaultLimit {
             self.allItemsLoaded = true
         }
     }
-        
+
     private func loadMoreStatuses() async throws {
         if let lastStatusId = self.statusViewModels.last?.id {
             let previousStatuses = try await self.client.accounts?.statuses(createdBy: self.accountId, maxId: lastStatusId, limit: self.defaultLimit) ?? []
@@ -75,14 +75,13 @@ struct UserProfileStatusesView: View {
             if previousStatuses.isEmpty {
                 self.allItemsLoaded = true
             }
-            
+
             var inPlaceStatuses: [StatusModel] = []
             for item in previousStatuses.getStatusesWithImagesOnly() {
                 inPlaceStatuses.append(StatusModel(status: item))
             }
-            
+
             self.statusViewModels.append(contentsOf: inPlaceStatuses)
         }
     }
 }
-

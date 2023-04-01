@@ -3,7 +3,7 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 import PixelfedKit
 import Foundation
@@ -13,21 +13,21 @@ struct HashtagsView: View {
         case trending
         case search(query: String)
     }
-    
+
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var client: Client
     @EnvironmentObject var routerPath: RouterPath
 
     @State public var listType: ListType
-    
+
     @State private var tags: [HashtagModel] = []
     @State private var state: ViewState = .loading
-    
+
     var body: some View {
         self.mainBody()
             .navigationTitle("trendingTags.navigationBar.title")
     }
-    
+
     @ViewBuilder
     private func mainBody() -> some View {
         switch state {
@@ -45,14 +45,14 @@ struct HashtagsView: View {
         case .error(let error):
             ErrorView(error: error) {
                 self.state = .loading
-                
+
                 self.tags = []
                 await self.loadData()
             }
             .padding()
         }
     }
-    
+
     @ViewBuilder
     private func list() -> some View {
         List {
@@ -75,7 +75,7 @@ struct HashtagsView: View {
             }
         }
     }
-    
+
     private func loadData() async {
         do {
             self.tags = try await self.loadTags()
@@ -89,7 +89,7 @@ struct HashtagsView: View {
             }
         }
     }
-    
+
     private func loadTags() async throws -> [HashtagModel] {
         switch self.listType {
         case .trending:

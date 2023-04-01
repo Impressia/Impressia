@@ -14,21 +14,21 @@ struct ImageViewer: View {
     private let closeDragDistance = UIScreen.main.bounds.height / 1.8
     private let imageHeight: Double
     private let imageWidth: Double
-            
+
     // Magnification.
     @State private var currentMagnification = 0.0
     @State private var finalMagnification = 1.0
-    
+
     // Rotation.
     @State private var rotationAngle = Angle.zero
-    
+
     // Draging.
     @State private var currentOffset = CGSize.zero
     @State private var accumulatedOffset = CGSize.zero
-            
+
     init(attachmentModel: AttachmentModel) {
         self.attachmentModel = attachmentModel
-        
+
         if let data = attachmentModel.data, let uiImage = UIImage(data: data) {
             self.image = Image(uiImage: uiImage)
             self.imageHeight = uiImage.size.height
@@ -39,7 +39,7 @@ struct ImageViewer: View {
             self.imageWidth = 200
         }
     }
-    
+
     var body: some View {
         image
             .resizable()
@@ -59,18 +59,18 @@ struct ImageViewer: View {
                 }
             }
     }
-        
+
     @MainActor
     var magnificationGesture: some Gesture {
         MagnificationGesture()
             .onChanged { amount in
                 self.currentMagnification = (amount - 1) * self.finalMagnification
             }
-            .onEnded { amount in
+            .onEnded { _ in
                 self.revertToPrecalculatedMagnification()
             }
     }
-    
+
     var doubleTapGesture: some Gesture {
         TapGesture(count: 2)
             .onEnded { _ in
@@ -89,7 +89,7 @@ struct ImageViewer: View {
                 }
             }
     }
-    
+
     @MainActor
     var dragGesture: some Gesture {
         DragGesture()
@@ -99,13 +99,13 @@ struct ImageViewer: View {
                     // We can move image whatever we want.
                     self.currentOffset = CGSize(width: amount.translation.width + self.accumulatedOffset.width,
                                                 height: amount.translation.height + self.accumulatedOffset.height)
-                    
+
                     // Changing angle.
                     self.rotationAngle = Angle(degrees: Double(self.currentOffset.width / 30))
                 } else {
                     // Bigger images we can move only horizontally (we have to include magnifications).
                     let offsetWidth = (amount.predictedEndTranslation.width / self.finalMagnification) + self.accumulatedOffset.width
-                    
+
                     withAnimation(.spring()) {
                         self.currentOffset = CGSize(width: offsetWidth, height: 0)
                     }
@@ -113,7 +113,7 @@ struct ImageViewer: View {
             } .onEnded { amount in
                 self.accumulatedOffset = CGSize(width: (amount.predictedEndTranslation.width / self.finalMagnification) + self.accumulatedOffset.width,
                                                 height: (amount.predictedEndTranslation.height / self.finalMagnification) + self.accumulatedOffset.height)
-                
+
                 // Animations only for small images sizes,
                 if self.finalMagnification == 1.0 {
                     // When we still are in range visible image then we have to only revert back image to starting position..
@@ -121,7 +121,7 @@ struct ImageViewer: View {
                         withAnimation(.linear(duration: 0.1)) {
                             self.currentOffset = self.accumulatedOffset
                         }
-                        
+
                         // Revert back image offset.
                         withAnimation(.linear(duration: 0.3).delay(0.1)) {
                             self.currentOffset = CGSize.zero
@@ -136,7 +136,7 @@ struct ImageViewer: View {
                             self.rotationAngle = Angle(degrees: Double(amount.predictedEndTranslation.width / 30))
                             self.accumulatedOffset = CGSize.zero
                         }
-                        
+
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
                             withoutAnimation {
                                 self.dismiss()
@@ -148,13 +148,13 @@ struct ImageViewer: View {
                 }
             }
     }
-    
+
     var tapGesture: some Gesture {
         TapGesture().onEnded({ _ in
             withAnimation {
                 self.currentOffset = self.calculateStartingOffset()
             }
-            
+
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 withoutAnimation {
                     self.dismiss()
@@ -162,21 +162,21 @@ struct ImageViewer: View {
             }
         })
     }
-    
+
     @MainActor
     private func revertToPrecalculatedMagnification() {
         let magnification = self.finalMagnification + self.currentMagnification
-        
+
         if magnification < 1.0 {
             // When image is small we are returning to starting point.
             withAnimation {
                 self.finalMagnification = 1.0
                 self.currentMagnification = 0
-                
+
                 // Also we have to move image to orginal position.
                 self.currentOffset = CGSize.zero
             }
-            
+
             HapticService.shared.fireHaptic(of: .animation)
         } else if magnification > 3.0 {
             // When image is magnified to much we are rturning to 1.5 maginification.
@@ -184,7 +184,7 @@ struct ImageViewer: View {
                 self.finalMagnification = 3.0
                 self.currentMagnification = 0
             }
-            
+
             HapticService.shared.fireHaptic(of: .animation)
         } else {
             self.finalMagnification = magnification
@@ -194,11 +194,11 @@ struct ImageViewer: View {
             self.moveToEdge()
         }
     }
-    
+
     @MainActor
     private func moveToEdge() {
         let maxEdgeDistance = ((UIScreen.main.bounds.width * self.finalMagnification) - UIScreen.main.bounds.width) / (2 * self.finalMagnification)
-        
+
         if self.currentOffset.width > maxEdgeDistance {
             withAnimation(.linear(duration: 0.15)) {
                 self.currentOffset = CGSize(width: maxEdgeDistance, height: 0)
@@ -211,28 +211,28 @@ struct ImageViewer: View {
                 self.currentOffset = CGSize(width: -maxEdgeDistance, height: 0)
                 self.accumulatedOffset = self.currentOffset
             }
-            
+
             HapticService.shared.fireHaptic(of: .animation)
         }
     }
-    
+
     private func calculateStartingOffset() -> CGSize {
         // Image size on the screen.
         let imageOnScreenHeight = self.calculateHeight(width: self.imageWidth, height: self.imageHeight)
-        
+
         // Calculate full space for image.
         let safeAreaInsetsTop = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 20.0
         let safeAreaInsetsBottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 20.0
         let spaceForNavigationBar = self.spaceForNavigationBar()
         let spaceForImage = UIScreen.main.bounds.height - safeAreaInsetsTop - safeAreaInsetsBottom - spaceForNavigationBar
-        
+
         // Calculate empty space.
         let emptySpace = spaceForImage - imageOnScreenHeight
-        
+
         // Calculate image shift.
         return CGSize(width: 0, height: -(emptySpace / 2))
     }
-    
+
     private func spaceForNavigationBar() -> CGFloat {
         if UIScreen.main.bounds.height == 852.0 || UIScreen.main.bounds.height == 932.0 {
             // iPhone 14 Pro, iPhone 14 Pro Max
@@ -242,7 +242,7 @@ struct ImageViewer: View {
             return 88.0
         }
     }
-        
+
     private func calculateHeight(width: Double, height: Double) -> CGFloat {
         let divider = width / UIScreen.main.bounds.size.width
         return height / divider

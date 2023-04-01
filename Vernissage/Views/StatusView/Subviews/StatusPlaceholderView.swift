@@ -3,16 +3,16 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 
 struct StatusPlaceholderView: View {
     @State var imageHeight: Double
     @State var imageBlurhash: String?
-    
+
     var body: some View {
         ScrollView {
-            VStack (alignment: .leading) {
+            VStack(alignment: .leading) {
                 if let imageBlurhash, let uiImage = UIImage(blurHash: imageBlurhash, size: CGSize(width: 32, height: 32)) {
                     Image(uiImage: uiImage)
                         .resizable()
@@ -23,19 +23,19 @@ struct StatusPlaceholderView: View {
                         .frame(width: UIScreen.main.bounds.width, height: imageHeight)
                         .redacted(reason: .placeholder)
                 }
-                
+
                 VStack(alignment: .leading) {
                     UsernameRow(accountId: "",
                                 accountDisplayName: "Verylong Displayname",
                                 accountUsername: "@username")
-                    
+
                     Text("Lorem ispum text something")
                         .foregroundColor(.lightGrayColor)
                         .font(.footnote)
                     Text("Lorem ispum text something sdf sdfsdf sdfdsfsdfsdf")
                         .foregroundColor(.lightGrayColor)
                         .font(.footnote)
-                    
+
                     LabelIcon(iconName: "mappin.and.ellipse", value: "Wroclaw, Poland")
                     LabelIcon(iconName: "camera", value: "SONY ILCE-7M3")
                     LabelIcon(iconName: "camera.aperture", value: "Viltrox 24mm F1.8 E")

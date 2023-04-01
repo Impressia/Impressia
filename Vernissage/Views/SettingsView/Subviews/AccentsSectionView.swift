@@ -8,10 +8,10 @@ import SwiftUI
 
 struct AccentsSectionView: View {
     @EnvironmentObject var applicationState: ApplicationState
-    
+
     private let accentColors1: [TintColor] = [.accentColor1, .accentColor2, .accentColor3, .accentColor4, .accentColor5]
     private let accentColors2: [TintColor] = [.accentColor6, .accentColor7, .accentColor8, .accentColor9, .accentColor10]
-    
+
     var body: some View {
         Section("settings.title.accent") {
             VStack(alignment: .leading) {
@@ -31,14 +31,14 @@ struct AccentsSectionView: View {
                                     .fontWeight(.bold)
                             }
                         }
-                        
+
                         if color != accentColors1.last {
                             Spacer()
                         }
                     }
                 }
                 .padding(.vertical, 8)
-                 
+
                 HStack(alignment: .center) {
                     ForEach(accentColors2, id: \.self) { color in
                         ZStack {
@@ -55,7 +55,7 @@ struct AccentsSectionView: View {
                                     .fontWeight(.bold)
                             }
                         }
-                        
+
                         if color != accentColors2.last {
                             Spacer()
                         }

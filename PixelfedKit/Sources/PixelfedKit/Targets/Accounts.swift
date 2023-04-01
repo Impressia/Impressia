@@ -54,49 +54,50 @@ extension Pixelfed.Account: TargetType {
             return "\(apiPath)/\(id)/mute"
         case .unmute(let id):
             return "\(apiPath)/\(id)/unmute"
-        case .relationships(_):
+        case .relationships:
             return "\(apiPath)/relationships"
-        case .search(_, _):
+        case .search:
             return "\(apiPath)/search"
-        case .updateCredentials(_, _, _, _, _):
+        case .updateCredentials:
             return "\(apiPath)/update_credentials"
-        case .updateAvatar(_):
+        case .updateAvatar:
             return "\(apiPath)/update_credentials"
         }
     }
-    
+
     public var method: Method {
         switch self {
-        case .follow(_), .unfollow(_), .block(_), .unblock(_), .mute(_), .unmute(_):
+        case .follow, .unfollow, .block, .unblock, .mute, .unmute:
             return .post
-        case .updateCredentials(_, _, _, _, _), .updateAvatar(_):
-            // Mastodon API uses PATCH, however in Pixelfed we have to use POST: https://github.com/pixelfed/pixelfed/issues/4250
+        case .updateCredentials, .updateAvatar:
+            // Mastodon API uses PATCH, however in Pixelfed we have to use POST:
+            // https://github.com/pixelfed/pixelfed/issues/4250
             // Also it seems that we have to speparatelly save text fields and avatar(?).
             return .post
         default:
             return .get
         }
     }
-        
+
     public var queryItems: [(String, String)]? {
         var params: [(String, String)] = []
 
-        var maxId: MaxId? = nil
-        var sinceId: SinceId? = nil
-        var minId: MinId? = nil
-        var limit: Limit? = nil
-        var page: Page? = nil
+        var maxId: MaxId?
+        var sinceId: SinceId?
+        var minId: MinId?
+        var limit: Limit?
+        var page: Page?
 
         switch self {
-        case .statuses(_, let onlyMedia, let excludeReplies, let _maxId, let _sinceId, let _minId, let _limit):
+        case .statuses(_, let paramOnlyMedia, let paramExcludeReplies, let paramMaxId, let paramSinceId, let paramMinId, let paramLimit):
             params.append(contentsOf: [
-                ("only_media", onlyMedia.asString),
-                ("exclude_replies", excludeReplies.asString)
+                ("only_media", paramOnlyMedia.asString),
+                ("exclude_replies", paramExcludeReplies.asString)
             ])
-            maxId = _maxId
-            sinceId = _sinceId
-            minId = _minId
-            limit = _limit
+            maxId = paramMaxId
+            sinceId = paramSinceId
+            minId = paramMinId
+            limit = paramLimit
         case .relationships(let id):
             return id.map({ id in
                     ("id[]", id)
@@ -106,32 +107,32 @@ extension Pixelfed.Account: TargetType {
                 ("q", query),
                 ("limit", limit.asString)
             ]
-        case .following(_, let _maxId, let _sinceId, let _minId, let _limit, let _page):
-            maxId = _maxId
-            sinceId = _sinceId
-            minId = _minId
-            limit = _limit
-            page = _page
-        case .followers(_, let _maxId, let _sinceId, let _minId, let _limit, let _page):
-            maxId = _maxId
-            sinceId = _sinceId
-            minId = _minId
-            limit = _limit
-            page = _page
-        case .updateCredentials(_, _, _, _, _), .updateAvatar(_):
+        case .following(_, let paramMaxId, let paramSinceId, let paramMinId, let paramLimit, let paramPage):
+            maxId = paramMaxId
+            sinceId = paramSinceId
+            minId = paramMinId
+            limit = paramLimit
+            page = paramPage
+        case .followers(_, let paramMaxId, let paramSinceId, let paramMinId, let paramLimit, let paramPage):
+            maxId = paramMaxId
+            sinceId = paramSinceId
+            minId = paramMinId
+            limit = paramLimit
+            page = paramPage
+        case .updateCredentials, .updateAvatar:
             return [
                 ("_pe", "1")
             ]
-        case .account(_), .verifyCredentials:
+        case .account, .verifyCredentials:
             return [
                 ("_pe", "1")
             ]
         default:
             return nil
         }
-        
+
         if let maxId {
-            params.append(("max_id",  maxId))
+            params.append(("max_id", maxId))
         }
         if let sinceId {
             params.append(("since_id", sinceId))
@@ -145,24 +146,24 @@ extension Pixelfed.Account: TargetType {
         if let page {
             params.append(("page", "\(page)"))
         }
-        
+
         return params
     }
-    
+
     public var headers: [String: String]? {
         switch self {
-        case .updateCredentials(_, _, _, _, _), .updateAvatar(_):
+        case .updateCredentials, .updateAvatar:
             return ["content-type": "multipart/form-data; boundary=\(multipartBoundary)"]
         default:
             return [:].contentTypeApplicationJson
         }
     }
-    
+
     public var httpBody: Data? {
         switch self {
         case .updateCredentials(let displayName, let bio, let website, let locked, let image):
             let formDataBuilder = MultipartFormData(boundary: multipartBoundary)
-            
+
             formDataBuilder.addTextField(named: "display_name", value: displayName)
             formDataBuilder.addTextField(named: "note", value: bio)
             formDataBuilder.addTextField(named: "website", value: website)
@@ -175,7 +176,7 @@ extension Pixelfed.Account: TargetType {
             return formDataBuilder.build()
         case .updateAvatar(let image):
             let formDataBuilder = MultipartFormData(boundary: multipartBoundary)
-            
+
             if let image {
                 formDataBuilder.addDataField(named: "avatar", fileName: "avatar.jpg", data: image, mimeType: "image/jpeg")
             }

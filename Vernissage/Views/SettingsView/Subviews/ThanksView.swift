@@ -8,7 +8,7 @@ import SwiftUI
 
 struct ThanksView: View {
     @EnvironmentObject var routerPath: RouterPath
-        
+
     var body: some View {
         VStack {
             Spacer()
@@ -23,7 +23,7 @@ struct ThanksView: View {
                         .font(.footnote)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.viewTextColor)
-                    
+
                     Button(NSLocalizedString("settings.title.thankYouClose", comment: "Close")) {
                         HapticService.shared.fireHaptic(of: .buttonPress)
 

@@ -3,7 +3,7 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import Foundation
 
 public class AccountModel: ObservableObject, Identifiable {
@@ -27,9 +27,9 @@ public class AccountModel: ObservableObject, Identifiable {
     public let url: URL?
     public let username: String
     public let lastSeenStatusId: String?
-    
+
     @Published public var avatarData: Data?
-    
+
     init(accountData: AccountData) {
         self.accessToken = accountData.accessToken
         self.refreshToken = accountData.refreshToken

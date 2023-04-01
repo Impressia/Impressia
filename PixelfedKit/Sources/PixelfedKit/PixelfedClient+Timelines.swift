@@ -18,7 +18,7 @@ public extension PixelfedClientAuthenticated {
             target: Pixelfed.Timelines.home(maxId, sinceId, minId, limit),
             withBearerToken: token
         )
-                    
+
         return try await downloadJson([Status].self, request: request)
     }
 
@@ -35,8 +35,7 @@ public extension PixelfedClientAuthenticated {
             target: Pixelfed.Timelines.pub(local, remote, onlyMedia, maxId, sinceId, minId, limit),
             withBearerToken: token
         )
-        
-        
+
         return try await downloadJson([Status].self, request: request)
     }
 
@@ -54,7 +53,7 @@ public extension PixelfedClientAuthenticated {
             target: Pixelfed.Timelines.tag(tag, local, remote, onlyMedia, maxId, sinceId, minId, limit),
             withBearerToken: token
         )
-        
+
         return try await downloadJson([Status].self, request: request)
     }
 

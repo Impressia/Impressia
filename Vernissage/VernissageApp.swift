@@ -18,11 +18,11 @@ struct VernissageApp: App {
     @StateObject var client = Client.shared
     @StateObject var routerPath = RouterPath()
     @StateObject var tipsStore = TipsStore()
-    
+
     @State var applicationViewMode: ApplicationViewMode = .loading
     @State var tintColor = ApplicationState.shared.tintColor.color()
     @State var theme = ApplicationState.shared.theme.colorScheme()
-    
+
     let timer = Timer.publish(every: 120, on: .main, in: .common).autoconnect()
 
     var body: some Scene {
@@ -65,7 +65,7 @@ struct VernissageApp: App {
                     }
                 }
             }
-            .onReceive(timer) { time in
+            .onReceive(timer) { _ in
                 Task {
                     // Refresh indicator of new photos each two minutes (when application is in the foreground)..
                     await self.calculateNewPhotosInBackground()
@@ -90,27 +90,27 @@ struct VernissageApp: App {
             }
         }
     }
-    
+
     @MainActor
     private func onApplicationStart() async {
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.white.withAlphaComponent(0.7)
         UIPageControl.appearance().pageIndicatorTintColor = UIColor.white.withAlphaComponent(0.4)
-        
+
         // Set custom configurations for Nuke image/data loaders.
         self.setImagePipelines()
 
         // Load user preferences from database.
         self.loadUserPreferences()
-        
+
         // Refresh other access tokens.
         await self.refreshAccessTokens()
-        
+
         // When user doesn't exists then we have to open sign in view.
         guard let currentAccount = AccountDataHandler.shared.getCurrentAccountData() else {
             self.applicationViewMode = .signIn
             return
         }
-        
+
         // Create model based on core data entity.
         let accountModel = AccountModel(accountData: currentAccount)
 
@@ -121,7 +121,7 @@ struct VernissageApp: App {
                 self.applicationViewMode = .signIn
                 return
             }
-            
+
             self.setApplicationState(accountModel: signedInAccountModel, checkNewPhotos: true)
         }
     }
@@ -132,30 +132,30 @@ struct VernissageApp: App {
 
             // Refresh client state.
             self.client.setAccount(account: accountModel)
-            
+
             // Refresh application state.
             self.applicationState.changeApplicationState(accountModel: accountModel,
                                                          instance: instance,
                                                          lastSeenStatusId: accountModel.lastSeenStatusId)
-            
+
             // Change view displayed by application.
             self.applicationViewMode = .mainView
-            
+
             // Check amount of newly added photos.
             if checkNewPhotos {
                 await self.calculateNewPhotosInBackground()
             }
         }
     }
-    
+
     private func loadUserPreferences() {
         let defaultSettings = ApplicationSettingsHandler.shared.get()
-        
+
         if let tintColor = TintColor(rawValue: Int(defaultSettings.tintColor)) {
             self.applicationState.tintColor = tintColor
             self.tintColor = tintColor.color()
         }
-        
+
         if let theme = Theme(rawValue: Int(defaultSettings.theme)) {
             self.applicationState.theme = theme
             self.theme = theme.colorScheme()
@@ -164,12 +164,12 @@ struct VernissageApp: App {
         if let avatarShape = AvatarShape(rawValue: Int(defaultSettings.avatarShape)) {
             self.applicationState.avatarShape = avatarShape
         }
-        
+
         self.applicationState.activeIcon = defaultSettings.activeIcon
         self.applicationState.showSensitive = defaultSettings.showSensitive
         self.applicationState.showPhotoDescription = defaultSettings.showPhotoDescription
     }
-    
+
     private func setImagePipelines() {
         let pipeline = ImagePipeline {
             $0.dataLoader =  DataLoader(configuration: {
@@ -178,30 +178,32 @@ struct VernissageApp: App {
                 conf.urlCache = nil
                 return conf
             }())
-            
+
             $0.imageCache = ImageCache.shared
-            $0.dataCache = try! DataCache(name: AppConstants.imagePipelineCacheName)
+            if let dataCache = try? DataCache(name: AppConstants.imagePipelineCacheName) {
+                $0.dataCache = dataCache
+            }
         }
-        
+
         ImagePipeline.shared = pipeline
     }
-    
+
     private func refreshAccessTokens() async {
         let defaultSettings = ApplicationSettingsHandler.shared.get()
-        
+
         // Run refreshing access tokens once per day.
         guard let refreshTokenDate = Calendar.current.date(byAdding: .day, value: 1, to: defaultSettings.lastRefreshTokens), refreshTokenDate < Date.now else {
             return
         }
-    
+
         // Refresh access tokens.
         await AuthorizationService.shared.refreshAccessTokens()
-        
+
         // Update time when refresh tokens has been updated.
         defaultSettings.lastRefreshTokens = Date.now
         CoreDataHandler.shared.save()
     }
-    
+
     private func calculateNewPhotosInBackground() async {
         if let account = self.applicationState.account {
             self.applicationState.amountOfNewStatuses = await HomeTimelineService.shared.amountOfNewStatuses(for: account)

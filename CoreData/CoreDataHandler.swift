@@ -8,7 +8,7 @@ import CoreData
 
 public class CoreDataHandler {
     public static let shared = CoreDataHandler()
-    
+
     lazy var container: NSPersistentContainer = {
         let container = NSPersistentContainer(name: AppConstants.coreDataPersistantContainerName)
         let storeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.dev.mczachurski.vernissage")!
@@ -23,10 +23,11 @@ public class CoreDataHandler {
             container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: storeURL)]
         }
 
-        container.loadPersistentStores(completionHandler: { [unowned container] (storeDescription, error) in
+        container.loadPersistentStores(completionHandler: { [unowned container] (_, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                // fatalError() causes the application to generate a crash log and terminate.
+                // You should not use this function in a shipping application, although it may be useful during development.
 
                 /*
                  Typical reasons for an error here include:
@@ -43,7 +44,7 @@ public class CoreDataHandler {
             if let url = defaultURL, url.absoluteString != storeURL.absoluteString {
                 let coordinator = container.persistentStoreCoordinator
                 if let oldStore = coordinator.persistentStore(for: url) {
-                    
+
                     // Migration process.
                     do {
                         try coordinator.migratePersistentStore(oldStore, to: storeURL, options: nil, withType: NSSQLiteStoreType)
@@ -67,11 +68,11 @@ public class CoreDataHandler {
         container.viewContext.automaticallyMergesChangesFromParent = true
         return container
     }()
-    
+
     public func newBackgroundContext() -> NSManagedObjectContext {
         self.container.newBackgroundContext()
     }
-    
+
     public func save(viewContext: NSManagedObjectContext? = nil) {
         let context = viewContext ?? CoreDataHandler.shared.container.viewContext
         if context.hasChanges {

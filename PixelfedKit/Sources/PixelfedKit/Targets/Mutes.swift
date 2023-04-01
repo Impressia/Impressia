@@ -22,7 +22,7 @@ extension Pixelfed.Mutes: TargetType {
             return "\(apiPath)"
         }
     }
-    
+
     /// The HTTP method used in the request.
     public var method: Method {
         switch self {
@@ -30,16 +30,16 @@ extension Pixelfed.Mutes: TargetType {
             return .get
         }
     }
-    
+
     /// The parameters to be incoded in the request.
     public var queryItems: [(String, String)]? {
         var params: [(String, String)] = []
 
-        var maxId: MaxId? = nil
-        var sinceId: SinceId? = nil
-        var minId: MinId? = nil
-        var limit: Limit? = nil
-        var page: Page? = nil
+        var maxId: MaxId?
+        var sinceId: SinceId?
+        var minId: MinId?
+        var limit: Limit?
+        var page: Page?
 
         switch self {
         case .mutes(let _maxId, let _sinceId, let _minId, let _limit, let _page):
@@ -49,9 +49,9 @@ extension Pixelfed.Mutes: TargetType {
             limit = _limit
             page = _page
         }
-        
+
         if let maxId {
-            params.append(("max_id",  maxId))
+            params.append(("max_id", maxId))
         }
         if let sinceId {
             params.append(("since_id", sinceId))
@@ -65,14 +65,14 @@ extension Pixelfed.Mutes: TargetType {
         if let page {
             params.append(("page", "\(page)"))
         }
-        
+
         return params
     }
-    
+
     public var headers: [String: String]? {
         [:].contentTypeApplicationJson
     }
-    
+
     public var httpBody: Data? {
         nil
     }

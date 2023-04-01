@@ -28,7 +28,7 @@ extension Pixelfed.Timelines: TargetType {
             return "\(apiPath)/tag/\(hashtag)"
         }
     }
-    
+
     /// The HTTP method used in the request.
     public var method: Method {
         switch self {
@@ -36,17 +36,17 @@ extension Pixelfed.Timelines: TargetType {
             return .get
         }
     }
-    
+
     /// The parameters to be incoded in the request.
     public var queryItems: [(String, String)]? {
         var params: [(String, String)] = []
-        var local: Bool? = nil
-        var remote: Bool? = nil
-        var onlyMedia: Bool? = nil
-        var maxId: MaxId? = nil
-        var sinceId: SinceId? = nil
-        var minId: MinId? = nil
-        var limit: Limit? = nil
+        var local: Bool?
+        var remote: Bool?
+        var onlyMedia: Bool?
+        var maxId: MaxId?
+        var sinceId: SinceId?
+        var minId: MinId?
+        var limit: Limit?
 
         switch self {
         case .tag(_, let _local, let _remote, let _onlyMedia, let _maxId, let _sinceId, let _minId, let _limit),
@@ -66,7 +66,7 @@ extension Pixelfed.Timelines: TargetType {
         }
 
         if let maxId {
-            params.append(("max_id",  maxId))
+            params.append(("max_id", maxId))
         }
         if let sinceId {
             params.append(("since_id", sinceId))
@@ -88,11 +88,11 @@ extension Pixelfed.Timelines: TargetType {
         }
         return params
     }
-    
+
     public var headers: [String: String]? {
         [:].contentTypeApplicationJson
     }
-    
+
     public var httpBody: Data? {
         nil
     }

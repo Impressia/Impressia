@@ -3,24 +3,24 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 
 struct ImageUploadView: View {
     @EnvironmentObject public var routerPath: RouterPath
     @ObservedObject public var photoAttachment: PhotoAttachment
-    
+
     private let delete: () -> Void
     private let open: () -> Void
     private let upload: () -> Void
-    
+
     public init(photoAttachment: PhotoAttachment, open: @escaping () -> Void, delete: @escaping () -> Void, upload: @escaping () -> Void) {
         self.photoAttachment = photoAttachment
         self.delete = delete
         self.open = open
         self.upload = upload
     }
-    
+
     var body: some View {
         if photoAttachment.error != nil {
             Menu {
@@ -30,9 +30,9 @@ struct ImageUploadView: View {
                 } label: {
                     Label("compose.title.tryToUpload", systemImage: "exclamationmark.arrow.triangle.2.circlepath")
                 }
-                
+
                 Divider()
-                
+
                 Button(role: .destructive) {
                     HapticService.shared.fireHaptic(of: .buttonPress)
                     self.delete()
@@ -45,7 +45,7 @@ struct ImageUploadView: View {
                     self.imageView()
                         .blur(radius: 10)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
-                    
+
                         Image(systemName: "exclamationmark.triangle.fill")
                     }
             }
@@ -54,7 +54,7 @@ struct ImageUploadView: View {
                 self.imageView()
                     .blur(radius: 10)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
-                
+
                     LoadingIndicator(isVisible: Binding.constant(true))
                 }
         } else {
@@ -65,9 +65,9 @@ struct ImageUploadView: View {
                 } label: {
                     Label("compose.title.edit", systemImage: "pencil")
                 }
-                
+
                 Divider()
-                
+
                 Button(role: .destructive) {
                     HapticService.shared.fireHaptic(of: .buttonPress)
                     self.delete()
@@ -80,7 +80,7 @@ struct ImageUploadView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func imageView() -> some View {
         if let photoData = self.photoAttachment.photoData, let uiImage =  UIImage(data: photoData) {

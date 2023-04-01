@@ -8,10 +8,10 @@ import Foundation
 
 public extension PixelfedClientAuthenticated {
     func mutes(maxId: EntityId? = nil,
-                sinceId: EntityId? = nil,
-                minId: EntityId? = nil,
-                limit: Int? = nil,
-                page: Page? = nil) async throws -> [Account] {
+               sinceId: EntityId? = nil,
+               minId: EntityId? = nil,
+               limit: Int? = nil,
+               page: Page? = nil) async throws -> [Account] {
         let request = try Self.request(
             for: baseURL,
             target: Pixelfed.Mutes.mutes(maxId, sinceId, minId, limit, page),

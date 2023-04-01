@@ -3,7 +3,7 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 import WidgetKit
 
@@ -18,7 +18,7 @@ struct LargeWidgetView: View {
                 .unredacted()
         }
     }
-    
+
     @ViewBuilder
     private func getWidgetBody(uiImage: Image, uiAvatar: Image) -> some View {
         VStack {
@@ -53,4 +53,3 @@ struct LargeWidgetView: View {
         }
     }
 }
-

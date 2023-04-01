@@ -10,7 +10,7 @@ import CoreData
 class AttachmentDataHandler {
     public static let shared = AttachmentDataHandler()
     private init() { }
-    
+
     func createAttachmnentDataEntity(viewContext: NSManagedObjectContext? = nil) -> AttachmentData {
         let context = viewContext ?? CoreDataHandler.shared.container.viewContext
         return AttachmentData(context: context)

@@ -3,19 +3,19 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 
 struct ImageCarouselPicture: View {
     @ObservedObject public var attachment: AttachmentModel
-    
+
     private let onImageDownloaded: (AttachmentModel, Data) -> Void
-    
+
     init(attachment: AttachmentModel, onImageDownloaded: @escaping (_: AttachmentModel, _: Data) -> Void) {
         self.attachment = attachment
         self.onImageDownloaded = onImageDownloaded
     }
-    
+
     var body: some View {
         if let data = attachment.data, let image = UIImage(data: data) {
             Image(uiImage: image)

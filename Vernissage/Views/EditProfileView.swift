@@ -13,7 +13,7 @@ struct EditProfileView: View {
     @EnvironmentObject private var applicationState: ApplicationState
     @EnvironmentObject private var client: Client
     @Environment(\.dismiss) private var dismiss
-    
+
     @State private var account: Account?
     @State private var photosPickerVisible = false
     @State private var selectedItems: [PhotosPickerItem] = []
@@ -24,7 +24,7 @@ struct EditProfileView: View {
     @State private var isPrivate = false
     @State private var avatarData: Data?
     @State private var state: ViewState = .loading
-    
+
     private let bioMaxLength = 200
     private let displayNameMaxLength = 30
     private let websiteMaxLength = 120
@@ -33,9 +33,9 @@ struct EditProfileView: View {
         self.mainBody()
             .navigationTitle("editProfile.navigationBar.title")
     }
-    
+
     @ViewBuilder
-    private func mainBody() ->  some View {
+    private func mainBody() -> some View {
         switch state {
         case .loading:
             LoadingIndicator()
@@ -56,119 +56,12 @@ struct EditProfileView: View {
             .padding()
         }
     }
-    
+
     @ViewBuilder
     private func editForm(account: Account) -> some View {
         Form {
-            HStack {
-                Spacer()
-                VStack {
-                    ZStack {
-                        if let avatarData, let uiAvatar = UIImage(data: avatarData) {
-                            Image(uiImage: uiAvatar)
-                                .resizable()
-                                .clipShape(applicationState.avatarShape.shape())
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 120, height: 120)
-                        } else {
-                            UserAvatar(accountAvatar: account.avatar, size: .large)
-                        }
-                        
-                        LoadingIndicator(isVisible: $saveDisabled)
-
-                        BottomRight {
-                            Button {
-                                self.photosPickerVisible = true
-                            } label: {
-                                ZStack {
-                                    Circle()
-                                        .foregroundColor(.accentColor.opacity(0.8))
-                                        .frame(width: 40, height: 40)
-                                    Image(systemName: "person.crop.circle.badge.plus")
-                                        .font(.title2)
-                                        .foregroundColor(.white)
-                                }
-                            }
-                            .buttonStyle(PlainButtonStyle())
-                        }
-                        .frame(width: 130, height: 130)
-                    }
-                    
-                    Text("@\(account.acct)")
-                        .font(.headline)
-                        .foregroundColor(.lightGrayColor)
-                    
-                    if self.avatarData != nil {
-                        HStack {
-                            Image(systemName: "info.circle")
-                                .font(.body)
-                                .foregroundColor(.accentColor)
-                            Text("editProfile.title.photoInfo")
-                                .font(.footnote)
-                                .foregroundColor(.lightGrayColor)
-                        }
-                        .padding(.top, 4)
-                    }
-                }
-                
-                Spacer()
-            }
-            .padding(-10)
-            .listRowBackground(Color(UIColor.systemGroupedBackground))
-            .listRowSeparator(Visibility.hidden)
-
-            Section {
-                TextField("", text: $displayName)
-                    .onChange(of: self.displayName, perform: { newValue in
-                        self.displayName = String(self.displayName.prefix(self.displayNameMaxLength))
-                    })
-            } header: {
-                Text("editProfile.title.displayName", comment: "Display name")
-            } footer: {
-                HStack {
-                    Spacer()
-                    Text("\(self.displayName.count)/\(self.displayNameMaxLength)")
-                }
-            }
-            
-            Section {
-                TextField("", text: $bio, axis: .vertical)
-                    .lineLimit(5, reservesSpace: true)
-                    .onChange(of: self.bio, perform: { newValue in
-                        self.bio = String(self.bio.prefix(self.bioMaxLength))
-                    })
-            } header: {
-                Text("editProfile.title.bio", comment: "Bio")
-            } footer: {
-                HStack {
-                    Spacer()
-                    Text("\(self.bio.count)/\(self.bioMaxLength)")
-                }
-            }
-            
-            Section {
-                TextField("", text: $website)
-                    .autocapitalization(.none)
-                    .keyboardType(.URL)
-                    .autocorrectionDisabled()
-                    .onChange(of: self.website, perform: { newValue in
-                        self.website = String(self.website.prefix(self.websiteMaxLength))
-                    })
-            } header: {
-                Text("editProfile.title.website", comment: "Website")
-            } footer: {
-                HStack {
-                    Spacer()
-                    Text("\(self.website.count)/\(self.websiteMaxLength)")
-                }
-            }
-            
-            Section {
-                Toggle("editProfile.title.privateAccount", isOn: $isPrivate)
-            } footer: {
-                Text("editProfile.title.privateAccountInfo", comment: "Private account info")
-            }
-
+            self.avatarView(account: account)
+            self.formView()
         }
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
@@ -185,7 +78,7 @@ struct EditProfileView: View {
             self.displayName = account.displayName ?? String.empty()
             self.website = account.website ?? String.empty()
             self.isPrivate = account.locked
-            
+
             // Bio should be set from source property (which is plain text).
             if let note = account.source?.note {
                 self.bio = note.removingHTMLEntities()
@@ -196,7 +89,7 @@ struct EditProfileView: View {
                 }
             }
         }
-        .onChange(of: self.selectedItems) { selectedItem in
+        .onChange(of: self.selectedItems) { _ in
             Task {
                 await self.getAvatar()
             }
@@ -206,7 +99,122 @@ struct EditProfileView: View {
                       maxSelectionCount: 1,
                       matching: .images)
     }
-    
+
+    @ViewBuilder
+    private func avatarView(account: Account) -> some View {
+        HStack {
+            Spacer()
+            VStack {
+                ZStack {
+                    if let avatarData, let uiAvatar = UIImage(data: avatarData) {
+                        Image(uiImage: uiAvatar)
+                            .resizable()
+                            .clipShape(applicationState.avatarShape.shape())
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 120, height: 120)
+                    } else {
+                        UserAvatar(accountAvatar: account.avatar, size: .large)
+                    }
+
+                    LoadingIndicator(isVisible: $saveDisabled)
+
+                    BottomRight {
+                        Button {
+                            self.photosPickerVisible = true
+                        } label: {
+                            ZStack {
+                                Circle()
+                                    .foregroundColor(.accentColor.opacity(0.8))
+                                    .frame(width: 40, height: 40)
+                                Image(systemName: "person.crop.circle.badge.plus")
+                                    .font(.title2)
+                                    .foregroundColor(.white)
+                            }
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    }
+                    .frame(width: 130, height: 130)
+                }
+
+                Text("@\(account.acct)")
+                    .font(.headline)
+                    .foregroundColor(.lightGrayColor)
+
+                if self.avatarData != nil {
+                    HStack {
+                        Image(systemName: "info.circle")
+                            .font(.body)
+                            .foregroundColor(.accentColor)
+                        Text("editProfile.title.photoInfo")
+                            .font(.footnote)
+                            .foregroundColor(.lightGrayColor)
+                    }
+                    .padding(.top, 4)
+                }
+            }
+
+            Spacer()
+        }
+        .padding(-10)
+        .listRowBackground(Color(UIColor.systemGroupedBackground))
+        .listRowSeparator(Visibility.hidden)
+    }
+
+    @ViewBuilder
+    private func formView() -> some View {
+        Section {
+            TextField("", text: $displayName)
+                .onChange(of: self.displayName, perform: { _ in
+                    self.displayName = String(self.displayName.prefix(self.displayNameMaxLength))
+                })
+        } header: {
+            Text("editProfile.title.displayName", comment: "Display name")
+        } footer: {
+            HStack {
+                Spacer()
+                Text("\(self.displayName.count)/\(self.displayNameMaxLength)")
+            }
+        }
+
+        Section {
+            TextField("", text: $bio, axis: .vertical)
+                .lineLimit(5, reservesSpace: true)
+                .onChange(of: self.bio, perform: { _ in
+                    self.bio = String(self.bio.prefix(self.bioMaxLength))
+                })
+        } header: {
+            Text("editProfile.title.bio", comment: "Bio")
+        } footer: {
+            HStack {
+                Spacer()
+                Text("\(self.bio.count)/\(self.bioMaxLength)")
+            }
+        }
+
+        Section {
+            TextField("", text: $website)
+                .autocapitalization(.none)
+                .keyboardType(.URL)
+                .autocorrectionDisabled()
+                .onChange(of: self.website, perform: { _ in
+                    self.website = String(self.website.prefix(self.websiteMaxLength))
+                })
+        } header: {
+            Text("editProfile.title.website", comment: "Website")
+        } footer: {
+            HStack {
+                Spacer()
+                Text("\(self.website.count)/\(self.websiteMaxLength)")
+            }
+        }
+
+        Section {
+            Toggle("editProfile.title.privateAccount", isOn: $isPrivate)
+        } footer: {
+            Text("editProfile.title.privateAccountInfo", comment: "Private account info")
+        }
+    }
+
     private func loadData() async {
         do {
             self.account = try await self.client.accounts?.pixelfedClient.verifyCredentials()
@@ -220,7 +228,7 @@ struct EditProfileView: View {
             }
         }
     }
-    
+
     @MainActor
     private func saveProfile(account: Account) async {
         do {
@@ -232,14 +240,14 @@ struct EditProfileView: View {
 
             if let avatarData = self.avatarData {
                 _ = try await self.client.accounts?.avatar(image: avatarData)
-                
+
                 if let accountData = AccountDataHandler.shared.getAccountData(accountId: account.id) {
                     accountData.avatarData = avatarData
                     self.applicationState.account?.avatarData = avatarData
                     CoreDataHandler.shared.save()
                 }
             }
-            
+
             let savedAccount = try await self.client.accounts?.account(withId: account.id)
             self.applicationState.updatedProfile = savedAccount
 
@@ -249,17 +257,17 @@ struct EditProfileView: View {
             ErrorService.shared.handle(error, message: "editProfile.error.saveAccountFailed", showToastr: true)
         }
     }
-    
+
     private func getAvatar() async {
         do {
             self.saveDisabled = true
-            
+
             for item in self.selectedItems {
                 if let data = try await item.loadTransferable(type: Data.self) {
                     self.avatarData = data
                 }
             }
-            
+
             guard let imageData = self.avatarData else {
                 return
             }
@@ -267,7 +275,7 @@ struct EditProfileView: View {
             guard let image = UIImage(data: imageData) else {
                 return
             }
-            
+
             guard let data = image
                 .resized(to: .init(width: 800, height: 800))
                 .getJpegData() else {
@@ -277,7 +285,7 @@ struct EditProfileView: View {
             withAnimation(.linear) {
                 self.avatarData = data
             }
-            
+
             self.saveDisabled = false
         } catch {
             ErrorService.shared.handle(error, message: "editProfile.error.loadingAvatarFailed", showToastr: true)

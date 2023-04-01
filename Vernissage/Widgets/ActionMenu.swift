@@ -13,7 +13,6 @@ struct ActionMenu<Label: View, Content: View>: View {
     private let label: () -> Label
     private let content: () -> Content
 
-
     init(@ViewBuilder content: @escaping () -> Content, @ViewBuilder label: @escaping () -> Label, primaryAction: @escaping () async -> Void) {
         self.label = label
         self.content = content
@@ -41,11 +40,11 @@ struct ActionMenu<Label: View, Content: View>: View {
                         }
                     }
                 }
-                
+
                 withAnimation {
                     self.isDuringAction = true
                 }
-                
+
                 await primaryAction()
             }
         }.disabled(isDuringAction)

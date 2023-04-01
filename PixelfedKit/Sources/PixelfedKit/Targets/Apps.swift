@@ -18,14 +18,14 @@ extension Pixelfed.Apps: TargetType {
         let redirectUris: String
         let scopes: String?
         let website: String?
-        
+
         enum CodingKeys: String, CodingKey {
             case clientName = "client_name"
             case redirectUris = "redirect_uris"
             case scopes
             case website
         }
-        
+
         func encode(to encoder: Encoder) throws {
             var container: KeyedEncodingContainer<Pixelfed.Apps.Request.CodingKeys> = encoder.container(keyedBy: Pixelfed.Apps.Request.CodingKeys.self)
             try container.encode(self.clientName, forKey: Pixelfed.Apps.Request.CodingKeys.clientName)
@@ -34,34 +34,34 @@ extension Pixelfed.Apps: TargetType {
             try container.encode(self.website, forKey: Pixelfed.Apps.Request.CodingKeys.website)
         }
     }
-    
+
     private var apiPath: String { return "/api/v1/apps" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.
     public var path: String {
         switch self {
-        case .register(_, _, _, _):
+        case .register:
             return "\(apiPath)"
         }
     }
-    
+
     /// The HTTP method used in the request.
     public var method: Method {
         switch self {
-        case .register(_, _, _, _):
+        case .register:
             return .post
         }
     }
-    
+
     /// The parameters to be incoded in the request.
     public var queryItems: [(String, String)]? {
         nil
     }
-    
+
     public var headers: [String: String]? {
         [:].contentTypeApplicationJson
     }
-    
+
     public var httpBody: Data? {
         switch self {
         case .register(let clientName, let redirectUris, let scopes, let website):

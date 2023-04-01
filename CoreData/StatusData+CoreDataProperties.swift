@@ -39,7 +39,7 @@ extension StatusData {
     @NSManaged public var visibility: String
     @NSManaged public var attachmentsRelation: Set<AttachmentData>?
     @NSManaged public var pixelfedAccount: AccountData
-    
+
     @NSManaged public var rebloggedStatusId: String?
     @NSManaged public var rebloggedAccountAvatar: URL?
     @NSManaged public var rebloggedAccountDisplayName: String?
@@ -64,5 +64,5 @@ extension StatusData {
 
 }
 
-extension StatusData : Identifiable {
+extension StatusData: Identifiable {
 }

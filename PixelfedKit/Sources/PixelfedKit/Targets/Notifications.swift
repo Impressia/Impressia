@@ -28,26 +28,26 @@ extension Pixelfed.Notifications: TargetType {
             return "\(apiPath)/clear"
         }
     }
-    
+
     /// The HTTP method used in the request.
     public var method: Method {
         switch self {
-        case .notifications, .notification(_):
+        case .notifications, .notification:
             return .get
         case .clear:
             return .post
         }
     }
-    
+
     /// The parameters to be incoded in the request.
     public var queryItems: [(String, String)]? {
         var params: [(String, String)] = []
 
-        var maxId: MaxId? = nil
-        var sinceId: SinceId? = nil
-        var minId: MinId? = nil
-        var limit: Limit? = nil
-        
+        var maxId: MaxId?
+        var sinceId: SinceId?
+        var minId: MinId?
+        var limit: Limit?
+
         switch self {
         case .notifications(let _maxId, let _sinceId, let _minId, let _limit):
             maxId = _maxId
@@ -56,9 +56,9 @@ extension Pixelfed.Notifications: TargetType {
             limit = _limit
         default: break
         }
-    
+
         if let maxId {
-            params.append(("max_id",  maxId))
+            params.append(("max_id", maxId))
         }
         if let sinceId {
             params.append(("since_id", sinceId))
@@ -69,14 +69,14 @@ extension Pixelfed.Notifications: TargetType {
         if let limit {
             params.append(("limit", "\(limit)"))
         }
-            
+
         return params
     }
-    
+
     public var headers: [String: String]? {
         [:].contentTypeApplicationJson
     }
-    
+
     public var httpBody: Data? {
         nil
     }

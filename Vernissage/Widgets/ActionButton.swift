@@ -9,16 +9,16 @@ import SwiftUI
 struct ActionButton<Label>: View where Label: View {
     @State public var showLoader: Bool
     @State private var isDuringAction = false
-    
+
     private let action: () async -> Void
     private let label: () -> Label
-    
+
     public init(showLoader: Bool = true, action: @escaping () async -> Void, @ViewBuilder label: @escaping () -> Label) {
         self.action = action
         self.label = label
         self.showLoader = showLoader
     }
-    
+
     var body: some View {
         Button {
             Task {
@@ -28,7 +28,7 @@ struct ActionButton<Label>: View where Label: View {
                 }
 
                 await action()
-                
+
                 withAnimation {
                     self.isDuringAction = false
                 }
@@ -41,7 +41,7 @@ struct ActionButton<Label>: View where Label: View {
             }
         }.disabled(isDuringAction)
     }
-    
+
     @ViewBuilder
     private func withLoader() -> some View {
         if isDuringAction {
@@ -53,4 +53,3 @@ struct ActionButton<Label>: View where Label: View {
         }
     }
 }
-

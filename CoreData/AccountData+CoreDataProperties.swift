@@ -53,5 +53,5 @@ extension AccountData {
     @NSManaged public func removeFromStatuses(_ values: NSSet)
 }
 
-extension AccountData : Identifiable {
+extension AccountData: Identifiable {
 }

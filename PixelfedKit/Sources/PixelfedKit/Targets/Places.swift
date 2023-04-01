@@ -22,7 +22,7 @@ extension Pixelfed.Places: TargetType {
             return "\(apiPath)"
         }
     }
-    
+
     /// The HTTP method used in the request.
     public var method: Method {
         switch self {
@@ -30,7 +30,7 @@ extension Pixelfed.Places: TargetType {
             return .get
         }
     }
-    
+
     /// The parameters to be incoded in the request.
     public var queryItems: [(String, String)]? {
         switch self {
@@ -40,11 +40,11 @@ extension Pixelfed.Places: TargetType {
             ]
         }
     }
-    
+
     public var headers: [String: String]? {
         [:].contentTypeApplicationJson
     }
-    
+
     public var httpBody: Data? {
         nil
     }

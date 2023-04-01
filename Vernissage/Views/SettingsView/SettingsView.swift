@@ -13,39 +13,39 @@ struct SettingsView: View {
 
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) private var dismiss
-    
+
     @State private var theme: ColorScheme?
     @State private var appVersion: String?
     @State private var appBundleVersion: String?
-            
+
     var body: some View {
         NavigationStack {
             NavigationView {
                 List {
                     // Accounts.
                     AccountsSectionView()
-                                
+
                     // General.
                     GeneralSectionView()
-                    
+
                     // Accents.
                     AccentsSectionView()
-                    
+
                     // Avatar shapes.
                     AvatarShapesSectionView()
-                    
+
                     // Media settings view.
                     MediaSettingsView()
-                    
+
                     // Haptics.
                     HapticsSectionView()
-                    
+
                     // Support.
                     SupportView()
-                    
+
                     // Other.
                     OtherSectionView()
-                    
+
                     // Version.
                     self.version()
                 }
@@ -71,7 +71,7 @@ struct SettingsView: View {
             .withAppRouteur()
             .withOverlayDestinations(overlayDestinations: $routerPath.presentedOverlay)
         }
-        .onChange(of: self.applicationState.theme) { newValue in
+        .onChange(of: self.applicationState.theme) { _ in
             // Change theme of current modal screen (unformtunatelly it's not changed autmatically.
             self.theme = self.applicationState.theme.colorScheme() ?? self.getSystemColorScheme()
         }
@@ -90,10 +90,10 @@ struct SettingsView: View {
         }
         .alert(isPresented: $tipsStore.hasError, error: tipsStore.error) { }
     }
-    
+
     @ViewBuilder
     private func version() -> some View {
-        Section() {
+        Section {
             HStack {
                 Text("settings.title.version", comment: "Version")
                 Spacer()

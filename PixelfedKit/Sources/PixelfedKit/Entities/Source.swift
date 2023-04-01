@@ -11,7 +11,7 @@ public struct Source: Codable {
 
     /// Profile bio, in plain-text instead of in HTML.
     public let note: String
-        
+
     private enum CodingKeys: String, CodingKey {
         case note
     }

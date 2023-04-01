@@ -6,7 +6,7 @@
 
 import Foundation
 
-extension AttachmentData : Comparable {
+extension AttachmentData: Comparable {
     public static func < (lhs: AttachmentData, rhs: AttachmentData) -> Bool {
         lhs.id < rhs.id
     }

@@ -3,13 +3,13 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import Foundation
 import RegexBuilder
 
 /// Link returned in header for paging feature/
 public struct Link {
-    
+
     /// Raw value of header link.
     public let rawLink: String
 }
@@ -27,7 +27,7 @@ extension Link {
 
         return nil
     }
-    
+
     public var minId: String? {
         do {
             let regex = try Regex("min_id=[0-9]+")

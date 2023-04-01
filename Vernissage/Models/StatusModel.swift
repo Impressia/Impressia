@@ -11,13 +11,13 @@ public class StatusModel: ObservableObject {
 
     public let id: EntityId
     public let content: Html
-    
+
     public let uri: String?
     public let url: URL?
     public let account: Account
     public let inReplyToId: EntityId?
     public let inReplyToAccount: EntityId?
-    
+
     public let createdAt: String
     public let reblogsCount: Int
     public let favouritesCount: Int
@@ -36,16 +36,16 @@ public class StatusModel: ObservableObject {
     public let application: BaseApplication?
     public let place: Place?
     public let commentsDisabled: Bool
-    
+
     public let reblogStatus: Status?
-    
+
     @Published public var mediaAttachments: [AttachmentModel]
-        
+
     init(status: Status) {
-        
+
         // If status has been rebloged we are saving orginal status here.
         let orginalStatus = status.reblog ?? status
-        
+
         self.id = orginalStatus.id
         self.content = orginalStatus.content
         self.uri = orginalStatus.uri
@@ -71,14 +71,14 @@ public class StatusModel: ObservableObject {
         self.application = orginalStatus.application
         self.place = orginalStatus.place
         self.commentsDisabled = orginalStatus.commentsDisabled
-        
+
         var mediaAttachments: [AttachmentModel] = []
         for item in orginalStatus.getAllImageMediaAttachments() {
             mediaAttachments.append(AttachmentModel(attachment: item))
         }
-        
+
         self.mediaAttachments = mediaAttachments
-        
+
         if status.reblog != nil {
             self.reblogStatus = status
         } else {
@@ -96,7 +96,7 @@ public extension StatusModel {
             return nil
         }
     }
-    
+
     func getImageHeight() -> Int32? {
         let highestImage = self.mediaAttachments.getHighestImage()
         if let height = (highestImage?.meta as? ImageMetadata)?.original?.height {

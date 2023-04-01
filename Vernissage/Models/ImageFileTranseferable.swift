@@ -10,7 +10,7 @@ import SwiftUI
 public struct ImageFileTranseferable: Transferable {
     let url: URL
     lazy var data: Data? = try? Data(contentsOf: url)
-    
+
     public static var transferRepresentation: some TransferRepresentation {
         FileRepresentation(contentType: .image) { image in
             SentTransferredFile(image.url)

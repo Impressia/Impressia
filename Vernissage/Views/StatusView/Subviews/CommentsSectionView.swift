@@ -12,9 +12,9 @@ struct CommentsSectionView: View {
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var client: Client
 
-    @State public var statusId: String    
+    @State public var statusId: String
     @State private var commentViewModels: [CommentModel]?
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             if let commentViewModels {
@@ -27,11 +27,11 @@ struct CommentsSectionView: View {
                                 .overlay(Color.placeholderText.opacity(0.3))
                                 .padding(0)
                         }
-                                                
+
                         CommentBodyView(statusViewModel: commentViewModel.status)
-                        
+
                         if self.applicationState.showInteractionStatusId == commentViewModel.status.id {
-                            VStack (alignment: .leading, spacing: 0) {
+                            VStack(alignment: .leading, spacing: 0) {
                                 InteractionRow(statusModel: commentViewModel.status)
                                     .foregroundColor(self.getInteractionRowTextColor())
                                     .padding(.horizontal, 16)
@@ -60,7 +60,7 @@ struct CommentsSectionView: View {
             await self.loadComments()
         }
     }
-    
+
     private func getInteractionRowTextColor() -> Color {
         return self.colorScheme == .dark ? Color.black : Color.white
     }
@@ -73,4 +73,3 @@ struct CommentsSectionView: View {
         }
     }
 }
-

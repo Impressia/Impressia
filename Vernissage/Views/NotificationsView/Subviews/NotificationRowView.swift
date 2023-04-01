@@ -14,21 +14,21 @@ struct NotificationRowView: View {
     @EnvironmentObject var client: Client
 
     @State private var image: SwiftUI.Image?
-    
+
     private var attachment: MediaAttachment?
     private var notification: PixelfedKit.Notification
-    
+
     public init(notification: PixelfedKit.Notification) {
         self.notification = notification
         self.attachment = notification.status?.getAllImageMediaAttachments().first
-        
+
         if let attachment, let previewUrl = attachment.previewUrl, let imageFromCache = CacheImageService.shared.get(for: previewUrl) {
             self.image = imageFromCache
         }
     }
-    
+
     var body: some View {
-        HStack (alignment: .top, spacing: 8) {
+        HStack(alignment: .top, spacing: 8) {
             ZStack {
                 HStack {
                     Spacer()
@@ -42,16 +42,16 @@ struct NotificationRowView: View {
                 self.notificationBadge()
             }
             .frame(width: 56, height: 56)
-            
-            VStack (alignment: .leading, spacing: 0) {
-                HStack (alignment: .top) {
+
+            VStack(alignment: .leading, spacing: 0) {
+                HStack(alignment: .top) {
                     Text(self.notification.account.displayNameWithoutEmojis)
                         .foregroundColor(.mainTextColor)
                         .font(.footnote)
                         .fontWeight(.bold)
-                    
+
                     Spacer()
-                    
+
                     Text(self.notification.createdAt.toRelative(.isoDateTimeMilliSec))
                         .foregroundColor(.lightGrayColor)
                         .font(.footnote)
@@ -61,8 +61,7 @@ struct NotificationRowView: View {
                     .foregroundColor(.lightGrayColor)
                     .font(.footnote)
                     .fontWeight(.light)
-                
-                
+
                 switch self.notification.type {
                 case .favourite, .reblog, .status, .poll, .update:
                     HStack(alignment: .top) {
@@ -92,7 +91,7 @@ struct NotificationRowView: View {
                     if let status = self.notification.status {
                         MarkdownFormattedText(status.content.asMarkdown)
                             .font(.caption)
-                            .environment(\.openURL, OpenURLAction { url in .handled })
+                            .environment(\.openURL, OpenURLAction { _ in .handled })
                     } else {
                         EmptyView()
                     }
@@ -100,7 +99,7 @@ struct NotificationRowView: View {
                     if let note = self.notification.account.note {
                         MarkdownFormattedText(note.asMarkdown)
                             .font(.caption)
-                            .environment(\.openURL, OpenURLAction { url in .handled })
+                            .environment(\.openURL, OpenURLAction { _ in .handled })
                     } else {
                         EmptyView()
                     }
@@ -135,7 +134,7 @@ struct NotificationRowView: View {
             }
         }
     }
-    
+
     private func notificationBadge() -> some View {
         VStack {
             HStack {
@@ -154,7 +153,7 @@ struct NotificationRowView: View {
             Spacer()
         }
     }
-    
+
     private func getTitle() -> LocalizedStringKey {
         switch notification.type {
         case .follow:
@@ -179,7 +178,7 @@ struct NotificationRowView: View {
             return "notifications.title.newReport"
         }
     }
-    
+
     private func getImage() -> Image {
         switch notification.type {
         case .follow:
@@ -204,7 +203,7 @@ struct NotificationRowView: View {
             return Image(systemName: "exclamationmark.bubble")
         }
     }
-    
+
     private func getColor() -> Color {
         switch notification.type {
         case .follow:

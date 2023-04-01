@@ -13,7 +13,7 @@ public class PhotoUrl: ObservableObject, Identifiable {
     @Published public var url: URL?
     @Published public var blurhash: String?
     @Published public var sensitive = false
-    
+
     init(id: String) {
         self.id = id
     }

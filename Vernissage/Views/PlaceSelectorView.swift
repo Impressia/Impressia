@@ -15,15 +15,15 @@ struct PlaceSelectorView: View {
     @State private var places: [Place] = []
     @State private var showLoader = false
     @State private var query = String.empty()
-    
+
     @Binding public var place: Place?
-    
+
     @FocusState private var focusedField: FocusField?
     enum FocusField: Hashable {
         case unknown
         case search
     }
-    
+
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
@@ -35,7 +35,7 @@ struct PlaceSelectorView: View {
                                 .focused($focusedField, equals: .search)
                                 .keyboardType(.default)
                                 .autocorrectionDisabled()
-                                .onAppear() {
+                                .onAppear {
                                     self.focusedField = .search
                                 }
                             Button {
@@ -44,12 +44,12 @@ struct PlaceSelectorView: View {
                                 }
                             } label: {
                                 Text("placeSelector.title.buttonSearch", comment: "Search")
-                                    
+
                             }
                             .buttonStyle(.bordered)
                         }
                     }
-                    
+
                     Section {
                         if self.showLoader {
                             HStack(alignment: .center) {
@@ -58,7 +58,7 @@ struct PlaceSelectorView: View {
                                 Spacer()
                             }
                         }
-                        
+
                         ForEach(self.places, id: \.id) { place in
                             Button {
                                 HapticService.shared.fireHaptic(of: .buttonPress)
@@ -93,7 +93,7 @@ struct PlaceSelectorView: View {
             }
         }
     }
-    
+
     @ToolbarContentBuilder
     private func getTrailingToolbar() -> some ToolbarContent {
         ToolbarItem(placement: .cancellationAction) {
@@ -102,7 +102,7 @@ struct PlaceSelectorView: View {
             }
         }
     }
-    
+
     private func searchPlaces() async {
         self.showLoader = true
 
@@ -113,8 +113,7 @@ struct PlaceSelectorView: View {
         } catch {
             ErrorService.shared.handle(error, message: "placeSelector.error.loadingPlacesFailed", showToastr: true)
         }
-        
+
         self.showLoader = false
     }
 }
-

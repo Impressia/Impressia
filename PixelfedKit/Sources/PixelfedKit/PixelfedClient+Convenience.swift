@@ -9,13 +9,13 @@ import OAuthSwift
 import AuthenticationServices
 
 public extension PixelfedClient {
-    
+
     /// Creates OAuth application in Pixelfed.
     func createApp(named name: String,
-                          redirectUri: String,
-                          scopes: Scopes,
-                          website: URL) async throws -> Application {
-        
+                   redirectUri: String,
+                   scopes: Scopes,
+                   website: URL) async throws -> Application {
+
         let request = try Self.request(
             for: baseURL,
             target: Pixelfed.Apps.register(
@@ -25,10 +25,10 @@ public extension PixelfedClient {
                 website: website.absoluteString
             )
         )
-        
+
         return try await downloadJson(Application.self, request: request)
     }
-    
+
     /// Refresh access token..
     func refreshToken(clientId: String, clientSecret: String, refreshToken: String) async throws -> OAuthSwiftCredential {
         oauthClient = OAuth2Swift(
@@ -38,11 +38,10 @@ public extension PixelfedClient {
             accessTokenUrl: baseURL.appendingPathComponent("oauth/token"),
             responseType: "code"
         )
-        
+
         return try await withCheckedThrowingContinuation { [weak self] continuation in
             self?.oAuthContinuation = continuation
-            
-            oauthClient?.renewAccessToken(
+            self?.oauthClient?.renewAccessToken(
                 withRefreshToken: refreshToken,
                 completionHandler: { result in
                     switch result {
@@ -55,14 +54,14 @@ public extension PixelfedClient {
             })
         }
     }
-    
+
     /// User authentication.
     func authenticate(app: Application,
                       scope: Scopes,
                       callbackUrlScheme: String,
                       presentationContextProvider: ASWebAuthenticationPresentationContextProviding
     ) async throws -> OAuthSwiftCredential {
-        
+
         oauthClient = OAuth2Swift(
             consumerKey: app.clientId,
             consumerSecret: app.clientSecret,
@@ -70,14 +69,14 @@ public extension PixelfedClient {
             accessTokenUrl: baseURL.appendingPathComponent("oauth/token"),
             responseType: "code"
         )
-        
+
         oauthClient?.authorizeURLHandler = ASWebAuthenticationURLHandler(callbackUrlScheme: callbackUrlScheme,
                                                                          presentationContextProvider: presentationContextProvider,
                                                                          prefersEphemeralWebBrowserSession: true)
-        
+
         return try await withCheckedThrowingContinuation { [weak self] continuation in
             self?.oAuthContinuation = continuation
-            oAuthHandle = oauthClient?.authorize(
+            self?.oAuthHandle = self?.oauthClient?.authorize(
                 withCallbackURL: app.redirectUri,
                 scope: scope.joined(separator: " "),
                 state: "PixELfed_AUTH",
@@ -93,7 +92,7 @@ public extension PixelfedClient {
             )
         }
     }
-    
+
     static func handleOAuthResponse(url: URL) {
         OAuthSwift.handle(url: url)
     }

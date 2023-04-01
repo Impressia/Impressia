@@ -3,7 +3,7 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import Foundation
 import PixelfedKit
 
@@ -17,16 +17,16 @@ public class AttachmentModel: ObservableObject, Identifiable {
     public let description: String?
     public let blurhash: String?
     public let meta: Metadata?
-    
+
     public let metaImageWidth: Int32?
     public let metaImageHeight: Int32?
-    
+
     @Published public var exifCamera: String?
     @Published public var exifCreatedDate: String?
     @Published public var exifExposure: String?
     @Published public var exifLens: String?
     @Published public var data: Data?
-    
+
     init(id: String,
          type: MediaAttachment.MediaAttachmentType,
          url: URL,
@@ -59,7 +59,7 @@ public class AttachmentModel: ObservableObject, Identifiable {
         self.metaImageHeight = metaImageHeight
         self.data = data
     }
-    
+
     init(attachment: MediaAttachment) {
         self.id = attachment.id
         self.type = attachment.type
@@ -69,44 +69,44 @@ public class AttachmentModel: ObservableObject, Identifiable {
         self.description = attachment.description
         self.blurhash = attachment.blurhash
         self.meta = attachment.meta
-        
+
         self.data = nil
         self.exifCamera = nil
         self.exifCreatedDate = nil
         self.exifExposure = nil
         self.exifLens = nil
-        
+
         if let width = (attachment.meta as? ImageMetadata)?.original?.width {
             self.metaImageWidth = Int32(width)
         } else {
             self.metaImageWidth = nil
         }
-        
+
         if let height = (attachment.meta as? ImageMetadata)?.original?.height {
             self.metaImageHeight = Int32(height)
         } else {
             self.metaImageHeight = nil
         }
     }
-    
+
     public func set(data: Data) {
         self.data = data
-        
+
         // Read exif information.
         if let exifProperties = self.data?.getExifData() {
             if let make = exifProperties.getExifValue("Make"), let model = exifProperties.getExifValue("Model") {
                 self.exifCamera = "\(make) \(model)"
             }
-            
+
             // "Lens" or "Lens Model"
             if let lens = exifProperties.getExifValue("Lens") {
                 self.exifLens = lens
             }
-            
+
             if let createData = exifProperties.getExifValue("CreateDate") {
                 self.exifCreatedDate = createData
             }
-            
+
             if let focalLenIn35mmFilm = exifProperties.getExifValue("FocalLenIn35mmFilm"),
                let fNumber = exifProperties.getExifValue("FNumber")?.calculateExifNumber(),
                let exposureTime = exifProperties.getExifValue("ExposureTime"),
@@ -129,7 +129,7 @@ extension [AttachmentModel] {
                 imgHeight = attachmentheight
             }
         }
-        
+
         return attachment
     }
 }

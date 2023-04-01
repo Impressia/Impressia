@@ -12,20 +12,20 @@ import PixelfedKit
 public class PhotoAttachment: ObservableObject, Identifiable, Equatable, Hashable {
     public let id: String
     public let photosPickerItem: PhotosPickerItem
-    
+
     @Published public var photoData: Data?
     @Published public var uploadedAttachment: UploadedAttachment?
     @Published public var error: Error?
-    
+
     init(photosPickerItem: PhotosPickerItem) {
         self.id = UUID().uuidString
         self.photosPickerItem = photosPickerItem
     }
-    
+
     public static func == (lhs: PhotoAttachment, rhs: PhotoAttachment) -> Bool {
         lhs.id == rhs.id
     }
-    
+
     public func hash(into hasher: inout Hasher) {
         return hasher.combine(self.id)
     }
@@ -37,16 +37,16 @@ extension [PhotoAttachment] {
             photoAttachment.uploadedAttachment != nil
         }
     }
-    
+
     public func getUploadedPhotoIds() -> [String] {
         var ids: [String] = []
-        
+
         for item in self {
             if let uploadedAttachment = item.uploadedAttachment {
                 ids.append(uploadedAttachment.id)
             }
         }
-        
+
         return ids
     }
 }

@@ -9,27 +9,27 @@ import UIKit
 import CoreData
 import PixelfedKit
 
-struct MainView: View {    
+struct MainView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var client: Client
     @EnvironmentObject var routerPath: RouterPath
     @EnvironmentObject var tipsStore: TipsStore
-    
+
     @State private var navBarTitle: LocalizedStringKey = "mainview.tab.homeTimeline"
     @State private var viewMode: ViewMode = .home {
         didSet {
             self.navBarTitle = self.getViewTitle(viewMode: viewMode)
         }
     }
-    
+
     @FetchRequest(sortDescriptors: [SortDescriptor(\.acct, order: .forward)]) var dbAccounts: FetchedResults<AccountData>
-    
+
     private enum ViewMode {
         case home, local, federated, profile, notifications, trendingPhotos, trendingTags, trendingAccounts, search
     }
-    
+
     var body: some View {
         self.getMainView()
         .navigationTitle(navBarTitle)
@@ -48,7 +48,7 @@ struct MainView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func getMainView() -> some View {
         switch self.viewMode {
@@ -87,7 +87,7 @@ struct MainView: View {
                 .id(applicationState.account?.id ?? String.empty())
         }
     }
-    
+
     @ToolbarContentBuilder
     private func getPrincipalToolbar() -> some ToolbarContent {
         ToolbarItem(placement: .principal) {
@@ -100,7 +100,7 @@ struct MainView: View {
                         Image(systemName: "house")
                     }
                 }
-                
+
                 Button {
                     self.switchView(to: .local)
                 } label: {
@@ -118,7 +118,7 @@ struct MainView: View {
                         Image(systemName: "globe.europe.africa")
                     }
                 }
-                
+
                 Button {
                     self.switchView(to: .search)
                 } label: {
@@ -127,9 +127,9 @@ struct MainView: View {
                         Image(systemName: "magnifyingglass")
                     }
                 }
-                
+
                 Divider()
-                
+
                 Menu {
                     Button {
                         self.switchView(to: .trendingPhotos)
@@ -139,7 +139,7 @@ struct MainView: View {
                             Image(systemName: "photo.stack")
                         }
                     }
-                    
+
                     Button {
                         self.switchView(to: .trendingTags)
                     } label: {
@@ -148,7 +148,7 @@ struct MainView: View {
                             Image(systemName: "tag")
                         }
                     }
-                    
+
                     Button {
                         self.switchView(to: .trendingAccounts)
                     } label: {
@@ -163,7 +163,7 @@ struct MainView: View {
                         Image(systemName: "chart.line.uptrend.xyaxis")
                     }
                 }
-                
+
                 Divider()
 
                 Button {
@@ -174,7 +174,7 @@ struct MainView: View {
                         Image(systemName: "person.crop.circle")
                     }
                 }
-                
+
                 Button {
                     self.switchView(to: .notifications)
                 } label: {
@@ -196,7 +196,7 @@ struct MainView: View {
             }
         }
     }
-    
+
     @ToolbarContentBuilder
     private func getLeadingToolbar() -> some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
@@ -214,7 +214,7 @@ struct MainView: View {
                 }
 
                 Divider()
-                
+
                 Button {
                     HapticService.shared.fireHaptic(of: .buttonPress)
                     self.routerPath.presentedSheet = .settings
@@ -227,7 +227,7 @@ struct MainView: View {
             }
         }
     }
-    
+
     @ToolbarContentBuilder
     private func getTrailingToolbar() -> some ToolbarContent {
         if viewMode == .local || viewMode == .home || viewMode == .federated || viewMode == .trendingPhotos || viewMode == .search {
@@ -243,7 +243,7 @@ struct MainView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func getAvatarImage(avatarUrl: URL?, avatarData: Data?) -> some View {
         if let avatarData,
@@ -269,7 +269,7 @@ struct MainView: View {
                 )
         }
     }
-    
+
     private func getViewTitle(viewMode: ViewMode) -> LocalizedStringKey {
         switch viewMode {
         case .home:
@@ -292,10 +292,10 @@ struct MainView: View {
             return "mainview.tab.search"
         }
     }
-    
+
     private func switchView(to newViewMode: ViewMode) {
         HapticService.shared.fireHaptic(of: .tabSelection)
-        
+
         if viewMode == .search {
             hideKeyboard()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -305,10 +305,10 @@ struct MainView: View {
             self.viewMode = newViewMode
         }
     }
-    
+
     private func switchAccounts(_ account: AccountData) {
         HapticService.shared.fireHaptic(of: .buttonPress)
-        
+
         if viewMode == .search {
             hideKeyboard()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -318,13 +318,13 @@ struct MainView: View {
             self.tryToSwitch(account)
         }
     }
-    
+
     private func tryToSwitch(_ account: AccountData) {
         Task {
             // Verify access token correctness.
             let authorizationSession = AuthorizationSession()
             let accountModel = AccountModel(accountData: account)
-            
+
             await AuthorizationService.shared.verifyAccount(session: authorizationSession, accountModel: accountModel) { signedInAccountModel in
                 guard let signedInAccountModel else {
                     ToastrService.shared.showError(subtitle: "mainview.error.switchAccounts")
@@ -336,7 +336,7 @@ struct MainView: View {
 
                     // Refresh client state.
                     self.client.setAccount(account: signedInAccountModel)
-                    
+
                     // Refresh application state.
                     self.applicationState.changeApplicationState(accountModel: signedInAccountModel,
                                                                  instance: instance,
@@ -349,4 +349,3 @@ struct MainView: View {
         }
     }
 }
-

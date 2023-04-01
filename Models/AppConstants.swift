@@ -3,7 +3,7 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import Foundation
 
 public struct AppConstants {
@@ -16,7 +16,7 @@ public struct AppConstants {
     public static let statusScheme = "status-vernissage"
     public static let statusCallbackPart = "statuses"
     public static let statusUri = "\(AppConstants.statusScheme)://\(statusCallbackPart)"
-    
+
     public static let imagePipelineCacheName = "dev.mczachurski.Vernissage.DataCache"
     public static let coreDataPersistantContainerName = "Vernissage"
 }

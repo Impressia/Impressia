@@ -3,7 +3,7 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 import Foundation
 import PixelfedKit
@@ -30,7 +30,7 @@ enum SheetDestinations: Identifiable {
     case newStatusEditor
     case replyToStatusEditor(status: StatusModel)
     case settings
-  
+
     public var id: String {
         switch self {
         case .replyToStatusEditor, .newStatusEditor:
@@ -48,7 +48,7 @@ enum OverlayDestinations {
 @MainActor
 class RouterPath: ObservableObject {
     public var urlHandler: ((URL) -> OpenURLAction.Result)?
-  
+
     @Published public var path: [RouteurDestinations] = []
     @Published public var presentedSheet: SheetDestinations?
     @Published public var presentedOverlay: OverlayDestinations?
@@ -58,7 +58,7 @@ class RouterPath: ObservableObject {
     public func navigate(to: RouteurDestinations) {
         path.append(to)
     }
-    
+
     public func handle(url: URL) -> OpenURLAction.Result {
         if url.pathComponents.contains(where: { $0 == "tags" }), let tag = url.pathComponents.last {
             navigate(to: .tag(hashTag: tag))
@@ -71,14 +71,14 @@ class RouterPath: ObservableObject {
 
             return .handled
         }
-        
+
         return urlHandler?(url) ?? .systemAction
     }
-    
+
     public func navigateToAccountFrom(acct: String, url: URL) async {
         Task {
             let results = try? await Client.shared.search?.search(query: acct, resultsType: Pixelfed.Search.ResultsType.accounts)
-                        
+
             if let accountFromApi = results?.accounts.first {
                 navigate(to: .userProfile(accountId: accountFromApi.id,
                                           accountDisplayName: accountFromApi.displayNameWithoutEmojis,

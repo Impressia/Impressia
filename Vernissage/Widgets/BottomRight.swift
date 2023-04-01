@@ -12,7 +12,7 @@ struct BottomRight<Content: View>: View {
     init(@ViewBuilder content: () -> Content) {
         self.content = content()
     }
-    
+
     var body: some View {
         VStack(alignment: .trailing) {
             Spacer()

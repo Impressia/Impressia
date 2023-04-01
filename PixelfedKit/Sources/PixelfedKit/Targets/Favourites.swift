@@ -18,11 +18,11 @@ extension Pixelfed.Favourites: TargetType {
     /// The path to be appended to `baseURL` to form the full `URL`.
     public var path: String {
         switch self {
-        case .favourites(_, _, _, _, _):
+        case .favourites:
             return "\(apiPath)"
         }
     }
-    
+
     /// The HTTP method used in the request.
     public var method: Method {
         switch self {
@@ -30,53 +30,53 @@ extension Pixelfed.Favourites: TargetType {
             return .get
         }
     }
-    
+
     /// The parameters to be incoded in the request.
     public var queryItems: [(String, String)]? {
         var params: [(String, String)] = []
 
-        var maxId: MaxId? = nil
-        var sinceId: SinceId? = nil
-        var minId: MinId? = nil
-        var limit: Limit? = nil
-        var page: Page? = nil
+        var maxId: MaxId?
+        var sinceId: SinceId?
+        var minId: MinId?
+        var limit: Limit?
+        var page: Page?
 
         switch self {
-        case .favourites(let _maxId, let _sinceId, let _minId, let _limit, let _page):
-            maxId = _maxId
-            sinceId = _sinceId
-            minId = _minId
-            limit = _limit
-            page = _page
+        case .favourites(let paramMaxId, let paramSinceId, let paramMinId, let paramLimit, let paramPage):
+            maxId = paramMaxId
+            sinceId = paramSinceId
+            minId = paramMinId
+            limit = paramLimit
+            page = paramPage
         }
-        
+
         if let maxId {
-            params.append(("max_id",  maxId))
+            params.append(("max_id", maxId))
         }
-        
+
         if let sinceId {
             params.append(("since_id", sinceId))
         }
-        
+
         if let minId {
             params.append(("min_id", minId))
         }
-        
+
         if let limit {
             params.append(("limit", "\(limit)"))
         }
-        
+
         if let page {
             params.append(("page", "\(page)"))
         }
-        
+
         return params
     }
-    
+
     public var headers: [String: String]? {
         [:].contentTypeApplicationJson
     }
-    
+
     public var httpBody: Data? {
         nil
     }

@@ -10,7 +10,7 @@ struct ImageRowItem: View {
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var client: Client
     @EnvironmentObject var routerPath: RouterPath
-    
+
     private let status: StatusData
     private let attachmentData: AttachmentData
 
@@ -19,19 +19,19 @@ struct ImageRowItem: View {
     @State private var cancelled = true
     @State private var error: Error?
     @State private var opacity = 0.0
-    
+
     private let onImageDownloaded: (Double, Double) -> Void
-    
-    init(status: StatusData, attachmentData: AttachmentData, onImageDownloaded: @escaping (_: Double, _:Double) -> Void) {
+
+    init(status: StatusData, attachmentData: AttachmentData, onImageDownloaded: @escaping (_: Double, _: Double) -> Void) {
         self.status = status
         self.attachmentData = attachmentData
         self.onImageDownloaded = onImageDownloaded
-        
+
         if let imageData = attachmentData.data {
             self.uiImage = UIImage(data: imageData)
         }
     }
-    
+
     var body: some View {
         if let uiImage {
             ZStack {
@@ -47,7 +47,7 @@ struct ImageRowItem: View {
                             }
                         } blurred: {
                             BlurredImage(blurhash: attachmentData.blurhash)
-                                .onTapGesture{
+                                .onTapGesture {
                                     self.navigateToStatus()
                                 }
                         }
@@ -61,7 +61,7 @@ struct ImageRowItem: View {
                 } else {
                     ZStack {
                         self.imageView(uiImage: uiImage)
-                        
+
                         if showThumbImage {
                             FavouriteTouch {
                                 self.showThumbImage = false
@@ -82,11 +82,10 @@ struct ImageRowItem: View {
                     .task {
                         await self.downloadImage(attachmentData: attachmentData)
                     }
-            }
-            else if let error {
+            } else if let error {
                 ZStack {
                     BlurredImage(blurhash: attachmentData.blurhash)
-                    
+
                     ErrorView(error: error) {
                         await self.downloadImage(attachmentData: attachmentData)
                     }
@@ -94,7 +93,7 @@ struct ImageRowItem: View {
                 }
             } else {
                 BlurredImage(blurhash: attachmentData.blurhash)
-                    .onTapGesture{
+                    .onTapGesture {
                         self.navigateToStatus()
                     }
                     .task {
@@ -103,7 +102,7 @@ struct ImageRowItem: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func imageView(uiImage: UIImage) -> some View {
         Image(uiImage: uiImage)
@@ -117,24 +116,24 @@ struct ImageRowItem: View {
                 self.showThumbImage = true
                 HapticService.shared.fireHaptic(of: .buttonPress)
             }
-            .onTapGesture{
+            .onTapGesture {
                 self.navigateToStatus()
             }
             .imageContextMenu(client: self.client, statusData: self.status)
     }
-    
+
     private func downloadImage(attachmentData: AttachmentData) async {
         do {
             if let imageData = try await RemoteFileService.shared.fetchData(url: attachmentData.url),
                let downloadedImage = UIImage(data: imageData) {
-                    
+
                 let size = ImageSizeService.shared.calculate(for: attachmentData.url,
                                                              width: downloadedImage.size.width,
                                                              height: downloadedImage.size.height)
-                                
+
                 self.uiImage = downloadedImage
                 self.onImageDownloaded(size.width, size.height)
-                
+
                 HomeTimelineService.shared.update(attachment: attachmentData, withData: imageData, imageWidth: size.width, imageHeight: size.height)
                 self.error = nil
                 self.cancelled = false
@@ -149,7 +148,7 @@ struct ImageRowItem: View {
             }
         }
     }
-    
+
     private func navigateToStatus() {
         self.routerPath.navigate(to: .status(
             id: status.rebloggedStatusId ?? status.id,

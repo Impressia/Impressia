@@ -19,7 +19,7 @@ struct OtherSectionView: View {
                 Link(NSLocalizedString("settings.title.openPage", comment: "Open"), destination: URL(string: "https://mczachurski.dev/vernissage/privacy-policy.html")!)
                     .font(.footnote)
             }
-            
+
             HStack {
                 Text("settings.title.terms", comment: "Terms & Conditions")
                 Spacer()
@@ -33,7 +33,7 @@ struct OtherSectionView: View {
                 Link(NSLocalizedString("settings.title.openPage", comment: "Open"), destination: URL(string: "https://github.com/VernissageApp/Vernissage")!)
                     .font(.footnote)
             }
-            
+
             HStack {
                 Text("settings.title.reportBug", comment: "Report a bug")
                 Spacer()
@@ -48,12 +48,12 @@ struct OtherSectionView: View {
                         .font(.footnote)
                         .foregroundColor(.lightGrayColor)
                 }
-                
+
                 Spacer()
                 Link("@vernissage", destination: URL(string: "https://mastodon.social/@vernissage")!)
                     .font(.footnote)
             }
-            
+
             HStack {
                 VStack(alignment: .leading) {
                     Text("settings.title.follow", comment: "Follow me")
@@ -61,12 +61,12 @@ struct OtherSectionView: View {
                         .font(.footnote)
                         .foregroundColor(.lightGrayColor)
                 }
-                
+
                 Spacer()
                 Link("@mczachurski", destination: URL(string: "https://mastodon.social/@mczachurski")!)
                     .font(.footnote)
             }
-            
+
             HStack {
                 VStack(alignment: .leading) {
                     Text("settings.title.follow", comment: "Follow me")
@@ -74,7 +74,7 @@ struct OtherSectionView: View {
                         .font(.footnote)
                         .foregroundColor(.lightGrayColor)
                 }
-                
+
                 Spacer()
                 Link("@mczachurski", destination: URL(string: "https://pixelfed.social/@mczachurski")!)
                     .font(.footnote)

@@ -8,6 +8,7 @@ import Foundation
 import SwiftUI
 
 extension View {
+
     func withAppRouteur() -> some View {
         self.navigationDestination(for: RouteurDestinations.self) { destination in
             switch destination {
@@ -51,7 +52,7 @@ extension View {
             }
         }
     }
-  
+
     func withSheetDestinations(sheetDestinations: Binding<SheetDestinations?>) -> some View {
         self.sheet(item: sheetDestinations) { destination in
             switch destination {
@@ -64,7 +65,7 @@ extension View {
             }
         }
     }
-    
+
     func withOverlayDestinations(overlayDestinations: Binding<OverlayDestinations?>) -> some View {
         self.overlay {
             switch overlayDestinations.wrappedValue {

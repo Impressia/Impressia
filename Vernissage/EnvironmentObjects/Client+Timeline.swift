@@ -3,7 +3,7 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import Foundation
 import PixelfedKit
 
@@ -23,7 +23,7 @@ extension Client {
                                                               minId: minId,
                                                               limit: limit)
         }
-        
+
         public func getTagStatuses(tag: String,
                                    local: Bool? = nil,
                                    remote: Bool? = nil,

@@ -9,7 +9,7 @@ import SwiftUI
 struct LabelIcon: View {
     let iconName: String
     let value: String?
-    
+
     var body: some View {
         if let value, value.isEmpty == false {
             HStack(alignment: .center) {

@@ -6,5 +6,5 @@
 
 import Foundation
 
-public class Pixelfed {    
+public class Pixelfed {
 }

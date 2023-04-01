@@ -3,7 +3,7 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 import PixelfedKit
 
@@ -13,14 +13,14 @@ struct ImagesCarousel: View {
     @State private var imageWidth: Double
     @State private var selected: String
     @State private var heightWasPrecalculated: Bool
-    
+
     @Binding public var selectedAttachment: AttachmentModel?
     @Binding public var exifCamera: String?
     @Binding public var exifExposure: String?
     @Binding public var exifCreatedDate: String?
     @Binding public var exifLens: String?
     @Binding public var description: String?
-    
+
     init(attachments: [AttachmentModel],
          selectedAttachment: Binding<AttachmentModel?>,
          exifCamera: Binding<String?>,
@@ -35,14 +35,14 @@ struct ImagesCarousel: View {
         _exifCreatedDate = exifCreatedDate
         _exifLens = exifLens
         _description = description
-        
+
         self.attachments = attachments
         self.selected = String.empty()
 
         let highestImage = attachments.getHighestImage()
         let imgHeight = Double((highestImage?.meta as? ImageMetadata)?.original?.height ?? 0)
         let imgWidth = Double((highestImage?.meta as? ImageMetadata)?.original?.width ?? 0)
-        
+
         // Calculate size of frame (first from cache, then from metadata).
         if let highestImage, let size = ImageSizeService.shared.get(for: highestImage.url) {
             self.imageWidth = size.width
@@ -61,19 +61,19 @@ struct ImagesCarousel: View {
             self.heightWasPrecalculated = false
         }
     }
-    
+
     var body: some View {
         TabView(selection: $selected) {
             ForEach(attachments, id: \.id) { attachment in
                 ImageCarouselPicture(attachment: attachment) { (attachment, imageData) in
                     withAnimation {
-                        self.recalculateImageHeight(attachment: attachment,  imageData: imageData)
+                        self.recalculateImageHeight(attachment: attachment, imageData: imageData)
                     }
-                    
+
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                         attachment.set(data: imageData)
                     }
-                    
+
                 }
                 .tag(attachment.id)
             }
@@ -94,7 +94,7 @@ struct ImagesCarousel: View {
             self.selected = self.attachments.first?.id ?? String.empty()
         }
     }
-    
+
     private func recalculateImageHeight(attachment: AttachmentModel, imageData: Data) {
         guard heightWasPrecalculated == false else {
             return
@@ -102,7 +102,7 @@ struct ImagesCarousel: View {
 
         var imageHeight = 0.0
         var imageWidth = 0.0
-        
+
         for item in attachments {
             if let data = item.data, let image = UIImage(data: data) {
                 if image.size.height > imageHeight {
@@ -111,14 +111,14 @@ struct ImagesCarousel: View {
                 }
             }
         }
-        
+
         if let image = UIImage(data: imageData) {
             if image.size.height > imageHeight {
                 imageHeight = image.size.height
                 imageWidth = image.size.width
             }
         }
-        
+
         let size = ImageSizeService.shared.calculate(for: attachment.url, width: imageWidth, height: imageHeight)
         self.imageWidth = size.width
         self.imageHeight = size.height

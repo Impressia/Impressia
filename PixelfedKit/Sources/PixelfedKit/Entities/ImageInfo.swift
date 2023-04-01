@@ -8,16 +8,16 @@ import Foundation
 
 /// Infor about image stored in metadata.
 public struct ImageInfo: Codable {
-    
+
     /// Width of the image.
     public let width: Int
-    
+
     /// Height of the image.
     public let height: Int
-    
+
     /// Size of the image.
     public let size: String
-    
+
     /// Aspect ratio of the image.
     public let aspect: Double
 

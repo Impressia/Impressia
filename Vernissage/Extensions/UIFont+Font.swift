@@ -3,13 +3,13 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 
 extension UIFont {
     class func preferredFont(from font: Font) -> UIFont {
         let uiFont: UIFont
-        
+
         switch font {
         case .largeTitle:
             uiFont = UIFont.preferredFont(forTextStyle: .largeTitle)
@@ -32,11 +32,11 @@ extension UIFont {
         case .footnote:
             uiFont = UIFont.preferredFont(forTextStyle: .footnote)
         case .body:
-            fallthrough
+            uiFont = UIFont.preferredFont(forTextStyle: .body)
         default:
             uiFont = UIFont.preferredFont(forTextStyle: .body)
         }
-        
+
         return uiFont
     }
 }

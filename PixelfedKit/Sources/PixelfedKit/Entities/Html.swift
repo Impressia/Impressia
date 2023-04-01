@@ -3,14 +3,14 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import Foundation
 import HTML2Markdown
 
 public struct Html: Codable {
     public var htmlValue: String = ""
     public var asMarkdown: String = ""
-    
+
     public init(_ htmlValue: String) {
         do {
             self.htmlValue = htmlValue
@@ -20,7 +20,7 @@ public struct Html: Codable {
             self.asMarkdown = ""
         }
     }
-    
+
     public init(from decoder: Decoder) {
         do {
             let container = try decoder.singleValueContainer()
@@ -31,12 +31,12 @@ public struct Html: Codable {
             self.asMarkdown = ""
         }
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(htmlValue)
     }
-    
+
     private func parseToMarkdown(html: String) throws -> String {
         let mutatedHtml = html
             // Fix issue: https://github.com/VernissageApp/Home/issues/11
@@ -46,7 +46,7 @@ public struct Html: Codable {
             // Fix issue: https://github.com/VernissageApp/Home/issues/10
             // When we replace all <br />\n into single <br /> then we have to change the remaining \n into <br />
             .replacingOccurrences(of: "\n", with: "<br />")
-            
+
         let dom = try HTMLParser().parse(html: mutatedHtml)
         return dom.toMarkdown()
             // Add space between hashtags and mentions that follow each other

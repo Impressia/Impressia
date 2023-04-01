@@ -3,7 +3,7 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 import Foundation
 import PixelfedKit
@@ -12,7 +12,7 @@ struct InstanceView: View {
     @EnvironmentObject private var applicationState: ApplicationState
     @EnvironmentObject private var routerPath: RouterPath
     @EnvironmentObject private var client: Client
-    
+
     @State private var state: ViewState = .loading
     @State private var instance: Instance?
 
@@ -20,7 +20,7 @@ struct InstanceView: View {
         self.mainBody()
             .navigationTitle("instance.navigationBar.title")
     }
-    
+
     @ViewBuilder
     private func mainBody() -> some View {
         switch state {
@@ -43,14 +43,14 @@ struct InstanceView: View {
             .padding()
         }
     }
-    
+
     @ViewBuilder
     private func details(instance: Instance) -> some View {
         List {
             Section("instance.title.instanceInfo") {
                 self.dataRow(title: "instance.title.name", value: instance.title ?? String.empty())
                 self.dataRow(title: "instance.title.address", value: "https://\(instance.uri)")
-                
+
                 VStack(alignment: .leading) {
                     if let description = instance.description {
                         MarkdownFormattedText(description.asMarkdown)
@@ -60,28 +60,28 @@ struct InstanceView: View {
                             })
                             .padding(.vertical, 4)
                     }
-                    
+
                     if let shortDescription = instance.shortDescription {
                         Text(shortDescription)
                             .font(.footnote)
                             .foregroundColor(.lightGrayColor)
                     }
                 }
-                
+
                 self.dataRow(title: "instance.title.version", value: instance.version)
                 self.dataRow(title: "instance.title.users", value: "\(instance.stats?.userCount ?? 0)")
                 self.dataRow(title: "instance.title.posts", value: "\(instance.stats?.statusCount ?? 0)")
                 self.dataRow(title: "instance.title.domains", value: "\(instance.stats?.domainCount ?? 0)")
-                
+
                 Toggle("instance.title.registrations", isOn: Binding.constant(instance.registrations))
                     .disabled(true)
                 Toggle("instance.title.approvalRequired", isOn: Binding.constant(instance.approvalRequired))
                     .disabled(true)
             }
-            
+
             Section("instance.title.contact") {
                 self.dataRow(title: "instance.title.email", value: instance.email ?? String.empty())
-                
+
                 if let contactAccount = instance.contactAccount {
                     NavigationLink(value: RouteurDestinations.userProfile(
                         accountId: contactAccount.id,
@@ -98,7 +98,7 @@ struct InstanceView: View {
                     }
                 }
             }
-            
+
             if let rules = self.instance?.rules {
                 Section("instance.title.rules") {
                     ForEach(rules, id: \.id) { rule in
@@ -108,7 +108,7 @@ struct InstanceView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func dataRow(title: LocalizedStringKey, value: String) -> some View {
         HStack {
@@ -119,13 +119,13 @@ struct InstanceView: View {
                 .font(.subheadline)
         }
     }
-    
+
     private func loadData() async {
         do {
             if let serverUrl = self.applicationState.account?.serverUrl {
                 self.instance = try await self.client.instances.instance(url: serverUrl)
             }
-            
+
             self.state = .loaded
         } catch {
             if !Task.isCancelled {
@@ -137,4 +137,3 @@ struct InstanceView: View {
         }
     }
 }
-

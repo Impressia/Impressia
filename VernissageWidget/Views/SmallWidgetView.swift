@@ -3,7 +3,7 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 import WidgetKit
 
@@ -18,7 +18,7 @@ struct SmallWidgetView: View {
                 .unredacted()
         }
     }
-    
+
     @ViewBuilder
     private func getWidgetBody(uiImage: Image, uiAvatar: Image) -> some View {
         VStack {
@@ -35,7 +35,7 @@ struct SmallWidgetView: View {
                             .frame(width: 16, height: 16)
                     )
                     .shadow(color: .black, radius: 2)
-                
+
                 Spacer()
             }
             .padding(.leading, 8)

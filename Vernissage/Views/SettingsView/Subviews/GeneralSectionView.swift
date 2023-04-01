@@ -3,19 +3,19 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 
 struct GeneralSectionView: View {
     @EnvironmentObject var applicationState: ApplicationState
-        
+
     private let customIconNames = ["Default", "Blue", "Violet", "Orange", "Pride", "Blue-Camera", "Violet-Camera", "Orange-Camera", "Pride-Camera"]
     private let themeNames: [(theme: Theme, name: LocalizedStringKey)] = [
         (Theme.system, "settings.title.system"),
         (Theme.light, "settings.title.light"),
         (Theme.dark, "settings.title.dark")
     ]
-    
+
     var body: some View {
         Section("settings.title.general") {
 
@@ -37,7 +37,7 @@ struct GeneralSectionView: View {
                 ApplicationSettingsHandler.shared.set(activeIcon: iconName)
                 UIApplication.shared.setAlternateIconName(iconName == "Default" ? nil : iconName)
             }
-            
+
             // Application theme.
             Picker(selection: $applicationState.theme) {
                 ForEach(self.themeNames, id: \.theme) { item in

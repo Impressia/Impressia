@@ -11,29 +11,29 @@ struct UserProfileHeaderView: View {
     @EnvironmentObject private var applicationState: ApplicationState
     @EnvironmentObject private var client: Client
     @EnvironmentObject private var routerPath: RouterPath
-    
+
     @State var account: Account
     @ObservedObject var relationship = RelationshipModel()
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .top) {
                 Spacer()
-                
+
                 if self.relationship.muting == true {
                     TagWidget(value: "Muted", color: .accentColor, systemImage: "message.and.waveform.fill")
                 }
-                
+
                 if self.relationship.blocking == true {
                     TagWidget(value: "Blocked", color: .dangerColor, systemImage: "hand.raised.fill")
                 }
             }
-            
+
             HStack(alignment: .center) {
                 UserAvatar(accountAvatar: account.avatar, size: .profile)
-                
+
                 Spacer()
-                
+
                 VStack(alignment: .center) {
                     Text("\(account.statusesCount)")
                         .font(.title3)
@@ -41,9 +41,9 @@ struct UserProfileHeaderView: View {
                         .font(.subheadline)
                         .opacity(0.6)
                 }
-                
+
                 Spacer()
-                
+
                 NavigationLink(value: RouteurDestinations.accounts(listType: .followers(entityId: account.id))) {
                     VStack(alignment: .center) {
                         Text("\(account.followersCount)")
@@ -53,9 +53,9 @@ struct UserProfileHeaderView: View {
                             .opacity(0.6)
                     }
                 }.foregroundColor(.mainTextColor)
-                                
+
                 Spacer()
-                
+
                 NavigationLink(value: RouteurDestinations.accounts(listType: .following(entityId: account.id))) {
                     VStack(alignment: .center) {
                         Text("\(account.followingCount)")
@@ -66,8 +66,8 @@ struct UserProfileHeaderView: View {
                     }
                 }.foregroundColor(.mainTextColor)
             }
-                        
-            HStack (alignment: .center) {
+
+            HStack(alignment: .center) {
                 VStack(alignment: .leading) {
                     Text(account.displayNameWithoutEmojis)
                         .foregroundColor(.mainTextColor)
@@ -77,14 +77,14 @@ struct UserProfileHeaderView: View {
                         .foregroundColor(.lightGrayColor)
                         .font(.subheadline)
                 }
-                
+
                 Spacer()
-                
+
                 if self.applicationState.account?.id != self.account.id {
                     self.otherAccountActionButtons()
                 }
             }
-                        
+
             if let note = account.note, !note.asMarkdown.isEmpty {
                 MarkdownFormattedText(note.asMarkdown)
                     .font(.subheadline)
@@ -93,7 +93,7 @@ struct UserProfileHeaderView: View {
                     })
                     .padding(.vertical, 4)
             }
-            
+
             if let website = account.website, let url = URL(string: website) {
                 HStack {
                     Image(systemName: "link")
@@ -103,14 +103,14 @@ struct UserProfileHeaderView: View {
                 .padding(.bottom, 2)
                 .font(.footnote)
             }
-            
+
             Text(String(format: NSLocalizedString("userProfile.title.joined", comment: "Joined"), account.createdAt.toRelative(.isoDateTimeMilliSec)))
                 .foregroundColor(.lightGrayColor.opacity(0.5))
                 .font(.footnote)
         }
         .padding()
     }
-    
+
     @ViewBuilder
     private func otherAccountActionButtons() -> some View {
         ActionButton {
@@ -118,13 +118,15 @@ struct UserProfileHeaderView: View {
         } label: {
             HStack {
                 Image(systemName: relationship.following == true ? "person.badge.minus" : "person.badge.plus")
-                Text(relationship.following == true ? "userProfile.title.unfollow" : (relationship.followedBy == true ? "userProfile.title.followBack" : "userProfile.title.follow"), comment: "Follow/unfollow actions")
+                Text(relationship.following == true
+                     ? "userProfile.title.unfollow"
+                     : (relationship.followedBy == true ? "userProfile.title.followBack" : "userProfile.title.follow"), comment: "Follow/unfollow actions")
             }
         }
         .buttonStyle(.borderedProminent)
         .tint(relationship.following == true ? .dangerColor : .accentColor)
     }
-    
+
     private func onRelationshipButtonTap() async {
         do {
             if self.relationship.following == true {
@@ -141,4 +143,3 @@ struct UserProfileHeaderView: View {
         }
     }
 }
-

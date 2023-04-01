@@ -3,19 +3,19 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 
 struct MediaSettingsView: View {
     @EnvironmentObject var applicationState: ApplicationState
     @Environment(\.colorScheme) var colorScheme
-    
+
     @State var showSensitive = true
     @State var showPhotoDescription = true
-    
+
     var body: some View {
         Section("settings.title.mediaSettings") {
-            
+
             Toggle(isOn: $showSensitive) {
                 VStack(alignment: .leading) {
                     Text("settings.title.alwaysShowSensitiveTitle", comment: "Always show NSFW")
@@ -28,7 +28,7 @@ struct MediaSettingsView: View {
                 self.applicationState.showSensitive = newValue
                 ApplicationSettingsHandler.shared.set(showSensitive: newValue)
             }
-            
+
             Toggle(isOn: $showPhotoDescription) {
                 VStack(alignment: .leading) {
                     Text("settings.title.alwaysShowAltTitle", comment: "Show alternative text")

@@ -10,17 +10,17 @@ struct ImageRow: View {
     private let status: StatusData
     private let attachmentsData: [AttachmentData]
     private let firstAttachment: AttachmentData?
-    
+
     @State private var imageHeight: Double
     @State private var imageWidth: Double
     @State private var selected: String
-    
+
     init(statusData: StatusData) {
         self.status = statusData
         self.attachmentsData = statusData.attachments()
         self.firstAttachment = self.attachmentsData.first
         self.selected = String.empty()
-        
+
         // Calculate size of frame (first from cache, then from real image, then from metadata).
         if let firstAttachment, let size = ImageSizeService.shared.get(for: firstAttachment.url) {
             self.imageWidth = size.width
@@ -36,7 +36,7 @@ struct ImageRow: View {
             self.imageWidth = UIScreen.main.bounds.width
         }
     }
-    
+
     var body: some View {
         if self.attachmentsData.count == 1, let firstAttachment = self.firstAttachment {
             ImageRowItem(status: self.status, attachmentData: firstAttachment) { (imageWidth, imageHeight) in
@@ -73,7 +73,7 @@ struct ImageRow: View {
                 if let attachment = attachmentsData.first(where: { item in item.id == attachmentId }) {
                     let doubleImageWidth = Double(attachment.metaImageWidth)
                     let doubleImageHeight = Double(attachment.metaImageHeight)
-                    
+
                     if doubleImageWidth != self.imageWidth || doubleImageHeight != self.imageHeight {
                         withAnimation(.linear(duration: 0.4)) {
                             self.imageWidth = doubleImageWidth

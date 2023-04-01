@@ -3,10 +3,10 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import Foundation
 
-public enum NetworkError: Error {    
+public enum NetworkError: Error {
     case notSuccessResponse(URLResponse)
     case unknownError
 }

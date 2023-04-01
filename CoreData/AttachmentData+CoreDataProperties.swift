@@ -32,5 +32,5 @@ extension AttachmentData {
 
 }
 
-extension AttachmentData : Identifiable {
+extension AttachmentData: Identifiable {
 }

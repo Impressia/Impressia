@@ -14,13 +14,15 @@ struct ThirdPartyView: View {
                     Link("https://github.com/kean/Nuke",
                          destination: URL(string: "https://github.com/kean/Nuke")!)
                     .padding(.bottom, 4)
+
+                    // swiftlint:disable:next line_length
                     Text("Nuke provides an efficient way to download and display images in your app. It's easy to learn and use. Its architecture enables many powerful features while offering virtually unlimited possibilities for customization.")
                 }
                 .font(.footnote)
             }
-            
+
             Section("Custom emoji") {
-                VStack(alignment: .leading)  {
+                VStack(alignment: .leading) {
                     Link("https://github.com/divadretlaw/EmojiText",
                          destination: URL(string: "https://github.com/divadretlaw/EmojiText")!)
                     .padding(.bottom, 4)
@@ -30,7 +32,7 @@ struct ThirdPartyView: View {
             }
 
             Section("Status body") {
-                VStack(alignment: .leading)  {
+                VStack(alignment: .leading) {
                     Link("https://gitlab.com/mflint/HTML2Markdown",
                          destination: URL(string: "https://gitlab.com/mflint/HTML2Markdown")!)
                     .padding(.bottom, 4)
@@ -38,9 +40,9 @@ struct ThirdPartyView: View {
                 }
                 .font(.footnote)
             }
-            
+
             Section("OAuth authrisation") {
-                VStack(alignment: .leading)  {
+                VStack(alignment: .leading) {
                     Link("https://github.com/OAuthSwift/OAuthSwift",
                          destination: URL(string: "https://github.com/OAuthSwift/OAuthSwift")!)
                     .padding(.bottom, 4)
@@ -48,9 +50,9 @@ struct ThirdPartyView: View {
                 }
                 .font(.footnote)
             }
-            
+
             Section("Notifications") {
-                VStack(alignment: .leading)  {
+                VStack(alignment: .leading) {
                     Link("https://github.com/omaralbeik/Drops",
                          destination: URL(string: "https://github.com/omaralbeik/Drops")!)
                     .padding(.bottom, 4)
@@ -58,9 +60,9 @@ struct ThirdPartyView: View {
                 }
                 .font(.footnote)
             }
-            
+
             Section("Loaders") {
-                VStack(alignment: .leading)  {
+                VStack(alignment: .leading) {
                     Link("https://github.com/exyte/ActivityIndicatorView",
                          destination: URL(string: "https://github.com/exyte/ActivityIndicatorView")!)
                     .padding(.bottom, 4)
@@ -68,9 +70,9 @@ struct ThirdPartyView: View {
                 }
                 .font(.footnote)
             }
-            
+
             Section("HTML String") {
-                VStack(alignment: .leading)  {
+                VStack(alignment: .leading) {
                     Link("https://github.com/alexisakers/HTMLString",
                          destination: URL(string: "https://github.com/alexisakers/HTMLString")!)
                     .padding(.bottom, 4)
@@ -78,9 +80,9 @@ struct ThirdPartyView: View {
                 }
                 .font(.footnote)
             }
-            
+
             Section("Fleur De Leah") {
-                VStack(alignment: .leading)  {
+                VStack(alignment: .leading) {
                     Link("https://fonts.google.com/specimen/Fleur+De+Leah",
                          destination: URL(string: "https://fonts.google.com/specimen/Fleur+De+Leah")!)
                     .padding(.bottom, 4)
@@ -93,4 +95,3 @@ struct ThirdPartyView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 }
-

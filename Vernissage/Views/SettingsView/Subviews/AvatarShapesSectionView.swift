@@ -3,7 +3,7 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 
 struct AvatarShapesSectionView: View {
@@ -21,11 +21,11 @@ struct AvatarShapesSectionView: View {
                         .clipShape(AvatarShape.circle.shape())
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 32, height: 32)
-                    
+
                     Text("settings.title.circle", comment: "Circle")
                         .foregroundColor(.label)
                     Spacer()
-                    
+
                     if self.applicationState.avatarShape == .circle {
                         Image(systemName: "checkmark")
                     }
@@ -47,7 +47,7 @@ struct AvatarShapesSectionView: View {
                     Text("settings.title.rounderRectangle", comment: "Rounded rectangle")
                         .foregroundColor(.label)
                     Spacer()
-                    
+
                     if self.applicationState.avatarShape == .roundedRectangle {
                         Image(systemName: "checkmark")
                     }

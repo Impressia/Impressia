@@ -9,10 +9,10 @@ import NukeUI
 
 struct UserAvatar: View {
     @EnvironmentObject var applicationState: ApplicationState
-    
+
     public enum Size {
         case mini, list, comment, profile, large
-      
+
         public var size: CGSize {
             switch self {
             case .mini:
@@ -28,15 +28,15 @@ struct UserAvatar: View {
             }
         }
     }
-    
+
     public let accountAvatar: URL?
     public let size: Size
-    
+
     public init(accountAvatar: URL?, size: Size = .list) {
       self.accountAvatar = accountAvatar
       self.size = size
     }
-    
+
     var body: some View {
         if let accountAvatar {
             if let cachedAvatar = CacheImageService.shared.get(for: accountAvatar) {
@@ -69,7 +69,7 @@ struct UserAvatar: View {
                 .frame(width: size.size.width, height: size.size.height)
         }
     }
-    
+
     @ViewBuilder private var placeholderView: some View {
         Image("Avatar")
             .resizable()
@@ -77,4 +77,3 @@ struct UserAvatar: View {
             .aspectRatio(contentMode: .fit)
     }
 }
-

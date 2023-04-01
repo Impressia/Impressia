@@ -12,7 +12,7 @@ struct AccountsSectionView: View {
 
     @State private var accounts: [AccountModel] = []
     @State private var dbAccounts: [AccountData] = []
-        
+
     var body: some View {
         Section("settings.title.accounts") {
             ForEach(self.accounts) { account in
@@ -30,7 +30,7 @@ struct AccountsSectionView: View {
                 .deleteDisabled(self.deleteDisabled(for: account))
             }
             .onDelete(perform: delete)
-            
+
             NavigationLink(value: RouteurDestinations.signIn) {
                 HStack {
                     Text("settings.title.newAccount", comment: "New account")
@@ -44,30 +44,30 @@ struct AccountsSectionView: View {
             self.accounts = self.dbAccounts.map({ AccountModel(accountData: $0) })
         }
     }
-    
+
     private func deleteDisabled(for account: AccountModel) -> Bool {
         self.applicationState.account?.id == account.id && self.accounts.count > 1
     }
-    
+
     private func delete(at offsets: IndexSet) {
         let accountsToDelete = offsets.map { self.accounts[$0] }
         var shouldClearApplicationState = false
-        
+
         // Delete from database.
         for account in accountsToDelete {
             // Check if we are deleting active user.
             if account.id == self.applicationState.account?.id {
                 shouldClearApplicationState = true
             }
-            
+
             if let dbAccount = self.dbAccounts.first(where: {$0.id == account.id }) {
                 AccountDataHandler.shared.remove(accountData: dbAccount)
             }
         }
-        
+
         // Delete from local state.
         self.accounts.remove(atOffsets: offsets)
-        
+
         // When we are deleting active user then we have to switch to sing in view.
         if shouldClearApplicationState {
             // We have to do this after animation of deleting row is ended.

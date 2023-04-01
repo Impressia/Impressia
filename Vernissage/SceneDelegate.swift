@@ -13,7 +13,7 @@ class SceneDelegate: NSObject, UISceneDelegate {
         guard let url = URLContexts.first?.url else {
             return
         }
-        
+
         if url.host == AppConstants.oauthCallbackPart {
             OAuthSwift.handle(url: url)
         } else if url.host == AppConstants.statusCallbackPart {

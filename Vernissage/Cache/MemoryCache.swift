@@ -17,7 +17,7 @@ final class MemoryCache<Key: Hashable, Value> {
         self.dateProvider = dateProvider
         self.entryLifetime = entryLifetime
     }
-    
+
     func insert(_ value: Value, forKey key: Key) {
         let date = dateProvider().addingTimeInterval(entryLifetime)
         let entry = Entry(value: value, expirationDate: date)

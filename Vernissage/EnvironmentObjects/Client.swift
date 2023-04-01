@@ -3,24 +3,24 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import Foundation
 import PixelfedKit
 
 public class Client: ObservableObject {
     public static let shared = Client()
     private init() { }
-    
+
     private var pixelfedClient: PixelfedClientAuthenticated?
 
     func setAccount(account: AccountModel) {
         guard let accessToken = account.accessToken else {
             return
         }
-        
+
         self.pixelfedClient = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
     }
-    
+
     func clearAccount() {
         self.pixelfedClient = nil
     }
@@ -43,7 +43,7 @@ extension Client {
 
 public class BaseClient {
     public var pixelfedClient: PixelfedClientAuthenticated
-    
+
     init?(pixelfedClient: PixelfedClientAuthenticated?) {
         guard let pixelfedClient else {
             return nil

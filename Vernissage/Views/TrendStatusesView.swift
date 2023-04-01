@@ -23,7 +23,7 @@ struct TrendStatusesView: View {
                 Text("trendingStatuses.title.daily", comment: "Daily").tag(Pixelfed.Trends.TrendRange.daily)
                 Text("trendingStatuses.title.monthly", comment: "Monthly").tag(Pixelfed.Trends.TrendRange.monthly)
                 Text("trendingStatuses.title.yearly", comment: "Yearly").tag(Pixelfed.Trends.TrendRange.yearly)
-                
+
             }
             .padding()
             .pickerStyle(SegmentedPickerStyle())
@@ -38,12 +38,12 @@ struct TrendStatusesView: View {
                     }
                 }
             }
-            
+
             self.mainBody()
         }
         .navigationTitle("trendingStatuses.navigationBar.title")
     }
-    
+
     @ViewBuilder
     private func mainBody() -> some View {
         switch state {
@@ -100,15 +100,15 @@ struct TrendStatusesView: View {
             .padding()
         }
     }
-    
+
     private func loadStatuses() async throws {
         if let statuses = try await client.trends?.statuses(range: tabSelectedValue) {
             var inPlaceStatuses: [StatusModel] = []
-            
+
             for item in statuses.getStatusesWithImagesOnly() {
                 inPlaceStatuses.append(StatusModel(status: item))
             }
-            
+
             self.statusViewModels = inPlaceStatuses
         }
     }

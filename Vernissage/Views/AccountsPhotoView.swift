@@ -3,7 +3,7 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 import PixelfedKit
 import Foundation
@@ -13,21 +13,21 @@ struct AccountsPhotoView: View {
         case trending
         case search(query: String)
     }
-    
+
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var client: Client
     @EnvironmentObject var routerPath: RouterPath
 
     @State public var listType: ListType
-    
+
     @State private var accounts: [Account] = []
     @State private var state: ViewState = .loading
-    
+
     var body: some View {
         self.mainBody()
             .navigationTitle("trendingAccounts.navigationBar.title")
     }
-    
+
     @ViewBuilder
     private func mainBody() -> some View {
         switch state {
@@ -45,14 +45,14 @@ struct AccountsPhotoView: View {
         case .error(let error):
             ErrorView(error: error) {
                 self.state = .loading
-                
+
                 self.accounts = []
                 await self.loadData()
             }
             .padding()
         }
     }
-    
+
     @ViewBuilder
     private func list() -> some View {
         List {
@@ -82,7 +82,7 @@ struct AccountsPhotoView: View {
             }
         }
     }
-    
+
     private func loadData() async {
         do {
             self.accounts = try await self.loadAccounts()
@@ -96,7 +96,7 @@ struct AccountsPhotoView: View {
             }
         }
     }
-    
+
     private func loadAccounts() async throws -> [Account] {
         switch self.listType {
         case .trending:
@@ -108,7 +108,7 @@ struct AccountsPhotoView: View {
                 if response.statusCode() == HTTPStatusCode.notFound {
                     return []
                 }
-                
+
                 throw NetworkError.notSuccessResponse(response)
             }
         case .search(let query):

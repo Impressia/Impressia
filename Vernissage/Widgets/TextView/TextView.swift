@@ -17,13 +17,12 @@ public struct TextView: View {
 
     private var getTextView: ((UITextView) -> Void)?
     public static let bodyFontSize = 17.0
-    
+
     var placeholderView: AnyView?
     var keyboard: UIKeyboardType = .default
 
     public init(_ text: Binding<NSMutableAttributedString>,
-                getTextView: ((UITextView) -> Void)? = nil)
-    {
+                getTextView: ((UITextView) -> Void)? = nil) {
         _text = text
         _isEmpty = Binding(
             get: { text.wrappedValue.string.isEmpty },
@@ -60,7 +59,7 @@ public struct TextView: View {
 final class UIKitTextView: UITextView {
     override var keyCommands: [UIKeyCommand]? {
         return (super.keyCommands ?? []) + [
-            UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(escape(_:))),
+            UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(escape(_:)))
         ]
     }
 
@@ -71,7 +70,7 @@ final class UIKitTextView: UITextView {
 
 extension TextView {
     struct Representable: UIViewRepresentable {
-        
+
         @Binding var text: NSMutableAttributedString
         @Binding var calculatedHeight: CGFloat
 
@@ -109,7 +108,7 @@ extension TextView.Representable {
         private var calculatedHeight: Binding<CGFloat>
 
         var didBecomeFirstResponder = false
-        
+
         var getTextView: ((UITextView) -> Void)?
 
         init(text: Binding<NSMutableAttributedString>,
@@ -130,7 +129,7 @@ extension TextView.Representable {
             super.init()
 
             textView.delegate = self
-            
+
             textView.font = UIFont.preferredFont(from: .body)
             textView.adjustsFontForContentSizeCategory = true
             textView.autocapitalizationType = .sentences
@@ -217,4 +216,3 @@ public extension TextView {
         return view
     }
 }
-

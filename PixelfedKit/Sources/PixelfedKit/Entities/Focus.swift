@@ -9,10 +9,10 @@ import Foundation
 /// Focal points for cropping media thumbnails.
 /// https://docs.joinmastodon.org/api/guidelines/#focal-points
 public struct Focus: Codable {
-    
+
     /// X position int he image.
     public let x: Int
-    
+
     /// Y position in the image.
     public let y: Int
 

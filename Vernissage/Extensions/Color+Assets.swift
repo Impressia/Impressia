@@ -3,11 +3,11 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 
 extension Color {
-    
+
     // MARK: - Text Colors
     static let dangerColor = Color("DangerColor")
     static let lightGrayColor = Color("LightGrayColor")
@@ -27,7 +27,6 @@ extension Color {
     static let accentColor9 = Color("AccentColor9")
     static let accentColor10 = Color("AccentColor10")
 }
-
 
 extension Color {
     func toUIColor() -> UIColor {

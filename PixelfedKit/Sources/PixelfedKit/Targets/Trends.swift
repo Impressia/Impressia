@@ -16,25 +16,25 @@ extension Pixelfed {
 
 extension Pixelfed.Trends: TargetType {
     public enum TrendRange: String {
-        case daily = "daily"
-        case monthly = "monthly"
-        case yearly = "yearly"
+        case daily
+        case monthly
+        case yearly
     }
-    
+
     private var apiPath: String { return "/api/v1.1/discover" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.
     public var path: String {
         switch self {
-        case .tags(_, _, _):
+        case .tags:
             return "\(apiPath)/posts/hashtags"
-        case .statuses(_, _, _):
+        case .statuses:
             return "\(apiPath)/posts/trending"
-        case .accounts(_, _, _):
+        case .accounts:
             return "\(apiPath)/accounts/popular"
         }
     }
-    
+
     /// The HTTP method used in the request.
     public var method: Method {
         switch self {
@@ -42,14 +42,14 @@ extension Pixelfed.Trends: TargetType {
             return .get
         }
     }
-    
+
     /// The parameters to be incoded in the request.
     public var queryItems: [(String, String)]? {
         var params: [(String, String)] = []
-        var trendRange: TrendRange? = nil
+        var trendRange: TrendRange?
 
-        var offset: Offset? = nil
-        var limit: Limit? = nil
+        var offset: Offset?
+        var limit: Limit?
 
         switch self {
         case .tags(let _trendRange, let _offset, let _limit):
@@ -65,7 +65,7 @@ extension Pixelfed.Trends: TargetType {
             offset = _offset
             limit = _limit
         }
-        
+
         switch trendRange {
         case .daily:
             params.append(("range", "daily"))
@@ -76,21 +76,21 @@ extension Pixelfed.Trends: TargetType {
         case .none:
             params.append(("range", "daily"))
         }
-        
+
         if let offset {
-            params.append(("offset",  "\(offset)"))
+            params.append(("offset", "\(offset)"))
         }
         if let limit {
             params.append(("limit", "\(limit)"))
         }
-        
+
         return params
     }
-    
+
     public var headers: [String: String]? {
         [:].contentTypeApplicationJson
     }
-    
+
     public var httpBody: Data? {
         nil
     }

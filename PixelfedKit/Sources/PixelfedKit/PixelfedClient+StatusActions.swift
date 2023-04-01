@@ -8,23 +8,22 @@ import Foundation
 
 public extension PixelfedClientAuthenticated {
     func boost(statusId: EntityId) async throws -> Status {
-        // TODO: Check whether the current user already boosted the status
         let request = try Self.request(
             for: baseURL,
             target: Pixelfed.Statuses.reblog(statusId),
             withBearerToken: token
         )
-                
+
         return try await downloadJson(Status.self, request: request)
     }
-    
+
     func unboost(statusId: EntityId) async throws -> Status {
         let request = try Self.request(
             for: baseURL,
             target: Pixelfed.Statuses.unreblog(statusId),
             withBearerToken: token
         )
-        
+
         return try await downloadJson(Status.self, request: request)
     }
 
@@ -67,7 +66,7 @@ public extension PixelfedClientAuthenticated {
 
         return try await downloadJson(Status.self, request: request)
     }
-    
+
     func pin(statusId: EntityId) async throws -> Status {
         let request = try Self.request(
             for: baseURL,
@@ -96,7 +95,7 @@ public extension PixelfedClientAuthenticated {
 
         return try await downloadJson(Status.self, request: request)
     }
-    
+
     func delete(statusId: EntityId) async throws {
         let request = try Self.request(
             for: baseURL,

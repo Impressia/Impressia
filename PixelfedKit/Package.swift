@@ -15,7 +15,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "PixelfedKit",
-            targets: ["PixelfedKit"]),
+            targets: ["PixelfedKit"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -31,6 +31,6 @@ let package = Package(
             dependencies: ["OAuthSwift", "HTML2Markdown"]),
         .testTarget(
             name: "PixelfedKitTests",
-            dependencies: ["PixelfedKit"]),
+            dependencies: ["PixelfedKit"])
     ]
 )

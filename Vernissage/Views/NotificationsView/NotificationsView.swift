@@ -3,7 +3,7 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 import PixelfedKit
 
@@ -15,17 +15,17 @@ struct NotificationsView: View {
     @State private var notifications: [PixelfedKit.Notification] = []
     @State private var allItemsLoaded = false
     @State private var state: ViewState = .loading
-    
+
     @State private var minId: String?
     @State private var maxId: String?
-    
+
     private let defaultPageSize = 40
-    
+
     var body: some View {
         self.mainBody()
             .navigationTitle("notifications.navigationBar.title")
     }
-    
+
     @ViewBuilder
     private func mainBody() -> some View {
         switch state {
@@ -48,14 +48,14 @@ struct NotificationsView: View {
             .padding()
         }
     }
-    
+
     @ViewBuilder
     private func list() -> some View {
         List {
             ForEach(notifications, id: \.id) { notification in
                 NotificationRowView(notification: notification)
             }
-            
+
             if allItemsLoaded == false {
                 HStack {
                     Spacer()
@@ -75,18 +75,18 @@ struct NotificationsView: View {
             HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
         }
     }
-    
+
     func loadNotifications() async {
-        do {            
+        do {
             if let linkable = try await self.client.notifications?.notifications(maxId: maxId, minId: minId, limit: 5) {
                 self.minId = linkable.link?.minId
                 self.maxId = linkable.link?.maxId
                 self.notifications = linkable.data
-                
+
                 if linkable.data.isEmpty {
                     self.allItemsLoaded = true
                 }
-                
+
                 self.state = .loaded
             }
         } catch {
@@ -98,7 +98,7 @@ struct NotificationsView: View {
             }
         }
     }
-    
+
     private func loadMoreNotifications() async {
         do {
             if let linkable = try await self.client.notifications?.notifications(maxId: self.maxId, limit: self.defaultPageSize) {
@@ -106,7 +106,7 @@ struct NotificationsView: View {
                     self.allItemsLoaded = true
                     return
                 }
-                
+
                 self.maxId = linkable.link?.maxId
                 self.notifications.append(contentsOf: linkable.data)
             }
@@ -114,7 +114,7 @@ struct NotificationsView: View {
             ErrorService.shared.handle(error, message: "notifications.error.loadingNotificationsFailed", showToastr: !Task.isCancelled)
         }
     }
-    
+
     private func loadNewNotifications() async {
         do {
             if let linkable = try await self.client.notifications?.notifications(minId: self.minId, limit: self.defaultPageSize) {
@@ -122,7 +122,7 @@ struct NotificationsView: View {
                     // We have all notifications, we don't have to do anything.
                     return
                 }
-                
+
                 self.minId = linkable.link?.minId
                 self.notifications.insert(contentsOf: linkable.data, at: 0)
             }

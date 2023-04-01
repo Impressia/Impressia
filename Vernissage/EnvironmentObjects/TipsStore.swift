@@ -3,7 +3,7 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import Foundation
 import StoreKit
 
@@ -12,10 +12,10 @@ final class TipsStore: ObservableObject {
 
     /// Products are registered in AppStore connect (and for development in InAppPurchaseStoreKitConfiguration.storekit file).
     @Published private(set) var items = [Product]()
-    
+
     /// Status of the purchase.
     @Published private(set) var status: ActionStatus? {
-        didSet{
+        didSet {
             switch status {
             case .failed:
                 self.hasError = true
@@ -27,7 +27,7 @@ final class TipsStore: ObservableObject {
 
     /// True when error during purchase occures.
     @Published var hasError = false
-    
+
     /// Error during purchase.
     var error: PurchaseError? {
         switch status {
@@ -37,21 +37,21 @@ final class TipsStore: ObservableObject {
             return nil
         }
     }
-    
+
     /// Listener responsible for waiting for new events from AppStore (when transaction didn't finish during the purchase).
     private var transactionListener: Task<Void, Error>?
-    
+
     init() {
         transactionListener = configureTransactionListener()
         Task { [weak self] in
             await self?.retrieve()
         }
     }
-    
+
     deinit {
         transactionListener?.cancel()
     }
-    
+
     /// Purchase new product.
     public func purchase(_ product: Product) async {
         do {
@@ -62,12 +62,12 @@ final class TipsStore: ObservableObject {
             ErrorService.shared.handle(error, message: "Purchase failed.", showToastr: false)
         }
     }
-    
+
     /// Reset status of the purchase/action.
     public func reset() {
         self.status = nil
     }
-    
+
     /// Handle purchase result.
     private func handlePurchase(from result: Product.PurchaseResult) async throws {
         switch result {
@@ -84,7 +84,7 @@ final class TipsStore: ObservableObject {
             break
         }
     }
-    
+
     /// We have to verify if transaction ends successfuly.
     private func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
         switch result {
@@ -94,7 +94,7 @@ final class TipsStore: ObservableObject {
             return signedType
         }
     }
-    
+
     /// Configure listener of interrupted transactions.
     private func configureTransactionListener() -> Task<Void, Error> {
         Task.detached(priority: .background) { @MainActor [weak self] in
@@ -110,13 +110,13 @@ final class TipsStore: ObservableObject {
             }
         }
     }
-    
+
     /// Retrieve products from Apple store.
     private func retrieve() async {
         do {
             let products = try await Product.products(for: ProductIdentifiers.allCases.map({ $0.rawValue }))
                 .sorted(by: { $0.price < $1.price })
-            
+
             self.items = products
         } catch {
             self.status = .failed(.system(error))
@@ -129,7 +129,7 @@ extension TipsStore {
     public enum ActionStatus: Equatable {
         case successful
         case failed(PurchaseError)
-        
+
         public static func == (lhs: TipsStore.ActionStatus, rhs: TipsStore.ActionStatus) -> Bool {
             switch (lhs, rhs) {
             case (.successful, .successful):

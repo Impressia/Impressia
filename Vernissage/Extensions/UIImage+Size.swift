@@ -3,7 +3,7 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import UIKit
 
 extension UIImage.Orientation {
@@ -27,13 +27,13 @@ extension UIImage {
         guard let sourceImage = CIImage(image: self, options: [.applyOrientationProperty: true]) else {
             return self
         }
-        
+
         // We have to store correct image orientation.
         let orientedImage = sourceImage.oriented(forExifOrientation: self.imageOrientation.exifOrientation)
-        
+
         // Filter.
-        let resizeFilter = CIFilter(name:"CILanczosScaleTransform")!
-        
+        let resizeFilter = CIFilter(name: "CILanczosScaleTransform")!
+
         // Compute scale.
         let scale = targetSize.width / orientedImage.extent.width
 
@@ -49,7 +49,7 @@ extension UIImage {
         guard let resizedCGImage = CIContext(options: nil).createCGImage(result, from: result.extent) else {
             return self
         }
-        
+
         return UIImage(cgImage: resizedCGImage)
     }
 }

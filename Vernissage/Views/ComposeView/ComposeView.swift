@@ -3,7 +3,7 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 import PhotosUI
 import PixelfedKit
@@ -15,9 +15,9 @@ struct ComposeView: View {
     @EnvironmentObject var client: Client
 
     @Environment(\.dismiss) private var dismiss
-    
+
     @StateObject private var textModel: TextModel
-    
+
     @State private var isKeyboardPresented = false
     @State private var isSensitive = false
     @State private var spoilerText = String.empty()
@@ -27,29 +27,29 @@ struct ComposeView: View {
     @State private var photosAreAttached = false
     @State private var publishDisabled = true
     @State private var interactiveDismissDisabled = false
-    
+
     @State private var photosAreUploading = false
     @State private var photosPickerVisible = false
-    
+
     @State private var selectedItems: [PhotosPickerItem] = []
     @State private var photosAttachment: [PhotoAttachment] = []
-    
+
     @State private var visibility = Pixelfed.Statuses.Visibility.pub
     @State private var visibilityText: LocalizedStringKey = "compose.title.everyone"
     @State private var visibilityImage = "globe.europe.africa"
-    
+
     @FocusState private var focusedField: FocusField?
     enum FocusField: Hashable {
         case unknown
         case content
         case spoilerText
     }
-    
-    @State private var showSheet: SheetType? = nil
+
+    @State private var showSheet: SheetType?
     enum SheetType: Identifiable {
         case photoDetails(PhotoAttachment)
         case placeSelector
-        
+
         public var id: String {
             switch self {
             case .photoDetails:
@@ -59,7 +59,7 @@ struct ComposeView: View {
             }
         }
     }
-    
+
     private let statusViewModel: StatusModel?
     private let keyboardFontImageSize = 20.0
     private let keyboardFontTextSize = 16.0
@@ -69,13 +69,13 @@ struct ComposeView: View {
         _textModel = StateObject(wrappedValue: .init())
         self.statusViewModel = statusViewModel
     }
-    
+
     var body: some View {
         NavigationStack {
             NavigationView {
                 ZStack(alignment: .bottom) {
                     self.composeBody()
-                    
+
                     if self.isKeyboardPresented {
                         VStack(alignment: .leading, spacing: 0) {
                             self.autocompleteToolbar()
@@ -95,7 +95,7 @@ struct ComposeView: View {
                         .disabled(self.publishDisabled)
                         .buttonStyle(.borderedProminent)
                     }
-                    
+
                     ToolbarItem(placement: .cancellationAction) {
                         Button(NSLocalizedString("compose.title.cancel", comment: "Cancel"), role: .cancel) {
                             dismiss()
@@ -105,10 +105,10 @@ struct ComposeView: View {
                 .onAppear {
                     self.textModel.client = self.client
                 }
-                .onChange(of: self.textModel.text) { newValue in
+                .onChange(of: self.textModel.text) { _ in
                     self.refreshScreenState()
                 }
-                .onChange(of: self.selectedItems) { selectedItem in
+                .onChange(of: self.selectedItems) { _ in
                     Task {
                         await self.loadPhotos()
                     }
@@ -138,41 +138,41 @@ struct ComposeView: View {
         }
         .interactiveDismissDisabled(self.interactiveDismissDisabled)
     }
-    
+
     @ViewBuilder
     private func composeBody() -> some View {
         ScrollView {
-            VStack (alignment: .leading){
+            VStack(alignment: .leading) {
                 // Red content warning.
                 self.contentWarningView()
-                
+
                 // Information that comments are disabled.
                 self.commentsDisabledView()
-                
+
                 // User avatar and name.
                 self.userAvatarView()
-                
+
                 // Incofmation about status visibility.
                 self.visibilityComboView()
-                
+
                 // Text area with new status.
                 self.statusTextView()
-                
+
                 // Grid with images.
                 self.imagesGridView()
-                
+
                 // Status when we are adding new comment.
                 self.statusModelView()
-                
+
                 Spacer()
             }
         }
     }
-    
+
     @ViewBuilder
     private func imagesGridView() -> some View {
         HStack(alignment: .center) {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum:80))]) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]) {
                 ForEach(self.photosAttachment, id: \.id) { photoAttachment in
                     ImageUploadView(photoAttachment: photoAttachment) {
                         self.showSheet = .photoDetails(photoAttachment)
@@ -180,11 +180,11 @@ struct ComposeView: View {
                         self.photosAttachment = self.photosAttachment.filter({ item in
                             item != photoAttachment
                         })
-                        
+
                         self.selectedItems = self.selectedItems.filter({ item in
                             item != photoAttachment.photosPickerItem
                         })
-                        
+
                         self.refreshScreenState()
                     } upload: {
                         Task {
@@ -198,33 +198,33 @@ struct ComposeView: View {
         }
         .padding(8)
     }
-    
+
     @ViewBuilder
     private func statusModelView() -> some View {
         if let status = self.statusViewModel {
-            HStack (alignment: .top) {
+            HStack(alignment: .top) {
                 UserAvatar(accountAvatar: status.account.avatar, size: .comment)
-                
-                VStack (alignment: .leading, spacing: 0) {
-                    HStack (alignment: .top) {
+
+                VStack(alignment: .leading, spacing: 0) {
+                    HStack(alignment: .top) {
                         Text(statusViewModel?.account.displayNameWithoutEmojis ?? "")
                             .foregroundColor(.mainTextColor)
                             .font(.footnote)
                             .fontWeight(.bold)
-                        
+
                         Spacer()
                     }
-                    
+
                     MarkdownFormattedText(status.content.asMarkdown)
                         .font(.subheadline)
-                        .environment(\.openURL, OpenURLAction { url in .handled })
+                        .environment(\.openURL, OpenURLAction { _ in .handled })
                 }
             }
             .padding(8)
             .background(Color.selectedRowColor)
         }
     }
-    
+
     @ViewBuilder
     private func statusTextView() -> some View {
         TextView($textModel.text, getTextView: { textView in
@@ -237,7 +237,7 @@ struct ComposeView: View {
             self.focusedField = .content
         }
     }
-    
+
     @ViewBuilder
     private func userAvatarView() -> some View {
         if let accountData = applicationState.account {
@@ -252,7 +252,7 @@ struct ComposeView: View {
             .padding(.horizontal, 8)
         }
     }
-    
+
     @ViewBuilder
     private func contentWarningView() -> some View {
         if self.isSensitive {
@@ -264,7 +264,7 @@ struct ComposeView: View {
                 .background(Color.dangerColor.opacity(0.4))
         }
     }
-    
+
     @ViewBuilder
     private func commentsDisabledView() -> some View {
         if self.commentsDisabled {
@@ -278,7 +278,7 @@ struct ComposeView: View {
             .padding(.horizontal, 8)
         }
     }
-    
+
     @ViewBuilder
     private func visibilityComboView() -> some View {
         HStack {
@@ -290,7 +290,7 @@ struct ComposeView: View {
                 } label: {
                     Label("compose.title.everyone", systemImage: "globe.europe.africa")
                 }
-                
+
                 Button {
                     self.visibility = .unlisted
                     self.visibilityText = "compose.title.unlisted"
@@ -298,7 +298,7 @@ struct ComposeView: View {
                 } label: {
                     Label("compose.title.unlisted", systemImage: "lock.open")
                 }
-                
+
                 Button {
                     self.visibility = .priv
                     self.visibilityText = "compose.title.followers"
@@ -318,9 +318,9 @@ struct ComposeView: View {
                         .stroke(Color.accentColor, lineWidth: 1)
                 )
             }
-            
+
             Spacer()
-            
+
             if let name = self.place?.name, let country = self.place?.country {
                 Group {
                     Image(systemName: "mappin.and.ellipse")
@@ -333,7 +333,7 @@ struct ComposeView: View {
         .font(.footnote)
         .padding(.horizontal, 8)
     }
-    
+
     @ViewBuilder
     private func autocompleteToolbar() -> some View {
         if !textModel.mentionsSuggestions.isEmpty || !textModel.tagsSuggestions.isEmpty {
@@ -344,10 +344,10 @@ struct ComposeView: View {
                             Button {
                                 textModel.selectMentionSuggestion(account: account)
                             } label: {
-                                HStack (alignment: .center) {
+                                HStack(alignment: .center) {
                                     UserAvatar(accountAvatar: account.avatar, size: .comment)
-                                    
-                                    VStack (alignment: .leading) {
+
+                                    VStack(alignment: .leading) {
                                         Text(account.displayNameWithoutEmojis)
                                             .foregroundColor(.mainTextColor)
                                         Text("@\(account.acct)")
@@ -379,13 +379,13 @@ struct ComposeView: View {
             .background(.ultraThinMaterial)
         }
     }
-    
+
     @ViewBuilder
     private func keyboardToolbar() -> some View {
         VStack(spacing: 0) {
             Divider()
             HStack(alignment: .center, spacing: 22) {
-                
+
                 Button {
                     hideKeyboard()
                     self.focusedField = .unknown
@@ -393,11 +393,11 @@ struct ComposeView: View {
                 } label: {
                     Image(systemName: self.photosAreAttached ? "photo.fill.on.rectangle.fill" : "photo.on.rectangle")
                 }
-                
+
                 Button {
                     withAnimation(.easeInOut) {
                         self.isSensitive.toggle()
-                        
+
                         if self.isSensitive {
                             self.focusedField = .spoilerText
                         } else {
@@ -407,7 +407,7 @@ struct ComposeView: View {
                 } label: {
                     Image(systemName: self.isSensitive ? "exclamationmark.square.fill" : "exclamationmark.square")
                 }
-                
+
                 Button {
                     withAnimation(.easeInOut) {
                         self.commentsDisabled.toggle()
@@ -415,7 +415,7 @@ struct ComposeView: View {
                 } label: {
                     Image(systemName: self.commentsDisabled ? "person.2.slash" : "person.2.fill")
                 }
-                
+
                 Button {
                     if self.place != nil {
                         withAnimation(.easeInOut) {
@@ -427,21 +427,21 @@ struct ComposeView: View {
                 } label: {
                     Image(systemName: self.place == nil ? "mappin.square" : "mappin.square.fill")
                 }
-                
+
                 Button {
                     self.textModel.insertAtCursorPosition(content: "#")
                 } label: {
                     Image(systemName: "number")
                 }
-                
+
                 Button {
                     self.textModel.insertAtCursorPosition(content: "@")
                 } label: {
                     Image(systemName: "at")
                 }
-                
+
                 Spacer()
-                
+
                 Text("\(self.applicationState.statusMaxCharacters - textModel.text.string.utf16.count)")
                     .foregroundColor(.lightGrayColor)
                     .font(.system(size: self.keyboardFontTextSize))
@@ -451,52 +451,52 @@ struct ComposeView: View {
         }
         .background(Color.keyboardToolbarColor)
     }
-    
+
     private func placeholder() -> LocalizedStringKey {
         self.statusViewModel == nil ? "compose.title.attachPhotoFull" : "compose.title.attachPhotoMini"
     }
-    
+
     private func isPublishButtonDisabled() -> Bool {
         // Publish always disabled when there is not status text.
         if self.textModel.text.string.isEmpty {
             return true
         }
-        
+
         // When application is during uploading photos we cannot send new status.
         if self.photosAreUploading == true {
             return true
         }
-        
+
         // When status is not a comment, then photo is required.
         if self.statusViewModel == nil && self.photosAttachment.hasUploadedPhotos() == false {
             return true
         }
-        
+
         return false
     }
-    
+
     private func isInteractiveDismissDisabled() -> Bool {
         if self.textModel.text.string.isEmpty == false {
             return true
         }
-        
+
         if self.photosAreUploading == true {
             return true
         }
-        
+
         if self.photosAttachment.hasUploadedPhotos() == true {
             return true
         }
-        
+
         return false
     }
-    
+
     private func loadPhotos() async {
         do {
             self.photosAreUploading = true
             self.publishDisabled = self.isPublishButtonDisabled()
             self.interactiveDismissDisabled = self.isInteractiveDismissDisabled()
-            
+
             // We have to create list with existing photos.
             var temporaryPhotosAttachment: [PhotoAttachment] = []
             for item in self.selectedItems {
@@ -504,26 +504,26 @@ struct ComposeView: View {
                     temporaryPhotosAttachment.append(photoAttachment)
                     continue
                 }
-                
+
                 temporaryPhotosAttachment.append(PhotoAttachment(photosPickerItem: item))
             }
-            
+
             // We can show new list on the screen.
             self.photosAttachment = temporaryPhotosAttachment
-            
+
             // Now we have to get from photos images as JPEG.
             for item in self.photosAttachment.filter({ $0.photoData == nil }) {
                 if let data = try await item.photosPickerItem.loadTransferable(type: Data.self) {
                     item.photoData = data
                 }
             }
-            
+
             // Open again the keyboard.
             self.focusedField = .content
-            
+
             // Upload images which hasn't been uploaded yet.
             await self.upload()
-            
+
             // Change state of the screen.
             self.photosAreUploading = false
             self.refreshScreenState()
@@ -531,34 +531,34 @@ struct ComposeView: View {
             ErrorService.shared.handle(error, message: "compose.error.loadingPhotosFailed", showToastr: true)
         }
     }
-    
+
     private func refreshScreenState() {
         self.photosAreAttached = self.photosAttachment.hasUploadedPhotos()
         self.publishDisabled = self.isPublishButtonDisabled()
         self.interactiveDismissDisabled = self.isInteractiveDismissDisabled()
     }
-    
+
     private func upload() async {
         for photoAttachment in self.photosAttachment {
             await self.upload(photoAttachment)
         }
     }
-    
+
     private func upload(_ photoAttachment: PhotoAttachment) async {
         do {
             // We have to have binary data and image shouldn't be uploaded yet.
             guard let photoData = photoAttachment.photoData, photoAttachment.uploadedAttachment == nil else {
                 return
             }
-            
+
             guard let image = UIImage(data: photoData) else {
                 return
             }
-            
+
             guard let data = image.getJpegData() else {
                 return
             }
-            
+
             let fileIndex = String.randomString(length: 8)
             if let mediaAttachment = try await self.client.media?.upload(data: data,
                                                                          fileName: "file-\(fileIndex).jpg",
@@ -570,7 +570,7 @@ struct ComposeView: View {
             ErrorService.shared.handle(error, message: "compose.error.postingPhotoFailed", showToastr: true)
         }
     }
-        
+
     private func publishStatus() async {
         do {
             let status = self.createStatus()
@@ -587,7 +587,7 @@ struct ComposeView: View {
             ErrorService.shared.handle(error, message: "compose.error.postingStatusFailed", showToastr: true)
         }
     }
-    
+
     private func createStatus() -> Pixelfed.Statuses.Components {
         return Pixelfed.Statuses.Components(inReplyToId: self.statusViewModel?.id,
                                             text: self.textModel.text.string,

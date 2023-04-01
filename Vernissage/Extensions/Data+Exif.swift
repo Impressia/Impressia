@@ -12,34 +12,36 @@ public extension Dictionary<String, Any> {
         if let value = self[key] as? String {
             return value
         }
-        
+
         if let dictionary = self[key] as? [String: Any], let value = dictionary[key] {
             return value as? String
         }
-        
+
         return nil
     }
 }
 
 public extension Data {
     func getExifData() -> [String: Any]? {
-        var imageInfo: [String: Any]? = nil
-        
+        var imageInfo: [String: Any]?
+
         guard let imageSource = CGImageSourceCreateWithData(self as CFData, nil),
               let metadata = CGImageSourceCopyMetadataAtIndex(imageSource, 0, nil),
               let tags = CGImageMetadataCopyTags(metadata) else {
             return nil
         }
-        
+
         imageInfo = self.readMetadataTagArr(tagArr: tags)
         return imageInfo
     }
-    
+
+    // swiftlint:disable force_cast
+
     /// Reads the Arrays of tags and convert them into a dictionary of [String: Any].
     private func readMetadataTagArr(tagArr: CFArray) -> [String: Any]? {
         var result = [String: Any]()
 
-        for (_, tag) in (tagArr as NSArray).enumerated() {
+        for tag in (tagArr as NSArray) {
             let tagMetadata = tag as! CGImageMetadataTag
             if let cfName = CGImageMetadataTagCopyName(tagMetadata) {
                 let name = String(cfName)
@@ -55,7 +57,7 @@ public extension Data {
         guard let cfName = CGImageMetadataTagCopyName(metadataTag) else { return result }
         let name = String(cfName)
         let value = CGImageMetadataTagCopyValue(metadataTag)
-        
+
         /// checking the type of `value` object and then performing respective operation on `value`
         if CFGetTypeID(value) == CFStringGetTypeID() {
             let valueStr = String(value as! CFString)
@@ -65,20 +67,20 @@ public extension Data {
             result[name] = self.getDictionary(from: nsDict)
         } else if CFGetTypeID(value) == CFArrayGetTypeID() {
             let valueArr: NSArray = value as! CFArray
-            for (_, item) in valueArr.enumerated() {
+            for item in valueArr {
                 let tagMetadata = item as! CGImageMetadataTag
                 result[name] = self.readMetadataTag(metadataTag: tagMetadata)
             }
         } else {
             // when the data was of some other type
-            let descriptionString: CFString = CFCopyDescription(value);
+            let descriptionString: CFString = CFCopyDescription(value)
             let str = String(descriptionString)
             result[name] = str
         }
         return result
     }
 
-        /// Converting CGImage Metadata dictionary to [String: Any]
+    /// Converting CGImage Metadata dictionary to [String: Any]
     private func getDictionary(from nsDict: NSDictionary) -> [String: Any] {
         var subDictionary = [String: Any]()
         for (key, val) in nsDict {
@@ -96,4 +98,6 @@ public extension Data {
         }
         return subDictionary
     }
+
+    // swiftlint:enable force_cast
 }

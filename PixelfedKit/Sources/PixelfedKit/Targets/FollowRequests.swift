@@ -22,32 +22,32 @@ extension Pixelfed.FollowRequests: TargetType {
         switch self {
         case .followRequests:
             return "\(apiPath)"
-        case .authorize(_):
+        case .authorize:
             return "\(apiPath)/authorize"
-        case .reject(_):
+        case .reject:
             return "\(apiPath)/reject"
         }
     }
-    
+
     /// The HTTP method used in the request.
     public var method: Method {
         switch self {
         case .followRequests:
             return .get
-        case .authorize(_), .reject(_):
+        case .authorize, .reject:
             return .post
         }
     }
-    
+
     /// The parameters to be incoded in the request.
     public var queryItems: [(String, String)]? {
         nil
     }
-    
+
     public var headers: [String: String]? {
         [:].contentTypeApplicationJson
     }
-    
+
     public var httpBody: Data? {
         switch self {
         case .followRequests:

@@ -3,7 +3,7 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 import NukeUI
 
@@ -13,7 +13,7 @@ struct ImageGrid: View {
 
     @StateObject var photoUrl: PhotoUrl
     @State var maxHeight = 120.0
-        
+
     var body: some View {
         if self.photoUrl.sensitive && !self.applicationState.showSensitive {
             BlurredImage(blurhash: self.photoUrl.blurhash)
@@ -49,7 +49,7 @@ struct ImageGrid: View {
             self.placeholder()
         }
     }
-    
+
     @ViewBuilder
     private func placeholder() -> some View {
         Image("ImagePlaceholder")

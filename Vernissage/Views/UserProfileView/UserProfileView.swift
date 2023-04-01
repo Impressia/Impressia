@@ -3,25 +3,25 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 import PixelfedKit
 
 struct UserProfileView: View {
     @EnvironmentObject private var applicationState: ApplicationState
     @EnvironmentObject private var client: Client
-    
+
     @Environment(\.dismiss) private var dismiss
-    
+
     @State public var accountId: String
     @State public var accountDisplayName: String?
     @State public var accountUserName: String
 
     @StateObject private var relationship = RelationshipModel()
-    @State private var account: Account? = nil
+    @State private var account: Account?
     @State private var state: ViewState = .loading
     @State private var viewId = UUID().uuidString
-    
+
     var body: some View {
         self.mainBody()
             .navigationTitle(self.accountDisplayName ?? self.accountUserName)
@@ -35,7 +35,7 @@ struct UserProfileView: View {
                 }
             }
     }
-    
+
     @ViewBuilder
     private func mainBody() -> some View {
         switch state {
@@ -56,7 +56,7 @@ struct UserProfileView: View {
             .padding()
         }
     }
-    
+
     private func accountView(account: Account) -> some View {
         ScrollView {
             UserProfileHeaderView(account: account, relationship: relationship)
@@ -72,7 +72,7 @@ struct UserProfileView: View {
             }
         }
     }
-    
+
     private func loadData() async {
         do {
             if self.accountId.isEmpty {
@@ -82,17 +82,17 @@ struct UserProfileView: View {
                 } else {
                     ToastrService.shared.showError(title: "userProfile.error.notExists", imageSystemName: "exclamationmark.octagon")
                     dismiss()
-                    
+
                     return
                 }
             }
-            
+
             async let relationshipTask = self.client.accounts?.relationships(withId: self.accountId)
             async let accountTask = self.client.accounts?.account(withId: self.accountId)
-            
+
             // Wait for download account and relationships.
             let (relationshipFromApi, accountFromApi) = try await (relationshipTask, accountTask)
-            
+
             if let relationshipFromApi {
                 self.relationship.update(relationship: relationshipFromApi)
             } else {
@@ -100,30 +100,30 @@ struct UserProfileView: View {
             }
 
             self.account = accountFromApi
-            
+
             self.state = .loaded
         } catch {
             ErrorService.shared.handle(error, message: "userProfile.error.loadingAccountFailed", showToastr: !Task.isCancelled)
             self.state = .error(error)
         }
     }
-    
+
     @ToolbarContentBuilder
     private func getTrailingAccountToolbar(account: Account) -> some ToolbarContent {
         ToolbarItem(placement: .navigationBarTrailing) {
-            Menu (content: {
+            Menu(content: {
                 if let accountUrl = account.url {
                     Link(destination: accountUrl) {
                         Label(NSLocalizedString("userProfile.title.openInBrowser", comment: "Open in browser"), systemImage: "safari")
                     }
-                    
+
                     ShareLink(item: accountUrl) {
                         Label(NSLocalizedString("userProfile.title.share", comment: "Share"), systemImage: "square.and.arrow.up")
                     }
-                    
+
                     Divider()
                 }
-                
+
                 Button {
                     Task {
                         await onMuteAccount(account: account)
@@ -135,7 +135,7 @@ struct UserProfileView: View {
                         Label(NSLocalizedString("userProfile.title.mute", comment: "Mute"), systemImage: "message.and.waveform")
                     }
                 }
-                
+
                 Button {
                     Task {
                         await onBlockAccount(account: account)
@@ -147,7 +147,7 @@ struct UserProfileView: View {
                         Label(NSLocalizedString("userProfile.title.block", comment: "Block"), systemImage: "hand.raised")
                     }
                 }
-                
+
             }, label: {
                 Image(systemName: "gear")
                     .tint(.mainTextColor)
@@ -155,21 +155,20 @@ struct UserProfileView: View {
             .tint(.accentColor)
         }
     }
-    
 
     @ToolbarContentBuilder
     private func getTrailingProfileToolbar(account: Account) -> some ToolbarContent {
         ToolbarItem(placement: .navigationBarTrailing) {
-            Menu (content: {
+            Menu(content: {
                 if let accountUrl = account.url {
                     Link(destination: accountUrl) {
                         Label(NSLocalizedString("userProfile.title.openInBrowser", comment: "Open in browser"), systemImage: "safari")
                     }
-                    
+
                     ShareLink(item: accountUrl) {
                         Label(NSLocalizedString("userProfile.title.share", comment: "Share"), systemImage: "square.and.arrow.up")
                     }
-                    
+
                     Divider()
                 }
 
@@ -178,30 +177,30 @@ struct UserProfileView: View {
                 }
 
                 Divider()
-                
+
                 NavigationLink(value: RouteurDestinations.accounts(listType: .blocks)) {
                     Label(NSLocalizedString("userProfile.title.blocks", comment: "Blocked accounts"), systemImage: "hand.raised.fill")
                 }
-                
+
                 NavigationLink(value: RouteurDestinations.accounts(listType: .mutes)) {
                     Label(NSLocalizedString("userProfile.title.mutes", comment: "Muted accounts"), systemImage: "message.and.waveform.fill")
                 }
-                
+
                 Divider()
-                
+
                 NavigationLink(value: RouteurDestinations.favourites) {
                     Label(NSLocalizedString("userProfile.title.favourites", comment: "Favourites"), systemImage: "hand.thumbsup")
                 }
-                
+
                 NavigationLink(value: RouteurDestinations.bookmarks) {
                     Label(NSLocalizedString("userProfile.title.bookmarks", comment: "Bookmarks"), systemImage: "bookmark")
                 }
-                
+
                 Divider()
-                
+
                 NavigationLink(value: RouteurDestinations.editProfile) {
                     Label(NSLocalizedString("userProfile.title.edit", comment: "Edit profile"), systemImage: "pencil")
-                }                
+                }
             }, label: {
                 Image(systemName: "gear")
                     .tint(.mainTextColor)
@@ -209,7 +208,7 @@ struct UserProfileView: View {
             .tint(.accentColor)
         }
     }
-    
+
     private func onMuteAccount(account: Account) async {
         do {
             if self.relationship.muting == true {
@@ -231,7 +230,7 @@ struct UserProfileView: View {
             ErrorService.shared.handle(error, message: "userProfile.error.mute", showToastr: true)
         }
     }
-    
+
     private func onBlockAccount(account: Account) async {
         do {
             if self.relationship.blocking == true {

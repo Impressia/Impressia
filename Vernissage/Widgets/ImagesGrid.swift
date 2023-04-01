@@ -3,7 +3,7 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 import PixelfedKit
 import NukeUI
@@ -13,15 +13,15 @@ struct ImagesGrid: View {
         case account(accountId: String, accountDisplayName: String?, accountUserName: String)
         case hashtag(name: String)
     }
-    
+
     @EnvironmentObject var client: Client
     @EnvironmentObject var routerPath: RouterPath
-    
+
     private let maxImages = 5
     private let maxHeight = 120.0
 
     @State public var gridType: GridType
-    
+
     @State private var photoUrls: [PhotoUrl] = [
         PhotoUrl(id: UUID().uuidString),
         PhotoUrl(id: UUID().uuidString),
@@ -29,14 +29,14 @@ struct ImagesGrid: View {
         PhotoUrl(id: UUID().uuidString),
         PhotoUrl(id: UUID().uuidString)
     ]
-        
+
     var body: some View {
         ScrollView(.horizontal) {
             LazyHGrid(rows: [GridItem(.fixed(self.maxHeight))]) {
                 ForEach(self.photoUrls) { photoUrl in
                     ImageGrid(photoUrl: photoUrl, maxHeight: self.maxHeight)
                 }
-                
+
                 Text("more...")
                     .foregroundColor(.accentColor)
                     .fontWeight(.bold)
@@ -53,7 +53,7 @@ struct ImagesGrid: View {
             }
         }
     }
-    
+
     private func openDetails() {
         switch self.gridType {
         case .hashtag(let name):
@@ -62,7 +62,7 @@ struct ImagesGrid: View {
             self.routerPath.navigate(to: .userProfile(accountId: accountId, accountDisplayName: accountDisplayName, accountUserName: accountUserName))
         }
     }
-    
+
     private func loadData() async {
         do {
             let statusesFromApi = try await self.loadStatuses()
@@ -73,7 +73,7 @@ struct ImagesGrid: View {
             ErrorService.shared.handle(error, message: "global.error.errorDuringDataLoad", showToastr: !Task.isCancelled)
         }
     }
-    
+
     private func updatePhotos(statusesWithImages: [Status]) {
         var index = 0
         for status in statusesWithImages {
@@ -84,21 +84,21 @@ struct ImagesGrid: View {
                     self.photoUrls[index].blurhash = mediaAttachment.blurhash
                     self.photoUrls[index].sensitive = status.sensitive
                 }
-            } else  {
+            } else {
                 if let mediaAttachment = status.getAllImageMediaAttachments().first {
                     let photoUrl = PhotoUrl(id: UUID().uuidString)
                     photoUrl.statusId = status.id
                     photoUrl.url = mediaAttachment.url
                     photoUrl.blurhash = mediaAttachment.blurhash
                     photoUrl.sensitive = status.sensitive
-                    
+
                     self.photoUrls.append(photoUrl)
                 }
             }
-            
+
             index = index + 1
         }
-        
+
         // Clear placeholders when there is small number of photos.
         if index < self.maxImages {
             for i in (index...self.maxImages - 1).reversed() {
@@ -106,7 +106,7 @@ struct ImagesGrid: View {
             }
         }
     }
-    
+
     private func loadStatuses() async throws -> [Status] {
         switch self.gridType {
         case .hashtag(let name):

@@ -15,10 +15,10 @@ struct UsernameRow: View {
     @State public var size: UserAvatar.Size?
 
     var body: some View {
-        HStack (alignment: .center) {
+        HStack(alignment: .center) {
             UserAvatar(accountAvatar: accountAvatar, size: size ?? .list)
-            
-            VStack (alignment: .leading) {
+
+            VStack(alignment: .leading) {
                 Text(accountDisplayName ?? accountUsername)
                     .foregroundColor(.mainTextColor)
                 Text("@\(accountUsername)")

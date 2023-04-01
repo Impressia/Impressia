@@ -78,7 +78,7 @@ extension Pixelfed.Statuses: TargetType {
         let placeId: Int?
         let commentsDisabled: Bool
         let collectionIds: [Int]?
-        
+
         enum CodingKeys: String, CodingKey {
             case status
             case inReplyToId = "in_reply_to_id"
@@ -90,7 +90,7 @@ extension Pixelfed.Statuses: TargetType {
             case commentsDisabled = "comments_disabled"
             case collectionIds = "collection_ids"
         }
-        
+
         func encode(to encoder: Encoder) throws {
             var container: KeyedEncodingContainer<Pixelfed.Statuses.Request.CodingKeys> = encoder.container(keyedBy: Pixelfed.Statuses.Request.CodingKeys.self)
             try container.encode(self.status, forKey: Pixelfed.Statuses.Request.CodingKeys.status)
@@ -104,7 +104,7 @@ extension Pixelfed.Statuses: TargetType {
             try container.encodeIfPresent(self.collectionIds, forKey: Pixelfed.Statuses.Request.CodingKeys.collectionIds)
         }
     }
-    
+
     private var apiPath: String { return "/api/v1/statuses" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.
@@ -120,7 +120,7 @@ extension Pixelfed.Statuses: TargetType {
             return "\(apiPath)/\(id)/reblogged_by"
         case .favouritedBy(let id, _, _, _, _, _):
             return "\(apiPath)/\(id)/favourited_by"
-        case .new(_):
+        case .new:
             return "\(apiPath)"
         case .delete(let id):
             return "\(apiPath)/\(id)"
@@ -142,40 +142,40 @@ extension Pixelfed.Statuses: TargetType {
             return "\(apiPath)/\(id)/unpin"
         }
     }
-    
+
     /// The HTTP method used in the request.
     public var method: Method {
         switch self {
-        case .new(_),
-                    .reblog(_),
-                    .unreblog(_),
-                    .favourite(_),
-                    .unfavourite(_),
-                    .bookmark(_),
-                    .unbookmark(_),
-                    .pin(_),
-                    .unpin(_):
+        case .new,
+                    .reblog,
+                    .unreblog,
+                    .favourite,
+                    .unfavourite,
+                    .bookmark,
+                    .unbookmark,
+                    .pin,
+                    .unpin:
             return .post
-        case .delete(_):
+        case .delete:
             return .delete
         default:
             return .get
         }
     }
-    
+
     /// The parameters to be incoded in the request.
     public var queryItems: [(String, String)]? {
         var params: [(String, String)] = []
 
-        var maxId: MaxId? = nil
-        var sinceId: SinceId? = nil
-        var minId: MinId? = nil
-        var limit: Limit? = nil
-        var page: Page? = nil
-        var pixelfedKey: Bool? = nil
+        var maxId: MaxId?
+        var sinceId: SinceId?
+        var minId: MinId?
+        var limit: Limit?
+        var page: Page?
+        var pixelfedKey: Bool?
 
         switch self {
-        case .status(_):
+        case .status:
             pixelfedKey = true
         case .favouritedBy(_, let _maxId, let _sinceId, let _minId, let _limit, let _page):
             maxId = _maxId
@@ -192,9 +192,9 @@ extension Pixelfed.Statuses: TargetType {
         default:
             return nil
         }
-        
+
         if let maxId {
-            params.append(("max_id",  maxId))
+            params.append(("max_id", maxId))
         }
 
         if let sinceId {
@@ -212,18 +212,18 @@ extension Pixelfed.Statuses: TargetType {
         if let page {
             params.append(("page", "\(page)"))
         }
-        
+
         if pixelfedKey != nil {
             params.append(("_pe", "1"))
         }
-        
+
         return params
     }
-    
+
     public var headers: [String: String]? {
         [:].contentTypeApplicationJson
     }
-    
+
     public var httpBody: Data? {
         switch self {
         case .new(let components):

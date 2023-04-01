@@ -18,7 +18,7 @@ public class TextModel: NSObject, ObservableObject {
             guard let textView else {
                 return .init(location: 0, length: 0)
             }
-          
+
             return textView.selectedRange
         }
         set {
@@ -33,10 +33,10 @@ public class TextModel: NSObject, ObservableObject {
 
         return textView.markedTextRange
     }
-    
+
     @Published var mentionsSuggestions: [Account] = []
     @Published var tagsSuggestions: [Tag] = []
-    
+
     @Published var text = NSMutableAttributedString(string: "") {
         didSet {
             let range = selectedRange
@@ -45,7 +45,7 @@ public class TextModel: NSObject, ObservableObject {
             selectedRange = range
         }
     }
-    
+
     private var currentSuggestionRange: NSRange?
     private var urlLengthAdjustments: Int = 0
     private let maxLengthOfUrl = 23
@@ -54,17 +54,17 @@ public class TextModel: NSObject, ObservableObject {
         let attrString = self.text
         attrString.append(NSAttributedString(string: content))
         self.text = attrString
-        
+
         selectedRange.location += content.utf16.count
     }
-    
+
     public func insertAtCursorPosition(content: String) {
         let string = self.text
         string.mutableString.insert(content, at: self.selectedRange.location)
         self.text = string
         selectedRange = NSRange(location: self.selectedRange.location + content.utf16.count, length: 0)
     }
-    
+
     private func processText() {
         guard markedTextRange == nil else { return }
 
@@ -72,7 +72,7 @@ public class TextModel: NSObject, ObservableObject {
                             .font: UIFont.preferredFont(from: .body),
                             .backgroundColor: UIColor.clear,
                             .underlineColor: UIColor.clear],
-                           range: NSMakeRange(0, text.string.utf16.count))
+                           range: NSRange(location: 0, length: text.string.utf16.count))
 
         let hashtagPattern = "(#+[a-zA-Z0-9(_)]{1,})"
         let mentionPattern = "(@+[a-zA-Z0-9(_).-]{1,})"
@@ -83,7 +83,7 @@ public class TextModel: NSObject, ObservableObject {
             let mentionRegex = try NSRegularExpression(pattern: mentionPattern, options: [])
             let urlRegex = try NSRegularExpression(pattern: urlPattern, options: [])
 
-            let range = NSMakeRange(0, text.string.utf16.count)
+            let range = NSRange(location: 0, length: text.string.utf16.count)
             var ranges = hashtagRegex.matches(in: text.string, options: [], range: range).map { $0.range }
             ranges.append(contentsOf: mentionRegex.matches(in: text.string, options: [], range: range).map { $0.range })
 
@@ -92,7 +92,7 @@ public class TextModel: NSObject, ObservableObject {
             var foundSuggestionRange = false
             for nsRange in ranges {
                 text.addAttributes([.foregroundColor: UIColor(.accentColor)], range: nsRange)
-                
+
                 if selectedRange.location == (nsRange.location + nsRange.length),
                    let range = Range(nsRange, in: text.string) {
                     foundSuggestionRange = true
@@ -131,7 +131,7 @@ public class TextModel: NSObject, ObservableObject {
             ErrorService.shared.handle(error, message: "Error during composing attribute string.")
         }
     }
-    
+
     private func loadAutoCompleteResults(query: String) {
         guard let client, query.utf8.count > 1 else { return }
         var query = query
@@ -159,13 +159,13 @@ public class TextModel: NSObject, ObservableObject {
             }
         }
     }
-    
+
     private func resetAutoCompletion() {
         tagsSuggestions = []
         mentionsSuggestions = []
         currentSuggestionRange = nil
     }
-    
+
     func selectMentionSuggestion(account: Account) {
         if let range = currentSuggestionRange {
             replaceTextWith(text: "@\(account.acct) ", inRange: range)
@@ -177,7 +177,7 @@ public class TextModel: NSObject, ObservableObject {
             replaceTextWith(text: "#\(tag.name) ", inRange: range)
         }
     }
-    
+
     func replaceTextWith(text: String, inRange: NSRange) {
         let string = self.text
         string.mutableString.deleteCharacters(in: inRange)
@@ -186,4 +186,3 @@ public class TextModel: NSObject, ObservableObject {
         selectedRange = NSRange(location: inRange.location + text.utf16.count, length: 0)
     }
 }
-

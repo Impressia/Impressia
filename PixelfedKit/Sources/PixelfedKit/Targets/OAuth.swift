@@ -20,7 +20,7 @@ extension Pixelfed.OAuth: TargetType {
         let username: String
         let password: String
         let scope: String
-        
+
         enum CodingKeys: String, CodingKey {
             case clientId = "client_id"
             case clientSecret = "client_secret"
@@ -29,7 +29,7 @@ extension Pixelfed.OAuth: TargetType {
             case password
             case scope
         }
-        
+
         func encode(to encoder: Encoder) throws {
             var container: KeyedEncodingContainer<Pixelfed.OAuth.Request.CodingKeys> = encoder.container(keyedBy: Pixelfed.OAuth.Request.CodingKeys.self)
             try container.encode(self.clientId, forKey: Pixelfed.OAuth.Request.CodingKeys.clientId)
@@ -40,34 +40,34 @@ extension Pixelfed.OAuth: TargetType {
             try container.encode(self.scope, forKey: Pixelfed.OAuth.Request.CodingKeys.scope)
         }
     }
-    
+
     private var apiPath: String { return "/oauth/token" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.
     public var path: String {
         switch self {
-        case.authenticate(_, _, _, _):
+        case.authenticate:
             return "\(apiPath)"
         }
     }
-    
+
     /// The HTTP method used in the request.
     public var method: Method {
         switch self {
-        case .authenticate(_, _, _, _):
+        case .authenticate:
             return .post
         }
     }
-    
+
     /// The parameters to be incoded in the request.
     public var queryItems: [(String, String)]? {
         nil
     }
-    
+
     public var headers: [String: String]? {
         [:].contentTypeApplicationJson
     }
-    
+
     public var httpBody: Data? {
         switch self {
         case .authenticate(let app, let username, let password, let scope):

@@ -3,7 +3,7 @@
 //  Copyright © 2022 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 import PixelfedKit
 import AuthenticationServices
@@ -16,11 +16,11 @@ struct SignInView: View {
     @EnvironmentObject var client: Client
 
     @State private var serverAddress = String.empty()
-    @State private var instructionsUrlString:String?
+    @State private var instructionsUrlString: String?
     @State private var instances: [Instance] = []
-        
+
     var onSignedIn: ((_ accountModel: AccountModel) -> Void)?
-    
+
     var body: some View {
         List {
             Section {
@@ -35,7 +35,7 @@ struct SignInView: View {
                             .keyboardType(.URL)
                             .disableAutocorrection(true)
                             .clearButton(text: $serverAddress)
-                        
+
                         Button(NSLocalizedString("signin.title.signIn", comment: "Sign in")) {
                             HapticService.shared.fireHaptic(of: .buttonPress)
 
@@ -60,7 +60,7 @@ struct SignInView: View {
                     }
                 }
             }
-            
+
             Section("signin.title.chooseServer") {
                 if self.instances.isEmpty {
                     HStack {
@@ -69,8 +69,8 @@ struct SignInView: View {
                         Spacer()
                     }
                 }
-                
-                ForEach(self.instances, id: \.uri) { instance in                    
+
+                ForEach(self.instances, id: \.uri) { instance in
                     InstanceRowView(instance: instance) { uri in
                         let baseAddress = self.getServerAddress(uri: uri)
                         self.signIn(baseAddress: baseAddress)
@@ -86,35 +86,34 @@ struct SignInView: View {
         .navigationTitle("signin.navigationBar.title")
         .navigationBarTitleDisplayMode(.inline)
     }
-    
+
     private func signIn(baseAddress: String) {
         Task {
             do {
                 let authorizationSession = AuthorizationSession()
                 try await AuthorizationService.shared.sign(in: baseAddress, session: authorizationSession) { accountModel in
                     onSignedIn?(accountModel)
-                    
+
                     DispatchQueue.main.sync {
                         dismiss()
                     }
                 }
             } catch let error as AuthorisationError {
                 ErrorService.shared.handle(error, message: error.localizedDescription, showToastr: true)
-            }
-            catch {
+            } catch {
                 ErrorService.shared.handle(error, message: "signin.error.communicationFailed", showToastr: true)
             }
         }
     }
-    
+
     private func getServerAddress(uri: String) -> String {
         var address = uri.trimmingCharacters(in: .whitespacesAndNewlines)
         address = address.trimmingCharacters(in: CharacterSet.init(charactersIn: "/\\"))
-        
+
         if !address.starts(with: "https://") {
             return "https://\(address)"
         }
-        
+
         return address
     }
 }

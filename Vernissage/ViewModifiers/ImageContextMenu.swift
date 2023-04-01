@@ -11,7 +11,7 @@ public extension View {
     func imageContextMenu(client: Client, statusModel: StatusModel) -> some View {
         modifier(ImageContextMenu(client: client, id: statusModel.id, url: statusModel.url))
     }
-    
+
     func imageContextMenu(client: Client, statusData: StatusData) -> some View {
         modifier(ImageContextMenu(client: client, id: statusData.id, url: statusData.url))
     }
@@ -21,17 +21,17 @@ private struct ImageContextMenu: ViewModifier {
     private let client: Client
     private let id: String
     private let url: URL?
-    
+
     init(client: Client, id: String, url: URL?) {
         self.client = client
         self.id = id
         self.url = url
     }
-    
+
     func body(content: Content) -> some View {
         ZStack(alignment: .trailing) {
             content
-                .contextMenu {                    
+                .contextMenu {
                     Button {
                         Task {
                             await self.reboost()
@@ -47,7 +47,7 @@ private struct ImageContextMenu: ViewModifier {
                     } label: {
                         Label("status.title.favourite", systemImage: "hand.thumbsup")
                     }
-                    
+
                     Button {
                         Task {
                             await self.bookmark()
@@ -55,9 +55,9 @@ private struct ImageContextMenu: ViewModifier {
                     } label: {
                         Label("status.title.bookmark", systemImage: "bookmark")
                     }
-                    
+
                     Divider()
-                    
+
                     if let url = self.url {
                         Link(destination: url) {
                             Label("status.title.openInBrowser", systemImage: "safari")
@@ -70,7 +70,7 @@ private struct ImageContextMenu: ViewModifier {
                 }
         }
     }
-    
+
     private func reboost() async {
         do {
             _ = try await self.client.statuses?.boost(statusId: self.id)
@@ -79,7 +79,7 @@ private struct ImageContextMenu: ViewModifier {
             ErrorService.shared.handle(error, message: "status.error.reboostFailed", showToastr: true)
         }
     }
-    
+
     private func favourite() async {
         do {
             _ = try await self.client.statuses?.favourite(statusId: self.id)
@@ -88,7 +88,7 @@ private struct ImageContextMenu: ViewModifier {
             ErrorService.shared.handle(error, message: "status.error.favouriteFailed", showToastr: true)
         }
     }
-    
+
     private func bookmark() async {
         do {
             _ = try await self.client.statuses?.bookmark(statusId: self.id)

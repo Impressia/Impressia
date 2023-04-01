@@ -9,7 +9,7 @@ import StoreKit
 
 struct SupportView: View {
     @EnvironmentObject var tipsStore: TipsStore
-    
+
     var body: some View {
         Section("settings.title.support") {
             ForEach(tipsStore.items) { product in
@@ -37,7 +37,7 @@ struct SupportView: View {
             }
         }
     }
-    
+
     private func getIcon(for product: Product) -> String {
         if product.id == ProductIdentifiers.donut.rawValue {
             return "🍩"
@@ -48,4 +48,3 @@ struct SupportView: View {
         }
     }
 }
-

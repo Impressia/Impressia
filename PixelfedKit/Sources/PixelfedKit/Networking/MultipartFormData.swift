@@ -31,11 +31,11 @@ struct MultipartFormData {
         httpBody.append(data)
         httpBody.append(separator)
     }
-    
+
     private func disposition(_ name: String) -> String {
         "Content-Disposition: form-data; name=\"\(name)\""
     }
-        
+
     func build() -> Data {
         httpBody.append("--\(boundary)\(separator)")
         return httpBody as Data

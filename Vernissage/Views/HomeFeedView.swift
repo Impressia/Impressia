@@ -13,24 +13,24 @@ private struct OffsetPreferenceKey: PreferenceKey {
 
 struct HomeFeedView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    
+
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var routerPath: RouterPath
-    
+
     @State private var allItemsLoaded = false
     @State private var state: ViewState = .loading
 
     @State private var opacity = 0.0
     @State private var offset = -50.0
-    
+
     @FetchRequest var dbStatuses: FetchedResults<StatusData>
-        
+
     init(accountId: String) {
         _dbStatuses = FetchRequest<StatusData>(
             sortDescriptors: [SortDescriptor(\.id, order: .reverse)],
             predicate: NSPredicate(format: "pixelfedAccount.id = %@", accountId))
     }
-    
+
     var body: some View {
         switch state {
         case .loading:
@@ -52,7 +52,7 @@ struct HomeFeedView: View {
             .padding()
         }
     }
-    
+
     @ViewBuilder
     private func timeline() -> some View {
         ZStack {
@@ -62,10 +62,10 @@ struct HomeFeedView: View {
                         if self.shouldUpToDateBeVisible(statusId: item.id) {
                             self.upToDatePlaceholder()
                         }
-                        
+
                         ImageRow(statusData: item)
                     }
-                    
+
                     if allItemsLoaded == false {
                         LoadingIndicator()
                             .task {
@@ -83,7 +83,7 @@ struct HomeFeedView: View {
                     }
                 }
             }
-            
+
             self.newPhotosView()
                 .offset(y: self.offset)
                 .opacity(self.opacity)
@@ -93,19 +93,19 @@ struct HomeFeedView: View {
             await self.refreshData()
             HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
         }
-        .onChange(of: self.applicationState.amountOfNewStatuses) { newValue in
+        .onChange(of: self.applicationState.amountOfNewStatuses) { _ in
             self.calculateOffset()
         }.onAppear {
             self.calculateOffset()
         }
     }
-    
+
     private func refreshData() async {
         do {
             if let account = self.applicationState.account {
                 if let lastSeenStatusId = try await HomeTimelineService.shared.loadOnTop(for: account) {
                     try await HomeTimelineService.shared.save(lastSeenStatusId: lastSeenStatusId, for: account)
-                    
+
                     self.applicationState.lastSeenStatusId = lastSeenStatusId
                     self.applicationState.amountOfNewStatuses = 0
                 }
@@ -114,13 +114,13 @@ struct HomeFeedView: View {
             ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadStatuses", showToastr: !Task.isCancelled)
         }
     }
-    
+
     private func loadData() async {
         do {
             if let account = self.applicationState.account {
                 _ = try await HomeTimelineService.shared.loadOnTop(for: account)
             }
-            
+
             self.applicationState.amountOfNewStatuses = 0
             self.state = .loaded
         } catch {
@@ -132,7 +132,7 @@ struct HomeFeedView: View {
             }
         }
     }
-        
+
     private func calculateOffset() {
         if self.applicationState.amountOfNewStatuses > 0 {
             withAnimation(.easeIn) {
@@ -144,21 +144,21 @@ struct HomeFeedView: View {
             }
         }
     }
-    
+
     private func showNewStatusesView() {
         self.offset = 0.0
         self.opacity = 1.0
     }
-    
+
     private func hideNewStatusesView() {
         self.offset = -50.0
         self.opacity = 0.0
     }
-    
+
     private func shouldUpToDateBeVisible(statusId: String) -> Bool {
         return self.applicationState.lastSeenStatusId != dbStatuses.first?.id && self.applicationState.lastSeenStatusId == statusId
     }
-        
+
     @ViewBuilder
     private func upToDatePlaceholder() -> some View {
         VStack(alignment: .center) {
@@ -175,7 +175,7 @@ struct HomeFeedView: View {
         .padding(.vertical, 8)
         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width * 0.75)
     }
-    
+
     @ViewBuilder
     private func newPhotosView() -> some View {
         VStack(alignment: .trailing, spacing: 4) {
@@ -193,7 +193,7 @@ struct HomeFeedView: View {
                 .background(.ultraThinMaterial)
                 .clipShape(Capsule())
             }
-            
+
             Spacer()
         }
         .padding(.top, 10)

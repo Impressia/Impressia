@@ -4,10 +4,12 @@
 //  Licensed under the Apache License 2.0.
 //
 
+// swiftlint:disable large_tuple
+
 import UIKit
 
 extension UIImage {
-    
+
     /// Code downloaded from: https://github.com/woltapp/blurhash/tree/master/Swift
     public convenience init?(blurHash: String, size: CGSize, punch: Float = 1) {
         guard blurHash.count >= 6 else { return nil }
@@ -101,14 +103,12 @@ private func signPow(_ value: Float, _ exp: Float) -> Float {
 
 private func linearTosRGB(_ value: Float) -> Int {
     let v = max(0, min(1, value))
-    if v <= 0.0031308 { return Int(v * 12.92 * 255 + 0.5) }
-    else { return Int((1.055 * pow(v, 1 / 2.4) - 0.055) * 255 + 0.5) }
+    if v <= 0.0031308 { return Int(v * 12.92 * 255 + 0.5) } else { return Int((1.055 * pow(v, 1 / 2.4) - 0.055) * 255 + 0.5) }
 }
 
 private func sRGBToLinear<Type: BinaryInteger>(_ value: Type) -> Float {
     let v = Float(Int64(value)) / 255
-    if v <= 0.04045 { return v / 12.92 }
-    else { return pow((v + 0.055) / 1.055, 2.4) }
+    if v <= 0.04045 { return v / 12.92 } else { return pow((v + 0.055) / 1.055, 2.4) }
 }
 
 private let encodeCharacters: [String] = {
@@ -152,3 +152,5 @@ private extension String {
         return self[start..<end]
     }
 }
+
+// swiftlint:enable large_tuple

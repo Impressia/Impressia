@@ -22,9 +22,9 @@ struct StatusView: View {
     @State var imageHeight: Int32?
 
     @State private var state: ViewState = .loading
-    
+
     @State private var statusViewModel: StatusModel?
-    
+
     @State private var selectedAttachmentModel: AttachmentModel?
     @State private var tappedAttachmentModel: AttachmentModel?
     @State private var exifCamera: String?
@@ -32,7 +32,7 @@ struct StatusView: View {
     @State private var exifCreatedDate: String?
     @State private var exifLens: String?
     @State private var description: String?
-        
+
     var body: some View {
         self.mainBody()
             .navigationTitle("status.navigationBar.title")
@@ -40,7 +40,7 @@ struct StatusView: View {
                 ImageViewer(attachmentModel: attachmentModel)
             })
     }
-    
+
     @ViewBuilder
     private func mainBody() -> some View {
         switch state {
@@ -61,11 +61,11 @@ struct StatusView: View {
             .padding()
         }
     }
-    
+
     @ViewBuilder
     private func statusView(statusViewModel: StatusModel) -> some View {
         ScrollView {
-            VStack (alignment: .leading) {
+            VStack(alignment: .leading) {
                 ImagesCarousel(attachments: statusViewModel.mediaAttachments,
                                selectedAttachment: $selectedAttachmentModel,
                                exifCamera: $exifCamera,
@@ -78,7 +78,7 @@ struct StatusView: View {
                         self.tappedAttachmentModel = self.selectedAttachmentModel
                     }
                 }
-                
+
                 VStack(alignment: .leading) {
                     self.reblogInformation()
 
@@ -91,30 +91,30 @@ struct StatusView: View {
                                                                   accountDisplayName: statusViewModel.account.displayNameWithoutEmojis,
                                                                   accountUserName: statusViewModel.account.acct))
                     }
-                    
+
                     MarkdownFormattedText(statusViewModel.content.asMarkdown)
                         .font(.callout)
                         .environment(\.openURL, OpenURLAction { url in
                             routerPath.handle(url: url)
                         })
 
-                    VStack (alignment: .leading) {
+                    VStack(alignment: .leading) {
                         if let name = statusViewModel.place?.name, let country = statusViewModel.place?.country {
                             LabelIcon(iconName: "mappin.and.ellipse", value: "\(name), \(country)")
                         }
-                        
+
                         LabelIcon(iconName: "camera", value: self.exifCamera)
                         LabelIcon(iconName: "camera.aperture", value: self.exifLens)
                         LabelIcon(iconName: "timelapse", value: self.exifExposure)
                         LabelIcon(iconName: "calendar", value: self.exifCreatedDate?.toDate(.isoDateTimeSec)?.formatted())
-                        
+
                         if self.applicationState.showPhotoDescription {
                             LabelIcon(iconName: "eye.trianglebadge.exclamationmark", value: self.description)
                         }
                     }
                     .padding(.bottom, 2)
                     .foregroundColor(.lightGrayColor)
-                    
+
                     HStack {
                         Text("status.title.uploaded", comment: "Uploaded")
                         Text(statusViewModel.createdAt.toRelative(.isoDateTimeMilliSec))
@@ -125,7 +125,7 @@ struct StatusView: View {
                     }
                     .foregroundColor(.lightGrayColor)
                     .font(.footnote)
-                    
+
                     InteractionRow(statusModel: statusViewModel) {
                         self.dismiss()
                     }
@@ -133,12 +133,12 @@ struct StatusView: View {
                     .padding(8)
                 }
                 .padding(8)
-                                    
+
                 CommentsSectionView(statusId: statusViewModel.id)
             }
         }
     }
-    
+
     @ViewBuilder
     func reblogInformation() -> some View {
         if let reblogStatus = self.statusViewModel?.reblogStatus {
@@ -154,13 +154,13 @@ struct StatusView: View {
             .clipShape(Capsule())
         }
     }
-    
+
     private func loadData() async {
         do {
             // Get status from API.
             if let status = try await self.client.statuses?.status(withId: self.statusId) {
                 var statusModel = StatusModel(status: status)
-                
+
                 // We have to always open main status (even if the user is redirected from notifications to comment).
                 statusModel = try await self.getMainStatus(status: statusModel)
                 if status.id != statusModel.id {
@@ -168,9 +168,9 @@ struct StatusView: View {
                      self.imageWidth = statusModel.getImageWidth()
                      self.imageHeight = statusModel.getImageHeight()
                 }
-                
+
                 self.statusViewModel = statusModel
-                
+
                 // If we have status in database then we can update data.
                 // TODO: It seems that Pixelfed didn't support status edit, thus we don't need to update status.
                 /*
@@ -180,7 +180,7 @@ struct StatusView: View {
                 }
                 */
             }
-            
+
             self.state = .loaded
         } catch NetworkError.notSuccessResponse(let response) {
             if response.statusCode() == HTTPStatusCode.notFound, let accountId = self.applicationState.account?.id {
@@ -188,8 +188,7 @@ struct StatusView: View {
                 ErrorService.shared.handle(NetworkError.notSuccessResponse(response), message: "status.error.notFound", showToastr: true)
                 self.dismiss()
             }
-        }
-        catch {
+        } catch {
             if !Task.isCancelled {
                 ErrorService.shared.handle(error, message: "status.error.loadingStatusFailed", showToastr: true)
                 self.state = .loaded
@@ -198,43 +197,42 @@ struct StatusView: View {
             }
         }
     }
-    
+
     private func setAttachment(_ attachmentData: AttachmentData) {
         exifCamera = attachmentData.exifCamera
         exifExposure = attachmentData.exifExposure
         exifCreatedDate = attachmentData.exifCreatedDate
         exifLens = attachmentData.exifLens
     }
-    
+
     private func getImageHeight() -> Double {
         if let highestImageUrl = self.highestImageUrl, let imageSize = ImageSizeService.shared.get(for: highestImageUrl) {
             return imageSize.height
         }
-        
+
         if let imageHeight = self.imageHeight, let imageWidth = self.imageWidth, imageHeight > 0 && imageWidth > 0 {
             return self.calculateHeight(width: Double(imageWidth), height: Double(imageHeight))
         }
-        
+
         // If we don't have image height and width in metadata, we have to use some constant height.
         return UIScreen.main.bounds.width * 0.75
     }
-    
+
     private func calculateHeight(width: Double, height: Double) -> CGFloat {
         let divider = width / UIScreen.main.bounds.size.width
         return height / divider
     }
-    
+
     private func getMainStatus(status: StatusModel) async throws -> StatusModel {
         guard let inReplyToId = status.inReplyToId else {
             return status
         }
-        
+
         guard let previousStatus = try await self.client.statuses?.status(withId: inReplyToId) else {
             throw ClientError.cannotRetrieveStatus
         }
-        
+
         let previousStatusModel = StatusModel(status: previousStatus)
         return try await self.getMainStatus(status: previousStatusModel)
     }
 }
-

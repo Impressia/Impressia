@@ -3,7 +3,7 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import Foundation
 import PixelfedKit
 
@@ -19,7 +19,7 @@ extension Status {
     func statusContainsImage() -> Bool {
         return getAllImageMediaAttachments().isEmpty == false
     }
-    
+
     func getAllImageMediaAttachments() -> [MediaAttachment] {
         if let reblog = self.reblog {
             // If status is rebloged the we have to check if orginal status contains image.
@@ -27,7 +27,7 @@ extension Status {
                 .filter { mediaAttachment in mediaAttachment.type == .image }
                 .sorted(by: { (lhs, rhs) in lhs.id < rhs.id })
         }
-        
+
         return self.mediaAttachments
             .filter { mediaAttachment in mediaAttachment.type == .image }
             .sorted(by: { (lhs, rhs) in lhs.id < rhs.id })

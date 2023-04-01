@@ -27,38 +27,35 @@ extension Pixelfed.Markers: TargetType {
 
     public var method: Method {
         switch self {
-            case .set(_):
-                return .post
-
-            case .read(_):
-                return .get
+        case .set:
+            return .post
+        case .read:
+            return .get
         }
     }
 
-    public var headers: [String : String]? {
+    public var headers: [String: String]? {
         [:].contentTypeApplicationJson
     }
 
     public var queryItems: [(String, String)]? {
         switch self {
-            case .set(_):
-                return nil
-
-            case .read(let markers):
-                return Array(markers)
-                    .map { ("timeline[]", $0.rawValue) }
+        case .set:
+            return nil
+        case .read(let markers):
+            return Array(markers)
+                .map { ("timeline[]", $0.rawValue) }
         }
     }
 
     public var httpBody: Data? {
         switch self {
-            case .set(let markers):
-                let dict = Dictionary(uniqueKeysWithValues: markers.map { ($0.rawValue, ["last_read_id": $1]) })
-                let data = try? JSONEncoder().encode(dict)
-                return data
-
-            case .read(_):
-                return nil
+        case .set(let markers):
+            let dict = Dictionary(uniqueKeysWithValues: markers.map { ($0.rawValue, ["last_read_id": $1]) })
+            let data = try? JSONEncoder().encode(dict)
+            return data
+        case .read:
+            return nil
         }
     }
 

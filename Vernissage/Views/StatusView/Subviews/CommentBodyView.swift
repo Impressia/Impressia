@@ -12,35 +12,35 @@ struct CommentBodyView: View {
     @EnvironmentObject var routerPath: RouterPath
 
     @State var statusViewModel: StatusModel
-    
+
     var body: some View {
-        HStack (alignment: .top) {
+        HStack(alignment: .top) {
             UserAvatar(accountAvatar: self.statusViewModel.account.avatar, size: .comment)
                 .onTapGesture {
                     routerPath.navigate(to: .userProfile(accountId: self.statusViewModel.account.id,
                                                          accountDisplayName: self.statusViewModel.account.displayNameWithoutEmojis,
                                                          accountUserName: self.statusViewModel.account.acct))
                 }
-            
-            VStack (alignment: .leading, spacing: 0) {
-                HStack (alignment: .top) {
+
+            VStack(alignment: .leading, spacing: 0) {
+                HStack(alignment: .top) {
                     Text(statusViewModel.account.displayNameWithoutEmojis)
                         .foregroundColor(.mainTextColor)
                         .font(.footnote)
                         .fontWeight(.bold)
-                    
+
                     Spacer()
-                    
+
                     Text(self.statusViewModel.createdAt.toRelative(.isoDateTimeMilliSec))
                         .foregroundColor(.lightGrayColor)
                         .font(.footnote)
                 }
-                
+
                 MarkdownFormattedText(self.statusViewModel.content.asMarkdown)
                     .font(.footnote)
-                    .environment(\.openURL, OpenURLAction { url in .handled })
+                    .environment(\.openURL, OpenURLAction { _ in .handled })
                     .padding(.top, 4)
-                
+
                 if self.statusViewModel.mediaAttachments.count > 0 {
                     LazyVGrid(
                         columns: self.statusViewModel.mediaAttachments.count == 1 ? [GridItem(.flexible())]: [GridItem(.flexible()), GridItem(.flexible())],
@@ -84,9 +84,8 @@ struct CommentBodyView: View {
         .padding(8)
         .background(self.getSelectedRowColor(statusViewModel: statusViewModel))
     }
-    
+
     private func getSelectedRowColor(statusViewModel: StatusModel) -> Color {
         return self.applicationState.showInteractionStatusId == statusViewModel.id ? Color.selectedRowColor : Color.systemBackground
     }
 }
-

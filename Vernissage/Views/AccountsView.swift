@@ -3,7 +3,7 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 import PixelfedKit
 import Foundation
@@ -18,7 +18,7 @@ struct AccountsView: View {
         case mutes
         case search(query: String)
     }
-    
+
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var client: Client
 
@@ -28,12 +28,12 @@ struct AccountsView: View {
     @State private var downloadedPage = 1
     @State private var allItemsLoaded = false
     @State private var state: ViewState = .loading
-    
+
     var body: some View {
         self.mainBody()
             .navigationTitle(self.getTitle())
     }
-    
+
     @ViewBuilder
     private func mainBody() -> some View {
         switch state {
@@ -51,7 +51,7 @@ struct AccountsView: View {
         case .error(let error):
             ErrorView(error: error) {
                 self.state = .loading
-                
+
                 self.downloadedPage = 1
                 self.allItemsLoaded = false
                 self.accounts = []
@@ -60,7 +60,7 @@ struct AccountsView: View {
             .padding()
         }
     }
-    
+
     @ViewBuilder
     private func list() -> some View {
         List {
@@ -76,7 +76,7 @@ struct AccountsView: View {
                                 accountUsername: account.acct)
                 }
             }
-            
+
             if allItemsLoaded == false {
                 HStack {
                     Spacer()
@@ -92,7 +92,7 @@ struct AccountsView: View {
         }
         .listStyle(.plain)
     }
-    
+
     private func loadData(page: Int) async {
         do {
             try await self.loadAccounts(page: page)
@@ -106,7 +106,7 @@ struct AccountsView: View {
             }
         }
     }
-    
+
     private func loadAccounts(page: Int) async throws {
         let accountsFromApi = try await self.loadFromApi(page: page)
 
@@ -114,11 +114,11 @@ struct AccountsView: View {
             self.allItemsLoaded = true
             return
         }
-        
+
         await self.downloadAvatars(accounts: accountsFromApi)
         self.accounts.append(contentsOf: accountsFromApi)
     }
-    
+
     private func getTitle() -> String {
         switch self.listType {
         case .followers:
@@ -137,7 +137,7 @@ struct AccountsView: View {
             return query
         }
     }
-    
+
     private func loadFromApi(page: Int) async throws -> [Account] {
         switch self.listType {
         case .followers(let entityId):
@@ -182,7 +182,7 @@ struct AccountsView: View {
             }
         }
     }
-    
+
     private func downloadAvatars(accounts: [Account]) async {
         await withTaskGroup(of: Void.self) { group in
             for account in accounts {

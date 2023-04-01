@@ -10,29 +10,29 @@ import Drops
 
 struct InteractionRow: View {
     typealias DeleteAction = () -> Void
-    
+
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var client: Client
     @EnvironmentObject var routerPath: RouterPath
-    
+
     @State var statusModel: StatusModel
-    
+
     @State private var repliesCount = 0
     @State private var reblogged = false
     @State private var reblogsCount = 0
     @State private var favourited = false
     @State private var favouritesCount = 0
     @State private var bookmarked = false
-            
+
     private let delete: DeleteAction?
-    
+
     public init(statusModel: StatusModel, delete: DeleteAction? = nil) {
         self.statusModel = statusModel
         self.delete = delete
     }
-    
+
     var body: some View {
-        HStack (alignment: .top) {
+        HStack(alignment: .top) {
             if self.statusModel.commentsDisabled == false {
                 ActionButton {
                     self.routerPath.presentedSheet = .replyToStatusEditor(status: statusModel)
@@ -43,10 +43,10 @@ struct InteractionRow: View {
                             .font(.caption)
                     }
                 }
-                
+
                 Spacer()
             }
-            
+
             ActionButton {
                 await self.reboost()
             } label: {
@@ -56,9 +56,9 @@ struct InteractionRow: View {
                         .font(.caption)
                 }
             }
-            
+
             Spacer()
-            
+
             ActionButton {
                 await self.favourite()
             } label: {
@@ -68,17 +68,17 @@ struct InteractionRow: View {
                         .font(.caption)
                 }
             }
-            
+
             Spacer()
-            
+
             ActionButton {
                 await self.bookmark()
             } label: {
                 Image(systemName: self.bookmarked ? "bookmark.fill" : "bookmark")
             }
-            
+
             Spacer()
-            
+
             Menu {
                 NavigationLink(value: RouteurDestinations.accounts(listType: .reblogged(entityId: statusModel.id))) {
                     Label("status.title.reboostedBy", image: "custom.rocket")
@@ -99,7 +99,7 @@ struct InteractionRow: View {
                         Label("status.title.shareStatus", systemImage: "square.and.arrow.up")
                     }
                 }
-                
+
                 if self.statusModel.account.id == self.applicationState.account?.id {
                     Section(header: Text("status.title.yourStatus", comment: "Your post")) {
                         Button(role: .destructive) {
@@ -119,7 +119,7 @@ struct InteractionRow: View {
             self.refreshCounters()
         }
     }
-    
+
     private func refreshCounters() {
         self.repliesCount = self.statusModel.repliesCount
         self.reblogged = self.statusModel.reblogged
@@ -128,7 +128,7 @@ struct InteractionRow: View {
         self.favouritesCount = self.statusModel.favouritesCount
         self.bookmarked = self.statusModel.bookmarked
     }
-    
+
     private func reboost() async {
         do {
             let status = self.reblogged
@@ -150,7 +150,7 @@ struct InteractionRow: View {
             ErrorService.shared.handle(error, message: "status.error.reboostFailed", showToastr: true)
         }
     }
-    
+
     private func favourite() async {
         do {
             let status = self.favourited
@@ -164,7 +164,7 @@ struct InteractionRow: View {
 
                 self.favourited = status.favourited
             }
-            
+
             ToastrService.shared.showSuccess(self.favourited
                                              ? NSLocalizedString("status.title.favourited", comment: "Favourited")
                                              : NSLocalizedString("status.title.unfavourited", comment: "Unfavourited"), imageSystemName: "hand.thumbsup.fill")
@@ -172,7 +172,7 @@ struct InteractionRow: View {
             ErrorService.shared.handle(error, message: "status.error.favouriteFailed", showToastr: true)
         }
     }
-    
+
     private func bookmark() async {
         do {
             _ = self.bookmarked
@@ -187,13 +187,13 @@ struct InteractionRow: View {
             ErrorService.shared.handle(error, message: "status.error.bookmarkFailed", showToastr: true)
         }
     }
-    
+
     private func deleteStatus() {
         Task {
             do {
                 try await self.client.statuses?.delete(statusId: self.statusModel.id)
                 ToastrService.shared.showSuccess("status.title.statusDeleted", imageSystemName: "checkmark.circle.fill")
-                
+
                 self.delete?()
             } catch {
                 ErrorService.shared.handle(error, message: "status.error.deleteFailed", showToastr: true)

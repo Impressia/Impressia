@@ -3,16 +3,16 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 
 struct ContentWarning<Content: View, Blurred: View>: View {
     private let spoilerText: String?
     private let content: () -> Content
     private let blurred: () -> Blurred
-    
+
     @State private var showSensitive = false
-    
+
     init(spoilerText: String?,
          @ViewBuilder content: @escaping () -> Content,
          @ViewBuilder blurred: @escaping () -> Blurred) {
@@ -21,7 +21,7 @@ struct ContentWarning<Content: View, Blurred: View>: View {
         self.content = content
         self.blurred = blurred
     }
-    
+
     var body: some View {
         if self.showSensitive {
             ZStack {
@@ -49,7 +49,7 @@ struct ContentWarning<Content: View, Blurred: View>: View {
         } else {
             ZStack {
                 self.blurred()
-                
+
                 VStack(alignment: .center) {
                     Spacer()
                     Image(systemName: "eye.slash.fill")

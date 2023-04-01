@@ -10,7 +10,7 @@ import CoreData
 class ApplicationSettingsHandler {
     public static let shared = ApplicationSettingsHandler()
     private init() { }
-    
+
     func get(viewContext: NSManagedObjectContext? = nil) -> ApplicationSettings {
         var settingsList: [ApplicationSettings] = []
 
@@ -34,7 +34,7 @@ class ApplicationSettingsHandler {
             return settings
         }
     }
-    
+
     func set(accountId: String?) {
         let defaultSettings = self.get()
         defaultSettings.currentAccount = accountId
@@ -52,61 +52,61 @@ class ApplicationSettingsHandler {
         defaultSettings.theme = Int32(theme.rawValue)
         CoreDataHandler.shared.save()
     }
-    
+
     func set(avatarShape: AvatarShape) {
         let defaultSettings = self.get()
         defaultSettings.avatarShape = Int32(avatarShape.rawValue)
         CoreDataHandler.shared.save()
     }
-    
+
     func set(hapticTabSelectionEnabled: Bool) {
         let defaultSettings = self.get()
         defaultSettings.hapticTabSelectionEnabled = hapticTabSelectionEnabled
         CoreDataHandler.shared.save()
     }
-    
+
     func set(hapticRefreshEnabled: Bool) {
         let defaultSettings = self.get()
         defaultSettings.hapticRefreshEnabled = hapticRefreshEnabled
         CoreDataHandler.shared.save()
     }
-    
+
     func set(hapticAnimationEnabled: Bool) {
         let defaultSettings = self.get()
         defaultSettings.hapticAnimationEnabled = hapticAnimationEnabled
         CoreDataHandler.shared.save()
     }
-    
+
     func set(hapticNotificationEnabled: Bool) {
         let defaultSettings = self.get()
         defaultSettings.hapticNotificationEnabled = hapticNotificationEnabled
         CoreDataHandler.shared.save()
     }
-    
+
     func set(hapticButtonPressEnabled: Bool) {
         let defaultSettings = self.get()
         defaultSettings.hapticButtonPressEnabled = hapticButtonPressEnabled
         CoreDataHandler.shared.save()
     }
-    
+
     func set(showSensitive: Bool) {
         let defaultSettings = self.get()
         defaultSettings.showSensitive = showSensitive
         CoreDataHandler.shared.save()
     }
-    
+
     func set(showPhotoDescription: Bool) {
         let defaultSettings = self.get()
         defaultSettings.showPhotoDescription = showPhotoDescription
         CoreDataHandler.shared.save()
     }
-    
+
     func set(activeIcon: String) {
         let defaultSettings = self.get()
         defaultSettings.activeIcon = activeIcon
         CoreDataHandler.shared.save()
     }
-    
+
     private func createApplicationSettingsEntity(viewContext: NSManagedObjectContext? = nil) -> ApplicationSettings {
         let context = viewContext ?? CoreDataHandler.shared.container.viewContext
         return ApplicationSettings(context: context)

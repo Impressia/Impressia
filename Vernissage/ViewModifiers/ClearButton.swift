@@ -15,11 +15,11 @@ public extension View {
 
 private struct ClearButton: ViewModifier {
     @Binding var text: String
-    
+
     func body(content: Content) -> some View {
         ZStack(alignment: .trailing) {
             content
-            
+
             if !text.isEmpty {
                 Button {
                     text = ""
@@ -32,5 +32,3 @@ private struct ClearButton: ViewModifier {
         }
     }
 }
-
-

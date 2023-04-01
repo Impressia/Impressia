@@ -18,13 +18,13 @@ extension Pixelfed.Reports: TargetType {
         let accountId: String
         let statusIds: [String]
         let comment: String
-        
+
         private enum CodingKeys: String, CodingKey {
             case accountId = "account_id"
             case statusIds = "status_ids"
             case comment
         }
-        
+
         func encode(to encoder: Encoder) throws {
             var container: KeyedEncodingContainer<Pixelfed.Reports.Request.CodingKeys> = encoder.container(keyedBy: Pixelfed.Reports.Request.CodingKeys.self)
             try container.encode(self.accountId, forKey: Pixelfed.Reports.Request.CodingKeys.accountId)
@@ -32,36 +32,36 @@ extension Pixelfed.Reports: TargetType {
             try container.encode(self.comment, forKey: Pixelfed.Reports.Request.CodingKeys.comment)
         }
     }
-    
+
     private var apiPath: String { return "/api/v1/reports" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.
     public var path: String {
         switch self {
-        case .list, .report(_, _, _):
+        case .list, .report:
             return "\(apiPath)"
         }
     }
-    
+
     /// The HTTP method used in the request.
     public var method: Method {
         switch self {
         case .list:
             return .get
-        case .report(_, _, _):
+        case .report:
             return .post
         }
     }
-    
+
     /// The parameters to be incoded in the request.
     public var queryItems: [(String, String)]? {
         nil
     }
-    
+
     public var headers: [String: String]? {
         [:].contentTypeApplicationJson
     }
-    
+
     public var httpBody: Data? {
         switch self {
         case .list:

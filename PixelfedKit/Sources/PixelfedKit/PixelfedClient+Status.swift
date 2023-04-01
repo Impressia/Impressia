@@ -12,10 +12,10 @@ public extension PixelfedClientAuthenticated {
             for: baseURL,
             target: Pixelfed.Statuses.status(statusId),
             withBearerToken: token)
-        
+
         return try await downloadJson(Status.self, request: request)
     }
-    
+
     func favouritedBy(for statusId: String, limit: Int? = nil, page: Int = 1) async throws -> [Account] {
         let request = try Self.request(
             for: baseURL,
@@ -25,14 +25,14 @@ public extension PixelfedClientAuthenticated {
 
         return try await downloadJson([Account].self, request: request)
     }
-    
+
     func rebloggedBy(for statusId: String, limit: Int? = nil, page: Int = 1) async throws -> [Account] {
         let request = try Self.request(
             for: baseURL,
             target: Pixelfed.Statuses.rebloggedBy(statusId, nil, nil, nil, limit, page),
             withBearerToken: token
         )
-        
+
         return try await downloadJson([Account].self, request: request)
     }
 }

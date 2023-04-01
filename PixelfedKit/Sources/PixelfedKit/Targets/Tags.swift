@@ -28,7 +28,7 @@ extension Pixelfed.Tags: TargetType {
             return "\(apiPath)/\(hashtag)/unfollow"
         }
     }
-    
+
     /// The HTTP method used in the request.
     public var method: Method {
         switch self {
@@ -38,16 +38,16 @@ extension Pixelfed.Tags: TargetType {
             return .post
         }
     }
-    
+
     /// The parameters to be incoded in the request.
-    public var queryItems: [(String, String)]? {        
+    public var queryItems: [(String, String)]? {
         return nil
     }
-    
+
     public var headers: [String: String]? {
         [:].contentTypeApplicationJson
     }
-    
+
     public var httpBody: Data? {
         nil
     }

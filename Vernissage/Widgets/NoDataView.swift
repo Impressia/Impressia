@@ -3,19 +3,19 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 
 struct NoDataView: View {
-    
+
     private let imageSystemName: String
     private let text: LocalizedStringKey
-    
+
     init(imageSystemName: String, text: LocalizedStringKey) {
         self.imageSystemName = imageSystemName
         self.text = text
     }
-    
+
     var body: some View {
         VStack {
             Image(systemName: self.imageSystemName)

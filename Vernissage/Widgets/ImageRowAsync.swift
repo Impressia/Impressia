@@ -3,7 +3,7 @@
 //  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
-    
+
 import SwiftUI
 import PixelfedKit
 
@@ -14,12 +14,12 @@ struct ImageRowAsync: View {
     @State private var selected: String
     @State private var imageHeight: Double
     @State private var imageWidth: Double
-    
+
     init(statusViewModel: StatusModel) {
         self.statusViewModel = statusViewModel
         self.firstAttachment = statusViewModel.mediaAttachments.first
         self.selected = String.empty()
-        
+
         // Calculate size of frame (first from cache, then from metadata).
         if let firstAttachment, let size = ImageSizeService.shared.get(for: firstAttachment.url) {
             self.imageWidth = size.width
@@ -27,7 +27,7 @@ struct ImageRowAsync: View {
         } else if let firstAttachment,
            let imgHeight = (firstAttachment.meta as? ImageMetadata)?.original?.height,
            let imgWidth = (firstAttachment.meta as? ImageMetadata)?.original?.width {
-            
+
             let size = ImageSizeService.shared.calculate(for: firstAttachment.url, width: imgWidth, height: imgHeight)
             self.imageWidth = size.width
             self.imageHeight = size.height
@@ -36,7 +36,7 @@ struct ImageRowAsync: View {
             self.imageHeight = UIScreen.main.bounds.width
         }
     }
-    
+
     var body: some View {
         if statusViewModel.mediaAttachments.count == 1, let firstAttachment = self.firstAttachment {
             ImageRowItemAsync(statusViewModel: self.statusViewModel, attachment: firstAttachment) { (imageWidth, imageHeight) in
