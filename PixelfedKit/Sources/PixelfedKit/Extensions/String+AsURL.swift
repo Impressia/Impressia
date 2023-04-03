@@ -11,7 +11,3 @@ extension String {
         return URL(string: self)
     }
 }
-
-extension String {
-    static let showTimeline = "ShowTimeline"
-}

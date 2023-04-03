@@ -9,7 +9,20 @@ import SwiftUI
 struct GeneralSectionView: View {
     @EnvironmentObject var applicationState: ApplicationState
 
-    private let customIconNames = ["Default", "Blue", "Violet", "Orange", "Pride", "Blue-Camera", "Violet-Camera", "Orange-Camera", "Pride-Camera"]
+    private let customIconNames = ["Default",
+                                   "Blue",
+                                   "Violet",
+                                   "Orange",
+                                   "Pride",
+                                   "Yellow",
+                                   "Gradient",
+                                   "Blue-Camera",
+                                   "Violet-Camera",
+                                   "Orange-Camera",
+                                   "Pride-Camera",
+                                   "Yellow-Camera",
+                                   "Gradient-Camera"]
+
     private let themeNames: [(theme: Theme, name: LocalizedStringKey)] = [
         (Theme.system, "settings.title.system"),
         (Theme.light, "settings.title.light"),
