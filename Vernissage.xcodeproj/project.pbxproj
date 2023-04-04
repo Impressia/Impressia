@@ -14,6 +14,8 @@
 		F80048082961E6DE00E6868A /* StatusDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048072961E6DE00E6868A /* StatusDataHandler.swift */; };
 		F800480A2961EA1900E6868A /* AttachmentDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048092961EA1900E6868A /* AttachmentDataHandler.swift */; };
 		F802884F297AEED5000BDD51 /* DatabaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F802884E297AEED5000BDD51 /* DatabaseError.swift */; };
+		F805DCEF29DBED96006A1FD9 /* Client+Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = F805DCEE29DBED96006A1FD9 /* Client+Report.swift */; };
+		F805DCF129DBEF83006A1FD9 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F805DCF029DBEF83006A1FD9 /* ReportView.swift */; };
 		F808641429756666009F035C /* NotificationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F808641329756666009F035C /* NotificationRowView.swift */; };
 		F8121CA8298A86D600B466C7 /* InstanceRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8121CA7298A86D600B466C7 /* InstanceRowView.swift */; };
 		F8210DCF2966B600001D9973 /* ImageRowAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8210DCE2966B600001D9973 /* ImageRowAsync.swift */; };
@@ -252,6 +254,8 @@
 		F80048072961E6DE00E6868A /* StatusDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusDataHandler.swift; sourceTree = "<group>"; };
 		F80048092961EA1900E6868A /* AttachmentDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentDataHandler.swift; sourceTree = "<group>"; };
 		F802884E297AEED5000BDD51 /* DatabaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseError.swift; sourceTree = "<group>"; };
+		F805DCEE29DBED96006A1FD9 /* Client+Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+Report.swift"; sourceTree = "<group>"; };
+		F805DCF029DBEF83006A1FD9 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		F808641329756666009F035C /* NotificationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRowView.swift; sourceTree = "<group>"; };
 		F8121CA7298A86D600B466C7 /* InstanceRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceRowView.swift; sourceTree = "<group>"; };
 		F8210DCE2966B600001D9973 /* ImageRowAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRowAsync.swift; sourceTree = "<group>"; };
@@ -537,6 +541,7 @@
 				F89AC00629A208CC00F4159F /* PlaceSelectorView.swift */,
 				F8E6D03229CDD52500416CCA /* EditProfileView.swift */,
 				F89B5CC129D01BF700549F2F /* InstanceView.swift */,
+				F805DCF029DBEF83006A1FD9 /* ReportView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -912,6 +917,7 @@
 				F8B9B350298D4B34009CC69C /* Client+Account.swift */,
 				F8B9B352298D4B5D009CC69C /* Client+Search.swift */,
 				F89AC00829A20C5C00F4159F /* Client+Places.swift */,
+				F805DCEE29DBED96006A1FD9 /* Client+Report.swift */,
 				F8B9B355298D4C1E009CC69C /* Client+Instance.swift */,
 				F86A4302299A9AF500DF7645 /* TipsStore.swift */,
 			);
@@ -1183,6 +1189,7 @@
 				F85DBF8F296732E20069BF89 /* AccountsView.swift in Sources */,
 				F85D49872964334100751DF7 /* String+Date.swift in Sources */,
 				F897978829681B9C00B22335 /* UserAvatar.swift in Sources */,
+				F805DCF129DBEF83006A1FD9 /* ReportView.swift in Sources */,
 				F8B0886029943498002AB40A /* OtherSectionView.swift in Sources */,
 				F808641429756666009F035C /* NotificationRowView.swift in Sources */,
 				F8210DDD2966CF17001D9973 /* StatusData+Status.swift in Sources */,
@@ -1281,6 +1288,7 @@
 				F88AB05329B3613900345EDE /* PhotoUrl.swift in Sources */,
 				F88E4D56297EAD6E0057491A /* AppRouteur.swift in Sources */,
 				F88FAD32295F5029009B20C9 /* RemoteFileService.swift in Sources */,
+				F805DCEF29DBED96006A1FD9 /* Client+Report.swift in Sources */,
 				F88FAD27295F400E009B20C9 /* NotificationsView.swift in Sources */,
 				F86B7216296BFFDA00EE59EC /* UserProfileStatusesView.swift in Sources */,
 				F897978F29684BCB00B22335 /* LoadingView.swift in Sources */,

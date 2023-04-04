@@ -102,6 +102,7 @@
 "userProfile.title.unmuted" = "Account unmuted";
 "userProfile.title.blocked" = "Account blocked";
 "userProfile.title.unblocked" = "Account unblocked";
+"userProfile.title.report" = "Report";
 "userProfile.error.notExists" = "Account does not exists.";
 "userProfile.error.loadingAccountFailed" = "Error during download account from server.";
 "userProfile.error.muting" = "Muting/unmuting action failed.";
@@ -237,6 +238,7 @@
 "status.title.bookmark" = "Bookmark";
 "status.title.unbookmark" = "Unbookmark";
 "status.title.comment" = "Comment";
+"status.title.report" = "Report";
 "status.error.loadingStatusFailed" = "Loading status failed.";
 "status.error.notFound" = "Status not existing anymore.";
 "status.error.loadingCommentsFailed" = "Comments cannot be downloaded.";
@@ -301,3 +303,21 @@
 "instance.title.pixelfedAccount" = "Pixelfed account";
 "instance.error.noInstanceData" = "Instance data cannot be displayed.";
 "instance.error.loadingDataFailed" = "Error during download instance data from server.";
+
+// Mark: Report screen.
+"report.navigationBar.title" = "Report";
+"report.title.close" = "Close";
+"report.title.send" = "Send";
+"report.title.userReported" = "User has been reported";
+"report.title.postReported" = "Post has been reported";
+"report.title.reportType" = "Type of abuse";
+"report.title.spam" = "It's a spam";
+"report.title.sensitive" = "Nudity or sexual activity";
+"report.title.abusive" = "Hate speech or symbols";
+"report.title.underage" = "Underage account";
+"report.title.violence" = "Violence or dangerous organisations";
+"report.title.copyright" = "Copyright infringement";
+"report.title.impersonation" = "Impersonation";
+"report.title.scam" = "Bullying of harassment";
+"report.title.terrorism" = "Terrorism";
+"report.error.notReported" = "Error during sending report.";

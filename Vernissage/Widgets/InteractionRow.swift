@@ -108,6 +108,14 @@ struct InteractionRow: View {
                             Label("status.title.delete", systemImage: "trash")
                         }
                     }
+                } else {
+                    Divider()
+
+                    Button {
+                        self.routerPath.presentedSheet = .report(objectType: .post, objectId: self.statusModel.id)
+                    } label: {
+                        Label(NSLocalizedString("status.title.report", comment: "Report"), systemImage: "exclamationmark.triangle")
+                    }
                 }
             } label: {
                 Image(systemName: "gear")

@@ -104,7 +104,7 @@ struct NotificationRowView: View {
                         EmptyView()
                     }
                 case .adminReport:
-                    Text(self.notification.report?.comment ?? "")
+                    Text(self.notification.report?.type.rawValue ?? "")
                         .multilineTextAlignment(.leading)
                 }
             }
@@ -126,10 +126,14 @@ struct NotificationRowView: View {
                                                           accountDisplayName: notification.account.displayNameWithoutEmojis,
                                                           accountUserName: notification.account.acct))
             case .adminReport:
-                if let targetAccount = notification.report?.targetAccount {
-                    self.routerPath.navigate(to: .userProfile(accountId: targetAccount.id,
-                                                              accountDisplayName: targetAccount.displayNameWithoutEmojis,
-                                                              accountUserName: targetAccount.acct))
+                if let objectType = notification.report?.objectType, let objectId = notification.report?.objectId {
+                    switch objectType {
+                    case .user:
+                        self.routerPath.navigate(to: .userProfile(accountId: objectId, accountDisplayName: "", accountUserName: ""))
+                    case .post:
+                        self.routerPath.navigate(to: .status(id: objectId))
+                    }
+
                 }
             }
         }

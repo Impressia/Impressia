@@ -62,6 +62,8 @@ extension View {
                 ComposeView()
             case .settings:
                 SettingsView()
+            case .report(let objectType, let objectId):
+                ReportView(objectType: objectType, objectId: objectId)
             }
         }
     }

@@ -10,6 +10,7 @@ import PixelfedKit
 struct UserProfileView: View {
     @EnvironmentObject private var applicationState: ApplicationState
     @EnvironmentObject private var client: Client
+    @EnvironmentObject private var routerPath: RouterPath
 
     @Environment(\.dismiss) private var dismiss
 
@@ -146,6 +147,12 @@ struct UserProfileView: View {
                     } else {
                         Label(NSLocalizedString("userProfile.title.block", comment: "Block"), systemImage: "hand.raised")
                     }
+                }
+
+                Button {
+                    self.routerPath.presentedSheet = .report(objectType: .user, objectId: self.accountId)
+                } label: {
+                    Label(NSLocalizedString("userProfile.title.report", comment: "Report"), systemImage: "exclamationmark.triangle")
                 }
 
             }, label: {

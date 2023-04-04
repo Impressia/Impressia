@@ -103,6 +103,7 @@
 "userProfile.title.unmuted" = "Wyciszenie wyłączone";
 "userProfile.title.blocked" = "Konto zablokowane";
 "userProfile.title.unblocked" = "Konto odblokowane";
+"userProfile.title.report" = "Zgłoś";
 "userProfile.error.notExists" = "Błąd podczas pobierania danych użytkownika.";
 "userProfile.error.mute" = "Błąd podczas wyciszania użytkownika.";
 "userProfile.error.block" = "Błąd podczas blokowania/odblokowywania użytkownika.";
@@ -237,6 +238,7 @@
 "status.title.bookmark" = "Dodaj do zakładek";
 "status.title.unbookmark" = "Usuń z zakładek";
 "status.title.comment" = "Skomentuj";
+"status.title.report" = "Zgłoś";
 "status.error.loadingStatusFailed" = "Błąd podczas wczytywanie statusu.";
 "status.error.notFound" = "Status już nie istnieje.";
 "status.error.loadingCommentsFailed" =" Błąd podczas wczytywanie komentarzy.";
@@ -292,7 +294,7 @@
 "instance.title.email" = "Email";
 "instance.title.version" = "Wersja";
 "instance.title.users" = "Użytkownicy";
-"instance.title.posts" = "Postów";
+"instance.title.posts" = "Statusów";
 "instance.title.domains" = "Domen";
 "instance.title.registrations" = "Rejestracja";
 "instance.title.approvalRequired" = "Akeptowanie rejestracji";
@@ -301,3 +303,21 @@
 "instance.title.pixelfedAccount" = "Konto Pixelfed";
 "instance.error.noInstanceData" = "Dane instancji nie mogą zostać wyświetlone.";
 "instance.error.loadingDataFailed" = "Błąd podczas pobierania danych instancji.";
+
+// Mark: Report screen.
+"report.navigationBar.title" = "Zgłoś";
+"report.title.close" = "Zamknij";
+"report.title.send" = "Wyślij";
+"report.title.userReported" = "Użytkownik został zgłoszony.";
+"report.title.postReported" = "Status został zgłoszony.";
+"report.title.reportType" = "Typ nadużycia";
+"report.title.spam" = "Spam";
+"report.title.sensitive" = "Nagość lub aktywność seksualna";
+"report.title.abusive" = "Mowa lub symbole nienawiści";
+"report.title.underage" = "Konto niepełnoletniego";
+"report.title.violence" = "Przemoc lub niebezpieczne organizacje";
+"report.title.copyright" = "Naruszenie praw autorskich";
+"report.title.impersonation" = "Podszywanie się";
+"report.title.scam" = "Znęcanie się lub nękanie";
+"report.title.terrorism" = "Terroryzm";
+"report.error.notReported" = "Błąd podczas wysyłania zgłoszenia.";

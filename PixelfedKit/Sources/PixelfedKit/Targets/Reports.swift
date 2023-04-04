@@ -8,37 +8,36 @@ import Foundation
 
 extension Pixelfed {
     public enum Reports {
-        case list
-        case report(String, [String], String)
+        case report(Report.ObjectType, EntityId, Report.ReportType)
     }
 }
 
 extension Pixelfed.Reports: TargetType {
     private struct Request: Encodable {
-        let accountId: String
-        let statusIds: [String]
-        let comment: String
+        let objectType: Report.ObjectType
+        let objectId: EntityId
+        let reportType: Report.ReportType
 
         private enum CodingKeys: String, CodingKey {
-            case accountId = "account_id"
-            case statusIds = "status_ids"
-            case comment
+            case objectType = "object_type"
+            case objectId = "object_id"
+            case reportType = "report_type"
         }
 
         func encode(to encoder: Encoder) throws {
             var container: KeyedEncodingContainer<Pixelfed.Reports.Request.CodingKeys> = encoder.container(keyedBy: Pixelfed.Reports.Request.CodingKeys.self)
-            try container.encode(self.accountId, forKey: Pixelfed.Reports.Request.CodingKeys.accountId)
-            try container.encode(self.statusIds, forKey: Pixelfed.Reports.Request.CodingKeys.statusIds)
-            try container.encode(self.comment, forKey: Pixelfed.Reports.Request.CodingKeys.comment)
+            try container.encode(self.objectType, forKey: Pixelfed.Reports.Request.CodingKeys.objectType)
+            try container.encode(self.objectId, forKey: Pixelfed.Reports.Request.CodingKeys.objectId)
+            try container.encode(self.reportType, forKey: Pixelfed.Reports.Request.CodingKeys.reportType)
         }
     }
 
-    private var apiPath: String { return "/api/v1/reports" }
+    private var apiPath: String { return "/api/v1.1/report" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.
     public var path: String {
         switch self {
-        case .list, .report:
+        case .report:
             return "\(apiPath)"
         }
     }
@@ -46,8 +45,6 @@ extension Pixelfed.Reports: TargetType {
     /// The HTTP method used in the request.
     public var method: Method {
         switch self {
-        case .list:
-            return .get
         case .report:
             return .post
         }
@@ -64,11 +61,9 @@ extension Pixelfed.Reports: TargetType {
 
     public var httpBody: Data? {
         switch self {
-        case .list:
-            return nil
-        case .report(let accountId, let statusIds, let comment):
+        case .report(let objectType, let objectId, let reportType):
             return try? JSONEncoder().encode(
-                Request(accountId: accountId, statusIds: statusIds, comment: comment)
+                Request(objectType: objectType, objectId: objectId, reportType: reportType)
             )
         }
     }

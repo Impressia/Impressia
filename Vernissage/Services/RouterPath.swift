@@ -30,6 +30,7 @@ enum SheetDestinations: Identifiable {
     case newStatusEditor
     case replyToStatusEditor(status: StatusModel)
     case settings
+    case report(objectType: Report.ObjectType, objectId: String)
 
     public var id: String {
         switch self {
@@ -37,6 +38,8 @@ enum SheetDestinations: Identifiable {
             return "statusEditor"
         case .settings:
             return "settings"
+        case .report:
+            return "report"
         }
     }
 }
