@@ -268,8 +268,8 @@
 // Mark: In-app purchases.
 "purchase.donut.title" = "Pączek";
 "purchase.donut.description" = "Poczęstuj mnie pączkiem.";
-"purchase.cofee.title" = "Kawa";
-"purchase.cofee.description" = "Poczęstuj mnie kawą.";
+"purchase.coffee.title" = "Kawa";
+"purchase.coffee.description" = "Poczęstuj mnie kawą.";
 "purchase.cake.title" = "Kawa z ciastkiem";
 "purchase.cake.description" = "Poczęstuj mnie kawą i ciastkiem.";
 

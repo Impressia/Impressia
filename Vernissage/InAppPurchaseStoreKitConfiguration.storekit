@@ -30,8 +30,8 @@
       "internalID" : "AD04459F",
       "localizations" : [
         {
-          "description" : "Treat me to a coffe.",
-          "displayName" : "Cofee",
+          "description" : "Treat me to a coffee.",
+          "displayName" : "Coffee",
           "locale" : "en_US"
         },
         {
@@ -41,7 +41,7 @@
         }
       ],
       "productID" : "dev.mczachurski.Vernissage.cofee",
-      "referenceName" : "Cofee",
+      "referenceName" : "Coffee",
       "type" : "Consumable"
     },
     {
@@ -50,8 +50,8 @@
       "internalID" : "16E4E30C",
       "localizations" : [
         {
-          "description" : "Treat me to a coffe and cake.",
-          "displayName" : "Cofee & cake",
+          "description" : "Treat me to a coffee and cake.",
+          "displayName" : "Coffee & cake",
           "locale" : "en_US"
         },
         {

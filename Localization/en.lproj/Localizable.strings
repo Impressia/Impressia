@@ -268,10 +268,10 @@
 // Mark: In-app purchases.
 "purchase.donut.title" = "Donut";
 "purchase.donut.description" = "Treat me to a doughnut.";
-"purchase.cofee.title" = "Cofee";
-"purchase.cofee.description" = "Treat me to a coffe.";
-"purchase.cake.title" = "Cofee & cake";
-"purchase.cake.description" = "Treat me to a coffe and cake.";
+"purchase.coffee.title" = "Coffee";
+"purchase.coffee.description" = "Treat me to a coffee.";
+"purchase.cake.title" = "Coffee & cake";
+"purchase.cake.description" = "Treat me to a coffee and cake.";
 
 // Mark: Edit profile.
 "editProfile.navigationBar.title" = "Edit profile";
@@ -320,6 +320,6 @@
 "report.title.violence" = "Violence or dangerous organisations";
 "report.title.copyright" = "Copyright infringement";
 "report.title.impersonation" = "Impersonation";
-"report.title.scam" = "Bullying of harassment";
+"report.title.scam" = "Bullying or harassment";
 "report.title.terrorism" = "Terrorism";
 "report.error.notReported" = "Error during sending report.";
