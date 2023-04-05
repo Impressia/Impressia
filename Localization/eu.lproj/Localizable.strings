@@ -268,8 +268,8 @@
 // Mark: In-app purchases.
 "purchase.donut.title" = "Opila";
 "purchase.donut.description" = "Eros diezadazu opil bat.";
-"purchase.cofee.title" = "Kafea";
-"purchase.cofee.description" = "Gonbida nazazu kafe bat hartzera.";
+"purchase.coffee.title" = "Kafea";
+"purchase.coffee.description" = "Gonbida nazazu kafe bat hartzera.";
 "purchase.cake.title" = "Kafea eta tarta";
 "purchase.cake.description" = "Kafea eta tarta erosiko?";
 
