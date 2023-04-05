@@ -202,6 +202,8 @@
 "settings.title.privacyPolicy" = "Privacy policy";
 "settings.title.terms" = "Terms & Conditions";
 "settings.title.sourceCode" = "Source code";
+"settings.title.rate" = "Rate Vernissage";
+"settings.title.socials" = "Socials";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Sign in to Pixelfed";

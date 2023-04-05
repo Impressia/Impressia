@@ -207,6 +207,7 @@
 		F8CEEDFA29ABAFD200DBED66 /* ImageFileTranseferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CEEDF929ABAFD200DBED66 /* ImageFileTranseferable.swift */; };
 		F8D5444329D4066C002225D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D5444229D4066C002225D6 /* AppDelegate.swift */; };
 		F8DF38E429DD68820047F1AA /* ViewOffsetKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DF38E329DD68820047F1AA /* ViewOffsetKey.swift */; };
+		F8DF38E629DDB98A0047F1AA /* SocialsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DF38E529DDB98A0047F1AA /* SocialsSectionView.swift */; };
 		F8E6D03329CDD52500416CCA /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E6D03229CDD52500416CCA /* EditProfileView.swift */; };
 		F8E6D03529CE161B00416CCA /* UIImage+Jpeg.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E6D03429CE161B00416CCA /* UIImage+Jpeg.swift */; };
 		F8E9391F29C0BCFA002BB3B8 /* ImageContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E9391E29C0BCFA002BB3B8 /* ImageContextMenu.swift */; };
@@ -434,6 +435,7 @@
 		F8CEEDF929ABAFD200DBED66 /* ImageFileTranseferable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileTranseferable.swift; sourceTree = "<group>"; };
 		F8D5444229D4066C002225D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8DF38E329DD68820047F1AA /* ViewOffsetKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOffsetKey.swift; sourceTree = "<group>"; };
+		F8DF38E529DDB98A0047F1AA /* SocialsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialsSectionView.swift; sourceTree = "<group>"; };
 		F8E6D03229CDD52500416CCA /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		F8E6D03429CE161B00416CCA /* UIImage+Jpeg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Jpeg.swift"; sourceTree = "<group>"; };
 		F8E9391E29C0BCFA002BB3B8 /* ImageContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageContextMenu.swift; sourceTree = "<group>"; };
@@ -713,6 +715,7 @@
 				F86A4306299AA5E900DF7645 /* ThanksView.swift */,
 				F8B05ACA29B489B100857221 /* HapticsSectionView.swift */,
 				F8B05ACD29B48E2F00857221 /* MediaSettingsView.swift */,
+				F8DF38E529DDB98A0047F1AA /* SocialsSectionView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -1306,6 +1309,7 @@
 				F8FA9920299FDDC3007AB130 /* TextInputField.swift in Sources */,
 				F86A4303299A9AF500DF7645 /* TipsStore.swift in Sources */,
 				F8C5E56229892CC300ADF6A7 /* FirstAppear.swift in Sources */,
+				F8DF38E629DDB98A0047F1AA /* SocialsSectionView.swift in Sources */,
 				F864F7A529BBA01D00B13921 /* CoreDataError.swift in Sources */,
 				F8864CEB29ACBAA80020C534 /* TextModel.swift in Sources */,
 				F8C14394296AF21B001FE31D /* Double+Round.swift in Sources */,
