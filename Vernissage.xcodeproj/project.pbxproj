@@ -436,6 +436,7 @@
 		F8D5444229D4066C002225D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8DF38E329DD68820047F1AA /* ViewOffsetKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOffsetKey.swift; sourceTree = "<group>"; };
 		F8DF38E529DDB98A0047F1AA /* SocialsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialsSectionView.swift; sourceTree = "<group>"; };
+		F8DF38E729DDC3D20047F1AA /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = eu; path = eu.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F8E6D03229CDD52500416CCA /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		F8E6D03429CE161B00416CCA /* UIImage+Jpeg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Jpeg.swift"; sourceTree = "<group>"; };
 		F8E9391E29C0BCFA002BB3B8 /* ImageContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageContextMenu.swift; sourceTree = "<group>"; };
@@ -1053,6 +1054,7 @@
 				en,
 				Base,
 				pl,
+				eu,
 			);
 			mainGroup = F88C245F295C37B80006098B;
 			packageReferences = (
@@ -1343,6 +1345,7 @@
 			children = (
 				F835082529BEF9C400DE3247 /* en */,
 				F835082729BEFA1E00DE3247 /* pl */,
+				F8DF38E729DDC3D20047F1AA /* eu */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
