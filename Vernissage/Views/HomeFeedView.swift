@@ -6,11 +6,6 @@
 
 import SwiftUI
 
-private struct OffsetPreferenceKey: PreferenceKey {
-  static var defaultValue: CGFloat = .zero
-  static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {}
-}
-
 struct HomeFeedView: View {
     @Environment(\.managedObjectContext) private var viewContext
 

@@ -14,6 +14,7 @@ struct ImageViewer: View {
     private let closeDragDistance = UIScreen.main.bounds.height / 1.8
     private let imageHeight: Double
     private let imageWidth: Double
+    private let imagePosition: Double?
 
     // Magnification.
     @State private var currentMagnification = 0.0
@@ -26,8 +27,9 @@ struct ImageViewer: View {
     @State private var currentOffset = CGSize.zero
     @State private var accumulatedOffset = CGSize.zero
 
-    init(attachmentModel: AttachmentModel) {
+    init(attachmentModel: AttachmentModel, imagePosition: Double) {
         self.attachmentModel = attachmentModel
+        self.imagePosition = imagePosition
 
         if let data = attachmentModel.data, let uiImage = UIImage(data: data) {
             self.image = Image(uiImage: uiImage)
@@ -155,7 +157,7 @@ struct ImageViewer: View {
                 self.currentOffset = self.calculateStartingOffset()
             }
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
                 withoutAnimation {
                     self.dismiss()
                 }
@@ -229,8 +231,14 @@ struct ImageViewer: View {
         // Calculate empty space.
         let emptySpace = spaceForImage - imageOnScreenHeight
 
+        // Shift of image when image is exactly at the top of the screen.
+        let imageShiftToTopScreen = -(emptySpace / 2)
+
+        // Shidt of image also when image has been scrolled top/bottom.
+        let imageShiftToImagePosition = imageShiftToTopScreen - (self.imagePosition ?? 0.0)
+
         // Calculate image shift.
-        return CGSize(width: 0, height: -(emptySpace / 2))
+        return CGSize(width: 0, height: imageShiftToImagePosition)
     }
 
     private func spaceForNavigationBar() -> CGFloat {

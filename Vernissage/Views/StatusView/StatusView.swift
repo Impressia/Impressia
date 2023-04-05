@@ -9,6 +9,12 @@ import PixelfedKit
 import AVFoundation
 
 struct StatusView: View {
+    struct TappedAttachment: Identifiable {
+        public let id: String
+        public let attachmentModel: AttachmentModel
+        public let imagePosition: Double
+    }
+
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var client: Client
     @EnvironmentObject var routerPath: RouterPath
@@ -24,9 +30,10 @@ struct StatusView: View {
     @State private var state: ViewState = .loading
 
     @State private var statusViewModel: StatusModel?
+    @State private var imagePosition: Double?
 
     @State private var selectedAttachmentModel: AttachmentModel?
-    @State private var tappedAttachmentModel: AttachmentModel?
+    @State private var tappedAttachment: TappedAttachment?
     @State private var exifCamera: String?
     @State private var exifExposure: String?
     @State private var exifCreatedDate: String?
@@ -36,8 +43,8 @@ struct StatusView: View {
     var body: some View {
         self.mainBody()
             .navigationTitle("status.navigationBar.title")
-            .fullScreenCover(item: $tappedAttachmentModel, content: { attachmentModel in
-                ImageViewer(attachmentModel: attachmentModel)
+            .fullScreenCover(item: $tappedAttachment, content: { tappedAttachment in
+                ImageViewer(attachmentModel: tappedAttachment.attachmentModel, imagePosition: tappedAttachment.imagePosition)
             })
     }
 
@@ -73,9 +80,19 @@ struct StatusView: View {
                                exifCreatedDate: $exifCreatedDate,
                                exifLens: $exifLens,
                                description: $description)
+                .background(GeometryReader {
+                    Color.clear.preference(key: ViewOffsetKey.self, value: -$0.frame(in: .named("scroll")).origin.y)
+                })
+                .onPreferenceChange(ViewOffsetKey.self) {
+                    self.imagePosition = $0
+                }
                 .onTapGesture {
                     withoutAnimation {
-                        self.tappedAttachmentModel = self.selectedAttachmentModel
+                        if let attachmentModel = self.selectedAttachmentModel {
+                            self.tappedAttachment = TappedAttachment(id: attachmentModel.id,
+                                                                     attachmentModel: attachmentModel,
+                                                                     imagePosition: self.imagePosition ?? 0.0)
+                        }
                     }
                 }
 
@@ -137,6 +154,7 @@ struct StatusView: View {
                 CommentsSectionView(statusId: statusViewModel.id)
             }
         }
+        .coordinateSpace(name: "scroll")
     }
 
     @ViewBuilder

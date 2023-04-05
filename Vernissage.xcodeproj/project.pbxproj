@@ -206,6 +206,7 @@
 		F8CEEDF829ABADDD00DBED66 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CEEDF729ABADDD00DBED66 /* UIImage+Size.swift */; };
 		F8CEEDFA29ABAFD200DBED66 /* ImageFileTranseferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CEEDF929ABAFD200DBED66 /* ImageFileTranseferable.swift */; };
 		F8D5444329D4066C002225D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D5444229D4066C002225D6 /* AppDelegate.swift */; };
+		F8DF38E429DD68820047F1AA /* ViewOffsetKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DF38E329DD68820047F1AA /* ViewOffsetKey.swift */; };
 		F8E6D03329CDD52500416CCA /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E6D03229CDD52500416CCA /* EditProfileView.swift */; };
 		F8E6D03529CE161B00416CCA /* UIImage+Jpeg.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E6D03429CE161B00416CCA /* UIImage+Jpeg.swift */; };
 		F8E9391F29C0BCFA002BB3B8 /* ImageContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E9391E29C0BCFA002BB3B8 /* ImageContextMenu.swift */; };
@@ -432,6 +433,7 @@
 		F8CEEDF729ABADDD00DBED66 /* UIImage+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Size.swift"; sourceTree = "<group>"; };
 		F8CEEDF929ABAFD200DBED66 /* ImageFileTranseferable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileTranseferable.swift; sourceTree = "<group>"; };
 		F8D5444229D4066C002225D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F8DF38E329DD68820047F1AA /* ViewOffsetKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOffsetKey.swift; sourceTree = "<group>"; };
 		F8E6D03229CDD52500416CCA /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		F8E6D03429CE161B00416CCA /* UIImage+Jpeg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Jpeg.swift"; sourceTree = "<group>"; };
 		F8E9391E29C0BCFA002BB3B8 /* ImageContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageContextMenu.swift; sourceTree = "<group>"; };
@@ -589,6 +591,7 @@
 				F88AB05229B3613900345EDE /* PhotoUrl.swift */,
 				F85D4DFD29B78C8400345267 /* HashtagModel.swift */,
 				F89F57AF29D1C11200001EE3 /* RelationshipModel.swift */,
+				F8DF38E329DD68820047F1AA /* ViewOffsetKey.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1242,6 +1245,7 @@
 				F8AD061329A565620042F111 /* String+Random.swift in Sources */,
 				F8AFF7C129B259150087D083 /* HashtagsView.swift in Sources */,
 				F898DE7229728CB2004B4A6A /* CommentModel.swift in Sources */,
+				F8DF38E429DD68820047F1AA /* ViewOffsetKey.swift in Sources */,
 				F89A46DE296EABA20062125F /* StatusPlaceholderView.swift in Sources */,
 				F88C2482295C3A4F0006098B /* StatusView.swift in Sources */,
 				F866F6A329604161002E8F88 /* AccountDataHandler.swift in Sources */,
