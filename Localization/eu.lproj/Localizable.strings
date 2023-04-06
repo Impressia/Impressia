@@ -202,12 +202,12 @@
 "settings.title.privacyPolicy" = "Pribatutasun politika";
 "settings.title.terms" = "Erabilera baldintzak";
 "settings.title.sourceCode" = "Iturburu kodea";
-"settings.title.rate" = "Rate Vernissage";
-"settings.title.socials" = "Socials";
-"settings.title.menuPosition" = "Menu position";
-"settings.title.topMenu" = "Navigation bar";
-"settings.title.bottomRightMenu" = "Bottom right";
-"settings.title.bottomLeftMenu" = "Bottom left";
+"settings.title.rate" = "Baloratu Vernissage";
+"settings.title.socials" = "Gizarte-sareak";
+"settings.title.menuPosition" = "Menuaren kokapena";
+"settings.title.topMenu" = "Nabigazio barra";
+"settings.title.bottomRightMenu" = "Behe eskumaldean";
+"settings.title.bottomLeftMenu" = "Behe ezkerraldean";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Hasi saioa Pixelfed-en";
