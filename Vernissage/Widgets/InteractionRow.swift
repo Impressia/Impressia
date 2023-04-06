@@ -63,7 +63,7 @@ struct InteractionRow: View {
                 await self.favourite()
             } label: {
                 HStack(alignment: .center) {
-                    Image(systemName: self.favourited ? "hand.thumbsup.fill" : "hand.thumbsup")
+                    Image(systemName: self.favourited ? "star.fill" : "star")
                     Text("\(self.favouritesCount)")
                         .font(.caption)
                 }
@@ -85,7 +85,7 @@ struct InteractionRow: View {
                 }
 
                 NavigationLink(value: RouteurDestinations.accounts(listType: .favourited(entityId: statusModel.id))) {
-                    Label("status.title.favouritedBy", systemImage: "hand.thumbsup")
+                    Label("status.title.favouritedBy", systemImage: "star")
                 }
 
                 if let url = statusModel.url {
@@ -175,7 +175,7 @@ struct InteractionRow: View {
 
             ToastrService.shared.showSuccess(self.favourited
                                              ? NSLocalizedString("status.title.favourited", comment: "Favourited")
-                                             : NSLocalizedString("status.title.unfavourited", comment: "Unfavourited"), imageSystemName: "hand.thumbsup.fill")
+                                             : NSLocalizedString("status.title.unfavourited", comment: "Unfavourited"), imageSystemName: "star.fill")
         } catch {
             ErrorService.shared.handle(error, message: "status.error.favouriteFailed", showToastr: true)
         }
