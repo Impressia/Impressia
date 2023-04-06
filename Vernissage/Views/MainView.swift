@@ -32,21 +32,28 @@ struct MainView: View {
 
     var body: some View {
         self.getMainView()
-        .navigationTitle(navBarTitle)
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            self.getLeadingToolbar()
-            self.getPrincipalToolbar()
-            self.getTrailingToolbar()
-        }
-        .onChange(of: tipsStore.status) { status in
-            if status == .successful {
-                withAnimation(.spring()) {
-                    self.routerPath.presentedOverlay = .successPayment
-                    self.tipsStore.reset()
+            .navigationMenu(menuPosition: $applicationState.menuPosition) {
+                self.navigationMenuContent()
+            }
+            .navigationTitle(navBarTitle)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                self.getLeadingToolbar()
+
+                if self.applicationState.menuPosition == .top {
+                    self.getPrincipalToolbar()
+                }
+
+                self.getTrailingToolbar()
+            }
+            .onChange(of: tipsStore.status) { status in
+                if status == .successful {
+                    withAnimation(.spring()) {
+                        self.routerPath.presentedOverlay = .successPayment
+                        self.tipsStore.reset()
+                    }
                 }
             }
-        }
     }
 
     @ViewBuilder
@@ -92,97 +99,7 @@ struct MainView: View {
     private func getPrincipalToolbar() -> some ToolbarContent {
         ToolbarItem(placement: .principal) {
             Menu {
-                Button {
-                    self.switchView(to: .home)
-                } label: {
-                    HStack {
-                        Text(self.getViewTitle(viewMode: .home))
-                        Image(systemName: "house")
-                    }
-                }
-
-                Button {
-                    self.switchView(to: .local)
-                } label: {
-                    HStack {
-                        Text(self.getViewTitle(viewMode: .local))
-                        Image(systemName: "building")
-                    }
-                }
-
-                Button {
-                    self.switchView(to: .federated)
-                } label: {
-                    HStack {
-                        Text(self.getViewTitle(viewMode: .federated))
-                        Image(systemName: "globe.europe.africa")
-                    }
-                }
-
-                Button {
-                    self.switchView(to: .search)
-                } label: {
-                    HStack {
-                        Text(self.getViewTitle(viewMode: .search))
-                        Image(systemName: "magnifyingglass")
-                    }
-                }
-
-                Divider()
-
-                Menu {
-                    Button {
-                        self.switchView(to: .trendingPhotos)
-                    } label: {
-                        HStack {
-                            Text(self.getViewTitle(viewMode: .trendingPhotos))
-                            Image(systemName: "photo.stack")
-                        }
-                    }
-
-                    Button {
-                        self.switchView(to: .trendingTags)
-                    } label: {
-                        HStack {
-                            Text(self.getViewTitle(viewMode: .trendingTags))
-                            Image(systemName: "tag")
-                        }
-                    }
-
-                    Button {
-                        self.switchView(to: .trendingAccounts)
-                    } label: {
-                        HStack {
-                            Text(self.getViewTitle(viewMode: .trendingAccounts))
-                            Image(systemName: "person.3")
-                        }
-                    }
-                } label: {
-                    HStack {
-                        Text("mainview.tab.trending", comment: "Trending menu section")
-                        Image(systemName: "chart.line.uptrend.xyaxis")
-                    }
-                }
-
-                Divider()
-
-                Button {
-                    self.switchView(to: .profile)
-                } label: {
-                    HStack {
-                        Text(self.getViewTitle(viewMode: .profile))
-                        Image(systemName: "person.crop.circle")
-                    }
-                }
-
-                Button {
-                    self.switchView(to: .notifications)
-                } label: {
-                    HStack {
-                        Text(self.getViewTitle(viewMode: .notifications))
-                        Image(systemName: "bell.badge")
-                    }
-                }
+                self.navigationMenuContent()
             } label: {
                 HStack {
                     Text(navBarTitle, comment: "Navbar title")
@@ -240,6 +157,101 @@ struct MainView: View {
                         .foregroundColor(Color.mainTextColor)
                         .fontWeight(.semibold)
                 }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func navigationMenuContent() -> some View {
+        Button {
+            self.switchView(to: .home)
+        } label: {
+            HStack {
+                Text(self.getViewTitle(viewMode: .home))
+                Image(systemName: "house")
+            }
+        }
+
+        Button {
+            self.switchView(to: .local)
+        } label: {
+            HStack {
+                Text(self.getViewTitle(viewMode: .local))
+                Image(systemName: "building")
+            }
+        }
+
+        Button {
+            self.switchView(to: .federated)
+        } label: {
+            HStack {
+                Text(self.getViewTitle(viewMode: .federated))
+                Image(systemName: "globe.europe.africa")
+            }
+        }
+
+        Button {
+            self.switchView(to: .search)
+        } label: {
+            HStack {
+                Text(self.getViewTitle(viewMode: .search))
+                Image(systemName: "magnifyingglass")
+            }
+        }
+
+        Divider()
+
+        Menu {
+            Button {
+                self.switchView(to: .trendingPhotos)
+            } label: {
+                HStack {
+                    Text(self.getViewTitle(viewMode: .trendingPhotos))
+                    Image(systemName: "photo.stack")
+                }
+            }
+
+            Button {
+                self.switchView(to: .trendingTags)
+            } label: {
+                HStack {
+                    Text(self.getViewTitle(viewMode: .trendingTags))
+                    Image(systemName: "tag")
+                }
+            }
+
+            Button {
+                self.switchView(to: .trendingAccounts)
+            } label: {
+                HStack {
+                    Text(self.getViewTitle(viewMode: .trendingAccounts))
+                    Image(systemName: "person.3")
+                }
+            }
+        } label: {
+            HStack {
+                Text("mainview.tab.trending", comment: "Trending menu section")
+                Image(systemName: "chart.line.uptrend.xyaxis")
+            }
+        }
+
+        Divider()
+
+        Button {
+            self.switchView(to: .profile)
+        } label: {
+            HStack {
+                Text(self.getViewTitle(viewMode: .profile))
+                Image(systemName: "person.crop.circle")
+            }
+        }
+
+        Button {
+            self.switchView(to: .notifications)
+        } label: {
+            HStack {
+                Text(self.getViewTitle(viewMode: .notifications))
+                Image(systemName: "bell.badge")
             }
         }
     }

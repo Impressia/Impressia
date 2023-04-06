@@ -204,6 +204,10 @@
 "settings.title.sourceCode" = "Source code";
 "settings.title.rate" = "Rate Vernissage";
 "settings.title.socials" = "Socials";
+"settings.title.menuPosition" = "Menu position";
+"settings.title.topMenu" = "Navigation bar";
+"settings.title.bottomRightMenu" = "Bottom right";
+"settings.title.bottomLeftMenu" = "Bottom left";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Sign in to Pixelfed";

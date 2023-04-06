@@ -204,6 +204,10 @@
 "settings.title.sourceCode" = "Kod źródłowy";
 "settings.title.rate" = "Oceń Vernissage";
 "settings.title.socials" = "Społeczności";
+"settings.title.menuPosition" = "Pozycja menu";
+"settings.title.topMenu" = "Panel tytułowy";
+"settings.title.bottomRightMenu" = "Dolny prawy";
+"settings.title.bottomLeftMenu" = "Dolny lewy";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Zaloguj się do Pixelfed";
