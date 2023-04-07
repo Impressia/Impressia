@@ -9,6 +9,7 @@ import SwiftUI
 import PixelfedKit
 import ClientKit
 import HTMLString
+import ServicesKit
 
 struct EditProfileView: View {
     @EnvironmentObject private var applicationState: ApplicationState

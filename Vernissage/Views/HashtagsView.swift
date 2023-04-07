@@ -8,6 +8,7 @@ import SwiftUI
 import PixelfedKit
 import ClientKit
 import Foundation
+import ServicesKit
 
 struct HashtagsView: View {
     public enum ListType: Hashable {

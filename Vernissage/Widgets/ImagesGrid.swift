@@ -8,6 +8,7 @@ import SwiftUI
 import PixelfedKit
 import ClientKit
 import NukeUI
+import ServicesKit
 
 struct ImagesGrid: View {
     public enum GridType: Hashable {

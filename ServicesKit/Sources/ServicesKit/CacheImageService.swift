@@ -13,7 +13,7 @@ public class CacheImageService {
 
     private var memoryCacheData = MemoryCache<URL, Image>(entryLifetime: 600)
 
-    func download(url: URL?) async {
+    public func download(url: URL?) async {
         guard let url else {
             return
         }
@@ -32,7 +32,7 @@ public class CacheImageService {
         }
     }
 
-    func get(for url: URL) -> Image? {
+    public func get(for url: URL) -> Image? {
         return self.memoryCacheData[url]
     }
 

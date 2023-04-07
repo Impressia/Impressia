@@ -6,6 +6,7 @@
 
 import SwiftUI
 import ClientKit
+import ServicesKit
 
 struct ImageRowItem: View {
     @EnvironmentObject var applicationState: ApplicationState

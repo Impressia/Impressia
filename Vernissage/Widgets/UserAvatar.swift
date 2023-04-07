@@ -6,6 +6,7 @@
 
 import SwiftUI
 import NukeUI
+import ServicesKit
 
 struct UserAvatar: View {
     @EnvironmentObject var applicationState: ApplicationState

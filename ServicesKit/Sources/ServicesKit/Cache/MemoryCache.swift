@@ -7,24 +7,23 @@
 import Foundation
 
 /// Memory cache based on article: https://www.swiftbysundell.com/articles/caching-in-swift/
-final class MemoryCache<Key: Hashable, Value> {
+public final class MemoryCache<Key: Hashable, Value> {
     private let wrapped = NSCache<WrappedKey, Entry>()
     private let dateProvider: () -> Date
     private let entryLifetime: TimeInterval
 
-    init(dateProvider: @escaping () -> Date = Date.init,
-         entryLifetime: TimeInterval = 12 * 60 * 60) {
+    public init(dateProvider: @escaping () -> Date = Date.init, entryLifetime: TimeInterval = 12 * 60 * 60) {
         self.dateProvider = dateProvider
         self.entryLifetime = entryLifetime
     }
 
-    func insert(_ value: Value, forKey key: Key) {
+    public func insert(_ value: Value, forKey key: Key) {
         let date = dateProvider().addingTimeInterval(entryLifetime)
         let entry = Entry(value: value, expirationDate: date)
         wrapped.setObject(entry, forKey: WrappedKey(key))
     }
 
-    func value(forKey key: Key) -> Value? {
+    public func value(forKey key: Key) -> Value? {
         guard let entry = wrapped.object(forKey: WrappedKey(key)) else {
             return nil
         }
@@ -38,7 +37,7 @@ final class MemoryCache<Key: Hashable, Value> {
         return entry.value
     }
 
-    func removeValue(forKey key: Key) {
+    public func removeValue(forKey key: Key) {
         wrapped.removeObject(forKey: WrappedKey(key))
     }
 }
@@ -73,7 +72,7 @@ private extension MemoryCache {
     }
 }
 
-extension MemoryCache {
+public extension MemoryCache {
     subscript(key: Key) -> Value? {
         get { return value(forKey: key) }
         set {

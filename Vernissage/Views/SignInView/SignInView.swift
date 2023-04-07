@@ -8,6 +8,7 @@ import SwiftUI
 import PixelfedKit
 import ClientKit
 import AuthenticationServices
+import ServicesKit
 
 struct SignInView: View {
     @Environment(\.managedObjectContext) private var viewContext

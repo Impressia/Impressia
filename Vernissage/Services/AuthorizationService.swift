@@ -9,6 +9,7 @@ import PixelfedKit
 import ClientKit
 import CoreData
 import AuthenticationServices
+import ServicesKit
 
 /// Srvice responsible for login user into the Pixelfed account.
 public class AuthorizationService {

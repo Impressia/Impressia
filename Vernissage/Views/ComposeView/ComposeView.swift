@@ -9,6 +9,7 @@ import PhotosUI
 import PixelfedKit
 import ClientKit
 import UIKit
+import ServicesKit
 
 struct ComposeView: View {
     @EnvironmentObject var applicationState: ApplicationState

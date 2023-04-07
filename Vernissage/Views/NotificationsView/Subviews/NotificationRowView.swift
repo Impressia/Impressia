@@ -8,6 +8,7 @@ import SwiftUI
 import PixelfedKit
 import ClientKit
 import NukeUI
+import ServicesKit
 
 struct NotificationRowView: View {
     @EnvironmentObject var applicationState: ApplicationState

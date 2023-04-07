@@ -8,6 +8,7 @@ import SwiftUI
 import PixelfedKit
 import ClientKit
 import AVFoundation
+import ServicesKit
 
 struct StatusView: View {
     struct TappedAttachment: Identifiable {

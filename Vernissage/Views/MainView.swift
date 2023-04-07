@@ -9,6 +9,7 @@ import UIKit
 import CoreData
 import PixelfedKit
 import ClientKit
+import ServicesKit
 
 struct MainView: View {
     @Environment(\.managedObjectContext) private var viewContext
