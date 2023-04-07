@@ -126,6 +126,11 @@
 		F88AB05829B36B8200345EDE /* AccountsPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88AB05729B36B8200345EDE /* AccountsPhotoView.swift */; };
 		F88ABD9229686F1C004EF61E /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88ABD9129686F1C004EF61E /* MemoryCache.swift */; };
 		F88ABD9429687CA4004EF61E /* ComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88ABD9329687CA4004EF61E /* ComposeView.swift */; };
+		F88BC50529E02F3900CE6141 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88BC50429E02F3900CE6141 /* ShareViewController.swift */; };
+		F88BC50C29E02F3900CE6141 /* VernissageShareExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F88BC50229E02F3900CE6141 /* VernissageShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F88BC51129E02F5300CE6141 /* PixelfedKit in Frameworks */ = {isa = PBXBuildFile; productRef = F88BC51029E02F5300CE6141 /* PixelfedKit */; };
+		F88BC51329E02FD800CE6141 /* ComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88BC51229E02FD800CE6141 /* ComposeView.swift */; };
+		F88BC51629E0307F00CE6141 /* NotificationsName.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88BC51529E0307F00CE6141 /* NotificationsName.swift */; };
 		F88C246C295C37B80006098B /* VernissageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C246B295C37B80006098B /* VernissageApp.swift */; };
 		F88C246E295C37B80006098B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C246D295C37B80006098B /* MainView.swift */; };
 		F88C2470295C37BB0006098B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F88C246F295C37BB0006098B /* Assets.xcassets */; };
@@ -235,6 +240,13 @@
 			remoteGlobalIDString = F864F75C29BB91B400B13921;
 			remoteInfo = VernissageWidgetExtension;
 		};
+		F88BC50A29E02F3900CE6141 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F88C2460295C37B80006098B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F88BC50129E02F3900CE6141;
+			remoteInfo = VernissageShareExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -245,6 +257,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				F864F76C29BB91B600B13921 /* VernissageWidgetExtension.appex in Embed Foundation Extensions */,
+				F88BC50C29E02F3900CE6141 /* VernissageShareExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -352,6 +365,12 @@
 		F88ABD9129686F1C004EF61E /* MemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
 		F88ABD9329687CA4004EF61E /* ComposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeView.swift; sourceTree = "<group>"; };
 		F88ABD9529687D4D004EF61E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		F88BC50229E02F3900CE6141 /* VernissageShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VernissageShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F88BC50429E02F3900CE6141 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		F88BC50929E02F3900CE6141 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F88BC51229E02FD800CE6141 /* ComposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeView.swift; sourceTree = "<group>"; };
+		F88BC51429E02FEB00CE6141 /* VernissageShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VernissageShareExtension.entitlements; sourceTree = "<group>"; };
+		F88BC51529E0307F00CE6141 /* NotificationsName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsName.swift; sourceTree = "<group>"; };
 		F88C2468295C37B80006098B /* Vernissage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vernissage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F88C246B295C37B80006098B /* VernissageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VernissageApp.swift; sourceTree = "<group>"; };
 		F88C246D295C37B80006098B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -469,6 +488,14 @@
 				F864F76129BB91B400B13921 /* SwiftUI.framework in Frameworks */,
 				F864F77A29BB94A800B13921 /* PixelfedKit in Frameworks */,
 				F864F75F29BB91B400B13921 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F88BC4FF29E02F3900CE6141 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F88BC51129E02F5300CE6141 /* PixelfedKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -643,7 +670,6 @@
 		F83901A2295D863B00456AE2 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
-				F8864CF229AD05420020C534 /* TextView */,
 				F83901A5295D8EC000456AE2 /* LabelIcon.swift */,
 				F85D4972296406E700751DF7 /* BottomRight.swift */,
 				F85D497629640A5200751DF7 /* ImageRow.swift */,
@@ -788,6 +814,18 @@
 			path = Cache;
 			sourceTree = "<group>";
 		};
+		F88BC50329E02F3900CE6141 /* VernissageShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				F88BC51429E02FEB00CE6141 /* VernissageShareExtension.entitlements */,
+				F88BC51229E02FD800CE6141 /* ComposeView.swift */,
+				F88BC51529E0307F00CE6141 /* NotificationsName.swift */,
+				F88BC50429E02F3900CE6141 /* ShareViewController.swift */,
+				F88BC50929E02F3900CE6141 /* Info.plist */,
+			);
+			path = VernissageShareExtension;
+			sourceTree = "<group>";
+		};
 		F88C245F295C37B80006098B = {
 			isa = PBXGroup;
 			children = (
@@ -796,12 +834,14 @@
 				F844F42429D2DC39000DD896 /* LICENSE */,
 				F8B3699A29D86EB600BE3808 /* .swiftlint.yml */,
 				F8B3699B29D86EBD00BE3808 /* .gitignore */,
+				F8864CF229AD05420020C534 /* TextView */,
 				F8CB3DF029D80B1E00CDAE5A /* Resources */,
 				F835081F29BEF88600DE3247 /* Localization */,
 				F864F79C29BB9D2400B13921 /* Models */,
 				F8341F96295C6427009C8EE6 /* CoreData */,
 				F88C246A295C37B80006098B /* Vernissage */,
 				F864F76229BB91B400B13921 /* VernissageWidget */,
+				F88BC50329E02F3900CE6141 /* VernissageShareExtension */,
 				F88C2469295C37B80006098B /* Products */,
 				F89992C5296D3DF8005994BF /* Frameworks */,
 			);
@@ -812,6 +852,7 @@
 			children = (
 				F88C2468295C37B80006098B /* Vernissage.app */,
 				F864F75D29BB91B400B13921 /* VernissageWidgetExtension.appex */,
+				F88BC50229E02F3900CE6141 /* VernissageShareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1006,6 +1047,26 @@
 			productReference = F864F75D29BB91B400B13921 /* VernissageWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		F88BC50129E02F3900CE6141 /* VernissageShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F88BC50F29E02F3900CE6141 /* Build configuration list for PBXNativeTarget "VernissageShareExtension" */;
+			buildPhases = (
+				F88BC4FE29E02F3900CE6141 /* Sources */,
+				F88BC4FF29E02F3900CE6141 /* Frameworks */,
+				F88BC50029E02F3900CE6141 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VernissageShareExtension;
+			packageProductDependencies = (
+				F88BC51029E02F5300CE6141 /* PixelfedKit */,
+			);
+			productName = VernissageShareExtension;
+			productReference = F88BC50229E02F3900CE6141 /* VernissageShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		F88C2467295C37B80006098B /* Vernissage */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F88C247B295C37BB0006098B /* Build configuration list for PBXNativeTarget "Vernissage" */;
@@ -1020,6 +1081,7 @@
 			);
 			dependencies = (
 				F864F76B29BB91B600B13921 /* PBXTargetDependency */,
+				F88BC50B29E02F3900CE6141 /* PBXTargetDependency */,
 			);
 			name = Vernissage;
 			packageProductDependencies = (
@@ -1043,11 +1105,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					F864F75C29BB91B400B13921 = {
 						CreatedOnToolsVersion = 14.2;
+					};
+					F88BC50129E02F3900CE6141 = {
+						CreatedOnToolsVersion = 14.3;
 					};
 					F88C2467295C37B80006098B = {
 						CreatedOnToolsVersion = 14.2;
@@ -1078,6 +1143,7 @@
 			targets = (
 				F88C2467295C37B80006098B /* Vernissage */,
 				F864F75C29BB91B400B13921 /* VernissageWidgetExtension */,
+				F88BC50129E02F3900CE6141 /* VernissageShareExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -1089,6 +1155,13 @@
 			files = (
 				F864F76829BB91B600B13921 /* Assets.xcassets in Resources */,
 				F835082429BEF9C400DE3247 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F88BC50029E02F3900CE6141 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1161,6 +1234,16 @@
 				F864F78A29BB9A8000B13921 /* ApplicationSettingsHandler.swift in Sources */,
 				F864F78C29BB9A8500B13921 /* AttachmentDataHandler.swift in Sources */,
 				F864F78B29BB9A8300B13921 /* StatusDataHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F88BC4FE29E02F3900CE6141 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F88BC50529E02F3900CE6141 /* ShareViewController.swift in Sources */,
+				F88BC51629E0307F00CE6141 /* NotificationsName.swift in Sources */,
+				F88BC51329E02FD800CE6141 /* ComposeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1348,6 +1431,11 @@
 			target = F864F75C29BB91B400B13921 /* VernissageWidgetExtension */;
 			targetProxy = F864F76A29BB91B600B13921 /* PBXContainerItemProxy */;
 		};
+		F88BC50B29E02F3900CE6141 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F88BC50129E02F3900CE6141 /* VernissageShareExtension */;
+			targetProxy = F88BC50A29E02F3900CE6141 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1413,6 +1501,61 @@
 				);
 				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		F88BC50D29E02F3900CE6141 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = VernissageShareExtension/VernissageShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 96;
+				DEVELOPMENT_TEAM = B2U9FEKYP8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = VernissageShareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = VernissageShareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage.share;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		F88BC50E29E02F3900CE6141 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = VernissageShareExtension/VernissageShareExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 96;
+				DEVELOPMENT_TEAM = B2U9FEKYP8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = VernissageShareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = VernissageShareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1629,6 +1772,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		F88BC50F29E02F3900CE6141 /* Build configuration list for PBXNativeTarget "VernissageShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F88BC50D29E02F3900CE6141 /* Debug */,
+				F88BC50E29E02F3900CE6141 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F88C2463295C37B80006098B /* Build configuration list for PBXProject "Vernissage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1718,6 +1870,10 @@
 			productName = ActivityIndicatorView;
 		};
 		F864F77929BB94A800B13921 /* PixelfedKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PixelfedKit;
+		};
+		F88BC51029E02F5300CE6141 /* PixelfedKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PixelfedKit;
 		};
