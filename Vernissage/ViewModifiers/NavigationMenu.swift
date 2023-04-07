@@ -60,11 +60,11 @@ private struct NavigationMenu<MenuItems>: ViewModifier where MenuItems: View {
             self.menuItems()
         } label: {
 
-            Image(systemName: "line.3.horizontal.circle")
+            Image(systemName: "line.3.horizontal")
                 .resizable()
                 .foregroundColor(.mainTextColor.opacity(0.8))
                 .shadow(radius: 5)
-                .padding(8)
+                .padding(12)
                 .frame(width: 44, height: 44)
                 .background(.ultraThinMaterial)
                 .clipShape(Circle())
