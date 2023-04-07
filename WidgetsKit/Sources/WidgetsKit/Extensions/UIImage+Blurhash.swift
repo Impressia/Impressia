@@ -11,7 +11,7 @@ import UIKit
 public extension UIImage {
 
     /// Code downloaded from: https://github.com/woltapp/blurhash/tree/master/Swift
-    public convenience init?(blurHash: String, size: CGSize, punch: Float = 1) {
+    convenience init?(blurHash: String, size: CGSize, punch: Float = 1) {
         guard blurHash.count >= 6 else { return nil }
 
         let sizeFlag = String(blurHash[0]).decode83()

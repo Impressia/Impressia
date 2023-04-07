@@ -36,6 +36,36 @@ class ApplicationSettingsHandler {
         }
     }
 
+    func update(applicationState: ApplicationState) {
+        let defaultSettings = ApplicationSettingsHandler.shared.get()
+
+        if let tintColor = TintColor(rawValue: Int(defaultSettings.tintColor)) {
+            applicationState.tintColor = tintColor
+        }
+
+        if let theme = Theme(rawValue: Int(defaultSettings.theme)) {
+            applicationState.theme = theme
+        }
+
+        if let avatarShape = AvatarShape(rawValue: Int(defaultSettings.avatarShape)) {
+            applicationState.avatarShape = avatarShape
+        }
+
+        applicationState.activeIcon = defaultSettings.activeIcon
+        applicationState.showSensitive = defaultSettings.showSensitive
+        applicationState.showPhotoDescription = defaultSettings.showPhotoDescription
+
+        if let menuPosition = MenuPosition(rawValue: Int(defaultSettings.menuPosition)) {
+            applicationState.menuPosition = menuPosition
+        }
+
+        applicationState.hapticTabSelectionEnabled = defaultSettings.hapticTabSelectionEnabled
+        applicationState.hapticRefreshEnabled = defaultSettings.hapticRefreshEnabled
+        applicationState.hapticButtonPressEnabled = defaultSettings.hapticButtonPressEnabled
+        applicationState.hapticAnimationEnabled = defaultSettings.hapticAnimationEnabled
+        applicationState.hapticNotificationEnabled = defaultSettings.hapticNotificationEnabled
+    }
+
     func set(accountId: String?) {
         let defaultSettings = self.get()
         defaultSettings.currentAccount = accountId

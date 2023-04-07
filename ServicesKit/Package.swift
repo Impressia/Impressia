@@ -28,7 +28,12 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "ServicesKit",
-            dependencies: ["Drops", "Nuke", "PixelfedKit", "EnvironmentKit"]),
+            dependencies: [
+                .product(name: "Drops", package: "Drops"),
+                .product(name: "Nuke", package: "Nuke"),
+                .product(name: "NukeUI", package: "Nuke"),
+                .product(name: "EnvironmentKit", package: "EnvironmentKit")
+            ]),
         .testTarget(
             name: "ServicesKitTests",
             dependencies: ["ServicesKit"])

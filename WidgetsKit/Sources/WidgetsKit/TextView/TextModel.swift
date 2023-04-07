@@ -7,6 +7,7 @@
 import Foundation
 import SwiftUI
 import PixelfedKit
+import ServicesKit
 import ClientKit
 import EnvironmentKit
 
@@ -130,8 +131,7 @@ public class TextModel: NSObject, ObservableObject {
                 }
             }
         } catch {
-            // TODO: Prepare something for common error.
-            // ErrorService.shared.handle(error, message: "Error during composing attribute string.")
+            ErrorService.shared.handle(error, message: "Error during composing attribute string.")
         }
     }
 
@@ -158,8 +158,7 @@ public class TextModel: NSObject, ObservableObject {
                     break
                 }
             } catch {
-                // TODO: Prepare something for common error.
-                // ErrorService.shared.handle(error, message: "Error during downloading autocomplete.")
+                ErrorService.shared.handle(error, message: "Error during downloading autocomplete.")
             }
         }
     }

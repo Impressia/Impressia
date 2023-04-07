@@ -9,65 +9,12 @@ import SwiftUI
 import PhotosUI
 import PixelfedKit
 import ClientKit
-
-// TODO: Move colors extenstions to shared.
+import EnvironmentKit
+import WidgetsKit
+import ServicesKit
 
 struct ComposeView: View {
-    var body: some View {
-        VStack {
-            Text("Hello!")
-            Button("Close") {
-                NotificationCenter.default.post(name: NotificationsName.shareSheetClose, object: nil)
-            }
-            .buttonStyle(.borderedProminent)
-        }
-    }
-}
-
-public class PhotoAttachment: ObservableObject, Identifiable, Equatable, Hashable {
-    public let id: String
-    public let photosPickerItem: PhotosPickerItem
-
-    @Published public var photoData: Data?
-    @Published public var uploadedAttachment: UploadedAttachment?
-    @Published public var error: Error?
-
-    init(photosPickerItem: PhotosPickerItem) {
-        self.id = UUID().uuidString
-        self.photosPickerItem = photosPickerItem
-    }
-
-    public static func == (lhs: PhotoAttachment, rhs: PhotoAttachment) -> Bool {
-        lhs.id == rhs.id
-    }
-
-    public func hash(into hasher: inout Hasher) {
-        return hasher.combine(self.id)
-    }
-}
-
-extension [PhotoAttachment] {
-    public func hasUploadedPhotos() -> Bool {
-        return self.contains { photoAttachment in
-            photoAttachment.uploadedAttachment != nil
-        }
-    }
-
-    public func getUploadedPhotoIds() -> [String] {
-        var ids: [String] = []
-
-        for item in self {
-            if let uploadedAttachment = item.uploadedAttachment {
-                ids.append(uploadedAttachment.id)
-            }
-        }
-
-        return ids
-    }
-}
-
-/*
-struct ComposeView: View {
+    @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var client: Client
 
     @StateObject private var textModel: TextModel
@@ -114,83 +61,79 @@ struct ComposeView: View {
         }
     }
 
+    private let attachments: [NSItemProvider]
     private let keyboardFontImageSize = 20.0
     private let keyboardFontTextSize = 16.0
     private let autocompleteFontTextSize = 12.0
 
-    public init() {
+    public init(attachments: [NSItemProvider]) {
+        self.attachments = attachments
         _textModel = StateObject(wrappedValue: .init())
     }
 
     var body: some View {
-        NavigationStack {
-            NavigationView {
-                ZStack(alignment: .bottom) {
-                    self.composeBody()
+        NavigationView {
+            ZStack(alignment: .bottom) {
+                self.composeBody()
 
-                    if self.isKeyboardPresented {
-                        VStack(alignment: .leading, spacing: 0) {
-                            self.autocompleteToolbar()
-                            self.keyboardToolbar()
-                        }
-                        .transition(.opacity)
+                if self.isKeyboardPresented {
+                    VStack(alignment: .leading, spacing: 0) {
+                        self.autocompleteToolbar()
+                        self.keyboardToolbar()
                     }
+                    .transition(.opacity)
                 }
-                .frame(alignment: .topLeading)
-                .toolbar {
-                    ToolbarItem(placement: .primaryAction) {
-                        Button {
-                            Task {
-                                await self.publishStatus()
-                            }
-                        } label: {
-                            Text("compose.title.publish", comment: "Publish")
-                        }
-                        .disabled(self.publishDisabled)
-                        .buttonStyle(.borderedProminent)
-                    }
-
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button(NSLocalizedString("compose.title.cancel", comment: "Cancel"), role: .cancel) {
-                            NotificationCenter.default.post(name: NotificationsName.shareSheetClose, object: nil)
-                        }
-                    }
-                }
-                .onAppear {
-                    self.textModel.client = self.client
-                }
-                .onChange(of: self.textModel.text) { _ in
-                    self.refreshScreenState()
-                }
-                .onChange(of: self.selectedItems) { _ in
-                    Task {
-                        await self.loadPhotos()
-                    }
-                }
-                .sheet(item: $showSheet, content: { sheetType in
-                    switch sheetType {
-                    case .photoDetails(let photoAttachment):
-                        // TODO: Move to common views?
-                        // PhotoEditorView(photoAttachment: photoAttachment)
-                        EmptyView()
-                    case .placeSelector:
-                        // TODO: Move to common views?
-                        // PlaceSelectorView(place: $place)
-                        EmptyView()
-                    }
-                })
-                .onReceive(keyboardPublisher) { value in
-                    withAnimation {
-                        self.isKeyboardPresented = value
-                    }
-                }
-                .photosPicker(isPresented: $photosPickerVisible,
-                              selection: $selectedItems,
-                              maxSelectionCount: 4,
-                              matching: .images)
-                .navigationTitle("compose.navigationBar.title")
-                .navigationBarTitleDisplayMode(.inline)
             }
+            .frame(alignment: .topLeading)
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button {
+                        Task {
+                            await self.publishStatus()
+                        }
+                    } label: {
+                        Text("compose.title.publish", comment: "Publish")
+                    }
+                    .disabled(self.publishDisabled)
+                    .buttonStyle(.borderedProminent)
+                }
+
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(NSLocalizedString("compose.title.cancel", comment: "Cancel"), role: .cancel) {
+                        NotificationCenter.default.post(name: NotificationsName.shareSheetClose, object: nil)
+                    }
+                }
+            }
+            .onAppear {
+                self.textModel.client = self.client
+            }
+            .onChange(of: self.textModel.text) { _ in
+                self.refreshScreenState()
+            }
+            .onChange(of: self.selectedItems) { _ in
+                Task {
+                    await self.loadPhotos()
+                }
+            }
+            .sheet(item: $showSheet, content: { sheetType in
+                switch sheetType {
+                case .photoDetails(let photoAttachment):
+                    PhotoEditorView(photoAttachment: photoAttachment)
+                case .placeSelector:
+                    PlaceSelectorView(place: $place)
+                }
+            })
+            .onReceive(keyboardPublisher) { value in
+                withAnimation {
+                    self.isKeyboardPresented = value
+                }
+            }
+            .photosPicker(isPresented: $photosPickerVisible,
+                          selection: $selectedItems,
+                          maxSelectionCount: 4,
+                          matching: .images)
+            .navigationTitle("compose.navigationBar.title")
+            .navigationBarTitleDisplayMode(.inline)
         }
         .interactiveDismissDisabled(self.interactiveDismissDisabled)
     }
@@ -216,9 +159,6 @@ struct ComposeView: View {
 
                 // Grid with images.
                 self.imagesGridView()
-
-                // Status when we are adding new comment.
-                self.statusModelView()
 
                 Spacer()
             }
@@ -253,32 +193,6 @@ struct ComposeView: View {
             }
         }
         .padding(8)
-    }
-
-    @ViewBuilder
-    private func statusModelView() -> some View {
-        if let status = self.statusViewModel {
-            HStack(alignment: .top) {
-                UserAvatar(accountAvatar: status.account.avatar, size: .comment)
-
-                VStack(alignment: .leading, spacing: 0) {
-                    HStack(alignment: .top) {
-                        Text(statusViewModel?.account.displayNameWithoutEmojis ?? "")
-                            .foregroundColor(.mainTextColor)
-                            .font(.footnote)
-                            .fontWeight(.bold)
-
-                        Spacer()
-                    }
-
-                    MarkdownFormattedText(status.content.asMarkdown)
-                        .font(.subheadline)
-                        .environment(\.openURL, OpenURLAction { _ in .handled })
-                }
-            }
-            .padding(8)
-            .background(Color.selectedRowColor)
-        }
     }
 
     @ViewBuilder
@@ -509,7 +423,7 @@ struct ComposeView: View {
     }
 
     private func placeholder() -> LocalizedStringKey {
-        self.statusViewModel == nil ? "compose.title.attachPhotoFull" : "compose.title.attachPhotoMini"
+        "compose.title.attachPhotoFull"
     }
 
     private func isPublishButtonDisabled() -> Bool {
@@ -524,7 +438,7 @@ struct ComposeView: View {
         }
 
         // When status is not a comment, then photo is required.
-        if self.statusViewModel == nil && self.photosAttachment.hasUploadedPhotos() == false {
+        if self.photosAttachment.hasUploadedPhotos() == false {
             return true
         }
 
@@ -637,7 +551,7 @@ struct ComposeView: View {
                 let commentModel = CommentModel(status: statusModel, showDivider: false)
                 self.applicationState.newComment = commentModel
 
-                dismiss()
+                NotificationCenter.default.post(name: NotificationsName.shareSheetClose, object: nil)
             }
         } catch {
             ErrorService.shared.handle(error, message: "compose.error.postingStatusFailed", showToastr: true)
@@ -645,7 +559,7 @@ struct ComposeView: View {
     }
 
     private func createStatus() -> Pixelfed.Statuses.Components {
-        return Pixelfed.Statuses.Components(inReplyToId: self.statusViewModel?.id,
+        return Pixelfed.Statuses.Components(inReplyToId: nil,
                                             text: self.textModel.text.string,
                                             spoilerText: self.isSensitive ? self.spoilerText : String.empty(),
                                             mediaIds: self.photosAttachment.getUploadedPhotoIds(),
@@ -655,4 +569,3 @@ struct ComposeView: View {
                                             commentsDisabled: self.commentsDisabled)
     }
 }
-*/

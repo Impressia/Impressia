@@ -20,6 +20,7 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/exyte/ActivityIndicatorView.git", .upToNextMajor(from: "1.0.0")),
         .package(url: "https://github.com/divadretlaw/EmojiText", .upToNextMajor(from: "2.6.0")),
+        .package(url: "https://github.com/kean/Nuke", .upToNextMajor(from: "12.0.0")),
         .package(name: "PixelfedKit", path: "../PixelfedKit"),
         .package(name: "ClientKit", path: "../ClientKit"),
         .package(name: "ServicesKit", path: "../ServicesKit"),
@@ -30,7 +31,17 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "WidgetsKit",
-            dependencies: ["ActivityIndicatorView", "EmojiText", "PixelfedKit", "ClientKit", "ServicesKit", "EnvironmentKit"]),
+            dependencies: [
+                .product(name: "ActivityIndicatorView", package: "ActivityIndicatorView"),
+                .product(name: "Nuke", package: "Nuke"),
+                .product(name: "NukeUI", package: "Nuke"),
+                .product(name: "EmojiText", package: "EmojiText"),
+                .product(name: "PixelfedKit", package: "PixelfedKit"),
+                .product(name: "ClientKit", package: "ClientKit"),
+                .product(name: "ServicesKit", package: "ServicesKit"),
+                .product(name: "EnvironmentKit", package: "EnvironmentKit")
+            ]
+        ),
         .testTarget(
             name: "WidgetsKitTests",
             dependencies: ["WidgetsKit"])
