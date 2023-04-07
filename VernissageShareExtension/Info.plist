@@ -9,15 +9,15 @@
 			<key>NSExtensionActivationRule</key>
 			<dict>
 				<key>NSExtensionActivationSupportsImageWithMaxCount</key>
-				<string>4</string>
+				<integer>4</integer>
 				<key>NSExtensionActivationSupportsMovieWithMaxCount</key>
-				<string>0</string>
+				<integer>0</integer>
 				<key>NSExtensionActivationSupportsText</key>
-				<string>NO</string>
+				<false/>
 				<key>NSExtensionActivationSupportsWebPageWithMaxCount</key>
-				<string>1</string>
+				<integer>0</integer>
 				<key>NSExtensionActivationSupportsWebURLWithMaxCount</key>
-				<string>1</string>
+				<integer>0</integer>
 			</dict>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>
