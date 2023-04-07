@@ -74,7 +74,7 @@ public class TextModel: NSObject, ObservableObject {
                             .underlineColor: UIColor.clear],
                            range: NSRange(location: 0, length: text.string.utf16.count))
 
-        let hashtagPattern = "(#+[a-zA-Z0-9(_)]{1,})"
+        let hashtagPattern = "(#+[\\w0-9(_)]{1,})"
         let mentionPattern = "(@+[a-zA-Z0-9(_).-]{1,})"
         let urlPattern = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)"
 

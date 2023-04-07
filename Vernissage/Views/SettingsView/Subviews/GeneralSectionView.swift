@@ -29,6 +29,12 @@ struct GeneralSectionView: View {
         (Theme.dark, "settings.title.dark")
     ]
 
+    private let menuPositions: [(menuPosition: MenuPosition, name: LocalizedStringKey)] = [
+        (MenuPosition.top, "settings.title.topMenu"),
+        (MenuPosition.bottomRight, "settings.title.bottomRightMenu"),
+        (MenuPosition.bottomLeft, "settings.title.bottomLeftMenu")
+    ]
+
     var body: some View {
         Section("settings.title.general") {
 
@@ -63,6 +69,20 @@ struct GeneralSectionView: View {
             .onChange(of: self.applicationState.theme) { theme in
                 self.applicationState.theme = theme
                 ApplicationSettingsHandler.shared.set(theme: theme)
+            }
+
+            // Menu position.
+            Picker(selection: $applicationState.menuPosition) {
+                ForEach(self.menuPositions, id: \.menuPosition) { item in
+                    Text(item.name, comment: "Menu positions")
+                        .tag(item.menuPosition)
+                }
+            } label: {
+                Text("settings.title.menuPosition", comment: "Menu position")
+            }
+            .onChange(of: self.applicationState.menuPosition) { menuPosition in
+                self.applicationState.menuPosition = menuPosition
+                ApplicationSettingsHandler.shared.set(menuPosition: menuPosition)
             }
         }
     }

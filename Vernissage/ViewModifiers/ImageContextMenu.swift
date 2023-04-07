@@ -45,7 +45,7 @@ private struct ImageContextMenu: ViewModifier {
                             await self.favourite()
                         }
                     } label: {
-                        Label("status.title.favourite", systemImage: "hand.thumbsup")
+                        Label("status.title.favourite", systemImage: "star")
                     }
 
                     Button {
@@ -83,7 +83,7 @@ private struct ImageContextMenu: ViewModifier {
     private func favourite() async {
         do {
             _ = try await self.client.statuses?.favourite(statusId: self.id)
-            ToastrService.shared.showSuccess(NSLocalizedString("status.title.favourited", comment: "Favourited"), imageSystemName: "hand.thumbsup.fill")
+            ToastrService.shared.showSuccess(NSLocalizedString("status.title.favourited", comment: "Favourited"), imageSystemName: "star.fill")
         } catch {
             ErrorService.shared.handle(error, message: "status.error.favouriteFailed", showToastr: true)
         }

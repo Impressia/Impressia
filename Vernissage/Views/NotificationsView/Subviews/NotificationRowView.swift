@@ -192,7 +192,7 @@ struct NotificationRowView: View {
         case .reblog:
             return Image("custom.rocket")
         case .favourite:
-            return Image(systemName: "hand.thumbsup")
+            return Image(systemName: "star")
         case .status:
             return Image(systemName: "photo.on.rectangle.angled")
         case .followRequest:

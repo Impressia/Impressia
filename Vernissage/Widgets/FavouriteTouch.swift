@@ -24,7 +24,7 @@ struct FavouriteTouch: View {
                 .foregroundColor(.white.opacity(0.75))
                 .scaleEffect(CGFloat(showCircle))
 
-            Image(systemName: "hand.thumbsup.fill")
+            Image(systemName: "star.fill")
                 .font(.system(size: 26))
                 .foregroundColor(.black.opacity(0.4))
                 .clipShape(Rectangle().offset(y: CGFloat(showThumb)))

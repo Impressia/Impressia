@@ -168,6 +168,16 @@ struct VernissageApp: App {
         self.applicationState.activeIcon = defaultSettings.activeIcon
         self.applicationState.showSensitive = defaultSettings.showSensitive
         self.applicationState.showPhotoDescription = defaultSettings.showPhotoDescription
+
+        if let menuPosition = MenuPosition(rawValue: Int(defaultSettings.menuPosition)) {
+            self.applicationState.menuPosition = menuPosition
+        }
+
+        self.applicationState.hapticTabSelectionEnabled = defaultSettings.hapticTabSelectionEnabled
+        self.applicationState.hapticRefreshEnabled = defaultSettings.hapticRefreshEnabled
+        self.applicationState.hapticButtonPressEnabled = defaultSettings.hapticButtonPressEnabled
+        self.applicationState.hapticAnimationEnabled = defaultSettings.hapticAnimationEnabled
+        self.applicationState.hapticNotificationEnabled = defaultSettings.hapticNotificationEnabled
     }
 
     private func setImagePipelines() {

@@ -2,6 +2,7 @@
 "global.title.contentWarning" = "Wrażliwe treści";
 "global.title.seePost" = "Pokaż zdjęcie";
 "global.title.refresh" = "Odśwież";
+"global.title.momentsAgo" = "chwilę temu";
 
 // MARK: Global errors.
 "global.error.unexpected" = "Wystąpił nieoczekiwany błąd.";
@@ -202,6 +203,12 @@
 "settings.title.privacyPolicy" = "Polityka prywatności";
 "settings.title.terms" = "Zasady i warunki";
 "settings.title.sourceCode" = "Kod źródłowy";
+"settings.title.rate" = "Oceń Vernissage";
+"settings.title.socials" = "Społeczności";
+"settings.title.menuPosition" = "Pozycja menu";
+"settings.title.topMenu" = "Panel tytułowy";
+"settings.title.bottomRightMenu" = "Dolny prawy";
+"settings.title.bottomLeftMenu" = "Dolny lewy";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Zaloguj się do Pixelfed";
@@ -266,8 +273,8 @@
 // Mark: In-app purchases.
 "purchase.donut.title" = "Pączek";
 "purchase.donut.description" = "Poczęstuj mnie pączkiem.";
-"purchase.cofee.title" = "Kawa";
-"purchase.cofee.description" = "Poczęstuj mnie kawą.";
+"purchase.coffee.title" = "Kawa";
+"purchase.coffee.description" = "Poczęstuj mnie kawą.";
 "purchase.cake.title" = "Kawa z ciastkiem";
 "purchase.cake.description" = "Poczęstuj mnie kawą i ciastkiem.";
 

@@ -107,6 +107,12 @@ class ApplicationSettingsHandler {
         CoreDataHandler.shared.save()
     }
 
+    func set(menuPosition: MenuPosition) {
+        let defaultSettings = self.get()
+        defaultSettings.menuPosition = Int32(menuPosition.rawValue)
+        CoreDataHandler.shared.save()
+    }
+
     private func createApplicationSettingsEntity(viewContext: NSManagedObjectContext? = nil) -> ApplicationSettings {
         let context = viewContext ?? CoreDataHandler.shared.container.viewContext
         return ApplicationSettings(context: context)

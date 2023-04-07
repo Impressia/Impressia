@@ -28,6 +28,7 @@ extension ApplicationSettings {
 
     @NSManaged public var showSensitive: Bool
     @NSManaged public var showPhotoDescription: Bool
+    @NSManaged public var menuPosition: Int32
 }
 
 extension ApplicationSettings: Identifiable {

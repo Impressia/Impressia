@@ -46,6 +46,9 @@ struct SettingsView: View {
                     // Other.
                     OtherSectionView()
 
+                    // Socials.
+                    SocialsSectionView()
+
                     // Version.
                     self.version()
                 }

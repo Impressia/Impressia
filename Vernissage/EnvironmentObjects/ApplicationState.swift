@@ -85,6 +85,9 @@ public class ApplicationState: ObservableObject {
     /// Updated user profile.
     @Published var updatedProfile: Account?
 
+    /// Information which menu should be shown (top or bottom).
+    @Published var menuPosition = MenuPosition.top
+
     public func changeApplicationState(accountModel: AccountModel, instance: Instance?, lastSeenStatusId: String?) {
         self.account = accountModel
         self.lastSeenStatusId = lastSeenStatusId

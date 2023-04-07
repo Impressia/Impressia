@@ -196,7 +196,7 @@ struct UserProfileView: View {
                 Divider()
 
                 NavigationLink(value: RouteurDestinations.favourites) {
-                    Label(NSLocalizedString("userProfile.title.favourites", comment: "Favourites"), systemImage: "hand.thumbsup")
+                    Label(NSLocalizedString("userProfile.title.favourites", comment: "Favourites"), systemImage: "star")
                 }
 
                 NavigationLink(value: RouteurDestinations.bookmarks) {
