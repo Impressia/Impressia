@@ -8,6 +8,8 @@ import SwiftUI
 import PixelfedKit
 import ClientKit
 import ServicesKit
+import EnvironmentKit
+import WidgetsKit
 
 struct PlaceSelectorView: View {
     @EnvironmentObject var applicationState: ApplicationState

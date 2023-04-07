@@ -10,6 +10,8 @@ import PixelfedKit
 import ClientKit
 import HTMLString
 import ServicesKit
+import WidgetsKit
+import EnvironmentKit
 
 struct EditProfileView: View {
     @EnvironmentObject private var applicationState: ApplicationState

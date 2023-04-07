@@ -10,6 +10,8 @@ import PixelfedKit
 import ClientKit
 import UIKit
 import ServicesKit
+import EnvironmentKit
+import WidgetsKit
 
 struct ComposeView: View {
     @EnvironmentObject var applicationState: ApplicationState

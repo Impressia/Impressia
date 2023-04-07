@@ -6,6 +6,7 @@
 
 import SwiftUI
 import WidgetKit
+import EnvironmentKit
 
 struct MediumWidgetView: View {
     var entry: Provider.Entry

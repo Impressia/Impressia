@@ -8,6 +8,8 @@ import SwiftUI
 import PixelfedKit
 import ClientKit
 import ServicesKit
+import WidgetsKit
+import EnvironmentKit
 
 struct UserProfileHeaderView: View {
     @EnvironmentObject private var applicationState: ApplicationState
@@ -23,11 +25,11 @@ struct UserProfileHeaderView: View {
                 Spacer()
 
                 if self.relationship.muting == true {
-                    TagWidget(value: "Muted", color: .accentColor, systemImage: "message.and.waveform.fill")
+                    TagWidget(value: "userProfile.title.muted", color: .accentColor, systemImage: "message.and.waveform.fill")
                 }
 
                 if self.relationship.blocking == true {
-                    TagWidget(value: "Blocked", color: .dangerColor, systemImage: "hand.raised.fill")
+                    TagWidget(value: "userProfile.title.blocked", color: .dangerColor, systemImage: "hand.raised.fill")
                 }
             }
 

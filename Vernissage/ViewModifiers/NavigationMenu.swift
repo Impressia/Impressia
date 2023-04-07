@@ -6,6 +6,7 @@
 
 import Foundation
 import SwiftUI
+import EnvironmentKit
 
 public extension View {
     func navigationMenu<MenuItems>(menuPosition: Binding<MenuPosition>,

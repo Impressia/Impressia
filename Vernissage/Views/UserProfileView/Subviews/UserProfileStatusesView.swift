@@ -8,6 +8,8 @@ import SwiftUI
 import PixelfedKit
 import ClientKit
 import ServicesKit
+import EnvironmentKit
+import WidgetsKit
 
 struct UserProfileStatusesView: View {
     @EnvironmentObject private var applicationState: ApplicationState

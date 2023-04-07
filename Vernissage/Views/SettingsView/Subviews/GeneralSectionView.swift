@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import EnvironmentKit
 
 struct GeneralSectionView: View {
     @EnvironmentObject var applicationState: ApplicationState

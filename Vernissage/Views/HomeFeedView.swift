@@ -6,6 +6,8 @@
 
 import SwiftUI
 import ServicesKit
+import EnvironmentKit
+import WidgetsKit
 
 struct HomeFeedView: View {
     @Environment(\.managedObjectContext) private var viewContext

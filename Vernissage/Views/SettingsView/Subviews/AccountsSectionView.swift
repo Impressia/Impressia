@@ -6,6 +6,8 @@
 
 import SwiftUI
 import ClientKit
+import EnvironmentKit
+import WidgetsKit
 
 struct AccountsSectionView: View {
     @EnvironmentObject var applicationState: ApplicationState

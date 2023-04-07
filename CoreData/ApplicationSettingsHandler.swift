@@ -6,6 +6,7 @@
 
 import Foundation
 import CoreData
+import EnvironmentKit
 
 class ApplicationSettingsHandler {
     public static let shared = ApplicationSettingsHandler()

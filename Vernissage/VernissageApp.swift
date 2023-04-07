@@ -8,6 +8,7 @@ import SwiftUI
 import Nuke
 import NukeUI
 import ClientKit
+import EnvironmentKit
 
 @main
 struct VernissageApp: App {

@@ -9,6 +9,8 @@ import PixelfedKit
 import ClientKit
 import Foundation
 import ServicesKit
+import EnvironmentKit
+import WidgetsKit
 
 struct AccountsPhotoView: View {
     public enum ListType: Hashable {

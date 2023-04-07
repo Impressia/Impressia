@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import EnvironmentKit
 
 struct MediaSettingsView: View {
     @EnvironmentObject var applicationState: ApplicationState

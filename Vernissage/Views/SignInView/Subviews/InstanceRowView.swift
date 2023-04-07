@@ -7,6 +7,8 @@
 import SwiftUI
 import PixelfedKit
 import NukeUI
+import ServicesKit
+import WidgetsKit
 
 struct InstanceRowView: View {
     @EnvironmentObject var routerPath: RouterPath

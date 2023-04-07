@@ -9,6 +9,8 @@ import PixelfedKit
 import Drops
 import ClientKit
 import ServicesKit
+import EnvironmentKit
+import WidgetsKit
 
 struct InteractionRow: View {
     typealias DeleteAction = () -> Void

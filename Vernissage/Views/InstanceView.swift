@@ -9,6 +9,8 @@ import Foundation
 import PixelfedKit
 import ClientKit
 import ServicesKit
+import EnvironmentKit
+import WidgetsKit
 
 struct InstanceView: View {
     @EnvironmentObject private var applicationState: ApplicationState

@@ -110,6 +110,8 @@
 "userProfile.error.block" = "Błąd podczas blokowania/odblokowywania użytkownika.";
 "userProfile.error.relationship" = "Błąd podczas zmiany relacji z użytkownikiem.";
 "userProfile.title.edit" = "Edytuj";
+"userProfile.title.muted" = "Wyciszony";
+"userProfile.title.blocked" = "Zablokowany";
 
 // Mark: Notifications view.
 "notifications.navigationBar.title" = "Powiadomienia";

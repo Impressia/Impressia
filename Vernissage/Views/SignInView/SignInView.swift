@@ -9,6 +9,8 @@ import PixelfedKit
 import ClientKit
 import AuthenticationServices
 import ServicesKit
+import EnvironmentKit
+import WidgetsKit
 
 struct SignInView: View {
     @Environment(\.managedObjectContext) private var viewContext
