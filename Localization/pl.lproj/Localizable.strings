@@ -2,6 +2,7 @@
 "global.title.contentWarning" = "Wrażliwe treści";
 "global.title.seePost" = "Pokaż zdjęcie";
 "global.title.refresh" = "Odśwież";
+"global.title.momentsAgo" = "chwilę temu";
 
 // MARK: Global errors.
 "global.error.unexpected" = "Wystąpił nieoczekiwany błąd.";

@@ -2,6 +2,7 @@
 "global.title.contentWarning" = "Sensitive content";
 "global.title.seePost" = "See post";
 "global.title.refresh" = "Refresh";
+"global.title.momentsAgo" = "moments ago";
 
 // MARK: Global errors.
 "global.error.unexpected" = "Unexpected error.";

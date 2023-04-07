@@ -103,9 +103,15 @@ extension String {
     }
 
     func toRelative(_ format: DateFormatType = .isoDate) -> String {
-        let formatter = RelativeDateTimeFormatter()
-        let date = self.toDate(format) ?? Date()
+        guard let date = self.toDate(format) else {
+            return NSLocalizedString("global.title.momentsAgo", comment: "moments ago")
+        }
 
+        if date.addingTimeInterval(60) > Date.now {
+            return NSLocalizedString("global.title.momentsAgo", comment: "moments ago")
+        }
+
+        let formatter = RelativeDateTimeFormatter()
         return formatter.localizedString(for: date, relativeTo: Date.now)
     }
 }
