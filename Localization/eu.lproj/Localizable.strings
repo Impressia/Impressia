@@ -6,15 +6,15 @@
 // MARK: Global errors.
 "global.error.unexpected" = "Espero ez zen errorea.";
 "global.error.statusesNotRetrieved" = "Ez dira egoerak eskuratu.";
-"global.error.errorDuringDownloadStatuses" = "Errorea egoerak zerbitzaritik eskuratzean.";
-"global.error.errorDuringDownloadHashtag" = "Errorea traolak zerbitzaritik eskuratzean.";
-"global.error.hashtagNotExists" = "Traola ez da existitzen.";
+"global.error.errorDuringDownloadStatuses" = "Errorea zerbitzaritik egoerak eskuratzean.";
+"global.error.errorDuringDownloadHashtag" = "Errorea zerbitzaritik traolak eskuratzean.";
+"global.error.hashtagNotExists" = "Traola ez da lehendik existitzen.";
 "global.error.errorDuringImageDownload" = "Ezin da irudia eskuratu.";
-"global.error.canceledImageDownload" = "Download image has been canceled.";
+"global.error.canceledImageDownload" = "Irudiaren deskarga bertan behera utzi da.";
 "global.error.errorDuringDataLoad" = "Datuen kargak huts egin du.";
 "global.error.errorDuringUserRead" = "Ezin izan da erabiltzailearen kontua eskuratu.";
 "global.error.badUrlServer" = "Zerbitzariaren URL okerra.";
-"global.error.accessTokenNotFound" = "Access token not found.";
+"global.error.accessTokenNotFound" = "Ez da sarbide-tokena aurkitu.";
 "global.error.errorDuringDownloadStatus" = "Errorea zerbitzaritik egoera eskuratzean.";
 "global.error.errorDuringPurchaseVerification" = "Erosketaren egiaztaketak huts egin du.";
 
@@ -34,18 +34,18 @@
 "mainview.menu.settings" = "Ezarpenak";
 
 // MARK: Main view (error notifications).
-"mainview.error.switchAccounts" = "Ezin da kontuak aldatu.";
+"mainview.error.switchAccounts" = "Ezin da kontua aldatu.";
 
 // MARK: Home timeline.
 "home.title.allCaughtUp" = "Egunean zaude";
-"home.title.noPhotos" = "Zoritxarrez, hemen ez dago argazkirik.";
+"home.title.noPhotos" = "Argazkirik ez.";
 
 // MARK: Statuses timeline (local/federated/favourite/bookmarks etc.).
 "statuses.navigationBar.localTimeline" = "Lokala";
 "statuses.navigationBar.federatedTimeline" = "Federatua";
 "statuses.navigationBar.favourites" = "Gogokoak";
 "statuses.navigationBar.bookmarks" = "Laster-markak";
-"statuses.title.noPhotos" = "Zoritxarrez, hemen ez dago argazkirik.";
+"statuses.title.noPhotos" = "Argazkirik ez.";
 "statuses.title.tagFollowed" = "Traolari jarraitzen diozu.";
 "statuses.title.tagUnfollowed" = "Traola jarraitzeari utzi diozu.";
 "statuses.error.loadingStatusesFailed" = "Egoerak kargatzeak huts egin du.";
@@ -66,17 +66,17 @@
 "trendingStatuses.title.monthly" = "Hilabetekoak";
 "trendingStatuses.title.yearly" = "Urtekoak";
 "trendingStatuses.error.loadingStatusesFailed" = "Egoerak kargatzeak huts egin du.";
-"trendingStatuses.title.noPhotos" = "Zoritxarrez, hemen ez dago argazkirik.";
+"trendingStatuses.title.noPhotos" = "Argazkirik ez.";
 
 // Mark: Trending tags.
 "trendingTags.navigationBar.title" = "Traolak";
-"trendingTags.title.noTags" = "Zoritxarrez, hemen ez dago traolarik.";
+"trendingTags.title.noTags" = "Traolarik ez.";
 "trendingTags.title.amountOfPosts" = "%d bidalketa";
 "trendingTags.error.loadingTagsFailed" = "Traolak kargatzeak huts egin du.";
 
 // Mark: Trending accounts.
 "trendingAccounts.navigationBar.title" = "Kontuak";
-"trendingAccounts.title.noAccounts" = "Zoritxarrez, hemen ez dago inor.";
+"trendingAccounts.title.noAccounts" = "Inor ez.";
 "trendingAccounts.error.loadingAccountsFailed" = "Kontuak kargatzeak huts egin du.";
 
 // Mark: User profile view.
@@ -88,48 +88,48 @@
 "userProfile.title.block" = "Blokeatu";
 "userProfile.title.favourites" = "Gogokoak";
 "userProfile.title.bookmarks" = "Laster-markak";
-"userProfile.title.posts" = "Bidalketak";
-"userProfile.title.followers" = "Jarraitzaileak";
+"userProfile.title.posts" = "Bidalketa";
+"userProfile.title.followers" = "Jarraitzaile";
 "userProfile.title.following" = "Jarraitzen";
-"userProfile.title.joined" = "%@-ra batu da";
+"userProfile.title.joined" = "%@ egin zuen bat";
 "userProfile.title.unfollow" = "Utzi jarraitzeari";
 "userProfile.title.followBack" = "Jarraitu bera ere";
 "userProfile.title.follow" = "Jarraitu";
 "userProfile.title.instance" = "Instantziari buruzko informazioa";
 "userProfile.title.blocks" = "Blokeatutako kontuak";
 "userProfile.title.mutes" = "Mutututako kontuak";
-"userProfile.title.muted" = "Mutututako kontua";
-"userProfile.title.unmuted" = "Mututzeari utzitako kontua";
-"userProfile.title.blocked" = "Blokeatutako kontua";
-"userProfile.title.unblocked" = "Blokeatzeari utzitako kontua";
+"userProfile.title.muted" = "Kontua mututu da";
+"userProfile.title.unmuted" = "Kontua mututzeari utzi zaio";
+"userProfile.title.blocked" = "Kontua blokeatu da";
+"userProfile.title.unblocked" = "Kontua blokeatzeari utzi zaio";
 "userProfile.title.report" = "Salatu";
 "userProfile.error.notExists" = "Kontua ez da existitzen.";
 "userProfile.error.loadingAccountFailed" = "Errorea zerbitzaritik kontua eskuratzean.";
 "userProfile.error.muting" = "Mututu/Mututzeari uzteak huts egin du.";
 "userProfile.error.block" = "Blokeatu/Blokeatzeari uzteak huts egin du.";
-"userProfile.error.relationship" = "Relationship action failed.";
+"userProfile.error.relationship" = "Harreman ekintzak huts egin du.";
 "userProfile.title.edit" = "Editatu";
 
 // Mark: Notifications view.
 "notifications.navigationBar.title" = "Jakinarazpenak";
-"notifications.title.noNotifications" = "Zoritxarrez, hemen ez dago ezer.";
-"notifications.title.followedYou" = "(e)k jarraitu dizu";
-"notifications.title.mentionedYou" = "(e)k aipatu zaitu";
-"notifications.title.boosted" = "(e)k bultzatu du";
-"notifications.title.favourited" = "(e)k gogoko du";
-"notifications.title.postedStatus" = "(e)k argitaratu du";
-"notifications.title.followRequest" = "follow request";
+"notifications.title.noNotifications" = "Ez dago jakinarazpenik.";
+"notifications.title.followedYou" = "jarraitu dizu";
+"notifications.title.mentionedYou" = "aipatu zaitu";
+"notifications.title.boosted" = "bultzatu du";
+"notifications.title.favourited" = "gogoko du";
+"notifications.title.postedStatus" = "argitaratu du";
+"notifications.title.followRequest" = "jarraipen-eskaera bidali dizu";
 "notifications.title.poll" = "bozketa";
-"notifications.title.updatedStatus" = "(e)k egoera eguneratu du";
-"notifications.title.signedUp" = "(e)k izena eman du";
+"notifications.title.updatedStatus" = "egoera eguneratu du";
+"notifications.title.signedUp" = "izena eman du";
 "notifications.title.newReport" = "txosten berria";
 "notifications.error.loadingNotificationsFailed" = "Jakinarazpenak kargatzeak huts egin du.";
 
 // Mark: Compose view.
 "compose.navigationBar.title" = "Idatzi";
-"compose.title.everyone" = "Edonork";
-"compose.title.unlisted" = "Zerrendatu gabe";
-"compose.title.followers" = "Jarraitzaileak";
+"compose.title.everyone" = "Edonorentzat ikusgai";
+"compose.title.unlisted" = "Zerrendatu gabea";
+"compose.title.followers" = "Jarraitzaileentzat ikusgai";
 "compose.title.attachPhotoFull" = "Erantsi argazkia eta idatzi buruan duzuna";
 "compose.title.attachPhotoMini" = "Idatzi buruan duzuna";
 "compose.title.publish" = "Argitaratu";
@@ -165,8 +165,8 @@
 "settings.title.close" = "Itxi";
 "settings.title.version" = "Bertsioa";
 "settings.title.accounts" = "Kontuak";
-"settings.title.newAccount" = "Kontu berria";
-"settings.title.accent" = "Kolorea";
+"settings.title.newAccount" = "Gehitu kontu";
+"settings.title.accent" = "Kolore nagusia";
 "settings.title.theme" = "Gaia";
 "settings.title.system" = "Sistemak darabilena";
 "settings.title.light" = "Argia";
@@ -174,25 +174,25 @@
 "settings.title.avatar" = "Abatarra";
 "settings.title.circle" = "Biribila";
 "settings.title.rounderRectangle" = "Biribildutako ertzak";
-"settings.title.other" = "Bestea";
+"settings.title.other" = "Beste batzuk";
 "settings.title.thirdParty" = "Hirugarrenak";
 "settings.title.reportBug" = "Eman errore baten berri";
 "settings.title.githubIssues" = "Erroreak Github-en";
 "settings.title.follow" = "Jarrai nazazu";
-"settings.title.support" = "Babestu";
+"settings.title.support" = "Eman babesa";
 "settings.title.thankYouTitle" = "Eskerrik asko 💕";
 "settings.title.thankYouMessage" = "Mila esker erosketagatik. Erosketa handi eta txikiek gure bezeroei kalitatezko produkturik onenak eskaintzeko ametsari eusten laguntzen digute. Espero dugu Vernissage gustuko izatea.";
 "settings.title.thankYouClose" = "Itxi";
-"settings.title.haptics" = "Haptikoak";
+"settings.title.haptics" = "Hobespen haptikoak";
 "settings.title.hapticsTabSelection" = "Fitxak hautatzean";
 "settings.title.hapticsButtonPress" = "Botoietan tap egitean";
 "settings.title.hapticsListRefresh" = "Zerrendak freskatzean";
 "settings.title.hapticsAnimationFinished" = "Animazioak amaitzean";
-"settings.title.mediaSettings" = "Multimedia ezarpenak";
-"settings.title.alwaysShowSensitiveTitle" = "Erakutsi beti NSFW (Lanerako Egokia Izan Ez Daitekeen Edukia)";
-"settings.title.alwaysShowSensitiveDescription" = "Erakutsi NSFW multimedia (hunkigarria) ohartarazpenik gabe";
+"settings.title.mediaSettings" = "Multimedia hobespenak";
+"settings.title.alwaysShowSensitiveTitle" = "Erakutsi beti NSFW edukia";
+"settings.title.alwaysShowSensitiveDescription" = "Erakutsi NSFW (Lanerako Egokia Izan Ez Daitekeen Edukia) gisa markatutako multimedia edukia ohartarazpenik gabe";
 "settings.title.alwaysShowAltTitle" = "Erakutsi testu alternatiboa";
-"settings.title.alwaysShowAltDescription" = "Erakutsi testu alternatiboa baldin badago egoeraren xehetasunen pantailan";
+"settings.title.alwaysShowAltDescription" = "Erakutsi testu alternatiboa xehetasunen pantailan, baldin badago";
 "settings.title.general" = "Orokorra";
 "settings.title.applicationIcon" = "Aplikazioaren ikonoa";
 "settings.title.followVernissage" = "Jarraitu Vernissage-ri";
@@ -215,17 +215,17 @@
 "signin.title.signIn" = "Hasi saioa";
 "signin.title.enterServerAddress" = "Sartu zerbitzariaren helbidea";
 "signin.title.howToJoinLink" = "Nola batu Pixelfed-era";
-"signin.title.chooseServer" = "Edo aukeratu Pixelfez zerbitzaria";
+"signin.title.chooseServer" = "Edo aukeratu Pixelfed zerbitzaria";
 "signin.title.amountOfUsers" = "%d erabiltzaile";
 "signin.title.amountOStatuses" = "%d egoera";
 "signin.error.communicationFailed" = "Zerbitzariarekin komunikazioak huts egin du.";
 
 // Mark: Status view.
 "status.navigationBar.title" = "Xehetasunak";
-"status.title.uploaded" = "";
+"status.title.uploaded" = ">";
 "status.title.via" = "%@ bidez";
-"status.title.reboostedBy" = "Hauek bultzatu dute";
-"status.title.favouritedBy" = "Hauek egin dute gogoko";
+"status.title.reboostedBy" = "Bultzatu dutenak";
+"status.title.favouritedBy" = "Gogoko egin dutenak";
 "status.title.openInBrowser" = "Ireki nabigatzailean";
 "status.title.shareStatus" = "Partekatu egoera";
 "status.title.yourStatus" = "Zure egoera";
@@ -260,7 +260,7 @@
 "accounts.navigationBar.reboostedBy" = "Honek bultzatua";
 "accounts.navigationBar.blocked" = "Blokeatutako kontuak";
 "accounts.navigationBar.mutes" = "Mutututako kontuak";
-"accounts.title.noAccounts" = "Zoritxarrez, hemen ez dago inor.";
+"accounts.title.noAccounts" = "Inor ez.";
 "accounts.error.loadingAccountsFailed" = "Kontuak kargatzeak huts egin du.";
 
 // Mark: Third party view.
