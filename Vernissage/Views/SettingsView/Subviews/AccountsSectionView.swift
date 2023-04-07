@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import ClientKit
 
 struct AccountsSectionView: View {
     @EnvironmentObject var applicationState: ApplicationState
@@ -41,7 +42,7 @@ struct AccountsSectionView: View {
         }
         .onAppear {
             self.dbAccounts = AccountDataHandler.shared.getAccountsData()
-            self.accounts = self.dbAccounts.map({ AccountModel(accountData: $0) })
+            self.accounts = self.dbAccounts.map({ $0.toAccountModel() })
         }
     }
 

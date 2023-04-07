@@ -6,6 +6,7 @@
 
 import SwiftUI
 import PixelfedKit
+import ClientKit
 
 struct NotificationsView: View {
     @EnvironmentObject var applicationState: ApplicationState

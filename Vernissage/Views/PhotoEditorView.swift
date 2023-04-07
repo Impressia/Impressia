@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import ClientKit
 
 struct PhotoEditorView: View {
     @EnvironmentObject var client: Client

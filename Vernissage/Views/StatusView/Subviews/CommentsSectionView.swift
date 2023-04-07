@@ -6,6 +6,7 @@
 
 import SwiftUI
 import PixelfedKit
+import ClientKit
 
 struct CommentsSectionView: View {
     @Environment(\.colorScheme) var colorScheme

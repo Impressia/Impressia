@@ -6,6 +6,7 @@
 
 import SwiftUI
 import PixelfedKit
+import ClientKit
 
 struct PaginableStatusesView: View {
     public enum ListType: Hashable {

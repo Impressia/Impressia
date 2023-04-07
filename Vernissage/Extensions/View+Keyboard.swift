@@ -7,6 +7,7 @@
 import SwiftUI
 import Combine
 
+// TODO: Move to shared views.
 extension View {
     var keyboardPublisher: AnyPublisher<Bool, Never> {
         Publishers

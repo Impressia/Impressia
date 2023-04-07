@@ -7,6 +7,7 @@
 import Foundation
 import SwiftUI
 import PixelfedKit
+import ClientKit
 
 @MainActor
 public class TextModel: NSObject, ObservableObject {
@@ -69,7 +70,7 @@ public class TextModel: NSObject, ObservableObject {
         guard markedTextRange == nil else { return }
 
         text.addAttributes([.foregroundColor: UIColor(Color.label),
-                            .font: UIFont.preferredFont(from: .body),
+                            .font: UIFont.preferredFont(forTextStyle: .body),
                             .backgroundColor: UIColor.clear,
                             .underlineColor: UIColor.clear],
                            range: NSRange(location: 0, length: text.string.utf16.count))
@@ -128,7 +129,8 @@ public class TextModel: NSObject, ObservableObject {
                 }
             }
         } catch {
-            ErrorService.shared.handle(error, message: "Error during composing attribute string.")
+            // TODO: Prepare something for common error.
+            // ErrorService.shared.handle(error, message: "Error during composing attribute string.")
         }
     }
 
@@ -155,7 +157,8 @@ public class TextModel: NSObject, ObservableObject {
                     break
                 }
             } catch {
-                ErrorService.shared.handle(error, message: "Error during downloading autocomplete.")
+                // TODO: Prepare something for common error.
+                // ErrorService.shared.handle(error, message: "Error during downloading autocomplete.")
             }
         }
     }

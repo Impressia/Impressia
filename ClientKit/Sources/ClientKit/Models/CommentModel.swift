@@ -7,8 +7,13 @@
 import Foundation
 
 public struct CommentModel {
-    var status: StatusModel
-    var showDivider: Bool
+    public var status: StatusModel
+    public var showDivider: Bool
+
+    public init(status: StatusModel, showDivider: Bool) {
+        self.status = status
+        self.showDivider = showDivider
+    }
 }
 
 extension CommentModel: Equatable {

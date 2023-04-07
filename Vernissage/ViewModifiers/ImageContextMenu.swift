@@ -6,6 +6,7 @@
 
 import Foundation
 import SwiftUI
+import ClientKit
 
 public extension View {
     func imageContextMenu(client: Client, statusModel: StatusModel) -> some View {

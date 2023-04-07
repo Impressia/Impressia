@@ -130,7 +130,7 @@ extension TextView.Representable {
 
             textView.delegate = self
 
-            textView.font = UIFont.preferredFont(from: .body)
+            textView.font = UIFont.preferredFont(forTextStyle: .body)
             textView.adjustsFontForContentSizeCategory = true
             textView.autocapitalizationType = .sentences
             textView.autocorrectionType = .yes

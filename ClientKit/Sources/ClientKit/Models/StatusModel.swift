@@ -41,7 +41,7 @@ public class StatusModel: ObservableObject {
 
     @Published public var mediaAttachments: [AttachmentModel]
 
-    init(status: Status) {
+    public init(status: Status) {
 
         // If status has been rebloged we are saving orginal status here.
         let orginalStatus = status.reblog ?? status

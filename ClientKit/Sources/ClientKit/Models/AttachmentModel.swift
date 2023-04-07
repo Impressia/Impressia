@@ -27,21 +27,21 @@ public class AttachmentModel: ObservableObject, Identifiable {
     @Published public var exifLens: String?
     @Published public var data: Data?
 
-    init(id: String,
-         type: MediaAttachment.MediaAttachmentType,
-         url: URL,
-         previewUrl: URL? = nil,
-         remoteUrl: URL? = nil,
-         description: String? = nil,
-         blurhash: String? = nil,
-         meta: Metadata? = nil,
-         exifCamera: String? = nil,
-         exifCreatedDate: String? = nil,
-         exifExposure: String? = nil,
-         exifLens: String? = nil,
-         metaImageWidth: Int32? = nil,
-         metaImageHeight: Int32? = nil,
-         data: Data? = nil
+    public init(id: String,
+                type: MediaAttachment.MediaAttachmentType,
+                url: URL,
+                previewUrl: URL? = nil,
+                remoteUrl: URL? = nil,
+                description: String? = nil,
+                blurhash: String? = nil,
+                meta: Metadata? = nil,
+                exifCamera: String? = nil,
+                exifCreatedDate: String? = nil,
+                exifExposure: String? = nil,
+                exifLens: String? = nil,
+                metaImageWidth: Int32? = nil,
+                metaImageHeight: Int32? = nil,
+                data: Data? = nil
     ) {
         self.id = id
         self.type = type
@@ -118,7 +118,7 @@ public class AttachmentModel: ObservableObject, Identifiable {
 }
 
 extension [AttachmentModel] {
-    func getHighestImage() -> AttachmentModel? {
+    public func getHighestImage() -> AttachmentModel? {
         var attachment = self.first
         var imgHeight = 0.0
 

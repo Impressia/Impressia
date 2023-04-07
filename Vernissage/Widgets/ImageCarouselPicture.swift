@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import ClientKit
 
 struct ImageCarouselPicture: View {
     @ObservedObject public var attachment: AttachmentModel

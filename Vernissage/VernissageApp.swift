@@ -7,6 +7,7 @@
 import SwiftUI
 import Nuke
 import NukeUI
+import ClientKit
 
 @main
 struct VernissageApp: App {
@@ -112,7 +113,7 @@ struct VernissageApp: App {
         }
 
         // Create model based on core data entity.
-        let accountModel = AccountModel(accountData: currentAccount)
+        let accountModel = currentAccount.toAccountModel()
 
         // Verify access token correctness.
         let authorizationSession = AuthorizationSession()

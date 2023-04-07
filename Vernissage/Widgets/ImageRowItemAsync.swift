@@ -6,6 +6,7 @@
 
 import SwiftUI
 import PixelfedKit
+import ClientKit
 import NukeUI
 
 struct ImageRowItemAsync: View {

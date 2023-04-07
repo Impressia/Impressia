@@ -7,6 +7,7 @@
 import SwiftUI
 import Foundation
 import PixelfedKit
+import ClientKit
 
 enum RouteurDestinations: Hashable {
     case tag(hashTag: String)

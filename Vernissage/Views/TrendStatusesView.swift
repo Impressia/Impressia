@@ -6,6 +6,7 @@
 
 import SwiftUI
 import PixelfedKit
+import ClientKit
 
 struct TrendStatusesView: View {
     @EnvironmentObject private var applicationState: ApplicationState

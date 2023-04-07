@@ -13,7 +13,7 @@ public class Client: ObservableObject {
 
     private var pixelfedClient: PixelfedClientAuthenticated?
 
-    func setAccount(account: AccountModel) {
+    public func setAccount(account: AccountModel) {
         guard let accessToken = account.accessToken else {
             return
         }
@@ -21,7 +21,7 @@ public class Client: ObservableObject {
         self.pixelfedClient = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
     }
 
-    func clearAccount() {
+    public func clearAccount() {
         self.pixelfedClient = nil
     }
 }

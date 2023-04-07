@@ -6,7 +6,7 @@
 
 import Foundation
 
-extension String {
+public extension String {
     func calculateExifNumber() -> String? {
         guard self.contains("/") else {
             return self

@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import ClientKit
 
 struct ImageViewer: View {
     @Environment(\.dismiss) private var dismiss

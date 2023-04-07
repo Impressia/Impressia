@@ -14,47 +14,47 @@ extension Client {
             return try await pixelfedClient.status(statusId: statusId)
         }
 
-        func favourite(statusId: String) async throws -> Status? {
+        public func favourite(statusId: String) async throws -> Status? {
             return try await pixelfedClient.favourite(statusId: statusId)
         }
 
-        func unfavourite(statusId: String) async throws -> Status? {
+        public func unfavourite(statusId: String) async throws -> Status? {
             return try await pixelfedClient.unfavourite(statusId: statusId)
         }
 
-        func pin(statusId: String) async throws -> Status? {
+        public func pin(statusId: String) async throws -> Status? {
             return try await pixelfedClient.pin(statusId: statusId)
         }
 
-        func unpin(statusId: String) async throws -> Status? {
+        public func unpin(statusId: String) async throws -> Status? {
             return try await pixelfedClient.unpin(statusId: statusId)
         }
 
-        func boost(statusId: String) async throws -> Status? {
+        public func boost(statusId: String) async throws -> Status? {
             return try await pixelfedClient.boost(statusId: statusId)
         }
 
-        func unboost(statusId: String) async throws -> Status? {
+        public func unboost(statusId: String) async throws -> Status? {
             return try await pixelfedClient.unboost(statusId: statusId)
         }
 
-        func bookmark(statusId: String) async throws -> Status? {
+        public func bookmark(statusId: String) async throws -> Status? {
             return try await pixelfedClient.bookmark(statusId: statusId)
         }
 
-        func unbookmark(statusId: String) async throws -> Status? {
+        public func unbookmark(statusId: String) async throws -> Status? {
             return try await pixelfedClient.unbookmark(statusId: statusId)
         }
 
-        func new(status: Pixelfed.Statuses.Components) async throws -> Status? {
+        public func new(status: Pixelfed.Statuses.Components) async throws -> Status? {
             return try await pixelfedClient.new(statusComponents: status)
         }
 
-        func delete(statusId: String) async throws {
+        public func delete(statusId: String) async throws {
             try await pixelfedClient.delete(statusId: statusId)
         }
 
-        func comments(to statusId: String) async throws -> [CommentModel] {
+        public func comments(to statusId: String) async throws -> [CommentModel] {
             var commentViewModels: [CommentModel] = []
 
             try await self.getCommentDescendants(to: statusId, showDivider: true, to: &commentViewModels)

@@ -6,6 +6,7 @@
 
 import SwiftUI
 import PixelfedKit
+import ClientKit
 
 struct UserProfileStatusesView: View {
     @EnvironmentObject private var applicationState: ApplicationState

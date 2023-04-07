@@ -7,6 +7,7 @@
 import SwiftUI
 import PhotosUI
 import PixelfedKit
+import ClientKit
 import UIKit
 
 struct ComposeView: View {

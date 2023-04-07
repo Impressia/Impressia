@@ -9,7 +9,7 @@ import PixelfedKit
 
 extension Client {
     public class Instances {
-        func instances(instanceUrls: [String]) async -> [Instance] {
+        public func instances(instanceUrls: [String]) async -> [Instance] {
             var instances: [Instance] = []
 
             // Now we have to download information about each instance.
@@ -24,7 +24,7 @@ extension Client {
 
                             return nil
                         } catch {
-                            ErrorService.shared.handle(error, message: "Cannot download instance information: \(url.string)")
+                            print("Error [Cannot download instance information: \(url.string)]: \(error.localizedDescription)")
                             return nil
                         }
                     }
@@ -40,7 +40,7 @@ extension Client {
             return instances
         }
 
-        func instance(url: URL) async throws -> Instance {
+        public func instance(url: URL) async throws -> Instance {
             let client = PixelfedClient(baseURL: url)
             return try await client.readInstanceInformation()
         }

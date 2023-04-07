@@ -6,6 +6,7 @@
 
 import SwiftUI
 import PixelfedKit
+import ClientKit
 
 struct StatusesView: View {
     public enum ListType: Hashable {

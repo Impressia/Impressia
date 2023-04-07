@@ -6,6 +6,11 @@
 
 import Foundation
 import SwiftUI
+import PhotosUI
+import PixelfedKit
+import ClientKit
+
+// TODO: Move colors extenstions to shared.
 
 struct ComposeView: View {
     var body: some View {
@@ -19,60 +24,51 @@ struct ComposeView: View {
     }
 }
 
-//public class PhotoAttachment: ObservableObject, Identifiable, Equatable, Hashable {
-//    public let id: String
-//    public let photosPickerItem: PhotosPickerItem
-//
-//    @Published public var photoData: Data?
-//    @Published public var uploadedAttachment: UploadedAttachment?
-//    @Published public var error: Error?
-//
-//    init(photosPickerItem: PhotosPickerItem) {
-//        self.id = UUID().uuidString
-//        self.photosPickerItem = photosPickerItem
-//    }
-//
-//    public static func == (lhs: PhotoAttachment, rhs: PhotoAttachment) -> Bool {
-//        lhs.id == rhs.id
-//    }
-//
-//    public func hash(into hasher: inout Hasher) {
-//        return hasher.combine(self.id)
-//    }
-//}
-//
-//extension [PhotoAttachment] {
-//    public func hasUploadedPhotos() -> Bool {
-//        return self.contains { photoAttachment in
-//            photoAttachment.uploadedAttachment != nil
-//        }
-//    }
-//
-//    public func getUploadedPhotoIds() -> [String] {
-//        var ids: [String] = []
-//
-//        for item in self {
-//            if let uploadedAttachment = item.uploadedAttachment {
-//                ids.append(uploadedAttachment.id)
-//            }
-//        }
-//
-//        return ids
-//    }
-//}
+public class PhotoAttachment: ObservableObject, Identifiable, Equatable, Hashable {
+    public let id: String
+    public let photosPickerItem: PhotosPickerItem
 
-//
-//  https://mczachurski.dev
-//  Copyright © 2023 Marcin Czachurski and the repository contributors.
-//  Licensed under the Apache License 2.0.
-//
+    @Published public var photoData: Data?
+    @Published public var uploadedAttachment: UploadedAttachment?
+    @Published public var error: Error?
+
+    init(photosPickerItem: PhotosPickerItem) {
+        self.id = UUID().uuidString
+        self.photosPickerItem = photosPickerItem
+    }
+
+    public static func == (lhs: PhotoAttachment, rhs: PhotoAttachment) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        return hasher.combine(self.id)
+    }
+}
+
+extension [PhotoAttachment] {
+    public func hasUploadedPhotos() -> Bool {
+        return self.contains { photoAttachment in
+            photoAttachment.uploadedAttachment != nil
+        }
+    }
+
+    public func getUploadedPhotoIds() -> [String] {
+        var ids: [String] = []
+
+        for item in self {
+            if let uploadedAttachment = item.uploadedAttachment {
+                ids.append(uploadedAttachment.id)
+            }
+        }
+
+        return ids
+    }
+}
+
 /*
-import SwiftUI
-import PhotosUI
-import PixelfedKit
-import UIKit
-
 struct ComposeView: View {
+    @EnvironmentObject var client: Client
 
     @StateObject private var textModel: TextModel
 
@@ -175,10 +171,12 @@ struct ComposeView: View {
                     switch sheetType {
                     case .photoDetails(let photoAttachment):
                         // TODO: Move to common views?
-                        PhotoEditorView(photoAttachment: photoAttachment)
+                        // PhotoEditorView(photoAttachment: photoAttachment)
+                        EmptyView()
                     case .placeSelector:
                         // TODO: Move to common views?
-                        PlaceSelectorView(place: $place)
+                        // PlaceSelectorView(place: $place)
+                        EmptyView()
                     }
                 })
                 .onReceive(keyboardPublisher) { value in
@@ -188,13 +186,11 @@ struct ComposeView: View {
                 }
                 .photosPicker(isPresented: $photosPickerVisible,
                               selection: $selectedItems,
-                              maxSelectionCount: self.applicationState.statusMaxMediaAttachments,
+                              maxSelectionCount: 4,
                               matching: .images)
                 .navigationTitle("compose.navigationBar.title")
                 .navigationBarTitleDisplayMode(.inline)
             }
-            .withAppRouteur()
-            .withOverlayDestinations(overlayDestinations: $routerPath.presentedOverlay)
         }
         .interactiveDismissDisabled(self.interactiveDismissDisabled)
     }

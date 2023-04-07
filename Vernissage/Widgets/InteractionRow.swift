@@ -7,6 +7,7 @@
 import SwiftUI
 import PixelfedKit
 import Drops
+import ClientKit
 
 struct InteractionRow: View {
     typealias DeleteAction = () -> Void

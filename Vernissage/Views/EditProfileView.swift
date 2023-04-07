@@ -7,6 +7,7 @@
 import PhotosUI
 import SwiftUI
 import PixelfedKit
+import ClientKit
 import HTMLString
 
 struct EditProfileView: View {

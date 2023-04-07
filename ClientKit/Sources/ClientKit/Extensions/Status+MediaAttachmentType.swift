@@ -7,7 +7,7 @@
 import Foundation
 import PixelfedKit
 
-extension [Status] {
+public extension [Status] {
     func getStatusesWithImagesOnly() -> [Status] {
         return self.filter { status in
             status.statusContainsImage()
@@ -15,7 +15,7 @@ extension [Status] {
     }
 }
 
-extension Status {
+public extension Status {
     func statusContainsImage() -> Bool {
         return getAllImageMediaAttachments().isEmpty == false
     }

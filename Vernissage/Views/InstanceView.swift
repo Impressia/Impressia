@@ -7,6 +7,7 @@
 import SwiftUI
 import Foundation
 import PixelfedKit
+import ClientKit
 
 struct InstanceView: View {
     @EnvironmentObject private var applicationState: ApplicationState

@@ -7,6 +7,7 @@
 import Foundation
 import SwiftUI
 import PixelfedKit
+import ClientKit
 
 public class ApplicationState: ObservableObject {
     public static let shared = ApplicationState()

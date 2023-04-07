@@ -6,6 +6,7 @@
 
 import SwiftUI
 import PixelfedKit
+import ClientKit
 
 struct PlaceSelectorView: View {
     @EnvironmentObject var applicationState: ApplicationState
