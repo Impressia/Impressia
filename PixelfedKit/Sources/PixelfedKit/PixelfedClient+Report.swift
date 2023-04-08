@@ -9,7 +9,7 @@ import Foundation
 public extension PixelfedClientAuthenticated {
     func report(objectType: Report.ObjectType,
                 objectId: EntityId,
-                reportType: Report.ReportType) async throws -> Report {
+                reportType: Report.ReportType) async throws {
         let request = try Self.request(
             for: baseURL,
             target: Pixelfed.Reports.report(objectType, objectId, reportType),
@@ -38,7 +38,5 @@ public extension PixelfedClientAuthenticated {
 
             throw NetworkError.notSuccessResponse(response)
         }
-
-        return try JSONDecoder().decode(Report.self, from: data)
     }
 }

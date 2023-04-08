@@ -8,7 +8,7 @@ import Foundation
 import SwiftUI
 import EnvironmentKit
 
-extension UIImage {
+public extension UIImage {
     func roundedAvatar(avatarShape: AvatarShape) -> UIImage {
         let imageView: UIImageView = UIImageView(image: self)
         let layer = imageView.layer

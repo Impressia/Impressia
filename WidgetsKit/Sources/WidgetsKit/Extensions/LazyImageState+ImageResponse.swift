@@ -8,8 +8,8 @@ import Foundation
 import Nuke
 import NukeUI
 
-extension LazyImageState {
-    public var imageResponse: ImageResponse? {
+public extension LazyImageState {
+    var imageResponse: ImageResponse? {
         if case .success(let imageResponse) = result {
             return imageResponse
         }

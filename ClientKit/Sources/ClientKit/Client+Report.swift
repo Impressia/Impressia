@@ -9,8 +9,8 @@ import PixelfedKit
 
 extension Client {
     public class Reports: BaseClient {
-        public func report(objectType: Report.ObjectType, objectId: EntityId, reportType: Report.ReportType) async throws -> Report {
-            return try await pixelfedClient.report(objectType: objectType, objectId: objectId, reportType: reportType)
+        public func report(objectType: Report.ObjectType, objectId: EntityId, reportType: Report.ReportType) async throws {
+            try await pixelfedClient.report(objectType: objectType, objectId: objectId, reportType: reportType)
         }
     }
 }

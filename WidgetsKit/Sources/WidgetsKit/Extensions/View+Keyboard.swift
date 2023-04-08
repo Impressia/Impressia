@@ -7,7 +7,7 @@
 import SwiftUI
 import Combine
 
-extension View {
+public extension View {
     var keyboardPublisher: AnyPublisher<Bool, Never> {
         Publishers
             .Merge(
