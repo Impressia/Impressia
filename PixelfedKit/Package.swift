@@ -28,7 +28,11 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "PixelfedKit",
-            dependencies: ["OAuthSwift", "HTML2Markdown"]),
+            dependencies: [
+                .product(name: "OAuthSwift", package: "OAuthSwift"),
+                .product(name: "HTML2Markdown", package: "HTML2Markdown")
+            ]
+        ),
         .testTarget(
             name: "PixelfedKitTests",
             dependencies: ["PixelfedKit"])

@@ -8,6 +8,9 @@ import SwiftUI
 import UIKit
 import CoreData
 import PixelfedKit
+import ClientKit
+import ServicesKit
+import EnvironmentKit
 
 struct MainView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -335,7 +338,7 @@ struct MainView: View {
         Task {
             // Verify access token correctness.
             let authorizationSession = AuthorizationSession()
-            let accountModel = AccountModel(accountData: account)
+            let accountModel = account.toAccountModel()
 
             await AuthorizationService.shared.verifyAccount(session: authorizationSession, accountModel: accountModel) { signedInAccountModel in
                 guard let signedInAccountModel else {

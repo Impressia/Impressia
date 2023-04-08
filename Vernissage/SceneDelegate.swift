@@ -7,6 +7,7 @@
 import SwiftUI
 import PixelfedKit
 import OAuthSwift
+import EnvironmentKit
 
 class SceneDelegate: NSObject, UISceneDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {

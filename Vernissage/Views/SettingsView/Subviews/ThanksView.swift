@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import ServicesKit
 
 struct ThanksView: View {
     @EnvironmentObject var routerPath: RouterPath

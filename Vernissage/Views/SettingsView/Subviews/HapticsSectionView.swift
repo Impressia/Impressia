@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import EnvironmentKit
 
 struct HapticsSectionView: View {
     @EnvironmentObject var applicationState: ApplicationState

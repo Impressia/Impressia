@@ -5,6 +5,7 @@
 //
 
 import CoreData
+import EnvironmentKit
 
 public class CoreDataHandler {
     public static let shared = CoreDataHandler()

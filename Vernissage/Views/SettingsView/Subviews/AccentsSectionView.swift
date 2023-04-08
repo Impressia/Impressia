@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import EnvironmentKit
 
 struct AccentsSectionView: View {
     @EnvironmentObject var applicationState: ApplicationState

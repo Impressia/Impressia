@@ -6,6 +6,9 @@
 
 import SwiftUI
 import PixelfedKit
+import ClientKit
+import ServicesKit
+import WidgetsKit
 
 struct ReportView: View {
     @EnvironmentObject private var client: Client

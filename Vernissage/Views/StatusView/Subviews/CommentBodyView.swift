@@ -6,6 +6,9 @@
 
 import SwiftUI
 import PixelfedKit
+import ClientKit
+import EnvironmentKit
+import WidgetsKit
 
 struct CommentBodyView: View {
     @EnvironmentObject var applicationState: ApplicationState

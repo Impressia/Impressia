@@ -6,7 +6,11 @@
 
 import SwiftUI
 import PixelfedKit
+import ClientKit
 import AVFoundation
+import ServicesKit
+import WidgetsKit
+import EnvironmentKit
 
 struct StatusView: View {
     struct TappedAttachment: Identifiable {

@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import EnvironmentKit
 
 struct AvatarShapesSectionView: View {
     @EnvironmentObject var applicationState: ApplicationState

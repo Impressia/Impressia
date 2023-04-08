@@ -6,6 +6,7 @@
 
 import Foundation
 import SwiftUI
+import EnvironmentKit
 
 extension UIImage {
     func roundedAvatar(avatarShape: AvatarShape) -> UIImage {

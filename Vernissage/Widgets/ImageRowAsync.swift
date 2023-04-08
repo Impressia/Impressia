@@ -6,6 +6,8 @@
 
 import SwiftUI
 import PixelfedKit
+import ClientKit
+import ServicesKit
 
 struct ImageRowAsync: View {
     private let statusViewModel: StatusModel

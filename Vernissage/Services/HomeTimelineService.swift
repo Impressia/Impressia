@@ -7,6 +7,8 @@
 import Foundation
 import CoreData
 import PixelfedKit
+import ClientKit
+import ServicesKit
 
 /// Service responsible for managing home timeline.
 public class HomeTimelineService {

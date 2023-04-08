@@ -6,8 +6,11 @@
 
 import Foundation
 import PixelfedKit
+import ClientKit
 import CoreData
 import AuthenticationServices
+import ServicesKit
+import EnvironmentKit
 
 /// Srvice responsible for login user into the Pixelfed account.
 public class AuthorizationService {
@@ -123,7 +126,7 @@ public class AuthorizationService {
         CoreDataHandler.shared.save(viewContext: backgroundContext)
 
         // Return account data.
-        let accountModel = AccountModel(accountData: accountData)
+        let accountModel = accountData.toAccountModel()
         result(accountModel)
     }
 
@@ -243,7 +246,7 @@ public class AuthorizationService {
         // Save account data in database and in application state.
         CoreDataHandler.shared.save(viewContext: backgroundContext)
 
-        return AccountModel(accountData: dbAccount)
+        return dbAccount.toAccountModel()
     }
 
     private func getAccountData(account: Account, backgroundContext: NSManagedObjectContext) -> AccountData {
