@@ -4,12 +4,11 @@
 //  Licensed under the Apache License 2.0.
 //
 
-import UIKit
 import SwiftUI
+import Foundation
 
 public struct ImageFileTranseferable: Transferable {
-    let url: URL
-    lazy var data: Data? = try? Data(contentsOf: url)
+    public let url: URL
 
     public static var transferRepresentation: some TransferRepresentation {
         FileRepresentation(contentType: .image) { image in

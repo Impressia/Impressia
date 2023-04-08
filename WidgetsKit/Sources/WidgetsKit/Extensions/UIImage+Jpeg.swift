@@ -8,6 +8,7 @@ import SwiftUI
 
 public extension UIImage {
     func getJpegData() -> Data? {
+
 #if targetEnvironment(simulator)
         // For testing purposes.
         let converted = self.convertToExtendedSRGBJpeg()

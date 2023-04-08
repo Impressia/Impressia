@@ -8,15 +8,27 @@ import Foundation
 import PhotosUI
 import SwiftUI
 import PixelfedKit
+import ServicesKit
 
 public class PhotoAttachment: ObservableObject, Identifiable, Equatable, Hashable {
     public let id: String
 
+    /// Information about image from photos picker.
     public let photosPickerItem: PhotosPickerItem?
+
+    /// Information about image from share extension.
     public let nsItemProvider: NSItemProvider?
 
+    /// Variable used for presentation layer.
     @Published public var photoData: Data?
+
+    /// Property which stores orginal image file copied from Photos.
+    @Published public var imageFileTranseferable: ImageFileTranseferable?
+
+    /// Property stores information after upload to Pixelfed.
     @Published public var uploadedAttachment: UploadedAttachment?
+
+    /// Error from Pixelfed.
     @Published public var error: Error?
 
     public init(photosPickerItem: PhotosPickerItem? = nil, nsItemProvider: NSItemProvider? = nil) {
@@ -36,18 +48,20 @@ public class PhotoAttachment: ObservableObject, Identifiable, Equatable, Hashabl
 }
 
 public extension PhotoAttachment {
-    func loadData() async throws -> Data? {
+
+    @MainActor
+    func loadImage() async throws {
         if let pickerItem = self.photosPickerItem,
-           let data = try await pickerItem.loadTransferable(type: Data.self) {
-            return data
+           let transferable = try await pickerItem.createImageFileTranseferable() {
+            self.imageFileTranseferable = transferable
+            self.photoData = await ImageCompressService.shared.compressImageFrom(url: transferable.url)
         }
 
         if let itemProvider = self.nsItemProvider,
-           let data = try await itemProvider.loadData() {
-            return data
+           let transferable = try await itemProvider.createImageFileTranseferable() {
+            self.imageFileTranseferable = transferable
+            self.photoData = await ImageCompressService.shared.compressImageFrom(url: transferable.url)
         }
-
-        return nil
     }
 }
 

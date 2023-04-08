@@ -517,9 +517,7 @@ struct ComposeView: View {
 
             // Now we have to get from photos images as JPEG.
             for item in self.photosAttachment.filter({ $0.photoData == nil }) {
-                if let data = try await item.loadData() {
-                    item.photoData = data
-                }
+                try await item.loadImage()
             }
 
             // Open again the keyboard.
@@ -550,16 +548,20 @@ struct ComposeView: View {
 
     private func upload(_ photoAttachment: PhotoAttachment) async {
         do {
-            // We have to have binary data and image shouldn't be uploaded yet.
-            guard let photoData = photoAttachment.photoData, photoAttachment.uploadedAttachment == nil else {
+            // Image shouldn't be uploaded yet.
+            guard photoAttachment.uploadedAttachment == nil else {
                 return
             }
 
-            guard let image = UIImage(data: photoData) else {
+            // We are sending orginal file (not file compressed from memory).
+            guard let imageFileTranseferable = photoAttachment.imageFileTranseferable,
+                  let data = try? Data(contentsOf: imageFileTranseferable.url),
+                  let uiImage = UIImage(data: data) else {
                 return
             }
 
-            guard let data = image.getJpegData() else {
+            // Compresing to JPEG with extendedRGB color space.
+            guard let data = uiImage.getJpegData() else {
                 return
             }
 
