@@ -14,7 +14,7 @@ public class ErrorService {
     public func handle(_ error: Error, message: String, showToastr: Bool = false) {
         if showToastr {
             switch error {
-            case is NetworkError, is URLError:
+            case is LocalizedError:
                 ToastrService.shared.showError(title: message, subtitle: error.localizedDescription)
             default:
                 ToastrService.shared.showError(subtitle: message)
