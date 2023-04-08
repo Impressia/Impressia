@@ -35,6 +35,11 @@ class ShareViewController: UIViewController {
         let accountModel = currentAccount.toAccountModel()
         client.setAccount(account: accountModel)
 
+        // Set application state (with default instance settings).
+        applicationState.changeApplicationState(accountModel: accountModel,
+                                                instance: nil,
+                                                lastSeenStatusId: accountModel.lastSeenStatusId)
+
         // Update application settings from database.
         ApplicationSettingsHandler.shared.update(applicationState: applicationState)
 

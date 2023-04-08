@@ -11,15 +11,19 @@ import PixelfedKit
 
 public class PhotoAttachment: ObservableObject, Identifiable, Equatable, Hashable {
     public let id: String
-    public let photosPickerItem: PhotosPickerItem
+
+    public let photosPickerItem: PhotosPickerItem?
+    public let nsItemProvider: NSItemProvider?
 
     @Published public var photoData: Data?
     @Published public var uploadedAttachment: UploadedAttachment?
     @Published public var error: Error?
 
-    public init(photosPickerItem: PhotosPickerItem) {
+    public init(photosPickerItem: PhotosPickerItem? = nil, nsItemProvider: NSItemProvider? = nil) {
         self.id = UUID().uuidString
+
         self.photosPickerItem = photosPickerItem
+        self.nsItemProvider = nsItemProvider
     }
 
     public static func == (lhs: PhotoAttachment, rhs: PhotoAttachment) -> Bool {
@@ -28,6 +32,22 @@ public class PhotoAttachment: ObservableObject, Identifiable, Equatable, Hashabl
 
     public func hash(into hasher: inout Hasher) {
         return hasher.combine(self.id)
+    }
+}
+
+public extension PhotoAttachment {
+    func loadData() async throws -> Data? {
+        if let pickerItem = self.photosPickerItem,
+           let data = try await pickerItem.loadTransferable(type: Data.self) {
+            return data
+        }
+
+        if let itemProvider = self.nsItemProvider,
+           let data = try await itemProvider.loadData() {
+            return data
+        }
+
+        return nil
     }
 }
 

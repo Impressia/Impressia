@@ -517,7 +517,7 @@ struct ComposeView: View {
 
             // Now we have to get from photos images as JPEG.
             for item in self.photosAttachment.filter({ $0.photoData == nil }) {
-                if let data = try await item.photosPickerItem.loadTransferable(type: Data.self) {
+                if let data = try await item.loadData() {
                     item.photoData = data
                 }
             }

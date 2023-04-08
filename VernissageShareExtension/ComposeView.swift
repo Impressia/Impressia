@@ -32,6 +32,7 @@ struct ComposeView: View {
     @State private var photosAreUploading = false
     @State private var photosPickerVisible = false
 
+    @State private var attachments: [NSItemProvider] = []
     @State private var selectedItems: [PhotosPickerItem] = []
     @State private var photosAttachment: [PhotoAttachment] = []
 
@@ -61,7 +62,6 @@ struct ComposeView: View {
         }
     }
 
-    private let attachments: [NSItemProvider]
     private let keyboardFontImageSize = 20.0
     private let keyboardFontTextSize = 16.0
     private let autocompleteFontTextSize = 12.0
@@ -106,6 +106,9 @@ struct ComposeView: View {
             }
             .onAppear {
                 self.textModel.client = self.client
+                Task {
+                    await self.loadPhotos()
+                }
             }
             .onChange(of: self.textModel.text) { _ in
                 self.refreshScreenState()
@@ -179,6 +182,10 @@ struct ComposeView: View {
 
                         self.selectedItems = self.selectedItems.filter({ item in
                             item != photoAttachment.photosPickerItem
+                        })
+
+                        self.attachments = self.attachments.filter({ item in
+                            item != photoAttachment.nsItemProvider
                         })
 
                         self.refreshScreenState()
@@ -469,6 +476,8 @@ struct ComposeView: View {
 
             // We have to create list with existing photos.
             var temporaryPhotosAttachment: [PhotoAttachment] = []
+
+            // Add to collection photos selected on photo picker.
             for item in self.selectedItems {
                 if let photoAttachment = self.photosAttachment.first(where: { $0.photosPickerItem == item }) {
                     temporaryPhotosAttachment.append(photoAttachment)
@@ -478,12 +487,22 @@ struct ComposeView: View {
                 temporaryPhotosAttachment.append(PhotoAttachment(photosPickerItem: item))
             }
 
+            // Add to collection photos from share sheet.
+            for item in self.attachments {
+                if let photoAttachment = self.photosAttachment.first(where: { $0.nsItemProvider == item }) {
+                    temporaryPhotosAttachment.append(photoAttachment)
+                    continue
+                }
+
+                temporaryPhotosAttachment.append(PhotoAttachment(nsItemProvider: item))
+            }
+
             // We can show new list on the screen.
             self.photosAttachment = temporaryPhotosAttachment
 
             // Now we have to get from photos images as JPEG.
             for item in self.photosAttachment.filter({ $0.photoData == nil }) {
-                if let data = try await item.photosPickerItem.loadTransferable(type: Data.self) {
+                if let data = try await item.loadData() {
                     item.photoData = data
                 }
             }
@@ -544,13 +563,7 @@ struct ComposeView: View {
     private func publishStatus() async {
         do {
             let status = self.createStatus()
-            if let newStatus = try await self.client.statuses?.new(status: status) {
-                ToastrService.shared.showSuccess("compose.title.statusPublished", imageSystemName: "message.fill")
-
-                let statusModel = StatusModel(status: newStatus)
-                let commentModel = CommentModel(status: statusModel, showDivider: false)
-                self.applicationState.newComment = commentModel
-
+            if try await self.client.statuses?.new(status: status) != nil {
                 NotificationCenter.default.post(name: NotificationsName.shareSheetClose, object: nil)
             }
         } catch {
