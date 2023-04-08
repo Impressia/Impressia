@@ -3,9 +3,9 @@
 "global.error.unknownError" = "Espero ez zen errorea.";
 
 // Mark: Report errors.
-"report.error.noSelfReports" = "Self-reporting is not allowed.";
-"report.error.invalidObjectId" = "Incorrect object Id.";
-"report.error.duplicate" = "The report has already been sent.";
-"report.error.invalidParameters" = "Invalid report parameters.";
-"report.error.invalidType" = "Invalid report type.";
-"report.error.invalidObject" = "Invalid object type.";
+"report.error.noSelfReports" = "Ezin duzu zure burua salatu.";
+"report.error.invalidObjectId" = "Elementuaren IDa ez da zuzena.";
+"report.error.duplicate" = "Txostena bidali da dagoeneko.";
+"report.error.invalidParameters" = "Txostenaren parametroak ez dira baliozkoak.";
+"report.error.invalidType" = "Txosten-mota ez da baliozkoa.";
+"report.error.invalidObject" = "Elementu-mota ez da baliozkoa.";
