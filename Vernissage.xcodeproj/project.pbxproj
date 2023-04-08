@@ -27,7 +27,6 @@
 		F835082329BEF9C400DE3247 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F835082629BEF9C400DE3247 /* Localizable.strings */; };
 		F835082429BEF9C400DE3247 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F835082629BEF9C400DE3247 /* Localizable.strings */; };
 		F83CBEFB298298A1002972C8 /* ImageCarouselPicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83CBEFA298298A1002972C8 /* ImageCarouselPicture.swift */; };
-		F83E00ED29A2237C005D25A3 /* PixelfedKit in Frameworks */ = {isa = PBXBuildFile; productRef = F83E00EC29A2237C005D25A3 /* PixelfedKit */; };
 		F85D4971296402DC00751DF7 /* AuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D4970296402DC00751DF7 /* AuthorizationService.swift */; };
 		F85D4975296407F100751DF7 /* HomeTimelineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D4974296407F100751DF7 /* HomeTimelineService.swift */; };
 		F85D497729640A5200751DF7 /* ImageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D497629640A5200751DF7 /* ImageRow.swift */; };
@@ -81,6 +80,7 @@
 		F86B7214296BFDCE00EE59EC /* UserProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7213296BFDCE00EE59EC /* UserProfileHeaderView.swift */; };
 		F86B7216296BFFDA00EE59EC /* UserProfileStatusesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7215296BFFDA00EE59EC /* UserProfileStatusesView.swift */; };
 		F86B7221296C49A300EE59EC /* EmptyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7220296C49A300EE59EC /* EmptyButtonStyle.swift */; };
+		F8724CE529E1923F001BF518 /* PixelfedKit in Frameworks */ = {isa = PBXBuildFile; productRef = F8724CE429E1923F001BF518 /* PixelfedKit */; };
 		F873F14C29BDB67300DE72D1 /* UIImage+Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = F873F14B29BDB67300DE72D1 /* UIImage+Rounded.swift */; };
 		F8742FC429990AFB00E9642B /* ClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8742FC329990AFB00E9642B /* ClientError.swift */; };
 		F8764187298ABB520057D362 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8764186298ABB520057D362 /* ViewState.swift */; };
@@ -96,7 +96,6 @@
 		F88ABD9429687CA4004EF61E /* ComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88ABD9329687CA4004EF61E /* ComposeView.swift */; };
 		F88BC50529E02F3900CE6141 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88BC50429E02F3900CE6141 /* ShareViewController.swift */; };
 		F88BC50C29E02F3900CE6141 /* VernissageShareExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F88BC50229E02F3900CE6141 /* VernissageShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		F88BC51129E02F5300CE6141 /* PixelfedKit in Frameworks */ = {isa = PBXBuildFile; productRef = F88BC51029E02F5300CE6141 /* PixelfedKit */; };
 		F88BC51329E02FD800CE6141 /* ComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88BC51229E02FD800CE6141 /* ComposeView.swift */; };
 		F88BC51629E0307F00CE6141 /* NotificationsName.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88BC51529E0307F00CE6141 /* NotificationsName.swift */; };
 		F88BC51B29E0350300CE6141 /* ClientKit in Frameworks */ = {isa = PBXBuildFile; productRef = F88BC51A29E0350300CE6141 /* ClientKit */; };
@@ -379,10 +378,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8724CE529E1923F001BF518 /* PixelfedKit in Frameworks */,
 				F88BC51F29E03ED300CE6141 /* ClientKit in Frameworks */,
 				F88BC53F29E06EB100CE6141 /* WidgetsKit in Frameworks */,
 				F88BC53229E0677000CE6141 /* EnvironmentKit in Frameworks */,
-				F88BC51129E02F5300CE6141 /* PixelfedKit in Frameworks */,
 				F88BC53D29E06EAD00CE6141 /* ServicesKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -397,7 +396,6 @@
 				F88BC51B29E0350300CE6141 /* ClientKit in Frameworks */,
 				F88E4D4D297EA4290057491A /* EmojiText in Frameworks */,
 				F8210DD72966BB7E001D9973 /* NukeExtensions in Frameworks */,
-				F83E00ED29A2237C005D25A3 /* PixelfedKit in Frameworks */,
 				F88BC52D29E04BB600CE6141 /* EnvironmentKit in Frameworks */,
 				F8210DD92966BB7E001D9973 /* NukeUI in Frameworks */,
 				F89B5CC029D019B600549F2F /* HTMLString in Frameworks */,
@@ -837,11 +835,11 @@
 			);
 			name = VernissageShareExtension;
 			packageProductDependencies = (
-				F88BC51029E02F5300CE6141 /* PixelfedKit */,
 				F88BC51E29E03ED300CE6141 /* ClientKit */,
 				F88BC53129E0677000CE6141 /* EnvironmentKit */,
 				F88BC53C29E06EAD00CE6141 /* ServicesKit */,
 				F88BC53E29E06EB100CE6141 /* WidgetsKit */,
+				F8724CE429E1923F001BF518 /* PixelfedKit */,
 			);
 			productName = VernissageShareExtension;
 			productReference = F88BC50229E02F3900CE6141 /* VernissageShareExtension.appex */;
@@ -869,7 +867,6 @@
 				F8210DD62966BB7E001D9973 /* NukeExtensions */,
 				F8210DD82966BB7E001D9973 /* NukeUI */,
 				F88E4D4C297EA4290057491A /* EmojiText */,
-				F83E00EC29A2237C005D25A3 /* PixelfedKit */,
 				F89B5CBF29D019B600549F2F /* HTMLString */,
 				F88BC51A29E0350300CE6141 /* ClientKit */,
 				F88BC52629E0431D00CE6141 /* ServicesKit */,
@@ -1567,15 +1564,11 @@
 			package = F8210DD32966BB7E001D9973 /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = NukeUI;
 		};
-		F83E00EC29A2237C005D25A3 /* PixelfedKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PixelfedKit;
-		};
 		F864F77929BB94A800B13921 /* PixelfedKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PixelfedKit;
 		};
-		F88BC51029E02F5300CE6141 /* PixelfedKit */ = {
+		F8724CE429E1923F001BF518 /* PixelfedKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PixelfedKit;
 		};

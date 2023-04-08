@@ -138,8 +138,15 @@ struct StatusView: View {
 
                     HStack {
                         Text("status.title.uploaded", comment: "Uploaded")
-                        Text(statusViewModel.createdAt.toRelative(.isoDateTimeMilliSec))
-                            .padding(.horizontal, -4)
+
+                        if let createdAt = statusViewModel.createdAt.toDate(.isoDateTimeMilliSec) {
+                            RelativeTime(date: createdAt)
+                                .padding(.horizontal, -4)
+                        } else {
+                            Text(statusViewModel.createdAt.toRelative(.isoDateTimeMilliSec))
+                                .padding(.horizontal, -4)
+                        }
+
                         if let applicationName = statusViewModel.application?.name {
                             Text(String(format: NSLocalizedString("status.title.via", comment: "via"), applicationName))
                         }

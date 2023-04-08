@@ -34,9 +34,11 @@ struct CommentBodyView: View {
 
                     Spacer()
 
-                    Text(self.statusViewModel.createdAt.toRelative(.isoDateTimeMilliSec))
-                        .foregroundColor(.lightGrayColor)
-                        .font(.footnote)
+                    if let createdAt = self.statusViewModel.createdAt.toDate(.isoDateTimeMilliSec) {
+                        RelativeTime(date: createdAt)
+                            .foregroundColor(.lightGrayColor)
+                            .font(.footnote)
+                    }
                 }
 
                 MarkdownFormattedText(self.statusViewModel.content.asMarkdown)
