@@ -100,7 +100,7 @@ struct ComposeView: View {
 
                 ToolbarItem(placement: .cancellationAction) {
                     Button(NSLocalizedString("compose.title.cancel", comment: "Cancel"), role: .cancel) {
-                        NotificationCenter.default.post(name: NotificationsName.shareSheetClose, object: nil)
+                        self.close()
                     }
                 }
             }
@@ -561,11 +561,19 @@ struct ComposeView: View {
         }
     }
 
+    private func close() {
+        // Clean tmp folder from file transferred from Photos.
+        FileManager.default.clearTmpDirectory()
+
+        // Close the view.
+        NotificationCenter.default.post(name: NotificationsName.shareSheetClose, object: nil)
+    }
+
     private func publishStatus() async {
         do {
             let status = self.createStatus()
             if try await self.client.statuses?.new(status: status) != nil {
-                NotificationCenter.default.post(name: NotificationsName.shareSheetClose, object: nil)
+                self.close()
             }
         } catch {
             ErrorService.shared.handle(error, message: "compose.error.postingStatusFailed", showToastr: true)

@@ -40,12 +40,14 @@ private struct NavigationMenu<MenuItems>: ViewModifier where MenuItems: View {
                             Spacer()
 
                             self.menuContent()
-                                .padding(.trailing, 20)
+                                .padding(.trailing, 30)
+                                .padding(.bottom, 10)
                         }
 
                         if self.menuPosition == .bottomLeft {
                             self.menuContent()
-                                .padding(.leading, 20)
+                                .padding(.leading, 30)
+                                .padding(.bottom, 10)
 
                             Spacer()
                         }

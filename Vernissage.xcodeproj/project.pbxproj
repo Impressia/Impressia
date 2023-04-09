@@ -81,7 +81,6 @@
 		F86B7214296BFDCE00EE59EC /* UserProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7213296BFDCE00EE59EC /* UserProfileHeaderView.swift */; };
 		F86B7216296BFFDA00EE59EC /* UserProfileStatusesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7215296BFFDA00EE59EC /* UserProfileStatusesView.swift */; };
 		F86B7221296C49A300EE59EC /* EmptyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7220296C49A300EE59EC /* EmptyButtonStyle.swift */; };
-		F8724CE529E1923F001BF518 /* PixelfedKit in Frameworks */ = {isa = PBXBuildFile; productRef = F8724CE429E1923F001BF518 /* PixelfedKit */; };
 		F8742FC429990AFB00E9642B /* ClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8742FC329990AFB00E9642B /* ClientError.swift */; };
 		F8764187298ABB520057D362 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8764186298ABB520057D362 /* ViewState.swift */; };
 		F876418D298AE5020057D362 /* PaginableStatusesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F876418C298AE5020057D362 /* PaginableStatusesView.swift */; };
@@ -371,7 +370,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8724CE529E1923F001BF518 /* PixelfedKit in Frameworks */,
 				F88BC51F29E03ED300CE6141 /* ClientKit in Frameworks */,
 				F88BC53F29E06EB100CE6141 /* WidgetsKit in Frameworks */,
 				F88BC53229E0677000CE6141 /* EnvironmentKit in Frameworks */,
@@ -829,7 +827,6 @@
 				F88BC53129E0677000CE6141 /* EnvironmentKit */,
 				F88BC53C29E06EAD00CE6141 /* ServicesKit */,
 				F88BC53E29E06EB100CE6141 /* WidgetsKit */,
-				F8724CE429E1923F001BF518 /* PixelfedKit */,
 			);
 			productName = VernissageShareExtension;
 			productReference = F88BC50229E02F3900CE6141 /* VernissageShareExtension.appex */;
@@ -1551,10 +1548,6 @@
 			productName = NukeUI;
 		};
 		F864F77929BB94A800B13921 /* PixelfedKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PixelfedKit;
-		};
-		F8724CE429E1923F001BF518 /* PixelfedKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PixelfedKit;
 		};

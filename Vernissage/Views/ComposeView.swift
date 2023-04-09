@@ -102,7 +102,7 @@ struct ComposeView: View {
 
                     ToolbarItem(placement: .cancellationAction) {
                         Button(NSLocalizedString("compose.title.cancel", comment: "Cancel"), role: .cancel) {
-                            dismiss()
+                            self.close()
                         }
                     }
                 }
@@ -577,6 +577,14 @@ struct ComposeView: View {
         }
     }
 
+    private func close() {
+        // Clean tmp folder from file transferred from Photos.
+        FileManager.default.clearTmpDirectory()
+
+        // Close the view.
+        dismiss()
+    }
+
     private func publishStatus() async {
         do {
             let status = self.createStatus()
@@ -587,7 +595,7 @@ struct ComposeView: View {
                 let commentModel = CommentModel(status: statusModel, showDivider: false)
                 self.applicationState.newComment = commentModel
 
-                dismiss()
+                self.close()
             }
         } catch {
             ErrorService.shared.handle(error, message: "compose.error.postingStatusFailed", showToastr: true)
