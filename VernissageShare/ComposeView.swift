@@ -154,7 +154,7 @@ struct ComposeView: View {
                 // User avatar and name.
                 self.userAvatarView()
 
-                // Incofmation about status visibility.
+                // Information about status visibility.
                 self.visibilityComboView()
 
                 // Text area with new status.
@@ -563,7 +563,7 @@ struct ComposeView: View {
 
     private func close() {
         // Clean tmp folder from file transferred from Photos.
-        FileManager.default.clearTmpDirectory()
+        self.photosAttachment.removeTmpFiles()
 
         // Close the view.
         NotificationCenter.default.post(name: NotificationsName.shareSheetClose, object: nil)

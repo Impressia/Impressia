@@ -22,7 +22,7 @@ public class PhotoAttachment: ObservableObject, Identifiable, Equatable, Hashabl
     /// Variable used for presentation layer.
     @Published public var photoData: Data?
 
-    /// Property which stores orginal image file copied from Photos.
+    /// Property which stores orginal image file copied from Photos to tmp folder.
     @Published public var imageFileTranseferable: ImageFileTranseferable?
 
     /// Property stores information after upload to Pixelfed.
@@ -82,5 +82,17 @@ public extension [PhotoAttachment] {
         }
 
         return ids
+    }
+
+    func removeTmpFiles() {
+        for file in self {
+            if let fileUrl = file.imageFileTranseferable?.url {
+                do {
+                    try FileManager.default.removeItem(at: fileUrl)
+                } catch {
+                    ErrorService.shared.handle(error, message: "Error during removing transferred image from tmp directory.")
+                }
+            }
+        }
     }
 }

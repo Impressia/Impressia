@@ -23,7 +23,7 @@ public class ImageCompressService {
 
             let maxPixelSize: Int
             if Bundle.main.bundlePath.hasSuffix(".appex") {
-                maxPixelSize = 1536
+                maxPixelSize = 2048
             } else {
                 maxPixelSize = 4096
             }
