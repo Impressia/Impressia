@@ -1,12 +1,16 @@
 //
 //  https://mczachurski.dev
-//  Copyright © 2022 Marcin Czachurski and the repository contributors.
+//  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
 
 import SwiftUI
 import PixelfedKit
+import ClientKit
 import AVFoundation
+import ServicesKit
+import WidgetsKit
+import EnvironmentKit
 
 struct StatusView: View {
     struct TappedAttachment: Identifiable {
@@ -134,8 +138,15 @@ struct StatusView: View {
 
                     HStack {
                         Text("status.title.uploaded", comment: "Uploaded")
-                        Text(statusViewModel.createdAt.toRelative(.isoDateTimeMilliSec))
-                            .padding(.horizontal, -4)
+
+                        if let createdAt = statusViewModel.createdAt.toDate(.isoDateTimeMilliSec) {
+                            RelativeTime(date: createdAt)
+                                .padding(.horizontal, -4)
+                        } else {
+                            Text(statusViewModel.createdAt.toRelative(.isoDateTimeMilliSec))
+                                .padding(.horizontal, -4)
+                        }
+
                         if let applicationName = statusViewModel.application?.name {
                             Text(String(format: NSLocalizedString("status.title.via", comment: "via"), applicationName))
                         }

@@ -6,6 +6,7 @@
 
 import SwiftUI
 import StoreKit
+import ServicesKit
 
 struct SupportView: View {
     @EnvironmentObject var tipsStore: TipsStore

@@ -1,12 +1,16 @@
 //
 //  https://mczachurski.dev
-//  Copyright © 2022 Marcin Czachurski and the repository contributors.
+//  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
 
 import SwiftUI
 import PixelfedKit
+import ClientKit
 import AuthenticationServices
+import ServicesKit
+import EnvironmentKit
+import WidgetsKit
 
 struct SignInView: View {
     @Environment(\.managedObjectContext) private var viewContext

@@ -1,12 +1,14 @@
 //
 //  https://mczachurski.dev
-//  Copyright © 2022 Marcin Czachurski and the repository contributors.
+//  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
 
 import SwiftUI
 import Nuke
 import NukeUI
+import ClientKit
+import EnvironmentKit
 
 @main
 struct VernissageApp: App {
@@ -112,7 +114,7 @@ struct VernissageApp: App {
         }
 
         // Create model based on core data entity.
-        let accountModel = AccountModel(accountData: currentAccount)
+        let accountModel = currentAccount.toAccountModel()
 
         // Verify access token correctness.
         let authorizationSession = AuthorizationSession()
@@ -149,35 +151,10 @@ struct VernissageApp: App {
     }
 
     private func loadUserPreferences() {
-        let defaultSettings = ApplicationSettingsHandler.shared.get()
+        ApplicationSettingsHandler.shared.update(applicationState: self.applicationState)
 
-        if let tintColor = TintColor(rawValue: Int(defaultSettings.tintColor)) {
-            self.applicationState.tintColor = tintColor
-            self.tintColor = tintColor.color()
-        }
-
-        if let theme = Theme(rawValue: Int(defaultSettings.theme)) {
-            self.applicationState.theme = theme
-            self.theme = theme.colorScheme()
-        }
-
-        if let avatarShape = AvatarShape(rawValue: Int(defaultSettings.avatarShape)) {
-            self.applicationState.avatarShape = avatarShape
-        }
-
-        self.applicationState.activeIcon = defaultSettings.activeIcon
-        self.applicationState.showSensitive = defaultSettings.showSensitive
-        self.applicationState.showPhotoDescription = defaultSettings.showPhotoDescription
-
-        if let menuPosition = MenuPosition(rawValue: Int(defaultSettings.menuPosition)) {
-            self.applicationState.menuPosition = menuPosition
-        }
-
-        self.applicationState.hapticTabSelectionEnabled = defaultSettings.hapticTabSelectionEnabled
-        self.applicationState.hapticRefreshEnabled = defaultSettings.hapticRefreshEnabled
-        self.applicationState.hapticButtonPressEnabled = defaultSettings.hapticButtonPressEnabled
-        self.applicationState.hapticAnimationEnabled = defaultSettings.hapticAnimationEnabled
-        self.applicationState.hapticNotificationEnabled = defaultSettings.hapticNotificationEnabled
+        self.tintColor = self.applicationState.tintColor.color()
+        self.theme = self.applicationState.theme.colorScheme()
     }
 
     private func setImagePipelines() {

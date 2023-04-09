@@ -6,6 +6,8 @@
 
 import SwiftUI
 import PixelfedKit
+import ClientKit
+import ServicesKit
 
 struct ImagesCarousel: View {
     @State public var attachments: [AttachmentModel]

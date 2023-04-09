@@ -6,6 +6,8 @@
 
 import SwiftUI
 import NukeUI
+import EnvironmentKit
+import WidgetsKit
 
 struct ImageGrid: View {
     @EnvironmentObject var applicationState: ApplicationState

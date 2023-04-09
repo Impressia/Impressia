@@ -6,6 +6,9 @@
 
 import SwiftUI
 import PixelfedKit
+import ClientKit
+import EnvironmentKit
+import WidgetsKit
 
 struct CommentBodyView: View {
     @EnvironmentObject var applicationState: ApplicationState
@@ -31,9 +34,11 @@ struct CommentBodyView: View {
 
                     Spacer()
 
-                    Text(self.statusViewModel.createdAt.toRelative(.isoDateTimeMilliSec))
-                        .foregroundColor(.lightGrayColor)
-                        .font(.footnote)
+                    if let createdAt = self.statusViewModel.createdAt.toDate(.isoDateTimeMilliSec) {
+                        RelativeTime(date: createdAt)
+                            .foregroundColor(.lightGrayColor)
+                            .font(.footnote)
+                    }
                 }
 
                 MarkdownFormattedText(self.statusViewModel.content.asMarkdown)

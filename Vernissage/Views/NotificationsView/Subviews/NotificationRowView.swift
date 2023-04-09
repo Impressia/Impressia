@@ -6,7 +6,11 @@
 
 import SwiftUI
 import PixelfedKit
+import ClientKit
 import NukeUI
+import ServicesKit
+import EnvironmentKit
+import WidgetsKit
 
 struct NotificationRowView: View {
     @EnvironmentObject var applicationState: ApplicationState
@@ -52,9 +56,11 @@ struct NotificationRowView: View {
 
                     Spacer()
 
-                    Text(self.notification.createdAt.toRelative(.isoDateTimeMilliSec))
-                        .foregroundColor(.lightGrayColor)
-                        .font(.footnote)
+                    if let createdAt = self.notification.createdAt.toDate(.isoDateTimeMilliSec) {
+                        RelativeTime(date: createdAt)
+                            .foregroundColor(.lightGrayColor)
+                            .font(.footnote)
+                    }
                 }
 
                 Text(self.getTitle(), comment: "Notification type")

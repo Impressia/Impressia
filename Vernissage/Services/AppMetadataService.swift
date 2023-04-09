@@ -6,6 +6,7 @@
 
 import Foundation
 import PixelfedKit
+import ServicesKit
 
 public class AppMetadataService {
     public static let shared = AppMetadataService()

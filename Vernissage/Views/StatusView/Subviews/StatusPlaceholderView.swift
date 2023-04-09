@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import WidgetsKit
 
 struct StatusPlaceholderView: View {
     @State var imageHeight: Double

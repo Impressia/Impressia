@@ -1,11 +1,15 @@
 //
 //  https://mczachurski.dev
-//  Copyright © 2022 Marcin Czachurski and the repository contributors.
+//  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
 
 import SwiftUI
 import PixelfedKit
+import ClientKit
+import ServicesKit
+import EnvironmentKit
+import WidgetsKit
 
 struct TrendStatusesView: View {
     @EnvironmentObject private var applicationState: ApplicationState

@@ -1,10 +1,11 @@
 //
 //  https://mczachurski.dev
-//  Copyright © 2022 Marcin Czachurski and the repository contributors.
+//  Copyright © 2023 Marcin Czachurski and the repository contributors.
 //  Licensed under the Apache License 2.0.
 //
 
 import CoreData
+import EnvironmentKit
 
 public class CoreDataHandler {
     public static let shared = CoreDataHandler()

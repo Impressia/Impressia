@@ -2,7 +2,7 @@
 "global.title.contentWarning" = "Eduki hunkigarria";
 "global.title.seePost" = "Ikusi bidalketa";
 "global.title.refresh" = "Freskatu";
-"global.title.momentsAgo" = "moments ago";
+"global.title.momentsAgo" = "oraintxe bertan";
 
 // MARK: Global errors.
 "global.error.unexpected" = "Espero ez zen errorea.";
@@ -110,6 +110,8 @@
 "userProfile.error.block" = "Blokeatu/Blokeatzeari uzteak huts egin du.";
 "userProfile.error.relationship" = "Harreman ekintzak huts egin du.";
 "userProfile.title.edit" = "Editatu";
+"userProfile.title.muted" = "Mutututa";
+"userProfile.title.blocked" = "Blokeatuta";
 
 // Mark: Notifications view.
 "notifications.navigationBar.title" = "Jakinarazpenak";

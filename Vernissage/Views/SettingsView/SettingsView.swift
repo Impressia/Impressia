@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import EnvironmentKit
 
 struct SettingsView: View {
     @EnvironmentObject var applicationState: ApplicationState
