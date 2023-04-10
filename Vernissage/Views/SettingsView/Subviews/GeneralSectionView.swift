@@ -68,7 +68,6 @@ struct GeneralSectionView: View {
                 Text("settings.title.theme", comment: "Theme")
             }
             .onChange(of: self.applicationState.theme) { theme in
-                self.applicationState.theme = theme
                 ApplicationSettingsHandler.shared.set(theme: theme)
             }
 
@@ -82,9 +81,13 @@ struct GeneralSectionView: View {
                 Text("settings.title.menuPosition", comment: "Menu position")
             }
             .onChange(of: self.applicationState.menuPosition) { menuPosition in
-                self.applicationState.menuPosition = menuPosition
                 ApplicationSettingsHandler.shared.set(menuPosition: menuPosition)
             }
+
+            Toggle("settings.title.showAvatarsOnTimeline", isOn: $applicationState.showAvatarsOnTimeline)
+                .onChange(of: self.applicationState.showAvatarsOnTimeline) { newValue in
+                    ApplicationSettingsHandler.shared.set(showAvatarsOnTimeline: newValue)
+                }
         }
     }
 }

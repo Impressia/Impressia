@@ -144,6 +144,12 @@ class ApplicationSettingsHandler {
         CoreDataHandler.shared.save()
     }
 
+    func set(showAvatarsOnTimeline: Bool) {
+        let defaultSettings = self.get()
+        defaultSettings.showAvatarsOnTimeline = showAvatarsOnTimeline
+        CoreDataHandler.shared.save()
+    }
+
     private func createApplicationSettingsEntity(viewContext: NSManagedObjectContext? = nil) -> ApplicationSettings {
         let context = viewContext ?? CoreDataHandler.shared.container.viewContext
         return ApplicationSettings(context: context)

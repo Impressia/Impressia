@@ -89,6 +89,9 @@ public class ApplicationState: ObservableObject {
     /// Information which menu should be shown (top or bottom).
     @Published public var menuPosition = MenuPosition.top
 
+    /// Should avatars be visible on timelines.
+    @Published public var showAvatarsOnTimeline = false
+
     public func changeApplicationState(accountModel: AccountModel, instance: Instance?, lastSeenStatusId: String?) {
         self.account = accountModel
         self.lastSeenStatusId = lastSeenStatusId

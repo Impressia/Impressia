@@ -26,7 +26,7 @@ struct UserProfileStatusesView: View {
         LazyVStack(alignment: .center) {
             if firstLoadFinished == true {
                 ForEach(self.statusViewModels, id: \.id) { item in
-                    ImageRowAsync(statusViewModel: item)
+                    ImageRowAsync(statusViewModel: item, withAvatar: false)
                 }
 
                 if allItemsLoaded == false && firstLoadFinished == true {
