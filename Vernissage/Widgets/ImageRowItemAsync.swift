@@ -128,11 +128,10 @@ struct ImageRowItemAsync: View {
                 self.navigateToStatus()
             }
             .if(self.showAvatar) {
-                  $0.imageAvatar(applicationState: self.applicationState,
-                                 displayName: self.statusViewModel.account.displayNameWithoutEmojis,
+                  $0.imageAvatar(displayName: self.statusViewModel.account.displayNameWithoutEmojis,
                                  avatarUrl: self.statusViewModel.account.avatar)
             }
-            .imageContextMenu(client: self.client, statusModel: self.statusViewModel)
+            .imageContextMenu(statusModel: self.statusViewModel)
     }
 
     private func navigateToStatus() {

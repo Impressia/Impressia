@@ -12,18 +12,18 @@ import ServicesKit
 import EnvironmentKit
 
 public extension View {
-    func imageAvatar(applicationState: ApplicationState, displayName: String?, avatarUrl: URL?) -> some View {
-        modifier(ImageAvatar(applicationState: applicationState, displayName: displayName, avatarUrl: avatarUrl))
+    func imageAvatar(displayName: String?, avatarUrl: URL?) -> some View {
+        modifier(ImageAvatar(displayName: displayName, avatarUrl: avatarUrl))
     }
 }
 
 private struct ImageAvatar: ViewModifier {
-    private let applicationState: ApplicationState
+    @EnvironmentObject var applicationState: ApplicationState
+    
     private let displayName: String?
     private let avatarUrl: URL?
 
-    init(applicationState: ApplicationState, displayName: String?, avatarUrl: URL?) {
-        self.applicationState = applicationState
+    init(displayName: String?, avatarUrl: URL?) {
         self.displayName = displayName
         self.avatarUrl = avatarUrl
     }

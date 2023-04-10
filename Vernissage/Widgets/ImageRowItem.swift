@@ -121,10 +121,9 @@ struct ImageRowItem: View {
             .onTapGesture {
                 self.navigateToStatus()
             }
-            .imageAvatar(applicationState: self.applicationState,
-                         displayName: self.status.accountDisplayName,
+            .imageAvatar(displayName: self.status.accountDisplayName,
                          avatarUrl: self.status.accountAvatar)
-            .imageContextMenu(client: self.client, statusData: self.status)
+            .imageContextMenu(statusData: self.status)
     }
 
     private func downloadImage(attachmentData: AttachmentData) async {
