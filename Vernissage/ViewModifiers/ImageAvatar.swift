@@ -19,7 +19,7 @@ public extension View {
 
 private struct ImageAvatar: ViewModifier {
     @EnvironmentObject var applicationState: ApplicationState
-    
+
     private let displayName: String?
     private let avatarUrl: URL?
 
@@ -49,7 +49,8 @@ private struct ImageAvatar: ViewModifier {
                         }
 
                         Text(displayName ?? "")
-                            .foregroundColor(.white)
+                            .font(.subheadline)
+                            .foregroundColor(.white.opacity(0.8))
                             .fontWeight(.semibold)
                             .shadow(color: .black, radius: 2)
                         Spacer()
