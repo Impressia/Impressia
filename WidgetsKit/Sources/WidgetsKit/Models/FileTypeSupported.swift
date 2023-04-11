@@ -73,6 +73,6 @@ enum FileTypeSupported: String, CaseIterable {
     }
 
     func getTmpFileUrl() -> URL {
-        return URL.temporaryDirectory.appending(path: "\(UUID().uuidString).jpeg")
+        return URL.temporaryDirectory.appending(path: "\(UUID().uuidString).jpg")
     }
 }
