@@ -38,32 +38,9 @@ struct ImageRowItem: View {
 
     var body: some View {
         if let uiImage {
-            ZStack {
-                if self.status.sensitive && !self.applicationState.showSensitive {
-                    ZStack {
-                        ContentWarning(spoilerText: self.status.spoilerText) {
-                            self.imageView(uiImage: uiImage)
-
-                            if showThumbImage {
-                                FavouriteTouch {
-                                    self.showThumbImage = false
-                                }
-                            }
-                        } blurred: {
-                            BlurredImage(blurhash: attachmentData.blurhash)
-                                .onTapGesture {
-                                    self.navigateToStatus()
-                                }
-                        }
-                    }
-                    .opacity(self.opacity)
-                    .onAppear {
-                        withAnimation {
-                            self.opacity = 1.0
-                        }
-                    }
-                } else {
-                    ZStack {
+            if self.status.sensitive && !self.applicationState.showSensitive {
+                ZStack {
+                    ContentWarning(spoilerText: self.status.spoilerText) {
                         self.imageView(uiImage: uiImage)
 
                         if showThumbImage {
@@ -71,12 +48,33 @@ struct ImageRowItem: View {
                                 self.showThumbImage = false
                             }
                         }
+                    } blurred: {
+                        BlurredImage(blurhash: attachmentData.blurhash)
+                            .onTapGesture {
+                                self.navigateToStatus()
+                            }
                     }
-                    .opacity(self.opacity)
-                    .onAppear {
-                        withAnimation {
-                            self.opacity = 1.0
+                }
+                .opacity(self.opacity)
+                .onAppear {
+                    withAnimation {
+                        self.opacity = 1.0
+                    }
+                }
+            } else {
+                ZStack {
+                    self.imageView(uiImage: uiImage)
+
+                    if showThumbImage {
+                        FavouriteTouch {
+                            self.showThumbImage = false
                         }
+                    }
+                }
+                .opacity(self.opacity)
+                .onAppear {
+                    withAnimation {
+                        self.opacity = 1.0
                     }
                 }
             }
@@ -123,7 +121,9 @@ struct ImageRowItem: View {
             .onTapGesture {
                 self.navigateToStatus()
             }
-            .imageContextMenu(client: self.client, statusData: self.status)
+            .imageAvatar(displayName: self.status.accountDisplayName,
+                         avatarUrl: self.status.accountAvatar)
+            .imageContextMenu(statusData: self.status)
     }
 
     private func downloadImage(attachmentData: AttachmentData) async {

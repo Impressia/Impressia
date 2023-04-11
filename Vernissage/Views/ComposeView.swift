@@ -530,6 +530,9 @@ struct ComposeView: View {
             self.photosAreUploading = false
             self.refreshScreenState()
         } catch {
+            self.photosAreUploading = false
+            self.refreshScreenState()
+
             ErrorService.shared.handle(error, message: "compose.error.loadingPhotosFailed", showToastr: true)
         }
     }
@@ -554,8 +557,8 @@ struct ComposeView: View {
             }
 
             // We are sending orginal file (not file compressed from memory).
-            guard let imageFileTranseferable = photoAttachment.imageFileTranseferable,
-                  let data = try? Data(contentsOf: imageFileTranseferable.url),
+            guard let photoUrl = photoAttachment.photoUrl,
+                  let data = try? Data(contentsOf: photoUrl),
                   let uiImage = UIImage(data: data) else {
                 return
             }

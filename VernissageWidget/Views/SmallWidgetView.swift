@@ -26,16 +26,7 @@ struct SmallWidgetView: View {
             Spacer()
             HStack {
                 uiAvatar
-                    .resizable()
-                    .clipShape(Circle())
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 16, height: 16)
-                    .overlay(
-                        Circle()
-                            .stroke(Color.white.opacity(0.6), lineWidth: 1)
-                            .frame(width: 16, height: 16)
-                    )
-                    .shadow(color: .black, radius: 2)
+                    .avatar(size: 16)
 
                 Spacer()
             }

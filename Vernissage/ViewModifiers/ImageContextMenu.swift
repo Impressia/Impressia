@@ -10,22 +10,22 @@ import ClientKit
 import ServicesKit
 
 public extension View {
-    func imageContextMenu(client: Client, statusModel: StatusModel) -> some View {
-        modifier(ImageContextMenu(client: client, id: statusModel.id, url: statusModel.url))
+    func imageContextMenu(statusModel: StatusModel) -> some View {
+        modifier(ImageContextMenu(id: statusModel.id, url: statusModel.url))
     }
 
-    func imageContextMenu(client: Client, statusData: StatusData) -> some View {
-        modifier(ImageContextMenu(client: client, id: statusData.id, url: statusData.url))
+    func imageContextMenu(statusData: StatusData) -> some View {
+        modifier(ImageContextMenu(id: statusData.id, url: statusData.url))
     }
 }
 
 private struct ImageContextMenu: ViewModifier {
-    private let client: Client
+    @EnvironmentObject var client: Client
+
     private let id: String
     private let url: URL?
 
-    init(client: Client, id: String, url: URL?) {
-        self.client = client
+    init(id: String, url: URL?) {
         self.id = id
         self.url = url
     }

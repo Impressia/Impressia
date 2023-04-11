@@ -26,19 +26,11 @@ struct LargeWidgetView: View {
             Spacer()
             HStack {
                 uiAvatar
-                    .resizable()
-                    .clipShape(Circle())
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 24, height: 24)
-                    .overlay(
-                        Circle()
-                            .stroke(Color.white.opacity(0.6), lineWidth: 1)
-                            .frame(width: 24, height: 24)
-                    )
-                    .shadow(color: .black, radius: 2)
+                    .avatar(size: 24)
 
                 Text(entry.displayName ?? "")
-                    .foregroundColor(.white)
+                    .font(.system(size: 15))
+                    .foregroundColor(.white.opacity(0.8))
                     .fontWeight(.semibold)
                     .shadow(color: .black, radius: 2)
                 Spacer()

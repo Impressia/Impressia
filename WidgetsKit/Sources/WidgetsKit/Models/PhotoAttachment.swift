@@ -23,7 +23,7 @@ public class PhotoAttachment: ObservableObject, Identifiable, Equatable, Hashabl
     @Published public var photoData: Data?
 
     /// Property which stores orginal image file copied from Photos to tmp folder.
-    @Published public var imageFileTranseferable: ImageFileTranseferable?
+    @Published public var photoUrl: URL?
 
     /// Property stores information after upload to Pixelfed.
     @Published public var uploadedAttachment: UploadedAttachment?
@@ -53,14 +53,20 @@ public extension PhotoAttachment {
     func loadImage() async throws {
         if let pickerItem = self.photosPickerItem,
            let transferable = try await pickerItem.createImageFileTranseferable() {
-            self.imageFileTranseferable = transferable
+            self.photoUrl = transferable.url
             self.photoData = await ImageCompressService.shared.compressImageFrom(url: transferable.url)
+
+            return
         }
 
         if let itemProvider = self.nsItemProvider,
-           let transferable = try await itemProvider.createImageFileTranseferable() {
-            self.imageFileTranseferable = transferable
-            self.photoData = await ImageCompressService.shared.compressImageFrom(url: transferable.url)
+           let identifier = itemProvider.registeredTypeIdentifiers.first,
+           let handledItemType = FileTypeSupported(rawValue: identifier),
+           let transferredFile = try await handledItemType.loadItemContent(item: itemProvider) {
+            self.photoUrl = transferredFile.url
+            self.photoData = transferredFile.file
+
+            return
         }
     }
 }
@@ -86,7 +92,7 @@ public extension [PhotoAttachment] {
 
     func removeTmpFiles() {
         for file in self {
-            if let fileUrl = file.imageFileTranseferable?.url {
+            if let fileUrl = file.photoUrl {
                 do {
                     try FileManager.default.removeItem(at: fileUrl)
                 } catch {
