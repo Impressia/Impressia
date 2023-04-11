@@ -29,7 +29,7 @@ struct MediumWidgetView: View {
                     .avatar(size: 24)
 
                 Text(entry.displayName ?? "")
-                    .font(.subheadline)
+                    .font(.system(size: 15))
                     .foregroundColor(.white.opacity(0.8))
                     .fontWeight(.semibold)
                     .shadow(color: .black, radius: 2)
