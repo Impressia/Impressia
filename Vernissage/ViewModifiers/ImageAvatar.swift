@@ -58,8 +58,8 @@ private struct ImageAvatar: ViewModifier {
 
                     Spacer()
                 }
-                .padding(.leading, 6)
-                .padding(.top, 6)
+                .padding(.leading, 8)
+                .padding(.top, 8)
             }
         } else {
             content

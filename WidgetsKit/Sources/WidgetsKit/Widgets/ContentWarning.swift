@@ -37,9 +37,10 @@ public struct ContentWarning<Content: View, Blurred: View>: View {
                             }
                         } label: {
                             Image(systemName: "eye.slash")
-                                .font(.title2)
+                                .font(.system(size: 16))
                                 .shadow(color: Color.systemBackground, radius: 0.3)
-                                .padding()
+                                .padding(.top, 10)
+                                .padding([.bottom, .leading, .trailing], 8)
                         }
                     }
                     Spacer()
