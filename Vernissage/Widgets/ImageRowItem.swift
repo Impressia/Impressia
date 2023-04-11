@@ -50,6 +50,8 @@ struct ImageRowItem: View {
                         }
                     } blurred: {
                         BlurredImage(blurhash: attachmentData.blurhash)
+                            .imageAvatar(displayName: self.status.accountDisplayName,
+                                         avatarUrl: self.status.accountAvatar)
                             .onTapGesture {
                                 self.navigateToStatus()
                             }

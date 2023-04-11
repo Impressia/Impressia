@@ -44,6 +44,10 @@ struct ImageRowItemAsync: View {
                             self.imageView(image: image)
                         } blurred: {
                             BlurredImage(blurhash: attachment.blurhash)
+                                .if(self.showAvatar) {
+                                      $0.imageAvatar(displayName: self.statusViewModel.account.displayNameWithoutEmojis,
+                                                     avatarUrl: self.statusViewModel.account.avatar)
+                                }
                                 .onTapGesture {
                                     self.navigateToStatus()
                                 }
