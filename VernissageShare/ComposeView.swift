@@ -469,54 +469,54 @@ struct ComposeView: View {
     }
 
     private func loadPhotos() async {
-        do {
-            self.photosAreUploading = true
-            self.publishDisabled = self.isPublishButtonDisabled()
-            self.interactiveDismissDisabled = self.isInteractiveDismissDisabled()
+        self.photosAreUploading = true
+        self.publishDisabled = self.isPublishButtonDisabled()
+        self.interactiveDismissDisabled = self.isInteractiveDismissDisabled()
 
-            // We have to create list with existing photos.
-            var temporaryPhotosAttachment: [PhotoAttachment] = []
+        // We have to create list with existing photos.
+        var temporaryPhotosAttachment: [PhotoAttachment] = []
 
-            // Add to collection photos selected on photo picker.
-            for item in self.selectedItems {
-                if let photoAttachment = self.photosAttachment.first(where: { $0.photosPickerItem == item }) {
-                    temporaryPhotosAttachment.append(photoAttachment)
-                    continue
-                }
-
-                temporaryPhotosAttachment.append(PhotoAttachment(photosPickerItem: item))
+        // Add to collection photos selected on photo picker.
+        for item in self.selectedItems {
+            if let photoAttachment = self.photosAttachment.first(where: { $0.photosPickerItem == item }) {
+                temporaryPhotosAttachment.append(photoAttachment)
+                continue
             }
 
-            // Add to collection photos from share sheet.
-            for item in self.attachments {
-                if let photoAttachment = self.photosAttachment.first(where: { $0.nsItemProvider == item }) {
-                    temporaryPhotosAttachment.append(photoAttachment)
-                    continue
-                }
-
-                temporaryPhotosAttachment.append(PhotoAttachment(nsItemProvider: item))
-            }
-
-            // We can show new list on the screen.
-            self.photosAttachment = temporaryPhotosAttachment
-
-            // Now we have to get from photos images as JPEG.
-            for item in self.photosAttachment.filter({ $0.photoData == nil }) {
-                try await item.loadImage()
-            }
-
-            // Open again the keyboard.
-            self.focusedField = .content
-
-            // Upload images which hasn't been uploaded yet.
-            await self.upload()
-
-            // Change state of the screen.
-            self.photosAreUploading = false
-            self.refreshScreenState()
-        } catch {
-            ErrorService.shared.handle(error, message: "compose.error.loadingPhotosFailed", showToastr: true)
+            temporaryPhotosAttachment.append(PhotoAttachment(photosPickerItem: item))
         }
+
+        // Add to collection photos from share sheet.
+        for item in self.attachments {
+            if let photoAttachment = self.photosAttachment.first(where: { $0.nsItemProvider == item }) {
+                temporaryPhotosAttachment.append(photoAttachment)
+                continue
+            }
+
+            temporaryPhotosAttachment.append(PhotoAttachment(nsItemProvider: item))
+        }
+
+        // We can show new list on the screen.
+        self.photosAttachment = temporaryPhotosAttachment
+
+        // Now we have to get from photos images as JPEG.
+        for item in self.photosAttachment.filter({ $0.photoData == nil }) {
+            do {
+                try await item.loadImage()
+            } catch {
+                ErrorService.shared.handle(error, message: "Cannot load image from external library.")
+            }
+        }
+
+        // Open again the keyboard.
+        self.focusedField = .content
+
+        // Upload images which hasn't been uploaded yet.
+        await self.upload()
+
+        // Change state of the screen.
+        self.photosAreUploading = false
+        self.refreshScreenState()
     }
 
     private func refreshScreenState() {
