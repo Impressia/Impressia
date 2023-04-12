@@ -54,7 +54,7 @@ public class ImageFetcher {
                 continue
             }
 
-            let displayDate = Calendar.current.date(byAdding: .minute, value: widgetEntries.count * 15, to: Date())
+            let displayDate = Calendar.current.date(byAdding: .minute, value: widgetEntries.count * 20, to: Date())
 
             widgetEntries.append(WidgetEntry(date: displayDate ?? Date(),
                                              image: uiImage,
@@ -67,7 +67,7 @@ public class ImageFetcher {
             widgetEntries.append(self.placeholder())
         }
 
-        return widgetEntries
+        return widgetEntries.shuffled()
     }
 
     func placeholder() -> WidgetEntry {

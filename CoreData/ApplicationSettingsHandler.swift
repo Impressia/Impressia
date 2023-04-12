@@ -54,6 +54,7 @@ class ApplicationSettingsHandler {
         applicationState.activeIcon = defaultSettings.activeIcon
         applicationState.showSensitive = defaultSettings.showSensitive
         applicationState.showPhotoDescription = defaultSettings.showPhotoDescription
+        applicationState.showAvatarsOnTimeline = defaultSettings.showAvatarsOnTimeline
 
         if let menuPosition = MenuPosition(rawValue: Int(defaultSettings.menuPosition)) {
             applicationState.menuPosition = menuPosition
@@ -141,6 +142,12 @@ class ApplicationSettingsHandler {
     func set(menuPosition: MenuPosition) {
         let defaultSettings = self.get()
         defaultSettings.menuPosition = Int32(menuPosition.rawValue)
+        CoreDataHandler.shared.save()
+    }
+
+    func set(showAvatarsOnTimeline: Bool) {
+        let defaultSettings = self.get()
+        defaultSettings.showAvatarsOnTimeline = showAvatarsOnTimeline
         CoreDataHandler.shared.save()
     }
 

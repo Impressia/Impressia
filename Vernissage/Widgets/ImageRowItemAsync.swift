@@ -19,13 +19,17 @@ struct ImageRowItemAsync: View {
 
     private var statusViewModel: StatusModel
     private var attachment: AttachmentModel
+    private let showAvatar: Bool
 
     @State private var showThumbImage = false
     @State private var opacity = 0.0
 
     private let onImageDownloaded: (Double, Double) -> Void
 
-    init(statusViewModel: StatusModel, attachment: AttachmentModel, onImageDownloaded: @escaping (_: Double, _: Double) -> Void) {
+    init(statusViewModel: StatusModel,
+         attachment: AttachmentModel,
+         withAvatar showAvatar: Bool = true, onImageDownloaded: @escaping (_: Double, _: Double) -> Void) {
+        self.showAvatar = showAvatar
         self.statusViewModel = statusViewModel
         self.attachment = attachment
         self.onImageDownloaded = onImageDownloaded
@@ -40,6 +44,10 @@ struct ImageRowItemAsync: View {
                             self.imageView(image: image)
                         } blurred: {
                             BlurredImage(blurhash: attachment.blurhash)
+                                .if(self.showAvatar) {
+                                      $0.imageAvatar(displayName: self.statusViewModel.account.displayNameWithoutEmojis,
+                                                     avatarUrl: self.statusViewModel.account.avatar)
+                                }
                                 .onTapGesture {
                                     self.navigateToStatus()
                                 }
@@ -123,7 +131,11 @@ struct ImageRowItemAsync: View {
             .onTapGesture {
                 self.navigateToStatus()
             }
-            .imageContextMenu(client: self.client, statusModel: self.statusViewModel)
+            .if(self.showAvatar) {
+                  $0.imageAvatar(displayName: self.statusViewModel.account.displayNameWithoutEmojis,
+                                 avatarUrl: self.statusViewModel.account.avatar)
+            }
+            .imageContextMenu(statusModel: self.statusViewModel)
     }
 
     private func navigateToStatus() {

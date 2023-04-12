@@ -211,6 +211,7 @@
 "settings.title.topMenu" = "Nabigazio barra";
 "settings.title.bottomRightMenu" = "Behe eskumaldean";
 "settings.title.bottomLeftMenu" = "Behe ezkerraldean";
+"settings.title.showAvatarsOnTimeline" = "Show avatars on timelines";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Hasi saioa Pixelfed-en";

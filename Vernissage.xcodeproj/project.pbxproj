@@ -17,6 +17,7 @@
 		F805DCF129DBEF83006A1FD9 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F805DCF029DBEF83006A1FD9 /* ReportView.swift */; };
 		F808641429756666009F035C /* NotificationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F808641329756666009F035C /* NotificationRowView.swift */; };
 		F8121CA8298A86D600B466C7 /* InstanceRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8121CA7298A86D600B466C7 /* InstanceRowView.swift */; };
+		F815F60C29E49CF20044566B /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F815F60B29E49CF20044566B /* Avatar.swift */; };
 		F8210DCF2966B600001D9973 /* ImageRowAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8210DCE2966B600001D9973 /* ImageRowAsync.swift */; };
 		F8210DD52966BB7E001D9973 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = F8210DD42966BB7E001D9973 /* Nuke */; };
 		F8210DD72966BB7E001D9973 /* NukeExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = F8210DD62966BB7E001D9973 /* NukeExtensions */; };
@@ -157,6 +158,7 @@
 		F89D6C4629718193001DA3D4 /* GeneralSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C4529718193001DA3D4 /* GeneralSectionView.swift */; };
 		F89D6C4A297196FF001DA3D4 /* ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89D6C49297196FF001DA3D4 /* ImageViewer.swift */; };
 		F89F57B029D1C11200001EE3 /* RelationshipModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89F57AF29D1C11200001EE3 /* RelationshipModel.swift */; };
+		F8A4A88329E3FD1C00267E36 /* ImageAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A4A88229E3FD1C00267E36 /* ImageAvatar.swift */; };
 		F8A93D7E2965FD89001D8331 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A93D7D2965FD89001D8331 /* UserProfileView.swift */; };
 		F8AFF7C129B259150087D083 /* HashtagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AFF7C029B259150087D083 /* HashtagsView.swift */; };
 		F8AFF7C429B25EF40087D083 /* ImagesGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AFF7C329B25EF40087D083 /* ImagesGrid.swift */; };
@@ -219,6 +221,7 @@
 		F805DCF029DBEF83006A1FD9 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		F808641329756666009F035C /* NotificationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRowView.swift; sourceTree = "<group>"; };
 		F8121CA7298A86D600B466C7 /* InstanceRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceRowView.swift; sourceTree = "<group>"; };
+		F815F60B29E49CF20044566B /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		F8210DCE2966B600001D9973 /* ImageRowAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRowAsync.swift; sourceTree = "<group>"; };
 		F8210DDC2966CF17001D9973 /* StatusData+Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusData+Status.swift"; sourceTree = "<group>"; };
 		F8210DDE2966CFC7001D9973 /* AttachmentData+Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttachmentData+Attachment.swift"; sourceTree = "<group>"; };
@@ -326,6 +329,8 @@
 		F89D6C49297196FF001DA3D4 /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
 		F89F0605299139F6003DC875 /* Vernissage-002.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-002.xcdatamodel"; sourceTree = "<group>"; };
 		F89F57AF29D1C11200001EE3 /* RelationshipModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationshipModel.swift; sourceTree = "<group>"; };
+		F8A4A88229E3FD1C00267E36 /* ImageAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAvatar.swift; sourceTree = "<group>"; };
+		F8A4A88429E4099900267E36 /* Vernissage-008.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-008.xcdatamodel"; sourceTree = "<group>"; };
 		F8A93D7D2965FD89001D8331 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		F8AFF7C029B259150087D083 /* HashtagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagsView.swift; sourceTree = "<group>"; };
 		F8AFF7C329B25EF40087D083 /* ImagesGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesGrid.swift; sourceTree = "<group>"; };
@@ -630,6 +635,7 @@
 			isa = PBXGroup;
 			children = (
 				F88BC53A29E06A5100CE6141 /* ImageContextMenu.swift */,
+				F8A4A88229E3FD1C00267E36 /* ImageAvatar.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -780,6 +786,7 @@
 		F8F6E44F29BCE9030004795E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F815F60B29E49CF20044566B /* Avatar.swift */,
 				F8F6E45029BCE9190004795E /* UIImage+Resize.swift */,
 			);
 			path = Extensions;
@@ -979,6 +986,7 @@
 				F8F6E44C29BCC1F70004795E /* SmallWidgetView.swift in Sources */,
 				F864F76629BB91B400B13921 /* VernissageWidget.swift in Sources */,
 				F8F6E44D29BCC1F90004795E /* MediumWidgetView.swift in Sources */,
+				F815F60C29E49CF20044566B /* Avatar.swift in Sources */,
 				F8F6E44E29BCC1FB0004795E /* LargeWidgetView.swift in Sources */,
 				F864F76429BB91B400B13921 /* VernissageWidgetBundle.swift in Sources */,
 				F864F77D29BB9A4600B13921 /* AttachmentData+CoreDataClass.swift in Sources */,
@@ -1069,6 +1077,7 @@
 				F80048042961850500E6868A /* AttachmentData+CoreDataProperties.swift in Sources */,
 				F88E4D4A297EA0490057491A /* RouterPath.swift in Sources */,
 				F88E4D48297E90CD0057491A /* TrendStatusesView.swift in Sources */,
+				F8A4A88329E3FD1C00267E36 /* ImageAvatar.swift in Sources */,
 				F800480A2961EA1900E6868A /* AttachmentDataHandler.swift in Sources */,
 				F80048032961850500E6868A /* AttachmentData+CoreDataClass.swift in Sources */,
 				F891E7D029C368750022C449 /* ImageRowItemAsync.swift in Sources */,
@@ -1163,7 +1172,7 @@
 				CODE_SIGN_ENTITLEMENTS = VernissageWidget/VernissageWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 102;
+				CURRENT_PROJECT_VERSION = 110;
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VernissageWidget/Info.plist;
@@ -1174,7 +1183,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1191,7 +1200,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = VernissageWidget/VernissageWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 102;
+				CURRENT_PROJECT_VERSION = 110;
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VernissageWidget/Info.plist;
@@ -1202,7 +1211,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1218,7 +1227,7 @@
 				CODE_SIGN_ENTITLEMENTS = VernissageShare/VernissageShareExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 102;
+				CURRENT_PROJECT_VERSION = 110;
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VernissageShare/Info.plist;
@@ -1230,7 +1239,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1245,7 +1254,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = VernissageShare/VernissageShareExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 102;
+				CURRENT_PROJECT_VERSION = 110;
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VernissageShare/Info.plist;
@@ -1257,7 +1266,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1394,7 +1403,7 @@
 				CODE_SIGN_ENTITLEMENTS = Vernissage/Vernissage.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 102;
+				CURRENT_PROJECT_VERSION = 110;
 				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
@@ -1411,7 +1420,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1434,7 +1443,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Vernissage/Vernissage.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 102;
+				CURRENT_PROJECT_VERSION = 110;
 				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
@@ -1451,7 +1460,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1603,6 +1612,7 @@
 		F88C2476295C37BB0006098B /* Vernissage.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				F8A4A88429E4099900267E36 /* Vernissage-008.xcdatamodel */,
 				F8911A1829DE9E5500770F44 /* Vernissage-007.xcdatamodel */,
 				F8EF371429C624DA00669F45 /* Vernissage-006.xcdatamodel */,
 				F8CAE64129B8F1AF001E0372 /* Vernissage-005.xcdatamodel */,
@@ -1612,7 +1622,7 @@
 				F8C937A929882CA90004D782 /* Vernissage-001.xcdatamodel */,
 				F88C2477295C37BB0006098B /* Vernissage.xcdatamodel */,
 			);
-			currentVersion = F8911A1829DE9E5500770F44 /* Vernissage-007.xcdatamodel */;
+			currentVersion = F8A4A88429E4099900267E36 /* Vernissage-008.xcdatamodel */;
 			path = Vernissage.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

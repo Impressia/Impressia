@@ -9,6 +9,7 @@ import Nuke
 import NukeUI
 import ClientKit
 import EnvironmentKit
+import WidgetKit
 
 @main
 struct VernissageApp: App {
@@ -66,6 +67,9 @@ struct VernissageApp: App {
                         await self.calculateNewPhotosInBackground()
                     }
                 }
+
+                // Reload widget content when application become active.
+                WidgetCenter.shared.reloadAllTimelines()
             }
             .onReceive(timer) { _ in
                 Task {
