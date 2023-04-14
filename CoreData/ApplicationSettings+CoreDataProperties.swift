@@ -30,6 +30,7 @@ extension ApplicationSettings {
     @NSManaged public var showPhotoDescription: Bool
     @NSManaged public var menuPosition: Int32
     @NSManaged public var showAvatarsOnTimeline: Bool
+    @NSManaged public var showFavouritesOnTimeline: Bool
 }
 
 extension ApplicationSettings: Identifiable {

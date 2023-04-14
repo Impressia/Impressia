@@ -92,6 +92,9 @@ public class ApplicationState: ObservableObject {
     /// Should avatars be visible on timelines.
     @Published public var showAvatarsOnTimeline = false
 
+    /// Should favourites be visible on timelines.
+    @Published public var showFavouritesOnTimeline = false
+
     public func changeApplicationState(accountModel: AccountModel, instance: Instance?, lastSeenStatusId: String?) {
         self.account = accountModel
         self.lastSeenStatusId = lastSeenStatusId

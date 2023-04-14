@@ -176,6 +176,7 @@
 		F8F6E44D29BCC1F90004795E /* MediumWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6E44829BCC0F00004795E /* MediumWidgetView.swift */; };
 		F8F6E44E29BCC1FB0004795E /* LargeWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6E44A29BCC0FF0004795E /* LargeWidgetView.swift */; };
 		F8F6E45129BCE9190004795E /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6E45029BCE9190004795E /* UIImage+Resize.swift */; };
+		F8FFBD4829E9901E0047EE80 /* ImageFavourite.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FFBD4729E9901E0047EE80 /* ImageFavourite.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -357,6 +358,8 @@
 		F8F6E44829BCC0F00004795E /* MediumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumWidgetView.swift; sourceTree = "<group>"; };
 		F8F6E44A29BCC0FF0004795E /* LargeWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeWidgetView.swift; sourceTree = "<group>"; };
 		F8F6E45029BCE9190004795E /* UIImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
+		F8FFBD4729E9901E0047EE80 /* ImageFavourite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFavourite.swift; sourceTree = "<group>"; };
+		F8FFBD4929E99BEE0047EE80 /* Vernissage-009.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-009.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -636,6 +639,7 @@
 			children = (
 				F88BC53A29E06A5100CE6141 /* ImageContextMenu.swift */,
 				F8A4A88229E3FD1C00267E36 /* ImageAvatar.swift */,
+				F8FFBD4729E9901E0047EE80 /* ImageFavourite.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -1076,6 +1080,7 @@
 				F86B7221296C49A300EE59EC /* EmptyButtonStyle.swift in Sources */,
 				F80048042961850500E6868A /* AttachmentData+CoreDataProperties.swift in Sources */,
 				F88E4D4A297EA0490057491A /* RouterPath.swift in Sources */,
+				F8FFBD4829E9901E0047EE80 /* ImageFavourite.swift in Sources */,
 				F88E4D48297E90CD0057491A /* TrendStatusesView.swift in Sources */,
 				F8A4A88329E3FD1C00267E36 /* ImageAvatar.swift in Sources */,
 				F800480A2961EA1900E6868A /* AttachmentDataHandler.swift in Sources */,
@@ -1612,6 +1617,7 @@
 		F88C2476295C37BB0006098B /* Vernissage.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				F8FFBD4929E99BEE0047EE80 /* Vernissage-009.xcdatamodel */,
 				F8A4A88429E4099900267E36 /* Vernissage-008.xcdatamodel */,
 				F8911A1829DE9E5500770F44 /* Vernissage-007.xcdatamodel */,
 				F8EF371429C624DA00669F45 /* Vernissage-006.xcdatamodel */,
@@ -1622,7 +1628,7 @@
 				F8C937A929882CA90004D782 /* Vernissage-001.xcdatamodel */,
 				F88C2477295C37BB0006098B /* Vernissage.xcdatamodel */,
 			);
-			currentVersion = F8A4A88429E4099900267E36 /* Vernissage-008.xcdatamodel */;
+			currentVersion = F8FFBD4929E99BEE0047EE80 /* Vernissage-009.xcdatamodel */;
 			path = Vernissage.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

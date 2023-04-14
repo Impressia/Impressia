@@ -23,6 +23,7 @@ struct ImageRowItemAsync: View {
 
     @State private var showThumbImage = false
     @State private var opacity = 0.0
+    @State private var isFavourited = false
 
     private let onImageDownloaded: (Double, Double) -> Void
 
@@ -122,11 +123,17 @@ struct ImageRowItemAsync: View {
             .aspectRatio(contentMode: .fit)
             .onTapGesture(count: 2) {
                 Task {
+                    // Update favourite in Pixelfed server.
                     try? await self.client.statuses?.favourite(statusId: self.statusViewModel.id)
                 }
 
+                // Run adnimation and haptic feedback.
                 self.showThumbImage = true
                 HapticService.shared.fireHaptic(of: .buttonPress)
+
+                // Mark favourite booleans used to show star in the timeline view.
+                self.statusViewModel.favourited = true
+                self.isFavourited = true
             }
             .onTapGesture {
                 self.navigateToStatus()
@@ -135,7 +142,11 @@ struct ImageRowItemAsync: View {
                   $0.imageAvatar(displayName: self.statusViewModel.account.displayNameWithoutEmojis,
                                  avatarUrl: self.statusViewModel.account.avatar)
             }
+            .imageFavourite(isFavourited: $isFavourited)
             .imageContextMenu(statusModel: self.statusViewModel)
+            .onAppear {
+                self.isFavourited = self.statusViewModel.favourited
+            }
     }
 
     private func navigateToStatus() {

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22E261" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AccountData" representedClassName="AccountData" syncable="YES">
+        <attribute name="accessToken" optional="YES" attributeType="String"/>
+        <attribute name="acct" attributeType="String"/>
+        <attribute name="avatar" optional="YES" attributeType="URI"/>
+        <attribute name="avatarData" optional="YES" attributeType="Binary"/>
+        <attribute name="clientId" attributeType="String"/>
+        <attribute name="clientSecret" attributeType="String"/>
+        <attribute name="clientVapidKey" attributeType="String"/>
+        <attribute name="createdAt" attributeType="String"/>
+        <attribute name="displayName" optional="YES" attributeType="String"/>
+        <attribute name="followersCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="followingCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="header" optional="YES" attributeType="URI"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="lastSeenStatusId" optional="YES" attributeType="String"/>
+        <attribute name="locked" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="note" optional="YES" attributeType="String"/>
+        <attribute name="refreshToken" optional="YES" attributeType="String"/>
+        <attribute name="serverUrl" attributeType="URI"/>
+        <attribute name="statusesCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="url" optional="YES" attributeType="URI"/>
+        <attribute name="username" attributeType="String"/>
+        <relationship name="statuses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StatusData" inverseName="pixelfedAccount" inverseEntity="StatusData"/>
+    </entity>
+    <entity name="ApplicationSettings" representedClassName="ApplicationSettings" syncable="YES">
+        <attribute name="activeIcon" attributeType="String" defaultValueString="Default"/>
+        <attribute name="avatarShape" attributeType="Integer 32" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="currentAccount" optional="YES" attributeType="String"/>
+        <attribute name="hapticAnimationEnabled" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="hapticButtonPressEnabled" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="hapticNotificationEnabled" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="hapticRefreshEnabled" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="hapticTabSelectionEnabled" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="lastRefreshTokens" attributeType="Date" defaultDateTimeInterval="694256400" usesScalarValueType="NO"/>
+        <attribute name="menuPosition" attributeType="Integer 32" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="showAvatarsOnTimeline" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="showFavouritesOnTimeline" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="showPhotoDescription" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="showSensitive" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="theme" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tintColor" attributeType="Integer 32" defaultValueString="2" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="AttachmentData" representedClassName="AttachmentData" syncable="YES">
+        <attribute name="blurhash" optional="YES" attributeType="String"/>
+        <attribute name="data" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="exifCamera" optional="YES" attributeType="String"/>
+        <attribute name="exifCreatedDate" optional="YES" attributeType="String"/>
+        <attribute name="exifExposure" optional="YES" attributeType="String"/>
+        <attribute name="exifLens" optional="YES" attributeType="String"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="metaImageHeight" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="metaImageWidth" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="previewUrl" optional="YES" attributeType="URI"/>
+        <attribute name="remoteUrl" optional="YES" attributeType="URI"/>
+        <attribute name="statusId" attributeType="String"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <attribute name="type" attributeType="String"/>
+        <attribute name="url" attributeType="URI"/>
+        <relationship name="statusRelation" maxCount="1" deletionRule="Nullify" destinationEntity="StatusData" inverseName="attachmentsRelation" inverseEntity="StatusData"/>
+    </entity>
+    <entity name="StatusData" representedClassName="StatusData" syncable="YES">
+        <attribute name="accountAvatar" optional="YES" attributeType="URI"/>
+        <attribute name="accountDisplayName" optional="YES" attributeType="String"/>
+        <attribute name="accountId" attributeType="String"/>
+        <attribute name="accountUsername" optional="YES" attributeType="String"/>
+        <attribute name="applicationName" optional="YES" attributeType="String"/>
+        <attribute name="applicationWebsite" optional="YES" attributeType="URI"/>
+        <attribute name="bookmarked" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="content" attributeType="String"/>
+        <attribute name="createdAt" attributeType="String"/>
+        <attribute name="favourited" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="favouritesCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="inReplyToAccount" optional="YES" attributeType="String"/>
+        <attribute name="inReplyToId" optional="YES" attributeType="String"/>
+        <attribute name="muted" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="pinned" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="reblogged" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="rebloggedAccountAvatar" optional="YES" attributeType="URI"/>
+        <attribute name="rebloggedAccountDisplayName" optional="YES" attributeType="String"/>
+        <attribute name="rebloggedAccountId" optional="YES" attributeType="String"/>
+        <attribute name="rebloggedAccountUsername" optional="YES" attributeType="String"/>
+        <attribute name="rebloggedStatusId" optional="YES" attributeType="String"/>
+        <attribute name="reblogsCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="repliesCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="sensitive" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="spoilerText" optional="YES" attributeType="String"/>
+        <attribute name="uri" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="URI"/>
+        <attribute name="visibility" attributeType="String"/>
+        <relationship name="attachmentsRelation" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AttachmentData" inverseName="statusRelation" inverseEntity="AttachmentData"/>
+        <relationship name="pixelfedAccount" maxCount="1" deletionRule="Nullify" destinationEntity="AccountData" inverseName="statuses" inverseEntity="AccountData"/>
+    </entity>
+</model>

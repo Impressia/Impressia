@@ -23,7 +23,6 @@ public class StatusModel: ObservableObject {
     public let favouritesCount: Int
     public let repliesCount: Int
     public let reblogged: Bool
-    public let favourited: Bool
     public let sensitive: Bool
     public let bookmarked: Bool
     public let pinned: Bool
@@ -39,6 +38,7 @@ public class StatusModel: ObservableObject {
 
     public let reblogStatus: Status?
 
+    @Published public var favourited: Bool
     @Published public var mediaAttachments: [AttachmentModel]
 
     public init(status: Status) {

@@ -23,6 +23,7 @@ struct ImageRowItem: View {
     @State private var cancelled = true
     @State private var error: Error?
     @State private var opacity = 0.0
+    @State private var isFavourited = false
 
     private let onImageDownloaded: (Double, Double) -> Void
 
@@ -114,18 +115,32 @@ struct ImageRowItem: View {
             .aspectRatio(contentMode: .fit)
             .onTapGesture(count: 2) {
                 Task {
-                    try? await self.client.statuses?.favourite(statusId: self.status.id)
+                    // Update favourite in Pixelfed server.
+                    _ = try? await self.client.statuses?.favourite(statusId: self.status.id)
+
+                    // Update favourite in local cache (core data).
+                    if let accountId = self.applicationState.account?.id {
+                        StatusDataHandler.shared.setFavourited(accountId: accountId, statusId: self.status.id)
+                    }
                 }
 
+                // Run adnimation and haptic feedback.
                 self.showThumbImage = true
                 HapticService.shared.fireHaptic(of: .buttonPress)
+
+                // Mark favourite booleans used to show star in the timeline view.
+                self.isFavourited = true
             }
             .onTapGesture {
                 self.navigateToStatus()
             }
             .imageAvatar(displayName: self.status.accountDisplayName,
                          avatarUrl: self.status.accountAvatar)
+            .imageFavourite(isFavourited: $isFavourited)
             .imageContextMenu(statusData: self.status)
+            .onAppear {
+                self.isFavourited = self.status.favourited
+            }
     }
 
     private func downloadImage(attachmentData: AttachmentData) async {
