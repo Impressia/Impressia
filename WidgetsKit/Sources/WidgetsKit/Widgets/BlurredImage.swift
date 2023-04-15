@@ -7,9 +7,7 @@
 import SwiftUI
 
 public struct BlurredImage: View {
-
-    @State var blurhash: String?
-    private let defaultBlurhash = "LFC6ZCso00OZ~q%29FNHE2tRr=RP"
+    private let blurhash: String?
 
     public init(blurhash: String? = nil) {
         self.blurhash = blurhash
