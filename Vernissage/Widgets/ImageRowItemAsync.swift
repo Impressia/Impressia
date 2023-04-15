@@ -23,6 +23,7 @@ struct ImageRowItemAsync: View {
 
     @State private var showThumbImage = false
     @State private var opacity = 0.0
+    @State private var isFavourited = false
 
     private let onImageDownloaded: (Double, Double) -> Void
 
@@ -41,21 +42,16 @@ struct ImageRowItemAsync: View {
                 if self.statusViewModel.sensitive && !self.applicationState.showSensitive {
                     ZStack {
                         ContentWarning(spoilerText: self.statusViewModel.spoilerText) {
-                            self.imageView(image: image)
+                            self.imageContainerView(image: image)
+                                .imageContextMenu(statusModel: self.statusViewModel)
                         } blurred: {
-                            BlurredImage(blurhash: attachment.blurhash)
-                                .if(self.showAvatar) {
-                                      $0.imageAvatar(displayName: self.statusViewModel.account.displayNameWithoutEmojis,
-                                                     avatarUrl: self.statusViewModel.account.avatar)
-                                }
-                                .onTapGesture {
-                                    self.navigateToStatus()
-                                }
-                        }
-
-                        if showThumbImage {
-                            FavouriteTouch {
-                                self.showThumbImage = false
+                            ZStack {
+                                BlurredImage(blurhash: attachment.blurhash)
+                                ImageAvatar(displayName: self.statusViewModel.account.displayNameWithoutEmojis,
+                                            avatarUrl: self.statusViewModel.account.avatar)
+                            }
+                            .onTapGesture {
+                                self.navigateToStatus()
                             }
                         }
                     }
@@ -70,25 +66,18 @@ struct ImageRowItemAsync: View {
                         }
                     }
                 } else {
-                    ZStack {
-                        self.imageView(image: image)
+                    self.imageContainerView(image: image)
+                        .imageContextMenu(statusModel: self.statusViewModel)
+                        .opacity(self.opacity)
+                        .onAppear {
+                            if let uiImage = state.imageResponse?.image {
+                                self.recalculateSizeOfDownloadedImage(uiImage: uiImage)
+                            }
 
-                        if showThumbImage {
-                            FavouriteTouch {
-                                self.showThumbImage = false
+                            withAnimation {
+                                self.opacity = 1.0
                             }
                         }
-                    }
-                    .opacity(self.opacity)
-                    .onAppear {
-                        if let uiImage = state.imageResponse?.image {
-                            self.recalculateSizeOfDownloadedImage(uiImage: uiImage)
-                        }
-
-                        withAnimation {
-                            self.opacity = 1.0
-                        }
-                    }
                 }
             } else if state.error != nil {
                 ZStack {
@@ -116,26 +105,47 @@ struct ImageRowItemAsync: View {
     }
 
     @ViewBuilder
+    private func imageContainerView(image: Image) -> some View {
+        ZStack {
+            self.imageView(image: image)
+
+            if self.showAvatar {
+                ImageAvatar(displayName: self.statusViewModel.account.displayNameWithoutEmojis,
+                            avatarUrl: self.statusViewModel.account.avatar)
+            }
+
+            ImageFavourite(isFavourited: $isFavourited)
+            FavouriteTouch(showFavouriteAnimation: $showThumbImage)
+        }
+    }
+
+    @ViewBuilder
     private func imageView(image: Image) -> some View {
         image
             .resizable()
             .aspectRatio(contentMode: .fit)
             .onTapGesture(count: 2) {
                 Task {
+                    // Update favourite in Pixelfed server.
                     try? await self.client.statuses?.favourite(statusId: self.statusViewModel.id)
                 }
 
+                // Run adnimation and haptic feedback.
                 self.showThumbImage = true
                 HapticService.shared.fireHaptic(of: .buttonPress)
+
+                // Mark favourite booleans used to show star in the timeline view.
+                self.statusViewModel.favourited = true
+                withAnimation(.default.delay(2.0)) {
+                    self.isFavourited = true
+                }
             }
             .onTapGesture {
                 self.navigateToStatus()
             }
-            .if(self.showAvatar) {
-                  $0.imageAvatar(displayName: self.statusViewModel.account.displayNameWithoutEmojis,
-                                 avatarUrl: self.statusViewModel.account.avatar)
+            .onAppear {
+                self.isFavourited = self.statusViewModel.favourited
             }
-            .imageContextMenu(statusModel: self.statusViewModel)
     }
 
     private func navigateToStatus() {

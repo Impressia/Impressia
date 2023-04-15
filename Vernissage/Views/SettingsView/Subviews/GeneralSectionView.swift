@@ -84,10 +84,29 @@ struct GeneralSectionView: View {
                 ApplicationSettingsHandler.shared.set(menuPosition: menuPosition)
             }
 
-            Toggle("settings.title.showAvatarsOnTimeline", isOn: $applicationState.showAvatarsOnTimeline)
-                .onChange(of: self.applicationState.showAvatarsOnTimeline) { newValue in
-                    ApplicationSettingsHandler.shared.set(showAvatarsOnTimeline: newValue)
+            Toggle(isOn: $applicationState.showAvatarsOnTimeline) {
+                VStack(alignment: .leading) {
+                    Text("settings.title.showAvatars", comment: "Show avatars")
+                    Text("settings.title.showAvatarsOnTimeline", comment: "Show avatars on timeline")
+                        .font(.footnote)
+                        .foregroundColor(.lightGrayColor)
                 }
+            }
+            .onChange(of: self.applicationState.showAvatarsOnTimeline) { newValue in
+                ApplicationSettingsHandler.shared.set(showAvatarsOnTimeline: newValue)
+            }
+
+            Toggle(isOn: $applicationState.showFavouritesOnTimeline) {
+                VStack(alignment: .leading) {
+                    Text("settings.title.showFavourite", comment: "Show favourites")
+                    Text("settings.title.showFavouriteOnTimeline", comment: "Show favourites on timeline")
+                        .font(.footnote)
+                        .foregroundColor(.lightGrayColor)
+                }
+            }
+            .onChange(of: self.applicationState.showFavouritesOnTimeline) { newValue in
+                ApplicationSettingsHandler.shared.set(showFavouritesOnTimeline: newValue)
+            }
         }
     }
 }

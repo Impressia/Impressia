@@ -28,8 +28,8 @@ class StatusDataHandler {
         }
     }
 
-    func getStatusData(accountId: String, statusId: String) -> StatusData? {
-        let context = CoreDataHandler.shared.container.viewContext
+    func getStatusData(accountId: String, statusId: String, viewContext: NSManagedObjectContext? = nil) -> StatusData? {
+        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
         let fetchRequest = StatusData.fetchRequest()
 
         fetchRequest.fetchLimit = 1
@@ -111,6 +111,15 @@ class StatusDataHandler {
             try context.save()
         } catch {
             CoreDataError.shared.handle(error, message: "Error during deleting status (remove).")
+        }
+    }
+
+    func setFavourited(accountId: String, statusId: String) {
+        let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
+
+        if let statusData = self.getStatusData(accountId: accountId, statusId: statusId, viewContext: backgroundContext) {
+            statusData.favourited = true
+            CoreDataHandler.shared.save(viewContext: backgroundContext)
         }
     }
 

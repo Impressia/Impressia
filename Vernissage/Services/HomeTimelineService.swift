@@ -153,6 +153,13 @@ public class HomeTimelineService {
             StatusDataHandler.shared.remove(accountId: account.id, statuses: dbStatusesToRemove)
         }
 
+        // Update existing one.
+        for dbStatus in dbStatuses {
+            if let status = statuses.first(where: { item in item.id == dbStatus.id}) {
+                dbStatus.favourited = status.favourited
+            }
+        }
+
         // Add statuses which are not existing in database, but has been downloaded via API.
         var statusesToAdd: [Status] = []
         for status in statuses where !dbStatuses.contains(where: { statusData in statusData.id == status.id }) {

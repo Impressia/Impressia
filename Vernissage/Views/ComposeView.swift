@@ -388,60 +388,63 @@ struct ComposeView: View {
     private func keyboardToolbar() -> some View {
         VStack(spacing: 0) {
             Divider()
-            HStack(alignment: .center, spacing: 22) {
+            HStack {
+                ScrollView(.horizontal) {
+                    HStack(alignment: .center, spacing: 20) {
+                        Button {
+                            hideKeyboard()
+                            self.focusedField = .unknown
+                            self.photosPickerVisible = true
+                        } label: {
+                            Image(systemName: self.photosAreAttached ? "photo.fill.on.rectangle.fill" : "photo.on.rectangle")
+                        }
 
-                Button {
-                    hideKeyboard()
-                    self.focusedField = .unknown
-                    self.photosPickerVisible = true
-                } label: {
-                    Image(systemName: self.photosAreAttached ? "photo.fill.on.rectangle.fill" : "photo.on.rectangle")
-                }
+                        Button {
+                            withAnimation(.easeInOut) {
+                                self.isSensitive.toggle()
 
-                Button {
-                    withAnimation(.easeInOut) {
-                        self.isSensitive.toggle()
+                                if self.isSensitive {
+                                    self.focusedField = .spoilerText
+                                } else {
+                                    self.focusedField = .content
+                                }
+                            }
+                        } label: {
+                            Image(systemName: self.isSensitive ? "exclamationmark.square.fill" : "exclamationmark.square")
+                        }
 
-                        if self.isSensitive {
-                            self.focusedField = .spoilerText
-                        } else {
-                            self.focusedField = .content
+                        Button {
+                            withAnimation(.easeInOut) {
+                                self.commentsDisabled.toggle()
+                            }
+                        } label: {
+                            Image(systemName: self.commentsDisabled ? "person.2.slash" : "person.2.fill")
+                        }
+
+                        Button {
+                            if self.place != nil {
+                                withAnimation(.easeInOut) {
+                                    self.place = nil
+                                }
+                            } else {
+                                self.showSheet = .placeSelector
+                            }
+                        } label: {
+                            Image(systemName: self.place == nil ? "mappin.square" : "mappin.square.fill")
+                        }
+
+                        Button {
+                            self.textModel.insertAtCursorPosition(content: "#")
+                        } label: {
+                            Image(systemName: "number")
+                        }
+
+                        Button {
+                            self.textModel.insertAtCursorPosition(content: "@")
+                        } label: {
+                            Image(systemName: "at")
                         }
                     }
-                } label: {
-                    Image(systemName: self.isSensitive ? "exclamationmark.square.fill" : "exclamationmark.square")
-                }
-
-                Button {
-                    withAnimation(.easeInOut) {
-                        self.commentsDisabled.toggle()
-                    }
-                } label: {
-                    Image(systemName: self.commentsDisabled ? "person.2.slash" : "person.2.fill")
-                }
-
-                Button {
-                    if self.place != nil {
-                        withAnimation(.easeInOut) {
-                            self.place = nil
-                        }
-                    } else {
-                        self.showSheet = .placeSelector
-                    }
-                } label: {
-                    Image(systemName: self.place == nil ? "mappin.square" : "mappin.square.fill")
-                }
-
-                Button {
-                    self.textModel.insertAtCursorPosition(content: "#")
-                } label: {
-                    Image(systemName: "number")
-                }
-
-                Button {
-                    self.textModel.insertAtCursorPosition(content: "@")
-                } label: {
-                    Image(systemName: "at")
                 }
 
                 Spacer()

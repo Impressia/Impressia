@@ -17,7 +17,18 @@ Vernissage is the perfect app for you. Try it out today and join our growing com
 It's built entirely in SwiftUI.
 
 ## Contributing
+
 You can fork and clone repository. Change development team and bundle id. Do your changes and create a pull a request 👍.
 
 Thank you in advance for any, even the smallest help, with the development of the project 💕!
 
+## Translations
+
+Creating new translation is pretty easy, all you need to do is to copy two folders:
+ - `Vernissage/Localization/en.lproj`
+ - `Vernissage/PixelfedKit/Sources/PixelfedKit/Resources/en.lproj`
+
+In the name of the folders you have to put ne code of the new language ([here](https://stackoverflow.com/a/13360348) you can find the languages codes).
+Then you have to open files in these folders and translate them 🇯🇵🇫🇷🇨🇮🇧🇪. After translation create a Pull Request 👍.
+
+From time to time you have to come back and translate lines which has been added since the last translation. 

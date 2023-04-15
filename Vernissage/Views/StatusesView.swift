@@ -32,6 +32,7 @@ struct StatusesView: View {
     @State private var tag: Tag?
     @State private var statusViewModels: [StatusModel] = []
     @State private var state: ViewState = .loading
+    @State private var lastStatusId: String?
 
     private let defaultLimit = 20
 
@@ -125,16 +126,21 @@ struct StatusesView: View {
             return
         }
 
+        // Remember last status id returned by API.
+        self.lastStatusId = statuses.last?.id
+
+        // Get only statuses with images.
         var inPlaceStatuses: [StatusModel] = []
         for item in statuses.getStatusesWithImagesOnly() {
             inPlaceStatuses.append(StatusModel(status: item))
         }
 
+        // Append to empty list.
         self.statusViewModels.append(contentsOf: inPlaceStatuses)
     }
 
     private func loadMoreStatuses() async throws {
-        if let lastStatusId = self.statusViewModels.last?.id {
+        if let lastStatusId = self.lastStatusId {
             let previousStatuses = try await self.loadFromApi(maxId: lastStatusId)
 
             if previousStatuses.isEmpty {
@@ -142,26 +148,41 @@ struct StatusesView: View {
                 return
             }
 
+            // Now we have new last status.
+            if let lastStatusId = previousStatuses.last?.id {
+                self.lastStatusId = lastStatusId
+            }
+
+            // Get only statuses with images.
             var inPlaceStatuses: [StatusModel] = []
             for item in previousStatuses.getStatusesWithImagesOnly() {
                 inPlaceStatuses.append(StatusModel(status: item))
             }
 
+            // Append statuses to existing array of statuses (at the end).
             self.statusViewModels.append(contentsOf: inPlaceStatuses)
         }
     }
 
     private func loadTopStatuses() async throws {
-        if let firstStatusId = self.statusViewModels.first?.id {
-            let newestStatuses = try await self.loadFromApi(sinceId: firstStatusId)
+        let statuses = try await self.loadFromApi()
 
-            var inPlaceStatuses: [StatusModel] = []
-            for item in newestStatuses.getStatusesWithImagesOnly() {
-                inPlaceStatuses.append(StatusModel(status: item))
-            }
-
-            self.statusViewModels.insert(contentsOf: inPlaceStatuses, at: 0)
+        if statuses.isEmpty {
+            self.allItemsLoaded = true
+            return
         }
+
+        // Remember last status id returned by API.
+        self.lastStatusId = statuses.last?.id
+
+        // Get only statuses with images.
+        var inPlaceStatuses: [StatusModel] = []
+        for item in statuses.getStatusesWithImagesOnly() {
+            inPlaceStatuses.append(StatusModel(status: item))
+        }
+
+        // Replace old collection with new one.
+        self.statusViewModels = inPlaceStatuses
     }
 
     private func loadFromApi(maxId: String? = nil, sinceId: String? = nil, minId: String? = nil) async throws -> [Status] {

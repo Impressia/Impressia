@@ -211,7 +211,10 @@
 "settings.title.topMenu" = "Panel tytułowy";
 "settings.title.bottomRightMenu" = "Dolny prawy";
 "settings.title.bottomLeftMenu" = "Dolny lewy";
-"settings.title.showAvatarsOnTimeline" = "Wyświetlaj awatary na osiach zdjęć";
+"settings.title.showAvatars" = "Wyświetlaj awatary";
+"settings.title.showAvatarsOnTimeline" = "Awatary będą widoczne na osiach zdjęć";
+"settings.title.showFavourite" = "Wyświetlaj polubienia";
+"settings.title.showFavouriteOnTimeline" = "Polubienia będą widoczne na osiach zdjęć";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Zaloguj się do Pixelfed";
