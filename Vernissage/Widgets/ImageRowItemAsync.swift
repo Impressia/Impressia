@@ -43,6 +43,7 @@ struct ImageRowItemAsync: View {
                     ZStack {
                         ContentWarning(spoilerText: self.statusViewModel.spoilerText) {
                             self.imageContainerView(image: image)
+                                .imageContextMenu(statusModel: self.statusViewModel)
                         } blurred: {
                             ZStack {
                                 BlurredImage(blurhash: attachment.blurhash)
@@ -65,19 +66,18 @@ struct ImageRowItemAsync: View {
                         }
                     }
                 } else {
-                    ZStack {
-                        self.imageContainerView(image: image)
-                    }
-                    .opacity(self.opacity)
-                    .onAppear {
-                        if let uiImage = state.imageResponse?.image {
-                            self.recalculateSizeOfDownloadedImage(uiImage: uiImage)
-                        }
+                    self.imageContainerView(image: image)
+                        .imageContextMenu(statusModel: self.statusViewModel)
+                        .opacity(self.opacity)
+                        .onAppear {
+                            if let uiImage = state.imageResponse?.image {
+                                self.recalculateSizeOfDownloadedImage(uiImage: uiImage)
+                            }
 
-                        withAnimation {
-                            self.opacity = 1.0
+                            withAnimation {
+                                self.opacity = 1.0
+                            }
                         }
-                    }
                 }
             } else if state.error != nil {
                 ZStack {
@@ -106,15 +106,17 @@ struct ImageRowItemAsync: View {
 
     @ViewBuilder
     private func imageContainerView(image: Image) -> some View {
-        self.imageView(image: image)
+        ZStack {
+            self.imageView(image: image)
 
-        if self.showAvatar {
-            ImageAvatar(displayName: self.statusViewModel.account.displayNameWithoutEmojis,
-                        avatarUrl: self.statusViewModel.account.avatar)
+            if self.showAvatar {
+                ImageAvatar(displayName: self.statusViewModel.account.displayNameWithoutEmojis,
+                            avatarUrl: self.statusViewModel.account.avatar)
+            }
+
+            ImageFavourite(isFavourited: $isFavourited)
+            FavouriteTouch(showFavouriteAnimation: $showThumbImage)
         }
-
-        ImageFavourite(isFavourited: $isFavourited)
-        FavouriteTouch(showFavouriteAnimation: $showThumbImage)
     }
 
     @ViewBuilder
@@ -141,7 +143,6 @@ struct ImageRowItemAsync: View {
             .onTapGesture {
                 self.navigateToStatus()
             }
-            .imageContextMenu(statusModel: self.statusViewModel)
             .onAppear {
                 self.isFavourited = self.statusViewModel.favourited
             }

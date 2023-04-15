@@ -43,6 +43,7 @@ struct ImageRowItem: View {
                 ZStack {
                     ContentWarning(spoilerText: self.status.spoilerText) {
                         self.imageContainerView(uiImage: uiImage)
+                            .imageContextMenu(statusData: self.status)
                     } blurred: {
                         ZStack {
                             BlurredImage(blurhash: attachmentData.blurhash)
@@ -60,15 +61,14 @@ struct ImageRowItem: View {
                     }
                 }
             } else {
-                ZStack {
-                    self.imageContainerView(uiImage: uiImage)
-                }
-                .opacity(self.opacity)
-                .onAppear {
-                    withAnimation {
-                        self.opacity = 1.0
+                self.imageContainerView(uiImage: uiImage)
+                    .imageContextMenu(statusData: self.status)
+                    .opacity(self.opacity)
+                    .onAppear {
+                        withAnimation {
+                            self.opacity = 1.0
+                        }
                     }
-                }
             }
         } else {
             if cancelled {
@@ -99,11 +99,13 @@ struct ImageRowItem: View {
 
     @ViewBuilder
     private func imageContainerView(uiImage: UIImage) -> some View {
-        self.imageView(uiImage: uiImage)
+        ZStack {
+            self.imageView(uiImage: uiImage)
 
-        ImageAvatar(displayName: self.status.accountDisplayName, avatarUrl: self.status.accountAvatar)
-        ImageFavourite(isFavourited: $isFavourited)
-        FavouriteTouch(showFavouriteAnimation: $showThumbImage)
+            ImageAvatar(displayName: self.status.accountDisplayName, avatarUrl: self.status.accountAvatar)
+            ImageFavourite(isFavourited: $isFavourited)
+            FavouriteTouch(showFavouriteAnimation: $showThumbImage)
+        }
     }
 
     @ViewBuilder
@@ -134,7 +136,6 @@ struct ImageRowItem: View {
             .onTapGesture {
                 self.navigateToStatus()
             }
-            .imageContextMenu(statusData: self.status)
             .onAppear {
                 self.isFavourited = self.status.favourited
             }
