@@ -45,9 +45,8 @@ struct MainView: View {
 
                 if self.applicationState.menuPosition == .top {
                     self.getPrincipalToolbar()
+                    self.getTrailingToolbar()
                 }
-
-                self.getTrailingToolbar()
             }
             .onChange(of: tipsStore.status) { status in
                 if status == .successful {
@@ -156,7 +155,7 @@ struct MainView: View {
                     HapticService.shared.fireHaptic(of: .buttonPress)
                     self.routerPath.presentedSheet = .newStatusEditor
                 } label: {
-                    Image(systemName: "square.and.pencil")
+                    Image(systemName: "plus")
                         .foregroundColor(Color.mainTextColor)
                         .fontWeight(.semibold)
                 }
