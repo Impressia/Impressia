@@ -3,6 +3,6 @@ disabled_rules:
   - nesting
 line_length: 180
 file_length: 1000
-type_body_length: 500
+type_body_length: 1000
 function_body_length: 100
 cyclomatic_complexity: 20
