@@ -84,7 +84,9 @@ public class HomeTimelineService {
         attachment.data = imageData
         attachment.metaImageWidth = Int32(imageWidth)
         attachment.metaImageHeight = Int32(imageHeight)
-        self.setExifProperties(in: attachment, from: imageData)
+
+        // TODO: Uncomment/remove when exif metadata will be supported.
+        // self.setExifProperties(in: attachment, from: imageData)
 
         // Save data into database.
         CoreDataHandler.shared.save()
