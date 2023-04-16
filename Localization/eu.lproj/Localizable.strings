@@ -6,6 +6,8 @@
 "global.title.success" = "Success";
 "global.title.photoSaved" = "Photo has been saved.";
 "global.title.ok" = "OK";
+"global.title.showMore" = "Show more";
+"global.title.showLess" = "Show less";
 
 // MARK: Global errors.
 "global.error.unexpected" = "Espero ez zen errorea.";
@@ -198,7 +200,7 @@
 "settings.title.alwaysShowSensitiveTitle" = "Erakutsi beti NSFW edukia";
 "settings.title.alwaysShowSensitiveDescription" = "Erakutsi NSFW (Lanerako Egokia Izan Ez Daitekeen Edukia) gisa markatutako multimedia edukia ohartarazpenik gabe";
 "settings.title.alwaysShowAltTitle" = "Erakutsi testu alternatiboa";
-"settings.title.alwaysShowAltDescription" = "Erakutsi testu alternatiboa xehetasunen pantailan, baldin badago";
+"settings.title.alwaysShowAltDescription" = "Alternative icon will be displayed on timelines";
 "settings.title.general" = "Orokorra";
 "settings.title.applicationIcon" = "Aplikazioaren ikonoa";
 "settings.title.followVernissage" = "Jarraitu Vernissage-ri";

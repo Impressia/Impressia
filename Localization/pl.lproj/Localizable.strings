@@ -6,6 +6,8 @@
 "global.title.success" = "Sukces";
 "global.title.photoSaved" = "Zdjęcie zostało zapisane.";
 "global.title.ok" = "OK";
+"global.title.showMore" = "Pokaż więcej";
+"global.title.showLess" = "Pokaż mniej";
 
 // MARK: Global errors.
 "global.error.unexpected" = "Wystąpił nieoczekiwany błąd.";
@@ -198,7 +200,7 @@
 "settings.title.alwaysShowSensitiveTitle" = "Zawsze pokazuj statusy NSFW";
 "settings.title.alwaysShowSensitiveDescription" = "Wymuś pokazywanie statusów NFSW (czułych) bez ostrzeżeń";
 "settings.title.alwaysShowAltTitle" = "Pokaż tekst alternatywny";
-"settings.title.alwaysShowAltDescription" = "Pokaż alternatywny tekst, jeśli jest obecny na szczegółach statusu";
+"settings.title.alwaysShowAltDescription" = "Ikony alternatywnego tekstu będą widoczne na osiach zdjęć";
 "settings.title.general" = "Ogólne";
 "settings.title.applicationIcon" = "Ikona aplikacji";
 "settings.title.followVernissage" = "Obserwuj Vernissage";

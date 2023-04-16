@@ -128,10 +128,7 @@ struct StatusView: View {
                         LabelIcon(iconName: "camera.aperture", value: self.exifLens)
                         LabelIcon(iconName: "timelapse", value: self.exifExposure)
                         LabelIcon(iconName: "calendar", value: self.exifCreatedDate?.toDate(.isoDateTimeSec)?.formatted())
-
-                        if self.applicationState.showPhotoDescription {
-                            LabelIcon(iconName: "eye.trianglebadge.exclamationmark", value: self.description)
-                        }
+                        LabelIcon(iconName: "eye.trianglebadge.exclamationmark", value: self.description, isExpandable: true)
                     }
                     .padding(.bottom, 2)
                     .foregroundColor(.lightGrayColor)
