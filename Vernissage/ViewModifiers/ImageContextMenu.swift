@@ -32,6 +32,7 @@ private struct ImageContextMenu: ViewModifier {
     }
 
     @EnvironmentObject var client: Client
+    @EnvironmentObject var routerPath: RouterPath
 
     @State private var alertInfo: AlertInfo?
 
@@ -102,6 +103,14 @@ private struct ImageContextMenu: ViewModifier {
                     }
 
                     if let uiImage {
+                        Button {
+                            Task {
+                                self.routerPath.presentedSheet = .shareImage(image: uiImage)
+                            }
+                        } label: {
+                            Label("status.title.shareImage", systemImage: "photo")
+                        }
+
                         Button {
                             let imageSaver = ImageSaver {
                                 self.alertInfo = AlertInfo(

@@ -33,6 +33,7 @@ enum SheetDestinations: Identifiable {
     case replyToStatusEditor(status: StatusModel)
     case settings
     case report(objectType: Report.ObjectType, objectId: String)
+    case shareImage(image: UIImage)
 
     public var id: String {
         switch self {
@@ -42,6 +43,8 @@ enum SheetDestinations: Identifiable {
             return "settings"
         case .report:
             return "report"
+        case .shareImage:
+            return "shareImage"
         }
     }
 }

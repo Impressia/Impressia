@@ -237,7 +237,7 @@
 "status.title.reboostedBy" = "Podbite przez";
 "status.title.favouritedBy" = "Polubione przez";
 "status.title.openInBrowser" = "Otwórz w przeglądarce";
-"status.title.shareStatus" = "Udostępnij";
+"status.title.shareStatus" = "Udostępnij status";
 "status.title.yourStatus" = "Twój status";
 "status.title.delete" = "Usuń";
 "status.title.reboosted" = "Podbite";
@@ -258,6 +258,7 @@
 "status.title.saveImage" = "Zapisz zdjęcie";
 "status.title.showMediaDescription" = "Pokaż opis zdjęcia";
 "status.title.mediaDescription" = "Opis zdjęcia";
+"status.title.shareImage" = "Udostępnij zdjęcie";
 "status.error.loadingStatusFailed" = "Błąd podczas wczytywanie statusu.";
 "status.error.notFound" = "Status już nie istnieje.";
 "status.error.loadingCommentsFailed" =" Błąd podczas wczytywanie komentarzy.";

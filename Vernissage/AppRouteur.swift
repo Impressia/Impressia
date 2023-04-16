@@ -65,6 +65,8 @@ extension View {
                 SettingsView()
             case .report(let objectType, let objectId):
                 ReportView(objectType: objectType, objectId: objectId)
+            case .shareImage(let image):
+                ActivityView(image: image)
             }
         }
     }

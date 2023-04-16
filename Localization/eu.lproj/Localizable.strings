@@ -258,6 +258,7 @@
 "status.title.saveImage" = "Save image";
 "status.title.showMediaDescription" = "Show media description";
 "status.title.mediaDescription" = "Media description";
+"status.title.shareImage" = "Share image";
 "status.error.loadingStatusFailed" = "Egoera kargatzeak huts egin du.";
 "status.error.notFound" = "Egoera ez da dagoeneko existitzen.";
 "status.error.loadingCommentsFailed" = "Ezin dira iruzkinak eskuratu.";

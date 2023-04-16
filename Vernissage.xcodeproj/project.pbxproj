@@ -83,6 +83,7 @@
 		F86B7216296BFFDA00EE59EC /* UserProfileStatusesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7215296BFFDA00EE59EC /* UserProfileStatusesView.swift */; };
 		F86B7221296C49A300EE59EC /* EmptyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7220296C49A300EE59EC /* EmptyButtonStyle.swift */; };
 		F86BC9E929EBBB67009415EC /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86BC9E829EBBB66009415EC /* ImageSaver.swift */; };
+		F86BC9EB29EBDA2E009415EC /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86BC9EA29EBDA2E009415EC /* ActivityView.swift */; };
 		F8742FC429990AFB00E9642B /* ClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8742FC329990AFB00E9642B /* ClientError.swift */; };
 		F8764187298ABB520057D362 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8764186298ABB520057D362 /* ViewState.swift */; };
 		F876418D298AE5020057D362 /* PaginableStatusesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F876418C298AE5020057D362 /* PaginableStatusesView.swift */; };
@@ -274,6 +275,7 @@
 		F86B7215296BFFDA00EE59EC /* UserProfileStatusesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileStatusesView.swift; sourceTree = "<group>"; };
 		F86B7220296C49A300EE59EC /* EmptyButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyButtonStyle.swift; sourceTree = "<group>"; };
 		F86BC9E829EBBB66009415EC /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
+		F86BC9EA29EBDA2E009415EC /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		F8742FC329990AFB00E9642B /* ClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientError.swift; sourceTree = "<group>"; };
 		F8764186298ABB520057D362 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		F876418C298AE5020057D362 /* PaginableStatusesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginableStatusesView.swift; sourceTree = "<group>"; };
@@ -465,6 +467,7 @@
 				F8E6D03229CDD52500416CCA /* EditProfileView.swift */,
 				F89B5CC129D01BF700549F2F /* InstanceView.swift */,
 				F805DCF029DBEF83006A1FD9 /* ReportView.swift */,
+				F86BC9EA29EBDA2E009415EC /* ActivityView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1132,6 +1135,7 @@
 				F8DF38E629DDB98A0047F1AA /* SocialsSectionView.swift in Sources */,
 				F88BC53B29E06A5100CE6141 /* ImageContextMenu.swift in Sources */,
 				F864F7A529BBA01D00B13921 /* CoreDataError.swift in Sources */,
+				F86BC9EB29EBDA2E009415EC /* ActivityView.swift in Sources */,
 				F83CBEFB298298A1002972C8 /* ImageCarouselPicture.swift in Sources */,
 				F89A46DC296EAACE0062125F /* SettingsView.swift in Sources */,
 				F866F6AE29606367002E8F88 /* ApplicationViewMode.swift in Sources */,
