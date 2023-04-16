@@ -43,7 +43,9 @@ struct ImageRowItemAsync: View {
                     ZStack {
                         ContentWarning(spoilerText: self.statusViewModel.spoilerText) {
                             self.imageContainerView(image: image)
-                                .imageContextMenu(statusModel: self.statusViewModel)
+                                .imageContextMenu(statusModel: self.statusViewModel,
+                                                  attachmentModel: self.attachment,
+                                                  uiImage: state.imageResponse?.image)
                         } blurred: {
                             ZStack {
                                 BlurredImage(blurhash: attachment.blurhash)
@@ -67,7 +69,9 @@ struct ImageRowItemAsync: View {
                     }
                 } else {
                     self.imageContainerView(image: image)
-                        .imageContextMenu(statusModel: self.statusViewModel)
+                        .imageContextMenu(statusModel: self.statusViewModel,
+                                          attachmentModel: self.attachment,
+                                          uiImage: state.imageResponse?.image)
                         .opacity(self.opacity)
                         .onAppear {
                             if let uiImage = state.imageResponse?.image {

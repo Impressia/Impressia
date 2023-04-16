@@ -10,24 +10,41 @@ import ClientKit
 import ServicesKit
 
 public extension View {
-    func imageContextMenu(statusModel: StatusModel) -> some View {
-        modifier(ImageContextMenu(id: statusModel.id, url: statusModel.url))
+    func imageContextMenu(statusModel: StatusModel, attachmentModel: AttachmentModel, uiImage: UIImage?) -> some View {
+        modifier(ImageContextMenu(id: statusModel.id, url: statusModel.url, altText: attachmentModel.description, uiImage: uiImage))
     }
 
-    func imageContextMenu(statusData: StatusData) -> some View {
-        modifier(ImageContextMenu(id: statusData.id, url: statusData.url))
+    func imageContextMenu(statusData: StatusData, attachmentData: AttachmentData, uiImage: UIImage?) -> some View {
+        modifier(ImageContextMenu(id: statusData.id, url: statusData.url, altText: attachmentData.text, uiImage: uiImage))
     }
 }
 
 private struct ImageContextMenu: ViewModifier {
+    private struct AlertInfo: Identifiable {
+        enum AlertType {
+            case showAlternativeText
+            case photoHasBeenSaved
+        }
+
+        let id: AlertType
+        let title: Text
+        let message: Text
+    }
+
     @EnvironmentObject var client: Client
+
+    @State private var alertInfo: AlertInfo?
 
     private let id: String
     private let url: URL?
+    private let altText: String?
+    private let uiImage: UIImage?
 
-    init(id: String, url: URL?) {
+    init(id: String, url: URL?, altText: String?, uiImage: UIImage?) {
         self.id = id
         self.url = url
+        self.altText = altText
+        self.uiImage = uiImage
     }
 
     func body(content: Content) -> some View {
@@ -69,8 +86,43 @@ private struct ImageContextMenu: ViewModifier {
                             Label("status.title.shareStatus", systemImage: "square.and.arrow.up")
                         }
                     }
+
+                    Divider()
+
+                    if let altText, altText.count > 0 {
+                        Button {
+                            self.alertInfo = AlertInfo(
+                                id: .showAlternativeText,
+                                title: Text("status.title.mediaDescription", comment: "Media description"),
+                                message: Text(altText)
+                            )
+                        } label: {
+                            Label("status.title.showMediaDescription", systemImage: "eye.trianglebadge.exclamationmark")
+                        }
+                    }
+
+                    if let uiImage {
+                        Button {
+                            let imageSaver = ImageSaver {
+                                self.alertInfo = AlertInfo(
+                                    id: .photoHasBeenSaved,
+                                    title: Text("global.title.success", comment: "Success"),
+                                    message: Text("global.title.photoSaved", comment: "Photo has been saved")
+                                )
+                            }
+
+                            imageSaver.writeToPhotoAlbum(image: uiImage)
+                        } label: {
+                            Label("status.title.saveImage", systemImage: "square.and.arrow.down")
+                        }
+                    }
                 }
         }
+        .alert(item: $alertInfo, content: { info in
+            Alert(title: info.title,
+                  message: info.message,
+                  dismissButton: .default(Text("global.title.ok", comment: "OK")))
+        })
     }
 
     private func reboost() async {

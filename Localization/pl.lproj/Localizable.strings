@@ -3,6 +3,9 @@
 "global.title.seePost" = "Pokaż zdjęcie";
 "global.title.refresh" = "Odśwież";
 "global.title.momentsAgo" = "chwilę temu";
+"global.title.success" = "Sukces";
+"global.title.photoSaved" = "Zdjęcie zostało zapisane.";
+"global.title.ok" = "OK";
 
 // MARK: Global errors.
 "global.error.unexpected" = "Wystąpił nieoczekiwany błąd.";
@@ -252,6 +255,9 @@
 "status.title.unbookmark" = "Usuń z zakładek";
 "status.title.comment" = "Skomentuj";
 "status.title.report" = "Zgłoś";
+"status.title.saveImage" = "Zapisz zdjęcie";
+"status.title.showMediaDescription" = "Pokaż opis zdjęcia";
+"status.title.mediaDescription" = "Opis zdjęcia";
 "status.error.loadingStatusFailed" = "Błąd podczas wczytywanie statusu.";
 "status.error.notFound" = "Status już nie istnieje.";
 "status.error.loadingCommentsFailed" =" Błąd podczas wczytywanie komentarzy.";

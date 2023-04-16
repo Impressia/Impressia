@@ -82,6 +82,7 @@
 		F86B7214296BFDCE00EE59EC /* UserProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7213296BFDCE00EE59EC /* UserProfileHeaderView.swift */; };
 		F86B7216296BFFDA00EE59EC /* UserProfileStatusesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7215296BFFDA00EE59EC /* UserProfileStatusesView.swift */; };
 		F86B7221296C49A300EE59EC /* EmptyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7220296C49A300EE59EC /* EmptyButtonStyle.swift */; };
+		F86BC9E929EBBB67009415EC /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86BC9E829EBBB66009415EC /* ImageSaver.swift */; };
 		F8742FC429990AFB00E9642B /* ClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8742FC329990AFB00E9642B /* ClientError.swift */; };
 		F8764187298ABB520057D362 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8764186298ABB520057D362 /* ViewState.swift */; };
 		F876418D298AE5020057D362 /* PaginableStatusesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F876418C298AE5020057D362 /* PaginableStatusesView.swift */; };
@@ -272,6 +273,7 @@
 		F86B7213296BFDCE00EE59EC /* UserProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeaderView.swift; sourceTree = "<group>"; };
 		F86B7215296BFFDA00EE59EC /* UserProfileStatusesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileStatusesView.swift; sourceTree = "<group>"; };
 		F86B7220296C49A300EE59EC /* EmptyButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyButtonStyle.swift; sourceTree = "<group>"; };
+		F86BC9E829EBBB66009415EC /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		F8742FC329990AFB00E9642B /* ClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientError.swift; sourceTree = "<group>"; };
 		F8764186298ABB520057D362 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		F876418C298AE5020057D362 /* PaginableStatusesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginableStatusesView.swift; sourceTree = "<group>"; };
@@ -718,6 +720,7 @@
 				F85D4974296407F100751DF7 /* HomeTimelineService.swift */,
 				F88E4D49297EA0490057491A /* RouterPath.swift */,
 				F878842129A4A4E3003CFAD2 /* AppMetadataService.swift */,
+				F86BC9E829EBBB66009415EC /* ImageSaver.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1117,6 +1120,7 @@
 				F89F57B029D1C11200001EE3 /* RelationshipModel.swift in Sources */,
 				F88AB05829B36B8200345EDE /* AccountsPhotoView.swift in Sources */,
 				F85D4971296402DC00751DF7 /* AuthorizationService.swift in Sources */,
+				F86BC9E929EBBB67009415EC /* ImageSaver.swift in Sources */,
 				F88AB05329B3613900345EDE /* PhotoUrl.swift in Sources */,
 				F88E4D56297EAD6E0057491A /* AppRouteur.swift in Sources */,
 				F88FAD27295F400E009B20C9 /* NotificationsView.swift in Sources */,
@@ -1412,6 +1416,7 @@
 				INFOPLIST_FILE = Vernissage/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Vernissage;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Saving photos from Pixelfed";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1452,6 +1457,7 @@
 				INFOPLIST_FILE = Vernissage/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Vernissage;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Saving photos from Pixelfed";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

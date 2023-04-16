@@ -3,6 +3,9 @@
 "global.title.seePost" = "Ikusi bidalketa";
 "global.title.refresh" = "Freskatu";
 "global.title.momentsAgo" = "oraintxe bertan";
+"global.title.success" = "Success";
+"global.title.photoSaved" = "Photo has been saved.";
+"global.title.ok" = "OK";
 
 // MARK: Global errors.
 "global.error.unexpected" = "Espero ez zen errorea.";
@@ -252,6 +255,9 @@
 "status.title.unbookmark" = "Kendu laster-marka";
 "status.title.comment" = "Egin iruzkina";
 "status.title.report" = "Salatu";
+"status.title.saveImage" = "Save image";
+"status.title.showMediaDescription" = "Show media description";
+"status.title.mediaDescription" = "Media description";
 "status.error.loadingStatusFailed" = "Egoera kargatzeak huts egin du.";
 "status.error.notFound" = "Egoera ez da dagoeneko existitzen.";
 "status.error.loadingCommentsFailed" = "Ezin dira iruzkinak eskuratu.";

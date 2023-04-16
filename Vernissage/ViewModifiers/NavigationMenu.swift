@@ -73,7 +73,7 @@ private struct NavigationMenu<MenuItems>: ViewModifier where MenuItems: View {
         }
         .padding(.horizontal, 8)
         .background(.ultraThinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: 22))
+        .clipShape(Capsule())
     }
 
     @ViewBuilder
@@ -81,12 +81,11 @@ private struct NavigationMenu<MenuItems>: ViewModifier where MenuItems: View {
         Menu {
             self.menuItems()
         } label: {
-            Image(systemName: "line.3.horizontal")
-                .resizable()
-                .foregroundColor(.mainTextColor.opacity(0.8))
-                .shadow(radius: 5)
-                .padding(12)
-                .frame(width: 44, height: 44)
+            Image(systemName: "ellipsis")
+                .font(.system(size: 26))
+                .foregroundColor(.mainTextColor.opacity(0.75))
+                .padding(.vertical, 10)
+                .padding(.horizontal, 8)
         }
     }
 
@@ -96,11 +95,10 @@ private struct NavigationMenu<MenuItems>: ViewModifier where MenuItems: View {
             self.routerPath.presentedSheet = .newStatusEditor
         } label: {
             Image(systemName: "plus")
-                .resizable()
-                .foregroundColor(.mainTextColor.opacity(0.8))
-                .shadow(radius: 5)
-                .padding(12)
-                .frame(width: 44, height: 44)
+                .font(.system(size: 26))
+                .foregroundColor(.mainTextColor.opacity(0.75))
+                .padding(.vertical, 10)
+                .padding(.horizontal, 8)
         }
     }
 }

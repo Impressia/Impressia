@@ -3,6 +3,9 @@
 "global.title.seePost" = "See post";
 "global.title.refresh" = "Refresh";
 "global.title.momentsAgo" = "moments ago";
+"global.title.success" = "Success";
+"global.title.photoSaved" = "Photo has been saved.";
+"global.title.ok" = "OK";
 
 // MARK: Global errors.
 "global.error.unexpected" = "Unexpected error.";
@@ -252,6 +255,9 @@
 "status.title.unbookmark" = "Unbookmark";
 "status.title.comment" = "Comment";
 "status.title.report" = "Report";
+"status.title.saveImage" = "Save image";
+"status.title.showMediaDescription" = "Show media description";
+"status.title.mediaDescription" = "Media description";
 "status.error.loadingStatusFailed" = "Loading status failed.";
 "status.error.notFound" = "Status not existing anymore.";
 "status.error.loadingCommentsFailed" = "Comments cannot be downloaded.";
