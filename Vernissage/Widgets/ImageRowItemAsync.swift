@@ -118,6 +118,10 @@ struct ImageRowItemAsync: View {
                             avatarUrl: self.statusViewModel.account.avatar)
             }
 
+            ImageAlternativeText(text: self.attachment.description) { text in
+                self.routerPath.presentedAlert = .alternativeText(text: text)
+            }
+
             ImageFavourite(isFavourited: $isFavourited)
             FavouriteTouch(showFavouriteAnimation: $showThumbImage)
         }

@@ -104,6 +104,10 @@ struct ImageRowItem: View {
 
             ImageAvatar(displayName: self.status.accountDisplayName, avatarUrl: self.status.accountAvatar)
             ImageFavourite(isFavourited: $isFavourited)
+            ImageAlternativeText(text: self.attachmentData.text) { text in
+                self.routerPath.presentedAlert = .alternativeText(text: text)
+            }
+
             FavouriteTouch(showFavouriteAnimation: $showThumbImage)
         }
     }

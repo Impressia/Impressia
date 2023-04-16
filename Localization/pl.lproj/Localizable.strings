@@ -259,6 +259,7 @@
 "status.title.showMediaDescription" = "Pokaż opis zdjęcia";
 "status.title.mediaDescription" = "Opis zdjęcia";
 "status.title.shareImage" = "Udostępnij zdjęcie";
+"status.title.altText" = "ALT";
 "status.error.loadingStatusFailed" = "Błąd podczas wczytywanie statusu.";
 "status.error.notFound" = "Status już nie istnieje.";
 "status.error.loadingCommentsFailed" =" Błąd podczas wczytywanie komentarzy.";

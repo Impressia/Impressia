@@ -53,6 +53,20 @@ enum OverlayDestinations {
     case successPayment
 }
 
+enum AlertDestinations: Identifiable {
+    case alternativeText(text: String)
+    case savePhotoSuccess
+
+    public var id: String {
+        switch self {
+        case .alternativeText:
+            return "alternativeText"
+        case .savePhotoSuccess:
+            return "savePhotoSuccess"
+        }
+    }
+}
+
 @MainActor
 class RouterPath: ObservableObject {
     public var urlHandler: ((URL) -> OpenURLAction.Result)?
@@ -60,6 +74,7 @@ class RouterPath: ObservableObject {
     @Published public var path: [RouteurDestinations] = []
     @Published public var presentedSheet: SheetDestinations?
     @Published public var presentedOverlay: OverlayDestinations?
+    @Published public var presentedAlert: AlertDestinations?
 
     public init() {}
 

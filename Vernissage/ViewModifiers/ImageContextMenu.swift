@@ -20,21 +20,8 @@ public extension View {
 }
 
 private struct ImageContextMenu: ViewModifier {
-    private struct AlertInfo: Identifiable {
-        enum AlertType {
-            case showAlternativeText
-            case photoHasBeenSaved
-        }
-
-        let id: AlertType
-        let title: Text
-        let message: Text
-    }
-
     @EnvironmentObject var client: Client
     @EnvironmentObject var routerPath: RouterPath
-
-    @State private var alertInfo: AlertInfo?
 
     private let id: String
     private let url: URL?
@@ -92,11 +79,7 @@ private struct ImageContextMenu: ViewModifier {
 
                     if let altText, altText.count > 0 {
                         Button {
-                            self.alertInfo = AlertInfo(
-                                id: .showAlternativeText,
-                                title: Text("status.title.mediaDescription", comment: "Media description"),
-                                message: Text(altText)
-                            )
+                            self.routerPath.presentedAlert = .alternativeText(text: altText)
                         } label: {
                             Label("status.title.showMediaDescription", systemImage: "eye.trianglebadge.exclamationmark")
                         }
@@ -113,11 +96,7 @@ private struct ImageContextMenu: ViewModifier {
 
                         Button {
                             let imageSaver = ImageSaver {
-                                self.alertInfo = AlertInfo(
-                                    id: .photoHasBeenSaved,
-                                    title: Text("global.title.success", comment: "Success"),
-                                    message: Text("global.title.photoSaved", comment: "Photo has been saved")
-                                )
+                                self.routerPath.presentedAlert = .savePhotoSuccess
                             }
 
                             imageSaver.writeToPhotoAlbum(image: uiImage)
@@ -127,11 +106,6 @@ private struct ImageContextMenu: ViewModifier {
                     }
                 }
         }
-        .alert(item: $alertInfo, content: { info in
-            Alert(title: info.title,
-                  message: info.message,
-                  dismissButton: .default(Text("global.title.ok", comment: "OK")))
-        })
     }
 
     private func reboost() async {

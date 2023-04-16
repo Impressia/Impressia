@@ -259,6 +259,7 @@
 "status.title.showMediaDescription" = "Show media description";
 "status.title.mediaDescription" = "Media description";
 "status.title.shareImage" = "Share image";
+"status.title.altText" = "ALT";
 "status.error.loadingStatusFailed" = "Loading status failed.";
 "status.error.notFound" = "Status not existing anymore.";
 "status.error.loadingCommentsFailed" = "Comments cannot be downloaded.";
