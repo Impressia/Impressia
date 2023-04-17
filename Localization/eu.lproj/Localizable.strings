@@ -6,8 +6,8 @@
 "global.title.success" = "Primeran";
 "global.title.photoSaved" = "Argazkia gorde da.";
 "global.title.ok" = "Ados";
-"global.title.showMore" = "Show more";
-"global.title.showLess" = "Show less";
+"global.title.showMore" = "Erakutsi gehiago";
+"global.title.showLess" = "Erakutsi gutxiago";
 
 // MARK: Global errors.
 "global.error.unexpected" = "Espero ez zen errorea.";
@@ -220,8 +220,8 @@
 "settings.title.showAvatarsOnTimeline" = "Abatarrak denbora-lerroan erakutsiko dira";
 "settings.title.showFavourite" = "Erakutsi gogokoak";
 "settings.title.showFavouriteOnTimeline" = "Gogokoak denbora-lerroan erakutsiko dira";
-"settings.title.showAltText" = "Show ALT icon";
-"settings.title.showAltTextOnTimeline" = "ALT icon will be displayed on timelines";
+"settings.title.showAltText" = "Erakutsi ALT ikurra";
+"settings.title.showAltTextOnTimeline" = "ALT ikurra denbora-lerroetan erakutsiko da";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Hasi saioa Pixelfed-en";
