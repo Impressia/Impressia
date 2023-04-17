@@ -200,7 +200,7 @@
 "settings.title.alwaysShowSensitiveTitle" = "Erakutsi beti NSFW edukia";
 "settings.title.alwaysShowSensitiveDescription" = "Erakutsi NSFW (Lanerako Egokia Izan Ez Daitekeen Edukia) gisa markatutako multimedia edukia ohartarazpenik gabe";
 "settings.title.alwaysShowAltTitle" = "Erakutsi testu alternatiboa";
-"settings.title.alwaysShowAltDescription" = "Alternative icon will be displayed on timelines";
+"settings.title.alwaysShowAltDescription" = "Erakutsi testu alternatiboa xehetasunen pantailan, baldin badago";
 "settings.title.general" = "Orokorra";
 "settings.title.applicationIcon" = "Aplikazioaren ikonoa";
 "settings.title.followVernissage" = "Jarraitu Vernissage-ri";
@@ -220,6 +220,8 @@
 "settings.title.showAvatarsOnTimeline" = "Avatars will be displayed on timelines";
 "settings.title.showFavourite" = "Show favourites";
 "settings.title.showFavouriteOnTimeline" = "Favourites will be displayed on timelines";
+"settings.title.showAltText" = "Show ALT icon";
+"settings.title.showAltTextOnTimeline" = "ALT icon will be displayed on timelines";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Hasi saioa Pixelfed-en";

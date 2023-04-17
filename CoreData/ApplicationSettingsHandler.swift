@@ -56,6 +56,7 @@ class ApplicationSettingsHandler {
         applicationState.showPhotoDescription = defaultSettings.showPhotoDescription
         applicationState.showAvatarsOnTimeline = defaultSettings.showAvatarsOnTimeline
         applicationState.showFavouritesOnTimeline = defaultSettings.showFavouritesOnTimeline
+        applicationState.showAltIconOnTimeline = defaultSettings.showAltIconOnTimeline
 
         if let menuPosition = MenuPosition(rawValue: Int(defaultSettings.menuPosition)) {
             applicationState.menuPosition = menuPosition
@@ -155,6 +156,12 @@ class ApplicationSettingsHandler {
     func set(showFavouritesOnTimeline: Bool) {
         let defaultSettings = self.get()
         defaultSettings.showFavouritesOnTimeline = showFavouritesOnTimeline
+        CoreDataHandler.shared.save()
+    }
+
+    func set(showAltIconOnTimeline: Bool) {
+        let defaultSettings = self.get()
+        defaultSettings.showAltIconOnTimeline = showAltIconOnTimeline
         CoreDataHandler.shared.save()
     }
 

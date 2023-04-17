@@ -61,6 +61,18 @@ struct MediaSettingsView: View {
             .onChange(of: self.applicationState.showFavouritesOnTimeline) { newValue in
                 ApplicationSettingsHandler.shared.set(showFavouritesOnTimeline: newValue)
             }
+
+            Toggle(isOn: $applicationState.showAltIconOnTimeline) {
+                VStack(alignment: .leading) {
+                    Text("settings.title.showAltText", comment: "Show ALT icon")
+                    Text("settings.title.showAltTextOnTimeline", comment: "ALT icon will be displayed on timelines")
+                        .font(.footnote)
+                        .foregroundColor(.lightGrayColor)
+                }
+            }
+            .onChange(of: self.applicationState.showAltIconOnTimeline) { newValue in
+                ApplicationSettingsHandler.shared.set(showAltIconOnTimeline: newValue)
+            }
         }
     }
 }

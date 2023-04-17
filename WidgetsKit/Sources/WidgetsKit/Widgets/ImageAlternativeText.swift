@@ -19,7 +19,7 @@ public struct ImageAlternativeText: View {
     }
 
     public var body: some View {
-        if let text = self.text, text.count > 0 && self.applicationState.showPhotoDescription {
+        if let text = self.text, text.count > 0 && self.applicationState.showAltIconOnTimeline {
             VStack(alignment: .leading) {
                 Spacer()
 

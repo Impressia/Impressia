@@ -200,7 +200,7 @@
 "settings.title.alwaysShowSensitiveTitle" = "Always show NSFW";
 "settings.title.alwaysShowSensitiveDescription" = "Force show all NFSW (sensitive) media without warnings";
 "settings.title.alwaysShowAltTitle" = "Show alternative text";
-"settings.title.alwaysShowAltDescription" = "Alternative icon will be displayed on timelines";
+"settings.title.alwaysShowAltDescription" = "Show alternative text if present on status details screen";
 "settings.title.general" = "General";
 "settings.title.applicationIcon" = "Application icon";
 "settings.title.followVernissage" = "Follow Vernissage";
@@ -220,6 +220,8 @@
 "settings.title.showAvatarsOnTimeline" = "Avatars will be displayed on timelines";
 "settings.title.showFavourite" = "Show favourites";
 "settings.title.showFavouriteOnTimeline" = "Favourites will be displayed on timelines";
+"settings.title.showAltText" = "Show ALT icon";
+"settings.title.showAltTextOnTimeline" = "ALT icon will be displayed on timelines";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Sign in to Pixelfed";

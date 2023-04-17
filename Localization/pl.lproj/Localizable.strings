@@ -200,7 +200,7 @@
 "settings.title.alwaysShowSensitiveTitle" = "Zawsze pokazuj statusy NSFW";
 "settings.title.alwaysShowSensitiveDescription" = "Wymuś pokazywanie statusów NFSW (czułych) bez ostrzeżeń";
 "settings.title.alwaysShowAltTitle" = "Pokaż tekst alternatywny";
-"settings.title.alwaysShowAltDescription" = "Ikony alternatywnego tekstu będą widoczne na osiach zdjęć";
+"settings.title.alwaysShowAltDescription" = "Pokaż alternatywny tekst, jeśli jest obecny na szczegółach statusu";
 "settings.title.general" = "Ogólne";
 "settings.title.applicationIcon" = "Ikona aplikacji";
 "settings.title.followVernissage" = "Obserwuj Vernissage";
@@ -220,6 +220,8 @@
 "settings.title.showAvatarsOnTimeline" = "Awatary będą widoczne na osiach zdjęć";
 "settings.title.showFavourite" = "Wyświetlaj polubienia";
 "settings.title.showFavouriteOnTimeline" = "Polubienia będą widoczne na osiach zdjęć";
+"settings.title.showAltText" = "Wyświetlaj ikonę ALT";
+"settings.title.showAltTextOnTimeline" = "Ikony ALT będą widonczne na osiach zdjęć";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Zaloguj się do Pixelfed";
