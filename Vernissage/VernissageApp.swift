@@ -47,6 +47,7 @@ struct VernissageApp: App {
                         .withAppRouteur()
                         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
                         .withOverlayDestinations(overlayDestinations: $routerPath.presentedOverlay)
+                        .withAlertDestinations(alertDestinations: $routerPath.presentedAlert)
                 }
             }
             .environment(\.managedObjectContext, coreDataHandler.container.viewContext)

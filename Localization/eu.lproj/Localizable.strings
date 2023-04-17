@@ -6,6 +6,8 @@
 "global.title.success" = "Primeran";
 "global.title.photoSaved" = "Argazkia gorde da.";
 "global.title.ok" = "Ados";
+"global.title.showMore" = "Show more";
+"global.title.showLess" = "Show less";
 
 // MARK: Global errors.
 "global.error.unexpected" = "Espero ez zen errorea.";
@@ -218,6 +220,8 @@
 "settings.title.showAvatarsOnTimeline" = "Abatarrak denbora-lerroan erakutsiko dira";
 "settings.title.showFavourite" = "Erakutsi gogokoak";
 "settings.title.showFavouriteOnTimeline" = "Gogokoak denbora-lerroan erakutsiko dira";
+"settings.title.showAltText" = "Show ALT icon";
+"settings.title.showAltTextOnTimeline" = "ALT icon will be displayed on timelines";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Hasi saioa Pixelfed-en";
@@ -259,6 +263,7 @@
 "status.title.showMediaDescription" = "Erakutsi multimediaren deskribapena";
 "status.title.mediaDescription" = "Multimediaren deskribapena";
 "status.title.shareImage" = "Partekatu irudia";
+"status.title.altText" = "ALT";
 "status.error.loadingStatusFailed" = "Egoera kargatzeak huts egin du.";
 "status.error.notFound" = "Egoera ez da dagoeneko existitzen.";
 "status.error.loadingCommentsFailed" = "Ezin dira iruzkinak eskuratu.";

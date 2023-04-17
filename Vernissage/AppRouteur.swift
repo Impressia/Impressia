@@ -82,4 +82,19 @@ extension View {
             }
         }
     }
+
+    func withAlertDestinations(alertDestinations: Binding<AlertDestinations?>) -> some View {
+        self.alert(item: alertDestinations) { destination in
+            switch destination {
+            case .alternativeText(let text):
+                return Alert(title: Text("status.title.mediaDescription", comment: "Media description"),
+                      message: Text(text),
+                      dismissButton: .default(Text("global.title.ok", comment: "OK")))
+            case .savePhotoSuccess:
+                return Alert(title: Text("global.title.success", comment: "Success"),
+                      message: Text("global.title.photoSaved", comment: "Photo has been saved"),
+                      dismissButton: .default(Text("global.title.ok", comment: "OK")))
+            }
+        }
+    }
 }

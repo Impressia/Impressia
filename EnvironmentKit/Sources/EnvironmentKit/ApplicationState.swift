@@ -95,6 +95,9 @@ public class ApplicationState: ObservableObject {
     /// Should favourites be visible on timelines.
     @Published public var showFavouritesOnTimeline = false
 
+    /// Should ALT icon be visible on timelines.
+    @Published public var showAltIconOnTimeline = false
+
     public func changeApplicationState(accountModel: AccountModel, instance: Instance?, lastSeenStatusId: String?) {
         self.account = accountModel
         self.lastSeenStatusId = lastSeenStatusId

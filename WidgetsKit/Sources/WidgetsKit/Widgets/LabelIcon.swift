@@ -9,10 +9,12 @@ import SwiftUI
 public struct LabelIcon: View {
     let iconName: String
     let value: String?
+    let isExpandable: Bool
 
-    public init(iconName: String, value: String?) {
+    public init(iconName: String, value: String?, isExpandable: Bool = false) {
         self.iconName = iconName
         self.value = value
+        self.isExpandable = isExpandable
     }
 
     public var body: some View {
@@ -20,8 +22,14 @@ public struct LabelIcon: View {
             HStack(alignment: .center) {
                 Image(systemName: iconName)
                     .frame(width: 24, alignment: .center)
-                Text(value)
-                    .font(.footnote)
+
+                if self.isExpandable {
+                    ExpandableText(text: value, lineLimit: 3)
+                        .font(.footnote)
+                } else {
+                    Text(value)
+                        .font(.footnote)
+                }
             }
             .padding(.vertical, 2)
         } else {
