@@ -39,9 +39,9 @@ public struct ContentWarning<Content: View, Blurred: View>: View {
                             Image(systemName: "eye.slash")
                                 .font(.system(size: 18))
                                 .foregroundColor(.white.opacity(0.8))
-                                .shadow(color: Color.systemBackground, radius: 0.3)
+                                .shadow(color: Color.black, radius: 1)
                                 .padding(.top, 11)
-                                .padding(.trailing, 6)
+                                .padding(.trailing, 16)
                                 .padding([.bottom, .leading], 16)
                         }
                     }
