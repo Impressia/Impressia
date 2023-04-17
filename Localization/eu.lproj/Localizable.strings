@@ -3,9 +3,9 @@
 "global.title.seePost" = "Ikusi bidalketa";
 "global.title.refresh" = "Freskatu";
 "global.title.momentsAgo" = "oraintxe bertan";
-"global.title.success" = "Success";
-"global.title.photoSaved" = "Photo has been saved.";
-"global.title.ok" = "OK";
+"global.title.success" = "Primeran";
+"global.title.photoSaved" = "Argazkia gorde da.";
+"global.title.ok" = "Ados";
 "global.title.showMore" = "Show more";
 "global.title.showLess" = "Show less";
 
@@ -216,10 +216,10 @@
 "settings.title.topMenu" = "Nabigazio barra";
 "settings.title.bottomRightMenu" = "Behe eskumaldean";
 "settings.title.bottomLeftMenu" = "Behe ezkerraldean";
-"settings.title.showAvatars" = "Show avatars";
-"settings.title.showAvatarsOnTimeline" = "Avatars will be displayed on timelines";
-"settings.title.showFavourite" = "Show favourites";
-"settings.title.showFavouriteOnTimeline" = "Favourites will be displayed on timelines";
+"settings.title.showAvatars" = "Erakutsi abatarrak";
+"settings.title.showAvatarsOnTimeline" = "Abatarrak denbora-lerroan erakutsiko dira";
+"settings.title.showFavourite" = "Erakutsi gogokoak";
+"settings.title.showFavouriteOnTimeline" = "Gogokoak denbora-lerroan erakutsiko dira";
 "settings.title.showAltText" = "Show ALT icon";
 "settings.title.showAltTextOnTimeline" = "ALT icon will be displayed on timelines";
 
@@ -259,17 +259,17 @@
 "status.title.unbookmark" = "Kendu laster-marka";
 "status.title.comment" = "Egin iruzkina";
 "status.title.report" = "Salatu";
-"status.title.saveImage" = "Save image";
-"status.title.showMediaDescription" = "Show media description";
-"status.title.mediaDescription" = "Media description";
-"status.title.shareImage" = "Share image";
+"status.title.saveImage" = "Gorde irudia";
+"status.title.showMediaDescription" = "Erakutsi multimediaren deskribapena";
+"status.title.mediaDescription" = "Multimediaren deskribapena";
+"status.title.shareImage" = "Partekatu irudia";
 "status.title.altText" = "ALT";
 "status.error.loadingStatusFailed" = "Egoera kargatzeak huts egin du.";
 "status.error.notFound" = "Egoera ez da dagoeneko existitzen.";
 "status.error.loadingCommentsFailed" = "Ezin dira iruzkinak eskuratu.";
 "status.error.reboostFailed" = "Bultzadak huts egin du.";
 "status.error.favouriteFailed" = "Gogokoak huts egin du.";
-"status.error.bookmarkFailed" = "Lastar-markak huts egin du.";
+"status.error.bookmarkFailed" = "Laster-markak huts egin du.";
 "status.error.deleteFailed" = "Ezabatzeak huts egin du.";
 
 // Mark: Accounts view.
