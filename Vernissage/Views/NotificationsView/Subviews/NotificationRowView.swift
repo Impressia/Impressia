@@ -76,6 +76,7 @@ struct NotificationRowView: View {
                             if let cachedImage = self.image {
                                 cachedImage
                                     .resizable()
+                                    .aspectRatio(contentMode: .fill)
                                     .frame(width: 50, height: 50)
                                     .clipShape(RoundedRectangle(cornerRadius: 8))
                             } else {
