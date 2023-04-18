@@ -14,38 +14,45 @@ public struct ImageAvatar: View {
 
     private let displayName: String?
     private let avatarUrl: URL?
+    private let onTap: () -> Void
 
-    public init(displayName: String?, avatarUrl: URL?) {
+    public init(displayName: String?, avatarUrl: URL?, onTap: @escaping () -> Void) {
         self.displayName = displayName
         self.avatarUrl = avatarUrl
+        self.onTap = onTap
     }
 
     public var body: some View {
         if self.applicationState.showAvatarsOnTimeline {
             VStack(alignment: .leading) {
                 HStack(alignment: .center) {
-                    LazyImage(url: avatarUrl) { state in
-                        if let image = state.image {
-                            self.buildAvatar(image: image)
-                        } else if state.isLoading {
-                            self.buildAvatar()
-                        } else {
-                            self.buildAvatar()
+                    HStack(alignment: .center) {
+                        LazyImage(url: avatarUrl) { state in
+                            if let image = state.image {
+                                self.buildAvatar(image: image)
+                            } else if state.isLoading {
+                                self.buildAvatar()
+                            } else {
+                                self.buildAvatar()
+                            }
                         }
+
+                        Text(displayName ?? "")
+                            .font(.system(size: 15))
+                            .foregroundColor(.white.opacity(0.8))
+                            .fontWeight(.semibold)
+                            .shadow(color: .black, radius: 2)
+                    }
+                    .padding(8)
+                    .onTapGesture {
+                        self.onTap()
                     }
 
-                    Text(displayName ?? "")
-                        .font(.system(size: 15))
-                        .foregroundColor(.white.opacity(0.8))
-                        .fontWeight(.semibold)
-                        .shadow(color: .black, radius: 2)
                     Spacer()
                 }
 
                 Spacer()
             }
-            .padding(.leading, 8)
-            .padding(.top, 8)
         }
     }
 

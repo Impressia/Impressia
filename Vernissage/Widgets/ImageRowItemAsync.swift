@@ -50,7 +50,11 @@ struct ImageRowItemAsync: View {
                             ZStack {
                                 BlurredImage(blurhash: attachment.blurhash)
                                 ImageAvatar(displayName: self.statusViewModel.account.displayNameWithoutEmojis,
-                                            avatarUrl: self.statusViewModel.account.avatar)
+                                            avatarUrl: self.statusViewModel.account.avatar) {
+                                    self.routerPath.navigate(to: .userProfile(accountId: self.statusViewModel.account.id,
+                                                                              accountDisplayName: self.statusViewModel.account.displayNameWithoutEmojis,
+                                                                              accountUserName: self.statusViewModel.account.acct))
+                                }
                             }
                             .onTapGesture {
                                 self.navigateToStatus()
@@ -115,7 +119,11 @@ struct ImageRowItemAsync: View {
 
             if self.showAvatar {
                 ImageAvatar(displayName: self.statusViewModel.account.displayNameWithoutEmojis,
-                            avatarUrl: self.statusViewModel.account.avatar)
+                            avatarUrl: self.statusViewModel.account.avatar) {
+                    self.routerPath.navigate(to: .userProfile(accountId: self.statusViewModel.account.id,
+                                                              accountDisplayName: self.statusViewModel.account.displayNameWithoutEmojis,
+                                                              accountUserName: self.statusViewModel.account.acct))
+                }
             }
 
             ImageAlternativeText(text: self.attachment.description) { text in
