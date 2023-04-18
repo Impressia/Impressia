@@ -41,7 +41,7 @@ struct ThirdPartyView: View {
                 .font(.footnote)
             }
 
-            Section("OAuth authrisation") {
+            Section("OAuth authorization") {
                 VStack(alignment: .leading) {
                     Link("https://github.com/OAuthSwift/OAuthSwift",
                          destination: URL(string: "https://github.com/OAuthSwift/OAuthSwift")!)
