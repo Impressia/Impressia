@@ -36,18 +36,18 @@ private struct NavigationMenu<MenuItems>: ViewModifier where MenuItems: View {
 
                 VStack(alignment: .trailing) {
                     Spacer()
-                    HStack {
+                    HStack(alignment: .center) {
                         if self.menuPosition == .bottomRight {
                             Spacer()
 
                             self.menuContainerView()
-                                .padding(.trailing, 30)
+                                .padding(.trailing, 24)
                                 .padding(.bottom, 10)
                         }
 
                         if self.menuPosition == .bottomLeft {
                             self.menuContainerView()
-                                .padding(.leading, 30)
+                                .padding(.leading, 24)
                                 .padding(.bottom, 10)
 
                             Spacer()
@@ -71,6 +71,7 @@ private struct NavigationMenu<MenuItems>: ViewModifier where MenuItems: View {
                 self.contextMenuView()
             }
         }
+        .frame(height: 44)
         .padding(.horizontal, 8)
         .background(.ultraThinMaterial)
         .clipShape(Capsule())
