@@ -89,7 +89,7 @@ extension View {
             case .alternativeText(let text):
                 return Alert(title: Text("status.title.mediaDescription", comment: "Media description"),
                       message: Text(text),
-                      dismissButton: .default(Text("global.title.ok", comment: "OK")))
+                      dismissButton: .default(Text("global.title.close", comment: "Close")))
             case .savePhotoSuccess:
                 return Alert(title: Text("global.title.success", comment: "Success"),
                       message: Text("global.title.photoSaved", comment: "Photo has been saved"),

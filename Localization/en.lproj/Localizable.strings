@@ -8,6 +8,7 @@
 "global.title.ok" = "OK";
 "global.title.showMore" = "Show more";
 "global.title.showLess" = "Show less";
+"global.title.close" = "Close";
 
 // MARK: Global errors.
 "global.error.unexpected" = "Unexpected error.";
