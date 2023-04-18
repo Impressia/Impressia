@@ -3,6 +3,11 @@
 "global.title.seePost" = "Ikusi bidalketa";
 "global.title.refresh" = "Freskatu";
 "global.title.momentsAgo" = "oraintxe bertan";
+"global.title.success" = "Primeran";
+"global.title.photoSaved" = "Argazkia gorde da.";
+"global.title.ok" = "Ados";
+"global.title.showMore" = "Erakutsi gehiago";
+"global.title.showLess" = "Erakutsi gutxiago";
 
 // MARK: Global errors.
 "global.error.unexpected" = "Espero ez zen errorea.";
@@ -211,10 +216,12 @@
 "settings.title.topMenu" = "Nabigazio barra";
 "settings.title.bottomRightMenu" = "Behe eskumaldean";
 "settings.title.bottomLeftMenu" = "Behe ezkerraldean";
-"settings.title.showAvatars" = "Show avatars";
-"settings.title.showAvatarsOnTimeline" = "Avatars will be displayed on timelines";
-"settings.title.showFavourite" = "Show favourites";
-"settings.title.showFavouriteOnTimeline" = "Favourites will be displayed on timelines";
+"settings.title.showAvatars" = "Erakutsi abatarrak";
+"settings.title.showAvatarsOnTimeline" = "Abatarrak denbora-lerroan erakutsiko dira";
+"settings.title.showFavourite" = "Erakutsi gogokoak";
+"settings.title.showFavouriteOnTimeline" = "Gogokoak denbora-lerroan erakutsiko dira";
+"settings.title.showAltText" = "Erakutsi ALT ikurra";
+"settings.title.showAltTextOnTimeline" = "ALT ikurra denbora-lerroetan erakutsiko da";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Hasi saioa Pixelfed-en";
@@ -252,12 +259,17 @@
 "status.title.unbookmark" = "Kendu laster-marka";
 "status.title.comment" = "Egin iruzkina";
 "status.title.report" = "Salatu";
+"status.title.saveImage" = "Gorde irudia";
+"status.title.showMediaDescription" = "Erakutsi multimediaren deskribapena";
+"status.title.mediaDescription" = "Multimediaren deskribapena";
+"status.title.shareImage" = "Partekatu irudia";
+"status.title.altText" = "ALT";
 "status.error.loadingStatusFailed" = "Egoera kargatzeak huts egin du.";
 "status.error.notFound" = "Egoera ez da dagoeneko existitzen.";
 "status.error.loadingCommentsFailed" = "Ezin dira iruzkinak eskuratu.";
 "status.error.reboostFailed" = "Bultzadak huts egin du.";
 "status.error.favouriteFailed" = "Gogokoak huts egin du.";
-"status.error.bookmarkFailed" = "Lastar-markak huts egin du.";
+"status.error.bookmarkFailed" = "Laster-markak huts egin du.";
 "status.error.deleteFailed" = "Ezabatzeak huts egin du.";
 
 // Mark: Accounts view.

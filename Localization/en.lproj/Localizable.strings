@@ -3,6 +3,11 @@
 "global.title.seePost" = "See post";
 "global.title.refresh" = "Refresh";
 "global.title.momentsAgo" = "moments ago";
+"global.title.success" = "Success";
+"global.title.photoSaved" = "Photo has been saved.";
+"global.title.ok" = "OK";
+"global.title.showMore" = "Show more";
+"global.title.showLess" = "Show less";
 
 // MARK: Global errors.
 "global.error.unexpected" = "Unexpected error.";
@@ -215,6 +220,8 @@
 "settings.title.showAvatarsOnTimeline" = "Avatars will be displayed on timelines";
 "settings.title.showFavourite" = "Show favourites";
 "settings.title.showFavouriteOnTimeline" = "Favourites will be displayed on timelines";
+"settings.title.showAltText" = "Show ALT icon";
+"settings.title.showAltTextOnTimeline" = "ALT icon will be displayed on timelines";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Sign in to Pixelfed";
@@ -252,6 +259,11 @@
 "status.title.unbookmark" = "Unbookmark";
 "status.title.comment" = "Comment";
 "status.title.report" = "Report";
+"status.title.saveImage" = "Save image";
+"status.title.showMediaDescription" = "Show media description";
+"status.title.mediaDescription" = "Media description";
+"status.title.shareImage" = "Share image";
+"status.title.altText" = "ALT";
 "status.error.loadingStatusFailed" = "Loading status failed.";
 "status.error.notFound" = "Status not existing anymore.";
 "status.error.loadingCommentsFailed" = "Comments cannot be downloaded.";

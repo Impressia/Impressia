@@ -28,7 +28,7 @@ Creating new translation is pretty easy, all you need to do is to copy two folde
  - `Vernissage/Localization/en.lproj`
  - `Vernissage/PixelfedKit/Sources/PixelfedKit/Resources/en.lproj`
 
-In the name of the folders you have to put ne code of the new language ([here](https://stackoverflow.com/a/13360348) you can find the languages codes).
+In the name of the folders you have to put the code of the new language ([here](https://stackoverflow.com/a/13360348) you can find the languages codes).
 Then you have to open files in these folders and translate them 🇯🇵🇫🇷🇨🇮🇧🇪. After translation create a Pull Request 👍.
 
 From time to time you have to come back and translate lines which has been added since the last translation. 

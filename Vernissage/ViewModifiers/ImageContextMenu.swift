@@ -10,24 +10,29 @@ import ClientKit
 import ServicesKit
 
 public extension View {
-    func imageContextMenu(statusModel: StatusModel) -> some View {
-        modifier(ImageContextMenu(id: statusModel.id, url: statusModel.url))
+    func imageContextMenu(statusModel: StatusModel, attachmentModel: AttachmentModel, uiImage: UIImage?) -> some View {
+        modifier(ImageContextMenu(id: statusModel.id, url: statusModel.url, altText: attachmentModel.description, uiImage: uiImage))
     }
 
-    func imageContextMenu(statusData: StatusData) -> some View {
-        modifier(ImageContextMenu(id: statusData.id, url: statusData.url))
+    func imageContextMenu(statusData: StatusData, attachmentData: AttachmentData, uiImage: UIImage?) -> some View {
+        modifier(ImageContextMenu(id: statusData.id, url: statusData.url, altText: attachmentData.text, uiImage: uiImage))
     }
 }
 
 private struct ImageContextMenu: ViewModifier {
     @EnvironmentObject var client: Client
+    @EnvironmentObject var routerPath: RouterPath
 
     private let id: String
     private let url: URL?
+    private let altText: String?
+    private let uiImage: UIImage?
 
-    init(id: String, url: URL?) {
+    init(id: String, url: URL?, altText: String?, uiImage: UIImage?) {
         self.id = id
         self.url = url
+        self.altText = altText
+        self.uiImage = uiImage
     }
 
     func body(content: Content) -> some View {
@@ -67,6 +72,36 @@ private struct ImageContextMenu: ViewModifier {
 
                         ShareLink(item: url) {
                             Label("status.title.shareStatus", systemImage: "square.and.arrow.up")
+                        }
+                    }
+
+                    Divider()
+
+                    if let altText, altText.count > 0 {
+                        Button {
+                            self.routerPath.presentedAlert = .alternativeText(text: altText)
+                        } label: {
+                            Label("status.title.showMediaDescription", systemImage: "eye.trianglebadge.exclamationmark")
+                        }
+                    }
+
+                    if let uiImage {
+                        Button {
+                            Task {
+                                self.routerPath.presentedSheet = .shareImage(image: uiImage)
+                            }
+                        } label: {
+                            Label("status.title.shareImage", systemImage: "photo")
+                        }
+
+                        Button {
+                            let imageSaver = ImageSaver {
+                                self.routerPath.presentedAlert = .savePhotoSuccess
+                            }
+
+                            imageSaver.writeToPhotoAlbum(image: uiImage)
+                        } label: {
+                            Label("status.title.saveImage", systemImage: "square.and.arrow.down")
                         }
                     }
                 }

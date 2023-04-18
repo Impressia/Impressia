@@ -8,6 +8,7 @@ import SwiftUI
 import PixelfedKit
 import ClientKit
 import ServicesKit
+import WidgetsKit
 
 struct ImageRowAsync: View {
     private let statusViewModel: StatusModel
@@ -86,7 +87,8 @@ struct ImageRowAsync: View {
                 }
             })
             .frame(width: self.imageWidth, height: self.imageHeight)
-            .tabViewStyle(PageTabViewStyle())
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            .overlay(CustomPageTabViewStyleView(pages: self.statusViewModel.mediaAttachments, currentId: $selected))
         }
     }
 }

@@ -6,6 +6,7 @@
 
 import SwiftUI
 import ServicesKit
+import WidgetsKit
 
 struct ImageRow: View {
     private let status: StatusData
@@ -84,7 +85,8 @@ struct ImageRow: View {
                 }
             })
             .frame(width: self.imageWidth, height: self.imageHeight)
-            .tabViewStyle(PageTabViewStyle())
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            .overlay(CustomPageTabViewStyleView(pages: self.attachmentsData, currentId: $selected))
         }
     }
 }

@@ -33,6 +33,7 @@ enum SheetDestinations: Identifiable {
     case replyToStatusEditor(status: StatusModel)
     case settings
     case report(objectType: Report.ObjectType, objectId: String)
+    case shareImage(image: UIImage)
 
     public var id: String {
         switch self {
@@ -42,12 +43,28 @@ enum SheetDestinations: Identifiable {
             return "settings"
         case .report:
             return "report"
+        case .shareImage:
+            return "shareImage"
         }
     }
 }
 
 enum OverlayDestinations {
     case successPayment
+}
+
+enum AlertDestinations: Identifiable {
+    case alternativeText(text: String)
+    case savePhotoSuccess
+
+    public var id: String {
+        switch self {
+        case .alternativeText:
+            return "alternativeText"
+        case .savePhotoSuccess:
+            return "savePhotoSuccess"
+        }
+    }
 }
 
 @MainActor
@@ -57,6 +74,7 @@ class RouterPath: ObservableObject {
     @Published public var path: [RouteurDestinations] = []
     @Published public var presentedSheet: SheetDestinations?
     @Published public var presentedOverlay: OverlayDestinations?
+    @Published public var presentedAlert: AlertDestinations?
 
     public init() {}
 

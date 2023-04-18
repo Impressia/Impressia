@@ -92,7 +92,11 @@ public class AttachmentModel: ObservableObject, Identifiable {
     public func set(data: Data) {
         self.data = data
 
-        // Read exif information.
+        // TODO: Uncomment/remove when exif metadata will be supported.
+        // self.setExifProperties()
+    }
+
+    private func setExifProperties() {
         if let exifProperties = self.data?.getExifData() {
             if let make = exifProperties.getExifValue("Make"), let model = exifProperties.getExifValue("Model") {
                 self.exifCamera = "\(make) \(model)"
