@@ -12,7 +12,7 @@ public class AppMetadataService {
     public static let shared = AppMetadataService()
     private init() { }
 
-    private let metadataUrl = URL(string: "https://raw.githubusercontent.com/VernissageApp/Home/main/instances.json")!
+    private let metadataUrl = URL(string: "https://raw.githubusercontent.com/VernissageApp/Home/main/instances2.json")!
     private let metadataCacheKey = "metadataCacheKey"
     private var memoryCacheData = MemoryCache<String, AppMetadata>(entryLifetime: 600)
 
