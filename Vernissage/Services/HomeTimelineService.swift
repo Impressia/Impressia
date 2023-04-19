@@ -15,6 +15,8 @@ public class HomeTimelineService {
     public static let shared = HomeTimelineService()
     private init() { }
 
+    private let defaultAmountOfDownloadedStatuses = 40
+
     public func loadOnBottom(for account: AccountModel) async throws -> Int {
         // Load data from API and operate on CoreData on background context.
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
@@ -36,7 +38,7 @@ public class HomeTimelineService {
         return newStatuses.count
     }
 
-    public func loadOnTop(for account: AccountModel) async throws -> String? {
+    public func refreshTimeline(for account: AccountModel) async throws -> String? {
         // Load data from API and operate on CoreData on background context.
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
 
@@ -113,7 +115,7 @@ public class HomeTimelineService {
         // There can be more then 40 newest statuses, that's why we have to sometimes send more then one request.
         while true {
             do {
-                let downloadedStatuses = try await client.getHomeTimeline(minId: newestStatusId, limit: 40)
+                let downloadedStatuses = try await client.getHomeTimeline(minId: newestStatusId, limit: self.defaultAmountOfDownloadedStatuses)
                 guard let firstStatus = downloadedStatuses.first else {
                     break
                 }
@@ -139,38 +141,59 @@ public class HomeTimelineService {
 
         // Retrieve statuses from API.
         let client = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
-        let statuses = try await client.getHomeTimeline(limit: 40)
+        let statuses = try await client.getHomeTimeline(limit: self.defaultAmountOfDownloadedStatuses)
 
-        // Retrieve all statuses from database.
-        let dbStatuses = StatusDataHandler.shared.getAllStatuses(accountId: account.id)
-        let lastSeenStatusId = dbStatuses.last?.rebloggedStatusId ?? dbStatuses.last?.id
+        // Retrieve newest visible status (last visible by user).
+        let dbNewestStatus = StatusDataHandler.shared.getMaximumStatus(accountId: account.id, viewContext: backgroundContext)
+        let lastSeenStatusId = dbNewestStatus?.rebloggedStatusId ?? dbNewestStatus?.id
 
-        // Remove statuses that are not in 40 downloaded once.
-        var dbStatusesToRemove: [StatusData] = []
-        for dbStatus in dbStatuses where !statuses.contains(where: { status in status.id == dbStatus.id }) {
-            dbStatusesToRemove.append(dbStatus)
-        }
-
-        if !dbStatusesToRemove.isEmpty {
-            StatusDataHandler.shared.remove(accountId: account.id, statuses: dbStatusesToRemove)
-        }
-
-        // Update existing one.
-        for dbStatus in dbStatuses {
-            if let status = statuses.first(where: { item in item.id == dbStatus.id}) {
-                dbStatus.favourited = status.favourited
+        // Update all existing statuses in database.
+        for status in statuses {
+            if let dbStatus = StatusDataHandler.shared.getStatusData(accountId: account.id, statusId: status.id, viewContext: backgroundContext) {
+                dbStatus.updateFrom(status)
             }
         }
 
         // Add statuses which are not existing in database, but has been downloaded via API.
         var statusesToAdd: [Status] = []
-        for status in statuses where !dbStatuses.contains(where: { statusData in statusData.id == status.id }) {
+        for status in statuses where StatusDataHandler.shared.getStatusData(accountId: account.id,
+                                                                            statusId: status.id,
+                                                                            viewContext: backgroundContext) == nil {
             statusesToAdd.append(status)
+        }
+
+        // Collection with statuses to remove from database.
+        var dbStatusesToRemove: [StatusData] = []
+
+        // Find statuses to delete (older then the last one from API).
+        if let lastStatus = statuses.last {
+            let dbOlderStatuses = StatusDataHandler.shared.getAllOlderStatuses(accountId: account.id,
+                                                                               statusId: lastStatus.id,
+                                                                               viewContext: backgroundContext)
+            if !dbOlderStatuses.isEmpty {
+                dbStatusesToRemove.append(contentsOf: dbOlderStatuses)
+            }
+        }
+
+        // Find statuses to delete (duplicates).
+        var existingStatusIds: [String] = []
+        let allDbStatuses = StatusDataHandler.shared.getAllStatuses(accountId: account.id, viewContext: backgroundContext)
+        for dbStatus in allDbStatuses {
+            if existingStatusIds.contains(where: { $0 == dbStatus.id }) {
+                dbStatusesToRemove.append(dbStatus)
+            } else {
+                existingStatusIds.append(dbStatus.id)
+            }
+        }
+
+        // Delete statuses from database.
+        if !dbStatusesToRemove.isEmpty {
+            StatusDataHandler.shared.remove(accountId: account.id, statuses: dbStatusesToRemove, viewContext: backgroundContext)
         }
 
         // Save statuses in database.
         if !statusesToAdd.isEmpty {
-            _ = try await self.save(statuses: statusesToAdd, for: account, on: backgroundContext)
+            _ = try await self.add(statusesToAdd, for: account, on: backgroundContext)
         }
 
         return lastSeenStatusId
@@ -187,15 +210,15 @@ public class HomeTimelineService {
 
         // Retrieve statuses from API.
         let client = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
-        let statuses = try await client.getHomeTimeline(maxId: maxId, minId: minId, limit: 20)
+        let statuses = try await client.getHomeTimeline(maxId: maxId, minId: minId, limit: self.defaultAmountOfDownloadedStatuses)
 
         // Save statuses in database.
-        return try await self.save(statuses: statuses, for: account, on: backgroundContext)
+        return try await self.add(statuses, for: account, on: backgroundContext)
     }
 
-    private func save(statuses: [Status],
-                      for account: AccountModel,
-                      on backgroundContext: NSManagedObjectContext
+    private func add(_ statuses: [Status],
+                     for account: AccountModel,
+                     on backgroundContext: NSManagedObjectContext
     ) async throws -> [Status] {
 
         guard let accountDataFromDb = AccountDataHandler.shared.getAccountData(accountId: account.id, viewContext: backgroundContext) else {

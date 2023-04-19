@@ -12,13 +12,33 @@ class StatusDataHandler {
     public static let shared = StatusDataHandler()
     private init() { }
 
-    func getAllStatuses(accountId: String) -> [StatusData] {
-        let context = CoreDataHandler.shared.container.viewContext
+    func getAllStatuses(accountId: String, viewContext: NSManagedObjectContext? = nil) -> [StatusData] {
+        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
         let fetchRequest = StatusData.fetchRequest()
 
         let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         fetchRequest.predicate = NSPredicate(format: "pixelfedAccount.id = %@", accountId)
+
+        do {
+            return try context.fetch(fetchRequest)
+        } catch {
+            CoreDataError.shared.handle(error, message: "Error during fetching status (getStatusData).")
+            return []
+        }
+    }
+
+    func getAllOlderStatuses(accountId: String, statusId: String, viewContext: NSManagedObjectContext? = nil) -> [StatusData] {
+        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
+        let fetchRequest = StatusData.fetchRequest()
+
+        let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+
+        let predicate1 = NSPredicate(format: "id < %@", statusId)
+        let predicate2 = NSPredicate(format: "pixelfedAccount.id = %@", accountId)
+
+        fetchRequest.predicate = NSCompoundPredicate.init(type: .and, subpredicates: [predicate1, predicate2])
 
         do {
             return try context.fetch(fetchRequest)
@@ -84,13 +104,13 @@ class StatusDataHandler {
         }
     }
 
-    func remove(accountId: String, statusId: String) {
+    func remove(accountId: String, statusId: String, viewContext: NSManagedObjectContext? = nil) {
         let status = self.getStatusData(accountId: accountId, statusId: statusId)
         guard let status else {
             return
         }
 
-        let context = CoreDataHandler.shared.container.viewContext
+        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
         context.delete(status)
 
         do {
@@ -100,8 +120,8 @@ class StatusDataHandler {
         }
     }
 
-    func remove(accountId: String, statuses: [StatusData]) {
-        let context = CoreDataHandler.shared.container.viewContext
+    func remove(accountId: String, statuses: [StatusData], viewContext: NSManagedObjectContext? = nil) {
+        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
 
         for status in statuses {
             context.delete(status)
