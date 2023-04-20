@@ -47,7 +47,11 @@ struct ImageRowItem: View {
                     } blurred: {
                         ZStack {
                             BlurredImage(blurhash: attachmentData.blurhash)
-                            ImageAvatar(displayName: self.status.accountDisplayName, avatarUrl: self.status.accountAvatar)
+                            ImageAvatar(displayName: self.status.accountDisplayName, avatarUrl: self.status.accountAvatar) {
+                                self.routerPath.navigate(to: .userProfile(accountId: self.status.accountId,
+                                                                          accountDisplayName: self.status.accountDisplayName,
+                                                                          accountUserName: self.status.accountUsername))
+                            }
                         }
                         .onTapGesture {
                             self.navigateToStatus()
@@ -102,7 +106,12 @@ struct ImageRowItem: View {
         ZStack {
             self.imageView(uiImage: uiImage)
 
-            ImageAvatar(displayName: self.status.accountDisplayName, avatarUrl: self.status.accountAvatar)
+            ImageAvatar(displayName: self.status.accountDisplayName, avatarUrl: self.status.accountAvatar) {
+                self.routerPath.navigate(to: .userProfile(accountId: self.status.accountId,
+                                                          accountDisplayName: self.status.accountDisplayName,
+                                                          accountUserName: self.status.accountUsername))
+            }
+
             ImageFavourite(isFavourited: $isFavourited)
             ImageAlternativeText(text: self.attachmentData.text) { text in
                 self.routerPath.presentedAlert = .alternativeText(text: text)

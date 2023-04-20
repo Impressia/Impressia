@@ -165,6 +165,24 @@ class ApplicationSettingsHandler {
         CoreDataHandler.shared.save()
     }
 
+    func set(customNavigationMenuItem1: Int32) {
+        let defaultSettings = self.get()
+        defaultSettings.customNavigationMenuItem1 = customNavigationMenuItem1
+        CoreDataHandler.shared.save()
+    }
+
+    func set(customNavigationMenuItem2: Int32) {
+        let defaultSettings = self.get()
+        defaultSettings.customNavigationMenuItem2 = customNavigationMenuItem2
+        CoreDataHandler.shared.save()
+    }
+
+    func set(customNavigationMenuItem3: Int32) {
+        let defaultSettings = self.get()
+        defaultSettings.customNavigationMenuItem3 = customNavigationMenuItem3
+        CoreDataHandler.shared.save()
+    }
+
     private func createApplicationSettingsEntity(viewContext: NSManagedObjectContext? = nil) -> ApplicationSettings {
         let context = viewContext ?? CoreDataHandler.shared.container.viewContext
         return ApplicationSettings(context: context)

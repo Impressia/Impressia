@@ -8,6 +8,7 @@
 "global.title.ok" = "Ados";
 "global.title.showMore" = "Erakutsi gehiago";
 "global.title.showLess" = "Erakutsi gutxiago";
+"global.title.close" = "Itxi";
 
 // MARK: Global errors.
 "global.error.unexpected" = "Espero ez zen errorea.";

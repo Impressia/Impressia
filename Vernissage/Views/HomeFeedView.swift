@@ -101,7 +101,7 @@ struct HomeFeedView: View {
     private func refreshData() async {
         do {
             if let account = self.applicationState.account {
-                if let lastSeenStatusId = try await HomeTimelineService.shared.loadOnTop(for: account) {
+                if let lastSeenStatusId = try await HomeTimelineService.shared.refreshTimeline(for: account) {
                     try await HomeTimelineService.shared.save(lastSeenStatusId: lastSeenStatusId, for: account)
 
                     self.applicationState.lastSeenStatusId = lastSeenStatusId
@@ -115,8 +115,17 @@ struct HomeFeedView: View {
 
     private func loadData() async {
         do {
+            // We have to load data automatically only when the database is empty.
+            guard self.dbStatuses.isEmpty else {
+                withAnimation {
+                    self.state = .loaded
+                }
+
+                return
+            }
+
             if let account = self.applicationState.account {
-                _ = try await HomeTimelineService.shared.loadOnTop(for: account)
+                _ = try await HomeTimelineService.shared.refreshTimeline(for: account)
             }
 
             self.applicationState.amountOfNewStatuses = 0

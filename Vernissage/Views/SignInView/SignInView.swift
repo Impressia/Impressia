@@ -74,7 +74,7 @@ struct SignInView: View {
                     }
                 }
 
-                ForEach(self.instances, id: \.uri) { instance in
+                ForEach(self.instances.filter { self.serverAddress.isEmpty || $0.uri.contains(self.serverAddress) }, id: \.uri) { instance in
                     InstanceRowView(instance: instance) { uri in
                         let baseAddress = self.getServerAddress(uri: uri)
                         self.signIn(baseAddress: baseAddress)
@@ -84,7 +84,7 @@ struct SignInView: View {
         }
         .onFirstAppear {
             let metadata = await AppMetadataService.shared.metadata()
-            self.instances = await self.client.instances.instances(instanceUrls: metadata.instances)
+            self.instances = metadata.instances
             self.instructionsUrlString = metadata.instructionsUrl
         }
         .navigationTitle("signin.navigationBar.title")

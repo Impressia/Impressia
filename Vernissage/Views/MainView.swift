@@ -29,15 +29,17 @@ struct MainView: View {
 
     @FetchRequest(sortDescriptors: [SortDescriptor(\.acct, order: .forward)]) var dbAccounts: FetchedResults<AccountData>
 
-    private enum ViewMode {
+    public enum ViewMode {
         case home, local, federated, profile, notifications, trendingPhotos, trendingTags, trendingAccounts, search
     }
 
     var body: some View {
         self.getMainView()
-            .navigationMenu(menuPosition: $applicationState.menuPosition) {
+            .navigationMenu(menuPosition: $applicationState.menuPosition, onViewModeIconTap: { viewMode in
+                self.switchView(to: viewMode)
+            }, menuItems: {
                 self.navigationMenuContent()
-            }
+            })
             .navigationTitle(navBarTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
