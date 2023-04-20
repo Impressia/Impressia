@@ -29,7 +29,10 @@ public class PhotoAttachment: ObservableObject, Identifiable, Equatable, Hashabl
     @Published public var uploadedAttachment: UploadedAttachment?
 
     /// Error from Pixelfed.
-    @Published public var error: Error?
+    @Published public var uploadError: Error?
+
+    /// Error from device.
+    @Published public var loadError: Error?
 
     public init(photosPickerItem: PhotosPickerItem? = nil, nsItemProvider: NSItemProvider? = nil) {
         self.id = UUID().uuidString
