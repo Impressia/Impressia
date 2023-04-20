@@ -10,39 +10,36 @@ import EnvironmentKit
 import ServicesKit
 
 extension View {
-    func navigationMenu<MenuItems>(menuPosition: Binding<MenuPosition>,
-                                   onViewModeIconTap: @escaping (MainView.ViewMode) -> Void,
-                                   @ViewBuilder menuItems: @escaping () -> MenuItems) -> some View where MenuItems: View {
-        modifier(NavigationMenu(menuPosition: menuPosition, onViewModeIconTap: onViewModeIconTap, menuItems: menuItems))
+    func navigationMenuButtons(menuPosition: Binding<MenuPosition>,
+                               onViewModeIconTap: @escaping (MainView.ViewMode) -> Void) -> some View {
+        modifier(NavigationMenuButtons(menuPosition: menuPosition, onViewModeIconTap: onViewModeIconTap))
     }
 }
 
-private struct NavigationMenu<MenuItems>: ViewModifier where MenuItems: View {
+private struct NavigationMenuButtons: ViewModifier {
     @EnvironmentObject var routerPath: RouterPath
 
-    private let menuItems: () -> MenuItems
     private let onViewModeIconTap: (MainView.ViewMode) -> Void
     private let imageFontSize = 20.0
 
     private let customMenuItems = [
-        NavigationMenuItemDetails(id: 1, viewMode: .home, title: "mainview.tab.homeTimeline", image: "house"),
-        NavigationMenuItemDetails(id: 2, viewMode: .local, title: "mainview.tab.localTimeline", image: "building"),
-        NavigationMenuItemDetails(id: 3, viewMode: .federated, title: "mainview.tab.federatedTimeline", image: "globe.europe.africa"),
-        NavigationMenuItemDetails(id: 4, viewMode: .search, title: "mainview.tab.search", image: "magnifyingglass"),
-        NavigationMenuItemDetails(id: 5, viewMode: .profile, title: "mainview.tab.userProfile", image: "person.crop.circle"),
-        NavigationMenuItemDetails(id: 6, viewMode: .notifications, title: "mainview.tab.notifications", image: "bell.badge")
+        NavigationMenuItemDetails(id: 1, viewMode: .home),
+        NavigationMenuItemDetails(id: 2, viewMode: .local),
+        NavigationMenuItemDetails(id: 3, viewMode: .federated),
+        NavigationMenuItemDetails(id: 4, viewMode: .search),
+        NavigationMenuItemDetails(id: 5, viewMode: .profile),
+        NavigationMenuItemDetails(id: 6, viewMode: .notifications)
     ]
 
     @State private var selectedCustomMenuItems = [
-        NavigationMenuItemDetails(id: 1, viewMode: .home, title: "mainview.tab.homeTimeline", image: "house"),
-        NavigationMenuItemDetails(id: 2, viewMode: .local, title: "mainview.tab.localTimeline", image: "building"),
-        NavigationMenuItemDetails(id: 3, viewMode: .profile, title: "mainview.tab.userProfile", image: "person.crop.circle")
+        NavigationMenuItemDetails(id: 1, viewMode: .home),
+        NavigationMenuItemDetails(id: 2, viewMode: .local),
+        NavigationMenuItemDetails(id: 3, viewMode: .profile)
     ]
 
     @Binding var menuPosition: MenuPosition
 
-    init(menuPosition: Binding<MenuPosition>, onViewModeIconTap: @escaping (MainView.ViewMode) -> Void, @ViewBuilder menuItems: @escaping () -> MenuItems) {
-        self.menuItems = menuItems
+    init(menuPosition: Binding<MenuPosition>, onViewModeIconTap: @escaping (MainView.ViewMode) -> Void) {
         self.onViewModeIconTap = onViewModeIconTap
         self._menuPosition = menuPosition
     }
@@ -123,7 +120,9 @@ private struct NavigationMenu<MenuItems>: ViewModifier where MenuItems: View {
     @ViewBuilder
     private func contextMenuView() -> some View {
         Menu {
-            self.menuItems()
+            MainNavigationOptions { viewMode in
+                self.onViewModeIconTap(viewMode)
+            }
         } label: {
             Image(systemName: "ellipsis")
                 .font(.system(size: self.imageFontSize))
@@ -174,9 +173,7 @@ private struct NavigationMenu<MenuItems>: ViewModifier where MenuItems: View {
         ForEach(self.customMenuItems) { item in
             Button {
                 withAnimation {
-                    customMenuItem.title = item.title
                     customMenuItem.viewMode = item.viewMode
-                    customMenuItem.image = item.image
                 }
 
                 // Saving in core data.
@@ -191,7 +188,7 @@ private struct NavigationMenu<MenuItems>: ViewModifier where MenuItems: View {
                     break
                 }
             } label: {
-                Label(NSLocalizedString(item.title, comment: "Custom menu item"), systemImage: item.image)
+                Label(item.title, systemImage: item.image)
             }
         }
     }

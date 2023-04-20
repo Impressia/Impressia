@@ -16,6 +16,15 @@ struct AccountsPhotoView: View {
     public enum ListType: Hashable {
         case trending
         case search(query: String)
+
+        public var title: LocalizedStringKey {
+            switch self {
+            case .trending:
+                return "trendingAccounts.navigationBar.title"
+            case .search:
+                return "trendingAccounts.navigationBar.title"
+            }
+        }
     }
 
     @EnvironmentObject var applicationState: ApplicationState
@@ -29,7 +38,7 @@ struct AccountsPhotoView: View {
 
     var body: some View {
         self.mainBody()
-            .navigationTitle("trendingAccounts.navigationBar.title")
+            .navigationTitle(self.listType.title)
     }
 
     @ViewBuilder

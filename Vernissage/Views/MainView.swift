@@ -20,10 +20,10 @@ struct MainView: View {
     @EnvironmentObject var routerPath: RouterPath
     @EnvironmentObject var tipsStore: TipsStore
 
-    @State private var navBarTitle: LocalizedStringKey = "mainview.tab.homeTimeline"
+    @State private var navBarTitle: LocalizedStringKey = ViewMode.home.title
     @State private var viewMode: ViewMode = .home {
         didSet {
-            self.navBarTitle = self.getViewTitle(viewMode: viewMode)
+            self.navBarTitle = viewMode.title
         }
     }
 
@@ -31,15 +31,59 @@ struct MainView: View {
 
     public enum ViewMode {
         case home, local, federated, profile, notifications, trendingPhotos, trendingTags, trendingAccounts, search
+
+        public var title: LocalizedStringKey {
+            switch self {
+            case .home:
+                return "mainview.tab.homeTimeline"
+            case .trendingPhotos:
+                return "mainview.tab.trendingPhotos"
+            case .trendingTags:
+                return "mainview.tab.trendingTags"
+            case .trendingAccounts:
+                return "mainview.tab.trendingAccounts"
+            case .local:
+                return "mainview.tab.localTimeline"
+            case .federated:
+                return "mainview.tab.federatedTimeline"
+            case .profile:
+                return "mainview.tab.userProfile"
+            case .notifications:
+                return "mainview.tab.notifications"
+            case .search:
+                return "mainview.tab.search"
+            }
+        }
+
+        public var image: String {
+            switch self {
+            case .home:
+                return "house"
+            case .trendingPhotos:
+                return "photo.stack"
+            case .trendingTags:
+                return "tag"
+            case .trendingAccounts:
+                return "person.3"
+            case .local:
+                return "building"
+            case .federated:
+                return "globe.europe.africa"
+            case .profile:
+                return "person.crop.circle"
+            case .notifications:
+                return "bell.badge"
+            case .search:
+                return "magnifyingglass"
+            }
+        }
     }
 
     var body: some View {
         self.getMainView()
-            .navigationMenu(menuPosition: $applicationState.menuPosition, onViewModeIconTap: { viewMode in
+            .navigationMenuButtons(menuPosition: $applicationState.menuPosition) { viewMode in
                 self.switchView(to: viewMode)
-            }, menuItems: {
-                self.navigationMenuContent()
-            })
+            }
             .navigationTitle(navBarTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -103,7 +147,9 @@ struct MainView: View {
     private func getPrincipalToolbar() -> some ToolbarContent {
         ToolbarItem(placement: .principal) {
             Menu {
-                self.navigationMenuContent()
+                MainNavigationOptions { viewMode in
+                    self.switchView(to: viewMode)
+                }
             } label: {
                 HStack {
                     Text(navBarTitle, comment: "Navbar title")
@@ -166,101 +212,6 @@ struct MainView: View {
     }
 
     @ViewBuilder
-    private func navigationMenuContent() -> some View {
-        Button {
-            self.switchView(to: .home)
-        } label: {
-            HStack {
-                Text(self.getViewTitle(viewMode: .home))
-                Image(systemName: "house")
-            }
-        }
-
-        Button {
-            self.switchView(to: .local)
-        } label: {
-            HStack {
-                Text(self.getViewTitle(viewMode: .local))
-                Image(systemName: "building")
-            }
-        }
-
-        Button {
-            self.switchView(to: .federated)
-        } label: {
-            HStack {
-                Text(self.getViewTitle(viewMode: .federated))
-                Image(systemName: "globe.europe.africa")
-            }
-        }
-
-        Button {
-            self.switchView(to: .search)
-        } label: {
-            HStack {
-                Text(self.getViewTitle(viewMode: .search))
-                Image(systemName: "magnifyingglass")
-            }
-        }
-
-        Divider()
-
-        Menu {
-            Button {
-                self.switchView(to: .trendingPhotos)
-            } label: {
-                HStack {
-                    Text(self.getViewTitle(viewMode: .trendingPhotos))
-                    Image(systemName: "photo.stack")
-                }
-            }
-
-            Button {
-                self.switchView(to: .trendingTags)
-            } label: {
-                HStack {
-                    Text(self.getViewTitle(viewMode: .trendingTags))
-                    Image(systemName: "tag")
-                }
-            }
-
-            Button {
-                self.switchView(to: .trendingAccounts)
-            } label: {
-                HStack {
-                    Text(self.getViewTitle(viewMode: .trendingAccounts))
-                    Image(systemName: "person.3")
-                }
-            }
-        } label: {
-            HStack {
-                Text("mainview.tab.trending", comment: "Trending menu section")
-                Image(systemName: "chart.line.uptrend.xyaxis")
-            }
-        }
-
-        Divider()
-
-        Button {
-            self.switchView(to: .profile)
-        } label: {
-            HStack {
-                Text(self.getViewTitle(viewMode: .profile))
-                Image(systemName: "person.crop.circle")
-            }
-        }
-
-        Button {
-            self.switchView(to: .notifications)
-        } label: {
-            HStack {
-                Text(self.getViewTitle(viewMode: .notifications))
-                Image(systemName: "bell.badge")
-            }
-        }
-    }
-
-    @ViewBuilder
     private func getAvatarImage(avatarUrl: URL?, avatarData: Data?) -> some View {
         if let avatarData,
            let uiImage = UIImage(data: avatarData)?.roundedAvatar(avatarShape: self.applicationState.avatarShape) {
@@ -283,29 +234,6 @@ struct MainView: View {
                 .background(
                     AvatarShape.circle.shape()
                 )
-        }
-    }
-
-    private func getViewTitle(viewMode: ViewMode) -> LocalizedStringKey {
-        switch viewMode {
-        case .home:
-            return "mainview.tab.homeTimeline"
-        case .trendingPhotos:
-            return "mainview.tab.trendingPhotos"
-        case .trendingTags:
-            return "mainview.tab.trendingTags"
-        case .trendingAccounts:
-            return "mainview.tab.trendingAccounts"
-        case .local:
-            return "mainview.tab.localTimeline"
-        case .federated:
-            return "mainview.tab.federatedTimeline"
-        case .profile:
-            return "mainview.tab.userProfile"
-        case .notifications:
-            return "mainview.tab.notifications"
-        case .search:
-            return "mainview.tab.search"
         }
     }
 

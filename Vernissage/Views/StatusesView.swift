@@ -18,6 +18,21 @@ struct StatusesView: View {
         case favourites
         case bookmarks
         case hashtag(tag: String)
+
+        public var title: LocalizedStringKey {
+            switch self {
+            case .local:
+                return "statuses.navigationBar.localTimeline"
+            case .federated:
+                return "statuses.navigationBar.federatedTimeline"
+            case .favourites:
+                return "statuses.navigationBar.favourites"
+            case .bookmarks:
+                return "statuses.navigationBar.bookmarks"
+            case .hashtag(let tag):
+                return "#\(tag)"
+            }
+        }
     }
 
     @EnvironmentObject private var applicationState: ApplicationState
@@ -38,7 +53,7 @@ struct StatusesView: View {
 
     var body: some View {
         self.mainBody()
-            .navigationTitle(self.getTitle())
+            .navigationTitle(self.listType.title)
             .toolbar {
                 // TODO: It seems like pixelfed is not supporting the endpoints.
                 // self.getTrailingToolbar()
@@ -228,21 +243,6 @@ struct StatusesView: View {
                 sinceId: sinceId,
                 minId: minId,
                 limit: self.defaultLimit) ?? []
-        }
-    }
-
-    private func getTitle() -> LocalizedStringKey {
-        switch self.listType {
-        case .local:
-            return "statuses.navigationBar.localTimeline"
-        case .federated:
-            return "statuses.navigationBar.federatedTimeline"
-        case .favourites:
-            return "statuses.navigationBar.favourites"
-        case .bookmarks:
-            return "statuses.navigationBar.bookmarks"
-        case .hashtag(let tag):
-            return "#\(tag)"
         }
     }
 

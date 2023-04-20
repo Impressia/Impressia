@@ -84,6 +84,7 @@
 		F86B7221296C49A300EE59EC /* EmptyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7220296C49A300EE59EC /* EmptyButtonStyle.swift */; };
 		F86BC9E929EBBB67009415EC /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86BC9E829EBBB66009415EC /* ImageSaver.swift */; };
 		F86BC9EB29EBDA2E009415EC /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86BC9EA29EBDA2E009415EC /* ActivityView.swift */; };
+		F870EE5229F1645C00A2D43B /* MainNavigationOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F870EE5129F1645C00A2D43B /* MainNavigationOptions.swift */; };
 		F871F21D29EF0D7000A351EF /* NavigationMenuItemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = F871F21C29EF0D7000A351EF /* NavigationMenuItemDetails.swift */; };
 		F8742FC429990AFB00E9642B /* ClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8742FC329990AFB00E9642B /* ClientError.swift */; };
 		F8764187298ABB520057D362 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8764186298ABB520057D362 /* ViewState.swift */; };
@@ -178,7 +179,7 @@
 		F8F6E44D29BCC1F90004795E /* MediumWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6E44829BCC0F00004795E /* MediumWidgetView.swift */; };
 		F8F6E44E29BCC1FB0004795E /* LargeWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6E44A29BCC0FF0004795E /* LargeWidgetView.swift */; };
 		F8F6E45129BCE9190004795E /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6E45029BCE9190004795E /* UIImage+Resize.swift */; };
-		F8FB8ABA29EB2ED400342C04 /* NavigationMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FB8AB929EB2ED400342C04 /* NavigationMenu.swift */; };
+		F8FB8ABA29EB2ED400342C04 /* NavigationMenuButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FB8AB929EB2ED400342C04 /* NavigationMenuButtons.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -278,6 +279,7 @@
 		F86B7220296C49A300EE59EC /* EmptyButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyButtonStyle.swift; sourceTree = "<group>"; };
 		F86BC9E829EBBB66009415EC /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		F86BC9EA29EBDA2E009415EC /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		F870EE5129F1645C00A2D43B /* MainNavigationOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationOptions.swift; sourceTree = "<group>"; };
 		F871F21C29EF0D7000A351EF /* NavigationMenuItemDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationMenuItemDetails.swift; sourceTree = "<group>"; };
 		F871F21F29EF0FEC00A351EF /* Vernissage-011.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-011.xcdatamodel"; sourceTree = "<group>"; };
 		F8742FC329990AFB00E9642B /* ClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientError.swift; sourceTree = "<group>"; };
@@ -364,7 +366,7 @@
 		F8F6E44829BCC0F00004795E /* MediumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumWidgetView.swift; sourceTree = "<group>"; };
 		F8F6E44A29BCC0FF0004795E /* LargeWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeWidgetView.swift; sourceTree = "<group>"; };
 		F8F6E45029BCE9190004795E /* UIImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
-		F8FB8AB929EB2ED400342C04 /* NavigationMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationMenu.swift; sourceTree = "<group>"; };
+		F8FB8AB929EB2ED400342C04 /* NavigationMenuButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationMenuButtons.swift; sourceTree = "<group>"; };
 		F8FFBD4929E99BEE0047EE80 /* Vernissage-009.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-009.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -540,6 +542,7 @@
 				F88AB05429B3626300345EDE /* ImageGrid.swift */,
 				F8AFF7C329B25EF40087D083 /* ImagesGrid.swift */,
 				F89D6C49297196FF001DA3D4 /* ImageViewer.swift */,
+				F870EE5129F1645C00A2D43B /* MainNavigationOptions.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -645,7 +648,7 @@
 		F88BC53729E068D200CE6141 /* ViewModifiers */ = {
 			isa = PBXGroup;
 			children = (
-				F8FB8AB929EB2ED400342C04 /* NavigationMenu.swift */,
+				F8FB8AB929EB2ED400342C04 /* NavigationMenuButtons.swift */,
 				F88BC53A29E06A5100CE6141 /* ImageContextMenu.swift */,
 			);
 			path = ViewModifiers;
@@ -1112,6 +1115,7 @@
 				F876418D298AE5020057D362 /* PaginableStatusesView.swift in Sources */,
 				F85D49852964301800751DF7 /* StatusData+Attachments.swift in Sources */,
 				F8764187298ABB520057D362 /* ViewState.swift in Sources */,
+				F870EE5229F1645C00A2D43B /* MainNavigationOptions.swift in Sources */,
 				F88ABD9429687CA4004EF61E /* ComposeView.swift in Sources */,
 				F89CEB802984198600A1376F /* AttachmentData+HighestImage.swift in Sources */,
 				F86B7214296BFDCE00EE59EC /* UserProfileHeaderView.swift in Sources */,
@@ -1123,7 +1127,7 @@
 				F8D5444329D4066C002225D6 /* AppDelegate.swift in Sources */,
 				F802884F297AEED5000BDD51 /* DatabaseError.swift in Sources */,
 				F86A4307299AA5E900DF7645 /* ThanksView.swift in Sources */,
-				F8FB8ABA29EB2ED400342C04 /* NavigationMenu.swift in Sources */,
+				F8FB8ABA29EB2ED400342C04 /* NavigationMenuButtons.swift in Sources */,
 				F88BC51D29E0377B00CE6141 /* AccountData+AccountModel.swift in Sources */,
 				F89B5CC229D01BF700549F2F /* InstanceView.swift in Sources */,
 				F89F57B029D1C11200001EE3 /* RelationshipModel.swift in Sources */,

@@ -15,6 +15,15 @@ struct PaginableStatusesView: View {
     public enum ListType: Hashable {
         case favourites
         case bookmarks
+
+        public var title: LocalizedStringKey {
+            switch self {
+            case .favourites:
+                return "statuses.navigationBar.favourites"
+            case .bookmarks:
+                return "statuses.navigationBar.bookmarks"
+            }
+        }
     }
 
     @EnvironmentObject private var applicationState: ApplicationState
@@ -32,7 +41,7 @@ struct PaginableStatusesView: View {
 
     var body: some View {
         self.mainBody()
-            .navigationTitle(self.getTitle())
+            .navigationTitle(self.listType.title)
     }
 
     @ViewBuilder
@@ -141,15 +150,6 @@ struct PaginableStatusesView: View {
             return try await self.client.accounts?.favourites(limit: self.defaultLimit, page: self.page) ?? []
         case .bookmarks:
             return try await self.client.accounts?.bookmarks(limit: self.defaultLimit, page: self.page) ?? []
-        }
-    }
-
-    private func getTitle() -> LocalizedStringKey {
-        switch self.listType {
-        case .favourites:
-            return "statuses.navigationBar.favourites"
-        case .bookmarks:
-            return "statuses.navigationBar.bookmarks"
         }
     }
 }
