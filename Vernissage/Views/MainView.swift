@@ -29,8 +29,16 @@ struct MainView: View {
 
     @FetchRequest(sortDescriptors: [SortDescriptor(\.acct, order: .forward)]) var dbAccounts: FetchedResults<AccountData>
 
-    public enum ViewMode {
-        case home, local, federated, profile, notifications, trendingPhotos, trendingTags, trendingAccounts, search
+    public enum ViewMode: Int {
+        case home = 1
+        case local = 2
+        case federated = 3
+        case search = 4
+        case profile = 5
+        case notifications = 6
+        case trendingPhotos = 7
+        case trendingTags = 8
+        case trendingAccounts = 9
 
         public var title: LocalizedStringKey {
             switch self {
@@ -147,7 +155,7 @@ struct MainView: View {
     private func getPrincipalToolbar() -> some ToolbarContent {
         ToolbarItem(placement: .principal) {
             Menu {
-                MainNavigationOptions { viewMode in
+                MainNavigationOptions(hiddenMenuItems: Binding.constant([])) { viewMode in
                     self.switchView(to: viewMode)
                 }
             } label: {

@@ -196,7 +196,7 @@ struct HomeFeedView: View {
                 .padding(12)
                 .font(.footnote)
                 .fontWeight(.light)
-                .foregroundColor(Color.white)
+                .foregroundColor(Color.mainTextColor)
                 .background(.ultraThinMaterial)
                 .clipShape(Capsule())
             }

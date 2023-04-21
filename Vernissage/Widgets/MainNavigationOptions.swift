@@ -10,40 +10,55 @@ import SwiftUI
 struct MainNavigationOptions: View {
     let onViewModeIconTap: (MainView.ViewMode) -> Void
 
+    @Binding var hiddenMenuItems: [MainView.ViewMode]
+
+    init(hiddenMenuItems: Binding<[MainView.ViewMode]>, onViewModeIconTap: @escaping (MainView.ViewMode) -> Void) {
+        self._hiddenMenuItems = hiddenMenuItems
+        self.onViewModeIconTap = onViewModeIconTap
+    }
+
     var body: some View {
-        Button {
-            self.onViewModeIconTap(.home)
-        } label: {
-            HStack {
-                Text(MainView.ViewMode.home.title)
-                Image(systemName: MainView.ViewMode.home.image)
+        if !self.hiddenMenuItems.contains(where: { $0 == .home }) {
+            Button {
+                self.onViewModeIconTap(.home)
+            } label: {
+                HStack {
+                    Text(MainView.ViewMode.home.title)
+                    Image(systemName: MainView.ViewMode.home.image)
+                }
             }
         }
 
-        Button {
-            self.onViewModeIconTap(.local)
-        } label: {
-            HStack {
-                Text(MainView.ViewMode.local.title)
-                Image(systemName: MainView.ViewMode.local.image)
+        if !self.hiddenMenuItems.contains(where: { $0 == .local }) {
+            Button {
+                self.onViewModeIconTap(.local)
+            } label: {
+                HStack {
+                    Text(MainView.ViewMode.local.title)
+                    Image(systemName: MainView.ViewMode.local.image)
+                }
             }
         }
 
-        Button {
-            self.onViewModeIconTap(.federated)
-        } label: {
-            HStack {
-                Text(MainView.ViewMode.federated.title)
-                Image(systemName: MainView.ViewMode.federated.image)
+        if !self.hiddenMenuItems.contains(where: { $0 == .federated }) {
+            Button {
+                self.onViewModeIconTap(.federated)
+            } label: {
+                HStack {
+                    Text(MainView.ViewMode.federated.title)
+                    Image(systemName: MainView.ViewMode.federated.image)
+                }
             }
         }
 
-        Button {
-            self.onViewModeIconTap(.search)
-        } label: {
-            HStack {
-                Text(MainView.ViewMode.search.title)
-                Image(systemName: MainView.ViewMode.search.image)
+        if !self.hiddenMenuItems.contains(where: { $0 == .search }) {
+            Button {
+                self.onViewModeIconTap(.search)
+            } label: {
+                HStack {
+                    Text(MainView.ViewMode.search.title)
+                    Image(systemName: MainView.ViewMode.search.image)
+                }
             }
         }
 
@@ -85,21 +100,25 @@ struct MainNavigationOptions: View {
 
         Divider()
 
-        Button {
-            self.onViewModeIconTap(.profile)
-        } label: {
-            HStack {
-                Text(MainView.ViewMode.profile.title)
-                Image(systemName: MainView.ViewMode.profile.image)
+        if !self.hiddenMenuItems.contains(where: { $0 == .profile }) {
+            Button {
+                self.onViewModeIconTap(.profile)
+            } label: {
+                HStack {
+                    Text(MainView.ViewMode.profile.title)
+                    Image(systemName: MainView.ViewMode.profile.image)
+                }
             }
         }
 
-        Button {
-            self.onViewModeIconTap(.notifications)
-        } label: {
-            HStack {
-                Text(MainView.ViewMode.notifications.title)
-                Image(systemName: MainView.ViewMode.notifications.image)
+        if !self.hiddenMenuItems.contains(where: { $0 == .notifications }) {
+            Button {
+                self.onViewModeIconTap(.notifications)
+            } label: {
+                HStack {
+                    Text(MainView.ViewMode.notifications.title)
+                    Image(systemName: MainView.ViewMode.notifications.image)
+                }
             }
         }
     }

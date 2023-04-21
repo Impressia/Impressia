@@ -8,7 +8,8 @@ import Foundation
 import SwiftUI
 
 class NavigationMenuItemDetails: ObservableObject, Identifiable {
-    let id: Int32
+    @Published var title: LocalizedStringKey
+    @Published var image: String
 
     @Published var viewMode: MainView.ViewMode {
         didSet {
@@ -17,11 +18,7 @@ class NavigationMenuItemDetails: ObservableObject, Identifiable {
         }
     }
 
-    @Published var title: LocalizedStringKey
-    @Published var image: String
-
-    init(id: Int32, viewMode: MainView.ViewMode) {
-        self.id = id
+    init(viewMode: MainView.ViewMode) {
         self.viewMode = viewMode
         self.title = viewMode.title
         self.image = viewMode.image

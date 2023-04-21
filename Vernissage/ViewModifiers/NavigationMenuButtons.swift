@@ -23,19 +23,21 @@ private struct NavigationMenuButtons: ViewModifier {
     private let imageFontSize = 20.0
 
     private let customMenuItems = [
-        NavigationMenuItemDetails(id: 1, viewMode: .home),
-        NavigationMenuItemDetails(id: 2, viewMode: .local),
-        NavigationMenuItemDetails(id: 3, viewMode: .federated),
-        NavigationMenuItemDetails(id: 4, viewMode: .search),
-        NavigationMenuItemDetails(id: 5, viewMode: .profile),
-        NavigationMenuItemDetails(id: 6, viewMode: .notifications)
+        NavigationMenuItemDetails(viewMode: .home),
+        NavigationMenuItemDetails(viewMode: .local),
+        NavigationMenuItemDetails(viewMode: .federated),
+        NavigationMenuItemDetails(viewMode: .search),
+        NavigationMenuItemDetails(viewMode: .profile),
+        NavigationMenuItemDetails(viewMode: .notifications)
     ]
 
-    @State private var selectedCustomMenuItems = [
-        NavigationMenuItemDetails(id: 1, viewMode: .home),
-        NavigationMenuItemDetails(id: 2, viewMode: .local),
-        NavigationMenuItemDetails(id: 3, viewMode: .profile)
+    @State private var displayedCustomMenuItems = [
+        SelectedMenuItemDetails(position: 1, viewMode: .home),
+        SelectedMenuItemDetails(position: 2, viewMode: .local),
+        SelectedMenuItemDetails(position: 3, viewMode: .profile)
     ]
+
+    @State private var hiddenMenuItems: [MainView.ViewMode] = []
 
     @Binding var menuPosition: MenuPosition
 
@@ -120,7 +122,7 @@ private struct NavigationMenuButtons: ViewModifier {
     @ViewBuilder
     private func contextMenuView() -> some View {
         Menu {
-            MainNavigationOptions { viewMode in
+            MainNavigationOptions(hiddenMenuItems: $hiddenMenuItems) { viewMode in
                 self.onViewModeIconTap(viewMode)
             }
         } label: {
@@ -134,8 +136,8 @@ private struct NavigationMenuButtons: ViewModifier {
 
     @ViewBuilder
     private func customMenuItemsView() -> some View {
-        ForEach(self.selectedCustomMenuItems) { item in
-            self.customMenuItemView(customMenuItem: item)
+        ForEach(self.displayedCustomMenuItems) { item in
+            self.customMenuItemView(item)
         }
     }
 
@@ -154,39 +156,41 @@ private struct NavigationMenuButtons: ViewModifier {
     }
 
     @ViewBuilder
-    private func customMenuItemView(customMenuItem: NavigationMenuItemDetails) -> some View {
+    private func customMenuItemView(_ displayedCustomMenuItem: SelectedMenuItemDetails) -> some View {
         Button {
-            self.onViewModeIconTap(customMenuItem.viewMode)
+            self.onViewModeIconTap(displayedCustomMenuItem.viewMode)
         } label: {
-            Image(systemName: customMenuItem.image)
+            Image(systemName: displayedCustomMenuItem.image)
                 .font(.system(size: self.imageFontSize))
                 .foregroundColor(.mainTextColor.opacity(0.75))
                 .padding(.vertical, 10)
                 .padding(.horizontal, 8)
         }.contextMenu {
-            self.listOfIconsView(customMenuItem: customMenuItem)
+            self.listOfIconsView(displayedCustomMenuItem)
         }
     }
 
     @ViewBuilder
-    private func listOfIconsView(customMenuItem: NavigationMenuItemDetails) -> some View {
+    private func listOfIconsView(_ displayedCustomMenuItem: SelectedMenuItemDetails) -> some View {
         ForEach(self.customMenuItems) { item in
             Button {
                 withAnimation {
-                    customMenuItem.viewMode = item.viewMode
+                    displayedCustomMenuItem.viewMode = item.viewMode
                 }
 
                 // Saving in core data.
-                switch customMenuItem.id {
+                switch displayedCustomMenuItem.position {
                 case 1:
-                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem1: item.id)
+                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem1: item.viewMode.rawValue)
                 case 2:
-                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem2: item.id)
+                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem2: item.viewMode.rawValue)
                 case 3:
-                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem3: item.id)
+                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem3: item.viewMode.rawValue)
                 default:
                     break
                 }
+
+                self.hiddenMenuItems = self.displayedCustomMenuItems.map({ $0.viewMode })
             } label: {
                 Label(item.title, systemImage: item.image)
             }
@@ -196,17 +200,19 @@ private struct NavigationMenuButtons: ViewModifier {
     private func loadCustomMenuItems() {
         let applicationSettings = ApplicationSettingsHandler.shared.get()
 
-        self.setCustomMenuItem(menuId: 1, savedId: Int(applicationSettings.customNavigationMenuItem1))
-        self.setCustomMenuItem(menuId: 2, savedId: Int(applicationSettings.customNavigationMenuItem2))
-        self.setCustomMenuItem(menuId: 3, savedId: Int(applicationSettings.customNavigationMenuItem3))
+        self.setCustomMenuItem(position: 1, viewMode: MainView.ViewMode(rawValue: Int(applicationSettings.customNavigationMenuItem1)) ?? .home)
+        self.setCustomMenuItem(position: 2, viewMode: MainView.ViewMode(rawValue: Int(applicationSettings.customNavigationMenuItem2)) ?? .local)
+        self.setCustomMenuItem(position: 3, viewMode: MainView.ViewMode(rawValue: Int(applicationSettings.customNavigationMenuItem3)) ?? .profile)
+
+        self.hiddenMenuItems = self.displayedCustomMenuItems.map({ $0.viewMode })
     }
 
-    private func setCustomMenuItem(menuId: Int, savedId: Int) {
-        if let selectedCustomMenuItem = self.selectedCustomMenuItems.first(where: { $0.id == menuId }),
-           let customMenuItem = self.customMenuItems.first(where: { $0.id == savedId }) {
-            selectedCustomMenuItem.title = customMenuItem.title
-            selectedCustomMenuItem.viewMode = customMenuItem.viewMode
-            selectedCustomMenuItem.image = customMenuItem.image
+    private func setCustomMenuItem(position: Int, viewMode: MainView.ViewMode) {
+        if let displayedCustomMenuItem = self.displayedCustomMenuItems.first(where: { $0.position == position }),
+           let customMenuItem = self.customMenuItems.first(where: { $0.viewMode == viewMode }) {
+            displayedCustomMenuItem.title = customMenuItem.title
+            displayedCustomMenuItem.viewMode = customMenuItem.viewMode
+            displayedCustomMenuItem.image = customMenuItem.image
         }
     }
 }
