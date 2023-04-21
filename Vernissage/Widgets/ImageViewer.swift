@@ -156,6 +156,8 @@ struct ImageViewer: View {
     var tapGesture: some Gesture {
         TapGesture().onEnded({ _ in
             withAnimation {
+                self.currentMagnification = 0
+                self.finalMagnification = 1.0
                 self.currentOffset = self.calculateStartingOffset()
             }
 

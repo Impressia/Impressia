@@ -18,7 +18,7 @@ public struct BaseComposeView: View {
 
     @StateObject private var textModel: TextModel
 
-    @State private var isKeyboardPresented = false
+    @State private var isKeyboardPresented = true
     @State private var isSensitive = false
     @State private var spoilerText = ""
     @State private var commentsDisabled = false
