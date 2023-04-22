@@ -22,7 +22,6 @@ struct ImageRowItem: View {
     @State private var showThumbImage = false
     @State private var cancelled = true
     @State private var error: Error?
-    @State private var opacity = 0.0
     @State private var isFavourited = false
 
     private let onImageDownloaded: (Double, Double) -> Void
@@ -58,21 +57,9 @@ struct ImageRowItem: View {
                         }
                     }
                 }
-                .opacity(self.opacity)
-                .onAppear {
-                    withAnimation {
-                        self.opacity = 1.0
-                    }
-                }
             } else {
                 self.imageContainerView(uiImage: uiImage)
                     .imageContextMenu(statusData: self.status, attachmentData: self.attachmentData, uiImage: uiImage)
-                    .opacity(self.opacity)
-                    .onAppear {
-                        withAnimation {
-                            self.opacity = 1.0
-                        }
-                    }
             }
         } else {
             if cancelled {

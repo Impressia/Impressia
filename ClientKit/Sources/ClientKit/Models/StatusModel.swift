@@ -107,6 +107,18 @@ public extension StatusModel {
     }
 }
 
+public extension [StatusModel] {
+    func getAllImagesUrls() -> [URL] {
+        var urls: [URL] = []
+
+        for status in self {
+            urls.append(contentsOf: status.mediaAttachments.map({ $0.url }))
+        }
+
+        return urls
+    }
+}
+
 public extension [Status] {
     func toStatusModels() -> [StatusModel] {
         self

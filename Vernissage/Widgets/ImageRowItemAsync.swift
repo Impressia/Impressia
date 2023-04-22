@@ -22,7 +22,6 @@ struct ImageRowItemAsync: View {
     private let showAvatar: Bool
 
     @State private var showThumbImage = false
-    @State private var opacity = 0.0
     @State private var isFavourited = false
 
     private let onImageDownloaded: (Double, Double) -> Void
@@ -61,14 +60,9 @@ struct ImageRowItemAsync: View {
                             }
                         }
                     }
-                    .opacity(self.opacity)
                     .onAppear {
                         if let uiImage = state.imageResponse?.image {
                             self.recalculateSizeOfDownloadedImage(uiImage: uiImage)
-                        }
-
-                        withAnimation {
-                            self.opacity = 1.0
                         }
                     }
                 } else {
@@ -76,14 +70,9 @@ struct ImageRowItemAsync: View {
                         .imageContextMenu(statusModel: self.statusViewModel,
                                           attachmentModel: self.attachment,
                                           uiImage: state.imageResponse?.image)
-                        .opacity(self.opacity)
                         .onAppear {
                             if let uiImage = state.imageResponse?.image {
                                 self.recalculateSizeOfDownloadedImage(uiImage: uiImage)
-                            }
-
-                            withAnimation {
-                                self.opacity = 1.0
                             }
                         }
                 }

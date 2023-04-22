@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import Nuke
 import PixelfedKit
 import ClientKit
 import ServicesKit
@@ -50,6 +51,7 @@ struct StatusesView: View {
     @State private var lastStatusId: String?
 
     private let defaultLimit = 20
+    private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
 
     var body: some View {
         self.mainBody()
@@ -150,6 +152,9 @@ struct StatusesView: View {
             inPlaceStatuses.append(StatusModel(status: item))
         }
 
+        // Prefetch images.
+        self.prefetch(statusModels: inPlaceStatuses)
+
         // Append to empty list.
         self.statusViewModels.append(contentsOf: inPlaceStatuses)
     }
@@ -173,6 +178,9 @@ struct StatusesView: View {
             for item in previousStatuses.getStatusesWithImagesOnly() {
                 inPlaceStatuses.append(StatusModel(status: item))
             }
+
+            // Prefetch images.
+            self.prefetch(statusModels: inPlaceStatuses)
 
             // Append statuses to existing array of statuses (at the end).
             self.statusViewModels.append(contentsOf: inPlaceStatuses)
@@ -290,5 +298,9 @@ struct StatusesView: View {
         } catch {
             ErrorService.shared.handle(error, message: "statuses.error.tagUnfollowFailed", showToastr: true)
         }
+    }
+
+    private func prefetch(statusModels: [StatusModel]) {
+        imagePrefetcher.startPrefetching(with: statusModels.getAllImagesUrls())
     }
 }

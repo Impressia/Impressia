@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import Nuke
 import PixelfedKit
 import ClientKit
 import ServicesKit
@@ -38,6 +39,7 @@ struct PaginableStatusesView: View {
     @State private var page = 1
 
     private let defaultLimit = 10
+    private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
 
     var body: some View {
         self.mainBody()
@@ -122,6 +124,9 @@ struct PaginableStatusesView: View {
             inPlaceStatuses.append(StatusModel(status: item))
         }
 
+        // Prefetch images.
+        self.prefetch(statusModels: inPlaceStatuses)
+
         self.statusViewModels.append(contentsOf: inPlaceStatuses)
     }
 
@@ -140,6 +145,9 @@ struct PaginableStatusesView: View {
             inPlaceStatuses.append(StatusModel(status: item))
         }
 
+        // Prefetch images.
+        self.prefetch(statusModels: inPlaceStatuses)
+
         self.statusViewModels.append(contentsOf: inPlaceStatuses)
     }
 
@@ -151,5 +159,9 @@ struct PaginableStatusesView: View {
         case .bookmarks:
             return try await self.client.accounts?.bookmarks(limit: self.defaultLimit, page: self.page) ?? []
         }
+    }
+
+    private func prefetch(statusModels: [StatusModel]) {
+        imagePrefetcher.startPrefetching(with: statusModels.getAllImagesUrls())
     }
 }
