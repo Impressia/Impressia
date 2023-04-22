@@ -1,0 +1,11 @@
+// MARK: Network errors.
+"global.error.notSuccessResponse" = "Réponse du serveur : %@.";
+"global.error.unknownError" = "Erreur inattendue.";
+
+// Mark: Report errors.
+"report.error.noSelfReports" = "L'autodéclaration n'est pas autorisée.";
+"report.error.invalidObjectId" = "Identifiant d'object incorrect.";
+"report.error.duplicate" = "Le rapport a déjà été envoyé.";
+"report.error.invalidParameters" = "Paramètres de rapport non valides.";
+"report.error.invalidType" = "Type de rapport non valide.";
+"report.error.invalidObject" = "Type d'objet non valide.";
