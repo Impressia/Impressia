@@ -83,8 +83,8 @@ struct HomeFeedView: View {
             }
 
             self.newPhotosView()
-                .offset(y: self.offset)
-                .opacity(self.opacity)
+                // .offset(y: self.offset)
+                // .opacity(self.opacity)
         }
         .refreshable {
             HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
@@ -191,11 +191,13 @@ struct HomeFeedView: View {
 
                 HStack {
                     Image(systemName: "arrow.up")
+                        .fontWeight(.light)
                     Text("\(self.applicationState.amountOfNewStatuses)")
+                        .fontWeight(.semibold)
                 }
-                .padding(12)
-                .font(.footnote)
-                .fontWeight(.light)
+                .padding(.vertical, 12)
+                .padding(.horizontal, 18)
+                .font(.callout)
                 .foregroundColor(Color.mainTextColor)
                 .background(.ultraThinMaterial)
                 .clipShape(Capsule())
