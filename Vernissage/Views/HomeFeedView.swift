@@ -83,8 +83,8 @@ struct HomeFeedView: View {
             }
 
             self.newPhotosView()
-                // .offset(y: self.offset)
-                // .opacity(self.opacity)
+                .offset(y: self.offset)
+                .opacity(self.opacity)
         }
         .refreshable {
             HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
