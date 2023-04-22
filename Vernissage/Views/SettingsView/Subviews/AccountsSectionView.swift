@@ -74,7 +74,7 @@ struct AccountsSectionView: View {
         // When we are deleting active user then we have to switch to sing in view.
         if shouldClearApplicationState {
             // We have to do this after animation of deleting row is ended.
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.asyncAfter(0.5) {
                 ApplicationSettingsHandler.shared.set(accountId: nil)
                 self.applicationState.clearApplicationState()
                 self.client.clearAccount()

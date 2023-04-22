@@ -141,7 +141,7 @@ struct ImageViewer: View {
                             self.accumulatedOffset = CGSize.zero
                         }
 
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                        self.asyncAfter(0.35) {
                             withoutAnimation {
                                 self.dismiss()
                             }
@@ -161,7 +161,7 @@ struct ImageViewer: View {
                 self.currentOffset = self.calculateStartingOffset()
             }
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+            self.asyncAfter(0.35) {
                 withoutAnimation {
                     self.dismiss()
                 }

@@ -249,8 +249,8 @@ struct MainView: View {
         HapticService.shared.fireHaptic(of: .tabSelection)
 
         if viewMode == .search {
-            hideKeyboard()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.hideKeyboard()
+            self.asyncAfter(0.3) {
                 self.viewMode = newViewMode
             }
         } else {
@@ -262,8 +262,8 @@ struct MainView: View {
         HapticService.shared.fireHaptic(of: .buttonPress)
 
         if viewMode == .search {
-            hideKeyboard()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.hideKeyboard()
+            self.asyncAfter(0.3) {
                 self.tryToSwitch(account)
             }
         } else {

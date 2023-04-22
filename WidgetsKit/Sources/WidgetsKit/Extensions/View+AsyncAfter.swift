@@ -1,8 +1,16 @@
 //
-//  File.swift
-//  
-//
-//  Created by Marcin Czachurski on 22/04/2023.
+//  https://mczachurski.dev
+//  Copyright © 2023 Marcin Czachurski and the repository contributors.
+//  Licensed under the Apache License 2.0.
 //
 
 import Foundation
+import SwiftUI
+
+public extension View {
+    func asyncAfter(_ time: Double, operation: @escaping () -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + time) {
+            operation()
+        }
+    }
+}

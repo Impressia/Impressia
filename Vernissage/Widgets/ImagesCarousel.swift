@@ -72,7 +72,7 @@ struct ImagesCarousel: View {
                         self.recalculateImageHeight(attachment: attachment, imageData: imageData)
                     }
 
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    self.asyncAfter(0.4) {
                         attachment.set(data: imageData)
                     }
 
