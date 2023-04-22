@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import Nuke
 import PixelfedKit
 import ClientKit
 import ServicesKit
@@ -20,7 +21,9 @@ struct UserProfileStatusesView: View {
     @State private var allItemsLoaded = false
     @State private var firstLoadFinished = false
     @State private var statusViewModels: [StatusModel] = []
+
     private let defaultLimit = 20
+    private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
 
     var body: some View {
         LazyVStack(alignment: .center) {
@@ -64,6 +67,9 @@ struct UserProfileStatusesView: View {
             inPlaceStatuses.append(StatusModel(status: item))
         }
 
+        // Prefetch images.
+        self.prefetch(statusModels: inPlaceStatuses)
+
         self.firstLoadFinished = true
         self.statusViewModels.append(contentsOf: inPlaceStatuses)
 
@@ -85,7 +91,15 @@ struct UserProfileStatusesView: View {
                 inPlaceStatuses.append(StatusModel(status: item))
             }
 
+            // Prefetch images.
+            self.prefetch(statusModels: inPlaceStatuses)
+
             self.statusViewModels.append(contentsOf: inPlaceStatuses)
         }
     }
+
+    private func prefetch(statusModels: [StatusModel]) {
+        imagePrefetcher.startPrefetching(with: statusModels.getAllImagesUrls())
+    }
+
 }
