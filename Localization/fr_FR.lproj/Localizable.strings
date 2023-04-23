@@ -1,0 +1,349 @@
+// MARK: Common strings.
+"global.title.contentWarning" = "Contenu sensible";
+"global.title.seePost" = "Voir le post";
+"global.title.refresh" = "Rafraîchir";
+"global.title.momentsAgo" = "Il y a quelques instants";
+"global.title.success" = "Succès";
+"global.title.photoSaved" = "La photo a été sauvegardée.";
+"global.title.ok" = "OK";
+"global.title.showMore" = "Montrer plus";
+"global.title.showLess" = "Montrer moins";
+"global.title.close" = "Fermer";
+
+// MARK: Global errors.
+"global.error.unexpected" = "Erreur inattendue.";
+"global.error.statusesNotRetrieved" = "Statuts non récupérés.";
+"global.error.errorDuringDownloadStatuses" = "Erreur pendant le téléchargerment des statuts du serveur.";
+"global.error.errorDuringDownloadHashtag" = "Erreur pendant le téléchargement des tags depuis le serveur.";
+"global.error.hashtagNotExists" = "Le hashtag n'existe pas.";
+"global.error.errorDuringImageDownload" = "Impossible de télécharger l'image.";
+"global.error.canceledImageDownload" = "Le téléchargement de l'image a été annulé.";
+"global.error.errorDuringDataLoad" = "Le chargement des données a échoué.";
+"global.error.errorDuringUserRead" = "Impossible de récupérer les données de l'utilisateur.";
+"global.error.badUrlServer" = "Mauvaise URL pour le serveur.";
+"global.error.accessTokenNotFound" = "Le jeton d'accès n'est pas trouvé.";
+"global.error.errorDuringDownloadStatus" = "Erreur durant le téléchargement du statut depuis le serveur.";
+"global.error.errorDuringPurchaseVerification" = "Vérification d'achat échoué.";
+
+// MARK: Main view (main navigation bar).
+"mainview.tab.homeTimeline" = "Accueil";
+"mainview.tab.localTimeline" = "Local";
+"mainview.tab.federatedTimeline" = "Fédéré";
+"mainview.tab.trendingPhotos" = "Photos";
+"mainview.tab.trendingTags" = "Tags";
+"mainview.tab.trendingAccounts" = "Utilisateurs";
+"mainview.tab.userProfile" = "Profil";
+"mainview.tab.notifications" = "Notifications";
+"mainview.tab.search" = "Rechercher";
+"mainview.tab.trending" = "Tendance";
+
+// MARK: Main view (leading navigation bar).
+"mainview.menu.settings" = "Paramètres";
+
+// MARK: Main view (error notifications).
+"mainview.error.switchAccounts" = "Impossible de changer de compte.";
+
+// MARK: Home timeline.
+"home.title.allCaughtUp" = "Tout est à jour";
+"home.title.noPhotos" = "Malheureusement, il n'y a pas de photos ici.";
+
+// MARK: Statuses timeline (local/federated/favourite/bookmarks etc.).
+"statuses.navigationBar.localTimeline" = "Local";
+"statuses.navigationBar.federatedTimeline" = "Fédéré";
+"statuses.navigationBar.favourites" = "Favoris";
+"statuses.navigationBar.bookmarks" = "Marque-pages";
+"statuses.title.noPhotos" = "Malheureusement, il n'y a pas de photos ici.";
+"statuses.title.tagFollowed" = "Vous suivez ce tag.";
+"statuses.title.tagUnfollowed" = "Vous ne suivez plus ce tag.";
+"statuses.error.loadingStatusesFailed" = "Chargement des statuts impossible.";
+"statuses.error.tagFollowFailed" = "Suivi de tag échoué.";
+"statuses.error.tagUnfollowFailed" = "Ne plus suivre le tag a échoué.";
+
+// Mark: Search view.
+"search.navigationBar.title" = "Rechercher";
+"search.title.placeholder" = "Rechercher...";
+"search.title.usersWith" = "Utilisateurs avec %@";
+"search.title.goToUser" = "Voir l'utilisateur %@";
+"search.title.hashtagWith" = "Hashtags avec %@";
+"search.title.goToHashtag" = "Voir le hashtag %@";
+
+// Mark: Trending statuses.
+"trendingStatuses.navigationBar.title" = "Photos";
+"trendingStatuses.title.daily" = "Quotidien";
+"trendingStatuses.title.monthly" = "Mensuel";
+"trendingStatuses.title.yearly" = "Annuel";
+"trendingStatuses.error.loadingStatusesFailed" = "Chargement des statuts échoué.";
+"trendingStatuses.title.noPhotos" = "Malheureusement, il n'y a pas de photos ici.";
+
+// Mark: Trending tags.
+"trendingTags.navigationBar.title" = "Tags";
+"trendingTags.title.noTags" = "Malheureusement, il n'y a pas de tags ici.";
+"trendingTags.title.amountOfPosts" = "%d posts";
+"trendingTags.error.loadingTagsFailed" = "Chargement des tags échoué.";
+
+// Mark: Trending accounts.
+"trendingAccounts.navigationBar.title" = "Utilisateurs";
+"trendingAccounts.title.noAccounts" = "Malheureusement, il n'y a personne ici.";
+"trendingAccounts.error.loadingAccountsFailed" = "Chargement des comptes échoué.";
+
+// Mark: User profile view.
+"userProfile.title.openInBrowser" = "Ouvrir dans un navigateur";
+"userProfile.title.share" = "Partager";
+"userProfile.title.unmute" = "Désactiver;
+"userProfile.title.mute" = "Sourdine";
+"userProfile.title.unblock" = "Déblouer";
+"userProfile.title.block" = "Bloquer";
+"userProfile.title.favourites" = "Favoris";
+"userProfile.title.bookmarks" = "Marque-pages";
+"userProfile.title.posts" = "Posts";
+"userProfile.title.followers" = "Suiveurs";
+"userProfile.title.following" = "Suivis";
+"userProfile.title.joined" = "Joint %@";
+"userProfile.title.unfollow" = "Ne plus suivre";
+"userProfile.title.followBack" = "Suivre en retour";
+"userProfile.title.follow" = "Suivre";
+"userProfile.title.instance" = "Information sur l'instance";
+"userProfile.title.blocks" = "Comptes bloqués";
+"userProfile.title.mutes" = "Comptes en sourdine";
+"userProfile.title.muted" = "Compte mis en sourdine";
+"userProfile.title.unmuted" = "Compte remis en actif";
+"userProfile.title.blocked" = "Compte bloqué";
+"userProfile.title.unblocked" = "Compte débloqué";
+"userProfile.title.report" = "Rapport";
+"userProfile.error.notExists" = "Le compte n'existe pas.";
+"userProfile.error.loadingAccountFailed" = "Erreur pendant le téléchargement du compte depuis le serveur.";
+"userProfile.error.muting" = "L'action sourdine / réactivation a échoué.";
+"userProfile.error.block" = "L'action bloquer / déblouquer a échoué.";
+"userProfile.error.relationship" = "L'action de relation a échoué.";
+"userProfile.title.edit" = "Editer";
+"userProfile.title.muted" = "Sourdine";
+"userProfile.title.blocked" = "Bloquer";
+
+// Mark: Notifications view.
+"notifications.navigationBar.title" = "Notifications";
+"notifications.title.noNotifications" = "Malheureusement, il n'y a rien ici.";
+"notifications.title.followedYou" = "vous a suivi";
+"notifications.title.mentionedYou" = "vous a mentionné";
+"notifications.title.boosted" = "partagé";
+"notifications.title.favourited" = "favouri";
+"notifications.title.postedStatus" = "statut posté";
+"notifications.title.followRequest" = "demande de suivi";
+"notifications.title.poll" = "sondage";
+"notifications.title.updatedStatus" = "statut mis à jour";
+"notifications.title.signedUp" = "s'inscrire";
+"notifications.title.newReport" = "new rapport";
+"notifications.error.loadingNotificationsFailed" = "Chargement des notifications échoué.";
+
+// Mark: Compose view.
+"compose.navigationBar.title" = "Composer";
+"compose.title.everyone" = "Tout le monde";
+"compose.title.unlisted" = "Non listé";
+"compose.title.followers" = "Suiveurs";
+"compose.title.attachPhotoFull" = "Joignez une photo et écrivez ce qui vous convient";
+"compose.title.attachPhotoMini" = "Ecrivez ce qui vous convient";
+"compose.title.publish" = "Publer";
+"compose.title.cancel" = "Annuler";
+"compose.title.writeContentWarning" = "Rédaction d'un avertissement sur le contenu";
+"compose.title.commentsWillBeDisabled" = "Les commentaires seront désactivés";
+"compose.title.statusPublished" = "Statuts publiés";
+"compose.title.tryToUpload" = "Essayer de télécharger";
+"compose.title.delete" = "Supprimer";
+"compose.title.edit" = "Editer";
+"compose.error.loadingPhotosFailed" = "Impossible de récupérer l'image depuis la bibliothèque.";
+"compose.error.postingPhotoFailed" = "Erreur pendant le post de la photo.";
+"compose.error.postingStatusFailed" = "Erreur pendant le post du statut.";
+
+// Mark: Photo editor view.
+"photoEdit.navigationBar.title" = "Détails sur la photo";
+"photoEdit.title.photo" = "Photo";
+"photoEdit.title.accessibility" = "Accessibilité";
+"photoEdit.title.accessibilityDescription" = "Description pour les malvoyants";
+"photoEdit.title.save" = "Enregistrer";
+"photoEdit.title.cancel" = "Annuler";
+"photoEdit.error.updatePhotoFailed" = "Erreur pendant la mise à jour de la photo.";
+
+// Mark: Place selector view.
+"placeSelector.navigationBar.title" = "Lieux";
+"placeSelector.title.search" = "Rechercher...";
+"placeSelector.title.buttonSearch" = "Rechercher";
+"placeSelector.title.cancel" = "Annuler";
+"placeSelector.error.loadingPlacesFailed" = "Chargement des notifications échoué.";
+
+// Mark: Settings view.
+"settings.navigationBar.title" = "Paramètres";
+"settings.title.close" = "Fermer";
+"settings.title.version" = "Version";
+"settings.title.accounts" = "Compte";
+"settings.title.newAccount" = "Nouveau compte";
+"settings.title.accent" = "Accent";
+"settings.title.theme" = "Thème";
+"settings.title.system" = "Système";
+"settings.title.light" = "Clair";
+"settings.title.dark" = "Sombre";
+"settings.title.avatar" = "Avatar";
+"settings.title.circle" = "Cercle";
+"settings.title.rounderRectangle" = "Rectangle arrondi;
+"settings.title.other" = "Autre";
+"settings.title.thirdParty" = "Tiers";
+"settings.title.reportBug" = "Rapporter un bogue";
+"settings.title.githubIssues" = "Problèmes sur Github";
+"settings.title.follow" = "Me suivre";
+"settings.title.support" = "Support";
+"settings.title.thankYouTitle" = "Merci 💕";
+"settings.title.thankYouMessage" = "Merci pour votre achat. Les achats, petits et grands, nous aident à réaliser notre rêve de fournir des produits de la meilleure qualité à nos clients. Nous espérons que vous aimez Vernissage.";
+"settings.title.thankYouClose" = "Fermer";
+"settings.title.haptics" = "Haptique";
+"settings.title.hapticsTabSelection" = "Sélection de l'onglet";
+"settings.title.hapticsButtonPress" = "Appui sur un bouton";
+"settings.title.hapticsListRefresh" = "Rafraîchir la liste";
+"settings.title.hapticsAnimationFinished" = "Animation finie";
+"settings.title.mediaSettings" = "Paramètres du media";
+"settings.title.alwaysShowSensitiveTitle" = "Toujours montrer les NSFW";
+"settings.title.alwaysShowSensitiveDescription" = "Forcer l'affichage de tous les media NFSW (contenu sensible) sans avertissement";
+"settings.title.alwaysShowAltTitle" = "Afficher le texte alternatif";
+"settings.title.alwaysShowAltDescription" = "Afficher le texte alternatif si présent sur l'écran des détails des statuts";
+"settings.title.general" = "Général";
+"settings.title.applicationIcon" = "Icône de l'application";
+"settings.title.followVernissage" = "Suivre Vernissage";
+"settings.title.mastodonAccount" = "Compte Mastodon";
+"settings.title.pixelfedAccount" = "Compte Pixelfed";
+"settings.title.openPage" = "Ouvrir";
+"settings.title.privacyPolicy" = "Politique de confidentialité";
+"settings.title.terms" = "Conditions générales d'utilisation";
+"settings.title.sourceCode" = "Code source";
+"settings.title.rate" = "Noter Vernissage";
+"settings.title.socials" = "Social";
+"settings.title.menuPosition" = "Position du menu";
+"settings.title.topMenu" = "Barre de navigation";
+"settings.title.bottomRightMenu" = "En bas à droite";
+"settings.title.bottomLeftMenu" = "En bas à gauche";
+"settings.title.showAvatars" = "Afficher les avatars";
+"settings.title.showAvatarsOnTimeline" = "Les avatars sont affichés sur la timeline";
+"settings.title.showFavourite" = "Afficher les favoris";
+"settings.title.showFavouriteOnTimeline" = "Les favoris sont affichés sur la timeline";
+"settings.title.showAltText" = "Afficher l'icône ALT";
+"settings.title.showAltTextOnTimeline" = "L'icône ALT sera affichée sur la timeline";
+
+// Mark: Signin view.
+"signin.navigationBar.title" = "Se connecter à Pixelfed";
+"signin.title.serverAddress" = "Adresse du serveur";
+"signin.title.signIn" = "Connecter";
+"signin.title.enterServerAddress" = "Entrer l'adresse du server";
+"signin.title.howToJoinLink" = "Comment rejoindre Pixelfed";
+"signin.title.chooseServer" = "Ou choisissez un sereveur Pixelfed";
+"signin.title.amountOfUsers" = "%d Utilisateurs";
+"signin.title.amountOStatuses" = "%d statuts";
+"signin.error.communicationFailed" = "La communication avec le server a échoué.";
+
+// Mark: Status view.
+"status.navigationBar.title" = "Détails";
+"status.title.uploaded" = "Envoyé";
+"status.title.via" = "via %@";
+"status.title.reboostedBy" = "Partagé par";
+"status.title.favouritedBy" = "Favoris par";
+"status.title.openInBrowser" = "Ouvrir dans un navigateur";
+"status.title.shareStatus" = "Partger le statut";
+"status.title.yourStatus" = "Votre statut";
+"status.title.delete" = "Supprimer";
+"status.title.reboosted" = "Partagé";
+"status.title.unreboosted" = "Enlever le partage";
+"status.title.favourited" = "Favorisé";
+"status.title.unfavourited" = "Enlever le favoris";
+"status.title.bookmarked" = "Marque-pages effectué";
+"status.title.unbookmarked" = "Marque-pages enlevé";
+"status.title.statusDeleted" = "Statut supprimé";
+"status.title.reboost" = "Partagé";
+"status.title.unreboost" = "Enlever le partage";
+"status.title.favourite" = "Favoris";
+"status.title.unfavourite" = "Enlever le favoris";
+"status.title.bookmark" = "Marque-pages";
+"status.title.unbookmark" = "Marque-pages enlevé";
+"status.title.comment" = "Commenter";
+"status.title.report" = "Rapport";
+"status.title.saveImage" = "Enregistrer l'image";
+"status.title.showMediaDescription" = "Afficher la description du media";
+"status.title.mediaDescription" = "Description du media";
+"status.title.shareImage" = "Partager l'image";
+"status.title.altText" = "ALT";
+"status.error.loadingStatusFailed" = "Chargement du statut échoué.";
+"status.error.notFound" = "Le statut n'existe plus.";
+"status.error.loadingCommentsFailed" = "Les commentaires ne peuvent être téléchargés.";
+"status.error.reboostFailed" = "L'action de partage a échoué.";
+"status.error.favouriteFailed" = "L'action de favoris a échoué.";
+"status.error.bookmarkFailed" = "L'action de marque-pages a échoué.";
+"status.error.deleteFailed" = "L'action de suppression a échoué.";
+
+// Mark: Accounts view.
+"accounts.navigationBar.followers" = "Suiveurs";
+"accounts.navigationBar.following" = "Suivis";
+"accounts.navigationBar.favouritedBy" = "Favorisé par";
+"accounts.navigationBar.reboostedBy" = "Partagé par";
+"accounts.navigationBar.blocked" = "Comptes bloqués";
+"accounts.navigationBar.mutes" = "Comptes mis en sourdine";
+"accounts.title.noAccounts" = "Malheureusement, il n'y a personne ici.";
+"accounts.error.loadingAccountsFailed" = "Le chargement des comptes a échoué.";
+
+// Mark: Third party view.
+"thirdParty.navigationBar.title" = "Tiers";
+
+// Mark: Widget view.
+"widget.title.description" = "Widget avec des photos de Pixelfed.";
+
+// Mark: In-app purchases.
+"purchase.donut.title" = "Beignet";
+"purchase.donut.description" = "Offrez-moi un beignet.";
+"purchase.coffee.title" = "Café";
+"purchase.coffee.description" = "Offrez-moi un café.";
+"purchase.cake.title" = "Café et gâteau";
+"purchase.cake.description" = "Offrez-moi un café et un gâteau.";
+
+// Mark: Edit profile.
+"editProfile.navigationBar.title" = "Editer le profil";
+"editProfile.title.displayName" = "Afficher le nom";
+"editProfile.title.bio" = "Bio";
+"editProfile.title.website" = "Site web";
+"editProfile.title.save" = "Enregistrer";
+"editProfile.title.accountSaved" = "Le profil a été mis à jour.";
+"editProfile.title.photoInfo" = "La photo modifiée sera visible dans l'application et sur le site web avec un petit délai.";
+"editProfile.title.privateAccount" = "Compte privé";
+"editProfile.title.privateAccountInfo" = "Lorsque votre compte est privé, seules les personnes que vous autorisez peuvent voir vos photos et vidéos sur Pixelfed. Les personnes qui vous suivent déjà ne seront pas affectées.";
+"editProfile.error.saveAccountFailed" = "Enregistrement du profil échoué.";
+"editProfile.error.loadingAvatarFailed" = "Chargement de l'avatar échoué.";
+"editProfile.error.noProfileData" = "Les données du profil ne peuvent pas être affichées.";
+"editProfile.error.loadingAccountFailed" = "Erreur lors du téléchargement du compte depuis le serveur.";
+
+// Mark: Instance information.
+"instance.navigationBar.title" = "Instance";
+"instance.title.instanceInfo" = "Information sur l'instance";
+"instance.title.name" = "Nom";
+"instance.title.address" = "Addresse";
+"instance.title.email" = "Email";
+"instance.title.version" = "Version";
+"instance.title.users" = "Utilisateurs";
+"instance.title.posts" = "Posts";
+"instance.title.domains" = "Domaines";
+"instance.title.registrations" = "Inscriptions";
+"instance.title.approvalRequired" = "Approbation requise";
+"instance.title.rules" = "Règles de l'instance";
+"instance.title.contact" = "Contact";
+"instance.title.pixelfedAccount" = "Compte Pixelfed";
+"instance.error.noInstanceData" = "Les données d'instance ne peuvent pas être affichées.";
+"instance.error.loadingDataFailed" = "Erreur lors du téléchargement des données d'instance depuis le serveur.";
+
+// Mark: Report screen.
+"report.navigationBar.title" = "Rapport";
+"report.title.close" = "Fermer";
+"report.title.send" = "Envoyer";
+"report.title.userReported" = "L'utilisateur a été signalé";
+"report.title.postReported" = "Le post a été signalé";
+"report.title.reportType" = "Type d'abus";
+"report.title.spam" = "C'est un spam";
+"report.title.sensitive" = "Nudité ou activité sexuelle";
+"report.title.abusive" = "Discours ou symboles haineux";
+"report.title.underage" = "Compte mineur";
+"report.title.violence" = "Violence ou organisations dangereuses";
+"report.title.copyright" = "Violation des droits d'auteur";
+"report.title.impersonation" = "Usurpation d'identité";
+"report.title.scam" = "Intimidation ou harcèlement";
+"report.title.terrorism" = "Le terrorisme";
+"report.error.notReported" = "Erreur lors de l'envoi du rapport.";
