@@ -341,6 +341,7 @@
 		F89D6C49297196FF001DA3D4 /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
 		F89F0605299139F6003DC875 /* Vernissage-002.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-002.xcdatamodel"; sourceTree = "<group>"; };
 		F89F57AF29D1C11200001EE3 /* RelationshipModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationshipModel.swift; sourceTree = "<group>"; };
+		F8A270DA29F500860062D275 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F8A4A88429E4099900267E36 /* Vernissage-008.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-008.xcdatamodel"; sourceTree = "<group>"; };
 		F8A93D7D2965FD89001D8331 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		F8AFF7C029B259150087D083 /* HashtagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagsView.swift; sourceTree = "<group>"; };
@@ -919,6 +920,7 @@
 				Base,
 				pl,
 				eu,
+				fr,
 			);
 			mainGroup = F88C245F295C37B80006098B;
 			packageReferences = (
@@ -1180,6 +1182,7 @@
 				F835082529BEF9C400DE3247 /* en */,
 				F835082729BEFA1E00DE3247 /* pl */,
 				F8DF38E729DDC3D20047F1AA /* eu */,
+				F8A270DA29F500860062D275 /* fr */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

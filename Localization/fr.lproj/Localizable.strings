@@ -89,7 +89,7 @@
 // Mark: User profile view.
 "userProfile.title.openInBrowser" = "Ouvrir dans un navigateur";
 "userProfile.title.share" = "Partager";
-"userProfile.title.unmute" = "Désactiver;
+"userProfile.title.unmute" = "Désactiver";
 "userProfile.title.mute" = "Sourdine";
 "userProfile.title.unblock" = "Déblouer";
 "userProfile.title.block" = "Bloquer";
@@ -182,7 +182,7 @@
 "settings.title.dark" = "Sombre";
 "settings.title.avatar" = "Avatar";
 "settings.title.circle" = "Cercle";
-"settings.title.rounderRectangle" = "Rectangle arrondi;
+"settings.title.rounderRectangle" = "Rectangle arrondi";
 "settings.title.other" = "Autre";
 "settings.title.thirdParty" = "Tiers";
 "settings.title.reportBug" = "Rapporter un bogue";
