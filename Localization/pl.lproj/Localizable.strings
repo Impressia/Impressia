@@ -149,6 +149,9 @@
 "compose.title.tryToUpload" = "Ponów";
 "compose.title.delete" = "Usuń";
 "compose.title.edit" = "Edytuj";
+"compose.title.photos" = "Biblioteka zdjęć";
+"compose.title.camera" = "Zrób zdjęcie";
+"compose.title.files" = "Przeglądaj pliki";
 "compose.error.loadingPhotosFailed" = "Nie można pobrać zdjęcia z biblioteki.";
 "compose.error.postingPhotoFailed" = "Błąd podczas publikowania zdjęcia.";
 "compose.error.postingStatusFailed" = "Błąd podczas wysyłania statusu.";

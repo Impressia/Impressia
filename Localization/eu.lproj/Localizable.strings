@@ -149,6 +149,9 @@
 "compose.title.tryToUpload" = "Saiatu igotzen";
 "compose.title.delete" = "Ezabatu";
 "compose.title.edit" = "Editatu";
+"compose.title.photos" = "Argazki-liburutegia";
+"compose.title.camera" = "Egin argazkia";
+"compose.title.files" = "Arakatu fitxategiak";
 "compose.error.loadingPhotosFailed" = "Ezin da liburutegiko irudia eskuratu.";
 "compose.error.postingPhotoFailed" = "Errorea argazkia argitaratzean.";
 "compose.error.postingStatusFailed" = "Errorea egoera argitaratzean.";

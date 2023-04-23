@@ -1437,6 +1437,7 @@
 				INFOPLIST_FILE = Vernissage/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Vernissage;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Uploading photos to Pixelfed";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Saving photos from Pixelfed";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1478,6 +1479,7 @@
 				INFOPLIST_FILE = Vernissage/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Vernissage;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Uploading photos to Pixelfed";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Saving photos from Pixelfed";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

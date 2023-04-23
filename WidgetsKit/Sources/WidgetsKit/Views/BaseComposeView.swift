@@ -31,9 +31,20 @@ public struct BaseComposeView: View {
     @State private var photosAreUploading = false
     @State private var photosPickerVisible = false
 
+    /// Images from camera pickler.
+    @State private var images: [UIImage] = []
+
+    /// Images from share sheet  or files application.
     @State private var attachments: [NSItemProvider]
+
+    /// Images from Photos app.
     @State private var selectedItems: [PhotosPickerItem] = []
+
+    /// Processed array with images.
     @State private var photosAttachment: [PhotoAttachment] = []
+
+    @State private var isCameraPickerPresented: Bool = false
+    @State private var isFileImporterPresented: Bool = false
 
     @State private var visibility = Pixelfed.Statuses.Visibility.pub
     @State private var visibilityText: LocalizedStringKey = "compose.title.everyone"
@@ -144,6 +155,30 @@ public struct BaseComposeView: View {
                       selection: $selectedItems,
                       maxSelectionCount: 4,
                       matching: .images)
+        .fileImporter(isPresented: $isFileImporterPresented,
+                      allowedContentTypes: [.image],
+                      allowsMultipleSelection: true) { result in
+            Task {
+                if let urls = try? result.get() {
+                    await self.processFiles(urls: urls)
+                }
+            }
+        }
+        .fullScreenCover(isPresented: $isCameraPickerPresented, content: {
+            CameraPickerView(selectedImage: .init(
+                get: { nil },
+                set: { image in
+                    if let image {
+                        self.images.append(image)
+
+                        Task {
+                            await self.loadPhotos()
+                        }
+                    }
+                }
+            ))
+            .background(.black)
+        })
         .interactiveDismissDisabled(self.interactiveDismissDisabled)
     }
 
@@ -195,6 +230,10 @@ public struct BaseComposeView: View {
 
                         self.attachments = self.attachments.filter({ item in
                             item != photoAttachment.nsItemProvider
+                        })
+
+                        self.images = self.images.filter({ item in
+                            item != photoAttachment.uiImage
                         })
 
                         self.refreshScreenState()
@@ -399,10 +438,30 @@ public struct BaseComposeView: View {
             HStack {
                 ScrollView(.horizontal) {
                     HStack(alignment: .center, spacing: 20) {
-                        Button {
-                            hideKeyboard()
-                            self.focusedField = .unknown
-                            self.photosPickerVisible = true
+                        Menu {
+                            Button {
+                                hideKeyboard()
+                                self.focusedField = .unknown
+                                self.photosPickerVisible = true
+                            } label: {
+                                Label("compose.title.photos", systemImage: "photo")
+                            }
+
+                            Button {
+                                hideKeyboard()
+                                self.focusedField = .unknown
+                                self.isCameraPickerPresented = true
+                            } label: {
+                                Label("compose.title.camera", systemImage: "camera")
+                            }
+
+                            Button {
+                                hideKeyboard()
+                                self.focusedField = .unknown
+                                isFileImporterPresented = true
+                            } label: {
+                                Label("compose.title.files", systemImage: "folder")
+                            }
                         } label: {
                             Image(systemName: self.photosAreAttached ? "photo.fill.on.rectangle.fill" : "photo.on.rectangle")
                         }
@@ -506,6 +565,14 @@ public struct BaseComposeView: View {
         return false
     }
 
+    private func processFiles(urls: [URL]) async {
+        let items = urls.filter { $0.startAccessingSecurityScopedResource() }
+            .compactMap { NSItemProvider(contentsOf: $0) }
+
+        self.attachments.append(contentsOf: items)
+        await self.loadPhotos()
+    }
+
     private func loadPhotos() async {
         self.photosAreUploading = true
         self.publishDisabled = self.isPublishButtonDisabled()
@@ -532,6 +599,16 @@ public struct BaseComposeView: View {
             }
 
             temporaryPhotosAttachment.append(PhotoAttachment(nsItemProvider: item))
+        }
+
+        // Add to collection photos from camera picker.
+        for item in self.images {
+            if let photoAttachment = self.photosAttachment.first(where: { $0.uiImage == item }) {
+                temporaryPhotosAttachment.append(photoAttachment)
+                continue
+            }
+
+            temporaryPhotosAttachment.append(PhotoAttachment(uiImage: item))
         }
 
         // We can show new list on the screen.
