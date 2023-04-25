@@ -110,11 +110,11 @@
 "userProfile.title.unblocked" = "Kontua blokeatzeari utzi zaio";
 "userProfile.title.report" = "Salatu";
 "userProfile.title.followsYou" = "Jarraitzen dizu";
-"userProfile.title.requestFollow" = "Request follow";
-"userProfile.title.cancelRequestFollow" = "Cancel request";
-"userProfile.title.followRequests" = "Follow requests";
-"userProfile.title.privateProfileTitle" = "This profile is private.";
-"userProfile.title.privateProfileSubtitle" = "Only approved followers can see photos.";
+"userProfile.title.requestFollow" = "Egin jarraitzeko eskaera";
+"userProfile.title.cancelRequestFollow" = "Bertan behera utzi jarraitzeko eskaera";
+"userProfile.title.followRequests" = "Jarraipen-eskaerak";
+"userProfile.title.privateProfileTitle" = "Profil hau pribatua da.";
+"userProfile.title.privateProfileSubtitle" = "Baimendutako jarraitzaileek soilik ikus ditzakete argazkiak.";
 "userProfile.error.notExists" = "Kontua ez da existitzen.";
 "userProfile.error.loadingAccountFailed" = "Errorea zerbitzaritik kontua eskuratzean.";
 "userProfile.error.muting" = "Mututu/Mututzeari uzteak huts egin du.";
@@ -357,8 +357,8 @@
 "report.error.notReported" = "Errorea salaketa bidaltzerakoan.";
 
 // Mark: Following requests.
-"followingRequests.navigationBar.title" = "Following requests";
-"followingRequests.title.approve" = "Approve";
-"followingRequests.title.reject" = "Reject";
-"followingRequests.error.approve" = "Error during approving request.";
-"followingRequests.error.reject" = "Error during rejecting request.";
+"followingRequests.navigationBar.title" = "Jarraipen-eskaerak";
+"followingRequests.title.approve" = "Baimendu";
+"followingRequests.title.reject" = "Baztertu";
+"followingRequests.error.approve" = "Errorea eskaera baimentzean.";
+"followingRequests.error.reject" = "Errorea eskaera baztertzean.";
