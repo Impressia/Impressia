@@ -26,6 +26,7 @@ enum RouteurDestinations: Hashable {
     case search
     case editProfile
     case instance
+    case followRequests
 }
 
 enum SheetDestinations: Identifiable {

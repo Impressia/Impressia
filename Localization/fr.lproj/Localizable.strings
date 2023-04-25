@@ -100,7 +100,6 @@
 "userProfile.title.following" = "Suivis";
 "userProfile.title.joined" = "Joint %@";
 "userProfile.title.unfollow" = "Ne plus suivre";
-"userProfile.title.followBack" = "Suivre en retour";
 "userProfile.title.follow" = "Suivre";
 "userProfile.title.instance" = "Information sur l'instance";
 "userProfile.title.blocks" = "Comptes bloqués";
@@ -110,6 +109,12 @@
 "userProfile.title.blocked" = "Compte bloqué";
 "userProfile.title.unblocked" = "Compte débloqué";
 "userProfile.title.report" = "Rapport";
+"userProfile.title.followsYou" = "Vous suit";
+"userProfile.title.requestFollow" = "Request follow";
+"userProfile.title.cancelRequestFollow" = "Cancel request";
+"userProfile.title.followRequests" = "Follow requests";
+"userProfile.title.privateProfileTitle" = "This profile is private.";
+"userProfile.title.privateProfileSubtitle" = "Only approved followers can see photos.";
 "userProfile.error.notExists" = "Le compte n'existe pas.";
 "userProfile.error.loadingAccountFailed" = "Erreur pendant le téléchargement du compte depuis le serveur.";
 "userProfile.error.muting" = "L'action sourdine / réactivation a échoué.";
@@ -350,3 +355,10 @@
 "report.title.scam" = "Intimidation ou harcèlement";
 "report.title.terrorism" = "Le terrorisme";
 "report.error.notReported" = "Erreur lors de l'envoi du rapport.";
+
+// Mark: Following requests.
+"followingRequests.navigationBar.title" = "Following requests";
+"followingRequests.title.approve" = "Approve";
+"followingRequests.title.reject" = "Reject";
+"followingRequests.error.approve" = "Error during approving request.";
+"followingRequests.error.reject" = "Error during rejecting request.";

@@ -100,10 +100,8 @@
 "userProfile.title.following" = "Obserwowani";
 "userProfile.title.joined" = "Dołączył(a) %@";
 "userProfile.title.unfollow" = "Przestań obserwować";
-"userProfile.title.followBack" = "Również obserwuj";
 "userProfile.title.follow" = "Obserwuj";
 "userProfile.title.instance" = "Informacje o instancji";
-"userProfile.error.notExists" = "Konto nie istnieje.";
 "userProfile.title.blocks" = "Zablokowane konta";
 "userProfile.title.mutes" = "Wyciszone konta";
 "userProfile.title.muted" = "Konto wyciszone";
@@ -111,6 +109,13 @@
 "userProfile.title.blocked" = "Konto zablokowane";
 "userProfile.title.unblocked" = "Konto odblokowane";
 "userProfile.title.report" = "Zgłoś";
+"userProfile.title.followsYou" = "Obserwuje ciebie";
+"userProfile.title.requestFollow" = "Poproś o obserwowanie";
+"userProfile.title.cancelRequestFollow" = "Anuluj prośbę";
+"userProfile.title.followRequests" = "Prośby o obserwowanie";
+"userProfile.title.privateProfileTitle" = "To konto jest prywatne.";
+"userProfile.title.privateProfileSubtitle" = "Tylko zaakceptowani użytkownicy mogą przeglądać zdjęcia.";
+"userProfile.error.notExists" = "Konto nie istnieje.";
 "userProfile.error.notExists" = "Błąd podczas pobierania danych użytkownika.";
 "userProfile.error.mute" = "Błąd podczas wyciszania użytkownika.";
 "userProfile.error.block" = "Błąd podczas blokowania/odblokowywania użytkownika.";
@@ -350,3 +355,10 @@
 "report.title.scam" = "Znęcanie się lub nękanie";
 "report.title.terrorism" = "Terroryzm";
 "report.error.notReported" = "Błąd podczas wysyłania zgłoszenia.";
+
+// Mark: Following requests.
+"followingRequests.navigationBar.title" = "Prośby o obserwowanie";
+"followingRequests.title.approve" = "Zaakceptuj";
+"followingRequests.title.reject" = "Odrzuć";
+"followingRequests.error.approve" = "Błąd podczas akceptowania prośby.";
+"followingRequests.error.reject" = "Błąd podczas odrzucania prośby.";

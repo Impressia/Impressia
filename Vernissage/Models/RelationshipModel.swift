@@ -9,6 +9,12 @@ import Foundation
 import PixelfedKit
 
 public class RelationshipModel: ObservableObject {
+    enum RelationshipAction {
+        case follow
+        case unfollow
+        case requestFollow
+        case cancelRequestFollow
+    }
 
     /// The account ID.
     @Published public var id: EntityId
@@ -120,5 +126,27 @@ extension RelationshipModel {
         self.endorsed = relationship.endorsed
         self.languages = relationship.languages
         self.note = relationship.note
+    }
+}
+
+extension RelationshipModel {
+    func haveAccessToPhotos(account: Account) -> Bool {
+        return !account.locked || (account.locked && self.following)
+    }
+
+    func getRelationshipAction(account: Account) -> RelationshipAction {
+        if self.following {
+            return .unfollow
+        }
+
+        if self.requested {
+            return .cancelRequestFollow
+        }
+
+        if account.locked {
+            return .requestFollow
+        }
+
+        return .follow
     }
 }

@@ -21,18 +21,6 @@ struct UserProfileHeaderView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            HStack(alignment: .top) {
-                Spacer()
-
-                if self.relationship.muting == true {
-                    TagWidget(value: "userProfile.title.muted", color: .accentColor, systemImage: "message.and.waveform.fill")
-                }
-
-                if self.relationship.blocking == true {
-                    TagWidget(value: "userProfile.title.blocked", color: .dangerColor, systemImage: "hand.raised.fill")
-                }
-            }
-
             HStack(alignment: .center) {
                 UserAvatar(accountAvatar: account.avatar, size: .profile)
 
@@ -108,11 +96,34 @@ struct UserProfileHeaderView: View {
                 .font(.footnote)
             }
 
+            self.accountRelationshipPanel()
+
             Text(String(format: NSLocalizedString("userProfile.title.joined", comment: "Joined"), account.createdAt.toRelative(.isoDateTimeMilliSec)))
                 .foregroundColor(.lightGrayColor.opacity(0.5))
                 .font(.footnote)
         }
         .padding()
+    }
+
+    @ViewBuilder
+    private func accountRelationshipPanel() -> some View {
+        if self.relationship.followedBy || self.relationship.muting || self.relationship.blocking {
+            HStack(alignment: .top) {
+                if self.relationship.followedBy {
+                    TagWidget(value: "userProfile.title.followsYou", color: .secondary, systemImage: "person.crop.circle.badge.checkmark")
+                }
+
+                if self.relationship.muting {
+                    TagWidget(value: "userProfile.title.muted", color: .accentColor, systemImage: "message.and.waveform.fill")
+                }
+
+                if self.relationship.blocking {
+                    TagWidget(value: "userProfile.title.blocked", color: .dangerColor, systemImage: "hand.raised.fill")
+                }
+
+                Spacer()
+            }
+        }
     }
 
     @ViewBuilder
@@ -122,24 +133,51 @@ struct UserProfileHeaderView: View {
         } label: {
             HStack {
                 Image(systemName: relationship.following == true ? "person.badge.minus" : "person.badge.plus")
-                Text(relationship.following == true
-                     ? "userProfile.title.unfollow"
-                     : (relationship.followedBy == true ? "userProfile.title.followBack" : "userProfile.title.follow"), comment: "Follow/unfollow actions")
+                Text(self.getRelationshipActionText(), comment: "Follow/unfollow actions")
             }
         }
         .buttonStyle(.borderedProminent)
-        .tint(relationship.following == true ? .dangerColor : .accentColor)
+        .tint(self.getTintColor())
+    }
+
+    private func getRelationshipActionText() -> LocalizedStringKey {
+        let relationshipAction = self.relationship.getRelationshipAction(account: self.account)
+
+        switch relationshipAction {
+        case .follow:
+            return "userProfile.title.follow"
+        case .cancelRequestFollow:
+            return "userProfile.title.cancelRequestFollow"
+        case .requestFollow:
+            return "userProfile.title.requestFollow"
+        case .unfollow:
+            return "userProfile.title.unfollow"
+        }
+    }
+
+    private func getTintColor() -> Color {
+        let relationshipAction = self.relationship.getRelationshipAction(account: self.account)
+
+        switch relationshipAction {
+        case .follow, .requestFollow:
+            return .accentColor
+        case .cancelRequestFollow, .unfollow:
+            return .dangerColor
+        }
     }
 
     private func onRelationshipButtonTap() async {
         do {
-            if self.relationship.following == true {
-                if let relationship = try await self.client.accounts?.unfollow(account: self.account.id) {
-                    self.relationship.following = relationship.following
-                }
-            } else {
+            let relationshipAction = self.relationship.getRelationshipAction(account: self.account)
+
+            switch relationshipAction {
+            case .follow, .requestFollow:
                 if let relationship = try await self.client.accounts?.follow(account: self.account.id) {
-                    self.relationship.following = relationship.following
+                    self.relationship.update(relationship: relationship)
+                }
+            case .cancelRequestFollow, .unfollow:
+                if let relationship = try await self.client.accounts?.unfollow(account: self.account.id) {
+                    self.relationship.update(relationship: relationship)
                 }
             }
         } catch {
