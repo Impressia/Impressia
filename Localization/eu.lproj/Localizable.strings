@@ -110,11 +110,11 @@
 "userProfile.title.unblocked" = "Kontua blokeatzeari utzi zaio";
 "userProfile.title.report" = "Salatu";
 "userProfile.title.followsYou" = "Jarraitzen dizu";
-"userProfile.title.requestFollow" = "Request follow";
-"userProfile.title.cancelRequestFollow" = "Cancel request";
-"userProfile.title.followRequests" = "Follow requests";
-"userProfile.title.privateProfileTitle" = "This profile is private.";
-"userProfile.title.privateProfileSubtitle" = "Only approved followers can see photos.";
+"userProfile.title.requestFollow" = "Egin jarraitzeko eskaera";
+"userProfile.title.cancelRequestFollow" = "Bertan behera utzi jarraitzeko eskaera";
+"userProfile.title.followRequests" = "Jarraipen-eskaerak";
+"userProfile.title.privateProfileTitle" = "Profil hau pribatua da.";
+"userProfile.title.privateProfileSubtitle" = "Baimendutako jarraitzaileek soilik ikus ditzakete argazkiak.";
 "userProfile.error.notExists" = "Kontua ez da existitzen.";
 "userProfile.error.loadingAccountFailed" = "Errorea zerbitzaritik kontua eskuratzean.";
 "userProfile.error.muting" = "Mututu/Mututzeari uzteak huts egin du.";
@@ -207,9 +207,9 @@
 "settings.title.hapticsAnimationFinished" = "Animazioak amaitzean";
 "settings.title.mediaSettings" = "Multimedia hobespenak";
 "settings.title.alwaysShowSensitiveTitle" = "Erakutsi beti NSFW edukia";
-"settings.title.alwaysShowSensitiveDescription" = "Erakutsi NSFW (Lanerako Egokia Izan Ez Daitekeen Edukia) gisa markatutako multimedia edukia ohartarazpenik gabe";
+"settings.title.alwaysShowSensitiveDescription" = "NSFW (Lanerako Egokia Izan Ez Daitekeen Edukia) gisa markatutako multimedia edukia ohartarazpenik gabe erakutsiko da";
 "settings.title.alwaysShowAltTitle" = "Erakutsi testu alternatiboa";
-"settings.title.alwaysShowAltDescription" = "Erakutsi testu alternatiboa xehetasunen pantailan, baldin badago";
+"settings.title.alwaysShowAltDescription" = "Testu alternatiboa xehetasunen pantailan erakutsiko da, baldin badago";
 "settings.title.general" = "Orokorra";
 "settings.title.applicationIcon" = "Aplikazioaren ikonoa";
 "settings.title.followVernissage" = "Jarraitu Vernissage-ri";
@@ -230,7 +230,7 @@
 "settings.title.showFavourite" = "Erakutsi gogokoak";
 "settings.title.showFavouriteOnTimeline" = "Gogokoak denbora-lerroan erakutsiko dira";
 "settings.title.showAltText" = "Erakutsi ALT ikurra";
-"settings.title.showAltTextOnTimeline" = "ALT ikurra denbora-lerroetan erakutsiko da";
+"settings.title.showAltTextOnTimeline" = "ALT ikurra (deskribapena edo testu alternatiboa dagoen seinale) denbora-lerroan erakutsiko da";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Hasi saioa Pixelfed-en";
@@ -357,8 +357,8 @@
 "report.error.notReported" = "Errorea salaketa bidaltzerakoan.";
 
 // Mark: Following requests.
-"followingRequests.navigationBar.title" = "Following requests";
-"followingRequests.title.approve" = "Approve";
-"followingRequests.title.reject" = "Reject";
-"followingRequests.error.approve" = "Error during approving request.";
-"followingRequests.error.reject" = "Error during rejecting request.";
+"followingRequests.navigationBar.title" = "Jarraipen-eskaerak";
+"followingRequests.title.approve" = "Baimendu";
+"followingRequests.title.reject" = "Baztertu";
+"followingRequests.error.approve" = "Errorea eskaera baimentzean.";
+"followingRequests.error.reject" = "Errorea eskaera baztertzean.";
