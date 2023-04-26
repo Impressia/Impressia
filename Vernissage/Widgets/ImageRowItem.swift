@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import Nuke
 import ClientKit
 import ServicesKit
 import EnvironmentKit
@@ -17,11 +18,13 @@ struct ImageRowItem: View {
 
     private let status: StatusData
     private let attachmentData: AttachmentData
+    private let imageFromCache: Bool
 
     @State private var uiImage: UIImage?
     @State private var showThumbImage = false
     @State private var cancelled = true
     @State private var error: Error?
+    @State private var opacity = 1.0
     @State private var isFavourited = false
 
     private let onImageDownloaded: (Double, Double) -> Void
@@ -33,6 +36,9 @@ struct ImageRowItem: View {
 
         if let imageData = attachmentData.data {
             self.uiImage = UIImage(data: imageData)
+            self.imageFromCache = true
+        } else {
+            self.imageFromCache = ImagePipeline.shared.cache.containsCachedImage(for: ImageRequest(url: attachmentData.url))
         }
     }
 
@@ -57,9 +63,27 @@ struct ImageRowItem: View {
                         }
                     }
                 }
+                .opacity(self.opacity)
+                .onAppear {
+                    if self.imageFromCache == false {
+                        self.opacity = 0.0
+                        withAnimation {
+                            self.opacity = 1.0
+                        }
+                    }
+                }
             } else {
                 self.imageContainerView(uiImage: uiImage)
                     .imageContextMenu(statusData: self.status, attachmentData: self.attachmentData, uiImage: uiImage)
+                    .opacity(self.opacity)
+                    .onAppear {
+                        if self.imageFromCache == false {
+                            self.opacity = 0.0
+                            withAnimation {
+                                self.opacity = 1.0
+                            }
+                        }
+                    }
             }
         } else {
             if cancelled {
