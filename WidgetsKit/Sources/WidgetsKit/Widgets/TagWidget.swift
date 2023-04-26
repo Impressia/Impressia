@@ -31,7 +31,7 @@ public struct TagWidget: View {
                 .fontWeight(.semibold)
         }
         .padding(.horizontal, 10)
-        .padding(.vertical, 6)
+        .padding(.vertical, 4)
         .background(Capsule().foregroundColor(self.color))
     }
 }

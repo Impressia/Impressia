@@ -172,20 +172,15 @@ public class HomeTimelineService {
 
         // Collection with statuses to remove from database.
         var dbStatusesToRemove: [StatusData] = []
+        let allDbStatuses = StatusDataHandler.shared.getAllStatuses(accountId: account.id, viewContext: backgroundContext)
 
-        // Find statuses to delete (older then the last one from API).
-        if let lastStatus = statuses.last {
-            let dbOlderStatuses = StatusDataHandler.shared.getAllOlderStatuses(accountId: account.id,
-                                                                               statusId: lastStatus.id,
-                                                                               viewContext: backgroundContext)
-            if !dbOlderStatuses.isEmpty {
-                dbStatusesToRemove.append(contentsOf: dbOlderStatuses)
-            }
+        // Find statuses to delete (not exiting in the API results).
+        for dbStatus in allDbStatuses where !statuses.contains(where: { status in status.id == dbStatus.id }) {
+            dbStatusesToRemove.append(dbStatus)
         }
 
         // Find statuses to delete (duplicates).
         var existingStatusIds: [String] = []
-        let allDbStatuses = StatusDataHandler.shared.getAllStatuses(accountId: account.id, viewContext: backgroundContext)
         for dbStatus in allDbStatuses {
             if existingStatusIds.contains(where: { $0 == dbStatus.id }) {
                 dbStatusesToRemove.append(dbStatus)
