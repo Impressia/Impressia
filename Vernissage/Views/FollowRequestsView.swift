@@ -87,12 +87,18 @@ struct FollowRequestsView: View {
                         }
                     }
                     .swipeActions {
-                        Button {
+                        Button(role: .destructive) {
+                            Task {
+                                await self.approve(account: account)
+                            }
                         } label: {
                             Label("followingRequests.title.approve", systemImage: "checkmark")
                         }
 
                         Button(role: .destructive) {
+                            Task {
+                                await self.reject(account: account)
+                            }
                         } label: {
                             Label("followingRequests.title.reject", systemImage: "xmark")
                         }
@@ -156,6 +162,7 @@ struct FollowRequestsView: View {
     private func approve(account: Account) async {
         do {
             _ = try await self.client.followRequests?.authorizeRequest(id: account.id)
+            self.accounts.removeAll { $0.id == account.id }
         } catch {
             ErrorService.shared.handle(error, message: "followingRequests.error.approve", showToastr: true)
         }
@@ -164,6 +171,7 @@ struct FollowRequestsView: View {
     private func reject(account: Account) async {
         do {
             _ = try await self.client.followRequests?.rejectRequest(id: account.id)
+            self.accounts.removeAll { $0.id == account.id }
         } catch {
             ErrorService.shared.handle(error, message: "followingRequests.error.reject", showToastr: true)
         }
