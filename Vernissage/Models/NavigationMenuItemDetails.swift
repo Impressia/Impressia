@@ -5,18 +5,22 @@
 //
 
 import Foundation
+import SwiftUI
 
 class NavigationMenuItemDetails: ObservableObject, Identifiable {
-    let id: Int32
-
-    @Published var viewMode: MainView.ViewMode
-    @Published var title: String
+    @Published var title: LocalizedStringKey
     @Published var image: String
 
-    init(id: Int32, viewMode: MainView.ViewMode, title: String, image: String) {
-        self.id = id
+    @Published var viewMode: MainView.ViewMode {
+        didSet {
+            self.title = viewMode.title
+            self.image = viewMode.image
+        }
+    }
+
+    init(viewMode: MainView.ViewMode) {
         self.viewMode = viewMode
-        self.title = title
-        self.image = image
+        self.title = viewMode.title
+        self.image = viewMode.image
     }
 }

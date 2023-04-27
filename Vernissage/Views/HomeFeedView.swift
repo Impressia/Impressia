@@ -191,12 +191,14 @@ struct HomeFeedView: View {
 
                 HStack {
                     Image(systemName: "arrow.up")
+                        .fontWeight(.light)
                     Text("\(self.applicationState.amountOfNewStatuses)")
+                        .fontWeight(.semibold)
                 }
-                .padding(12)
-                .font(.footnote)
-                .fontWeight(.light)
-                .foregroundColor(Color.white)
+                .padding(.vertical, 12)
+                .padding(.horizontal, 18)
+                .font(.callout)
+                .foregroundColor(Color.mainTextColor)
                 .background(.ultraThinMaterial)
                 .clipShape(Capsule())
             }

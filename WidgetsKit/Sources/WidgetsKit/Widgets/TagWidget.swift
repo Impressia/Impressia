@@ -30,8 +30,8 @@ public struct TagWidget: View {
                 .font(.footnote)
                 .fontWeight(.semibold)
         }
-        .padding(.horizontal, 8)
-        .padding(.vertical, 2)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 4)
         .background(Capsule().foregroundColor(self.color))
     }
 }

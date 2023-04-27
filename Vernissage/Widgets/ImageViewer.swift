@@ -141,7 +141,7 @@ struct ImageViewer: View {
                             self.accumulatedOffset = CGSize.zero
                         }
 
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                        self.asyncAfter(0.35) {
                             withoutAnimation {
                                 self.dismiss()
                             }
@@ -156,10 +156,12 @@ struct ImageViewer: View {
     var tapGesture: some Gesture {
         TapGesture().onEnded({ _ in
             withAnimation {
+                self.currentMagnification = 0
+                self.finalMagnification = 1.0
                 self.currentOffset = self.calculateStartingOffset()
             }
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+            self.asyncAfter(0.35) {
                 withoutAnimation {
                     self.dismiss()
                 }

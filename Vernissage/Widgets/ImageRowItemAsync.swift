@@ -5,9 +5,10 @@
 //
 
 import SwiftUI
+import Nuke
+import NukeUI
 import PixelfedKit
 import ClientKit
-import NukeUI
 import ServicesKit
 import EnvironmentKit
 import WidgetsKit
@@ -20,9 +21,10 @@ struct ImageRowItemAsync: View {
     private var statusViewModel: StatusModel
     private var attachment: AttachmentModel
     private let showAvatar: Bool
+    private let imageFromCache: Bool
 
     @State private var showThumbImage = false
-    @State private var opacity = 0.0
+    @State private var opacity = 1.0
     @State private var isFavourited = false
 
     private let onImageDownloaded: (Double, Double) -> Void
@@ -34,6 +36,8 @@ struct ImageRowItemAsync: View {
         self.statusViewModel = statusViewModel
         self.attachment = attachment
         self.onImageDownloaded = onImageDownloaded
+
+        self.imageFromCache = ImagePipeline.shared.cache.containsCachedImage(for: ImageRequest(url: attachment.url))
     }
 
     var body: some View {
@@ -67,8 +71,11 @@ struct ImageRowItemAsync: View {
                             self.recalculateSizeOfDownloadedImage(uiImage: uiImage)
                         }
 
-                        withAnimation {
-                            self.opacity = 1.0
+                        if self.imageFromCache == false {
+                            self.opacity = 0.0
+                            withAnimation {
+                                self.opacity = 1.0
+                            }
                         }
                     }
                 } else {
@@ -82,8 +89,11 @@ struct ImageRowItemAsync: View {
                                 self.recalculateSizeOfDownloadedImage(uiImage: uiImage)
                             }
 
-                            withAnimation {
-                                self.opacity = 1.0
+                            if self.imageFromCache == false {
+                                self.opacity = 0.0
+                                withAnimation {
+                                    self.opacity = 1.0
+                                }
                             }
                         }
                 }

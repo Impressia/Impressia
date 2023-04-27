@@ -8,7 +8,7 @@ import Foundation
 
 extension Pixelfed {
     public enum FollowRequests {
-        case followRequests
+        case followRequests(Limit?, Page?)
         case authorize(String)
         case reject(String)
     }
@@ -22,10 +22,10 @@ extension Pixelfed.FollowRequests: TargetType {
         switch self {
         case .followRequests:
             return "\(apiPath)"
-        case .authorize:
-            return "\(apiPath)/authorize"
-        case .reject:
-            return "\(apiPath)/reject"
+        case .authorize(let id):
+            return "\(apiPath)/\(id)/authorize"
+        case .reject(let id):
+            return "\(apiPath)/\(id)/reject"
         }
     }
 
@@ -39,9 +39,29 @@ extension Pixelfed.FollowRequests: TargetType {
         }
     }
 
-    /// The parameters to be incoded in the request.
     public var queryItems: [(String, String)]? {
-        nil
+        var params: [(String, String)] = []
+
+        var limit: Limit?
+        var page: Page?
+
+        switch self {
+        case .followRequests(let paramLimit, let paramPage):
+            limit = paramLimit
+            page = paramPage
+        default:
+            return nil
+        }
+
+        if let limit {
+            params.append(("limit", "\(limit)"))
+        }
+
+        if let page {
+            params.append(("page", "\(page)"))
+        }
+
+        return params
     }
 
     public var headers: [String: String]? {
@@ -49,15 +69,6 @@ extension Pixelfed.FollowRequests: TargetType {
     }
 
     public var httpBody: Data? {
-        switch self {
-        case .followRequests:
-            return nil
-        case .authorize(let id):
-            return try? JSONEncoder().encode(
-                ["id": id]
-            )
-        case .reject:
-            return nil
-        }
+        return nil
     }
 }

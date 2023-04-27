@@ -100,7 +100,6 @@
 "userProfile.title.following" = "Following";
 "userProfile.title.joined" = "Joined %@";
 "userProfile.title.unfollow" = "Unfollow";
-"userProfile.title.followBack" = "Follow back";
 "userProfile.title.follow" = "Follow";
 "userProfile.title.instance" = "Instance information";
 "userProfile.title.blocks" = "Blocked accounts";
@@ -110,6 +109,12 @@
 "userProfile.title.blocked" = "Account blocked";
 "userProfile.title.unblocked" = "Account unblocked";
 "userProfile.title.report" = "Report";
+"userProfile.title.followsYou" = "Follows you";
+"userProfile.title.requestFollow" = "Request follow";
+"userProfile.title.cancelRequestFollow" = "Cancel request";
+"userProfile.title.followRequests" = "Follow requests";
+"userProfile.title.privateProfileTitle" = "This profile is private.";
+"userProfile.title.privateProfileSubtitle" = "Only approved followers can see photos.";
 "userProfile.error.notExists" = "Account does not exists.";
 "userProfile.error.loadingAccountFailed" = "Error during download account from server.";
 "userProfile.error.muting" = "Muting/unmuting action failed.";
@@ -149,6 +154,9 @@
 "compose.title.tryToUpload" = "Try to upload";
 "compose.title.delete" = "Delete";
 "compose.title.edit" = "Edit";
+"compose.title.photos" = "Photos library";
+"compose.title.camera" = "Take photo";
+"compose.title.files" = "Browse files";
 "compose.error.loadingPhotosFailed" = "Cannot retreive image from library.";
 "compose.error.postingPhotoFailed" = "Error during posting photo.";
 "compose.error.postingStatusFailed" = "Error during posting status.";
@@ -347,3 +355,10 @@
 "report.title.scam" = "Bullying or harassment";
 "report.title.terrorism" = "Terrorism";
 "report.error.notReported" = "Error during sending report.";
+
+// Mark: Following requests.
+"followingRequests.navigationBar.title" = "Following requests";
+"followingRequests.title.approve" = "Approve";
+"followingRequests.title.reject" = "Reject";
+"followingRequests.error.approve" = "Error during approving request.";
+"followingRequests.error.reject" = "Error during rejecting request.";

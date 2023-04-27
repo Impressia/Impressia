@@ -39,6 +39,7 @@ extension Client {
     public var blocks: Blocks? { return Blocks(pixelfedClient: self.pixelfedClient) }
     public var mutes: Mutes? { return Mutes(pixelfedClient: self.pixelfedClient) }
     public var reports: Reports? { return Reports(pixelfedClient: self.pixelfedClient) }
+    public var followRequests: FollowRequests? { return FollowRequests(pixelfedClient: self.pixelfedClient) }
     public var instances: Instances { return Instances() }
 }
 

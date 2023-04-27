@@ -165,21 +165,21 @@ class ApplicationSettingsHandler {
         CoreDataHandler.shared.save()
     }
 
-    func set(customNavigationMenuItem1: Int32) {
+    func set(customNavigationMenuItem1: Int) {
         let defaultSettings = self.get()
-        defaultSettings.customNavigationMenuItem1 = customNavigationMenuItem1
+        defaultSettings.customNavigationMenuItem1 = Int32(customNavigationMenuItem1)
         CoreDataHandler.shared.save()
     }
 
-    func set(customNavigationMenuItem2: Int32) {
+    func set(customNavigationMenuItem2: Int) {
         let defaultSettings = self.get()
-        defaultSettings.customNavigationMenuItem2 = customNavigationMenuItem2
+        defaultSettings.customNavigationMenuItem2 = Int32(customNavigationMenuItem2)
         CoreDataHandler.shared.save()
     }
 
-    func set(customNavigationMenuItem3: Int32) {
+    func set(customNavigationMenuItem3: Int) {
         let defaultSettings = self.get()
-        defaultSettings.customNavigationMenuItem3 = customNavigationMenuItem3
+        defaultSettings.customNavigationMenuItem3 = Int32(customNavigationMenuItem3)
         CoreDataHandler.shared.save()
     }
 

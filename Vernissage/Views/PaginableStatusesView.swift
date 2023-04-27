@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import Nuke
 import PixelfedKit
 import ClientKit
 import ServicesKit
@@ -15,6 +16,15 @@ struct PaginableStatusesView: View {
     public enum ListType: Hashable {
         case favourites
         case bookmarks
+
+        public var title: LocalizedStringKey {
+            switch self {
+            case .favourites:
+                return "statuses.navigationBar.favourites"
+            case .bookmarks:
+                return "statuses.navigationBar.bookmarks"
+            }
+        }
     }
 
     @EnvironmentObject private var applicationState: ApplicationState
@@ -29,10 +39,11 @@ struct PaginableStatusesView: View {
     @State private var page = 1
 
     private let defaultLimit = 10
+    private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
 
     var body: some View {
         self.mainBody()
-            .navigationTitle(self.getTitle())
+            .navigationTitle(self.listType.title)
     }
 
     @ViewBuilder
@@ -113,6 +124,9 @@ struct PaginableStatusesView: View {
             inPlaceStatuses.append(StatusModel(status: item))
         }
 
+        // Prefetch images.
+        self.prefetch(statusModels: inPlaceStatuses)
+
         self.statusViewModels.append(contentsOf: inPlaceStatuses)
     }
 
@@ -131,6 +145,9 @@ struct PaginableStatusesView: View {
             inPlaceStatuses.append(StatusModel(status: item))
         }
 
+        // Prefetch images.
+        self.prefetch(statusModels: inPlaceStatuses)
+
         self.statusViewModels.append(contentsOf: inPlaceStatuses)
     }
 
@@ -144,12 +161,7 @@ struct PaginableStatusesView: View {
         }
     }
 
-    private func getTitle() -> LocalizedStringKey {
-        switch self.listType {
-        case .favourites:
-            return "statuses.navigationBar.favourites"
-        case .bookmarks:
-            return "statuses.navigationBar.bookmarks"
-        }
+    private func prefetch(statusModels: [StatusModel]) {
+        imagePrefetcher.startPrefetching(with: statusModels.getAllImagesUrls())
     }
 }

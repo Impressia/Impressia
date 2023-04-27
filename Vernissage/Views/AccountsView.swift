@@ -21,6 +21,25 @@ struct AccountsView: View {
         case blocks
         case mutes
         case search(query: String)
+
+        public var title: String {
+            switch self {
+            case .followers:
+                return NSLocalizedString("accounts.navigationBar.followers", comment: "Followers")
+            case .following:
+                return NSLocalizedString("accounts.navigationBar.following", comment: "Following")
+            case .favourited:
+                return NSLocalizedString("accounts.navigationBar.favouritedBy", comment: "Favourited by")
+            case .reblogged:
+                return NSLocalizedString("accounts.navigationBar.reboostedBy", comment: "Reboosted by")
+            case .blocks:
+                return NSLocalizedString("accounts.navigationBar.blocked", comment: "Blocked")
+            case .mutes:
+                return NSLocalizedString("accounts.navigationBar.mutes", comment: "Mutes")
+            case .search(let query):
+                return query
+            }
+        }
     }
 
     @EnvironmentObject var applicationState: ApplicationState
@@ -35,7 +54,7 @@ struct AccountsView: View {
 
     var body: some View {
         self.mainBody()
-            .navigationTitle(self.getTitle())
+            .navigationTitle(self.listType.title)
     }
 
     @ViewBuilder
@@ -121,25 +140,6 @@ struct AccountsView: View {
 
         await self.downloadAvatars(accounts: accountsFromApi)
         self.accounts.append(contentsOf: accountsFromApi)
-    }
-
-    private func getTitle() -> String {
-        switch self.listType {
-        case .followers:
-            return NSLocalizedString("accounts.navigationBar.followers", comment: "Followers")
-        case .following:
-            return NSLocalizedString("accounts.navigationBar.following", comment: "Following")
-        case .favourited:
-            return NSLocalizedString("accounts.navigationBar.favouritedBy", comment: "Favourited by")
-        case .reblogged:
-            return NSLocalizedString("accounts.navigationBar.reboostedBy", comment: "Reboosted by")
-        case .blocks:
-            return NSLocalizedString("accounts.navigationBar.blocked", comment: "Blocked")
-        case .mutes:
-            return NSLocalizedString("accounts.navigationBar.mutes", comment: "Mutes")
-        case .search(let query):
-            return query
-        }
     }
 
     private func loadFromApi(page: Int) async throws -> [Account] {

@@ -66,7 +66,12 @@ struct UserProfileView: View {
         ScrollView {
             UserProfileHeaderView(account: account, relationship: relationship)
                 .id(self.viewId)
-            UserProfileStatusesView(accountId: account.id)
+
+            if self.applicationState.account?.id == account.id || self.relationship.haveAccessToPhotos(account: account) {
+                UserProfileStatusesView(accountId: account.id)
+            } else {
+                UserProfilePrivateAccountView()
+            }
         }
         .onAppear {
             if let updatedProfile = self.applicationState.updatedProfile {
@@ -189,13 +194,7 @@ struct UserProfileView: View {
 
                 Divider()
 
-                NavigationLink(value: RouteurDestinations.accounts(listType: .blocks)) {
-                    Label(NSLocalizedString("userProfile.title.blocks", comment: "Blocked accounts"), systemImage: "hand.raised.fill")
-                }
-
-                NavigationLink(value: RouteurDestinations.accounts(listType: .mutes)) {
-                    Label(NSLocalizedString("userProfile.title.mutes", comment: "Muted accounts"), systemImage: "message.and.waveform.fill")
-                }
+                self.accountsMenuView(account: account)
 
                 Divider()
 
@@ -217,6 +216,23 @@ struct UserProfileView: View {
                     .tint(.mainTextColor)
             })
             .tint(.accentColor)
+        }
+    }
+
+    @ViewBuilder
+    private func accountsMenuView(account: Account) -> some View {
+        NavigationLink(value: RouteurDestinations.accounts(listType: .blocks)) {
+            Label(NSLocalizedString("userProfile.title.blocks", comment: "Blocked accounts"), systemImage: "hand.raised.fill")
+        }
+
+        NavigationLink(value: RouteurDestinations.accounts(listType: .mutes)) {
+            Label(NSLocalizedString("userProfile.title.mutes", comment: "Muted accounts"), systemImage: "message.and.waveform.fill")
+        }
+
+        if account.locked {
+            NavigationLink(value: RouteurDestinations.followRequests) {
+                Label(NSLocalizedString("userProfile.title.followRequests", comment: "FollowRequests"), systemImage: "person.crop.circle.badge.checkmark")
+            }
         }
     }
 

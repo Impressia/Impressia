@@ -22,16 +22,18 @@ public struct ImageUploadView: View {
     }
 
     public var body: some View {
-        if photoAttachment.error != nil {
+        if photoAttachment.uploadError != nil || photoAttachment.loadError != nil {
             Menu {
-                Button {
-                    HapticService.shared.fireHaptic(of: .buttonPress)
-                    self.upload()
-                } label: {
-                    Label("compose.title.tryToUpload", systemImage: "exclamationmark.arrow.triangle.2.circlepath")
-                }
+                if photoAttachment.uploadError != nil {
+                    Button {
+                        HapticService.shared.fireHaptic(of: .buttonPress)
+                        self.upload()
+                    } label: {
+                        Label("compose.title.tryToUpload", systemImage: "exclamationmark.arrow.triangle.2.circlepath")
+                    }
 
-                Divider()
+                    Divider()
+                }
 
                 Button(role: .destructive) {
                     HapticService.shared.fireHaptic(of: .buttonPress)
@@ -89,9 +91,10 @@ public struct ImageUploadView: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 80, height: 80)
         } else {
-            Rectangle()
+            Image("Blurhash")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
                 .frame(width: 80, height: 80)
-                .background(Color.lightGrayColor)
         }
     }
 }

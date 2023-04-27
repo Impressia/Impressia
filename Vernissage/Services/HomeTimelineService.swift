@@ -9,6 +9,7 @@ import CoreData
 import PixelfedKit
 import ClientKit
 import ServicesKit
+import Nuke
 
 /// Service responsible for managing home timeline.
 public class HomeTimelineService {
@@ -16,6 +17,7 @@ public class HomeTimelineService {
     private init() { }
 
     private let defaultAmountOfDownloadedStatuses = 40
+    private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
 
     public func loadOnBottom(for account: AccountModel) async throws -> Int {
         // Load data from API and operate on CoreData on background context.
@@ -29,25 +31,35 @@ public class HomeTimelineService {
         }
 
         // Load data on bottom of the list.
-        let newStatuses = try await self.load(for: account, on: backgroundContext, maxId: oldestStatus.id)
+        let allStatusesFromApi = try await self.load(for: account, on: backgroundContext, maxId: oldestStatus.id)
 
         // Save data into database.
         CoreDataHandler.shared.save(viewContext: backgroundContext)
 
+        // Start prefetching images.
+        self.prefetch(statuses: allStatusesFromApi)
+
         // Return amount of newly downloaded statuses.
-        return newStatuses.count
+        return allStatusesFromApi.count
     }
 
     public func refreshTimeline(for account: AccountModel) async throws -> String? {
         // Load data from API and operate on CoreData on background context.
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
 
+        // Retrieve newest visible status (last visible by user).
+        let dbNewestStatus = StatusDataHandler.shared.getMaximumStatus(accountId: account.id, viewContext: backgroundContext)
+        let lastSeenStatusId = dbNewestStatus?.rebloggedStatusId ?? dbNewestStatus?.id
+
         // Refresh/load home timeline (refreshing on top downloads always first 40 items).
         // When Apple introduce good way to show new items without scroll to top then we can change that method.
-        let lastSeenStatusId = try await self.refresh(for: account, on: backgroundContext)
+        let allStatusesFromApi = try await self.refresh(for: account, on: backgroundContext)
 
         // Save data into database.
         CoreDataHandler.shared.save(viewContext: backgroundContext)
+
+        // Start prefetching images.
+        self.prefetch(statuses: allStatusesFromApi)
 
         // Return id of last seen status.
         return lastSeenStatusId
@@ -134,18 +146,14 @@ public class HomeTimelineService {
         return amountOfStatuses
     }
 
-    private func refresh(for account: AccountModel, on backgroundContext: NSManagedObjectContext) async throws -> String? {
+    private func refresh(for account: AccountModel, on backgroundContext: NSManagedObjectContext) async throws -> [Status] {
         guard let accessToken = account.accessToken else {
-            return nil
+            return []
         }
 
         // Retrieve statuses from API.
         let client = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
         let statuses = try await client.getHomeTimeline(limit: self.defaultAmountOfDownloadedStatuses)
-
-        // Retrieve newest visible status (last visible by user).
-        let dbNewestStatus = StatusDataHandler.shared.getMaximumStatus(accountId: account.id, viewContext: backgroundContext)
-        let lastSeenStatusId = dbNewestStatus?.rebloggedStatusId ?? dbNewestStatus?.id
 
         // Update all existing statuses in database.
         for status in statuses {
@@ -164,20 +172,15 @@ public class HomeTimelineService {
 
         // Collection with statuses to remove from database.
         var dbStatusesToRemove: [StatusData] = []
+        let allDbStatuses = StatusDataHandler.shared.getAllStatuses(accountId: account.id, viewContext: backgroundContext)
 
-        // Find statuses to delete (older then the last one from API).
-        if let lastStatus = statuses.last {
-            let dbOlderStatuses = StatusDataHandler.shared.getAllOlderStatuses(accountId: account.id,
-                                                                               statusId: lastStatus.id,
-                                                                               viewContext: backgroundContext)
-            if !dbOlderStatuses.isEmpty {
-                dbStatusesToRemove.append(contentsOf: dbOlderStatuses)
-            }
+        // Find statuses to delete (not exiting in the API results).
+        for dbStatus in allDbStatuses where !statuses.contains(where: { status in status.id == dbStatus.id }) {
+            dbStatusesToRemove.append(dbStatus)
         }
 
         // Find statuses to delete (duplicates).
         var existingStatusIds: [String] = []
-        let allDbStatuses = StatusDataHandler.shared.getAllStatuses(accountId: account.id, viewContext: backgroundContext)
         for dbStatus in allDbStatuses {
             if existingStatusIds.contains(where: { $0 == dbStatus.id }) {
                 dbStatusesToRemove.append(dbStatus)
@@ -196,7 +199,8 @@ public class HomeTimelineService {
             _ = try await self.add(statusesToAdd, for: account, on: backgroundContext)
         }
 
-        return lastSeenStatusId
+        // Return all statuses downloaded from API.
+        return statuses
     }
 
     private func load(for account: AccountModel,
@@ -213,13 +217,16 @@ public class HomeTimelineService {
         let statuses = try await client.getHomeTimeline(maxId: maxId, minId: minId, limit: self.defaultAmountOfDownloadedStatuses)
 
         // Save statuses in database.
-        return try await self.add(statuses, for: account, on: backgroundContext)
+        try await self.add(statuses, for: account, on: backgroundContext)
+
+        // Return all statuses downloaded from API.
+        return statuses
     }
 
     private func add(_ statuses: [Status],
                      for account: AccountModel,
                      on backgroundContext: NSManagedObjectContext
-    ) async throws -> [Status] {
+    ) async throws {
 
         guard let accountDataFromDb = AccountDataHandler.shared.getAccountData(accountId: account.id, viewContext: backgroundContext) else {
             throw DatabaseError.cannotDownloadAccount
@@ -237,8 +244,6 @@ public class HomeTimelineService {
 
             self.copy(from: status, to: statusData, on: backgroundContext)
         }
-
-        return statusesWithImages
     }
 
     private func copy(from status: Status,
@@ -286,5 +291,10 @@ public class HomeTimelineService {
                 attachmentData.exifExposure = "\(focalLenIn35mmFilm)mm, f/\(fNumber), \(exposureTime)s, ISO \(photographicSensitivity)"
             }
         }
+    }
+
+    private func prefetch(statuses: [Status]) {
+        let statusModels = statuses.getStatusesWithImagesOnly().toStatusModels()
+        imagePrefetcher.startPrefetching(with: statusModels.getAllImagesUrls())
     }
 }

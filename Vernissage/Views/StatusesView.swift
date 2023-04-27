@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import Nuke
 import PixelfedKit
 import ClientKit
 import ServicesKit
@@ -18,6 +19,21 @@ struct StatusesView: View {
         case favourites
         case bookmarks
         case hashtag(tag: String)
+
+        public var title: LocalizedStringKey {
+            switch self {
+            case .local:
+                return "statuses.navigationBar.localTimeline"
+            case .federated:
+                return "statuses.navigationBar.federatedTimeline"
+            case .favourites:
+                return "statuses.navigationBar.favourites"
+            case .bookmarks:
+                return "statuses.navigationBar.bookmarks"
+            case .hashtag(let tag):
+                return "#\(tag)"
+            }
+        }
     }
 
     @EnvironmentObject private var applicationState: ApplicationState
@@ -35,10 +51,11 @@ struct StatusesView: View {
     @State private var lastStatusId: String?
 
     private let defaultLimit = 20
+    private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
 
     var body: some View {
         self.mainBody()
-            .navigationTitle(self.getTitle())
+            .navigationTitle(self.listType.title)
             .toolbar {
                 // TODO: It seems like pixelfed is not supporting the endpoints.
                 // self.getTrailingToolbar()
@@ -135,6 +152,9 @@ struct StatusesView: View {
             inPlaceStatuses.append(StatusModel(status: item))
         }
 
+        // Prefetch images.
+        self.prefetch(statusModels: inPlaceStatuses)
+
         // Append to empty list.
         self.statusViewModels.append(contentsOf: inPlaceStatuses)
     }
@@ -158,6 +178,9 @@ struct StatusesView: View {
             for item in previousStatuses.getStatusesWithImagesOnly() {
                 inPlaceStatuses.append(StatusModel(status: item))
             }
+
+            // Prefetch images.
+            self.prefetch(statusModels: inPlaceStatuses)
 
             // Append statuses to existing array of statuses (at the end).
             self.statusViewModels.append(contentsOf: inPlaceStatuses)
@@ -231,21 +254,6 @@ struct StatusesView: View {
         }
     }
 
-    private func getTitle() -> LocalizedStringKey {
-        switch self.listType {
-        case .local:
-            return "statuses.navigationBar.localTimeline"
-        case .federated:
-            return "statuses.navigationBar.federatedTimeline"
-        case .favourites:
-            return "statuses.navigationBar.favourites"
-        case .bookmarks:
-            return "statuses.navigationBar.bookmarks"
-        case .hashtag(let tag):
-            return "#\(tag)"
-        }
-    }
-
     @ToolbarContentBuilder
     private func getTrailingToolbar() -> some ToolbarContent {
         if case .hashtag(let hashtag) = self.listType {
@@ -290,5 +298,9 @@ struct StatusesView: View {
         } catch {
             ErrorService.shared.handle(error, message: "statuses.error.tagUnfollowFailed", showToastr: true)
         }
+    }
+
+    private func prefetch(statusModels: [StatusModel]) {
+        imagePrefetcher.startPrefetching(with: statusModels.getAllImagesUrls())
     }
 }

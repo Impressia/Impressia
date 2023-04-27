@@ -50,6 +50,8 @@ extension View {
                 EditProfileView()
             case .instance:
                 InstanceView()
+            case .followRequests:
+                FollowRequestsView()
             }
         }
     }

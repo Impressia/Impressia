@@ -18,6 +18,11 @@
           "description" : "Poczęstuj mnie pączkiem.",
           "displayName" : "Pączek",
           "locale" : "pl"
+        },
+        {
+          "description" : "Offrez-moi un beignet.",
+          "displayName" : "Beignet",
+          "locale" : "fr"
         }
       ],
       "productID" : "dev.mczachurski.Vernissage.donut",
@@ -38,6 +43,11 @@
           "description" : "Poczęstuj mnie kawą.",
           "displayName" : "Kawa",
           "locale" : "pl"
+        },
+        {
+          "description" : "Offrez-moi un café.",
+          "displayName" : "Café",
+          "locale" : "fr"
         }
       ],
       "productID" : "dev.mczachurski.Vernissage.cofee",
@@ -58,6 +68,11 @@
           "description" : "Poczęstuj mnie kawą i ciastkiem.",
           "displayName" : "Kawa z ciastkiem",
           "locale" : "pl"
+        },
+        {
+          "description" : "Offrez-moi un café et un gâteau.",
+          "displayName" : "Café et gâteau",
+          "locale" : "fr"
         }
       ],
       "productID" : "dev.mczachurski.Vernissage.cake",
