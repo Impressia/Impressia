@@ -30,6 +30,7 @@ public struct BaseComposeView: View {
 
     @State private var photosAreUploading = false
     @State private var photosPickerVisible = false
+    @State private var draggedItem: PhotoAttachment?
 
     /// Images from camera pickler.
     @State private var images: [UIImage] = []
@@ -46,6 +47,7 @@ public struct BaseComposeView: View {
     @State private var isCameraPickerPresented: Bool = false
     @State private var isFileImporterPresented: Bool = false
 
+    @State private var showAltAlert = false
     @State private var visibility = Pixelfed.Statuses.Visibility.pub
     @State private var visibilityText: LocalizedStringKey = "compose.title.everyone"
     @State private var visibilityImage = "globe.europe.africa"
@@ -73,6 +75,8 @@ public struct BaseComposeView: View {
     }
 
     private let statusViewModel: StatusModel?
+    private let imageSize: Double
+    private let amoutOfImagesInRow = 3
     private let keyboardFontImageSize = 20.0
     private let keyboardFontTextSize = 16.0
     private let autocompleteFontTextSize = 12.0
@@ -88,6 +92,8 @@ public struct BaseComposeView: View {
         self.attachments = attachments
         self.onClose = onClose
         self.onUpload = onUpload
+        self.draggedItem = nil
+        self.imageSize = (UIScreen.main.bounds.width - 40) / Double(self.amoutOfImagesInRow)
 
         _textModel = StateObject(wrappedValue: .init())
     }
@@ -179,6 +185,16 @@ public struct BaseComposeView: View {
             ))
             .background(.black)
         })
+        .alert(isPresented: $showAltAlert, content: {
+            Alert(title: Text("compose.title.missingAltTexts", comment: "Missing ALT texts"),
+                  message: Text("compose.title.missingAltTextsWarning", comment: "Missing ALT texts warning"),
+                  primaryButton: .default(Text("compose.title.publish", comment: "Publish")) {
+                      Task {
+                          await self.sendToServer()
+                      }
+                  },
+                  secondaryButton: .cancel(Text("compose.title.cancel", comment: "Cancel")))
+        })
         .interactiveDismissDisabled(self.interactiveDismissDisabled)
     }
 
@@ -210,14 +226,16 @@ public struct BaseComposeView: View {
                 Spacer()
             }
         }
+        // Space for keyboard toolbar.
+        .padding(.bottom, 40)
     }
 
     @ViewBuilder
     private func imagesGridView() -> some View {
         HStack(alignment: .center) {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: self.imageSize))]) {
                 ForEach(self.photosAttachment, id: \.id) { photoAttachment in
-                    ImageUploadView(photoAttachment: photoAttachment) {
+                    ImageUploadView(photoAttachment: photoAttachment, size: self.imageSize) {
                         self.showSheet = .photoDetails(photoAttachment)
                     } delete: {
                         self.photosAttachment = self.photosAttachment.filter({ item in
@@ -244,6 +262,11 @@ public struct BaseComposeView: View {
                             self.refreshScreenState()
                         }
                     }
+                    .onDrag({
+                        self.draggedItem = photoAttachment
+                        return NSItemProvider()
+                    })
+                    .onDrop(of: [UTType.text], delegate: PhotoDropDelegate(item: photoAttachment, items: $photosAttachment, draggedItem: $draggedItem))
                 }
             }
         }
@@ -661,6 +684,21 @@ public struct BaseComposeView: View {
     }
 
     private func publishStatus() async {
+        if self.applicationState.warnAboutMissingAlt == false {
+            await self.sendToServer()
+            return
+        }
+        
+        let notAllImagesHaveAltText = self.photosAttachment.contains(where: { ($0.uploadedAttachment?.description ?? "").isEmpty })
+        if notAllImagesHaveAltText == false {
+            await self.sendToServer()
+            return
+        }
+
+        self.showAltAlert = true
+    }
+
+    private func sendToServer() async {
         do {
             let status = self.createStatus()
             if try await self.client.statuses?.new(status: status) != nil {

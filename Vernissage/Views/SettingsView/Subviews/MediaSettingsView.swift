@@ -73,6 +73,18 @@ struct MediaSettingsView: View {
             .onChange(of: self.applicationState.showAltIconOnTimeline) { newValue in
                 ApplicationSettingsHandler.shared.set(showAltIconOnTimeline: newValue)
             }
+
+            Toggle(isOn: $applicationState.warnAboutMissingAlt) {
+                VStack(alignment: .leading) {
+                    Text("settings.title.warnAboutMissingAltTitle", comment: "Warn of missing ALT text")
+                    Text("settings.title.warnAboutMissingAltDescription", comment: "A warning about missing ALT texts will be displayed before publishing new post.")
+                        .font(.footnote)
+                        .foregroundColor(.lightGrayColor)
+                }
+            }
+            .onChange(of: self.applicationState.warnAboutMissingAlt) { newValue in
+                ApplicationSettingsHandler.shared.set(warnAboutMissingAlt: newValue)
+            }
         }
     }
 }

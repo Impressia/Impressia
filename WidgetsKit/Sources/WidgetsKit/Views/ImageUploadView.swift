@@ -10,12 +10,18 @@ import ServicesKit
 public struct ImageUploadView: View {
     @ObservedObject public var photoAttachment: PhotoAttachment
 
+    private let size: Double
     private let delete: () -> Void
     private let open: () -> Void
     private let upload: () -> Void
 
-    public init(photoAttachment: PhotoAttachment, open: @escaping () -> Void, delete: @escaping () -> Void, upload: @escaping () -> Void) {
+    public init(photoAttachment: PhotoAttachment,
+                size: Double,
+                open: @escaping () -> Void,
+                delete: @escaping () -> Void,
+                upload: @escaping () -> Void) {
         self.photoAttachment = photoAttachment
+        self.size = size
         self.delete = delete
         self.open = open
         self.upload = upload
@@ -23,78 +29,114 @@ public struct ImageUploadView: View {
 
     public var body: some View {
         if photoAttachment.uploadError != nil || photoAttachment.loadError != nil {
-            Menu {
+            ZStack {
+                self.imageView(showAccessories: true, blur: true)
+
                 if photoAttachment.uploadError != nil {
                     Button {
                         HapticService.shared.fireHaptic(of: .buttonPress)
                         self.upload()
                     } label: {
-                        Label("compose.title.tryToUpload", systemImage: "exclamationmark.arrow.triangle.2.circlepath")
-                    }
-
-                    Divider()
+                        Text("compose.title.tryToUpload", comment: "Try to upload")
+                            .font(.caption)
+                    }.buttonStyle(.borderedProminent)
+                } else {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .font(.system(size: 24))
                 }
-
-                Button(role: .destructive) {
-                    HapticService.shared.fireHaptic(of: .buttonPress)
-                    self.delete()
-                } label: {
-                    Label("compose.title.delete", systemImage: "trash")
-                        .tint(.red)
-                }
-            } label: {
-                ZStack {
-                    self.imageView()
-                        .blur(radius: 10)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-
-                        Image(systemName: "exclamationmark.triangle.fill")
-                    }
             }
         } else if photoAttachment.uploadedAttachment == nil {
             ZStack {
-                self.imageView()
-                    .blur(radius: 10)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-
-                    LoadingIndicator(isVisible: Binding.constant(true))
-                }
-        } else {
-            Menu {
-                Button {
-                    HapticService.shared.fireHaptic(of: .buttonPress)
-                    self.open()
-                } label: {
-                    Label("compose.title.edit", systemImage: "pencil")
-                }
-
-                Divider()
-
-                Button(role: .destructive) {
-                    HapticService.shared.fireHaptic(of: .buttonPress)
-                    self.delete()
-                } label: {
-                    Label("compose.title.delete", systemImage: "trash")
-                }
-            } label: {
-                self.imageView()
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                self.imageView(showAccessories: false, blur: true)
+                LoadingIndicator(isVisible: Binding.constant(true))
             }
+        } else {
+            self.imageView(showAccessories: true, blur: false)
         }
     }
 
     @ViewBuilder
-    private func imageView() -> some View {
+    private func imageView(showAccessories: Bool, blur: Bool) -> some View {
         if let photoData = self.photoAttachment.photoData, let uiImage =  UIImage(data: photoData) {
-            Image(uiImage: uiImage)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 80, height: 80)
+            ZStack(alignment: .bottom) {
+                HStack {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: self.size - 6, height: self.size - 6)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .accessibilityLabel("compose.title.edit")
+                        .onTapGesture {
+                            HapticService.shared.fireHaptic(of: .buttonPress)
+                            self.open()
+                        }
+                        .if(blur) {
+                            $0.blur(radius: 10)
+                        }
+                    Spacer()
+                }
+
+                if showAccessories {
+                    VStack {
+                        HStack {
+                            Spacer()
+                            Button(role: .destructive) {
+                                HapticService.shared.fireHaptic(of: .buttonPress)
+                                self.delete()
+                            } label: {
+                                Image(systemName: "xmark.circle.fill")
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
+                                    .symbolRenderingMode(.palette)
+                                    .foregroundStyle(Color.white, Color.dangerColor)
+                                    .opacity(0.8)
+                                    .accessibilityLabel("compose.title.delete")
+                            }
+                        }
+                        Spacer()
+                    }
+
+                    HStack {
+                        Spacer()
+                        HStack {
+                            Group {
+                                if (self.photoAttachment.uploadedAttachment?.description ?? "").isEmpty {
+                                    Image(systemName: "exclamationmark.circle.fill")
+                                        .symbolRenderingMode(.palette)
+                                        .foregroundStyle(Color.white, Color.dangerColor)
+                                } else {
+                                    Image(systemName: "checkmark.circle.fill")
+                                        .symbolRenderingMode(.palette)
+                                        .foregroundStyle(Color.white, Color.systemGreen)
+                                }
+
+                                Text("ALT", comment: "ALT")
+                            }
+                            .font(.system(size: 12))
+                            .shadow(color: .black, radius: 4)
+                        }
+                        .padding(.vertical, 4)
+                        .padding(.horizontal, 8)
+                        .background(RoundedRectangle(cornerRadius: 8).foregroundColor(.black.opacity(0.8)))
+                        .padding(.bottom, 4)
+                        .padding(.trailing, 12)
+                        .opacity(0.75)
+                    }
+                    .if(blur) {
+                        $0.blur(radius: 10)
+                    }
+                }
+            }
+            .frame(width: self.size, height: self.size)
         } else {
             Image("Blurhash")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 80, height: 80)
+                .frame(width: self.size, height: self.size)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .if(blur) {
+                    $0.blur(radius: 10)
+                }
         }
     }
 }

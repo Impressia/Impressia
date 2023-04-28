@@ -157,6 +157,8 @@
 "compose.title.photos" = "Biblioteka zdjęć";
 "compose.title.camera" = "Zrób zdjęcie";
 "compose.title.files" = "Przeglądaj pliki";
+"compose.title.missingAltTexts" = "Brakuje tekstów ALT";
+"compose.title.missingAltTextsWarning" = "Nie wszystkie zdjęcia zostały opisane dla niedowidzących. Czy pomimo tego chcesz je wysłać?";
 "compose.error.loadingPhotosFailed" = "Nie można pobrać zdjęcia z biblioteki.";
 "compose.error.postingPhotoFailed" = "Błąd podczas publikowania zdjęcia.";
 "compose.error.postingStatusFailed" = "Błąd podczas wysyłania statusu.";
@@ -231,6 +233,8 @@
 "settings.title.showFavouriteOnTimeline" = "Polubienia będą widoczne na osiach zdjęć";
 "settings.title.showAltText" = "Wyświetlaj ikonę ALT";
 "settings.title.showAltTextOnTimeline" = "Ikony ALT będą widonczne na osiach zdjęć";
+"settings.title.warnAboutMissingAltTitle" = "Ostrzeganie o brakującym tekście ALT";
+"settings.title.warnAboutMissingAltDescription" = "Ostrzeżenie o brakujących tekstach ALT będzie wyświetlane przed opublikowaniem nowego statusu.";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Zaloguj się do Pixelfed";
