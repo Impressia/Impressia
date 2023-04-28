@@ -6,8 +6,10 @@
 
 import SwiftUI
 import ServicesKit
+import EnvironmentKit
 
 public struct ImageUploadView: View {
+    @EnvironmentObject var applicationState: ApplicationState
     @ObservedObject public var photoAttachment: PhotoAttachment
 
     private let size: Double
@@ -96,34 +98,36 @@ public struct ImageUploadView: View {
                         Spacer()
                     }
 
-                    HStack {
-                        Spacer()
+                    if self.applicationState.warnAboutMissingAlt {
                         HStack {
-                            Group {
-                                if (self.photoAttachment.uploadedAttachment?.description ?? "").isEmpty {
-                                    Image(systemName: "exclamationmark.circle.fill")
-                                        .symbolRenderingMode(.palette)
-                                        .foregroundStyle(Color.white, Color.dangerColor)
-                                } else {
-                                    Image(systemName: "checkmark.circle.fill")
-                                        .symbolRenderingMode(.palette)
-                                        .foregroundStyle(Color.white, Color.systemGreen)
-                                }
+                            Spacer()
+                            HStack {
+                                Group {
+                                    if (self.photoAttachment.uploadedAttachment?.description ?? "").isEmpty {
+                                        Image(systemName: "exclamationmark.circle.fill")
+                                            .symbolRenderingMode(.palette)
+                                            .foregroundStyle(Color.white, Color.dangerColor)
+                                    } else {
+                                        Image(systemName: "checkmark.circle.fill")
+                                            .symbolRenderingMode(.palette)
+                                            .foregroundStyle(Color.white, Color.systemGreen)
+                                    }
 
-                                Text("ALT", comment: "ALT")
+                                    Text("ALT", comment: "ALT")
+                                }
+                                .font(.system(size: 12))
+                                .shadow(color: .black, radius: 4)
                             }
-                            .font(.system(size: 12))
-                            .shadow(color: .black, radius: 4)
+                            .padding(.vertical, 4)
+                            .padding(.horizontal, 8)
+                            .background(RoundedRectangle(cornerRadius: 8).foregroundColor(.black.opacity(0.8)))
+                            .padding(.bottom, 4)
+                            .padding(.trailing, 12)
+                            .opacity(0.75)
                         }
-                        .padding(.vertical, 4)
-                        .padding(.horizontal, 8)
-                        .background(RoundedRectangle(cornerRadius: 8).foregroundColor(.black.opacity(0.8)))
-                        .padding(.bottom, 4)
-                        .padding(.trailing, 12)
-                        .opacity(0.75)
-                    }
-                    .if(blur) {
-                        $0.blur(radius: 10)
+                        .if(blur) {
+                            $0.blur(radius: 10)
+                        }
                     }
                 }
             }

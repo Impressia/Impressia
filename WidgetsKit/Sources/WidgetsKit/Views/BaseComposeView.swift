@@ -688,7 +688,7 @@ public struct BaseComposeView: View {
             await self.sendToServer()
             return
         }
-        
+
         let notAllImagesHaveAltText = self.photosAttachment.contains(where: { ($0.uploadedAttachment?.description ?? "").isEmpty })
         if notAllImagesHaveAltText == false {
             await self.sendToServer()
