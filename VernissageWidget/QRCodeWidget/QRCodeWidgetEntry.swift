@@ -10,6 +10,7 @@ import SwiftUI
 struct QRCodeWidgetEntry: TimelineEntry {
     let date: Date
     let accountId: String
+    let acct: String
     let avatar: UIImage?
     let displayName: String?
     let profileUrl: URL?

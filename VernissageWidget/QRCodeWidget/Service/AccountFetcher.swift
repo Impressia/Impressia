@@ -27,6 +27,7 @@ public class AccountFetcher {
         return [
             QRCodeWidgetEntry(date: Date(),
                               accountId: accountId,
+                              acct: account.acct,
                               avatar: uiAvatar,
                               displayName: account.displayName,
                               profileUrl: account.url,
@@ -38,6 +39,7 @@ public class AccountFetcher {
     func placeholder() -> QRCodeWidgetEntry {
         QRCodeWidgetEntry(date: Date(),
                           accountId: "",
+                          acct: "@caroline",
                           avatar: nil,
                           displayName: "Caroline Rick",
                           profileUrl: URL(string: "https://pixelfed.org"),

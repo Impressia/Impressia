@@ -43,30 +43,55 @@ struct QRCodeMediumWidgetView: View {
 
     @ViewBuilder
     private func getWidgetBody(uiAvatar: Image, uiQRCode: Image) -> some View {
-        VStack(spacing: 0) {
-            uiQRCode
-                .resizable()
-                .widgetURL(URL(string: "\(AppConstants.accountUri)/\(entry.accountId)"))
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(alignment: .center, spacing: 0) {
+                uiQRCode
+                    .resizable()
+                    .scaledToFit()
+                    .widgetURL(URL(string: "\(AppConstants.accountUri)/\(entry.accountId)"))
 
-            HStack {
-                uiAvatar
-                    .avatar(size: 24)
-                    .padding(.leading, 8)
+                HStack(alignment: .center) {
+                    uiAvatar
+                        .avatar(size: 24)
 
-                Text(entry.displayName ?? "")
-                    .font(.system(size: 16))
-                    .foregroundColor(Color.primary)
-                    .fontWeight(.semibold)
+                    VStack(alignment: .leading) {
+                        Text(entry.displayName ?? "")
+                            .font(.system(size: 12))
+                            .foregroundColor(Color.primary)
+                            .fontWeight(.semibold)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+
+                        Text("@\(entry.acct)")
+                            .font(.system(size: 12))
+                            .foregroundColor(Color.primary.opacity(0.6))
+                            .fontWeight(.semibold)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                    }
+
+                    Spacer()
+                }
+                .padding(.leading, 8)
+            }
+
+            HStack(alignment: .center, spacing: 0) {
+                if let profileUrl = entry.profileUrl {
+                    Text(profileUrl.absoluteString)
+                        .font(.system(size: 10))
+                        .foregroundColor(Color.primary.opacity(0.6))
+                }
 
                 Spacer()
 
                 Image("Pixelfed")
                     .resizable()
                     .scaledToFit()
-                    .frame(height: 32)
+                    .frame(height: 26)
             }
-            .padding(.top, 4)
+            .padding(.leading, 3)
+            .offset(y: -4)
         }
-        .padding(8)
+        .padding([.leading, .trailing, .top], 12)
     }
 }
