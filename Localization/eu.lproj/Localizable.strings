@@ -300,7 +300,7 @@
 
 // Mark: Widget view.
 "widget.title.photoDescription" = "Widgeta Pixelfed-eko argazkiekin.";
-"widget.title.qrCodeDescription" = "Widget with QR Code to your Pixelfed profile.";
+"widget.title.qrCodeDescription" = "Widgeta zure Pixelfed-eko profilaren QR kodearekin.";
 
 // Mark: In-app purchases.
 "purchase.donut.title" = "Opila";
