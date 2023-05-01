@@ -157,8 +157,8 @@
 "compose.title.photos" = "Argazki-liburutegia";
 "compose.title.camera" = "Egin argazkia";
 "compose.title.files" = "Arakatu fitxategiak";
-"compose.title.missingAltTexts" = "Missing ALT texts";
-"compose.title.missingAltTextsWarning" = "Not all images have been described for the visually impaired. Would you like to send photos anyway?";
+"compose.title.missingAltTexts" = "ALT testurik ez";
+"compose.title.missingAltTextsWarning" = "Irudiren bat ez da ikusmen urritasuna dutenentzat deskribatu. Argazkiok argitaratu nahi dituzu hala ere?";
 "compose.error.loadingPhotosFailed" = "Ezin da liburutegiko irudia eskuratu.";
 "compose.error.postingPhotoFailed" = "Errorea argazkia argitaratzean.";
 "compose.error.postingStatusFailed" = "Errorea egoera argitaratzean.";
@@ -232,9 +232,9 @@
 "settings.title.showFavourite" = "Erakutsi gogokoak";
 "settings.title.showFavouriteOnTimeline" = "Gogokoak denbora-lerroan erakutsiko dira";
 "settings.title.showAltText" = "Erakutsi ALT ikurra";
-"settings.title.showAltTextOnTimeline" = "ALT ikurra (deskribapena edo testu alternatiboa dagoen seinale) denbora-lerroan erakutsiko da";
-"settings.title.warnAboutMissingAltTitle" = "Warn of missing ALT text";
-"settings.title.warnAboutMissingAltDescription" = "A warning about missing ALT texts will be displayed before publishing new post.";
+"settings.title.showAltTextOnTimeline" = "ALT ikurra (deskribapena edo testu alternatiboa dagoenaren seinale) denbora-lerroan erakutsiko da";
+"settings.title.warnAboutMissingAltTitle" = "Abisatu ALT ahaztu bazait";
+"settings.title.warnAboutMissingAltDescription" = "Irudiren batek deskribapenik ez badu, argitaratu baino lehen abisua erakutsiko da.";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Hasi saioa Pixelfed-en";
