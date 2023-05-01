@@ -299,7 +299,8 @@
 "thirdParty.navigationBar.title" = "Third party";
 
 // Mark: Widget view.
-"widget.title.description" = "Widget with photos from Pixelfed.";
+"widget.title.photoDescription" = "Widget with photos from Pixelfed.";
+"widget.title.qrCodeDescription" = "Widget with QR Code to your Pixelfed profile.";
 
 // Mark: In-app purchases.
 "purchase.donut.title" = "Donut";

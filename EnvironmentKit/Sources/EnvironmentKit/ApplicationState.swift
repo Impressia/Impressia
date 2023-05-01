@@ -83,6 +83,9 @@ public class ApplicationState: ObservableObject {
     /// Status which should be shown from URL.
     @Published public var showStatusId: String?
 
+    /// Account which should be shown from URL.
+    @Published public var showAccountId: String?
+
     /// Updated user profile.
     @Published public var updatedProfile: Account?
 

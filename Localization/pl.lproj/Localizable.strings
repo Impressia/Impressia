@@ -299,7 +299,8 @@
 "thirdParty.navigationBar.title" = "Zewnętrzne biblioteki";
 
 // Mark: Widget view.
-"widget.title.description" = "Widget ze zdjęciami z Pixelfed.";
+"widget.title.photoDescription" = "Widget ze zdjęciami z Pixelfed.";
+"widget.title.qrCodeDescription" = "Widget z QR kodem do profilu na Pixelfed.";
 
 // Mark: In-app purchases.
 "purchase.donut.title" = "Pączek";

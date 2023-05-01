@@ -95,6 +95,12 @@ struct VernissageApp: App {
                     self.applicationState.showStatusId = nil
                 }
             }
+            .onChange(of: applicationState.showAccountId) { newValue in
+                if let accountId = newValue {
+                    self.routerPath.navigate(to: .userProfile(accountId: accountId, accountDisplayName: nil, accountUserName: ""))
+                    self.applicationState.showAccountId = nil
+                }
+            }
         }
     }
 

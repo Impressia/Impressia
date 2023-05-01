@@ -299,7 +299,8 @@
 "thirdParty.navigationBar.title" = "Hirugarrenak";
 
 // Mark: Widget view.
-"widget.title.description" = "Widgeta Pixelfed-eko argazkiekin.";
+"widget.title.photoDescription" = "Widgeta Pixelfed-eko argazkiekin.";
+"widget.title.qrCodeDescription" = "Widget with QR Code to your Pixelfed profile.";
 
 // Mark: In-app purchases.
 "purchase.donut.title" = "Opila";

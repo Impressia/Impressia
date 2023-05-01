@@ -8,8 +8,8 @@ import SwiftUI
 import WidgetKit
 import EnvironmentKit
 
-struct LargeWidgetView: View {
-    var entry: Provider.Entry
+struct PhotoLargeWidgetView: View {
+    var entry: PhotoProvider.Entry
 
     var body: some View {
         if let uiImage = entry.image, let uiAvatar = entry.avatar {

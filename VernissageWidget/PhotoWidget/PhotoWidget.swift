@@ -7,15 +7,15 @@
 import WidgetKit
 import SwiftUI
 
-struct VernissageWidget: Widget {
+struct PhotoWidget: Widget {
     let kind: String = "VernissageWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            VernissageWidgetEntryView(entry: entry)
+        StaticConfiguration(kind: kind, provider: PhotoProvider()) { entry in
+            PhotoWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("Vernissage")
-        .description("widget.title.description")
+        .description("widget.title.photoDescription")
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
 }

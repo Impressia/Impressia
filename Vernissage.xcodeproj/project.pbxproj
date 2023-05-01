@@ -30,6 +30,13 @@
 		F835082329BEF9C400DE3247 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F835082629BEF9C400DE3247 /* Localizable.strings */; };
 		F835082429BEF9C400DE3247 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F835082629BEF9C400DE3247 /* Localizable.strings */; };
 		F83CBEFB298298A1002972C8 /* ImageCarouselPicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83CBEFA298298A1002972C8 /* ImageCarouselPicture.swift */; };
+		F84625E929FE2788002D3AF4 /* QRCodeWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84625E829FE2788002D3AF4 /* QRCodeWidget.swift */; };
+		F84625EB29FE28D4002D3AF4 /* QRCodeWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84625EA29FE28D4002D3AF4 /* QRCodeWidgetEntryView.swift */; };
+		F84625ED29FE295B002D3AF4 /* QRCodeLargeWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84625EC29FE295B002D3AF4 /* QRCodeLargeWidgetView.swift */; };
+		F84625F229FE2B6B002D3AF4 /* QRCodeWidgetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84625F129FE2B6B002D3AF4 /* QRCodeWidgetEntry.swift */; };
+		F84625F429FE2BF9002D3AF4 /* QRCodeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84625F329FE2BF9002D3AF4 /* QRCodeProvider.swift */; };
+		F84625F829FE2C2F002D3AF4 /* AccountFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84625F729FE2C2F002D3AF4 /* AccountFetcher.swift */; };
+		F84625FB29FE393B002D3AF4 /* QRCode in Frameworks */ = {isa = PBXBuildFile; productRef = F84625FA29FE393B002D3AF4 /* QRCode */; };
 		F858906B29E1CC7A00D4BDED /* UIApplication+Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = F858906A29E1CC7A00D4BDED /* UIApplication+Window.swift */; };
 		F85D4971296402DC00751DF7 /* AuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D4970296402DC00751DF7 /* AuthorizationService.swift */; };
 		F85D4975296407F100751DF7 /* HomeTimelineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D4974296407F100751DF7 /* HomeTimelineService.swift */; };
@@ -46,14 +53,14 @@
 		F864F75F29BB91B400B13921 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F864F75E29BB91B400B13921 /* WidgetKit.framework */; };
 		F864F76129BB91B400B13921 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F864F76029BB91B400B13921 /* SwiftUI.framework */; };
 		F864F76429BB91B400B13921 /* VernissageWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F76329BB91B400B13921 /* VernissageWidgetBundle.swift */; };
-		F864F76629BB91B400B13921 /* VernissageWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F76529BB91B400B13921 /* VernissageWidget.swift */; };
+		F864F76629BB91B400B13921 /* PhotoWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F76529BB91B400B13921 /* PhotoWidget.swift */; };
 		F864F76829BB91B600B13921 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F864F76729BB91B600B13921 /* Assets.xcassets */; };
 		F864F76C29BB91B600B13921 /* VernissageWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F864F75D29BB91B400B13921 /* VernissageWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		F864F77529BB92CE00B13921 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F77329BB929A00B13921 /* Provider.swift */; };
-		F864F77629BB92CE00B13921 /* VernissageWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F77129BB924D00B13921 /* VernissageWidgetEntryView.swift */; };
-		F864F77829BB930000B13921 /* WidgetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F77729BB930000B13921 /* WidgetEntry.swift */; };
+		F864F77529BB92CE00B13921 /* PhotoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F77329BB929A00B13921 /* PhotoProvider.swift */; };
+		F864F77629BB92CE00B13921 /* PhotoWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F77129BB924D00B13921 /* PhotoWidgetEntryView.swift */; };
+		F864F77829BB930000B13921 /* PhotoWidgetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F77729BB930000B13921 /* PhotoWidgetEntry.swift */; };
 		F864F77A29BB94A800B13921 /* PixelfedKit in Frameworks */ = {isa = PBXBuildFile; productRef = F864F77929BB94A800B13921 /* PixelfedKit */; };
-		F864F77C29BB982100B13921 /* ImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F77B29BB982100B13921 /* ImageFetcher.swift */; };
+		F864F77C29BB982100B13921 /* StatusFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F77B29BB982100B13921 /* StatusFetcher.swift */; };
 		F864F77D29BB9A4600B13921 /* AttachmentData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80047FF2961850500E6868A /* AttachmentData+CoreDataClass.swift */; };
 		F864F77E29BB9A4900B13921 /* AttachmentData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048002961850500E6868A /* AttachmentData+CoreDataProperties.swift */; };
 		F864F78229BB9A6500B13921 /* StatusData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048012961850500E6868A /* StatusData+CoreDataClass.swift */; };
@@ -87,6 +94,10 @@
 		F86B7221296C49A300EE59EC /* EmptyButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B7220296C49A300EE59EC /* EmptyButtonStyle.swift */; };
 		F86BC9E929EBBB67009415EC /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86BC9E829EBBB66009415EC /* ImageSaver.swift */; };
 		F86BC9EB29EBDA2E009415EC /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86BC9EA29EBDA2E009415EC /* ActivityView.swift */; };
+		F8705A7729FF7ABD00DA818A /* QRCodeSmallWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8705A7629FF7ABD00DA818A /* QRCodeSmallWidgetView.swift */; };
+		F8705A7929FF7CCB00DA818A /* QRCodeMediumWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8705A7829FF7CCB00DA818A /* QRCodeMediumWidgetView.swift */; };
+		F8705A7B29FF872F00DA818A /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8705A7A29FF872F00DA818A /* QRCodeGenerator.swift */; };
+		F8705A7E29FF880600DA818A /* FileFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8705A7D29FF880600DA818A /* FileFetcher.swift */; };
 		F870EE5229F1645C00A2D43B /* MainNavigationOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F870EE5129F1645C00A2D43B /* MainNavigationOptions.swift */; };
 		F871F21D29EF0D7000A351EF /* NavigationMenuItemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = F871F21C29EF0D7000A351EF /* NavigationMenuItemDetails.swift */; };
 		F8742FC429990AFB00E9642B /* ClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8742FC329990AFB00E9642B /* ClientError.swift */; };
@@ -178,9 +189,9 @@
 		F8DF38E629DDB98A0047F1AA /* SocialsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DF38E529DDB98A0047F1AA /* SocialsSectionView.swift */; };
 		F8E6D03329CDD52500416CCA /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E6D03229CDD52500416CCA /* EditProfileView.swift */; };
 		F8F6E44229BC58F20004795E /* Vernissage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F88C2476295C37BB0006098B /* Vernissage.xcdatamodeld */; };
-		F8F6E44C29BCC1F70004795E /* SmallWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6E44629BCC0DC0004795E /* SmallWidgetView.swift */; };
-		F8F6E44D29BCC1F90004795E /* MediumWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6E44829BCC0F00004795E /* MediumWidgetView.swift */; };
-		F8F6E44E29BCC1FB0004795E /* LargeWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6E44A29BCC0FF0004795E /* LargeWidgetView.swift */; };
+		F8F6E44C29BCC1F70004795E /* PhotoSmallWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6E44629BCC0DC0004795E /* PhotoSmallWidgetView.swift */; };
+		F8F6E44D29BCC1F90004795E /* PhotoMediumWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6E44829BCC0F00004795E /* PhotoMediumWidgetView.swift */; };
+		F8F6E44E29BCC1FB0004795E /* PhotoLargeWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6E44A29BCC0FF0004795E /* PhotoLargeWidgetView.swift */; };
 		F8F6E45129BCE9190004795E /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6E45029BCE9190004795E /* UIImage+Resize.swift */; };
 		F8FB8ABA29EB2ED400342C04 /* NavigationMenuButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FB8AB929EB2ED400342C04 /* NavigationMenuButtons.swift */; };
 /* End PBXBuildFile section */
@@ -240,6 +251,12 @@
 		F837269429A221420098D3C4 /* PixelfedKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PixelfedKit; sourceTree = "<group>"; };
 		F83CBEFA298298A1002972C8 /* ImageCarouselPicture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCarouselPicture.swift; sourceTree = "<group>"; };
 		F844F42429D2DC39000DD896 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		F84625E829FE2788002D3AF4 /* QRCodeWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeWidget.swift; sourceTree = "<group>"; };
+		F84625EA29FE28D4002D3AF4 /* QRCodeWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeWidgetEntryView.swift; sourceTree = "<group>"; };
+		F84625EC29FE295B002D3AF4 /* QRCodeLargeWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeLargeWidgetView.swift; sourceTree = "<group>"; };
+		F84625F129FE2B6B002D3AF4 /* QRCodeWidgetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeWidgetEntry.swift; sourceTree = "<group>"; };
+		F84625F329FE2BF9002D3AF4 /* QRCodeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeProvider.swift; sourceTree = "<group>"; };
+		F84625F729FE2C2F002D3AF4 /* AccountFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountFetcher.swift; sourceTree = "<group>"; };
 		F858906A29E1CC7A00D4BDED /* UIApplication+Window.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Window.swift"; sourceTree = "<group>"; };
 		F85B586C29ED169B00A16D12 /* Vernissage-010.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-010.xcdatamodel"; sourceTree = "<group>"; };
 		F85D4970296402DC00751DF7 /* AuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationService.swift; sourceTree = "<group>"; };
@@ -258,13 +275,13 @@
 		F864F75E29BB91B400B13921 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		F864F76029BB91B400B13921 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		F864F76329BB91B400B13921 /* VernissageWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VernissageWidgetBundle.swift; sourceTree = "<group>"; };
-		F864F76529BB91B400B13921 /* VernissageWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VernissageWidget.swift; sourceTree = "<group>"; };
+		F864F76529BB91B400B13921 /* PhotoWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoWidget.swift; sourceTree = "<group>"; };
 		F864F76729BB91B600B13921 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F864F76929BB91B600B13921 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F864F77129BB924D00B13921 /* VernissageWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VernissageWidgetEntryView.swift; sourceTree = "<group>"; };
-		F864F77329BB929A00B13921 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
-		F864F77729BB930000B13921 /* WidgetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetEntry.swift; sourceTree = "<group>"; };
-		F864F77B29BB982100B13921 /* ImageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetcher.swift; sourceTree = "<group>"; };
+		F864F77129BB924D00B13921 /* PhotoWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoWidgetEntryView.swift; sourceTree = "<group>"; };
+		F864F77329BB929A00B13921 /* PhotoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoProvider.swift; sourceTree = "<group>"; };
+		F864F77729BB930000B13921 /* PhotoWidgetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoWidgetEntry.swift; sourceTree = "<group>"; };
+		F864F77B29BB982100B13921 /* StatusFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusFetcher.swift; sourceTree = "<group>"; };
 		F864F7A429BBA01D00B13921 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		F866F69E296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplicationSettings+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F866F69F296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplicationSettings+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -285,6 +302,10 @@
 		F86B7220296C49A300EE59EC /* EmptyButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyButtonStyle.swift; sourceTree = "<group>"; };
 		F86BC9E829EBBB66009415EC /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		F86BC9EA29EBDA2E009415EC /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		F8705A7629FF7ABD00DA818A /* QRCodeSmallWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeSmallWidgetView.swift; sourceTree = "<group>"; };
+		F8705A7829FF7CCB00DA818A /* QRCodeMediumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeMediumWidgetView.swift; sourceTree = "<group>"; };
+		F8705A7A29FF872F00DA818A /* QRCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
+		F8705A7D29FF880600DA818A /* FileFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileFetcher.swift; sourceTree = "<group>"; };
 		F870EE5129F1645C00A2D43B /* MainNavigationOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationOptions.swift; sourceTree = "<group>"; };
 		F871F21C29EF0D7000A351EF /* NavigationMenuItemDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationMenuItemDetails.swift; sourceTree = "<group>"; };
 		F871F21F29EF0FEC00A351EF /* Vernissage-011.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-011.xcdatamodel"; sourceTree = "<group>"; };
@@ -370,9 +391,9 @@
 		F8EF3C8B29FC3A5F00CBFF7C /* Vernissage-012.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-012.xcdatamodel"; sourceTree = "<group>"; };
 		F8F6E44329BC5CAA0004795E /* VernissageWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VernissageWidgetExtension.entitlements; sourceTree = "<group>"; };
 		F8F6E44429BC5CC50004795E /* Vernissage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Vernissage.entitlements; sourceTree = "<group>"; };
-		F8F6E44629BCC0DC0004795E /* SmallWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallWidgetView.swift; sourceTree = "<group>"; };
-		F8F6E44829BCC0F00004795E /* MediumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumWidgetView.swift; sourceTree = "<group>"; };
-		F8F6E44A29BCC0FF0004795E /* LargeWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeWidgetView.swift; sourceTree = "<group>"; };
+		F8F6E44629BCC0DC0004795E /* PhotoSmallWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSmallWidgetView.swift; sourceTree = "<group>"; };
+		F8F6E44829BCC0F00004795E /* PhotoMediumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMediumWidgetView.swift; sourceTree = "<group>"; };
+		F8F6E44A29BCC0FF0004795E /* PhotoLargeWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLargeWidgetView.swift; sourceTree = "<group>"; };
 		F8F6E45029BCE9190004795E /* UIImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
 		F8FB8AB929EB2ED400342C04 /* NavigationMenuButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationMenuButtons.swift; sourceTree = "<group>"; };
 		F8FFBD4929E99BEE0047EE80 /* Vernissage-009.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-009.xcdatamodel"; sourceTree = "<group>"; };
@@ -383,6 +404,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F84625FB29FE393B002D3AF4 /* QRCode in Frameworks */,
 				F864F76129BB91B400B13921 /* SwiftUI.framework in Frameworks */,
 				F864F77A29BB94A800B13921 /* PixelfedKit in Frameworks */,
 				F864F75F29BB91B400B13921 /* WidgetKit.framework in Frameworks */,
@@ -557,6 +579,59 @@
 			path = Widgets;
 			sourceTree = "<group>";
 		};
+		F84625EE29FE2ABA002D3AF4 /* PhotoWidget */ = {
+			isa = PBXGroup;
+			children = (
+				F84625F629FE2C18002D3AF4 /* Service */,
+				F84625EF29FE2AC5002D3AF4 /* Views */,
+				F864F77729BB930000B13921 /* PhotoWidgetEntry.swift */,
+				F864F77329BB929A00B13921 /* PhotoProvider.swift */,
+				F864F77129BB924D00B13921 /* PhotoWidgetEntryView.swift */,
+				F864F76529BB91B400B13921 /* PhotoWidget.swift */,
+			);
+			path = PhotoWidget;
+			sourceTree = "<group>";
+		};
+		F84625EF29FE2AC5002D3AF4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F8F6E44629BCC0DC0004795E /* PhotoSmallWidgetView.swift */,
+				F8F6E44829BCC0F00004795E /* PhotoMediumWidgetView.swift */,
+				F8F6E44A29BCC0FF0004795E /* PhotoLargeWidgetView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F84625F029FE2B40002D3AF4 /* QRCodeWidget */ = {
+			isa = PBXGroup;
+			children = (
+				F84625F529FE2C0D002D3AF4 /* Service */,
+				F8F6E44529BCC0C90004795E /* Views */,
+				F84625E829FE2788002D3AF4 /* QRCodeWidget.swift */,
+				F84625EA29FE28D4002D3AF4 /* QRCodeWidgetEntryView.swift */,
+				F84625F129FE2B6B002D3AF4 /* QRCodeWidgetEntry.swift */,
+				F84625F329FE2BF9002D3AF4 /* QRCodeProvider.swift */,
+			);
+			path = QRCodeWidget;
+			sourceTree = "<group>";
+		};
+		F84625F529FE2C0D002D3AF4 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				F84625F729FE2C2F002D3AF4 /* AccountFetcher.swift */,
+				F8705A7A29FF872F00DA818A /* QRCodeGenerator.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		F84625F629FE2C18002D3AF4 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				F864F77B29BB982100B13921 /* StatusFetcher.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		F858906729E1CC2900D4BDED /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -570,14 +645,11 @@
 			children = (
 				F8F6E44329BC5CAA0004795E /* VernissageWidgetExtension.entitlements */,
 				F864F76929BB91B600B13921 /* Info.plist */,
+				F8705A7C29FF87EE00DA818A /* SharedServices */,
+				F84625F029FE2B40002D3AF4 /* QRCodeWidget */,
+				F84625EE29FE2ABA002D3AF4 /* PhotoWidget */,
 				F8F6E44F29BCE9030004795E /* Extensions */,
-				F8F6E44529BCC0C90004795E /* Views */,
-				F864F77B29BB982100B13921 /* ImageFetcher.swift */,
-				F864F77729BB930000B13921 /* WidgetEntry.swift */,
-				F864F77329BB929A00B13921 /* Provider.swift */,
 				F864F76329BB91B400B13921 /* VernissageWidgetBundle.swift */,
-				F864F77129BB924D00B13921 /* VernissageWidgetEntryView.swift */,
-				F864F76529BB91B400B13921 /* VernissageWidget.swift */,
 				F864F76729BB91B600B13921 /* Assets.xcassets */,
 			);
 			path = VernissageWidget;
@@ -589,6 +661,14 @@
 				F86B7220296C49A300EE59EC /* EmptyButtonStyle.swift */,
 			);
 			path = Styles;
+			sourceTree = "<group>";
+		};
+		F8705A7C29FF87EE00DA818A /* SharedServices */ = {
+			isa = PBXGroup;
+			children = (
+				F8705A7D29FF880600DA818A /* FileFetcher.swift */,
+			);
+			path = SharedServices;
 			sourceTree = "<group>";
 		};
 		F878841B29A49493003CFAD2 /* Subviews */ = {
@@ -802,9 +882,9 @@
 		F8F6E44529BCC0C90004795E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F8F6E44629BCC0DC0004795E /* SmallWidgetView.swift */,
-				F8F6E44829BCC0F00004795E /* MediumWidgetView.swift */,
-				F8F6E44A29BCC0FF0004795E /* LargeWidgetView.swift */,
+				F84625EC29FE295B002D3AF4 /* QRCodeLargeWidgetView.swift */,
+				F8705A7629FF7ABD00DA818A /* QRCodeSmallWidgetView.swift */,
+				F8705A7829FF7CCB00DA818A /* QRCodeMediumWidgetView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -837,6 +917,7 @@
 			packageProductDependencies = (
 				F864F77929BB94A800B13921 /* PixelfedKit */,
 				F88BC52E29E04C5F00CE6141 /* EnvironmentKit */,
+				F84625FA29FE393B002D3AF4 /* QRCode */,
 			);
 			productName = VernissageWidgetExtension;
 			productReference = F864F75D29BB91B400B13921 /* VernissageWidgetExtension.appex */;
@@ -934,6 +1015,7 @@
 				F8210DD32966BB7E001D9973 /* XCRemoteSwiftPackageReference "Nuke" */,
 				F88E4D4B297EA4290057491A /* XCRemoteSwiftPackageReference "EmojiText" */,
 				F89B5CBE29D019B600549F2F /* XCRemoteSwiftPackageReference "HTMLString" */,
+				F84625F929FE393B002D3AF4 /* XCRemoteSwiftPackageReference "QRCode" */,
 			);
 			productRefGroup = F88C2469295C37B80006098B /* Products */;
 			projectDirPath = "";
@@ -1005,16 +1087,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F864F77829BB930000B13921 /* WidgetEntry.swift in Sources */,
-				F864F77529BB92CE00B13921 /* Provider.swift in Sources */,
-				F864F77629BB92CE00B13921 /* VernissageWidgetEntryView.swift in Sources */,
-				F864F77C29BB982100B13921 /* ImageFetcher.swift in Sources */,
+				F864F77829BB930000B13921 /* PhotoWidgetEntry.swift in Sources */,
+				F864F77529BB92CE00B13921 /* PhotoProvider.swift in Sources */,
+				F864F77629BB92CE00B13921 /* PhotoWidgetEntryView.swift in Sources */,
+				F8705A7729FF7ABD00DA818A /* QRCodeSmallWidgetView.swift in Sources */,
+				F864F77C29BB982100B13921 /* StatusFetcher.swift in Sources */,
+				F84625ED29FE295B002D3AF4 /* QRCodeLargeWidgetView.swift in Sources */,
 				F8F6E44229BC58F20004795E /* Vernissage.xcdatamodeld in Sources */,
-				F8F6E44C29BCC1F70004795E /* SmallWidgetView.swift in Sources */,
-				F864F76629BB91B400B13921 /* VernissageWidget.swift in Sources */,
-				F8F6E44D29BCC1F90004795E /* MediumWidgetView.swift in Sources */,
+				F8F6E44C29BCC1F70004795E /* PhotoSmallWidgetView.swift in Sources */,
+				F864F76629BB91B400B13921 /* PhotoWidget.swift in Sources */,
+				F8F6E44D29BCC1F90004795E /* PhotoMediumWidgetView.swift in Sources */,
 				F815F60C29E49CF20044566B /* Avatar.swift in Sources */,
-				F8F6E44E29BCC1FB0004795E /* LargeWidgetView.swift in Sources */,
+				F8F6E44E29BCC1FB0004795E /* PhotoLargeWidgetView.swift in Sources */,
 				F864F76429BB91B400B13921 /* VernissageWidgetBundle.swift in Sources */,
 				F864F77D29BB9A4600B13921 /* AttachmentData+CoreDataClass.swift in Sources */,
 				F864F7A629BBA01D00B13921 /* CoreDataError.swift in Sources */,
@@ -1023,14 +1107,22 @@
 				F864F78329BB9A6800B13921 /* StatusData+CoreDataProperties.swift in Sources */,
 				F864F78429BB9A6E00B13921 /* ApplicationSettings+CoreDataClass.swift in Sources */,
 				F864F78629BB9A7400B13921 /* AccountData+CoreDataClass.swift in Sources */,
+				F8705A7B29FF872F00DA818A /* QRCodeGenerator.swift in Sources */,
+				F8705A7E29FF880600DA818A /* FileFetcher.swift in Sources */,
 				F864F78529BB9A7100B13921 /* ApplicationSettings+CoreDataProperties.swift in Sources */,
+				F84625E929FE2788002D3AF4 /* QRCodeWidget.swift in Sources */,
 				F864F78729BB9A7700B13921 /* AccountData+CoreDataProperties.swift in Sources */,
 				F864F78829BB9A7B00B13921 /* CoreDataHandler.swift in Sources */,
 				F8F6E45129BCE9190004795E /* UIImage+Resize.swift in Sources */,
 				F864F78929BB9A7D00B13921 /* AccountDataHandler.swift in Sources */,
 				F864F78A29BB9A8000B13921 /* ApplicationSettingsHandler.swift in Sources */,
+				F84625F229FE2B6B002D3AF4 /* QRCodeWidgetEntry.swift in Sources */,
+				F84625EB29FE28D4002D3AF4 /* QRCodeWidgetEntryView.swift in Sources */,
 				F864F78C29BB9A8500B13921 /* AttachmentDataHandler.swift in Sources */,
+				F84625F829FE2C2F002D3AF4 /* AccountFetcher.swift in Sources */,
+				F84625F429FE2BF9002D3AF4 /* QRCodeProvider.swift in Sources */,
 				F864F78B29BB9A8300B13921 /* StatusDataHandler.swift in Sources */,
+				F8705A7929FF7CCB00DA818A /* QRCodeMediumWidgetView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1561,6 +1653,14 @@
 				minimumVersion = 12.0.0;
 			};
 		};
+		F84625F929FE393B002D3AF4 /* XCRemoteSwiftPackageReference "QRCode" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmrschmidt/QRCode";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		F88E4D4B297EA4290057491A /* XCRemoteSwiftPackageReference "EmojiText" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/divadretlaw/EmojiText";
@@ -1594,6 +1694,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F8210DD32966BB7E001D9973 /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = NukeUI;
+		};
+		F84625FA29FE393B002D3AF4 /* QRCode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F84625F929FE393B002D3AF4 /* XCRemoteSwiftPackageReference "QRCode" */;
+			productName = QRCode;
 		};
 		F864F77929BB94A800B13921 /* PixelfedKit */ = {
 			isa = XCSwiftPackageProductDependency;

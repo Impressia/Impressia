@@ -7,16 +7,16 @@
 import WidgetKit
 import SwiftUI
 
-struct VernissageWidgetEntryView: View {
+struct PhotoWidgetEntryView: View {
     @Environment(\.widgetFamily) var family: WidgetFamily
 
-    var entry: Provider.Entry
+    var entry: PhotoProvider.Entry
 
     var body: some View {
         switch family {
-        case .systemSmall: SmallWidgetView(entry: entry)
-        case .systemMedium: MediumWidgetView(entry: entry)
-        case .systemLarge: LargeWidgetView(entry: entry)
+        case .systemSmall: PhotoSmallWidgetView(entry: entry)
+        case .systemMedium: PhotoMediumWidgetView(entry: entry)
+        case .systemLarge: PhotoLargeWidgetView(entry: entry)
         default: Text("Not supported")
         }
     }

@@ -22,6 +22,11 @@ class SceneDelegate: NSObject, UISceneDelegate {
             if statusId.isEmpty == false {
                 ApplicationState.shared.showStatusId = statusId
             }
+        } else if url.host == AppConstants.accountCallbackPart {
+            let accountId = url.string.replacingOccurrences(of: "\(AppConstants.accountUri)/", with: "")
+            if accountId.isEmpty == false {
+                ApplicationState.shared.showAccountId = accountId
+            }
         }
     }
 }

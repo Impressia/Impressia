@@ -90,6 +90,16 @@ struct ThirdPartyView: View {
                 }
                 .font(.footnote)
             }
+
+            Section("QR codes") {
+                VStack(alignment: .leading) {
+                    Link("https://github.com/dmrschmidt/QRCode",
+                         destination: URL(string: "https://github.com/dmrschmidt/QRCode")!)
+                    .padding(.bottom, 4)
+                    Text("A simple QR code image generator to use in your apps, written in Swift 5.")
+                }
+                .font(.footnote)
+            }
         }
         .navigationTitle("thirdParty.navigationBar.title")
         .navigationBarTitleDisplayMode(.inline)
