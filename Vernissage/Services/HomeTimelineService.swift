@@ -252,7 +252,7 @@ public class HomeTimelineService {
     ) {
         statusData.copyFrom(status)
 
-        for attachment in status.getAllImageMediaAttachments() {
+        for (index, attachment) in status.getAllImageMediaAttachments().enumerated() {
 
             // Save attachment in database.
             let attachmentData = statusData.attachments().first { item in item.id == attachment.id }
@@ -260,6 +260,7 @@ public class HomeTimelineService {
 
             attachmentData.copyFrom(attachment)
             attachmentData.statusId = statusData.id
+            attachmentData.order = Int32(index)
 
             if attachmentData.isInserted {
                 attachmentData.statusRelation = statusData

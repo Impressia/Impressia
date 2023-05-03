@@ -203,9 +203,13 @@ struct InteractionRow: View {
     private func deleteStatus() {
         Task {
             do {
+                // Remove from server.
                 try await self.client.statuses?.delete(statusId: self.statusModel.id)
-                ToastrService.shared.showSuccess("status.title.statusDeleted", imageSystemName: "checkmark.circle.fill")
 
+                // Remove from database.
+                StatusDataHandler.shared.remove(accountId: self.statusModel.account.id, statusId: self.statusModel.id)
+
+                ToastrService.shared.showSuccess("status.title.statusDeleted", imageSystemName: "checkmark.circle.fill")
                 self.delete?()
             } catch {
                 ErrorService.shared.handle(error, message: "status.error.deleteFailed", showToastr: true)

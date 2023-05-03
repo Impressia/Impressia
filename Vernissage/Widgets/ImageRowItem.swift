@@ -22,7 +22,7 @@ struct ImageRowItem: View {
 
     @State private var uiImage: UIImage?
     @State private var showThumbImage = false
-    @State private var cancelled = true
+    @State private var cancelled = false
     @State private var error: Error?
     @State private var opacity = 1.0
     @State private var isFavourited = false
@@ -33,6 +33,15 @@ struct ImageRowItem: View {
         self.status = status
         self.attachmentData = attachmentData
         self.onImageDownloaded = onImageDownloaded
+
+        // When we are deleting status, for some reason that view is updating during the deleting process,
+        // unfortunatelly the entity state is faulty and we cannot do any operations on that entity.
+        if status.isFaulty() || attachmentData.isFaulty() {
+            self.uiImage = nil
+            self.imageFromCache = false
+
+            return
+        }
 
         if let imageData = attachmentData.data {
             self.uiImage = UIImage(data: imageData)
@@ -89,14 +98,24 @@ struct ImageRowItem: View {
             if cancelled {
                 BlurredImage(blurhash: attachmentData.blurhash)
                     .task {
-                        await self.downloadImage(attachmentData: attachmentData)
+                        if !status.isFaulty() && !attachmentData.isFaulty() {
+                            if let imageData = await self.downloadImage(attachmentData: attachmentData),
+                               let downloadedImage = UIImage(data: imageData) {
+                                self.setVariables(imageData: imageData, downloadedImage: downloadedImage)
+                            }
+                        }
                     }
             } else if let error {
                 ZStack {
                     BlurredImage(blurhash: attachmentData.blurhash)
 
                     ErrorView(error: error) {
-                        await self.downloadImage(attachmentData: attachmentData)
+                        if !status.isFaulty() && !attachmentData.isFaulty() {
+                            if let imageData = await self.downloadImage(attachmentData: attachmentData),
+                               let downloadedImage = UIImage(data: imageData) {
+                                self.setVariables(imageData: imageData, downloadedImage: downloadedImage)
+                            }
+                        }
                     }
                     .padding()
                 }
@@ -106,7 +125,12 @@ struct ImageRowItem: View {
                         self.navigateToStatus()
                     }
                     .task {
-                        await self.downloadImage(attachmentData: attachmentData)
+                        if !status.isFaulty() && !attachmentData.isFaulty() {
+                            if let imageData = await self.downloadImage(attachmentData: attachmentData),
+                               let downloadedImage = UIImage(data: imageData) {
+                                self.setVariables(imageData: imageData, downloadedImage: downloadedImage)
+                            }
+                        }
                     }
             }
         }
@@ -165,22 +189,13 @@ struct ImageRowItem: View {
             }
     }
 
-    private func downloadImage(attachmentData: AttachmentData) async {
+    private func downloadImage(attachmentData: AttachmentData) async -> Data? {
         do {
-            if let imageData = try await RemoteFileService.shared.fetchData(url: attachmentData.url),
-               let downloadedImage = UIImage(data: imageData) {
-
-                let size = ImageSizeService.shared.calculate(for: attachmentData.url,
-                                                             width: downloadedImage.size.width,
-                                                             height: downloadedImage.size.height)
-
-                self.uiImage = downloadedImage
-                self.onImageDownloaded(size.width, size.height)
-
-                HomeTimelineService.shared.update(attachment: attachmentData, withData: imageData, imageWidth: size.width, imageHeight: size.height)
-                self.error = nil
-                self.cancelled = false
+            if let imageData = try await RemoteFileService.shared.fetchData(url: attachmentData.url) {
+                return imageData
             }
+
+            return nil
         } catch {
             if !Task.isCancelled {
                 ErrorService.shared.handle(error, message: "global.error.errorDuringImageDownload")
@@ -189,7 +204,22 @@ struct ImageRowItem: View {
                 ErrorService.shared.handle(error, message: "global.error.canceledImageDownload")
                 self.cancelled = true
             }
+
+            return nil
         }
+    }
+
+    private func setVariables(imageData: Data, downloadedImage: UIImage) {
+        let size = ImageSizeService.shared.calculate(for: attachmentData.url,
+                                                     width: downloadedImage.size.width,
+                                                     height: downloadedImage.size.height)
+
+        self.onImageDownloaded(size.width, size.height)
+        self.uiImage = downloadedImage
+
+        HomeTimelineService.shared.update(attachment: attachmentData, withData: imageData, imageWidth: size.width, imageHeight: size.height)
+        self.error = nil
+        self.cancelled = false
     }
 
     private func navigateToStatus() {

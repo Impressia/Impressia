@@ -76,6 +76,12 @@
 		F864F78C29BB9A8500B13921 /* AttachmentDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80048092961EA1900E6868A /* AttachmentDataHandler.swift */; };
 		F864F7A529BBA01D00B13921 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F7A429BBA01D00B13921 /* CoreDataError.swift */; };
 		F864F7A629BBA01D00B13921 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F7A429BBA01D00B13921 /* CoreDataError.swift */; };
+		F865B4CD2A024AD8008ACDFC /* StatusData+Faulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = F865B4CC2A024AD8008ACDFC /* StatusData+Faulty.swift */; };
+		F865B4CE2A024AD8008ACDFC /* StatusData+Faulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = F865B4CC2A024AD8008ACDFC /* StatusData+Faulty.swift */; };
+		F865B4CF2A024AD8008ACDFC /* StatusData+Faulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = F865B4CC2A024AD8008ACDFC /* StatusData+Faulty.swift */; };
+		F865B4D12A024AFE008ACDFC /* AttachmentData+Faulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = F865B4D02A024AFE008ACDFC /* AttachmentData+Faulty.swift */; };
+		F865B4D22A024AFE008ACDFC /* AttachmentData+Faulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = F865B4D02A024AFE008ACDFC /* AttachmentData+Faulty.swift */; };
+		F865B4D32A024AFE008ACDFC /* AttachmentData+Faulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = F865B4D02A024AFE008ACDFC /* AttachmentData+Faulty.swift */; };
 		F866F6A0296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F69E296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift */; };
 		F866F6A1296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F69F296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift */; };
 		F866F6A329604161002E8F88 /* AccountDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F6A229604161002E8F88 /* AccountDataHandler.swift */; };
@@ -283,6 +289,9 @@
 		F864F77729BB930000B13921 /* PhotoWidgetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoWidgetEntry.swift; sourceTree = "<group>"; };
 		F864F77B29BB982100B13921 /* StatusFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusFetcher.swift; sourceTree = "<group>"; };
 		F864F7A429BBA01D00B13921 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
+		F865B4CC2A024AD8008ACDFC /* StatusData+Faulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusData+Faulty.swift"; sourceTree = "<group>"; };
+		F865B4D02A024AFE008ACDFC /* AttachmentData+Faulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttachmentData+Faulty.swift"; sourceTree = "<group>"; };
+		F865B4D42A0252FB008ACDFC /* Vernissage-013.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-013.xcdatamodel"; sourceTree = "<group>"; };
 		F866F69E296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplicationSettings+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F866F69F296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplicationSettings+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F866F6A229604161002E8F88 /* AccountDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDataHandler.swift; sourceTree = "<group>"; };
@@ -534,10 +543,12 @@
 				F85D498229642FAC00751DF7 /* AttachmentData+Comperable.swift */,
 				F8210DDE2966CFC7001D9973 /* AttachmentData+Attachment.swift */,
 				F89CEB7F2984198600A1376F /* AttachmentData+HighestImage.swift */,
+				F865B4D02A024AFE008ACDFC /* AttachmentData+Faulty.swift */,
 				F80048012961850500E6868A /* StatusData+CoreDataClass.swift */,
 				F80048022961850500E6868A /* StatusData+CoreDataProperties.swift */,
 				F85D49842964301800751DF7 /* StatusData+Attachments.swift */,
 				F8210DDC2966CF17001D9973 /* StatusData+Status.swift */,
+				F865B4CC2A024AD8008ACDFC /* StatusData+Faulty.swift */,
 				F866F69E296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift */,
 				F866F69F296040A8002E8F88 /* ApplicationSettings+CoreDataProperties.swift */,
 				F88FAD28295F43B8009B20C9 /* AccountData+CoreDataClass.swift */,
@@ -1108,7 +1119,9 @@
 				F864F78429BB9A6E00B13921 /* ApplicationSettings+CoreDataClass.swift in Sources */,
 				F864F78629BB9A7400B13921 /* AccountData+CoreDataClass.swift in Sources */,
 				F8705A7B29FF872F00DA818A /* QRCodeGenerator.swift in Sources */,
+				F865B4CE2A024AD8008ACDFC /* StatusData+Faulty.swift in Sources */,
 				F8705A7E29FF880600DA818A /* FileFetcher.swift in Sources */,
+				F865B4D22A024AFE008ACDFC /* AttachmentData+Faulty.swift in Sources */,
 				F864F78529BB9A7100B13921 /* ApplicationSettings+CoreDataProperties.swift in Sources */,
 				F84625E929FE2788002D3AF4 /* QRCodeWidget.swift in Sources */,
 				F864F78729BB9A7700B13921 /* AccountData+CoreDataProperties.swift in Sources */,
@@ -1134,6 +1147,7 @@
 				F88BC54729E072B800CE6141 /* AccountData+CoreDataProperties.swift in Sources */,
 				F88BC54D29E072D600CE6141 /* AttachmentData+CoreDataProperties.swift in Sources */,
 				F88BC54F29E073BC00CE6141 /* AccountData+AccountModel.swift in Sources */,
+				F865B4D32A024AFE008ACDFC /* AttachmentData+Faulty.swift in Sources */,
 				F88BC54629E072B500CE6141 /* CoreDataHandler.swift in Sources */,
 				F88BC50529E02F3900CE6141 /* ShareViewController.swift in Sources */,
 				F88BC54129E072A600CE6141 /* CoreDataError.swift in Sources */,
@@ -1146,6 +1160,7 @@
 				F88BC54C29E072CD00CE6141 /* StatusData+CoreDataClass.swift in Sources */,
 				F88BC54B29E072CA00CE6141 /* StatusData+CoreDataProperties.swift in Sources */,
 				F88BC54A29E072C400CE6141 /* ApplicationSettings+CoreDataClass.swift in Sources */,
+				F865B4CF2A024AD8008ACDFC /* StatusData+Faulty.swift in Sources */,
 				F88BC54929E072C000CE6141 /* ApplicationSettings+CoreDataProperties.swift in Sources */,
 				F88BC55029E074EB00CE6141 /* Vernissage.xcdatamodeld in Sources */,
 				F88BC54329E072AC00CE6141 /* StatusDataHandler.swift in Sources */,
@@ -1165,6 +1180,7 @@
 				F80048082961E6DE00E6868A /* StatusDataHandler.swift in Sources */,
 				F866F6A0296040A8002E8F88 /* ApplicationSettings+CoreDataClass.swift in Sources */,
 				F8210DEA2966E4F9001D9973 /* AnimatePlaceholderModifier.swift in Sources */,
+				F865B4D12A024AFE008ACDFC /* AttachmentData+Faulty.swift in Sources */,
 				F8B08862299435C9002AB40A /* SupportView.swift in Sources */,
 				F8B05ACB29B489B100857221 /* HapticsSectionView.swift in Sources */,
 				F88FAD2B295F43B8009B20C9 /* AccountData+CoreDataProperties.swift in Sources */,
@@ -1217,6 +1233,7 @@
 				F8B0885E29942E31002AB40A /* ThirdPartyView.swift in Sources */,
 				F8E6D03329CDD52500416CCA /* EditProfileView.swift in Sources */,
 				F858906B29E1CC7A00D4BDED /* UIApplication+Window.swift in Sources */,
+				F865B4CD2A024AD8008ACDFC /* StatusData+Faulty.swift in Sources */,
 				F876418D298AE5020057D362 /* PaginableStatusesView.swift in Sources */,
 				F85D49852964301800751DF7 /* StatusData+Attachments.swift in Sources */,
 				F8764187298ABB520057D362 /* ViewState.swift in Sources */,
@@ -1756,6 +1773,7 @@
 		F88C2476295C37BB0006098B /* Vernissage.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				F865B4D42A0252FB008ACDFC /* Vernissage-013.xcdatamodel */,
 				F8EF3C8B29FC3A5F00CBFF7C /* Vernissage-012.xcdatamodel */,
 				F871F21F29EF0FEC00A351EF /* Vernissage-011.xcdatamodel */,
 				F85B586C29ED169B00A16D12 /* Vernissage-010.xcdatamodel */,
@@ -1770,7 +1788,7 @@
 				F8C937A929882CA90004D782 /* Vernissage-001.xcdatamodel */,
 				F88C2477295C37BB0006098B /* Vernissage.xcdatamodel */,
 			);
-			currentVersion = F8EF3C8B29FC3A5F00CBFF7C /* Vernissage-012.xcdatamodel */;
+			currentVersion = F865B4D42A0252FB008ACDFC /* Vernissage-013.xcdatamodel */;
 			path = Vernissage.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

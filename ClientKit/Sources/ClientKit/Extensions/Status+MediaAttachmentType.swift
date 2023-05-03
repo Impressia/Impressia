@@ -25,11 +25,9 @@ public extension Status {
             // If status is rebloged the we have to check if orginal status contains image.
             return reblog.mediaAttachments
                 .filter { mediaAttachment in mediaAttachment.type == .image }
-                .sorted(by: { (lhs, rhs) in lhs.id < rhs.id })
         }
 
         return self.mediaAttachments
             .filter { mediaAttachment in mediaAttachment.type == .image }
-            .sorted(by: { (lhs, rhs) in lhs.id < rhs.id })
     }
 }
