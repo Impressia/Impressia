@@ -8,7 +8,7 @@ import WidgetKit
 import SwiftUI
 
 struct QRCodeWidget: Widget {
-    let kind: String = "QRCodeWidget"
+    let kind: String = "VernissageQRCodeWidget"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: QRCodeProvider()) { entry in
