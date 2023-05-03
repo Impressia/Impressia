@@ -28,8 +28,8 @@ extension AttachmentData {
     @NSManaged public var url: URL
     @NSManaged public var metaImageWidth: Int32
     @NSManaged public var metaImageHeight: Int32
+    @NSManaged public var order: Int32
     @NSManaged public var statusRelation: StatusData?
-
 }
 
 extension AttachmentData: Identifiable {

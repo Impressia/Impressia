@@ -157,6 +157,8 @@
 "compose.title.photos" = "Photos library";
 "compose.title.camera" = "Take photo";
 "compose.title.files" = "Browse files";
+"compose.title.missingAltTexts" = "Missing ALT texts";
+"compose.title.missingAltTextsWarning" = "Not all images have been described for the visually impaired. Would you like to send photos anyway?";
 "compose.error.loadingPhotosFailed" = "Cannot retreive image from library.";
 "compose.error.postingPhotoFailed" = "Error during posting photo.";
 "compose.error.postingStatusFailed" = "Error during posting status.";
@@ -231,6 +233,8 @@
 "settings.title.showFavouriteOnTimeline" = "Favourites will be displayed on timelines";
 "settings.title.showAltText" = "Show ALT icon";
 "settings.title.showAltTextOnTimeline" = "ALT icon will be displayed on timelines";
+"settings.title.warnAboutMissingAltTitle" = "Warn of missing ALT text";
+"settings.title.warnAboutMissingAltDescription" = "A warning about missing ALT texts will be displayed before publishing new post.";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Sign in to Pixelfed";
@@ -295,7 +299,8 @@
 "thirdParty.navigationBar.title" = "Third party";
 
 // Mark: Widget view.
-"widget.title.description" = "Widget with photos from Pixelfed.";
+"widget.title.photoDescription" = "Widget with photos from Pixelfed.";
+"widget.title.qrCodeDescription" = "Widget with QR Code to your Pixelfed profile.";
 
 // Mark: In-app purchases.
 "purchase.donut.title" = "Donut";

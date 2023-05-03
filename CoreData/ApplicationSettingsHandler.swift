@@ -57,6 +57,7 @@ class ApplicationSettingsHandler {
         applicationState.showAvatarsOnTimeline = defaultSettings.showAvatarsOnTimeline
         applicationState.showFavouritesOnTimeline = defaultSettings.showFavouritesOnTimeline
         applicationState.showAltIconOnTimeline = defaultSettings.showAltIconOnTimeline
+        applicationState.warnAboutMissingAlt = defaultSettings.warnAboutMissingAlt
 
         if let menuPosition = MenuPosition(rawValue: Int(defaultSettings.menuPosition)) {
             applicationState.menuPosition = menuPosition
@@ -162,6 +163,12 @@ class ApplicationSettingsHandler {
     func set(showAltIconOnTimeline: Bool) {
         let defaultSettings = self.get()
         defaultSettings.showAltIconOnTimeline = showAltIconOnTimeline
+        CoreDataHandler.shared.save()
+    }
+
+    func set(warnAboutMissingAlt: Bool) {
+        let defaultSettings = self.get()
+        defaultSettings.warnAboutMissingAlt = warnAboutMissingAlt
         CoreDataHandler.shared.save()
     }
 

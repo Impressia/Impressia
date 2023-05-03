@@ -17,6 +17,10 @@ public struct AppConstants {
     public static let statusCallbackPart = "statuses"
     public static let statusUri = "\(AppConstants.statusScheme)://\(statusCallbackPart)"
 
+    public static let accountScheme = "account-vernissage"
+    public static let accountCallbackPart = "accounts"
+    public static let accountUri = "\(AppConstants.accountScheme)://\(accountCallbackPart)"
+
     public static let imagePipelineCacheName = "dev.mczachurski.Vernissage.DataCache"
     public static let coreDataPersistantContainerName = "Vernissage"
 }

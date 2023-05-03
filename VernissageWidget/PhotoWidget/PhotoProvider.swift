@@ -8,19 +8,19 @@ import WidgetKit
 import SwiftUI
 import Intents
 
-struct Provider: TimelineProvider {
-    typealias Entry = WidgetEntry
+struct PhotoProvider: TimelineProvider {
+    typealias Entry = PhotoWidgetEntry
 
-    func placeholder(in context: Context) -> WidgetEntry {
-        ImageFetcher.shared.placeholder()
+    func placeholder(in context: Context) -> PhotoWidgetEntry {
+        StatusFetcher.shared.placeholder()
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (WidgetEntry) -> Void) {
+    func getSnapshot(in context: Context, completion: @escaping (PhotoWidgetEntry) -> Void) {
         Task {
             if let widgetEntry = await self.getWidgetEntries(length: 1).first {
                 completion(widgetEntry)
             } else {
-                let entry = ImageFetcher.shared.placeholder()
+                let entry = StatusFetcher.shared.placeholder()
                 completion(entry)
             }
         }
@@ -37,11 +37,11 @@ struct Provider: TimelineProvider {
         }
     }
 
-    func getWidgetEntries(length: Int = 3) async -> [WidgetEntry] {
+    func getWidgetEntries(length: Int = 3) async -> [PhotoWidgetEntry] {
         do {
-            return try await ImageFetcher.shared.fetchWidgetEntries(length: length)
+            return try await StatusFetcher.shared.fetchWidgetEntries(length: length)
         } catch {
-            return [ImageFetcher.shared.placeholder()]
+            return [StatusFetcher.shared.placeholder()]
         }
     }
 }

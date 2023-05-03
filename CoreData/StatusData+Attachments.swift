@@ -13,7 +13,7 @@ extension StatusData {
         }
 
         return attachments.sorted(by: { lhs, rhs in
-            lhs.id < rhs.id
+            lhs.order < rhs.order
         })
     }
 }

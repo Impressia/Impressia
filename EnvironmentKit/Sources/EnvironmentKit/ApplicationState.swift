@@ -83,6 +83,9 @@ public class ApplicationState: ObservableObject {
     /// Status which should be shown from URL.
     @Published public var showStatusId: String?
 
+    /// Account which should be shown from URL.
+    @Published public var showAccountId: String?
+
     /// Updated user profile.
     @Published public var updatedProfile: Account?
 
@@ -97,6 +100,9 @@ public class ApplicationState: ObservableObject {
 
     /// Should ALT icon be visible on timelines.
     @Published public var showAltIconOnTimeline = false
+
+    /// Show warning about missing ALT texts on compose screen.
+    @Published public var warnAboutMissingAlt = true
 
     public func changeApplicationState(accountModel: AccountModel, instance: Instance?, lastSeenStatusId: String?) {
         self.account = accountModel

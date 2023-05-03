@@ -32,6 +32,7 @@ extension ApplicationSettings {
     @NSManaged public var showAvatarsOnTimeline: Bool
     @NSManaged public var showFavouritesOnTimeline: Bool
     @NSManaged public var showAltIconOnTimeline: Bool
+    @NSManaged public var warnAboutMissingAlt: Bool
 
     @NSManaged public var customNavigationMenuItem1: Int32
     @NSManaged public var customNavigationMenuItem2: Int32

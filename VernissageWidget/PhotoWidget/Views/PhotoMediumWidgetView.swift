@@ -8,8 +8,8 @@ import SwiftUI
 import WidgetKit
 import EnvironmentKit
 
-struct SmallWidgetView: View {
-    var entry: Provider.Entry
+struct PhotoMediumWidgetView: View {
+    var entry: PhotoProvider.Entry
 
     var body: some View {
         if let uiImage = entry.image, let uiAvatar = entry.avatar {
@@ -26,8 +26,13 @@ struct SmallWidgetView: View {
             Spacer()
             HStack {
                 uiAvatar
-                    .avatar(size: 16)
+                    .avatar(size: 24)
 
+                Text(entry.displayName ?? "")
+                    .font(.system(size: 15))
+                    .foregroundColor(.white.opacity(0.8))
+                    .fontWeight(.semibold)
+                    .shadow(color: .black, radius: 2)
                 Spacer()
             }
             .padding(.leading, 8)

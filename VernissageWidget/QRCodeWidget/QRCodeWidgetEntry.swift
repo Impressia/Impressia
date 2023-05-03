@@ -7,10 +7,13 @@
 import WidgetKit
 import SwiftUI
 
-struct WidgetEntry: TimelineEntry {
+struct QRCodeWidgetEntry: TimelineEntry {
     let date: Date
-    let image: UIImage?
+    let accountId: String
+    let acct: String
     let avatar: UIImage?
     let displayName: String?
-    let statusId: String?
+    let profileUrl: URL?
+    let avatarUrl: URL?
+    let portfolioUrl: URL?
 }

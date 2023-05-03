@@ -7,12 +7,10 @@
 import WidgetKit
 import SwiftUI
 
-@main
-struct VernissageWidgetBundle: WidgetBundle {
-
-    @WidgetBundleBuilder
-    var body: some Widget {
-        PhotoWidget()
-        QRCodeWidget()
-    }
+struct PhotoWidgetEntry: TimelineEntry {
+    let date: Date
+    let image: UIImage?
+    let avatar: UIImage?
+    let displayName: String?
+    let statusId: String?
 }
