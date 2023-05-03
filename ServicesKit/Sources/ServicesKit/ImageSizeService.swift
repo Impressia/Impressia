@@ -25,7 +25,7 @@ public class ImageSizeService {
         return calculate(for: url, width: Double(width), height: Double(height))
     }
 
-    public func calculate(for url: URL, width: Double, height: Double) -> CGSize {
+    public func calculate(width: Double, height: Double) -> CGSize {
         let divider = Double(width) / UIScreen.main.bounds.size.width
         let calculatedHeight = Double(height) / divider
 
@@ -33,6 +33,12 @@ public class ImageSizeService {
             width: UIScreen.main.bounds.width,
             height: (calculatedHeight > 0 && calculatedHeight < .infinity) ? calculatedHeight : UIScreen.main.bounds.width
         )
+
+        return size
+    }
+
+    public func calculate(for url: URL, width: Double, height: Double) -> CGSize {
+        let size = self.calculate(width: width, height: height)
 
         self.memoryCacheData.insert(size, forKey: url)
         return size

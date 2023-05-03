@@ -73,13 +73,12 @@ struct ImageRow: View {
             }
             .onChange(of: selected, perform: { attachmentId in
                 if let attachment = attachmentsData.first(where: { item in item.id == attachmentId }) {
-                    let doubleImageWidth = Double(attachment.metaImageWidth)
-                    let doubleImageHeight = Double(attachment.metaImageHeight)
+                    let size = ImageSizeService.shared.calculate(width: Double(attachment.metaImageWidth), height: Double(attachment.metaImageHeight))
 
-                    if doubleImageWidth != self.imageWidth || doubleImageHeight != self.imageHeight {
+                    if size.width != self.imageWidth || size.height != self.imageHeight {
                         withAnimation(.linear(duration: 0.4)) {
-                            self.imageWidth = doubleImageWidth
-                            self.imageHeight = doubleImageHeight
+                            self.imageWidth = size.width
+                            self.imageHeight = size.height
                         }
                     }
                 }
