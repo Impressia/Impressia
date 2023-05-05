@@ -21,6 +21,7 @@ struct ImageRowItemAsync: View {
     private var statusViewModel: StatusModel
     private var attachment: AttachmentModel
     private let showAvatar: Bool
+    private let clipToSquare: Bool
     private let imageFromCache: Bool
 
     @State private var showThumbImage = false
@@ -31,8 +32,11 @@ struct ImageRowItemAsync: View {
 
     init(statusViewModel: StatusModel,
          attachment: AttachmentModel,
-         withAvatar showAvatar: Bool = true, onImageDownloaded: @escaping (_: Double, _: Double) -> Void) {
+         withAvatar showAvatar: Bool = true,
+         clipToSquare: Bool = false,
+         onImageDownloaded: @escaping (_: Double, _: Double) -> Void) {
         self.showAvatar = showAvatar
+        self.clipToSquare = clipToSquare
         self.statusViewModel = statusViewModel
         self.attachment = attachment
         self.onImageDownloaded = onImageDownloaded
@@ -149,7 +153,10 @@ struct ImageRowItemAsync: View {
     private func imageView(image: Image) -> some View {
         image
             .resizable()
-            .aspectRatio(contentMode: .fit)
+            .scaledToFill()
+            .if(self.clipToSquare) {
+                $0.frame(width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.width / 2).clipped()
+            }
             .onTapGesture(count: 2) {
                 Task {
                     // Update favourite in Pixelfed server.

@@ -26,10 +26,12 @@ struct UserProfileStatusesView: View {
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
 
     var body: some View {
-        LazyVStack(alignment: .center) {
-            if firstLoadFinished == true {
+        // LazyVStack(alignment: .center) {
+        if firstLoadFinished == true {
+            LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 0)], spacing: 5) {
                 ForEach(self.statusViewModels, id: \.id) { item in
-                    ImageRowAsync(statusViewModel: item, withAvatar: false)
+                    ImageRowAsync(statusViewModel: item, withAvatar: false, clipToSquare: true)
+                        .frame(width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.width / 2)
                 }
 
                 if allItemsLoaded == false && firstLoadFinished == true {
@@ -46,16 +48,16 @@ struct UserProfileStatusesView: View {
                         Spacer()
                     }
                 }
-            } else {
-                LoadingIndicator()
             }
-        }
-        .onFirstAppear {
-            do {
-                try await self.loadStatuses()
-            } catch {
-                ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadStatuses", showToastr: !Task.isCancelled)
-            }
+        } else {
+            LoadingIndicator()
+                .onFirstAppear {
+                    do {
+                        try await self.loadStatuses()
+                    } catch {
+                        ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadStatuses", showToastr: !Task.isCancelled)
+                    }
+                }
         }
     }
 
