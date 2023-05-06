@@ -14,15 +14,15 @@ struct ImageRowAsync: View {
     private let statusViewModel: StatusModel
     private let firstAttachment: AttachmentModel?
     private let showAvatar: Bool
-    private let clipToSquare: Bool
+    private let imageScale: ImageScale
 
     @State private var selected: String
     @State private var imageHeight: Double
     @State private var imageWidth: Double
 
-    init(statusViewModel: StatusModel, withAvatar showAvatar: Bool = true, clipToSquare: Bool = false) {
+    init(statusViewModel: StatusModel, withAvatar showAvatar: Bool = true, imageScale: ImageScale = .orginalFullWidth) {
         self.showAvatar = showAvatar
-        self.clipToSquare = clipToSquare
+        self.imageScale = imageScale
         self.statusViewModel = statusViewModel
         self.firstAttachment = statusViewModel.mediaAttachments.first
         self.selected = String.empty()
@@ -49,7 +49,7 @@ struct ImageRowAsync: View {
             ImageRowItemAsync(statusViewModel: self.statusViewModel,
                               attachment: firstAttachment,
                               withAvatar: self.showAvatar,
-                              clipToSquare: self.clipToSquare) { (imageWidth, imageHeight) in
+                              imageScale: self.imageScale) { (imageWidth, imageHeight) in
 
                 // When we download image and calculate real size we have to change view size.
                 if imageWidth != self.imageWidth || imageHeight != self.imageHeight {
@@ -59,7 +59,7 @@ struct ImageRowAsync: View {
                     }
                 }
             }
-            .if(self.clipToSquare == false) {
+            .if(self.imageScale == .orginalFullWidth) {
                 $0.frame(width: self.imageWidth, height: self.imageHeight)
             }
         } else {
@@ -68,7 +68,7 @@ struct ImageRowAsync: View {
                     ImageRowItemAsync(statusViewModel: self.statusViewModel,
                                       attachment: attachment,
                                       withAvatar: self.showAvatar,
-                                      clipToSquare: self.clipToSquare) { (imageWidth, imageHeight) in
+                                      imageScale: self.imageScale) { (imageWidth, imageHeight) in
 
                         // When we download image and calculate real size we have to change view size (only when image is now visible).
                         if attachment.id == self.selected {
@@ -98,7 +98,7 @@ struct ImageRowAsync: View {
                     }
                 }
             })
-            .if(self.clipToSquare == false) {
+            .if(self.imageScale == .orginalFullWidth) {
                 $0.frame(width: self.imageWidth, height: self.imageHeight)
             }
             .tabViewStyle(.page(indexDisplayMode: .never))

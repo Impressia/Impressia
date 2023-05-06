@@ -21,8 +21,8 @@ struct ImageRowItemAsync: View {
     private var statusViewModel: StatusModel
     private var attachment: AttachmentModel
     private let showAvatar: Bool
-    private let clipToSquare: Bool
     private let imageFromCache: Bool
+    private let imageScale: ImageScale
 
     @State private var showThumbImage = false
     @State private var opacity = 1.0
@@ -33,10 +33,10 @@ struct ImageRowItemAsync: View {
     init(statusViewModel: StatusModel,
          attachment: AttachmentModel,
          withAvatar showAvatar: Bool = true,
-         clipToSquare: Bool = false,
+         imageScale: ImageScale = .orginalFullWidth,
          onImageDownloaded: @escaping (_: Double, _: Double) -> Void) {
         self.showAvatar = showAvatar
-        self.clipToSquare = clipToSquare
+        self.imageScale = imageScale
         self.statusViewModel = statusViewModel
         self.attachment = attachment
         self.onImageDownloaded = onImageDownloaded
@@ -49,7 +49,7 @@ struct ImageRowItemAsync: View {
             if let image = state.image {
                 if self.statusViewModel.sensitive && !self.applicationState.showSensitive {
                     ZStack {
-                        ContentWarning(spoilerText: self.clipToSquare ? nil : self.statusViewModel.spoilerText) {
+                        ContentWarning(spoilerText: self.imageScale == .orginalFullWidth ? self.statusViewModel.spoilerText : nil) {
                             self.imageContainerView(image: image)
                                 .imageContextMenu(statusModel: self.statusViewModel,
                                                   attachmentModel: self.attachment,
@@ -156,7 +156,7 @@ struct ImageRowItemAsync: View {
         image
             .resizable()
             .scaledToFill()
-            .if(self.clipToSquare) {
+            .if(self.imageScale == .squareHalfWidth) {
                 $0.frame(width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.width / 2).clipped()
             }
             .onTapGesture(count: 2) {

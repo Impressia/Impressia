@@ -57,7 +57,9 @@ struct UserProfileStatusesView: View {
 
             LazyVGrid(columns: self.applicationState.showGridOnUserProfile ? dubleGrid : singleGrids, spacing: 5) {
                 ForEach(self.statusViewModels, id: \.id) { item in
-                    ImageRowAsync(statusViewModel: item, withAvatar: false, clipToSquare: self.applicationState.showGridOnUserProfile)
+                    ImageRowAsync(statusViewModel: item,
+                                  withAvatar: false,
+                                  imageScale: self.applicationState.showGridOnUserProfile ? .squareHalfWidth : .orginalFullWidth)
                         .if(self.applicationState.showGridOnUserProfile) {
                             $0.frame(width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.width / 2)
                         }
@@ -132,5 +134,4 @@ struct UserProfileStatusesView: View {
     private func prefetch(statusModels: [StatusModel]) {
         imagePrefetcher.startPrefetching(with: statusModels.getAllImagesUrls())
     }
-
 }

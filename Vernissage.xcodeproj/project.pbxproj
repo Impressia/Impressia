@@ -190,6 +190,7 @@
 		F8B0885E29942E31002AB40A /* ThirdPartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B0885D29942E31002AB40A /* ThirdPartyView.swift */; };
 		F8B0886029943498002AB40A /* OtherSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B0885F29943498002AB40A /* OtherSectionView.swift */; };
 		F8B08862299435C9002AB40A /* SupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B08861299435C9002AB40A /* SupportView.swift */; };
+		F8C287A32A06B4C90072213F /* ImageScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C287A22A06B4C90072213F /* ImageScale.swift */; };
 		F8D5444329D4066C002225D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D5444229D4066C002225D6 /* AppDelegate.swift */; };
 		F8DF38E429DD68820047F1AA /* ViewOffsetKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DF38E329DD68820047F1AA /* ViewOffsetKey.swift */; };
 		F8DF38E629DDB98A0047F1AA /* SocialsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DF38E529DDB98A0047F1AA /* SocialsSectionView.swift */; };
@@ -390,6 +391,7 @@
 		F8B08861299435C9002AB40A /* SupportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportView.swift; sourceTree = "<group>"; };
 		F8B3699A29D86EB600BE3808 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		F8B3699B29D86EBD00BE3808 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		F8C287A22A06B4C90072213F /* ImageScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScale.swift; sourceTree = "<group>"; };
 		F8C937A929882CA90004D782 /* Vernissage-001.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-001.xcdatamodel"; sourceTree = "<group>"; };
 		F8CAE64129B8F1AF001E0372 /* Vernissage-005.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-005.xcdatamodel"; sourceTree = "<group>"; };
 		F8D5444229D4066C002225D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -531,6 +533,7 @@
 				F8DF38E329DD68820047F1AA /* ViewOffsetKey.swift */,
 				F871F21C29EF0D7000A351EF /* NavigationMenuItemDetails.swift */,
 				F8624D3C29F2D3AC00204986 /* SelectedMenuItemDetails.swift */,
+				F8C287A22A06B4C90072213F /* ImageScale.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1255,6 +1258,7 @@
 				F89B5CC229D01BF700549F2F /* InstanceView.swift in Sources */,
 				F825F0CB29F7CFC4008BD204 /* FollowRequestsView.swift in Sources */,
 				F825F0C929F7A562008BD204 /* UserProfilePrivateAccountView.swift in Sources */,
+				F8C287A32A06B4C90072213F /* ImageScale.swift in Sources */,
 				F89F57B029D1C11200001EE3 /* RelationshipModel.swift in Sources */,
 				F88AB05829B36B8200345EDE /* AccountsPhotoView.swift in Sources */,
 				F85D4971296402DC00751DF7 /* AuthorizationService.swift in Sources */,
