@@ -131,7 +131,9 @@ public class PixelfedClientAuthenticated: PixelfedClientProtocol {
                 return try JSONDecoder().decode(type, from: data)
             } catch {
                 let json = String(data: data, encoding: .utf8)!
+
                 print(json)
+                print(String(describing: error))
 
                 throw error
             }
@@ -158,7 +160,9 @@ public class PixelfedClientAuthenticated: PixelfedClientProtocol {
                 return Linkable(data: decoded, link: link)
             } catch {
                 let json = String(data: data, encoding: .utf8)!
+
                 print(json)
+                print(String(describing: error))
 
                 throw error
             }

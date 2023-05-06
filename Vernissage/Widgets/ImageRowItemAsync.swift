@@ -49,7 +49,7 @@ struct ImageRowItemAsync: View {
             if let image = state.image {
                 if self.statusViewModel.sensitive && !self.applicationState.showSensitive {
                     ZStack {
-                        ContentWarning(spoilerText: self.statusViewModel.spoilerText) {
+                        ContentWarning(spoilerText: self.clipToSquare ? nil : self.statusViewModel.spoilerText) {
                             self.imageContainerView(image: image)
                                 .imageContextMenu(statusModel: self.statusViewModel,
                                                   attachmentModel: self.attachment,
@@ -57,11 +57,13 @@ struct ImageRowItemAsync: View {
                         } blurred: {
                             ZStack {
                                 BlurredImage(blurhash: attachment.blurhash)
-                                ImageAvatar(displayName: self.statusViewModel.account.displayNameWithoutEmojis,
-                                            avatarUrl: self.statusViewModel.account.avatar) {
-                                    self.routerPath.navigate(to: .userProfile(accountId: self.statusViewModel.account.id,
-                                                                              accountDisplayName: self.statusViewModel.account.displayNameWithoutEmojis,
-                                                                              accountUserName: self.statusViewModel.account.acct))
+                                if self.showAvatar {
+                                    ImageAvatar(displayName: self.statusViewModel.account.displayNameWithoutEmojis,
+                                                avatarUrl: self.statusViewModel.account.avatar) {
+                                        self.routerPath.navigate(to: .userProfile(accountId: self.statusViewModel.account.id,
+                                                                                  accountDisplayName: self.statusViewModel.account.displayNameWithoutEmojis,
+                                                                                  accountUserName: self.statusViewModel.account.acct))
+                                    }
                                 }
                             }
                             .onTapGesture {
