@@ -22,6 +22,7 @@ struct ImageRowItemAsync: View {
     private var attachment: AttachmentModel
     private let showAvatar: Bool
     private let imageFromCache: Bool
+    private let imageScale: ImageScale
 
     @State private var showThumbImage = false
     @State private var opacity = 1.0
@@ -31,8 +32,11 @@ struct ImageRowItemAsync: View {
 
     init(statusViewModel: StatusModel,
          attachment: AttachmentModel,
-         withAvatar showAvatar: Bool = true, onImageDownloaded: @escaping (_: Double, _: Double) -> Void) {
+         withAvatar showAvatar: Bool = true,
+         imageScale: ImageScale = .orginalFullWidth,
+         onImageDownloaded: @escaping (_: Double, _: Double) -> Void) {
         self.showAvatar = showAvatar
+        self.imageScale = imageScale
         self.statusViewModel = statusViewModel
         self.attachment = attachment
         self.onImageDownloaded = onImageDownloaded
@@ -45,7 +49,7 @@ struct ImageRowItemAsync: View {
             if let image = state.image {
                 if self.statusViewModel.sensitive && !self.applicationState.showSensitive {
                     ZStack {
-                        ContentWarning(spoilerText: self.statusViewModel.spoilerText) {
+                        ContentWarning(spoilerText: self.imageScale == .orginalFullWidth ? self.statusViewModel.spoilerText : nil) {
                             self.imageContainerView(image: image)
                                 .imageContextMenu(statusModel: self.statusViewModel,
                                                   attachmentModel: self.attachment,
@@ -53,11 +57,13 @@ struct ImageRowItemAsync: View {
                         } blurred: {
                             ZStack {
                                 BlurredImage(blurhash: attachment.blurhash)
-                                ImageAvatar(displayName: self.statusViewModel.account.displayNameWithoutEmojis,
-                                            avatarUrl: self.statusViewModel.account.avatar) {
-                                    self.routerPath.navigate(to: .userProfile(accountId: self.statusViewModel.account.id,
-                                                                              accountDisplayName: self.statusViewModel.account.displayNameWithoutEmojis,
-                                                                              accountUserName: self.statusViewModel.account.acct))
+                                if self.showAvatar {
+                                    ImageAvatar(displayName: self.statusViewModel.account.displayNameWithoutEmojis,
+                                                avatarUrl: self.statusViewModel.account.avatar) {
+                                        self.routerPath.navigate(to: .userProfile(accountId: self.statusViewModel.account.id,
+                                                                                  accountDisplayName: self.statusViewModel.account.displayNameWithoutEmojis,
+                                                                                  accountUserName: self.statusViewModel.account.acct))
+                                    }
                                 }
                             }
                             .onTapGesture {
@@ -149,7 +155,10 @@ struct ImageRowItemAsync: View {
     private func imageView(image: Image) -> some View {
         image
             .resizable()
-            .aspectRatio(contentMode: .fit)
+            .scaledToFill()
+            .if(self.imageScale == .squareHalfWidth) {
+                $0.frame(width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.width / 2).clipped()
+            }
             .onTapGesture(count: 2) {
                 Task {
                     // Update favourite in Pixelfed server.

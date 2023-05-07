@@ -102,7 +102,7 @@ struct UserProfileHeaderView: View {
                 .foregroundColor(.lightGrayColor.opacity(0.5))
                 .font(.footnote)
         }
-        .padding()
+        .padding([.top, .leading, .trailing])
     }
 
     @ViewBuilder

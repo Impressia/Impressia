@@ -240,16 +240,12 @@ struct StatusView: View {
         }
 
         if let imageHeight = self.imageHeight, let imageWidth = self.imageWidth, imageHeight > 0 && imageWidth > 0 {
-            return self.calculateHeight(width: Double(imageWidth), height: Double(imageHeight))
+            let calculatedSize = ImageSizeService.shared.calculate(width: Double(imageWidth), height: Double(imageHeight))
+            return calculatedSize.height
         }
 
         // If we don't have image height and width in metadata, we have to use some constant height.
         return UIScreen.main.bounds.width * 0.75
-    }
-
-    private func calculateHeight(width: Double, height: Double) -> CGFloat {
-        let divider = width / UIScreen.main.bounds.size.width
-        return height / divider
     }
 
     private func getMainStatus(status: StatusModel) async throws -> StatusModel {

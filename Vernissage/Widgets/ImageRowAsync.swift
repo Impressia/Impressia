@@ -14,13 +14,15 @@ struct ImageRowAsync: View {
     private let statusViewModel: StatusModel
     private let firstAttachment: AttachmentModel?
     private let showAvatar: Bool
+    private let imageScale: ImageScale
 
     @State private var selected: String
     @State private var imageHeight: Double
     @State private var imageWidth: Double
 
-    init(statusViewModel: StatusModel, withAvatar showAvatar: Bool = true) {
+    init(statusViewModel: StatusModel, withAvatar showAvatar: Bool = true, imageScale: ImageScale = .orginalFullWidth) {
         self.showAvatar = showAvatar
+        self.imageScale = imageScale
         self.statusViewModel = statusViewModel
         self.firstAttachment = statusViewModel.mediaAttachments.first
         self.selected = String.empty()
@@ -44,7 +46,11 @@ struct ImageRowAsync: View {
 
     var body: some View {
         if statusViewModel.mediaAttachments.count == 1, let firstAttachment = self.firstAttachment {
-            ImageRowItemAsync(statusViewModel: self.statusViewModel, attachment: firstAttachment, withAvatar: self.showAvatar) { (imageWidth, imageHeight) in
+            ImageRowItemAsync(statusViewModel: self.statusViewModel,
+                              attachment: firstAttachment,
+                              withAvatar: self.showAvatar,
+                              imageScale: self.imageScale) { (imageWidth, imageHeight) in
+
                 // When we download image and calculate real size we have to change view size.
                 if imageWidth != self.imageWidth || imageHeight != self.imageHeight {
                     withAnimation(.linear(duration: 0.4)) {
@@ -53,11 +59,17 @@ struct ImageRowAsync: View {
                     }
                 }
             }
-            .frame(width: self.imageWidth, height: self.imageHeight)
+            .if(self.imageScale == .orginalFullWidth) {
+                $0.frame(width: self.imageWidth, height: self.imageHeight)
+            }
         } else {
             TabView(selection: $selected) {
                 ForEach(statusViewModel.mediaAttachments, id: \.id) { attachment in
-                    ImageRowItemAsync(statusViewModel: self.statusViewModel, attachment: attachment, withAvatar: self.showAvatar) { (imageWidth, imageHeight) in
+                    ImageRowItemAsync(statusViewModel: self.statusViewModel,
+                                      attachment: attachment,
+                                      withAvatar: self.showAvatar,
+                                      imageScale: self.imageScale) { (imageWidth, imageHeight) in
+
                         // When we download image and calculate real size we have to change view size (only when image is now visible).
                         if attachment.id == self.selected {
                             if imageWidth != self.imageWidth || imageHeight != self.imageHeight {
@@ -86,7 +98,9 @@ struct ImageRowAsync: View {
                     }
                 }
             })
-            .frame(width: self.imageWidth, height: self.imageHeight)
+            .if(self.imageScale == .orginalFullWidth) {
+                $0.frame(width: self.imageWidth, height: self.imageHeight)
+            }
             .tabViewStyle(.page(indexDisplayMode: .never))
             .overlay(CustomPageTabViewStyleView(pages: self.statusViewModel.mediaAttachments, currentId: $selected))
         }
