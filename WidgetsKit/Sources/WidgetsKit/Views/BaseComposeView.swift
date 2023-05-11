@@ -159,7 +159,7 @@ public struct BaseComposeView: View {
         }
         .photosPicker(isPresented: $photosPickerVisible,
                       selection: $selectedItems,
-                      maxSelectionCount: 4,
+                      maxSelectionCount: self.applicationState.statusMaxMediaAttachments,
                       matching: .images)
         .fileImporter(isPresented: $isFileImporterPresented,
                       allowedContentTypes: [.image],
