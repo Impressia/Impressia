@@ -9,8 +9,8 @@
 "global.title.showMore" = "Erakutsi gehiago";
 "global.title.showLess" = "Erakutsi gutxiago";
 "global.title.close" = "Itxi";
-"global.error.refreshingCredentialsTitle" = "Refreshing credentials error.";
-"global.error.refreshingCredentialsSubtitle" = "Please sign in again to Pixelfed.";
+"global.error.refreshingCredentialsTitle" = "Egiaztagirien freskatzeak huts egin du.";
+"global.error.refreshingCredentialsSubtitle" = "Hasi saioa berriro Pixelfeden.";
 
 // MARK: Global errors.
 "global.error.unexpected" = "Espero ez zen errorea.";
