@@ -24,12 +24,45 @@ struct UserProfileStatusesView: View {
 
     private let defaultLimit = 20
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
+    private let singleGrids = [GridItem(.flexible(), spacing: 10)]
+    private let dubleGrid = [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 0)]
 
     var body: some View {
-        LazyVStack(alignment: .center) {
-            if firstLoadFinished == true {
+        if firstLoadFinished == true {
+            HStack {
+                Spacer()
+                Button {
+                    withAnimation {
+                        self.applicationState.showGridOnUserProfile = false
+                        ApplicationSettingsHandler.shared.set(showGridOnUserProfile: false)
+                    }
+                } label: {
+                    Image(systemName: "rectangle.grid.1x2.fill")
+                        .foregroundColor(self.applicationState.showGridOnUserProfile ? .lightGrayColor : .accentColor)
+                        .padding(.trailing, 8)
+                        .padding(.bottom, 8)
+                }
+                Button {
+                    withAnimation {
+                        self.applicationState.showGridOnUserProfile = true
+                        ApplicationSettingsHandler.shared.set(showGridOnUserProfile: true)
+                    }
+                } label: {
+                    Image(systemName: "rectangle.grid.2x2.fill")
+                        .foregroundColor(self.applicationState.showGridOnUserProfile ? .accentColor : .lightGrayColor)
+                        .padding(.trailing, 16)
+                        .padding(.bottom, 8)
+                }
+            }
+
+            LazyVGrid(columns: self.applicationState.showGridOnUserProfile ? dubleGrid : singleGrids, spacing: 5) {
                 ForEach(self.statusViewModels, id: \.id) { item in
-                    ImageRowAsync(statusViewModel: item, withAvatar: false)
+                    ImageRowAsync(statusViewModel: item,
+                                  withAvatar: false,
+                                  imageScale: self.applicationState.showGridOnUserProfile ? .squareHalfWidth : .orginalFullWidth)
+                        .if(self.applicationState.showGridOnUserProfile) {
+                            $0.frame(width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.width / 2)
+                        }
                 }
 
                 if allItemsLoaded == false && firstLoadFinished == true {
@@ -46,16 +79,16 @@ struct UserProfileStatusesView: View {
                         Spacer()
                     }
                 }
-            } else {
-                LoadingIndicator()
             }
-        }
-        .onFirstAppear {
-            do {
-                try await self.loadStatuses()
-            } catch {
-                ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadStatuses", showToastr: !Task.isCancelled)
-            }
+        } else {
+            LoadingIndicator()
+                .onFirstAppear {
+                    do {
+                        try await self.loadStatuses()
+                    } catch {
+                        ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadStatuses", showToastr: !Task.isCancelled)
+                    }
+                }
         }
     }
 
@@ -101,5 +134,4 @@ struct UserProfileStatusesView: View {
     private func prefetch(statusModels: [StatusModel]) {
         imagePrefetcher.startPrefetching(with: statusModels.getAllImagesUrls())
     }
-
 }

@@ -104,6 +104,9 @@ public class ApplicationState: ObservableObject {
     /// Show warning about missing ALT texts on compose screen.
     @Published public var warnAboutMissingAlt = true
 
+    /// Show grid of photos on user profile.
+    @Published public var showGridOnUserProfile = false
+
     public func changeApplicationState(accountModel: AccountModel, instance: Instance?, lastSeenStatusId: String?) {
         self.account = accountModel
         self.lastSeenStatusId = lastSeenStatusId

@@ -41,7 +41,10 @@ public class AuthorizationService {
                 let signedInAccountModel = try await self.refreshCredentials(for: accountModel, presentationContextProvider: session)
                 result(signedInAccountModel)
             } catch {
-                ErrorService.shared.handle(error, message: "Issues during refreshing credentials.", showToastr: true)
+                ErrorService.shared.handle(error, message: "Issues during refreshing credentials.")
+                ToastrService.shared.showError(title: "global.error.refreshingCredentialsTitle",
+                                               subtitle: NSLocalizedString("global.error.refreshingCredentialsSubtitle", comment: ""))
+                result(nil)
             }
         }
     }

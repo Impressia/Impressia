@@ -12,16 +12,17 @@ public class ErrorService {
     private init() { }
 
     public func handle(_ error: Error, message: String, showToastr: Bool = false) {
+        let localizedMessage = NSLocalizedString(message, comment: "Error message")
+
         if showToastr {
             switch error {
             case is LocalizedError:
                 ToastrService.shared.showError(title: message, subtitle: error.localizedDescription)
             default:
-                ToastrService.shared.showError(subtitle: message)
+                ToastrService.shared.showError(subtitle: localizedMessage)
             }
         }
 
-        let localizedMessage = NSLocalizedString(message, comment: "Error message")
         print("Error ['\(localizedMessage)']: \(error.localizedDescription)")
     }
 }

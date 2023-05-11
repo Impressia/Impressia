@@ -224,7 +224,8 @@ struct ImageViewer: View {
 
     private func calculateStartingOffset() -> CGSize {
         // Image size on the screen.
-        let imageOnScreenHeight = self.calculateHeight(width: self.imageWidth, height: self.imageHeight)
+        let calculatedSize = ImageSizeService.shared.calculate(width: self.imageWidth, height: self.imageHeight)
+        let imageOnScreenHeight = calculatedSize.height
 
         // Calculate full space for image.
         let safeAreaInsetsTop = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 20.0
@@ -253,10 +254,5 @@ struct ImageViewer: View {
             // iPhone SE, iPhone 12 Pro, iPhone 12 Pro Max, iPhone 13 Pro, iPhone 13 Pro Max
             return 88.0
         }
-    }
-
-    private func calculateHeight(width: Double, height: Double) -> CGFloat {
-        let divider = width / UIScreen.main.bounds.size.width
-        return height / divider
     }
 }
