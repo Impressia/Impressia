@@ -279,7 +279,7 @@ struct MainView: View {
 
             await AuthorizationService.shared.verifyAccount(session: authorizationSession, accountModel: accountModel) { signedInAccountModel in
                 guard let signedInAccountModel else {
-                    ToastrService.shared.showError(subtitle: "mainview.error.switchAccounts")
+                    ToastrService.shared.showError(subtitle: NSLocalizedString("mainview.error.switchAccounts", comment: "Cannot switch accounts."))
                     return
                 }
 

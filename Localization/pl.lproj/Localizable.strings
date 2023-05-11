@@ -9,6 +9,8 @@
 "global.title.showMore" = "Pokaż więcej";
 "global.title.showLess" = "Pokaż mniej";
 "global.title.close" = "Zamknij";
+"global.error.refreshingCredentialsTitle" = "Błąd odświeżania danych uwierzytelniających.";
+"global.error.refreshingCredentialsSubtitle" = "Prosimy o ponowne zalogowanie się do Pixelfed.";
 
 // MARK: Global errors.
 "global.error.unexpected" = "Wystąpił nieoczekiwany błąd.";
