@@ -27,6 +27,7 @@
 		F8210DEA2966E4F9001D9973 /* AnimatePlaceholderModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8210DE92966E4F9001D9973 /* AnimatePlaceholderModifier.swift */; };
 		F825F0C929F7A562008BD204 /* UserProfilePrivateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F825F0C829F7A562008BD204 /* UserProfilePrivateAccountView.swift */; };
 		F825F0CB29F7CFC4008BD204 /* FollowRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F825F0CA29F7CFC4008BD204 /* FollowRequestsView.swift */; };
+		F830C3CD2A07A4020005FEF8 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = F830C3CC2A07A4020005FEF8 /* WaterfallGrid */; };
 		F835082329BEF9C400DE3247 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F835082629BEF9C400DE3247 /* Localizable.strings */; };
 		F835082429BEF9C400DE3247 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F835082629BEF9C400DE3247 /* Localizable.strings */; };
 		F83CBEFB298298A1002972C8 /* ImageCarouselPicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83CBEFA298298A1002972C8 /* ImageCarouselPicture.swift */; };
@@ -449,6 +450,7 @@
 				F8210DD92966BB7E001D9973 /* NukeUI in Frameworks */,
 				F89B5CC029D019B600549F2F /* HTMLString in Frameworks */,
 				F88BC52A29E046D700CE6141 /* WidgetsKit in Frameworks */,
+				F830C3CD2A07A4020005FEF8 /* WaterfallGrid in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -988,6 +990,7 @@
 				F88BC52629E0431D00CE6141 /* ServicesKit */,
 				F88BC52929E046D700CE6141 /* WidgetsKit */,
 				F88BC52C29E04BB600CE6141 /* EnvironmentKit */,
+				F830C3CC2A07A4020005FEF8 /* WaterfallGrid */,
 			);
 			productName = Vernissage;
 			productReference = F88C2468295C37B80006098B /* Vernissage.app */;
@@ -1031,6 +1034,7 @@
 				F88E4D4B297EA4290057491A /* XCRemoteSwiftPackageReference "EmojiText" */,
 				F89B5CBE29D019B600549F2F /* XCRemoteSwiftPackageReference "HTMLString" */,
 				F84625F929FE393B002D3AF4 /* XCRemoteSwiftPackageReference "QRCode" */,
+				F830C3CB2A07A4020005FEF8 /* XCRemoteSwiftPackageReference "WaterfallGrid" */,
 			);
 			productRefGroup = F88C2469295C37B80006098B /* Products */;
 			projectDirPath = "";
@@ -1338,7 +1342,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1366,7 +1370,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1394,7 +1398,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1421,7 +1425,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1580,7 +1584,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1621,7 +1625,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1675,6 +1679,14 @@
 				minimumVersion = 12.0.0;
 			};
 		};
+		F830C3CB2A07A4020005FEF8 /* XCRemoteSwiftPackageReference "WaterfallGrid" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/paololeonardi/WaterfallGrid.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		F84625F929FE393B002D3AF4 /* XCRemoteSwiftPackageReference "QRCode" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dmrschmidt/QRCode";
@@ -1716,6 +1728,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F8210DD32966BB7E001D9973 /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = NukeUI;
+		};
+		F830C3CC2A07A4020005FEF8 /* WaterfallGrid */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F830C3CB2A07A4020005FEF8 /* XCRemoteSwiftPackageReference "WaterfallGrid" */;
+			productName = WaterfallGrid;
 		};
 		F84625FA29FE393B002D3AF4 /* QRCode */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -11,6 +11,7 @@ import ClientKit
 import ServicesKit
 import EnvironmentKit
 import WidgetsKit
+import WaterfallGrid
 
 struct UserProfileStatusesView: View {
     @EnvironmentObject private var applicationState: ApplicationState
@@ -22,7 +23,7 @@ struct UserProfileStatusesView: View {
     @State private var firstLoadFinished = false
     @State private var statusViewModels: [StatusModel] = []
 
-    private let defaultLimit = 20
+    private let defaultLimit = 40
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
     private let singleGrids = [GridItem(.flexible(), spacing: 10)]
     private let dubleGrid = [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 0)]
@@ -54,7 +55,19 @@ struct UserProfileStatusesView: View {
                         .padding(.bottom, 8)
                 }
             }
+            
+            WaterfallGrid(self.statusViewModels, id: \.id) { item in
+                ImageRowAsync(statusViewModel: item,
+                              withAvatar: false,
+                              imageScale: self.applicationState.showGridOnUserProfile ? .squareHalfWidth : .orginalFullWidth)
+//                    .if(self.applicationState.showGridOnUserProfile) {
+//                        $0.frame(width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.width / 2)
+//                    }
+            }
+            .gridStyle(columns: 3, spacing: 2)
+            .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
 
+            /*
             LazyVGrid(columns: self.applicationState.showGridOnUserProfile ? dubleGrid : singleGrids, spacing: 5) {
                 ForEach(self.statusViewModels, id: \.id) { item in
                     ImageRowAsync(statusViewModel: item,
@@ -80,6 +93,7 @@ struct UserProfileStatusesView: View {
                     }
                 }
             }
+             */
         } else {
             LoadingIndicator()
                 .onFirstAppear {

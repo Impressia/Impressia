@@ -59,8 +59,8 @@ struct ImageRowAsync: View {
                     }
                 }
             }
-            .if(self.imageScale == .orginalFullWidth) {
-                $0.frame(width: self.imageWidth, height: self.imageHeight)
+            .if(self.imageScale == .squareHalfWidth) {
+                $0.frame(width: self.imageWidth / 3, height: self.imageHeight / 3)
             }
         } else {
             TabView(selection: $selected) {
@@ -98,8 +98,8 @@ struct ImageRowAsync: View {
                     }
                 }
             })
-            .if(self.imageScale == .orginalFullWidth) {
-                $0.frame(width: self.imageWidth, height: self.imageHeight)
+            .if(self.imageScale == .squareHalfWidth) {
+                $0.frame(width: self.imageWidth / 3, height: self.imageHeight / 3)
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
             .overlay(CustomPageTabViewStyleView(pages: self.statusViewModel.mediaAttachments, currentId: $selected))

@@ -155,10 +155,11 @@ struct ImageRowItemAsync: View {
     private func imageView(image: Image) -> some View {
         image
             .resizable()
-            .scaledToFill()
-            .if(self.imageScale == .squareHalfWidth) {
-                $0.frame(width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.width / 2).clipped()
-            }
+            //.aspectRatio(contentMode: .fill)
+            .aspectRatio(contentMode: .fit)
+//            .if(self.imageScale == .squareHalfWidth) {
+//                $0.frame(width: UIScreen.main.bounds.width / 4, height: UIScreen.main.bounds.width / 4).clipped()
+//            }
             .onTapGesture(count: 2) {
                 Task {
                     // Update favourite in Pixelfed server.
