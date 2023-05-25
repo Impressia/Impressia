@@ -77,7 +77,7 @@ struct PaginableStatusesView: View {
         ScrollView {
             LazyVStack(alignment: .center) {
                 ForEach(self.statusViewModels, id: \.id) { item in
-                    ImageRowAsync(statusViewModel: item)
+                    ImageRowAsync(statusViewModel: item, containerWidth: Binding.constant(UIScreen.main.bounds.width))
                 }
 
                 if allItemsLoaded == false {

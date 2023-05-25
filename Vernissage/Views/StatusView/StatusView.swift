@@ -240,7 +240,9 @@ struct StatusView: View {
         }
 
         if let imageHeight = self.imageHeight, let imageWidth = self.imageWidth, imageHeight > 0 && imageWidth > 0 {
-            let calculatedSize = ImageSizeService.shared.calculate(width: Double(imageWidth), height: Double(imageHeight))
+            let calculatedSize = ImageSizeService.shared.calculate(width: Double(imageWidth),
+                                                                   height: Double(imageHeight),
+                                                                   andContainerWidth: UIScreen.main.bounds.size.width)
             return calculatedSize.height
         }
 

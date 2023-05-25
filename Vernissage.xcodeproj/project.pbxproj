@@ -27,7 +27,6 @@
 		F8210DEA2966E4F9001D9973 /* AnimatePlaceholderModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8210DE92966E4F9001D9973 /* AnimatePlaceholderModifier.swift */; };
 		F825F0C929F7A562008BD204 /* UserProfilePrivateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F825F0C829F7A562008BD204 /* UserProfilePrivateAccountView.swift */; };
 		F825F0CB29F7CFC4008BD204 /* FollowRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F825F0CA29F7CFC4008BD204 /* FollowRequestsView.swift */; };
-		F830C3CD2A07A4020005FEF8 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = F830C3CC2A07A4020005FEF8 /* WaterfallGrid */; };
 		F835082329BEF9C400DE3247 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F835082629BEF9C400DE3247 /* Localizable.strings */; };
 		F835082429BEF9C400DE3247 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F835082629BEF9C400DE3247 /* Localizable.strings */; };
 		F83CBEFB298298A1002972C8 /* ImageCarouselPicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83CBEFA298298A1002972C8 /* ImageCarouselPicture.swift */; };
@@ -90,6 +89,7 @@
 		F866F6A729604629002E8F88 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F6A629604629002E8F88 /* SignInView.swift */; };
 		F866F6AA29605AFA002E8F88 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F6A929605AFA002E8F88 /* SceneDelegate.swift */; };
 		F866F6AE29606367002E8F88 /* ApplicationViewMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F6AD29606367002E8F88 /* ApplicationViewMode.swift */; };
+		F8675DD02A1FA40500A89959 /* WaterfallGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8675DCF2A1FA40500A89959 /* WaterfallGrid.swift */; };
 		F86A42FD299A8B8E00DF7645 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F86A42FC299A8B8E00DF7645 /* StoreKit.framework */; };
 		F86A42FF299A8C5500DF7645 /* InAppPurchaseStoreKitConfiguration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = F86A42FE299A8C5500DF7645 /* InAppPurchaseStoreKitConfiguration.storekit */; };
 		F86A4301299A97F500DF7645 /* ProductIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86A4300299A97F500DF7645 /* ProductIdentifiers.swift */; };
@@ -191,7 +191,6 @@
 		F8B0885E29942E31002AB40A /* ThirdPartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B0885D29942E31002AB40A /* ThirdPartyView.swift */; };
 		F8B0886029943498002AB40A /* OtherSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B0885F29943498002AB40A /* OtherSectionView.swift */; };
 		F8B08862299435C9002AB40A /* SupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B08861299435C9002AB40A /* SupportView.swift */; };
-		F8C287A32A06B4C90072213F /* ImageScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C287A22A06B4C90072213F /* ImageScale.swift */; };
 		F8D5444329D4066C002225D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D5444229D4066C002225D6 /* AppDelegate.swift */; };
 		F8DF38E429DD68820047F1AA /* ViewOffsetKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DF38E329DD68820047F1AA /* ViewOffsetKey.swift */; };
 		F8DF38E629DDB98A0047F1AA /* SocialsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DF38E529DDB98A0047F1AA /* SocialsSectionView.swift */; };
@@ -303,6 +302,7 @@
 		F866F6A829604FFF002E8F88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F866F6A929605AFA002E8F88 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F866F6AD29606367002E8F88 /* ApplicationViewMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationViewMode.swift; sourceTree = "<group>"; };
+		F8675DCF2A1FA40500A89959 /* WaterfallGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterfallGrid.swift; sourceTree = "<group>"; };
 		F86A42FC299A8B8E00DF7645 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		F86A42FE299A8C5500DF7645 /* InAppPurchaseStoreKitConfiguration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = InAppPurchaseStoreKitConfiguration.storekit; sourceTree = "<group>"; };
 		F86A4300299A97F500DF7645 /* ProductIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductIdentifiers.swift; sourceTree = "<group>"; };
@@ -392,7 +392,6 @@
 		F8B08861299435C9002AB40A /* SupportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportView.swift; sourceTree = "<group>"; };
 		F8B3699A29D86EB600BE3808 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		F8B3699B29D86EBD00BE3808 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		F8C287A22A06B4C90072213F /* ImageScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScale.swift; sourceTree = "<group>"; };
 		F8C937A929882CA90004D782 /* Vernissage-001.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-001.xcdatamodel"; sourceTree = "<group>"; };
 		F8CAE64129B8F1AF001E0372 /* Vernissage-005.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-005.xcdatamodel"; sourceTree = "<group>"; };
 		F8D5444229D4066C002225D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -450,7 +449,6 @@
 				F8210DD92966BB7E001D9973 /* NukeUI in Frameworks */,
 				F89B5CC029D019B600549F2F /* HTMLString in Frameworks */,
 				F88BC52A29E046D700CE6141 /* WidgetsKit in Frameworks */,
-				F830C3CD2A07A4020005FEF8 /* WaterfallGrid in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,7 +533,6 @@
 				F8DF38E329DD68820047F1AA /* ViewOffsetKey.swift */,
 				F871F21C29EF0D7000A351EF /* NavigationMenuItemDetails.swift */,
 				F8624D3C29F2D3AC00204986 /* SelectedMenuItemDetails.swift */,
-				F8C287A22A06B4C90072213F /* ImageScale.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -592,6 +589,7 @@
 				F8AFF7C329B25EF40087D083 /* ImagesGrid.swift */,
 				F89D6C49297196FF001DA3D4 /* ImageViewer.swift */,
 				F870EE5129F1645C00A2D43B /* MainNavigationOptions.swift */,
+				F8675DCF2A1FA40500A89959 /* WaterfallGrid.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -990,7 +988,6 @@
 				F88BC52629E0431D00CE6141 /* ServicesKit */,
 				F88BC52929E046D700CE6141 /* WidgetsKit */,
 				F88BC52C29E04BB600CE6141 /* EnvironmentKit */,
-				F830C3CC2A07A4020005FEF8 /* WaterfallGrid */,
 			);
 			productName = Vernissage;
 			productReference = F88C2468295C37B80006098B /* Vernissage.app */;
@@ -1034,7 +1031,6 @@
 				F88E4D4B297EA4290057491A /* XCRemoteSwiftPackageReference "EmojiText" */,
 				F89B5CBE29D019B600549F2F /* XCRemoteSwiftPackageReference "HTMLString" */,
 				F84625F929FE393B002D3AF4 /* XCRemoteSwiftPackageReference "QRCode" */,
-				F830C3CB2A07A4020005FEF8 /* XCRemoteSwiftPackageReference "WaterfallGrid" */,
 			);
 			productRefGroup = F88C2469295C37B80006098B /* Products */;
 			projectDirPath = "";
@@ -1262,7 +1258,6 @@
 				F89B5CC229D01BF700549F2F /* InstanceView.swift in Sources */,
 				F825F0CB29F7CFC4008BD204 /* FollowRequestsView.swift in Sources */,
 				F825F0C929F7A562008BD204 /* UserProfilePrivateAccountView.swift in Sources */,
-				F8C287A32A06B4C90072213F /* ImageScale.swift in Sources */,
 				F89F57B029D1C11200001EE3 /* RelationshipModel.swift in Sources */,
 				F88AB05829B36B8200345EDE /* AccountsPhotoView.swift in Sources */,
 				F85D4971296402DC00751DF7 /* AuthorizationService.swift in Sources */,
@@ -1282,6 +1277,7 @@
 				F83CBEFB298298A1002972C8 /* ImageCarouselPicture.swift in Sources */,
 				F89A46DC296EAACE0062125F /* SettingsView.swift in Sources */,
 				F866F6AE29606367002E8F88 /* ApplicationViewMode.swift in Sources */,
+				F8675DD02A1FA40500A89959 /* WaterfallGrid.swift in Sources */,
 				F85D4DFE29B78C8400345267 /* HashtagModel.swift in Sources */,
 				F866F6AA29605AFA002E8F88 /* SceneDelegate.swift in Sources */,
 			);
@@ -1679,14 +1675,6 @@
 				minimumVersion = 12.0.0;
 			};
 		};
-		F830C3CB2A07A4020005FEF8 /* XCRemoteSwiftPackageReference "WaterfallGrid" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/paololeonardi/WaterfallGrid.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		F84625F929FE393B002D3AF4 /* XCRemoteSwiftPackageReference "QRCode" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dmrschmidt/QRCode";
@@ -1728,11 +1716,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F8210DD32966BB7E001D9973 /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = NukeUI;
-		};
-		F830C3CC2A07A4020005FEF8 /* WaterfallGrid */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F830C3CB2A07A4020005FEF8 /* XCRemoteSwiftPackageReference "WaterfallGrid" */;
-			productName = WaterfallGrid;
 		};
 		F84625FA29FE393B002D3AF4 /* QRCode */ = {
 			isa = XCSwiftPackageProductDependency;

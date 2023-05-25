@@ -72,7 +72,7 @@ struct TrendStatusesView: View {
             } else {
                 LazyVStack(alignment: .center) {
                     ForEach(self.statusViewModels, id: \.id) { item in
-                        ImageRowAsync(statusViewModel: item)
+                        ImageRowAsync(statusViewModel: item, containerWidth: Binding.constant(UIScreen.main.bounds.width))
                     }
                 }
                 .refreshable {

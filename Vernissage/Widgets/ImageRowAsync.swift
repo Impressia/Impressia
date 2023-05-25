@@ -9,38 +9,50 @@ import PixelfedKit
 import ClientKit
 import ServicesKit
 import WidgetsKit
+import EnvironmentKit
 
 struct ImageRowAsync: View {
     private let statusViewModel: StatusModel
     private let firstAttachment: AttachmentModel?
     private let showAvatar: Bool
-    private let imageScale: ImageScale
+
+    @Binding private var containerWidth: Double
+    @Binding private var clipToRectangle: Bool
 
     @State private var selected: String
     @State private var imageHeight: Double
     @State private var imageWidth: Double
 
-    init(statusViewModel: StatusModel, withAvatar showAvatar: Bool = true, imageScale: ImageScale = .orginalFullWidth) {
+    init(statusViewModel: StatusModel,
+         withAvatar showAvatar: Bool = true,
+         containerWidth: Binding<Double>,
+         clipToRectangle: Binding<Bool> = Binding.constant(false)) {
         self.showAvatar = showAvatar
-        self.imageScale = imageScale
         self.statusViewModel = statusViewModel
         self.firstAttachment = statusViewModel.mediaAttachments.first
         self.selected = String.empty()
 
+        self._containerWidth = containerWidth
+        self._clipToRectangle = clipToRectangle
+
         // Calculate size of frame (first from cache, then from metadata).
         if let firstAttachment, let size = ImageSizeService.shared.get(for: firstAttachment.url) {
-            self.imageWidth = size.width
-            self.imageHeight = size.height
+            let calculatedSize = ImageSizeService.shared.calculate(width: size.width, height: size.height, andContainerWidth: containerWidth.wrappedValue)
+
+            self.imageWidth = calculatedSize.width
+            self.imageHeight = calculatedSize.height
         } else if let firstAttachment,
            let imgHeight = (firstAttachment.meta as? ImageMetadata)?.original?.height,
            let imgWidth = (firstAttachment.meta as? ImageMetadata)?.original?.width {
 
-            let size = ImageSizeService.shared.calculate(for: firstAttachment.url, width: imgWidth, height: imgHeight)
-            self.imageWidth = size.width
-            self.imageHeight = size.height
+            ImageSizeService.shared.save(for: firstAttachment.url, width: imgWidth, height: imgHeight)
+            let calculatedSize = ImageSizeService.shared.calculate(for: firstAttachment.url, andContainerWidth: containerWidth.wrappedValue)
+
+            self.imageWidth = calculatedSize.width
+            self.imageHeight = calculatedSize.height
         } else {
-            self.imageWidth = UIScreen.main.bounds.width
-            self.imageHeight = UIScreen.main.bounds.width
+            self.imageWidth = containerWidth.wrappedValue
+            self.imageHeight = containerWidth.wrappedValue
         }
     }
 
@@ -49,18 +61,28 @@ struct ImageRowAsync: View {
             ImageRowItemAsync(statusViewModel: self.statusViewModel,
                               attachment: firstAttachment,
                               withAvatar: self.showAvatar,
-                              imageScale: self.imageScale) { (imageWidth, imageHeight) in
+                              containerWidth: $containerWidth,
+                              clipToRectangle: $clipToRectangle,
+                              showSpoilerText: Binding.constant(self.containerWidth > 300)) { (imageWidth, imageHeight) in
 
                 // When we download image and calculate real size we have to change view size.
-                if imageWidth != self.imageWidth || imageHeight != self.imageHeight {
+                let calculatedSize = ImageSizeService.shared.calculate(width: imageWidth, height: imageHeight, andContainerWidth: self.containerWidth)
+
+                if calculatedSize.width != self.imageWidth || calculatedSize.height != self.imageHeight {
                     withAnimation(.linear(duration: 0.4)) {
-                        self.imageWidth = imageWidth
-                        self.imageHeight = imageHeight
+                        self.imageWidth = calculatedSize.width
+                        self.imageHeight = calculatedSize.height
                     }
                 }
             }
-            .if(self.imageScale == .squareHalfWidth) {
-                $0.frame(width: self.imageWidth / 3, height: self.imageHeight / 3)
+            .frame(width: self.clipToRectangle ? self.containerWidth : self.imageWidth,
+                   height: self.clipToRectangle ? self.containerWidth : self.imageHeight)
+            .onChange(of: self.containerWidth) { newContainerWidth in
+                let calculatedSize = ImageSizeService.shared.calculate(width: self.imageWidth,
+                                                             height: self.imageHeight,
+                                                             andContainerWidth: newContainerWidth)
+                self.imageWidth = calculatedSize.width
+                self.imageHeight = calculatedSize.height
             }
         } else {
             TabView(selection: $selected) {
@@ -68,14 +90,18 @@ struct ImageRowAsync: View {
                     ImageRowItemAsync(statusViewModel: self.statusViewModel,
                                       attachment: attachment,
                                       withAvatar: self.showAvatar,
-                                      imageScale: self.imageScale) { (imageWidth, imageHeight) in
+                                      containerWidth: $containerWidth,
+                                      clipToRectangle: $clipToRectangle,
+                                      showSpoilerText: Binding.constant(self.containerWidth > 300)) { (imageWidth, imageHeight) in
 
                         // When we download image and calculate real size we have to change view size (only when image is now visible).
+                        let calculatedSize = ImageSizeService.shared.calculate(width: imageWidth, height: imageHeight, andContainerWidth: self.containerWidth)
+
                         if attachment.id == self.selected {
-                            if imageWidth != self.imageWidth || imageHeight != self.imageHeight {
+                            if calculatedSize.width != self.imageWidth || calculatedSize.height != self.imageHeight {
                                 withAnimation(.linear(duration: 0.4)) {
-                                    self.imageWidth = imageWidth
-                                    self.imageHeight = imageHeight
+                                    self.imageWidth = calculatedSize.width
+                                    self.imageHeight = calculatedSize.height
                                 }
                             }
                         }
@@ -83,24 +109,34 @@ struct ImageRowAsync: View {
                     .tag(attachment.id)
                 }
             }
+            .onChange(of: self.containerWidth) { newContainerWidth in
+                let calculatedSize = ImageSizeService.shared.calculate(width: self.imageWidth,
+                                                             height: self.imageHeight,
+                                                             andContainerWidth: newContainerWidth)
+                self.imageWidth = calculatedSize.width
+                self.imageHeight = calculatedSize.height
+            }
             .onFirstAppear {
                 self.selected = self.statusViewModel.mediaAttachments.first?.id ?? String.empty()
             }
             .onChange(of: selected, perform: { attachmentId in
                 if let attachment = self.statusViewModel.mediaAttachments.first(where: { item in item.id == attachmentId }) {
                     if let size = ImageSizeService.shared.get(for: attachment.url) {
-                        if size.width != self.imageWidth || size.height != self.imageHeight {
+                        let calculatedSize = ImageSizeService.shared.calculate(width: size.width,
+                                                                               height: size.height,
+                                                                               andContainerWidth: self.containerWidth)
+
+                        if calculatedSize.width != self.imageWidth || calculatedSize.height != self.imageHeight {
                             withAnimation(.linear(duration: 0.4)) {
-                                self.imageWidth = size.width
-                                self.imageHeight = size.height
+                                self.imageWidth = calculatedSize.width
+                                self.imageHeight = calculatedSize.height
                             }
                         }
                     }
                 }
             })
-            .if(self.imageScale == .squareHalfWidth) {
-                $0.frame(width: self.imageWidth / 3, height: self.imageHeight / 3)
-            }
+            .frame(width: self.clipToRectangle ? self.containerWidth : self.imageWidth,
+                   height: self.clipToRectangle ? self.containerWidth : self.imageHeight)
             .tabViewStyle(.page(indexDisplayMode: .never))
             .overlay(CustomPageTabViewStyleView(pages: self.statusViewModel.mediaAttachments, currentId: $selected))
         }

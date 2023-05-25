@@ -25,12 +25,15 @@ struct ImageRow: View {
 
         // Calculate size of frame (first from cache, then from real image, then from metadata).
         if let firstAttachment, let size = ImageSizeService.shared.get(for: firstAttachment.url) {
-            self.imageWidth = size.width
-            self.imageHeight = size.height
+            let calculatedSize = ImageSizeService.shared.calculate(width: size.width, height: size.height, andContainerWidth: UIScreen.main.bounds.size.width)
+            self.imageWidth = calculatedSize.width
+            self.imageHeight = calculatedSize.height
         } else if let firstAttachment, firstAttachment.metaImageWidth > 0 && firstAttachment.metaImageHeight > 0 {
-            let size = ImageSizeService.shared.calculate(for: firstAttachment.url,
-                                                         width: firstAttachment.metaImageWidth,
-                                                         height: firstAttachment.metaImageHeight)
+            ImageSizeService.shared.save(for: firstAttachment.url,
+                                         width: firstAttachment.metaImageWidth,
+                                         height: firstAttachment.metaImageHeight)
+
+            let size = ImageSizeService.shared.calculate(for: firstAttachment.url, andContainerWidth: UIScreen.main.bounds.size.width)
             self.imageWidth = size.width
             self.imageHeight = size.height
         } else {
@@ -73,7 +76,9 @@ struct ImageRow: View {
             }
             .onChange(of: selected, perform: { attachmentId in
                 if let attachment = attachmentsData.first(where: { item in item.id == attachmentId }) {
-                    let size = ImageSizeService.shared.calculate(width: Double(attachment.metaImageWidth), height: Double(attachment.metaImageHeight))
+                    let size = ImageSizeService.shared.calculate(width: Double(attachment.metaImageWidth),
+                                                                 height: Double(attachment.metaImageHeight),
+                                                                 andContainerWidth: UIScreen.main.bounds.size.width)
 
                     if size.width != self.imageWidth || size.height != self.imageHeight {
                         withAnimation(.linear(duration: 0.4)) {

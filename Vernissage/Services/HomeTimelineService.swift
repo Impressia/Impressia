@@ -19,6 +19,7 @@ public class HomeTimelineService {
     private let defaultAmountOfDownloadedStatuses = 40
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
 
+    @MainActor
     public func loadOnBottom(for account: AccountModel) async throws -> Int {
         // Load data from API and operate on CoreData on background context.
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
@@ -43,6 +44,7 @@ public class HomeTimelineService {
         return allStatusesFromApi.count
     }
 
+    @MainActor
     public func refreshTimeline(for account: AccountModel) async throws -> String? {
         // Load data from API and operate on CoreData on background context.
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()

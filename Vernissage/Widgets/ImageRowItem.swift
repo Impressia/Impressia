@@ -210,14 +210,18 @@ struct ImageRowItem: View {
     }
 
     private func setVariables(imageData: Data, downloadedImage: UIImage) {
-        let size = ImageSizeService.shared.calculate(for: attachmentData.url,
-                                                     width: downloadedImage.size.width,
-                                                     height: downloadedImage.size.height)
+        ImageSizeService.shared.save(for: attachmentData.url,
+                                     width: downloadedImage.size.width,
+                                     height: downloadedImage.size.height)
 
+        let size = ImageSizeService.shared.calculate(for: attachmentData.url, andContainerWidth: UIScreen.main.bounds.size.width)
         self.onImageDownloaded(size.width, size.height)
-        self.uiImage = downloadedImage
 
-        HomeTimelineService.shared.update(attachment: attachmentData, withData: imageData, imageWidth: size.width, imageHeight: size.height)
+        self.uiImage = downloadedImage
+        HomeTimelineService.shared.update(attachment: attachmentData,
+                                          withData: imageData,
+                                          imageWidth: downloadedImage.size.width,
+                                          imageHeight: downloadedImage.size.height)
         self.error = nil
         self.cancelled = false
     }

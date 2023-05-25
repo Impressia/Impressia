@@ -14,3 +14,11 @@ public extension View {
         }
     }
 }
+
+public extension ViewModifier {
+    func asyncAfter(_ time: Double, operation: @escaping () -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + time) {
+            operation()
+        }
+    }
+}

@@ -11,7 +11,6 @@ import ClientKit
 import ServicesKit
 import EnvironmentKit
 import WidgetsKit
-import WaterfallGrid
 
 struct StatusesView: View {
     public enum ListType: Hashable {
@@ -51,6 +50,11 @@ struct StatusesView: View {
     @State private var state: ViewState = .loading
     @State private var lastStatusId: String?
 
+    // Gallery parameters.
+    @State private var imageColumns = 3
+    @State private var containerWidth: Double = UIScreen.main.bounds.width
+    @State private var containerHeight: Double = UIScreen.main.bounds.height
+
     private let defaultLimit = 40
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
 
@@ -89,35 +93,43 @@ struct StatusesView: View {
     @ViewBuilder
     private func list() -> some View {
         ScrollView {
-            WaterfallGrid(self.statusViewModels, id: \.id) { item in
-                ImageRowAsync(statusViewModel: item,
-                              withAvatar: true,
-                              imageScale: self.applicationState.showGridOnUserProfile ? .squareHalfWidth : .orginalFullWidth)
-                .padding(.top, -2)
+            if self.imageColumns > 1 {
+                WaterfallGrid(statusViewModel: $statusViewModels, columns: $imageColumns, hideLoadMore: $allItemsLoaded) { item in
+                    ImageRowAsync(statusViewModel: item, containerWidth: $containerWidth)
+                } onLoadMore: {
+                    do {
+                        try await self.loadMoreStatuses()
+                    } catch {
+                        ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
+                    }
+                }
+            } else {
+                LazyVStack(alignment: .center) {
+                    ForEach(self.statusViewModels, id: \.id) { item in
+                        ImageRowAsync(statusViewModel: item, containerWidth: $containerWidth)
+                    }
+
+                    if allItemsLoaded == false {
+                        HStack {
+                            Spacer()
+                            LoadingIndicator()
+                                .task {
+                                    do {
+                                        try await self.loadMoreStatuses()
+                                    } catch {
+                                        ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
+                                    }
+                                }
+                            Spacer()
+                        }
+                    }
+                }
             }
-            .gridStyle(columns: 3, spacing: 4)
-            // .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-            
-//            LazyVStack(alignment: .center) {
-//                ForEach(self.statusViewModels, id: \.id) { item in
-//                    ImageRowAsync(statusViewModel: item)
-//                }
-//
-//                if allItemsLoaded == false {
-//                    HStack {
-//                        Spacer()
-//                        LoadingIndicator()
-//                            .task {
-//                                do {
-//                                    try await self.loadMoreStatuses()
-//                                } catch {
-//                                    ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
-//                                }
-//                            }
-//                        Spacer()
-//                    }
-//                }
-//            }
+        }
+        .gallery { galleryProperties in
+            self.imageColumns = galleryProperties.imageColumns
+            self.containerWidth = galleryProperties.containerWidth
+            self.containerHeight = galleryProperties.containerHeight
         }
         .refreshable {
             do {

@@ -52,7 +52,8 @@ struct ImagesCarousel: View {
 
             self.heightWasPrecalculated = true
         } else if let highestImage, imgHeight > 0 && imgWidth > 0 {
-            let size = ImageSizeService.shared.calculate(for: highestImage.url, width: imgWidth, height: imgHeight)
+            ImageSizeService.shared.save(for: highestImage.url, width: imgWidth, height: imgHeight)
+            let size = ImageSizeService.shared.calculate(for: highestImage.url, andContainerWidth: UIScreen.main.bounds.size.width)
             self.imageWidth = size.width
             self.imageHeight = size.height
 
@@ -107,6 +108,8 @@ struct ImagesCarousel: View {
 
         for item in attachments {
             if let data = item.data, let image = UIImage(data: data) {
+                ImageSizeService.shared.save(for: attachment.url, width: image.size.width, height: image.size.height)
+
                 if image.size.height > imageHeight {
                     imageHeight = image.size.height
                     imageWidth = image.size.width
@@ -121,7 +124,7 @@ struct ImagesCarousel: View {
             }
         }
 
-        let size = ImageSizeService.shared.calculate(for: attachment.url, width: imageWidth, height: imageHeight)
+        let size = ImageSizeService.shared.calculate(for: attachment.url, andContainerWidth: UIScreen.main.bounds.size.width)
         self.imageWidth = size.width
         self.imageHeight = size.height
     }
