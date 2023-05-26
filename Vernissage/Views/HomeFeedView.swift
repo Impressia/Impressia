@@ -21,11 +21,6 @@ struct HomeFeedView: View {
     @State private var opacity = 0.0
     @State private var offset = -50.0
 
-    // Gallery parameters.
-    @State private var imageColumns = 3
-    @State private var containerWidth: Double = UIScreen.main.bounds.width
-    @State private var containerHeight: Double = UIScreen.main.bounds.height
-    
     @FetchRequest var dbStatuses: FetchedResults<StatusData>
 
     init(accountId: String) {
@@ -60,48 +55,31 @@ struct HomeFeedView: View {
     private func timeline() -> some View {
         ZStack {
             ScrollView {
-                if self.imageColumns > 1 {
-//                    WaterfallGrid(statusViewModel: $dbStatuses, columns: $imageColumns, hideLoadMore: $allItemsLoaded) { item in
-//                        ImageRowAsync(statusViewModel: item, containerWidth: $containerWidth)
-//                    } onLoadMore: {
-//                        do {
-//                            try await self.loadMoreStatuses()
-//                        } catch {
-//                            ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
-//                        }
-//                    }
-                } else {
-                    LazyVStack {
-                        ForEach(dbStatuses, id: \.self) { item in
-                            if self.shouldUpToDateBeVisible(statusId: item.id) {
-                                self.upToDatePlaceholder()
-                            }
-                            
-                            ImageRow(statusData: item)
+                LazyVStack {
+                    ForEach(dbStatuses, id: \.self) { item in
+                        if self.shouldUpToDateBeVisible(statusId: item.id) {
+                            self.upToDatePlaceholder()
                         }
-                        
-                        if allItemsLoaded == false {
-                            LoadingIndicator()
-                                .task {
-                                    do {
-                                        if let account = self.applicationState.account {
-                                            let newStatusesCount = try await HomeTimelineService.shared.loadOnBottom(for: account)
-                                            if newStatusesCount == 0 {
-                                                allItemsLoaded = true
-                                            }
+
+                        ImageRow(statusData: item)
+                    }
+
+                    if allItemsLoaded == false {
+                        LoadingIndicator()
+                            .task {
+                                do {
+                                    if let account = self.applicationState.account {
+                                        let newStatusesCount = try await HomeTimelineService.shared.loadOnBottom(for: account)
+                                        if newStatusesCount == 0 {
+                                            allItemsLoaded = true
                                         }
-                                    } catch {
-                                        ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadStatuses", showToastr: !Task.isCancelled)
                                     }
+                                } catch {
+                                    ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadStatuses", showToastr: !Task.isCancelled)
                                 }
-                        }
+                            }
                     }
                 }
-            }
-            .gallery { galleryProperties in
-                self.imageColumns = galleryProperties.imageColumns
-                self.containerWidth = galleryProperties.containerWidth
-                self.containerHeight = galleryProperties.containerHeight
             }
 
             self.newPhotosView()

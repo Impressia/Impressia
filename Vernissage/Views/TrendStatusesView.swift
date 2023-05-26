@@ -21,6 +21,11 @@ struct TrendStatusesView: View {
     @State private var statusViewModels: [StatusModel] = []
     @State private var state: ViewState = .loading
 
+    // Gallery parameters.
+    @State private var imageColumns = 3
+    @State private var containerWidth: Double = UIScreen.main.bounds.width
+    @State private var containerHeight: Double = UIScreen.main.bounds.height
+
     var body: some View {
         ScrollView {
             Picker(selection: $tabSelectedValue, label: Text("")) {
@@ -44,6 +49,20 @@ struct TrendStatusesView: View {
             }
 
             self.mainBody()
+        }
+        .gallery { galleryProperties in
+            self.imageColumns = galleryProperties.imageColumns
+            self.containerWidth = galleryProperties.containerWidth
+            self.containerHeight = galleryProperties.containerHeight
+        }
+        .refreshable {
+            do {
+                HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
+                try await self.loadStatuses()
+                HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
+            } catch {
+                ErrorService.shared.handle(error, message: "trendingStatuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
+            }
         }
         .navigationTitle("trendingStatuses.navigationBar.title")
     }
@@ -70,18 +89,15 @@ struct TrendStatusesView: View {
             if self.statusViewModels.isEmpty {
                 NoDataView(imageSystemName: "photo.on.rectangle.angled", text: "trendingStatuses.title.noPhotos")
             } else {
-                LazyVStack(alignment: .center) {
-                    ForEach(self.statusViewModels, id: \.id) { item in
-                        ImageRowAsync(statusViewModel: item, containerWidth: Binding.constant(UIScreen.main.bounds.width))
-                    }
-                }
-                .refreshable {
-                    do {
-                        HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
-                        try await self.loadStatuses()
-                        HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
-                    } catch {
-                        ErrorService.shared.handle(error, message: "trendingStatuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
+                if self.imageColumns > 1 {
+                    WaterfallGrid($statusViewModels, columns: $imageColumns, hideLoadMore: Binding.constant(true)) { item in
+                        ImageRowAsync(statusViewModel: item, containerWidth: $containerWidth)
+                    } onLoadMore: { }
+                } else {
+                    LazyVStack(alignment: .center) {
+                        ForEach(self.statusViewModels, id: \.id) { item in
+                            ImageRowAsync(statusViewModel: item, containerWidth: Binding.constant(UIScreen.main.bounds.width))
+                        }
                     }
                 }
             }

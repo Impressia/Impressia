@@ -14,6 +14,7 @@ import WidgetsKit
 
 struct StatusesView: View {
     public enum ListType: Hashable {
+        case home
         case local
         case federated
         case favourites
@@ -22,6 +23,8 @@ struct StatusesView: View {
 
         public var title: LocalizedStringKey {
             switch self {
+            case .home:
+                return "mainview.tab.homeTimeline"
             case .local:
                 return "statuses.navigationBar.localTimeline"
             case .federated:
@@ -94,10 +97,11 @@ struct StatusesView: View {
     private func list() -> some View {
         ScrollView {
             if self.imageColumns > 1 {
-                WaterfallGrid(statusViewModel: $statusViewModels, columns: $imageColumns, hideLoadMore: $allItemsLoaded) { item in
+                WaterfallGrid($statusViewModels, columns: $imageColumns, hideLoadMore: $allItemsLoaded) { item in
                     ImageRowAsync(statusViewModel: item, containerWidth: $containerWidth)
                 } onLoadMore: {
                     do {
+                        print("load more......")
                         try await self.loadMoreStatuses()
                     } catch {
                         ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
@@ -232,6 +236,12 @@ struct StatusesView: View {
 
     private func loadFromApi(maxId: String? = nil, sinceId: String? = nil, minId: String? = nil) async throws -> [Status] {
         switch self.listType {
+        case .home:
+            return try await self.client.publicTimeline?.getHomeTimeline(
+                maxId: maxId,
+                sinceId: sinceId,
+                minId: minId,
+                limit: self.defaultLimit) ?? []
         case .local:
             return try await self.client.publicTimeline?.getStatuses(
                 local: true,

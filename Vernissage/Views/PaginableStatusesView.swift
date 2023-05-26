@@ -38,6 +38,11 @@ struct PaginableStatusesView: View {
     @State private var state: ViewState = .loading
     @State private var page = 1
 
+    // Gallery parameters.
+    @State private var imageColumns = 3
+    @State private var containerWidth: Double = UIScreen.main.bounds.width
+    @State private var containerHeight: Double = UIScreen.main.bounds.height
+
     private let defaultLimit = 10
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
 
@@ -75,26 +80,43 @@ struct PaginableStatusesView: View {
     @ViewBuilder
     private func list() -> some View {
         ScrollView {
-            LazyVStack(alignment: .center) {
-                ForEach(self.statusViewModels, id: \.id) { item in
-                    ImageRowAsync(statusViewModel: item, containerWidth: Binding.constant(UIScreen.main.bounds.width))
+            if self.imageColumns > 1 {
+                WaterfallGrid($statusViewModels, columns: $imageColumns, hideLoadMore: $allItemsLoaded) { item in
+                    ImageRowAsync(statusViewModel: item, containerWidth: $containerWidth)
+                } onLoadMore: {
+                    do {
+                        try await self.loadMoreStatuses()
+                    } catch {
+                        ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
+                    }
                 }
+            } else {
+                LazyVStack(alignment: .center) {
+                    ForEach(self.statusViewModels, id: \.id) { item in
+                        ImageRowAsync(statusViewModel: item, containerWidth: $containerWidth)
+                    }
 
-                if allItemsLoaded == false {
-                    HStack {
-                        Spacer()
-                        LoadingIndicator()
-                            .task {
-                                do {
-                                    try await self.loadMoreStatuses()
-                                } catch {
-                                    ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
+                    if allItemsLoaded == false {
+                        HStack {
+                            Spacer()
+                            LoadingIndicator()
+                                .task {
+                                    do {
+                                        try await self.loadMoreStatuses()
+                                    } catch {
+                                        ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
+                                    }
                                 }
-                            }
-                        Spacer()
+                            Spacer()
+                        }
                     }
                 }
             }
+        }
+        .gallery { galleryProperties in
+            self.imageColumns = galleryProperties.imageColumns
+            self.containerWidth = galleryProperties.containerWidth
+            self.containerHeight = galleryProperties.containerHeight
         }
     }
 

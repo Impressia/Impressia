@@ -42,7 +42,7 @@ struct UserProfileStatusesView: View {
     var body: some View {
         if firstLoadFinished == true {
             if self.imageColumns > 1 {
-                WaterfallGrid(statusViewModel: $statusViewModels, columns: $imageColumns, hideLoadMore: $allItemsLoaded) { item in
+                WaterfallGrid($statusViewModels, columns: $imageColumns, hideLoadMore: $allItemsLoaded) { item in
                     ImageRowAsync(statusViewModel: item, withAvatar: false, containerWidth: $containerWidth)
                 } onLoadMore: {
                     do {
