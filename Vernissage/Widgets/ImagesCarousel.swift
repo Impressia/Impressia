@@ -47,8 +47,12 @@ struct ImagesCarousel: View {
 
         // Calculate size of frame (first from cache, then from metadata).
         if let highestImage, let size = ImageSizeService.shared.get(for: highestImage.url) {
-            self.imageWidth = size.width
-            self.imageHeight = size.height
+            let calculatedSize = ImageSizeService.shared.calculate(width: size.width,
+                                                                   height: size.height,
+                                                                   andContainerWidth: UIScreen.main.bounds.size.width)
+
+            self.imageWidth = calculatedSize.width
+            self.imageHeight = calculatedSize.height
 
             self.heightWasPrecalculated = true
         } else if let highestImage, imgHeight > 0 && imgWidth > 0 {
