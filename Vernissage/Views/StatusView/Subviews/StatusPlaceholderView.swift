@@ -8,6 +8,7 @@ import SwiftUI
 import WidgetsKit
 
 struct StatusPlaceholderView: View {
+    @State var imageWidth: Double
     @State var imageHeight: Double
     @State var imageBlurhash: String?
 
@@ -17,11 +18,11 @@ struct StatusPlaceholderView: View {
                 if let imageBlurhash, let uiImage = UIImage(blurHash: imageBlurhash, size: CGSize(width: 32, height: 32)) {
                     Image(uiImage: uiImage)
                         .resizable()
-                        .frame(width: UIScreen.main.bounds.width, height: imageHeight)
+                        .frame(width: self.imageWidth, height: self.imageHeight)
                 } else {
                     Rectangle()
                         .fill(Color.placeholderText)
-                        .frame(width: UIScreen.main.bounds.width, height: imageHeight)
+                        .frame(width: self.imageWidth, height: self.imageHeight)
                         .redacted(reason: .placeholder)
                 }
 

@@ -57,6 +57,8 @@ struct UserProfileHeaderView: View {
                             .opacity(0.6)
                     }
                 }.foregroundColor(.mainTextColor)
+
+                Spacer()
             }
 
             HStack(alignment: .center) {

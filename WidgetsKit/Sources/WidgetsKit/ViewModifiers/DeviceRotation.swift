@@ -52,10 +52,10 @@ struct DeviceImageGallery: ViewModifier {
                     }
                 }
                 .onAppear {
-                    asyncAfter(0.1) {
+                    // asyncAfter(0.1) {
                         let galleryProperties = self.getGalleryProperties(geometry: geometry, horizontalSize: self.horizontalSizeClass ?? .compact)
                         self.action(galleryProperties)
-                    }
+                    // }
                 }
         }
     }
@@ -69,7 +69,6 @@ struct DeviceImageGallery: ViewModifier {
         } else {
             // View like on iPad.
             let imageColumns = geometry.size.width > geometry.size.height ? 3 : 2
-            print("\(geometry.size.width ):\(geometry.size.height)")
 
             return GalleryProperties(imageColumns: imageColumns,
                                      containerWidth: geometry.size.width / Double(imageColumns),

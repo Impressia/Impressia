@@ -92,6 +92,8 @@ struct QRCodeMediumWidgetView: View {
             .padding(.leading, 3)
             .offset(y: -4)
         }
+        .widgetBackground {
+        }
         .padding([.leading, .trailing, .top], 12)
     }
 }

@@ -200,6 +200,7 @@
 		F8F6E44D29BCC1F90004795E /* PhotoMediumWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6E44829BCC0F00004795E /* PhotoMediumWidgetView.swift */; };
 		F8F6E44E29BCC1FB0004795E /* PhotoLargeWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6E44A29BCC0FF0004795E /* PhotoLargeWidgetView.swift */; };
 		F8F6E45129BCE9190004795E /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F6E45029BCE9190004795E /* UIImage+Resize.swift */; };
+		F8FAA0AD2AB0BCB400FD78BD /* View+ContainerBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FAA0AC2AB0BCB400FD78BD /* View+ContainerBackground.swift */; };
 		F8FB8ABA29EB2ED400342C04 /* NavigationMenuButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FB8AB929EB2ED400342C04 /* NavigationMenuButtons.swift */; };
 /* End PBXBuildFile section */
 
@@ -407,6 +408,7 @@
 		F8F6E44829BCC0F00004795E /* PhotoMediumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMediumWidgetView.swift; sourceTree = "<group>"; };
 		F8F6E44A29BCC0FF0004795E /* PhotoLargeWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLargeWidgetView.swift; sourceTree = "<group>"; };
 		F8F6E45029BCE9190004795E /* UIImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
+		F8FAA0AC2AB0BCB400FD78BD /* View+ContainerBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ContainerBackground.swift"; sourceTree = "<group>"; };
 		F8FB8AB929EB2ED400342C04 /* NavigationMenuButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationMenuButtons.swift; sourceTree = "<group>"; };
 		F8FFBD4929E99BEE0047EE80 /* Vernissage-009.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-009.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -909,6 +911,7 @@
 			children = (
 				F815F60B29E49CF20044566B /* Avatar.swift */,
 				F8F6E45029BCE9190004795E /* UIImage+Resize.swift */,
+				F8FAA0AC2AB0BCB400FD78BD /* View+ContainerBackground.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1121,6 +1124,7 @@
 				F864F78229BB9A6500B13921 /* StatusData+CoreDataClass.swift in Sources */,
 				F864F78329BB9A6800B13921 /* StatusData+CoreDataProperties.swift in Sources */,
 				F864F78429BB9A6E00B13921 /* ApplicationSettings+CoreDataClass.swift in Sources */,
+				F8FAA0AD2AB0BCB400FD78BD /* View+ContainerBackground.swift in Sources */,
 				F864F78629BB9A7400B13921 /* AccountData+CoreDataClass.swift in Sources */,
 				F8705A7B29FF872F00DA818A /* QRCodeGenerator.swift in Sources */,
 				F865B4CE2A024AD8008ACDFC /* StatusData+Faulty.swift in Sources */,
@@ -1552,7 +1556,7 @@
 				CODE_SIGN_ENTITLEMENTS = Vernissage/Vernissage.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 143;
+				CURRENT_PROJECT_VERSION = 200;
 				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
@@ -1571,7 +1575,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.0;
+				MARKETING_VERSION = 1.10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1594,7 +1598,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Vernissage/Vernissage.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 143;
+				CURRENT_PROJECT_VERSION = 200;
 				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
@@ -1613,7 +1617,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9.0;
+				MARKETING_VERSION = 1.10.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

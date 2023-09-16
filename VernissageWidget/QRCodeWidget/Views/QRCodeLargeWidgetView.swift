@@ -82,6 +82,8 @@ struct QRCodeLargeWidgetView: View {
                     .offset(y: -8)
             }
         }
+        .widgetBackground {
+        }
         .padding([.leading, .trailing, .top], 24)
     }
 }

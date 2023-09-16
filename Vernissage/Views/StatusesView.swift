@@ -101,7 +101,6 @@ struct StatusesView: View {
                     ImageRowAsync(statusViewModel: item, containerWidth: $containerWidth)
                 } onLoadMore: {
                     do {
-                        print("load more......")
                         try await self.loadMoreStatuses()
                     } catch {
                         ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)

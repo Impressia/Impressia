@@ -18,6 +18,7 @@ public class ImageSizeService {
 
     /// Cache with orginal image sizes.
     private var memoryCacheData = MemoryCache<URL, CGSize>(entryLifetime: 3600)
+    private let staticImageHeight = 500.0
 
     public func get(for url: URL) -> CGSize? {
         return self.memoryCacheData[url]
@@ -37,12 +38,32 @@ public class ImageSizeService {
 }
 
 extension ImageSizeService {
+    public func calculate(for url: URL) -> CGSize {
+        return UIDevice.current.userInterfaceIdiom == .phone
+            ? ImageSizeService.shared.calculate(for: url, andContainerWidth: UIScreen.main.bounds.size.width)
+            : ImageSizeService.shared.calculate(for: url, andContainerHeight: self.staticImageHeight)
+    }
+
     public func calculate(for url: URL, andContainerWidth containerWidth: Double) -> CGSize {
         guard let size = self.get(for: url) else {
             return CGSize(width: containerWidth, height: containerWidth)
         }
 
         return self.calculate(width: size.width, height: size.height, andContainerWidth: containerWidth)
+    }
+
+    public func calculate(for url: URL, andContainerHeight containerHeight: Double) -> CGSize {
+        guard let size = self.get(for: url) else {
+            return CGSize(width: containerHeight, height: containerHeight)
+        }
+
+        return self.calculate(width: size.width, height: size.height, andContainerHeight: containerHeight)
+    }
+
+    public func calculate(width: Double, height: Double) -> CGSize {
+        return UIDevice.current.userInterfaceIdiom == .phone
+            ? ImageSizeService.shared.calculate(width: width, height: height, andContainerWidth: UIScreen.main.bounds.size.width)
+            : ImageSizeService.shared.calculate(width: width, height: height, andContainerHeight: self.staticImageHeight)
     }
 
     public func calculate(width: Double, height: Double, andContainerWidth containerWidth: Double) -> CGSize {
@@ -52,6 +73,18 @@ extension ImageSizeService {
         let size = CGSize(
             width: containerWidth,
             height: (calculatedHeight > 0 && calculatedHeight < .infinity) ? calculatedHeight : containerWidth
+        )
+
+        return size
+    }
+
+    public func calculate(width: Double, height: Double, andContainerHeight containerHeight: Double) -> CGSize {
+        let divider = Double(height) / containerHeight
+        let calculatedWidth = Double(width) / divider
+
+        let size = CGSize(
+            width: (calculatedWidth > 0 && calculatedWidth < .infinity) ? calculatedWidth : containerHeight,
+            height: containerHeight
         )
 
         return size

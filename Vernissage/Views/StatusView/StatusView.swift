@@ -56,7 +56,7 @@ struct StatusView: View {
     private func mainBody() -> some View {
         switch state {
         case .loading:
-            StatusPlaceholderView(imageHeight: self.getImageHeight(), imageBlurhash: self.imageBlurhash)
+            StatusPlaceholderView(imageWidth: self.getImageWidth(), imageHeight: self.getImageHeight(), imageBlurhash: self.imageBlurhash)
                 .task {
                     await self.loadData()
                 }
@@ -236,14 +236,28 @@ struct StatusView: View {
 
     private func getImageHeight() -> Double {
         if let highestImageUrl = self.highestImageUrl, let imageSize = ImageSizeService.shared.get(for: highestImageUrl) {
-            return imageSize.height
+            let calculatedSize = ImageSizeService.shared.calculate(width: imageSize.width, height: imageSize.height)
+            return calculatedSize.height
         }
 
         if let imageHeight = self.imageHeight, let imageWidth = self.imageWidth, imageHeight > 0 && imageWidth > 0 {
-            let calculatedSize = ImageSizeService.shared.calculate(width: Double(imageWidth),
-                                                                   height: Double(imageHeight),
-                                                                   andContainerWidth: UIScreen.main.bounds.size.width)
+            let calculatedSize = ImageSizeService.shared.calculate(width: Double(imageWidth), height: Double(imageHeight))
             return calculatedSize.height
+        }
+
+        // If we don't have image height and width in metadata, we have to use some constant height.
+        return UIScreen.main.bounds.width * 0.75
+    }
+
+    private func getImageWidth() -> Double {
+        if let highestImageUrl = self.highestImageUrl, let imageSize = ImageSizeService.shared.get(for: highestImageUrl) {
+            let calculatedSize = ImageSizeService.shared.calculate(width: imageSize.width, height: imageSize.height)
+            return calculatedSize.width
+        }
+
+        if let imageHeight = self.imageHeight, let imageWidth = self.imageWidth, imageHeight > 0 && imageWidth > 0 {
+            let calculatedSize = ImageSizeService.shared.calculate(width: Double(imageWidth), height: Double(imageHeight))
+            return calculatedSize.width
         }
 
         // If we don't have image height and width in metadata, we have to use some constant height.

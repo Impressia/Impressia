@@ -47,9 +47,7 @@ struct ImagesCarousel: View {
 
         // Calculate size of frame (first from cache, then from metadata).
         if let highestImage, let size = ImageSizeService.shared.get(for: highestImage.url) {
-            let calculatedSize = ImageSizeService.shared.calculate(width: size.width,
-                                                                   height: size.height,
-                                                                   andContainerWidth: UIScreen.main.bounds.size.width)
+            let calculatedSize = ImageSizeService.shared.calculate(width: size.width, height: size.height)
 
             self.imageWidth = calculatedSize.width
             self.imageHeight = calculatedSize.height
@@ -57,7 +55,8 @@ struct ImagesCarousel: View {
             self.heightWasPrecalculated = true
         } else if let highestImage, imgHeight > 0 && imgWidth > 0 {
             ImageSizeService.shared.save(for: highestImage.url, width: imgWidth, height: imgHeight)
-            let size = ImageSizeService.shared.calculate(for: highestImage.url, andContainerWidth: UIScreen.main.bounds.size.width)
+            let size = ImageSizeService.shared.calculate(for: highestImage.url)
+
             self.imageWidth = size.width
             self.imageHeight = size.height
 
@@ -70,33 +69,37 @@ struct ImagesCarousel: View {
     }
 
     var body: some View {
-        TabView(selection: $selected) {
-            ForEach(attachments, id: \.id) { attachment in
-                ImageCarouselPicture(attachment: attachment) { (attachment, imageData) in
-                    withAnimation {
-                        self.recalculateImageHeight(attachment: attachment, imageData: imageData)
-                    }
+        HStack {
+            Spacer()
+            TabView(selection: $selected) {
+                ForEach(attachments, id: \.id) { attachment in
+                    ImageCarouselPicture(attachment: attachment) { (attachment, imageData) in
+                        withAnimation {
+                            self.recalculateImageHeight(attachment: attachment, imageData: imageData)
+                        }
 
-                    self.asyncAfter(0.4) {
-                        attachment.set(data: imageData)
-                    }
+                        self.asyncAfter(0.4) {
+                            attachment.set(data: imageData)
+                        }
 
+                    }
+                    .tag(attachment.id)
                 }
-                .tag(attachment.id)
             }
+            .frame(height: self.imageHeight)
+            .tabViewStyle(PageTabViewStyle())
+            .onChange(of: selected, perform: { index in
+                if let attachment = attachments.first(where: { item in item.id == index }) {
+                    self.selectedAttachment = attachment
+                    self.exifCamera = attachment.exifCamera
+                    self.exifExposure = attachment.exifExposure
+                    self.exifCreatedDate = attachment.exifCreatedDate
+                    self.exifLens = attachment.exifLens
+                    self.description = attachment.description
+                }
+            })
+            Spacer()
         }
-        .frame(height: self.imageHeight)
-        .tabViewStyle(PageTabViewStyle())
-        .onChange(of: selected, perform: { index in
-            if let attachment = attachments.first(where: { item in item.id == index }) {
-                self.selectedAttachment = attachment
-                self.exifCamera = attachment.exifCamera
-                self.exifExposure = attachment.exifExposure
-                self.exifCreatedDate = attachment.exifCreatedDate
-                self.exifLens = attachment.exifLens
-                self.description = attachment.description
-            }
-        })
         .onAppear {
             self.selected = self.attachments.first?.id ?? String.empty()
         }
@@ -107,28 +110,41 @@ struct ImagesCarousel: View {
             return
         }
 
-        var imageHeight = 0.0
-        var imageWidth = 0.0
+        var maxImageHeight = 0.0
+        var maxImageWidth = 0.0
 
         for item in attachments {
-            if let data = item.data, let image = UIImage(data: data) {
-                ImageSizeService.shared.save(for: attachment.url, width: image.size.width, height: image.size.height)
+            // Get attachment sizes from cache.
+            if let attachmentSize = ImageSizeService.shared.get(for: item.url) {
+                if attachmentSize.height > maxImageHeight {
+                    maxImageHeight = attachmentSize.height
+                    maxImageWidth = attachmentSize.width
+                }
 
-                if image.size.height > imageHeight {
-                    imageHeight = image.size.height
-                    imageWidth = image.size.width
+                continue
+            }
+
+            // When we don't have in cache read from data and add to cache.
+            if let data = item.data, let image = UIImage(data: data) {
+                ImageSizeService.shared.save(for: item.url, width: image.size.width, height: image.size.height)
+
+                if image.size.height > maxImageHeight {
+                    maxImageHeight = image.size.height
+                    maxImageWidth = image.size.width
                 }
             }
         }
 
         if let image = UIImage(data: imageData) {
-            if image.size.height > imageHeight {
-                imageHeight = image.size.height
-                imageWidth = image.size.width
+            ImageSizeService.shared.save(for: attachment.url, width: image.size.width, height: image.size.height)
+
+            if image.size.height > maxImageHeight {
+                maxImageHeight = image.size.height
+                maxImageWidth = image.size.width
             }
         }
 
-        let size = ImageSizeService.shared.calculate(for: attachment.url, andContainerWidth: UIScreen.main.bounds.size.width)
+        let size = ImageSizeService.shared.calculate(width: maxImageWidth, height: maxImageHeight)
         self.imageWidth = size.width
         self.imageHeight = size.height
     }
