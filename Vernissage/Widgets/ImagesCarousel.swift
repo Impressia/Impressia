@@ -69,8 +69,8 @@ struct ImagesCarousel: View {
     }
 
     var body: some View {
-        HStack {
-            Spacer()
+        HStack(spacing: 0) {
+            Spacer(minLength: 0)
             TabView(selection: $selected) {
                 ForEach(attachments, id: \.id) { attachment in
                     ImageCarouselPicture(attachment: attachment) { (attachment, imageData) in
@@ -86,6 +86,7 @@ struct ImagesCarousel: View {
                     .tag(attachment.id)
                 }
             }
+            .padding(0)
             .frame(height: self.imageHeight)
             .tabViewStyle(PageTabViewStyle())
             .onChange(of: selected, perform: { index in
@@ -98,8 +99,9 @@ struct ImagesCarousel: View {
                     self.description = attachment.description
                 }
             })
-            Spacer()
+            Spacer(minLength: 0)
         }
+        .padding(0)
         .onAppear {
             self.selected = self.attachments.first?.id ?? String.empty()
         }
