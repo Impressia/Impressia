@@ -8,30 +8,35 @@ import SwiftUI
 import WidgetsKit
 
 struct WaterfallGrid<Data, ID, Content>: View where Data: RandomAccessCollection, Data: Equatable, Content: View,
-                                                    ID: Hashable, Data.Element: Equatable, Data.Element: Identifiable, Data.Element: Hashable {
+                                                    ID: Hashable, Data.Element: Equatable, Data.Element: Identifiable, Data.Element: Hashable, Data.Element: Sizable {
     @Binding private var columns: Int
     @Binding private var hideLoadMore: Bool
-
     @Binding private var data: Data
-    private let dataId: KeyPath<Data.Element, ID>
+
     private let content: (Data.Element) -> Content
 
-    @State private var columnsData: [[Data.Element]] = []
+    @State private var columnsData: [ColumnData<Data.Element>] = []
+    @State private var processedItems: [Data.Element.ID] = []
+    @State private var isDuringLoading: Bool = false
 
     private let onLoadMore: () async -> Void
 
     var body: some View {
         HStack(alignment: .top, spacing: 20) {
-            ForEach(self.columnsData, id: \.self) { array in
+            ForEach(self.columnsData, id: \.id) { columnData in
                 LazyVStack(spacing: 8) {
-                    ForEach(array, id: \.id) { item in
+                    ForEach(columnData.data, id: \.id) { item in
                         self.content(item)
                     }
 
-                    if self.shouldShowSpinner(array: array) {
+                    if self.hideLoadMore == false {
                         LoadingIndicator()
                             .task {
-                                await self.onLoadMore()
+                                if isDuringLoading == false {
+                                    isDuringLoading = true
+                                    await self.onLoadMore()
+                                    isDuringLoading = false
+                                }
                             }
                     }
                 }
@@ -41,7 +46,7 @@ struct WaterfallGrid<Data, ID, Content>: View where Data: RandomAccessCollection
             self.recalculateArrays()
         }
         .onChange(of: self.data) { _ in
-            self.recalculateArrays()
+            self.appendToArrays()
         }
         .onChange(of: self.columns) { _ in
             self.recalculateArrays()
@@ -49,52 +54,66 @@ struct WaterfallGrid<Data, ID, Content>: View where Data: RandomAccessCollection
     }
 
     private func recalculateArrays() {
-        var internalArray: [[Data.Element]] = []
+        self.columnsData = []
+        self.processedItems = []
 
         for _ in 0 ..< self.columns {
-            internalArray.append([])
+            self.columnsData.append(ColumnData())
         }
 
-        for (index, item) in self.data.enumerated() {
-            let arrayIndex = index % self.columns
-            internalArray[arrayIndex].append(item)
-        }
+        for item in self.data {
+            let index = self.minimumHeightIndex()
 
-        self.columnsData = internalArray
+            self.columnsData[index].data.append(item)
+            self.columnsData[index].height = self.columnsData[index].height + self.calculateHeight(item: item)
+            self.processedItems.append(item.id)
+        }
     }
 
-    private func shouldShowSpinner(array: [Data.Element]) -> Bool {
-        if self.hideLoadMore {
-            return false
-        }
+    private func appendToArrays() {
+        for item in self.data where self.processedItems.contains(where: { $0 == item.id }) == false {
+            let index = self.minimumHeightIndex()
 
-        return self.columnsData[1].first == array.first
+            self.columnsData[index].data.append(item)
+            self.columnsData[index].height = self.columnsData[index].height + self.calculateHeight(item: item)
+            self.processedItems.append(item.id)
+        }
     }
 
+    private func calculateHeight(item: Sizable) -> Double {
+        return item.height / item.width
+    }
+
+    private func minimumHeight() -> Double {
+        return self.columnsData.map({ $0.height }).min() ?? .zero
+    }
+
+    private func minimumHeightIndex() -> Int {
+        let minimumHeight = self.minimumHeight()
+        return self.columnsData.lastIndex(where: { $0.height == minimumHeight }) ?? 0
+    }
 }
 
 extension WaterfallGrid {
     init(_ data: Binding<Data>, id: KeyPath<Data.Element, ID>, columns: Binding<Int>,
          hideLoadMore: Binding<Bool>, content: @escaping (Data.Element) -> Content, onLoadMore: @escaping () async -> Void) {
-        self._data = data
-        self.dataId = id
         self.content = content
+        self.onLoadMore = onLoadMore
 
+        self._data = data
         self._columns = columns
         self._hideLoadMore = hideLoadMore
-        self.onLoadMore = onLoadMore
     }
 }
 
 extension WaterfallGrid where ID == Data.Element.ID, Data.Element: Identifiable {
     init(_ data: Binding<Data>, columns: Binding<Int>,
          hideLoadMore: Binding<Bool>, content: @escaping (Data.Element) -> Content, onLoadMore: @escaping () async -> Void) {
-        self._data = data
-        self.dataId = \Data.Element.id
         self.content = content
+        self.onLoadMore = onLoadMore
 
+        self._data = data
         self._columns = columns
         self._hideLoadMore = hideLoadMore
-        self.onLoadMore = onLoadMore
     }
 }
