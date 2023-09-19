@@ -400,7 +400,7 @@ public struct BaseComposeView: View {
                     Image(systemName: "mappin.and.ellipse")
                     Text("\(name), \(country)")
                 }
-                .foregroundColor(.lightGrayColor)
+                .foregroundColor(.customGrayColor)
                 .padding(.trailing, 8)
             }
         }
@@ -425,7 +425,7 @@ public struct BaseComposeView: View {
                                         Text(account.displayNameWithoutEmojis)
                                             .foregroundColor(.mainTextColor)
                                         Text("@\(account.acct)")
-                                            .foregroundColor(.lightGrayColor)
+                                            .foregroundColor(.customGrayColor)
                                     }
                                     .padding(.leading, 8)
                                 }
@@ -540,7 +540,7 @@ public struct BaseComposeView: View {
                 Spacer()
 
                 Text("\(self.applicationState.statusMaxCharacters - textModel.text.string.utf16.count)")
-                    .foregroundColor(.lightGrayColor)
+                    .foregroundColor(.customGrayColor)
                     .font(.system(size: self.keyboardFontTextSize))
             }
             .padding(8)

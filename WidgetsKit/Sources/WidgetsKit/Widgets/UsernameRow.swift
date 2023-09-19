@@ -34,7 +34,7 @@ public struct UsernameRow: View {
                 Text(accountDisplayName ?? accountUsername)
                     .foregroundColor(.mainTextColor)
                 Text("@\(accountUsername)")
-                    .foregroundColor(.lightGrayColor)
+                    .foregroundColor(.customGrayColor)
                     .font(.footnote)
             }
             .padding(.leading, 8)

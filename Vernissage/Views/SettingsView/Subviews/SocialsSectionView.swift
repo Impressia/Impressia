@@ -14,7 +14,7 @@ struct SocialsSectionView: View {
                     Text("settings.title.followVernissage", comment: "Follow Vernissage")
                     Text("settings.title.mastodonAccount", comment: "Mastodon account")
                         .font(.footnote)
-                        .foregroundColor(.lightGrayColor)
+                        .foregroundColor(.customGrayColor)
                 }
 
                 Spacer()
@@ -27,7 +27,7 @@ struct SocialsSectionView: View {
                     Text("settings.title.follow", comment: "Follow me")
                     Text("settings.title.mastodonAccount", comment: "Mastodon account")
                         .font(.footnote)
-                        .foregroundColor(.lightGrayColor)
+                        .foregroundColor(.customGrayColor)
                 }
 
                 Spacer()
@@ -40,7 +40,7 @@ struct SocialsSectionView: View {
                     Text("settings.title.follow", comment: "Follow me")
                     Text("settings.title.pixelfedAccount", comment: "Pixelfed account")
                         .font(.footnote)
-                        .foregroundColor(.lightGrayColor)
+                        .foregroundColor(.customGrayColor)
                 }
 
                 Spacer()

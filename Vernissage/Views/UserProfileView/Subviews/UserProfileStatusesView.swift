@@ -61,7 +61,7 @@ struct UserProfileStatusesView: View {
                         }
                     } label: {
                         Image(systemName: "rectangle.grid.1x2.fill")
-                            .foregroundColor(self.applicationState.showGridOnUserProfile ? .lightGrayColor : .accentColor)
+                            .foregroundColor(self.applicationState.showGridOnUserProfile ? .customGrayColor : .accentColor)
                             .padding(.trailing, 8)
                             .padding(.bottom, 8)
                     }
@@ -72,7 +72,7 @@ struct UserProfileStatusesView: View {
                         }
                     } label: {
                         Image(systemName: "rectangle.grid.2x2.fill")
-                            .foregroundColor(self.applicationState.showGridOnUserProfile ? .accentColor : .lightGrayColor)
+                            .foregroundColor(self.applicationState.showGridOnUserProfile ? .accentColor : .customGrayColor)
                             .padding(.trailing, 16)
                             .padding(.bottom, 8)
                     }

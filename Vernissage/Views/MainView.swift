@@ -242,7 +242,7 @@ struct MainView: View {
                 .frame(width: 16, height: 16)
                 .foregroundColor(.white)
                 .padding(8)
-                .background(Color.lightGrayColor)
+                .background(Color.customGrayColor)
                 .clipShape(AvatarShape.circle.shape())
                 .background(
                     AvatarShape.circle.shape()

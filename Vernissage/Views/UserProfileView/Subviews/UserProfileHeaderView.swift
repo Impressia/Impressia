@@ -68,7 +68,7 @@ struct UserProfileHeaderView: View {
                         .font(.title3)
                         .fontWeight(.bold)
                     Text("@\(account.acct)")
-                        .foregroundColor(.lightGrayColor)
+                        .foregroundColor(.customGrayColor)
                         .font(.subheadline)
                 }
 
@@ -101,7 +101,7 @@ struct UserProfileHeaderView: View {
             self.accountRelationshipPanel()
 
             Text(String(format: NSLocalizedString("userProfile.title.joined", comment: "Joined"), account.createdAt.toRelative(.isoDateTimeMilliSec)))
-                .foregroundColor(.lightGrayColor.opacity(0.5))
+                .foregroundColor(.customGrayColor.opacity(0.5))
                 .font(.footnote)
         }
         .padding([.top, .leading, .trailing])

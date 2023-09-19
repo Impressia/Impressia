@@ -19,7 +19,7 @@ struct MediaSettingsView: View {
                     Text("settings.title.alwaysShowSensitiveTitle", comment: "Always show NSFW")
                     Text("settings.title.alwaysShowSensitiveDescription", comment: "Force show all NFSW (sensitive) media without warnings")
                         .font(.footnote)
-                        .foregroundColor(.lightGrayColor)
+                        .foregroundColor(.customGrayColor)
                 }
             }
             .onChange(of: self.applicationState.showSensitive) { newValue in
@@ -31,7 +31,7 @@ struct MediaSettingsView: View {
                     Text("settings.title.alwaysShowAltTitle", comment: "Show alternative text")
                     Text("settings.title.alwaysShowAltDescription", comment: "Show alternative text if present on status details screen")
                         .font(.footnote)
-                        .foregroundColor(.lightGrayColor)
+                        .foregroundColor(.customGrayColor)
                 }
             }
             .onChange(of: self.applicationState.showPhotoDescription) { newValue in
@@ -43,7 +43,7 @@ struct MediaSettingsView: View {
                     Text("settings.title.showAvatars", comment: "Show avatars")
                     Text("settings.title.showAvatarsOnTimeline", comment: "Show avatars on timeline")
                         .font(.footnote)
-                        .foregroundColor(.lightGrayColor)
+                        .foregroundColor(.customGrayColor)
                 }
             }
             .onChange(of: self.applicationState.showAvatarsOnTimeline) { newValue in
@@ -55,7 +55,7 @@ struct MediaSettingsView: View {
                     Text("settings.title.showFavourite", comment: "Show favourites")
                     Text("settings.title.showFavouriteOnTimeline", comment: "Show favourites on timeline")
                         .font(.footnote)
-                        .foregroundColor(.lightGrayColor)
+                        .foregroundColor(.customGrayColor)
                 }
             }
             .onChange(of: self.applicationState.showFavouritesOnTimeline) { newValue in
@@ -67,7 +67,7 @@ struct MediaSettingsView: View {
                     Text("settings.title.showAltText", comment: "Show ALT icon")
                     Text("settings.title.showAltTextOnTimeline", comment: "ALT icon will be displayed on timelines")
                         .font(.footnote)
-                        .foregroundColor(.lightGrayColor)
+                        .foregroundColor(.customGrayColor)
                 }
             }
             .onChange(of: self.applicationState.showAltIconOnTimeline) { newValue in
@@ -79,7 +79,7 @@ struct MediaSettingsView: View {
                     Text("settings.title.warnAboutMissingAltTitle", comment: "Warn of missing ALT text")
                     Text("settings.title.warnAboutMissingAltDescription", comment: "A warning about missing ALT texts will be displayed before publishing new post.")
                         .font(.footnote)
-                        .foregroundColor(.lightGrayColor)
+                        .foregroundColor(.customGrayColor)
                 }
             }
             .onChange(of: self.applicationState.warnAboutMissingAlt) { newValue in

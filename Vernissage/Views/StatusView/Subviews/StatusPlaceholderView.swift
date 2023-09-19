@@ -32,10 +32,10 @@ struct StatusPlaceholderView: View {
                                 accountUsername: "@username")
 
                     Text("Lorem ispum text something")
-                        .foregroundColor(.lightGrayColor)
+                        .foregroundColor(.customGrayColor)
                         .font(.footnote)
                     Text("Lorem ispum text something sdf sdfsdf sdfdsfsdfsdf")
-                        .foregroundColor(.lightGrayColor)
+                        .foregroundColor(.customGrayColor)
                         .font(.footnote)
 
                     LabelIcon(iconName: "mappin.and.ellipse", value: "Wroclaw, Poland")

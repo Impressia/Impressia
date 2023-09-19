@@ -41,7 +41,7 @@ struct CommentsSectionView: View {
                                     .padding(.horizontal, 16)
                                     .padding(.vertical, 8)
                             }
-                            .background(Color.lightGrayColor.opacity(0.5))
+                            .background(Color.customGrayColor.opacity(0.5))
                             .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
                         }
                     }

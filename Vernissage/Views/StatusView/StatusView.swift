@@ -134,7 +134,7 @@ struct StatusView: View {
                         }
                     }
                     .padding(.bottom, 2)
-                    .foregroundColor(.lightGrayColor)
+                    .foregroundColor(.customGrayColor)
 
                     HStack {
                         Text("status.title.uploaded", comment: "Uploaded")
@@ -151,7 +151,7 @@ struct StatusView: View {
                             Text(String(format: NSLocalizedString("status.title.via", comment: "via"), applicationName))
                         }
                     }
-                    .foregroundColor(.lightGrayColor)
+                    .foregroundColor(.customGrayColor)
                     .font(.footnote)
 
                     InteractionRow(statusModel: statusViewModel) {

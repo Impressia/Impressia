@@ -38,6 +38,7 @@
 		F84625F829FE2C2F002D3AF4 /* AccountFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84625F729FE2C2F002D3AF4 /* AccountFetcher.swift */; };
 		F84625FB29FE393B002D3AF4 /* QRCode in Frameworks */ = {isa = PBXBuildFile; productRef = F84625FA29FE393B002D3AF4 /* QRCode */; };
 		F858906B29E1CC7A00D4BDED /* UIApplication+Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = F858906A29E1CC7A00D4BDED /* UIApplication+Window.swift */; };
+		F85D0C652ABA08F9002B3577 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F85D0C642ABA08F9002B3577 /* Assets.xcassets */; };
 		F85D4971296402DC00751DF7 /* AuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D4970296402DC00751DF7 /* AuthorizationService.swift */; };
 		F85D4975296407F100751DF7 /* HomeTimelineService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D4974296407F100751DF7 /* HomeTimelineService.swift */; };
 		F85D497729640A5200751DF7 /* ImageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D497629640A5200751DF7 /* ImageRow.swift */; };
@@ -54,7 +55,6 @@
 		F864F76129BB91B400B13921 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F864F76029BB91B400B13921 /* SwiftUI.framework */; };
 		F864F76429BB91B400B13921 /* VernissageWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F76329BB91B400B13921 /* VernissageWidgetBundle.swift */; };
 		F864F76629BB91B400B13921 /* PhotoWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F76529BB91B400B13921 /* PhotoWidget.swift */; };
-		F864F76829BB91B600B13921 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F864F76729BB91B600B13921 /* Assets.xcassets */; };
 		F864F76C29BB91B600B13921 /* VernissageWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F864F75D29BB91B400B13921 /* VernissageWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F864F77529BB92CE00B13921 /* PhotoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F77329BB929A00B13921 /* PhotoProvider.swift */; };
 		F864F77629BB92CE00B13921 /* PhotoWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F77129BB924D00B13921 /* PhotoWidgetEntryView.swift */; };
@@ -271,6 +271,7 @@
 		F84625F729FE2C2F002D3AF4 /* AccountFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountFetcher.swift; sourceTree = "<group>"; };
 		F858906A29E1CC7A00D4BDED /* UIApplication+Window.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Window.swift"; sourceTree = "<group>"; };
 		F85B586C29ED169B00A16D12 /* Vernissage-010.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Vernissage-010.xcdatamodel"; sourceTree = "<group>"; };
+		F85D0C642ABA08F9002B3577 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F85D4970296402DC00751DF7 /* AuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationService.swift; sourceTree = "<group>"; };
 		F85D4974296407F100751DF7 /* HomeTimelineService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTimelineService.swift; sourceTree = "<group>"; };
 		F85D497629640A5200751DF7 /* ImageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRow.swift; sourceTree = "<group>"; };
@@ -288,7 +289,6 @@
 		F864F76029BB91B400B13921 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		F864F76329BB91B400B13921 /* VernissageWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VernissageWidgetBundle.swift; sourceTree = "<group>"; };
 		F864F76529BB91B400B13921 /* PhotoWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoWidget.swift; sourceTree = "<group>"; };
-		F864F76729BB91B600B13921 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F864F76929BB91B600B13921 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F864F77129BB924D00B13921 /* PhotoWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoWidgetEntryView.swift; sourceTree = "<group>"; };
 		F864F77329BB929A00B13921 /* PhotoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoProvider.swift; sourceTree = "<group>"; };
@@ -676,7 +676,7 @@
 				F84625EE29FE2ABA002D3AF4 /* PhotoWidget */,
 				F8F6E44F29BCE9030004795E /* Extensions */,
 				F864F76329BB91B400B13921 /* VernissageWidgetBundle.swift */,
-				F864F76729BB91B600B13921 /* Assets.xcassets */,
+				F85D0C642ABA08F9002B3577 /* Assets.xcassets */,
 			);
 			path = VernissageWidget;
 			sourceTree = "<group>";
@@ -981,7 +981,6 @@
 				F88C2465295C37B80006098B /* Frameworks */,
 				F88C2466295C37B80006098B /* Resources */,
 				F864F76D29BB91B600B13921 /* Embed Foundation Extensions */,
-				F8CB3DF129D8267C00CDAE5A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1013,7 +1012,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					F864F75C29BB91B400B13921 = {
 						CreatedOnToolsVersion = 14.2;
@@ -1060,7 +1059,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F864F76829BB91B600B13921 /* Assets.xcassets in Resources */,
+				F85D0C652ABA08F9002B3577 /* Assets.xcassets in Resources */,
 				F835082429BEF9C400DE3247 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1087,27 +1086,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		F8CB3DF129D8267C00CDAE5A /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https: //github.com/realm/SwiftLint\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F864F75929BB91B400B13921 /* Sources */ = {
@@ -1447,6 +1425,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1480,6 +1459,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1508,6 +1488,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1541,6 +1522,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

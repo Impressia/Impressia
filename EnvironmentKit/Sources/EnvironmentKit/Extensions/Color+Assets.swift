@@ -10,7 +10,7 @@ public extension Color {
 
     // MARK: - Text Colors
     static let dangerColor = Color("DangerColor")
-    static let lightGrayColor = Color("LightGrayColor")
+    static let customGrayColor = Color("CustomGrayColor")
     static let mainTextColor = Color("MainTextColor")
     static let selectedRowColor = Color("SelectedRowColor")
     static let viewBackgroundColor = Color("ViewBackgroundColor")
