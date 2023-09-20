@@ -6,6 +6,7 @@
 
 import SwiftUI
 import WidgetsKit
+import Semaphore
 
 struct WaterfallGrid<Data, ID, Content>: View where Data: RandomAccessCollection, Data: Equatable, Content: View,
                                                     ID: Hashable, Data.Element: Equatable, Data.Element: Identifiable, Data.Element: Hashable, Data.Element: Sizable {
@@ -17,9 +18,9 @@ struct WaterfallGrid<Data, ID, Content>: View where Data: RandomAccessCollection
 
     @State private var columnsData: [ColumnData<Data.Element>] = []
     @State private var processedItems: [Data.Element.ID] = []
-    @State private var isDuringLoading: Bool = false
 
     private let onLoadMore: () async -> Void
+    private let semaphore = AsyncSemaphore(value: 1)
 
     var body: some View {
         HStack(alignment: .top, spacing: 20) {
@@ -30,12 +31,12 @@ struct WaterfallGrid<Data, ID, Content>: View where Data: RandomAccessCollection
                     }
 
                     if self.hideLoadMore == false {
+                        // We can show multiple loading indicators. Each indicator can run loading feature in pararell.
+                        // Thus we have to be sure that loading will exeute one by one.
                         LoadingIndicator()
                             .task {
-                                if isDuringLoading == false {
-                                    isDuringLoading = true
-                                    await self.onLoadMore()
-                                    isDuringLoading = false
+                                Task { @MainActor in
+                                    await self.loadMoreData()
                                 }
                             }
                     }
@@ -52,31 +53,48 @@ struct WaterfallGrid<Data, ID, Content>: View where Data: RandomAccessCollection
             self.recalculateArrays()
         }
     }
+    
+    private func loadMoreData() async {
+        await semaphore.wait()
+        defer { semaphore.signal() }
+
+        await self.onLoadMore()
+    }
 
     private func recalculateArrays() {
-        self.columnsData = []
-        self.processedItems = []
-
-        for _ in 0 ..< self.columns {
-            self.columnsData.append(ColumnData())
-        }
-
-        for item in self.data {
-            let index = self.minimumHeightIndex()
-
-            self.columnsData[index].data.append(item)
-            self.columnsData[index].height = self.columnsData[index].height + self.calculateHeight(item: item)
-            self.processedItems.append(item.id)
+        Task { @MainActor in
+            await semaphore.wait()
+            defer { semaphore.signal() }
+            
+            self.columnsData = []
+            self.processedItems = []
+            
+            for _ in 0 ..< self.columns {
+                self.columnsData.append(ColumnData())
+            }
+            
+            for item in self.data {
+                let index = self.minimumHeightIndex()
+                
+                self.columnsData[index].data.append(item)
+                self.columnsData[index].height = self.columnsData[index].height + self.calculateHeight(item: item)
+                self.processedItems.append(item.id)
+            }
         }
     }
 
     private func appendToArrays() {
-        for item in self.data where self.processedItems.contains(where: { $0 == item.id }) == false {
-            let index = self.minimumHeightIndex()
-
-            self.columnsData[index].data.append(item)
-            self.columnsData[index].height = self.columnsData[index].height + self.calculateHeight(item: item)
-            self.processedItems.append(item.id)
+        Task { @MainActor in
+            await semaphore.wait()
+            defer { semaphore.signal() }
+            
+            for item in self.data where self.processedItems.contains(where: { $0 == item.id }) == false {
+                let index = self.minimumHeightIndex()
+                
+                self.columnsData[index].data.append(item)
+                self.columnsData[index].height = self.columnsData[index].height + self.calculateHeight(item: item)
+                self.processedItems.append(item.id)
+            }
         }
     }
 
