@@ -55,8 +55,8 @@ struct StatusesView: View {
 
     // Gallery parameters.
     @State private var imageColumns = 3
-    @State private var containerWidth: Double = UIScreen.main.bounds.width
-    @State private var containerHeight: Double = UIScreen.main.bounds.height
+    @State private var containerWidth: Double = UIDevice.isIPad ? UIScreen.main.bounds.width / 3 : UIScreen.main.bounds.width
+    @State private var containerHeight: Double = UIDevice.isIPad ? UIScreen.main.bounds.height / 3 : UIScreen.main.bounds.height
 
     private let defaultLimit = 40
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)

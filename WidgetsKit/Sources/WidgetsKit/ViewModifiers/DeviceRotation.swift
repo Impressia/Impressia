@@ -52,10 +52,10 @@ struct DeviceImageGallery: ViewModifier {
                     }
                 }
                 .onAppear {
-                    // asyncAfter(0.1) {
+                    asyncAfter(0.1) {
                         let galleryProperties = self.getGalleryProperties(geometry: geometry, horizontalSize: self.horizontalSizeClass ?? .compact)
                         self.action(galleryProperties)
-                    // }
+                    }
                 }
         }
     }
