@@ -224,7 +224,9 @@ struct ImageViewer: View {
 
     private func calculateStartingOffset() -> CGSize {
         // Image size on the screen.
-        let calculatedSize = ImageSizeService.shared.calculate(width: self.imageWidth, height: self.imageHeight)
+        let calculatedSize = ImageSizeService.shared.calculate(width: self.imageWidth,
+                                                               height: self.imageHeight,
+                                                               andContainerWidth: UIScreen.main.bounds.size.width)
         let imageOnScreenHeight = calculatedSize.height
 
         // Calculate full space for image.

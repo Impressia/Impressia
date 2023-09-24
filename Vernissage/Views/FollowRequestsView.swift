@@ -71,7 +71,7 @@ struct FollowRequestsView: View {
                                 Text(account.displayName ?? account.username)
                                     .foregroundColor(.mainTextColor)
                                 Text("@\(account.acct)")
-                                    .foregroundColor(.lightGrayColor)
+                                    .foregroundColor(.customGrayColor)
                                     .font(.footnote)
                             }
                             .padding(.leading, 8)

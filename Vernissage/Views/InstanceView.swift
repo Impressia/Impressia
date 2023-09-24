@@ -68,7 +68,7 @@ struct InstanceView: View {
                     if let shortDescription = instance.shortDescription {
                         Text(shortDescription)
                             .font(.footnote)
-                            .foregroundColor(.lightGrayColor)
+                            .foregroundColor(.customGrayColor)
                     }
                 }
 
@@ -119,7 +119,7 @@ struct InstanceView: View {
             Text(title, comment: "Title")
             Spacer()
             Text(value)
-                .foregroundColor(.lightGrayColor)
+                .foregroundColor(.customGrayColor)
                 .font(.subheadline)
         }
     }

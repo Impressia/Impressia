@@ -20,7 +20,6 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/omaralbeik/Drops", .upToNextMajor(from: "1.6.1")),
         .package(url: "https://github.com/kean/Nuke", .upToNextMajor(from: "12.0.0")),
-        .package(name: "PixelfedKit", path: "../PixelfedKit"),
         .package(name: "EnvironmentKit", path: "../EnvironmentKit")
     ],
     targets: [

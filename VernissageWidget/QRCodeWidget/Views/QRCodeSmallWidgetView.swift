@@ -61,6 +61,8 @@ struct QRCodeSmallWidgetView: View {
                     .frame(height: 24)
             }
         }
+        .widgetBackground {
+        }
         .padding(8)
     }
 }

@@ -58,13 +58,13 @@ struct NotificationRowView: View {
 
                     if let createdAt = self.notification.createdAt.toDate(.isoDateTimeMilliSec) {
                         RelativeTime(date: createdAt)
-                            .foregroundColor(.lightGrayColor)
+                            .foregroundColor(.customGrayColor)
                             .font(.footnote)
                     }
                 }
 
                 Text(self.getTitle(), comment: "Notification type")
-                    .foregroundColor(.lightGrayColor)
+                    .foregroundColor(.customGrayColor)
                     .font(.footnote)
                     .fontWeight(.light)
 

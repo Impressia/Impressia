@@ -36,7 +36,7 @@ struct CommentBodyView: View {
 
                     if let createdAt = self.statusViewModel.createdAt.toDate(.isoDateTimeMilliSec) {
                         RelativeTime(date: createdAt)
-                            .foregroundColor(.lightGrayColor)
+                            .foregroundColor(.customGrayColor)
                             .font(.footnote)
                     }
                 }

@@ -24,7 +24,7 @@ public struct NoDataView: View {
             Text(self.text, comment: "No data message")
                 .font(.title3)
         }
-        .foregroundColor(.lightGrayColor)
+        .foregroundColor(.customGrayColor)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     }
 }

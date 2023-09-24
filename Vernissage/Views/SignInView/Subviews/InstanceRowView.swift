@@ -80,7 +80,7 @@ struct InstanceRowView: View {
                     Spacer()
                 }
                 .padding(.top, 4)
-                .foregroundColor(.lightGrayColor)
+                .foregroundColor(.customGrayColor)
                 .font(.caption)
             }
         }

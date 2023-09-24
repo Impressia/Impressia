@@ -142,7 +142,7 @@ struct EditProfileView: View {
 
                 Text("@\(account.acct)")
                     .font(.headline)
-                    .foregroundColor(.lightGrayColor)
+                    .foregroundColor(.customGrayColor)
 
                 if self.avatarData != nil {
                     HStack {
@@ -151,7 +151,7 @@ struct EditProfileView: View {
                             .foregroundColor(.accentColor)
                         Text("editProfile.title.photoInfo")
                             .font(.footnote)
-                            .foregroundColor(.lightGrayColor)
+                            .foregroundColor(.customGrayColor)
                     }
                     .padding(.top, 4)
                 }

@@ -19,6 +19,7 @@ public class HomeTimelineService {
     private let defaultAmountOfDownloadedStatuses = 40
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
 
+    @MainActor
     public func loadOnBottom(for account: AccountModel) async throws -> Int {
         // Load data from API and operate on CoreData on background context.
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
@@ -43,7 +44,8 @@ public class HomeTimelineService {
         return allStatusesFromApi.count
     }
 
-    public func refreshTimeline(for account: AccountModel) async throws -> String? {
+    @MainActor
+    public func refreshTimeline(for account: AccountModel, updateLastSeenStatus: Bool = false) async throws -> String? {
         // Load data from API and operate on CoreData on background context.
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
 
@@ -55,29 +57,28 @@ public class HomeTimelineService {
         // When Apple introduce good way to show new items without scroll to top then we can change that method.
         let allStatusesFromApi = try await self.refresh(for: account, on: backgroundContext)
 
-        // Save data into database.
-        CoreDataHandler.shared.save(viewContext: backgroundContext)
-
+        // Update last seen status.
+        if let lastSeenStatusId, updateLastSeenStatus == true {
+            try self.update(lastSeenStatusId: lastSeenStatusId, for: account, on: backgroundContext)
+        }
+        
         // Start prefetching images.
         self.prefetch(statuses: allStatusesFromApi)
+        
+        // Save data into database.
+        CoreDataHandler.shared.save(viewContext: backgroundContext)
 
         // Return id of last seen status.
         return lastSeenStatusId
     }
 
-    public func save(lastSeenStatusId: String, for account: AccountModel) async throws {
-        // Load data from API and operate on CoreData on background context.
-        let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
-
+    private func update(lastSeenStatusId: String, for account: AccountModel, on backgroundContext: NSManagedObjectContext) throws {
         // Save information about last seen status.
         guard let accountDataFromDb = AccountDataHandler.shared.getAccountData(accountId: account.id, viewContext: backgroundContext) else {
             throw DatabaseError.cannotDownloadAccount
         }
 
         accountDataFromDb.lastSeenStatusId = lastSeenStatusId
-
-        // Save data into database.
-        CoreDataHandler.shared.save(viewContext: backgroundContext)
     }
 
     public func update(status statusData: StatusData, basedOn status: Status, for account: AccountModel) async throws -> StatusData? {
@@ -191,7 +192,9 @@ public class HomeTimelineService {
 
         // Delete statuses from database.
         if !dbStatusesToRemove.isEmpty {
-            StatusDataHandler.shared.remove(accountId: account.id, statuses: dbStatusesToRemove, viewContext: backgroundContext)
+            for dbStatusToRemove in dbStatusesToRemove {
+                backgroundContext.delete(dbStatusToRemove)
+            }
         }
 
         // Save statuses in database.
