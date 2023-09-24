@@ -108,7 +108,7 @@ struct WaterfallGrid<Data, ID, Content>: View where Data: RandomAccessCollection
 
     private func minimumHeightIndex() -> Int {
         let minimumHeight = self.minimumHeight()
-        return self.columnsData.lastIndex(where: { $0.height == minimumHeight }) ?? 0
+        return self.columnsData.firstIndex(where: { $0.height == minimumHeight }) ?? 0
     }
 }
 

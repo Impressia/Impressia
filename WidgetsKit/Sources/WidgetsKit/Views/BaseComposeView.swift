@@ -75,8 +75,7 @@ public struct BaseComposeView: View {
     }
 
     private let statusViewModel: StatusModel?
-    private let imageSize: Double
-    private let amoutOfImagesInRow = 3
+    private let imageSize = 115.0
     private let keyboardFontImageSize = 20.0
     private let keyboardFontTextSize = 16.0
     private let autocompleteFontTextSize = 12.0
@@ -93,7 +92,6 @@ public struct BaseComposeView: View {
         self.onClose = onClose
         self.onUpload = onUpload
         self.draggedItem = nil
-        self.imageSize = (UIScreen.main.bounds.width - 40) / Double(self.amoutOfImagesInRow)
 
         _textModel = StateObject(wrappedValue: .init())
     }
