@@ -12,7 +12,7 @@ extension Pixelfed {
         case verifyCredentials
         case followers(EntityId, MaxId?, SinceId?, MinId?, Limit?, Page?)
         case following(EntityId, MaxId?, SinceId?, MinId?, Limit?, Page?)
-        case statuses(EntityId, Bool, Bool, MaxId?, SinceId?, MinId?, Limit?)
+        case statuses(EntityId, Bool?, Bool?, MaxId?, SinceId?, MinId?, Limit?)
         case follow(EntityId)
         case unfollow(EntityId)
         case block(EntityId)
@@ -90,10 +90,15 @@ extension Pixelfed.Account: TargetType {
 
         switch self {
         case .statuses(_, let paramOnlyMedia, let paramExcludeReplies, let paramMaxId, let paramSinceId, let paramMinId, let paramLimit):
-            params.append(contentsOf: [
-                ("only_media", paramOnlyMedia.asString),
-                ("exclude_replies", paramExcludeReplies.asString)
-            ])
+
+            if let paramOnlyMedia {
+                params.append(("only_media", paramOnlyMedia.asString))
+            }
+
+            if let paramExcludeReplies {
+                params.append(("only_media", paramExcludeReplies.asString))
+            }
+
             maxId = paramMaxId
             sinceId = paramSinceId
             minId = paramMinId

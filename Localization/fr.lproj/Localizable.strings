@@ -9,8 +9,8 @@
 "global.title.showMore" = "Montrer plus";
 "global.title.showLess" = "Montrer moins";
 "global.title.close" = "Fermer";
-"global.error.refreshingCredentialsTitle" = "Refreshing credentials error.";
-"global.error.refreshingCredentialsSubtitle" = "Please sign in again to Pixelfed.";
+"global.error.refreshingCredentialsTitle" = "Erreur d'actualisation des données d'identification.";
+"global.error.refreshingCredentialsSubtitle" = "Veuillez vous connecter à nouveau à Pixelfed.";
 
 // MARK: Global errors.
 "global.error.unexpected" = "Erreur inattendue.";
@@ -98,8 +98,8 @@
 "userProfile.title.favourites" = "Favoris";
 "userProfile.title.bookmarks" = "Marque-pages";
 "userProfile.title.posts" = "Posts";
-"userProfile.title.followers" = "Suiveurs";
-"userProfile.title.following" = "Suivis";
+"userProfile.title.followers" = "Abonnés";
+"userProfile.title.following" = "Abonnements";
 "userProfile.title.joined" = "Joint %@";
 "userProfile.title.unfollow" = "Ne plus suivre";
 "userProfile.title.follow" = "Suivre";
@@ -112,11 +112,11 @@
 "userProfile.title.unblocked" = "Compte débloqué";
 "userProfile.title.report" = "Rapport";
 "userProfile.title.followsYou" = "Vous suit";
-"userProfile.title.requestFollow" = "Request follow";
-"userProfile.title.cancelRequestFollow" = "Cancel request";
-"userProfile.title.followRequests" = "Follow requests";
-"userProfile.title.privateProfileTitle" = "This profile is private.";
-"userProfile.title.privateProfileSubtitle" = "Only approved followers can see photos.";
+"userProfile.title.requestFollow" = "Demande de suivi";
+"userProfile.title.cancelRequestFollow" = "Annuler la demande";
+"userProfile.title.followRequests" = "Suivre les demandes";
+"userProfile.title.privateProfileTitle" = "Ce profil est privé.";
+"userProfile.title.privateProfileSubtitle" = "Seules les personnes approuvées peuvent voir les photos.";
 "userProfile.error.notExists" = "Le compte n'existe pas.";
 "userProfile.error.loadingAccountFailed" = "Erreur pendant le téléchargement du compte depuis le serveur.";
 "userProfile.error.muting" = "L'action sourdine / réactivation a échoué.";
@@ -132,23 +132,23 @@
 "notifications.title.followedYou" = "vous a suivi";
 "notifications.title.mentionedYou" = "vous a mentionné";
 "notifications.title.boosted" = "partagé";
-"notifications.title.favourited" = "favouri";
+"notifications.title.favourited" = "favori";
 "notifications.title.postedStatus" = "statut posté";
 "notifications.title.followRequest" = "demande de suivi";
 "notifications.title.poll" = "sondage";
 "notifications.title.updatedStatus" = "statut mis à jour";
 "notifications.title.signedUp" = "s'inscrire";
-"notifications.title.newReport" = "new rapport";
+"notifications.title.newReport" = "nouveau rapport";
 "notifications.error.loadingNotificationsFailed" = "Chargement des notifications échoué.";
 
 // Mark: Compose view.
 "compose.navigationBar.title" = "Composer";
 "compose.title.everyone" = "Tout le monde";
 "compose.title.unlisted" = "Non listé";
-"compose.title.followers" = "Suiveurs";
+"compose.title.followers" = "Abonnés";
 "compose.title.attachPhotoFull" = "Joignez une photo et écrivez ce qui vous convient";
 "compose.title.attachPhotoMini" = "Ecrivez ce qui vous convient";
-"compose.title.publish" = "Publer";
+"compose.title.publish" = "Publier";
 "compose.title.cancel" = "Annuler";
 "compose.title.writeContentWarning" = "Rédaction d'un avertissement sur le contenu";
 "compose.title.commentsWillBeDisabled" = "Les commentaires seront désactivés";
@@ -156,11 +156,11 @@
 "compose.title.tryToUpload" = "Essayer de télécharger";
 "compose.title.delete" = "Supprimer";
 "compose.title.edit" = "Editer";
-"compose.title.photos" = "Photos library";
-"compose.title.camera" = "Take photo";
-"compose.title.files" = "Browse files";
-"compose.title.missingAltTexts" = "Missing ALT texts";
-"compose.title.missingAltTextsWarning" = "Not all images have been described for the visually impaired. Would you like to send photos anyway?";
+"compose.title.photos" = "Albums photos";
+"compose.title.camera" = "Prendre une photo";
+"compose.title.files" = "Parcourir les fichiers";
+"compose.title.missingAltTexts" = "Manque un texte ALT";
+"compose.title.missingAltTextsWarning" = "Toutes les images n'ont pas été décrites pour les malvoyants. Souhaitez-vous tout de même envoyer des photos ?";
 "compose.error.loadingPhotosFailed" = "Impossible de récupérer l'image depuis la bibliothèque.";
 "compose.error.postingPhotoFailed" = "Erreur pendant le post de la photo.";
 "compose.error.postingStatusFailed" = "Erreur pendant le post du statut.";
@@ -235,8 +235,8 @@
 "settings.title.showFavouriteOnTimeline" = "Les favoris sont affichés sur la timeline";
 "settings.title.showAltText" = "Afficher l'icône ALT";
 "settings.title.showAltTextOnTimeline" = "L'icône ALT sera affichée sur la timeline";
-"settings.title.warnAboutMissingAltTitle" = "Warn of missing ALT text";
-"settings.title.warnAboutMissingAltDescription" = "A warning about missing ALT texts will be displayed before publishing new post.";
+"settings.title.warnAboutMissingAltTitle" = "Avertir de l'absence de texte ALT";
+"settings.title.warnAboutMissingAltDescription" = "Un avertissement concernant les textes ALT manquants sera affiché avant la publication d'un nouveau message.";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Se connecter à Pixelfed";
@@ -288,8 +288,8 @@
 "status.error.deleteFailed" = "L'action de suppression a échoué.";
 
 // Mark: Accounts view.
-"accounts.navigationBar.followers" = "Suiveurs";
-"accounts.navigationBar.following" = "Suivis";
+"accounts.navigationBar.followers" = "Abonnés";
+"accounts.navigationBar.following" = "Abonnements";
 "accounts.navigationBar.favouritedBy" = "Favorisé par";
 "accounts.navigationBar.reboostedBy" = "Partagé par";
 "accounts.navigationBar.blocked" = "Comptes bloqués";
@@ -302,7 +302,7 @@
 
 // Mark: Widget view.
 "widget.title.photoDescription" = "Widget avec des photos de Pixelfed.";
-"widget.title.qrCodeDescription" = "Widget with QR Code to your Pixelfed profile.";
+"widget.title.qrCodeDescription" = "Widget avec QR Code vers votre profil Pixelfed.";
 
 // Mark: In-app purchases.
 "purchase.donut.title" = "Beignet";
@@ -364,8 +364,8 @@
 "report.error.notReported" = "Erreur lors de l'envoi du rapport.";
 
 // Mark: Following requests.
-"followingRequests.navigationBar.title" = "Following requests";
-"followingRequests.title.approve" = "Approve";
-"followingRequests.title.reject" = "Reject";
-"followingRequests.error.approve" = "Error during approving request.";
-"followingRequests.error.reject" = "Error during rejecting request.";
+"followingRequests.navigationBar.title" = "Suivre les demandes";
+"followingRequests.title.approve" = "Approuver";
+"followingRequests.title.reject" = "Rejeter";
+"followingRequests.error.approve" = "Erreur lors de l'approbation de la demande.";
+"followingRequests.error.reject" = "Erreur lors du rejet de la demande.";
