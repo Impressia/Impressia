@@ -6,7 +6,7 @@
 
 import Foundation
 
-enum ImageScale {
-    case orginalFullWidth
-    case squareHalfWidth
+public protocol Sizable {
+    var height: Double { get }
+    var width: Double { get }
 }

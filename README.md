@@ -32,3 +32,9 @@ In the name of the folders you have to put the code of the new language ([here](
 Then you have to open files in these folders and translate them 🇯🇵🇫🇷🇨🇮🇧🇪. After translation create a Pull Request 👍.
 
 From time to time you have to come back and translate lines which has been added since the last translation. 
+
+## Technical debt
+ - Use auto generated resources (Color/Images) instead static extensions (how to do this in separete Swift Packages?)
+ - Enable swiftlint (https://github.com/realm/SwiftLint/issues/5053)
+ - Investigate new (iOS 17) Observables
+ - Check how to migrate to SwiftData (iOS 17)

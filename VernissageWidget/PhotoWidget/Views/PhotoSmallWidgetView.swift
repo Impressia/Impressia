@@ -33,7 +33,7 @@ struct PhotoSmallWidgetView: View {
             .padding(.leading, 8)
             .padding(.bottom, 8)
         }
-        .background {
+        .widgetBackground {
             uiImage
                 .resizable()
                 .aspectRatio(contentMode: .fill)

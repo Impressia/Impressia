@@ -101,12 +101,10 @@ struct HomeFeedView: View {
     private func refreshData() async {
         do {
             if let account = self.applicationState.account {
-                if let lastSeenStatusId = try await HomeTimelineService.shared.refreshTimeline(for: account) {
-                    try await HomeTimelineService.shared.save(lastSeenStatusId: lastSeenStatusId, for: account)
-                    self.applicationState.lastSeenStatusId = lastSeenStatusId
-                }
+                let lastSeenStatusId = try await HomeTimelineService.shared.refreshTimeline(for: account, updateLastSeenStatus: true)
 
                 asyncAfter(0.35) {
+                    self.applicationState.lastSeenStatusId = lastSeenStatusId
                     self.applicationState.amountOfNewStatuses = 0
                 }
             }

@@ -17,5 +17,6 @@ struct PhotoWidget: Widget {
         .configurationDisplayName("Vernissage")
         .description("widget.title.photoDescription")
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
+        .contentMarginsDisabled()
     }
 }

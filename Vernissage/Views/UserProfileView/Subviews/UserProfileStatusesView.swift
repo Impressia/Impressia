@@ -18,65 +18,87 @@ struct UserProfileStatusesView: View {
 
     @State public var accountId: String
 
+    // Gallery parameters.
+    @Binding private var imageColumns: Int
+    @Binding private var containerWidth: Double
+    @Binding private var containerHeight: Double
+
     @State private var allItemsLoaded = false
     @State private var firstLoadFinished = false
     @State private var statusViewModels: [StatusModel] = []
 
-    private let defaultLimit = 20
+    private let defaultLimit = 40
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
     private let singleGrids = [GridItem(.flexible(), spacing: 10)]
     private let dubleGrid = [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 0)]
 
+    init(accountId: String, imageColumns: Binding<Int>, containerWidth: Binding<Double>, containerHeight: Binding<Double>) {
+        self.accountId = accountId
+        self._imageColumns = imageColumns
+        self._containerWidth = containerWidth
+        self._containerHeight = containerHeight
+    }
+
     var body: some View {
         if firstLoadFinished == true {
-            HStack {
-                Spacer()
-                Button {
-                    withAnimation {
-                        self.applicationState.showGridOnUserProfile = false
-                        ApplicationSettingsHandler.shared.set(showGridOnUserProfile: false)
+            if self.imageColumns > 1 {
+                WaterfallGrid($statusViewModels, columns: $imageColumns, hideLoadMore: $allItemsLoaded) { item in
+                    ImageRowAsync(statusViewModel: item, withAvatar: false, containerWidth: $containerWidth)
+                } onLoadMore: {
+                    do {
+                        try await self.loadMoreStatuses()
+                    } catch {
+                        ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
                     }
-                } label: {
-                    Image(systemName: "rectangle.grid.1x2.fill")
-                        .foregroundColor(self.applicationState.showGridOnUserProfile ? .lightGrayColor : .accentColor)
-                        .padding(.trailing, 8)
-                        .padding(.bottom, 8)
                 }
-                Button {
-                    withAnimation {
-                        self.applicationState.showGridOnUserProfile = true
-                        ApplicationSettingsHandler.shared.set(showGridOnUserProfile: true)
-                    }
-                } label: {
-                    Image(systemName: "rectangle.grid.2x2.fill")
-                        .foregroundColor(self.applicationState.showGridOnUserProfile ? .accentColor : .lightGrayColor)
-                        .padding(.trailing, 16)
-                        .padding(.bottom, 8)
-                }
-            }
-
-            LazyVGrid(columns: self.applicationState.showGridOnUserProfile ? dubleGrid : singleGrids, spacing: 5) {
-                ForEach(self.statusViewModels, id: \.id) { item in
-                    ImageRowAsync(statusViewModel: item,
-                                  withAvatar: false,
-                                  imageScale: self.applicationState.showGridOnUserProfile ? .squareHalfWidth : .orginalFullWidth)
-                        .if(self.applicationState.showGridOnUserProfile) {
-                            $0.frame(width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.width / 2)
+            } else {
+                HStack {
+                    Spacer()
+                    Button {
+                        withAnimation {
+                            self.applicationState.showGridOnUserProfile = false
+                            ApplicationSettingsHandler.shared.set(showGridOnUserProfile: false)
                         }
+                    } label: {
+                        Image(systemName: "rectangle.grid.1x2.fill")
+                            .foregroundColor(self.applicationState.showGridOnUserProfile ? .customGrayColor : .accentColor)
+                            .padding(.trailing, 8)
+                            .padding(.bottom, 8)
+                    }
+                    Button {
+                        withAnimation {
+                            self.applicationState.showGridOnUserProfile = true
+                            ApplicationSettingsHandler.shared.set(showGridOnUserProfile: true)
+                        }
+                    } label: {
+                        Image(systemName: "rectangle.grid.2x2.fill")
+                            .foregroundColor(self.applicationState.showGridOnUserProfile ? .accentColor : .customGrayColor)
+                            .padding(.trailing, 16)
+                            .padding(.bottom, 8)
+                    }
                 }
 
-                if allItemsLoaded == false && firstLoadFinished == true {
-                    HStack {
-                        Spacer()
-                        LoadingIndicator()
-                            .task {
-                                do {
-                                    try await self.loadMoreStatuses()
-                                } catch {
-                                    ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadStatuses", showToastr: true)
+                LazyVGrid(columns: self.applicationState.showGridOnUserProfile ? dubleGrid : singleGrids, spacing: 5) {
+                    ForEach(self.statusViewModels, id: \.id) { item in
+                        ImageRowAsync(statusViewModel: item,
+                                      withAvatar: false,
+                                      containerWidth: Binding.constant(self.applicationState.showGridOnUserProfile ? self.containerWidth / 2 : self.containerWidth),
+                                      clipToRectangle: $applicationState.showGridOnUserProfile)
+                    }
+
+                    if allItemsLoaded == false && firstLoadFinished == true {
+                        HStack {
+                            Spacer()
+                            LoadingIndicator()
+                                .task {
+                                    do {
+                                        try await self.loadMoreStatuses()
+                                    } catch {
+                                        ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadStatuses", showToastr: true)
+                                    }
                                 }
-                            }
-                        Spacer()
+                            Spacer()
+                        }
                     }
                 }
             }

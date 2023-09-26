@@ -12,11 +12,29 @@ import WidgetsKit
 struct ImageCarouselPicture: View {
     @ObservedObject public var attachment: AttachmentModel
 
+    @State private var blurredImageHeight: Double
+    @State private var blurredImageWidth: Double
+
     private let onImageDownloaded: (AttachmentModel, Data) -> Void
 
     init(attachment: AttachmentModel, onImageDownloaded: @escaping (_: AttachmentModel, _: Data) -> Void) {
         self.attachment = attachment
         self.onImageDownloaded = onImageDownloaded
+
+        if let size = ImageSizeService.shared.get(for: attachment.url) {
+            let imageSize = ImageSizeService.shared.calculate(width: size.width, height: size.height)
+
+            self.blurredImageHeight = imageSize.height
+            self.blurredImageWidth = imageSize.width
+        } else if let imageWidth = attachment.metaImageWidth, let imageHeight = attachment.metaImageHeight {
+            let imageSize = ImageSizeService.shared.calculate(width: Double(imageWidth), height: Double(imageHeight))
+
+            self.blurredImageHeight = imageSize.height
+            self.blurredImageWidth = imageSize.width
+        } else {
+            self.blurredImageHeight = 100.0
+            self.blurredImageWidth = 100.0
+        }
     }
 
     var body: some View {
@@ -26,6 +44,7 @@ struct ImageCarouselPicture: View {
                 .aspectRatio(contentMode: .fit)
         } else {
             BlurredImage(blurhash: attachment.blurhash)
+                .frame(width: self.blurredImageWidth, height: self.blurredImageHeight)
                 .task {
                     do {
                         // Download image and recalculate exif data.

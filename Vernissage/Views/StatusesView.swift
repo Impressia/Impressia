@@ -14,6 +14,7 @@ import WidgetsKit
 
 struct StatusesView: View {
     public enum ListType: Hashable {
+        case home
         case local
         case federated
         case favourites
@@ -22,6 +23,8 @@ struct StatusesView: View {
 
         public var title: LocalizedStringKey {
             switch self {
+            case .home:
+                return "mainview.tab.homeTimeline"
             case .local:
                 return "statuses.navigationBar.localTimeline"
             case .federated:
@@ -50,7 +53,12 @@ struct StatusesView: View {
     @State private var state: ViewState = .loading
     @State private var lastStatusId: String?
 
-    private let defaultLimit = 20
+    // Gallery parameters.
+    @State private var imageColumns = 3
+    @State private var containerWidth: Double = UIDevice.isIPad ? UIScreen.main.bounds.width / 3 : UIScreen.main.bounds.width
+    @State private var containerHeight: Double = UIDevice.isIPad ? UIScreen.main.bounds.height / 3 : UIScreen.main.bounds.height
+
+    private let defaultLimit = 40
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
 
     var body: some View {
@@ -88,26 +96,43 @@ struct StatusesView: View {
     @ViewBuilder
     private func list() -> some View {
         ScrollView {
-            LazyVStack(alignment: .center) {
-                ForEach(self.statusViewModels, id: \.id) { item in
-                    ImageRowAsync(statusViewModel: item)
+            if self.imageColumns > 1 {
+                WaterfallGrid($statusViewModels, columns: $imageColumns, hideLoadMore: $allItemsLoaded) { item in
+                    ImageRowAsync(statusViewModel: item, containerWidth: $containerWidth)
+                } onLoadMore: {
+                    do {
+                        try await self.loadMoreStatuses()
+                    } catch {
+                        ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
+                    }
                 }
+            } else {
+                LazyVStack(alignment: .center) {
+                    ForEach(self.statusViewModels, id: \.id) { item in
+                        ImageRowAsync(statusViewModel: item, containerWidth: $containerWidth)
+                    }
 
-                if allItemsLoaded == false {
-                    HStack {
-                        Spacer()
-                        LoadingIndicator()
-                            .task {
-                                do {
-                                    try await self.loadMoreStatuses()
-                                } catch {
-                                    ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
+                    if allItemsLoaded == false {
+                        HStack {
+                            Spacer()
+                            LoadingIndicator()
+                                .task {
+                                    do {
+                                        try await self.loadMoreStatuses()
+                                    } catch {
+                                        ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
+                                    }
                                 }
-                            }
-                        Spacer()
+                            Spacer()
+                        }
                     }
                 }
             }
+        }
+        .gallery { galleryProperties in
+            self.imageColumns = galleryProperties.imageColumns
+            self.containerWidth = galleryProperties.containerWidth
+            self.containerHeight = galleryProperties.containerHeight
         }
         .refreshable {
             do {
@@ -210,6 +235,12 @@ struct StatusesView: View {
 
     private func loadFromApi(maxId: String? = nil, sinceId: String? = nil, minId: String? = nil) async throws -> [Status] {
         switch self.listType {
+        case .home:
+            return try await self.client.publicTimeline?.getHomeTimeline(
+                maxId: maxId,
+                sinceId: sinceId,
+                minId: minId,
+                limit: self.defaultLimit) ?? []
         case .local:
             return try await self.client.publicTimeline?.getStatuses(
                 local: true,

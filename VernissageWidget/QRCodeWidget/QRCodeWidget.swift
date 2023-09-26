@@ -17,5 +17,6 @@ struct QRCodeWidget: Widget {
         .configurationDisplayName("Vernissage")
         .description("widget.title.qrCodeDescription")
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
+        .contentMarginsDisabled()
     }
 }

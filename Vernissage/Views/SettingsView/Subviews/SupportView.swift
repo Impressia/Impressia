@@ -21,7 +21,7 @@ struct SupportView: View {
                         Text(product.displayName)
                         Text(product.description)
                             .font(.footnote)
-                            .foregroundColor(.lightGrayColor)
+                            .foregroundColor(.customGrayColor)
                     }
                     Spacer()
                     Button(product.displayPrice) {

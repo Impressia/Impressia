@@ -113,7 +113,8 @@ public struct ImageUploadView: View {
                                             .foregroundStyle(Color.white, Color.systemGreen)
                                     }
 
-                                    Text("ALT", comment: "ALT")
+                                    Text("status.title.altText", comment: "ALT")
+                                        .foregroundStyle(Color.white)
                                 }
                                 .font(.system(size: 12))
                                 .shadow(color: .black, radius: 4)

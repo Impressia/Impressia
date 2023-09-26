@@ -8,7 +8,6 @@ import Foundation
 import PixelfedKit
 
 public class StatusModel: ObservableObject {
-
     public let id: EntityId
     public let content: Html
 
@@ -105,6 +104,21 @@ public extension StatusModel {
             return nil
         }
     }
+}
+
+extension StatusModel: Equatable {
+    public static func == (lhs: StatusModel, rhs: StatusModel) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+
+extension StatusModel: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        return hasher.combine(self.id)
+    }
+}
+
+extension StatusModel: Identifiable {
 }
 
 public extension [StatusModel] {

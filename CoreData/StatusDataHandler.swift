@@ -120,20 +120,6 @@ class StatusDataHandler {
         }
     }
 
-    func remove(accountId: String, statuses: [StatusData], viewContext: NSManagedObjectContext? = nil) {
-        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
-
-        for status in statuses {
-            context.delete(status)
-        }
-
-        do {
-            try context.save()
-        } catch {
-            CoreDataError.shared.handle(error, message: "Error during deleting status (remove).")
-        }
-    }
-
     func setFavourited(accountId: String, statusId: String) {
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
 

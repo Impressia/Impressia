@@ -75,8 +75,7 @@ public struct BaseComposeView: View {
     }
 
     private let statusViewModel: StatusModel?
-    private let imageSize: Double
-    private let amoutOfImagesInRow = 3
+    private let imageSize = 115.0
     private let keyboardFontImageSize = 20.0
     private let keyboardFontTextSize = 16.0
     private let autocompleteFontTextSize = 12.0
@@ -93,7 +92,6 @@ public struct BaseComposeView: View {
         self.onClose = onClose
         self.onUpload = onUpload
         self.draggedItem = nil
-        self.imageSize = (UIScreen.main.bounds.width - 40) / Double(self.amoutOfImagesInRow)
 
         _textModel = StateObject(wrappedValue: .init())
     }
@@ -400,7 +398,7 @@ public struct BaseComposeView: View {
                     Image(systemName: "mappin.and.ellipse")
                     Text("\(name), \(country)")
                 }
-                .foregroundColor(.lightGrayColor)
+                .foregroundColor(.customGrayColor)
                 .padding(.trailing, 8)
             }
         }
@@ -425,7 +423,7 @@ public struct BaseComposeView: View {
                                         Text(account.displayNameWithoutEmojis)
                                             .foregroundColor(.mainTextColor)
                                         Text("@\(account.acct)")
-                                            .foregroundColor(.lightGrayColor)
+                                            .foregroundColor(.customGrayColor)
                                     }
                                     .padding(.leading, 8)
                                 }
@@ -540,7 +538,7 @@ public struct BaseComposeView: View {
                 Spacer()
 
                 Text("\(self.applicationState.statusMaxCharacters - textModel.text.string.utf16.count)")
-                    .foregroundColor(.lightGrayColor)
+                    .foregroundColor(.customGrayColor)
                     .font(.system(size: self.keyboardFontTextSize))
             }
             .padding(8)

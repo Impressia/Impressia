@@ -116,8 +116,13 @@ struct MainView: View {
     private func getMainView() -> some View {
         switch self.viewMode {
         case .home:
-            HomeFeedView(accountId: applicationState.account?.id ?? String.empty())
-                .id(applicationState.account?.id ?? String.empty())
+            if UIDevice.isIPhone {
+                HomeFeedView(accountId: applicationState.account?.id ?? String.empty())
+                    .id(applicationState.account?.id ?? String.empty())
+            } else {
+                StatusesView(listType: .home)
+                    .id(applicationState.account?.id ?? String.empty())
+            }
         case .trendingPhotos:
             TrendStatusesView(accountId: applicationState.account?.id ?? String.empty())
                 .id(applicationState.account?.id ?? String.empty())
@@ -237,7 +242,7 @@ struct MainView: View {
                 .frame(width: 16, height: 16)
                 .foregroundColor(.white)
                 .padding(8)
-                .background(Color.lightGrayColor)
+                .background(Color.customGrayColor)
                 .clipShape(AvatarShape.circle.shape())
                 .background(
                     AvatarShape.circle.shape()

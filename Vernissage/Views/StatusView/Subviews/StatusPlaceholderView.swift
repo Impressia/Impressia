@@ -8,6 +8,7 @@ import SwiftUI
 import WidgetsKit
 
 struct StatusPlaceholderView: View {
+    @State var imageWidth: Double
     @State var imageHeight: Double
     @State var imageBlurhash: String?
 
@@ -17,11 +18,11 @@ struct StatusPlaceholderView: View {
                 if let imageBlurhash, let uiImage = UIImage(blurHash: imageBlurhash, size: CGSize(width: 32, height: 32)) {
                     Image(uiImage: uiImage)
                         .resizable()
-                        .frame(width: UIScreen.main.bounds.width, height: imageHeight)
+                        .frame(width: self.imageWidth, height: self.imageHeight)
                 } else {
                     Rectangle()
                         .fill(Color.placeholderText)
-                        .frame(width: UIScreen.main.bounds.width, height: imageHeight)
+                        .frame(width: self.imageWidth, height: self.imageHeight)
                         .redacted(reason: .placeholder)
                 }
 
@@ -31,10 +32,10 @@ struct StatusPlaceholderView: View {
                                 accountUsername: "@username")
 
                     Text("Lorem ispum text something")
-                        .foregroundColor(.lightGrayColor)
+                        .foregroundColor(.customGrayColor)
                         .font(.footnote)
                     Text("Lorem ispum text something sdf sdfsdf sdfdsfsdfsdf")
-                        .foregroundColor(.lightGrayColor)
+                        .foregroundColor(.customGrayColor)
                         .font(.footnote)
 
                     LabelIcon(iconName: "mappin.and.ellipse", value: "Wroclaw, Poland")

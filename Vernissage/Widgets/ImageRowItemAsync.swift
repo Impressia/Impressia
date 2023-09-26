@@ -22,7 +22,10 @@ struct ImageRowItemAsync: View {
     private var attachment: AttachmentModel
     private let showAvatar: Bool
     private let imageFromCache: Bool
-    private let imageScale: ImageScale
+
+    @Binding private var containerWidth: Double
+    @Binding private var showSpoilerText: Bool
+    @Binding private var clipToRectangle: Bool
 
     @State private var showThumbImage = false
     @State private var opacity = 1.0
@@ -33,13 +36,18 @@ struct ImageRowItemAsync: View {
     init(statusViewModel: StatusModel,
          attachment: AttachmentModel,
          withAvatar showAvatar: Bool = true,
-         imageScale: ImageScale = .orginalFullWidth,
+         containerWidth: Binding<Double>,
+         clipToRectangle: Binding<Bool> = Binding.constant(false),
+         showSpoilerText: Binding<Bool> = Binding.constant(true),
          onImageDownloaded: @escaping (_: Double, _: Double) -> Void) {
         self.showAvatar = showAvatar
-        self.imageScale = imageScale
         self.statusViewModel = statusViewModel
         self.attachment = attachment
         self.onImageDownloaded = onImageDownloaded
+
+        self._containerWidth = containerWidth
+        self._showSpoilerText = showSpoilerText
+        self._clipToRectangle = clipToRectangle
 
         self.imageFromCache = ImagePipeline.shared.cache.containsCachedImage(for: ImageRequest(url: attachment.url))
     }
@@ -49,7 +57,7 @@ struct ImageRowItemAsync: View {
             if let image = state.image {
                 if self.statusViewModel.sensitive && !self.applicationState.showSensitive {
                     ZStack {
-                        ContentWarning(spoilerText: self.imageScale == .orginalFullWidth ? self.statusViewModel.spoilerText : nil) {
+                        ContentWarning(spoilerText: self.showSpoilerText ? self.statusViewModel.spoilerText : nil) {
                             self.imageContainerView(image: image)
                                 .imageContextMenu(statusModel: self.statusViewModel,
                                                   attachmentModel: self.attachment,
@@ -155,9 +163,9 @@ struct ImageRowItemAsync: View {
     private func imageView(image: Image) -> some View {
         image
             .resizable()
-            .scaledToFill()
-            .if(self.imageScale == .squareHalfWidth) {
-                $0.frame(width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.width / 2).clipped()
+            .aspectRatio(contentMode: self.clipToRectangle ? .fill : .fit)
+            .if(self.clipToRectangle) {
+                $0.frame(width: self.containerWidth, height: self.containerWidth).clipped()
             }
             .onTapGesture(count: 2) {
                 Task {
@@ -194,10 +202,11 @@ struct ImageRowItemAsync: View {
     }
 
     private func recalculateSizeOfDownloadedImage(uiImage: UIImage) {
-        let size = ImageSizeService.shared.calculate(for: attachment.url,
-                                                     width: uiImage.size.width,
-                                                     height: uiImage.size.height)
+        ImageSizeService.shared.save(for: attachment.url,
+                                     width: uiImage.size.width,
+                                     height: uiImage.size.height)
 
+        let size = ImageSizeService.shared.calculate(for: attachment.url, andContainerWidth: UIScreen.main.bounds.size.width)
         self.onImageDownloaded(size.width, size.height)
     }
 }

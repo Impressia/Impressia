@@ -27,6 +27,11 @@ struct UserProfileView: View {
     @State private var state: ViewState = .loading
     @State private var viewId = UUID().uuidString
 
+    // Gallery parameters.
+    @State private var imageColumns = 3
+    @State private var containerWidth: Double = UIScreen.main.bounds.width
+    @State private var containerHeight: Double = UIScreen.main.bounds.height
+
     var body: some View {
         self.mainBody()
             .navigationTitle(self.accountDisplayName ?? self.accountUserName)
@@ -68,10 +73,15 @@ struct UserProfileView: View {
                 .id(self.viewId)
 
             if self.applicationState.account?.id == account.id || self.relationship.haveAccessToPhotos(account: account) {
-                UserProfileStatusesView(accountId: account.id)
+                UserProfileStatusesView(accountId: account.id, imageColumns: $imageColumns, containerWidth: $containerWidth, containerHeight: $containerHeight)
             } else {
                 UserProfilePrivateAccountView()
             }
+        }
+        .gallery { galleryProperties in
+            self.imageColumns = galleryProperties.imageColumns
+            self.containerWidth = galleryProperties.containerWidth
+            self.containerHeight = galleryProperties.containerHeight
         }
         .onAppear {
             if let updatedProfile = self.applicationState.updatedProfile {

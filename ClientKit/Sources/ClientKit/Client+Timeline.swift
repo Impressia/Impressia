@@ -9,6 +9,13 @@ import PixelfedKit
 
 extension Client {
     public class PublicTimeline: BaseClient {
+        public func getHomeTimeline(maxId: String? = nil,
+                                    sinceId: String? = nil,
+                                    minId: String? = nil,
+                                    limit: Int = 40) async throws -> [Status] {
+            return try await pixelfedClient.getHomeTimeline(maxId: maxId, sinceId: sinceId, minId: minId, limit: limit)
+        }
+
         public func getStatuses(local: Bool? = nil,
                                 remote: Bool? = nil,
                                 maxId: String? = nil,

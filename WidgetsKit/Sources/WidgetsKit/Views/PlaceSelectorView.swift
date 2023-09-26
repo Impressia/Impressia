@@ -79,7 +79,7 @@ public struct PlaceSelectorView: View {
                                             .foregroundColor(.mainTextColor)
                                         Text(place.country ?? String.empty())
                                             .font(.subheadline)
-                                            .foregroundColor(.lightGrayColor)
+                                            .foregroundColor(.customGrayColor)
                                     }
 
                                     Spacer()
