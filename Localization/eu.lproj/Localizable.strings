@@ -78,10 +78,12 @@
 "trendingStatuses.title.noPhotos" = "Argazkirik ez.";
 
 // Mark: Trending tags.
-"trendingTags.navigationBar.title" = "Traolak";
-"trendingTags.title.noTags" = "Traolarik ez.";
-"trendingTags.title.amountOfPosts" = "%d bidalketa";
-"trendingTags.error.loadingTagsFailed" = "Traolak kargatzeak huts egin du.";
+"tags.navigationBar.trendingTitle" = "Traolak";
+"tags.navigationBar.searchTitle" = "Traolak";
+"tags.navigationBar.followedTitle" = "Traolak";
+"tags.title.noTags" = "Traolarik ez.";
+"tags.title.amountOfPosts" = "%d bidalketa";
+"tags.error.loadingTagsFailed" = "Traolak kargatzeak huts egin du.";
 
 // Mark: Trending accounts.
 "trendingAccounts.navigationBar.title" = "Kontuak";
@@ -97,6 +99,7 @@
 "userProfile.title.block" = "Blokeatu";
 "userProfile.title.favourites" = "Gogokoak";
 "userProfile.title.bookmarks" = "Laster-markak";
+"userProfile.title.followedTags" = "Traolak";
 "userProfile.title.posts" = "Bidalketa";
 "userProfile.title.followers" = "Jarraitzaile";
 "userProfile.title.following" = "Jarraitzen";

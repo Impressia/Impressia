@@ -78,10 +78,12 @@
 "trendingStatuses.title.noPhotos" = "Unfortunately, there are no photos here.";
 
 // Mark: Trending tags.
-"trendingTags.navigationBar.title" = "Tags";
-"trendingTags.title.noTags" = "Unfortunately, there are no tags here.";
-"trendingTags.title.amountOfPosts" = "%d posts";
-"trendingTags.error.loadingTagsFailed" = "Loading tags failed.";
+"tags.navigationBar.trendingTitle" = "Tags";
+"tags.navigationBar.searchTitle" = "Tags";
+"tags.navigationBar.followedTitle" = "Followed tags";
+"tags.title.noTags" = "Unfortunately, there are no tags here.";
+"tags.title.amountOfPosts" = "%d posts";
+"tags.error.loadingTagsFailed" = "Loading tags failed.";
 
 // Mark: Trending accounts.
 "trendingAccounts.navigationBar.title" = "Accounts";
@@ -97,6 +99,7 @@
 "userProfile.title.block" = "Block";
 "userProfile.title.favourites" = "Favourites";
 "userProfile.title.bookmarks" = "Bookmarks";
+"userProfile.title.followedTags" = "Followed tags";
 "userProfile.title.posts" = "Posts";
 "userProfile.title.followers" = "Followers";
 "userProfile.title.following" = "Following";

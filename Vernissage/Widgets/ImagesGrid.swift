@@ -20,7 +20,7 @@ struct ImagesGrid: View {
     @EnvironmentObject var routerPath: RouterPath
 
     private let maxImages = 5
-    private let maxHeight = 120.0
+    private let maxHeight = UIDevice.isIPad ? 240.0 : 120.0
 
     @State public var gridType: GridType
 

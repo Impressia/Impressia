@@ -11,6 +11,7 @@ extension Pixelfed {
         case tag(Hashtag)
         case follow(Hashtag)
         case unfollow(Hashtag)
+        case followed(MaxId?, SinceId?, MinId?, Limit?)
     }
 }
 
@@ -26,13 +27,15 @@ extension Pixelfed.Tags: TargetType {
             return "\(apiPath)/\(hashtag)/follow"
         case .unfollow(let hashtag):
             return "\(apiPath)/\(hashtag)/unfollow"
+        case .followed:
+            return "/api/v1/followed_tags"
         }
     }
 
     /// The HTTP method used in the request.
     public var method: Method {
         switch self {
-        case .tag:
+        case .tag, .followed(_, _, _, _):
             return .get
         case .follow, .unfollow:
             return .post
@@ -41,7 +44,36 @@ extension Pixelfed.Tags: TargetType {
 
     /// The parameters to be incoded in the request.
     public var queryItems: [(String, String)]? {
-        return nil
+        var params: [(String, String)] = []
+
+        var maxId: MaxId?
+        var sinceId: SinceId?
+        var minId: MinId?
+        var limit: Limit?
+
+        switch self {
+        case .followed(let paramMaxId, let paramSinceId, let paramMinId, let paramLimit):
+            maxId = paramMaxId
+            sinceId = paramSinceId
+            minId = paramMinId
+            limit = paramLimit
+        default: break
+        }
+
+        if let maxId {
+            params.append(("max_id", maxId))
+        }
+        if let sinceId {
+            params.append(("since_id", sinceId))
+        }
+        if let minId {
+            params.append(("min_id", minId))
+        }
+        if let limit {
+            params.append(("limit", "\(limit)"))
+        }
+
+        return params
     }
 
     public var headers: [String: String]? {

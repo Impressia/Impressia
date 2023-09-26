@@ -15,14 +15,17 @@ import WidgetsKit
 struct HashtagsView: View {
     public enum ListType: Hashable {
         case trending
+        case followed
         case search(query: String)
 
         public var title: LocalizedStringKey {
             switch self {
             case .trending:
-                return "trendingTags.navigationBar.title"
+                return "tags.navigationBar.trendingTitle"
             case .search:
-                return "trendingTags.navigationBar.title"
+                return "tags.navigationBar.searchTitle"
+            case .followed:
+                return "tags.navigationBar.followedTitle"
             }
         }
     }
@@ -51,7 +54,7 @@ struct HashtagsView: View {
                 }
         case .loaded:
             if self.tags.isEmpty {
-                NoDataView(imageSystemName: "person.3.sequence", text: "trendingTags.title.noTags")
+                NoDataView(imageSystemName: "person.3.sequence", text: "tags.title.noTags")
             } else {
                 self.list()
             }
@@ -77,7 +80,7 @@ struct HashtagsView: View {
                         Text(tag.name).font(.headline)
                         Spacer()
                         if let total = tag.total {
-                            Text(String(format: NSLocalizedString("trendingTags.title.amountOfPosts", comment: "Amount of posts"), total))
+                            Text(String(format: NSLocalizedString("tags.title.amountOfPosts", comment: "Amount of posts"), total))
                                 .font(.caption)
                         }
                     }
@@ -87,6 +90,9 @@ struct HashtagsView: View {
                 }
             }
         }
+        .refreshable {
+            await self.loadData()
+        }
     }
 
     private func loadData() async {
@@ -95,10 +101,10 @@ struct HashtagsView: View {
             self.state = .loaded
         } catch {
             if !Task.isCancelled {
-                ErrorService.shared.handle(error, message: "trendingTags.error.loadingTagsFailed", showToastr: true)
+                ErrorService.shared.handle(error, message: "tags.error.loadingTagsFailed", showToastr: true)
                 self.state = .error(error)
             } else {
-                ErrorService.shared.handle(error, message: "trendingTags.error.loadingTagsFailed", showToastr: false)
+                ErrorService.shared.handle(error, message: "tags.error.loadingTagsFailed", showToastr: false)
             }
         }
     }
@@ -111,6 +117,9 @@ struct HashtagsView: View {
         case .search(let query):
             let results = try await self.client.search?.search(query: query, resultsType: .hashtags, limit: 40)
             return results?.hashtags.map({ tag in HashtagModel(tag: tag) }) ?? []
+        case .followed:
+            let tagsFromApi = try await self.client.tags?.followed(limit: 200)
+            return tagsFromApi?.data.map({ tag in HashtagModel(tag: tag) }) ?? []
         }
     }
 }
