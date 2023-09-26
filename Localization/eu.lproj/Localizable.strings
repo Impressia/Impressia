@@ -80,7 +80,7 @@
 // Mark: Trending tags.
 "tags.navigationBar.trendingTitle" = "Traolak";
 "tags.navigationBar.searchTitle" = "Traolak";
-"tags.navigationBar.followedTitle" = "Traolak";
+"tags.navigationBar.followedTitle" = "Jarraitzen dituzun traolak";
 "tags.title.noTags" = "Traolarik ez.";
 "tags.title.amountOfPosts" = "%d bidalketa";
 "tags.error.loadingTagsFailed" = "Traolak kargatzeak huts egin du.";
