@@ -74,7 +74,7 @@ struct DeviceImageGallery: ViewModifier {
 
             return GalleryProperties(imageColumns: imageColumns,
                                      containerWidth: (geometry.size.width - Double(marginSpacing)) / Double(imageColumns),
-                                     containerHeight: geometry.size.height / Double(imageColumns))
+                                     containerHeight: (geometry.size.height - Double(marginSpacing)) / Double(imageColumns))
         }
     }
 }
