@@ -20,7 +20,7 @@ private struct NavigationMenuButtons: ViewModifier {
     @EnvironmentObject var routerPath: RouterPath
 
     private let onViewModeIconTap: (MainView.ViewMode) -> Void
-    private let imageFontSize = 20.0
+    private let imageFontSize = UIDevice.isIPad ? 30.0 : 20.0
 
     private let customMenuItems = [
         NavigationMenuItemDetails(viewMode: .home),
@@ -88,22 +88,22 @@ private struct NavigationMenuButtons: ViewModifier {
                     self.contextMenuView()
                     self.customMenuItemsView()
                 }
-                .frame(height: 50)
-                .padding(.horizontal, 8)
+                .frame(height: UIDevice.isIPad ? 64 : 50)
+                .padding(.horizontal, UIDevice.isIPad ? 16 : 8)
                 .background(.ultraThinMaterial)
                 .clipShape(Capsule())
 
                 self.composeImageView()
-                    .frame(height: 50)
-                    .padding(.horizontal, 8)
+                    .frame(height: UIDevice.isIPad ? 64 : 50)
+                    .padding(.horizontal, UIDevice.isIPad ? 16 : 8)
                     .background(.ultraThinMaterial)
                     .clipShape(Circle())
             }
         } else {
             HStack(alignment: .center) {
                 self.composeImageView()
-                    .frame(height: 50)
-                    .padding(.horizontal, 8)
+                    .frame(height: UIDevice.isIPad ? 64 : 50)
+                    .padding(.horizontal, UIDevice.isIPad ? 16 : 8)
                     .background(.ultraThinMaterial)
                     .clipShape(Circle())
 
@@ -111,8 +111,8 @@ private struct NavigationMenuButtons: ViewModifier {
                     self.customMenuItemsView()
                     self.contextMenuView()
                 }
-                .frame(height: 50)
-                .padding(.horizontal, 8)
+                .frame(height: UIDevice.isIPad ? 64 : 50)
+                .padding(.horizontal, UIDevice.isIPad ? 16 : 8)
                 .background(.ultraThinMaterial)
                 .clipShape(Capsule())
             }
@@ -128,6 +128,7 @@ private struct NavigationMenuButtons: ViewModifier {
         } label: {
             Image(systemName: "ellipsis")
                 .font(.system(size: self.imageFontSize))
+                .fontWeight(UIDevice.isIPad ? .light : .regular)
                 .foregroundColor(.mainTextColor.opacity(0.75))
                 .padding(.vertical, 10)
                 .padding(.horizontal, 8)
@@ -149,6 +150,7 @@ private struct NavigationMenuButtons: ViewModifier {
         } label: {
             Image(systemName: "plus")
                 .font(.system(size: self.imageFontSize))
+                .fontWeight(UIDevice.isIPad ? .light : .regular)
                 .foregroundColor(.mainTextColor.opacity(0.75))
                 .padding(.vertical, 10)
                 .padding(.horizontal, 8)
@@ -162,6 +164,7 @@ private struct NavigationMenuButtons: ViewModifier {
         } label: {
             Image(systemName: displayedCustomMenuItem.image)
                 .font(.system(size: self.imageFontSize))
+                .fontWeight(UIDevice.isIPad ? .light : .regular)
                 .foregroundColor(.mainTextColor.opacity(0.75))
                 .padding(.vertical, 10)
                 .padding(.horizontal, 8)

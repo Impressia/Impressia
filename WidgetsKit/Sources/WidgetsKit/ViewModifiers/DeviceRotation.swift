@@ -35,6 +35,7 @@ struct DeviceImageGallery: ViewModifier {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
 
     let action: (GalleryProperties) -> Void
+    let imageSpacing = 8
 
     func body(content: Content) -> some View {
         GeometryReader { geometry in
@@ -69,9 +70,10 @@ struct DeviceImageGallery: ViewModifier {
         } else {
             // View like on iPad.
             let imageColumns = geometry.size.width > geometry.size.height ? 3 : 2
+            let marginSpacing = self.imageSpacing * (imageColumns - 1)
 
             return GalleryProperties(imageColumns: imageColumns,
-                                     containerWidth: geometry.size.width / Double(imageColumns),
+                                     containerWidth: (geometry.size.width - Double(marginSpacing)) / Double(imageColumns),
                                      containerHeight: geometry.size.height / Double(imageColumns))
         }
     }

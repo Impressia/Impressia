@@ -23,7 +23,7 @@ struct WaterfallGrid<Data, ID, Content>: View where Data: RandomAccessCollection
     private let semaphore = AsyncSemaphore(value: 1)
 
     var body: some View {
-        HStack(alignment: .top, spacing: 20) {
+        HStack(alignment: .top, spacing: 8) {
             ForEach(self.columnsData, id: \.id) { columnData in
                 LazyVStack(spacing: 8) {
                     ForEach(columnData.data, id: \.id) { item in
