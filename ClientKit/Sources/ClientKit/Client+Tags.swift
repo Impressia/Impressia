@@ -20,5 +20,13 @@ extension Client {
         public func unfollow(tag: String) async throws -> Tag? {
             return try await pixelfedClient.unfollow(hashtag: tag)
         }
+        
+        public func followed(maxId: MaxId? = nil,
+                             sinceId: SinceId? = nil,
+                             minId: MinId? = nil,
+                             limit: Int? = nil
+        ) async throws -> Linkable<[Tag]> {
+            return try await pixelfedClient.followedTags(maxId: maxId, sinceId: sinceId, minId: minId, limit: limit)
+        }
     }
 }

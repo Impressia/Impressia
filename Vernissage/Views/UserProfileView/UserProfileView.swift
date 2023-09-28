@@ -215,6 +215,10 @@ struct UserProfileView: View {
                 NavigationLink(value: RouteurDestinations.bookmarks) {
                     Label(NSLocalizedString("userProfile.title.bookmarks", comment: "Bookmarks"), systemImage: "bookmark")
                 }
+                
+                NavigationLink(value: RouteurDestinations.hashtags(listType: .followed)) {
+                    Label(NSLocalizedString("userProfile.title.followedTags", comment: "Followed tags"), systemImage: "number.square")
+                }
 
                 Divider()
 

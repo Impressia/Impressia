@@ -37,4 +37,16 @@ public extension PixelfedClientAuthenticated {
 
         return try await downloadJson(Tag.self, request: request)
     }
+    
+    func followedTags(maxId: MaxId? = nil,
+                      sinceId: SinceId? = nil,
+                      minId: MinId? = nil,
+                      limit: Int? = nil
+    ) async throws -> Linkable<[Tag]> {
+        let request = try Self.request(for: baseURL,
+                                       target: Pixelfed.Tags.followed(maxId, sinceId, minId, limit),
+                                       withBearerToken: token)
+
+        return try await downloadJsonWithLink([Tag].self, request: request)
+    }
 }

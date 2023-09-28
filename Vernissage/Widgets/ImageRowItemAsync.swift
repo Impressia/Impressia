@@ -163,9 +163,16 @@ struct ImageRowItemAsync: View {
     private func imageView(image: Image) -> some View {
         image
             .resizable()
-            .aspectRatio(contentMode: self.clipToRectangle ? .fill : .fit)
-            .if(self.clipToRectangle) {
-                $0.frame(width: self.containerWidth, height: self.containerWidth).clipped()
+            .if(self.clipToRectangle == true) {
+                $0
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: self.containerWidth, height: self.containerWidth)
+                    .clipped()
+                    // Fix issue with clickable content area outside of the visible image: https://developer.apple.com/forums/thread/123717.
+                    .contentShape(Rectangle())
+            }
+            .if(self.clipToRectangle == false) {
+                $0.aspectRatio(contentMode: .fit)
             }
             .onTapGesture(count: 2) {
                 Task {

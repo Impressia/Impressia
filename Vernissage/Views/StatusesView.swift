@@ -65,8 +65,7 @@ struct StatusesView: View {
         self.mainBody()
             .navigationTitle(self.listType.title)
             .toolbar {
-                // TODO: It seems like pixelfed is not supporting the endpoints.
-                // self.getTrailingToolbar()
+                 self.getTrailingToolbar()
             }
     }
 
@@ -292,15 +291,16 @@ struct StatusesView: View {
                 Button {
                     Task {
                         if self.tag?.following == true {
-                            await self.follow(hashtag: hashtag)
-                        } else {
                             await self.unfollow(hashtag: hashtag)
+                        } else {
+                            await self.follow(hashtag: hashtag)
                         }
                     }
                 } label: {
                     Image(systemName: self.tag?.following == true ? "number.square.fill" : "number.square")
                         .tint(.mainTextColor)
                 }
+                .disabled(self.tag == nil)
             }
         }
     }
