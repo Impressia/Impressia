@@ -12,7 +12,8 @@ extension StatusData {
         if let reblog = status.reblog {
             self.copyFrom(reblog)
 
-            self.rebloggedStatusId = status.id
+            self.id = status.id
+            self.rebloggedStatusId = reblog.id
             self.rebloggedAccountAvatar = status.account.avatar
             self.rebloggedAccountDisplayName = status.account.displayName
             self.rebloggedAccountId = status.account.id

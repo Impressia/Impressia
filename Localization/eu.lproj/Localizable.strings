@@ -240,6 +240,8 @@
 "settings.title.showAltTextOnTimeline" = "ALT ikurra (deskribapena edo testu alternatiboa dagoenaren seinale) denbora-lerroan erakutsiko da";
 "settings.title.warnAboutMissingAltTitle" = "Abisatu ALT ahaztu bazait";
 "settings.title.warnAboutMissingAltDescription" = "Irudiren batek deskribapenik ez badu, argitaratu baino lehen abisua erakutsiko da.";
+"settings.title.enableReboostOnTimeline" = "Show boosted statuses";
+"settings.title.enableReboostOnTimelineDescription" = "Boosted statuses will be visible on your home timeline.";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Hasi saioa Pixelfed-en";

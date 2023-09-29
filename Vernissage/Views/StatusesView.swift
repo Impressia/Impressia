@@ -239,7 +239,8 @@ struct StatusesView: View {
                 maxId: maxId,
                 sinceId: sinceId,
                 minId: minId,
-                limit: self.defaultLimit) ?? []
+                limit: self.defaultLimit,
+                includeReblogs: self.applicationState.showReboostedStatuses) ?? []
         case .local:
             return try await self.client.publicTimeline?.getStatuses(
                 local: true,

@@ -45,7 +45,7 @@ public class StatusModel: ObservableObject {
         // If status has been rebloged we are saving orginal status here.
         let orginalStatus = status.reblog ?? status
 
-        self.id = orginalStatus.id
+        self.id = status.id
         self.content = orginalStatus.content
         self.uri = orginalStatus.uri
         self.url = orginalStatus.url

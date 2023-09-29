@@ -8,7 +8,7 @@ import Foundation
 
 extension Pixelfed {
     public enum Timelines {
-        case home(MaxId?, SinceId?, MinId?, Limit?)
+        case home(MaxId?, SinceId?, MinId?, Limit?, Bool?)
         case pub(Bool?, Bool?, Bool?, MaxId?, SinceId?, MinId?, Limit?)
         case tag(String, Bool?, Bool?, Bool?, MaxId?, SinceId?, MinId?, Limit?)
     }
@@ -43,6 +43,7 @@ extension Pixelfed.Timelines: TargetType {
         var local: Bool?
         var remote: Bool?
         var onlyMedia: Bool?
+        var includeReblogs: Bool?
         var maxId: MaxId?
         var sinceId: SinceId?
         var minId: MinId?
@@ -58,34 +59,46 @@ extension Pixelfed.Timelines: TargetType {
             sinceId = paramSinceId
             minId = paramMinId
             limit = paramLimit
-        case .home(let paramMaxId, let paramSinceId, let paramMinId, let paramLimit):
+        case .home(let paramMaxId, let paramSinceId, let paramMinId, let paramLimit, let paramIncludeReblogs):
             maxId = paramMaxId
             sinceId = paramSinceId
             minId = paramMinId
             limit = paramLimit
+            includeReblogs = paramIncludeReblogs
         }
 
         if let maxId {
             params.append(("max_id", maxId))
         }
+
         if let sinceId {
             params.append(("since_id", sinceId))
         }
+
         if let minId {
             params.append(("min_id", minId))
         }
+
         if let limit {
             params.append(("limit", "\(limit)"))
         }
+
         if let local {
             params.append(("local", local.asString))
         }
+
         if let remote {
             params.append(("remote", remote.asString))
         }
+
         if let onlyMedia {
             params.append(("only_media", onlyMedia.asString))
         }
+
+        if let includeReblogs, includeReblogs == true {
+            params.append(("include_reblogs", includeReblogs.asString))
+        }
+        
         return params
     }
 

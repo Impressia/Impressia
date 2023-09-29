@@ -67,7 +67,9 @@ struct ImageRowItemAsync: View {
                                 BlurredImage(blurhash: attachment.blurhash)
                                 if self.showAvatar {
                                     ImageAvatar(displayName: self.statusViewModel.account.displayNameWithoutEmojis,
-                                                avatarUrl: self.statusViewModel.account.avatar) {
+                                                avatarUrl: self.statusViewModel.account.avatar,
+                                                rebloggedAccountDisplayName: self.statusViewModel.reblogStatus?.account.displayNameWithoutEmojis,
+                                                rebloggedAccountAvatar: self.statusViewModel.reblogStatus?.account.avatar) {
                                         self.routerPath.navigate(to: .userProfile(accountId: self.statusViewModel.account.id,
                                                                                   accountDisplayName: self.statusViewModel.account.displayNameWithoutEmojis,
                                                                                   accountUserName: self.statusViewModel.account.acct))
@@ -143,7 +145,9 @@ struct ImageRowItemAsync: View {
 
             if self.showAvatar {
                 ImageAvatar(displayName: self.statusViewModel.account.displayNameWithoutEmojis,
-                            avatarUrl: self.statusViewModel.account.avatar) {
+                            avatarUrl: self.statusViewModel.account.avatar,
+                            rebloggedAccountDisplayName: self.statusViewModel.reblogStatus?.account.displayNameWithoutEmojis,
+                            rebloggedAccountAvatar: self.statusViewModel.reblogStatus?.account.avatar) {
                     self.routerPath.navigate(to: .userProfile(accountId: self.statusViewModel.account.id,
                                                               accountDisplayName: self.statusViewModel.account.displayNameWithoutEmojis,
                                                               accountUserName: self.statusViewModel.account.acct))

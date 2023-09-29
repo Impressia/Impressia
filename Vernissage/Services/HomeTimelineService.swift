@@ -20,7 +20,7 @@ public class HomeTimelineService {
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
 
     @MainActor
-    public func loadOnBottom(for account: AccountModel) async throws -> Int {
+    public func loadOnBottom(for account: AccountModel, includeReblogs: Bool) async throws -> Int {
         // Load data from API and operate on CoreData on background context.
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
 
@@ -32,7 +32,7 @@ public class HomeTimelineService {
         }
 
         // Load data on bottom of the list.
-        let allStatusesFromApi = try await self.load(for: account, on: backgroundContext, maxId: oldestStatus.id)
+        let allStatusesFromApi = try await self.load(for: account, includeReblogs: includeReblogs, on: backgroundContext, maxId: oldestStatus.id)
 
         // Save data into database.
         CoreDataHandler.shared.save(viewContext: backgroundContext)
@@ -45,7 +45,7 @@ public class HomeTimelineService {
     }
 
     @MainActor
-    public func refreshTimeline(for account: AccountModel, updateLastSeenStatus: Bool = false) async throws -> String? {
+    public func refreshTimeline(for account: AccountModel, includeReblogs: Bool, updateLastSeenStatus: Bool = false) async throws -> String? {
         // Load data from API and operate on CoreData on background context.
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
 
@@ -55,7 +55,7 @@ public class HomeTimelineService {
 
         // Refresh/load home timeline (refreshing on top downloads always first 40 items).
         // When Apple introduce good way to show new items without scroll to top then we can change that method.
-        let allStatusesFromApi = try await self.refresh(for: account, on: backgroundContext)
+        let allStatusesFromApi = try await self.refresh(for: account, includeReblogs: includeReblogs, on: backgroundContext)
 
         // Update last seen status.
         if let lastSeenStatusId, updateLastSeenStatus == true {
@@ -107,7 +107,7 @@ public class HomeTimelineService {
         CoreDataHandler.shared.save()
     }
 
-    public func amountOfNewStatuses(for account: AccountModel) async -> Int {
+    public func amountOfNewStatuses(for account: AccountModel, includeReblogs: Bool) async -> Int {
         guard let accessToken = account.accessToken else {
             return 0
         }
@@ -128,7 +128,7 @@ public class HomeTimelineService {
         // There can be more then 40 newest statuses, that's why we have to sometimes send more then one request.
         while true {
             do {
-                let downloadedStatuses = try await client.getHomeTimeline(minId: newestStatusId, limit: self.defaultAmountOfDownloadedStatuses)
+                let downloadedStatuses = try await client.getHomeTimeline(minId: newestStatusId, limit: self.defaultAmountOfDownloadedStatuses, includeReblogs: includeReblogs)
                 guard let firstStatus = downloadedStatuses.first else {
                     break
                 }
@@ -147,14 +147,14 @@ public class HomeTimelineService {
         return amountOfStatuses
     }
 
-    private func refresh(for account: AccountModel, on backgroundContext: NSManagedObjectContext) async throws -> [Status] {
+    private func refresh(for account: AccountModel, includeReblogs: Bool, on backgroundContext: NSManagedObjectContext) async throws -> [Status] {
         guard let accessToken = account.accessToken else {
             return []
         }
 
         // Retrieve statuses from API.
         let client = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
-        let statuses = try await client.getHomeTimeline(limit: self.defaultAmountOfDownloadedStatuses)
+        let statuses = try await client.getHomeTimeline(limit: self.defaultAmountOfDownloadedStatuses, includeReblogs: includeReblogs)
 
         // Update all existing statuses in database.
         for status in statuses {
@@ -207,6 +207,7 @@ public class HomeTimelineService {
     }
 
     private func load(for account: AccountModel,
+                      includeReblogs: Bool,
                       on backgroundContext: NSManagedObjectContext,
                       minId: String? = nil,
                       maxId: String? = nil
@@ -217,7 +218,7 @@ public class HomeTimelineService {
 
         // Retrieve statuses from API.
         let client = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
-        let statuses = try await client.getHomeTimeline(maxId: maxId, minId: minId, limit: self.defaultAmountOfDownloadedStatuses)
+        let statuses = try await client.getHomeTimeline(maxId: maxId, minId: minId, limit: self.defaultAmountOfDownloadedStatuses, includeReblogs: includeReblogs)
 
         // Save statuses in database.
         try await self.add(statuses, for: account, on: backgroundContext)

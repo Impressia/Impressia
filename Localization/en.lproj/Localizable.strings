@@ -240,6 +240,8 @@
 "settings.title.showAltTextOnTimeline" = "ALT icon will be displayed on timelines";
 "settings.title.warnAboutMissingAltTitle" = "Warn of missing ALT text";
 "settings.title.warnAboutMissingAltDescription" = "A warning about missing ALT texts will be displayed before publishing new post.";
+"settings.title.enableReboostOnTimeline" = "Show boosted statuses";
+"settings.title.enableReboostOnTimelineDescription" = "Boosted statuses will be visible on your home timeline.";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Sign in to Pixelfed";

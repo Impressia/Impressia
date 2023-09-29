@@ -61,7 +61,10 @@ struct ImageRowItem: View {
                     } blurred: {
                         ZStack {
                             BlurredImage(blurhash: attachmentData.blurhash)
-                            ImageAvatar(displayName: self.status.accountDisplayName, avatarUrl: self.status.accountAvatar) {
+                            ImageAvatar(displayName: self.status.accountDisplayName,
+                                        avatarUrl: self.status.accountAvatar,
+                                        rebloggedAccountDisplayName: self.status.rebloggedAccountDisplayName,
+                                        rebloggedAccountAvatar: self.status.rebloggedAccountAvatar) {
                                 self.routerPath.navigate(to: .userProfile(accountId: self.status.accountId,
                                                                           accountDisplayName: self.status.accountDisplayName,
                                                                           accountUserName: self.status.accountUsername))
@@ -141,7 +144,10 @@ struct ImageRowItem: View {
         ZStack {
             self.imageView(uiImage: uiImage)
 
-            ImageAvatar(displayName: self.status.accountDisplayName, avatarUrl: self.status.accountAvatar) {
+            ImageAvatar(displayName: self.status.accountDisplayName,
+                        avatarUrl: self.status.accountAvatar,
+                        rebloggedAccountDisplayName: self.status.rebloggedAccountDisplayName,
+                        rebloggedAccountAvatar: self.status.rebloggedAccountAvatar) {
                 self.routerPath.navigate(to: .userProfile(accountId: self.status.accountId,
                                                           accountDisplayName: self.status.accountDisplayName,
                                                           accountUserName: self.status.accountUsername))
@@ -153,6 +159,23 @@ struct ImageRowItem: View {
             }
 
             FavouriteTouch(showFavouriteAnimation: $showThumbImage)
+        }
+    }
+    
+    @ViewBuilder
+    func reblogInformation() -> some View {
+        if let rebloggedAccountAvatar = self.status.rebloggedAccountAvatar,
+           let rebloggedAccountDisplayName = self.status.rebloggedAccountDisplayName {
+            HStack(alignment: .center, spacing: 4) {
+                UserAvatar(accountAvatar: rebloggedAccountAvatar, size: .mini)
+                Text(rebloggedAccountDisplayName)
+                Image("custom.rocket")
+                    .padding(.trailing, 8)
+            }
+            .font(.footnote)
+            .foregroundColor(Color.mainTextColor.opacity(0.4))
+            .background(Color.mainTextColor.opacity(0.1))
+            .clipShape(Capsule())
         }
     }
 
@@ -228,7 +251,7 @@ struct ImageRowItem: View {
 
     private func navigateToStatus() {
         self.routerPath.navigate(to: .status(
-            id: status.rebloggedStatusId ?? status.id,
+            id: status.id,
             blurhash: status.attachments().first?.blurhash,
             highestImageUrl: status.attachments().getHighestImage()?.url,
             metaImageWidth: status.attachments().first?.metaImageWidth,

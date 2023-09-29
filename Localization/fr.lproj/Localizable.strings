@@ -240,6 +240,8 @@
 "settings.title.showAltTextOnTimeline" = "L'icône ALT sera affichée sur la timeline";
 "settings.title.warnAboutMissingAltTitle" = "Avertir de l'absence de texte ALT";
 "settings.title.warnAboutMissingAltDescription" = "Un avertissement concernant les textes ALT manquants sera affiché avant la publication d'un nouveau message.";
+"settings.title.enableReboostOnTimeline" = "Show boosted statuses";
+"settings.title.enableReboostOnTimelineDescription" = "Boosted statuses will be visible on your home timeline.";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Se connecter à Pixelfed";
