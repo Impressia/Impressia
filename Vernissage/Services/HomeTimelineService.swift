@@ -51,7 +51,7 @@ public class HomeTimelineService {
 
         // Retrieve newest visible status (last visible by user).
         let dbNewestStatus = StatusDataHandler.shared.getMaximumStatus(accountId: account.id, viewContext: backgroundContext)
-        let lastSeenStatusId = dbNewestStatus?.rebloggedStatusId ?? dbNewestStatus?.id
+        let lastSeenStatusId = dbNewestStatus?.id
 
         // Refresh/load home timeline (refreshing on top downloads always first 40 items).
         // When Apple introduce good way to show new items without scroll to top then we can change that method.

@@ -16,9 +16,9 @@ public struct ImageAvatar: View {
     private let avatarUrl: URL?
     private let rebloggedAccountDisplayName: String?
     private let rebloggedAccountAvatar: URL?
-    private let onTap: () -> Void
+    private let onTap: (Bool) -> Void
     
-    public init(displayName: String?, avatarUrl: URL?, rebloggedAccountDisplayName: String?, rebloggedAccountAvatar: URL?, onTap: @escaping () -> Void) {
+    public init(displayName: String?, avatarUrl: URL?, rebloggedAccountDisplayName: String?, rebloggedAccountAvatar: URL?, onTap: @escaping (Bool) -> Void) {
         self.displayName = displayName
         self.avatarUrl = avatarUrl
         self.rebloggedAccountAvatar = rebloggedAccountAvatar
@@ -28,26 +28,24 @@ public struct ImageAvatar: View {
 
     public var body: some View {
         if self.applicationState.showAvatarsOnTimeline {
-            VStack(alignment: .leading, spacing: 2) {
-                HStack(alignment: .center) {
-                    LazyImage(url: avatarUrl) { state in
-                        if let image = state.image {
-                            self.buildAvatar(image: image)
-                        } else if state.isLoading {
-                            self.buildAvatar()
-                        } else {
-                            self.buildAvatar()
-                        }
+            VStack(alignment: .leading, spacing: 0){
+                HStack(alignment: .center, spacing: 0) {
+                    HStack(alignment: .center, spacing: 4) {
+                        UserAvatar(accountAvatar: avatarUrl, size: .mini)
+                        Text(displayName ?? "")
+                            .fontWeight(.semibold)
+                            .lineLimit(1)
+                            .padding(.trailing, 8)
                     }
-
-                    Text(displayName ?? "")
-                        .lineLimit(1)
-                        .font(.system(size: 15))
-                        .foregroundColor(.white.opacity(0.8))
-                        .fontWeight(.semibold)
-                        .shadow(color: .black, radius: 2)
-                    
-                    Spacer()
+                    .font(.footnote)
+                    .foregroundColor(.white.opacity(0.8))
+                    .background(.black.opacity(0.4))
+                    .clipShape(Capsule())
+                    .padding(.leading, 8)
+                    .padding(.top, 8)
+                    .onTapGesture {
+                        self.onTap(true)
+                    }
                     
                     if let rebloggedAccountAvatar = self.rebloggedAccountAvatar,
                        let rebloggedAccountDisplayName = self.rebloggedAccountDisplayName {
@@ -62,16 +60,17 @@ public struct ImageAvatar: View {
                         .foregroundColor(.white.opacity(0.8))
                         .background(.black.opacity(0.4))
                         .clipShape(Capsule())
-                        .padding(.leading, 32)
+                        .padding(.leading, 8)
+                        .padding(.top, 8)
+                        .onTapGesture {
+                            self.onTap(false)
+                        }
                     }
+                    Spacer()
                 }
-                .padding(8)
-                .onTapGesture {
-                    self.onTap()
-                }
-                
                 Spacer()
             }
+            .padding(.trailing, 58)
         }
     }
 

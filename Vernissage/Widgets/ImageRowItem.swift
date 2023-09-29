@@ -64,10 +64,19 @@ struct ImageRowItem: View {
                             ImageAvatar(displayName: self.status.accountDisplayName,
                                         avatarUrl: self.status.accountAvatar,
                                         rebloggedAccountDisplayName: self.status.rebloggedAccountDisplayName,
-                                        rebloggedAccountAvatar: self.status.rebloggedAccountAvatar) {
-                                self.routerPath.navigate(to: .userProfile(accountId: self.status.accountId,
-                                                                          accountDisplayName: self.status.accountDisplayName,
-                                                                          accountUserName: self.status.accountUsername))
+                                        rebloggedAccountAvatar: self.status.rebloggedAccountAvatar) { isAuthor in
+                                if isAuthor {
+                                    self.routerPath.navigate(to: .userProfile(accountId: self.status.accountId,
+                                                                              accountDisplayName: self.status.accountDisplayName,
+                                                                              accountUserName: self.status.accountUsername))
+                                } else {
+                                    if let rebloggedAccountId = self.status.rebloggedAccountId,
+                                       let rebloggedAccountUsername = self.status.rebloggedAccountUsername {
+                                        self.routerPath.navigate(to: .userProfile(accountId: rebloggedAccountId,
+                                                                                  accountDisplayName: self.status.rebloggedAccountDisplayName,
+                                                                                  accountUserName: rebloggedAccountUsername))
+                                    }
+                                }
                             }
                         }
                         .onTapGesture {
@@ -147,10 +156,19 @@ struct ImageRowItem: View {
             ImageAvatar(displayName: self.status.accountDisplayName,
                         avatarUrl: self.status.accountAvatar,
                         rebloggedAccountDisplayName: self.status.rebloggedAccountDisplayName,
-                        rebloggedAccountAvatar: self.status.rebloggedAccountAvatar) {
-                self.routerPath.navigate(to: .userProfile(accountId: self.status.accountId,
-                                                          accountDisplayName: self.status.accountDisplayName,
-                                                          accountUserName: self.status.accountUsername))
+                        rebloggedAccountAvatar: self.status.rebloggedAccountAvatar) { isAuthor in
+                if isAuthor {
+                    self.routerPath.navigate(to: .userProfile(accountId: self.status.accountId,
+                                                              accountDisplayName: self.status.accountDisplayName,
+                                                              accountUserName: self.status.accountUsername))
+                } else {
+                    if let rebloggedAccountId = self.status.rebloggedAccountId,
+                       let rebloggedAccountUsername = self.status.rebloggedAccountUsername {
+                        self.routerPath.navigate(to: .userProfile(accountId: rebloggedAccountId,
+                                                                  accountDisplayName: self.status.rebloggedAccountDisplayName,
+                                                                  accountUserName: rebloggedAccountUsername))
+                    }
+                }
             }
 
             ImageFavourite(isFavourited: $isFavourited)

@@ -29,8 +29,7 @@ public struct ContentWarning<Content: View, Blurred: View>: View {
                     .transition(.opacity)
 
                 VStack(alignment: .trailing) {
-                    Spacer()
-                    HStack(alignment: .bottom) {
+                    HStack(alignment: .top) {
                         Spacer()
                         Button {
                             withAnimation {
@@ -41,10 +40,12 @@ public struct ContentWarning<Content: View, Blurred: View>: View {
                                 .font(.system(size: 18))
                                 .foregroundColor(.white.opacity(0.8))
                                 .shadow(color: Color.black, radius: 1)
-                                .padding([.top, .bottom, .leading], 12)
+                                .padding(.top, 11)
+                                .padding(.trailing, 16)
+                                .padding([.bottom, .leading], 16)
                         }
                     }
-                    .padding(.trailing, 64)
+                    Spacer()
                 }
                 .foregroundColor(.mainTextColor)
             }
