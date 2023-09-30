@@ -9,6 +9,7 @@ import PixelfedKit
 
 public class StatusModel: ObservableObject {
     public let id: EntityId
+    public let rebloggedStatusId: EntityId?
     public let content: Html
 
     public let uri: String?
@@ -41,11 +42,12 @@ public class StatusModel: ObservableObject {
     @Published public var mediaAttachments: [AttachmentModel]
 
     public init(status: Status) {
-
+        self.id = status.id
+        self.rebloggedStatusId = status.reblog?.id
+        
         // If status has been rebloged we are saving orginal status here.
         let orginalStatus = status.reblog ?? status
 
-        self.id = status.id
         self.content = orginalStatus.content
         self.uri = orginalStatus.uri
         self.url = orginalStatus.url
@@ -83,6 +85,13 @@ public class StatusModel: ObservableObject {
         } else {
             self.reblogStatus = nil
         }
+    }
+}
+
+public extension StatusModel {
+    /// Function returns status Id for real status (status with images), even for reboosted statuses.
+    func getOrginalStatusId() -> EntityId {
+        return self.rebloggedStatusId ?? self.id
     }
 }
 

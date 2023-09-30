@@ -84,11 +84,11 @@ struct InteractionRow: View {
             Spacer()
 
             Menu {
-                NavigationLink(value: RouteurDestinations.accounts(listType: .reblogged(entityId: statusModel.id))) {
+                NavigationLink(value: RouteurDestinations.accounts(listType: .reblogged(entityId: statusModel.getOrginalStatusId()))) {
                     Label("status.title.reboostedBy", image: "custom.rocket")
                 }
 
-                NavigationLink(value: RouteurDestinations.accounts(listType: .favourited(entityId: statusModel.id))) {
+                NavigationLink(value: RouteurDestinations.accounts(listType: .favourited(entityId: statusModel.getOrginalStatusId()))) {
                     Label("status.title.favouritedBy", systemImage: "star")
                 }
 
@@ -116,7 +116,7 @@ struct InteractionRow: View {
                     Divider()
 
                     Button {
-                        self.routerPath.presentedSheet = .report(objectType: .post, objectId: self.statusModel.id)
+                        self.routerPath.presentedSheet = .report(objectType: .post, objectId: self.statusModel.getOrginalStatusId())
                     } label: {
                         Label(NSLocalizedString("status.title.report", comment: "Report"), systemImage: "exclamationmark.triangle")
                     }
@@ -144,8 +144,8 @@ struct InteractionRow: View {
     private func reboost() async {
         do {
             let status = self.reblogged
-            ? try await self.client.statuses?.unboost(statusId: self.statusModel.id)
-            : try await self.client.statuses?.boost(statusId: self.statusModel.id)
+            ? try await self.client.statuses?.unboost(statusId: self.statusModel.getOrginalStatusId())
+            : try await self.client.statuses?.boost(statusId: self.statusModel.getOrginalStatusId())
 
             if let status {
                 self.reblogsCount = status.reblogsCount == self.reblogsCount
@@ -166,8 +166,8 @@ struct InteractionRow: View {
     private func favourite() async {
         do {
             let status = self.favourited
-            ? try await self.client.statuses?.unfavourite(statusId: self.statusModel.id)
-            : try await self.client.statuses?.favourite(statusId: self.statusModel.id)
+            ? try await self.client.statuses?.unfavourite(statusId: self.statusModel.getOrginalStatusId())
+            : try await self.client.statuses?.favourite(statusId: self.statusModel.getOrginalStatusId())
 
             if let status {
                 self.favouritesCount = status.favouritesCount == self.favouritesCount
@@ -188,8 +188,8 @@ struct InteractionRow: View {
     private func bookmark() async {
         do {
             _ = self.bookmarked
-            ? try await self.client.statuses?.unbookmark(statusId: self.statusModel.id)
-            : try await self.client.statuses?.bookmark(statusId: self.statusModel.id)
+            ? try await self.client.statuses?.unbookmark(statusId: self.statusModel.getOrginalStatusId())
+            : try await self.client.statuses?.bookmark(statusId: self.statusModel.getOrginalStatusId())
 
             self.bookmarked.toggle()
             ToastrService.shared.showSuccess(self.bookmarked

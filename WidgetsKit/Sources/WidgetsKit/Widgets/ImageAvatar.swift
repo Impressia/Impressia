@@ -39,7 +39,7 @@ public struct ImageAvatar: View {
                     }
                     .font(.footnote)
                     .foregroundColor(.white.opacity(0.8))
-                    .background(.black.opacity(0.4))
+                    .background(.black.opacity(0.6))
                     .clipShape(Capsule())
                     .padding(.leading, 8)
                     .padding(.top, 8)
@@ -58,7 +58,7 @@ public struct ImageAvatar: View {
                         }
                         .font(.footnote)
                         .foregroundColor(.white.opacity(0.8))
-                        .background(.black.opacity(0.4))
+                        .background(.black.opacity(0.6))
                         .clipShape(Capsule())
                         .padding(.leading, 8)
                         .padding(.top, 8)

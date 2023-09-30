@@ -14,6 +14,7 @@ extension StatusData {
 
             self.id = status.id
             self.rebloggedStatusId = reblog.id
+
             self.rebloggedAccountAvatar = status.account.avatar
             self.rebloggedAccountDisplayName = status.account.displayName
             self.rebloggedAccountId = status.account.id
@@ -77,5 +78,11 @@ extension StatusData {
             self.url = status.url
             self.visibility = status.visibility.rawValue
         }
+    }
+}
+
+public extension StatusData {
+    func getOrginalStatusId() -> String {
+        return self.rebloggedStatusId ?? self.id
     }
 }
