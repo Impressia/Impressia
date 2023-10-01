@@ -8,9 +8,12 @@ import SwiftUI
 import ServicesKit
 import EnvironmentKit
 import WidgetsKit
+import OSLog
+import Semaphore
 
 struct HomeFeedView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.refresh) private var refresh
 
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var routerPath: RouterPath
@@ -102,8 +105,7 @@ struct HomeFeedView: View {
         do {
             if let account = self.applicationState.account {
                 let lastSeenStatusId = try await HomeTimelineService.shared.refreshTimeline(for: account, includeReblogs: self.applicationState.showReboostedStatuses, updateLastSeenStatus: true)
-
-                asyncAfter(0.35) {
+                asyncAfter(0.75) {
                     self.applicationState.lastSeenStatusId = lastSeenStatusId
                     self.applicationState.amountOfNewStatuses = 0
                 }
@@ -207,5 +209,10 @@ struct HomeFeedView: View {
         }
         .padding(.top, 10)
         .padding(.trailing, 6)
+        .onTapGesture {
+            Task {
+                await refresh?()
+            }
+        }
     }
 }

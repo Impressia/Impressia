@@ -5,12 +5,14 @@
 //
 
 import Foundation
+import OSLog
+import EnvironmentKit
 
 public class CoreDataError {
     public static let shared = CoreDataError()
     private init() { }
 
     public func handle(_ error: Error, message: String) {
-        print("Error ['\(message)']: \(error.localizedDescription)")
+        Logger.main.error("Error ['\(message)']: \(error.localizedDescription)")
     }
 }

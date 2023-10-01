@@ -10,6 +10,9 @@ import PixelfedKit
 import ClientKit
 import ServicesKit
 import Nuke
+import OSLog
+import EnvironmentKit
+import Semaphore
 
 /// Service responsible for managing home timeline.
 public class HomeTimelineService {
@@ -18,6 +21,7 @@ public class HomeTimelineService {
 
     private let defaultAmountOfDownloadedStatuses = 40
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
+    private let semaphore = AsyncSemaphore(value: 1)
 
     @MainActor
     public func loadOnBottom(for account: AccountModel, includeReblogs: Bool) async throws -> Int {
@@ -46,6 +50,9 @@ public class HomeTimelineService {
 
     @MainActor
     public func refreshTimeline(for account: AccountModel, includeReblogs: Bool, updateLastSeenStatus: Bool = false) async throws -> String? {
+        await semaphore.wait()
+        defer { semaphore.signal() }
+
         // Load data from API and operate on CoreData on background context.
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
 
@@ -61,10 +68,11 @@ public class HomeTimelineService {
         if let lastSeenStatusId, updateLastSeenStatus == true {
             try self.update(lastSeenStatusId: lastSeenStatusId, for: account, on: backgroundContext)
         }
-        
+
+
         // Start prefetching images.
         self.prefetch(statuses: allStatusesFromApi)
-        
+
         // Save data into database.
         CoreDataHandler.shared.save(viewContext: backgroundContext)
 
@@ -108,6 +116,9 @@ public class HomeTimelineService {
     }
 
     public func amountOfNewStatuses(for account: AccountModel, includeReblogs: Bool) async -> Int {
+        await semaphore.wait()
+        defer { semaphore.signal() }
+        
         guard let accessToken = account.accessToken else {
             return 0
         }

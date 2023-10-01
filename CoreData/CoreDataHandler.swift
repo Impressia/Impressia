@@ -5,6 +5,7 @@
 //
 
 import CoreData
+import OSLog
 import EnvironmentKit
 
 public class CoreDataHandler {
@@ -50,7 +51,7 @@ public class CoreDataHandler {
                     do {
                         try coordinator.migratePersistentStore(oldStore, to: storeURL, options: nil, withType: NSSQLiteStoreType)
                     } catch {
-                        print(error.localizedDescription)
+                        Logger.main.error("\(error.localizedDescription)")
                     }
 
                     // Delete old store.
@@ -59,7 +60,7 @@ public class CoreDataHandler {
                         do {
                             try FileManager.default.removeItem(at: url)
                         } catch {
-                            print(error.localizedDescription)
+                            Logger.main.error("\(error.localizedDescription)")
                         }
                     })
                 }

@@ -99,6 +99,8 @@ extension Pixelfed.Timelines: TargetType {
             params.append(("include_reblogs", includeReblogs.asString))
         }
         
+        params.append(("_t", String.randomString(length: 8)))
+        
         return params
     }
 
