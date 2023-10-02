@@ -1,0 +1,11 @@
+// MARK: Network errors.
+"global.error.notSuccessResponse" = "Antwort vom Server: %@.";
+"global.error.unknownError" = "Unbekannter Fehler.";
+
+// Mark: Report errors.
+"report.error.noSelfReports" = "Du darfst Dich nicht selbst melden.";
+"report.error.invalidObjectId" = "Fehlerhafte ID.";
+"report.error.duplicate" = "Der Bericht wurde bereits gesendet.";
+"report.error.invalidParameters" = "Ungültige Parameter.";
+"report.error.invalidType" = "Ungültiger Berichtstyp.";
+"report.error.invalidObject" = "Ungültiges Objekt.";
