@@ -13,7 +13,6 @@ import Semaphore
 
 struct HomeFeedView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @Environment(\.refresh) private var refresh
 
     @EnvironmentObject var applicationState: ApplicationState
     @EnvironmentObject var routerPath: RouterPath
@@ -209,10 +208,5 @@ struct HomeFeedView: View {
         }
         .padding(.top, 10)
         .padding(.trailing, 6)
-        .onTapGesture {
-            Task {
-                await refresh?()
-            }
-        }
     }
 }
