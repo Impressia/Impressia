@@ -174,7 +174,7 @@ struct HomeFeedView: View {
                 .resizable()
                 .frame(width: 64, height: 64)
                 .fontWeight(.ultraLight)
-                .foregroundColor(.accentColor.opacity(0.6))
+                .foregroundColor(self.applicationState.tintColor.color().opacity(0.6))
             Text("home.title.allCaughtUp", comment: "You're all caught up")
                 .font(.title2)
                 .fontWeight(.thin)
