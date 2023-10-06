@@ -68,6 +68,9 @@ public class HomeTimelineService {
         if let lastSeenStatusId, updateLastSeenStatus == true {
             try self.update(lastSeenStatusId: lastSeenStatusId, for: account, on: backgroundContext)
         }
+        
+        // Delete old viewed statuses from database.
+        ViewedStatusHandler.shared.deleteOldViewedStatuses(viewContext: backgroundContext)
 
         // Start prefetching images.
         self.prefetch(statuses: allStatusesFromApi)
@@ -152,7 +155,11 @@ public class HomeTimelineService {
                 break
             }
         }
+        
+        // Start prefetching images.
+        self.prefetch(statuses: statuses)
 
+        // Return number of new statuses not visible yet on the timeline.
         return statuses.count
     }
 
@@ -328,7 +335,7 @@ public class HomeTimelineService {
     }
 
     private func prefetch(statuses: [Status]) {
-        let statusModels = statuses.getStatusesWithImagesOnly().toStatusModels()
+        let statusModels = statuses.toStatusModels()
         imagePrefetcher.startPrefetching(with: statusModels.getAllImagesUrls())
     }
     
