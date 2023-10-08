@@ -10,6 +10,9 @@ import PixelfedKit
 import ClientKit
 import ServicesKit
 import Nuke
+import OSLog
+import EnvironmentKit
+import Semaphore
 
 /// Service responsible for managing home timeline.
 public class HomeTimelineService {
@@ -18,9 +21,10 @@ public class HomeTimelineService {
 
     private let defaultAmountOfDownloadedStatuses = 40
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
+    private let semaphore = AsyncSemaphore(value: 1)
 
     @MainActor
-    public func loadOnBottom(for account: AccountModel) async throws -> Int {
+    public func loadOnBottom(for account: AccountModel, includeReblogs: Bool) async throws -> Int {
         // Load data from API and operate on CoreData on background context.
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
 
@@ -32,7 +36,7 @@ public class HomeTimelineService {
         }
 
         // Load data on bottom of the list.
-        let allStatusesFromApi = try await self.load(for: account, on: backgroundContext, maxId: oldestStatus.id)
+        let allStatusesFromApi = try await self.load(for: account, includeReblogs: includeReblogs, on: backgroundContext, maxId: oldestStatus.id)
 
         // Save data into database.
         CoreDataHandler.shared.save(viewContext: backgroundContext)
@@ -45,53 +49,37 @@ public class HomeTimelineService {
     }
 
     @MainActor
-    public func refreshTimeline(for account: AccountModel, updateLastSeenStatus: Bool = false) async throws -> String? {
+    public func refreshTimeline(for account: AccountModel, includeReblogs: Bool, updateLastSeenStatus: Bool = false) async throws -> String? {
+        await semaphore.wait()
+        defer { semaphore.signal() }
+
         // Load data from API and operate on CoreData on background context.
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
 
         // Retrieve newest visible status (last visible by user).
         let dbNewestStatus = StatusDataHandler.shared.getMaximumStatus(accountId: account.id, viewContext: backgroundContext)
-        let lastSeenStatusId = dbNewestStatus?.rebloggedStatusId ?? dbNewestStatus?.id
+        let lastSeenStatusId = dbNewestStatus?.id
 
         // Refresh/load home timeline (refreshing on top downloads always first 40 items).
         // When Apple introduce good way to show new items without scroll to top then we can change that method.
-        let allStatusesFromApi = try await self.refresh(for: account, on: backgroundContext)
+        let allStatusesFromApi = try await self.refresh(for: account, includeReblogs: includeReblogs, on: backgroundContext)
 
         // Update last seen status.
         if let lastSeenStatusId, updateLastSeenStatus == true {
             try self.update(lastSeenStatusId: lastSeenStatusId, for: account, on: backgroundContext)
         }
         
+        // Delete old viewed statuses from database.
+        ViewedStatusHandler.shared.deleteOldViewedStatuses(viewContext: backgroundContext)
+
         // Start prefetching images.
         self.prefetch(statuses: allStatusesFromApi)
-        
+
         // Save data into database.
         CoreDataHandler.shared.save(viewContext: backgroundContext)
 
         // Return id of last seen status.
         return lastSeenStatusId
-    }
-
-    private func update(lastSeenStatusId: String, for account: AccountModel, on backgroundContext: NSManagedObjectContext) throws {
-        // Save information about last seen status.
-        guard let accountDataFromDb = AccountDataHandler.shared.getAccountData(accountId: account.id, viewContext: backgroundContext) else {
-            throw DatabaseError.cannotDownloadAccount
-        }
-
-        accountDataFromDb.lastSeenStatusId = lastSeenStatusId
-    }
-
-    public func update(status statusData: StatusData, basedOn status: Status, for account: AccountModel) async throws -> StatusData? {
-        // Load data from API and operate on CoreData on background context.
-        let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
-
-        // Update status data in database.
-        self.copy(from: status, to: statusData, on: backgroundContext)
-
-        // Save data into database.
-        CoreDataHandler.shared.save(viewContext: backgroundContext)
-
-        return statusData
     }
 
     @MainActor
@@ -107,7 +95,10 @@ public class HomeTimelineService {
         CoreDataHandler.shared.save()
     }
 
-    public func amountOfNewStatuses(for account: AccountModel) async -> Int {
+    public func amountOfNewStatuses(for account: AccountModel, includeReblogs: Bool) async -> Int {
+        await semaphore.wait()
+        defer { semaphore.signal() }
+        
         guard let accessToken = account.accessToken else {
             return 0
         }
@@ -122,13 +113,16 @@ public class HomeTimelineService {
         }
 
         let client = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
-        var amountOfStatuses = 0
+        var statuses: [Status] = []
         var newestStatusId = newestStatus.id
 
         // There can be more then 40 newest statuses, that's why we have to sometimes send more then one request.
         while true {
             do {
-                let downloadedStatuses = try await client.getHomeTimeline(minId: newestStatusId, limit: self.defaultAmountOfDownloadedStatuses)
+                let downloadedStatuses = try await client.getHomeTimeline(minId: newestStatusId,
+                                                                          limit: self.defaultAmountOfDownloadedStatuses,
+                                                                          includeReblogs: includeReblogs)
+
                 guard let firstStatus = downloadedStatuses.first else {
                     break
                 }
@@ -136,25 +130,64 @@ public class HomeTimelineService {
                 // We have to include in the counter only statuses with images.
                 let statusesWithImagesOnly = downloadedStatuses.getStatusesWithImagesOnly()
 
-                amountOfStatuses = amountOfStatuses + statusesWithImagesOnly.count
+                for status in statusesWithImagesOnly {
+                    // We should add to timeline only statuses that has not been showned to the user already.
+                    guard self.hasBeenAlreadyOnTimeline(accountId: account.id, status: status, on: backgroundContext) == false else {
+                        continue
+                    }
+                    
+                    // Same rebloged status has been already visible in current portion of data.
+                    if let reblog = status.reblog, statuses.contains(where: { $0.reblog?.id == reblog.id }) {
+                        continue
+                    }
+                    
+                    // Same status has been already visible in current portion of data.
+                    if let reblog = status.reblog, statusesWithImagesOnly.contains(where: { $0.id == reblog.id }) {
+                        continue
+                    }
+                    
+                    statuses.append(status)
+                }
+                
                 newestStatusId = firstStatus.id
             } catch {
                 ErrorService.shared.handle(error, message: "Error during downloading new statuses for amount of new statuses.")
                 break
             }
         }
+        
+        // Start prefetching images.
+        self.prefetch(statuses: statuses)
 
-        return amountOfStatuses
+        // Return number of new statuses not visible yet on the timeline.
+        return statuses.count
     }
 
-    private func refresh(for account: AccountModel, on backgroundContext: NSManagedObjectContext) async throws -> [Status] {
-        guard let accessToken = account.accessToken else {
-            return []
+    private func update(lastSeenStatusId: String, for account: AccountModel, on backgroundContext: NSManagedObjectContext) throws {
+        // Save information about last seen status.
+        guard let accountDataFromDb = AccountDataHandler.shared.getAccountData(accountId: account.id, viewContext: backgroundContext) else {
+            throw DatabaseError.cannotDownloadAccount
         }
 
+        accountDataFromDb.lastSeenStatusId = lastSeenStatusId
+    }
+    
+    private func update(status statusData: StatusData, basedOn status: Status, for account: AccountModel) async throws -> StatusData? {
+        // Load data from API and operate on CoreData on background context.
+        let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
+
+        // Update status data in database.
+        self.copy(from: status, to: statusData, on: backgroundContext)
+
+        // Save data into database.
+        CoreDataHandler.shared.save(viewContext: backgroundContext)
+
+        return statusData
+    }
+    
+    private func refresh(for account: AccountModel, includeReblogs: Bool, on backgroundContext: NSManagedObjectContext) async throws -> [Status] {
         // Retrieve statuses from API.
-        let client = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
-        let statuses = try await client.getHomeTimeline(limit: self.defaultAmountOfDownloadedStatuses)
+        let statuses = try await self.getUniqueStatusesForHomeTimeline(account: account, includeReblogs: includeReblogs, on: backgroundContext)
 
         // Update all existing statuses in database.
         for status in statuses {
@@ -207,17 +240,12 @@ public class HomeTimelineService {
     }
 
     private func load(for account: AccountModel,
+                      includeReblogs: Bool,
                       on backgroundContext: NSManagedObjectContext,
-                      minId: String? = nil,
                       maxId: String? = nil
     ) async throws -> [Status] {
-        guard let accessToken = account.accessToken else {
-            return []
-        }
-
         // Retrieve statuses from API.
-        let client = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
-        let statuses = try await client.getHomeTimeline(maxId: maxId, minId: minId, limit: self.defaultAmountOfDownloadedStatuses)
+        let statuses = try await self.getUniqueStatusesForHomeTimeline(account: account, maxId: maxId, includeReblogs: includeReblogs, on: backgroundContext)
 
         // Save statuses in database.
         try await self.add(statuses, for: account, on: backgroundContext)
@@ -238,14 +266,23 @@ public class HomeTimelineService {
         // Proceed statuses with images only.
         let statusesWithImages = statuses.getStatusesWithImagesOnly()
 
-        // Save status data in database.
+        // Save all data to database.
         for status in statusesWithImages {
+            // Save status to database.
             let statusData = StatusDataHandler.shared.createStatusDataEntity(viewContext: backgroundContext)
-
+            self.copy(from: status, to: statusData, on: backgroundContext)
+            
             statusData.pixelfedAccount = accountDataFromDb
             accountDataFromDb.addToStatuses(statusData)
 
-            self.copy(from: status, to: statusData, on: backgroundContext)
+            // Save statusId to viewed statuses.
+            let viewedStatus = ViewedStatusHandler.shared.createViewedStatusEntity(viewContext: backgroundContext)
+            
+            viewedStatus.id = status.id
+            viewedStatus.reblogId = status.reblog?.id
+            viewedStatus.date = Date()
+            viewedStatus.pixelfedAccount = accountDataFromDb
+            accountDataFromDb.addToViewedStatuses(viewedStatus)
         }
     }
 
@@ -298,7 +335,62 @@ public class HomeTimelineService {
     }
 
     private func prefetch(statuses: [Status]) {
-        let statusModels = statuses.getStatusesWithImagesOnly().toStatusModels()
+        let statusModels = statuses.toStatusModels()
         imagePrefetcher.startPrefetching(with: statusModels.getAllImagesUrls())
     }
+    
+    private func hasBeenAlreadyOnTimeline(accountId: String, status: Status, on backgroundContext: NSManagedObjectContext) -> Bool {
+        return ViewedStatusHandler.shared.hasBeenAlreadyOnTimeline(accountId: accountId, status: status, viewContext: backgroundContext)
+    }
+    
+    private func getUniqueStatusesForHomeTimeline(account: AccountModel, maxId: EntityId? = nil, includeReblogs: Bool? = nil, on backgroundContext: NSManagedObjectContext) async throws -> [Status] {
+            guard let accessToken = account.accessToken else {
+                return []
+            }
+            
+            let client = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
+            var lastStatusId = maxId
+            var statuses: [Status] = []
+            
+            while true {
+                let downloadedStatuses = try await client.getHomeTimeline(maxId: lastStatusId,
+                                                                          limit: self.defaultAmountOfDownloadedStatuses,
+                                                                          includeReblogs: includeReblogs)
+
+                // When there is not any older statuses we have to finish.
+                guard let lastStatus = downloadedStatuses.last else {
+                    break
+                }
+                
+                // We have to include in the counter only statuses with images.
+                let statusesWithImagesOnly = downloadedStatuses.getStatusesWithImagesOnly()
+
+                for status in statusesWithImagesOnly {
+                    // We should add to timeline only statuses that has not been showned to the user already.
+                    guard self.hasBeenAlreadyOnTimeline(accountId: account.id, status: status, on: backgroundContext) == false else {
+                        continue
+                    }
+                    
+                    // Same rebloged status has been already visible in current portion of data.
+                    if let reblog = status.reblog, statuses.contains(where: { $0.reblog?.id == reblog.id }) {
+                        continue
+                    }
+                    
+                    // Same status has been already visible in current portion of data.
+                    if let reblog = status.reblog, statusesWithImagesOnly.contains(where: { $0.id == reblog.id }) {
+                        continue
+                    }
+                    
+                    statuses.append(status)
+                }
+                
+                if statuses.count >= self.defaultAmountOfDownloadedStatuses {
+                    break
+                }
+                
+                lastStatusId = lastStatus.id
+            }
+
+        return statuses
+   }
 }

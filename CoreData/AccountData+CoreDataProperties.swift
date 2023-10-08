@@ -34,6 +34,7 @@ extension AccountData {
     @NSManaged public var url: URL?
     @NSManaged public var username: String
     @NSManaged public var statuses: Set<StatusData>?
+    @NSManaged public var viewedStatuses: Set<ViewedStatus>?
     @NSManaged public var lastSeenStatusId: String?
 }
 
@@ -51,6 +52,18 @@ extension AccountData {
 
     @objc(removeStatuses:)
     @NSManaged public func removeFromStatuses(_ values: NSSet)
+    
+    @objc(addViewedStatusesObject:)
+    @NSManaged public func addToViewedStatuses(_ value: ViewedStatus)
+
+    @objc(removeViewedStatusesObject:)
+    @NSManaged public func removeFromViewedStatuses(_ value: ViewedStatus)
+
+    @objc(addViewedStatuses:)
+    @NSManaged public func addToViewedStatuses(_ values: NSSet)
+
+    @objc(removeViewedStatuses:)
+    @NSManaged public func removeFromViewedStatuses(_ values: NSSet)
 }
 
 extension AccountData: Identifiable {

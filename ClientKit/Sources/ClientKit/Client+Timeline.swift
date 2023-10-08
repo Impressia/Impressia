@@ -12,8 +12,9 @@ extension Client {
         public func getHomeTimeline(maxId: String? = nil,
                                     sinceId: String? = nil,
                                     minId: String? = nil,
-                                    limit: Int = 40) async throws -> [Status] {
-            return try await pixelfedClient.getHomeTimeline(maxId: maxId, sinceId: sinceId, minId: minId, limit: limit)
+                                    limit: Int = 40,
+                                    includeReblogs: Bool? = nil) async throws -> [Status] {
+            return try await pixelfedClient.getHomeTimeline(maxId: maxId, sinceId: sinceId, minId: minId, limit: limit, includeReblogs: includeReblogs)
         }
 
         public func getStatuses(local: Bool? = nil,

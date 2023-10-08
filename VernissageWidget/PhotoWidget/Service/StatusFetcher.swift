@@ -27,7 +27,7 @@ public class StatusFetcher {
         }
 
         let client = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
-        let statuses = try await client.getHomeTimeline(limit: 20)
+        let statuses = try await client.getHomeTimeline(limit: 20, includeReblogs: defaultSettings.showReboostedStatuses)
         var widgetEntries: [PhotoWidgetEntry] = []
 
         for status in statuses {

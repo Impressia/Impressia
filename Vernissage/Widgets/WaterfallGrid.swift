@@ -13,11 +13,13 @@ struct WaterfallGrid<Data, ID, Content>: View where Data: RandomAccessCollection
     @Binding private var columns: Int
     @Binding private var hideLoadMore: Bool
     @Binding private var data: Data
+    @Binding private var refreshId: String
 
     private let content: (Data.Element) -> Content
 
     @State private var columnsData: [ColumnData<Data.Element>] = []
     @State private var processedItems: [Data.Element.ID] = []
+    @State private var shouldRecalculate = false
 
     private let onLoadMore: () async -> Void
     private let semaphore = AsyncSemaphore(value: 1)
@@ -46,8 +48,16 @@ struct WaterfallGrid<Data, ID, Content>: View where Data: RandomAccessCollection
         .onFirstAppear {
             self.recalculateArrays()
         }
+        .onChange(of: self.refreshId) { _ in
+            self.shouldRecalculate = true
+        }
         .onChange(of: self.data) { _ in
-            self.appendToArrays()
+            if self.shouldRecalculate {
+                self.recalculateArrays()
+                self.shouldRecalculate = false
+            } else {
+                self.appendToArrays()
+            }
         }
         .onChange(of: self.columns) { _ in
             self.recalculateArrays()
@@ -113,25 +123,37 @@ struct WaterfallGrid<Data, ID, Content>: View where Data: RandomAccessCollection
 }
 
 extension WaterfallGrid {
-    init(_ data: Binding<Data>, id: KeyPath<Data.Element, ID>, columns: Binding<Int>,
-         hideLoadMore: Binding<Bool>, content: @escaping (Data.Element) -> Content, onLoadMore: @escaping () async -> Void) {
+    init(_ data: Binding<Data>,
+         refreshId: Binding<String>,
+         columns: Binding<Int>,
+         hideLoadMore: Binding<Bool>,
+         content: @escaping (Data.Element) -> Content,
+         onLoadMore: @escaping () async -> Void) {
+
         self.content = content
         self.onLoadMore = onLoadMore
 
         self._data = data
         self._columns = columns
         self._hideLoadMore = hideLoadMore
+        self._refreshId = refreshId
     }
 }
 
 extension WaterfallGrid where ID == Data.Element.ID, Data.Element: Identifiable {
-    init(_ data: Binding<Data>, columns: Binding<Int>,
-         hideLoadMore: Binding<Bool>, content: @escaping (Data.Element) -> Content, onLoadMore: @escaping () async -> Void) {
+    init(_ data: Binding<Data>,
+         refreshId: Binding<String>,
+         columns: Binding<Int>,
+         hideLoadMore: Binding<Bool>,
+         content: @escaping (Data.Element) -> Content,
+         onLoadMore: @escaping () async -> Void) {
+
         self.content = content
         self.onLoadMore = onLoadMore
 
         self._data = data
         self._columns = columns
         self._hideLoadMore = hideLoadMore
+        self._refreshId = refreshId
     }
 }

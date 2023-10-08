@@ -5,6 +5,8 @@
 //
 
 import Foundation
+import OSLog
+import EnvironmentKit
 import PixelfedKit
 
 public class ErrorService {
@@ -23,6 +25,7 @@ public class ErrorService {
             }
         }
 
-        print("Error ['\(localizedMessage)']: \(error.localizedDescription)")
+        Logger.main.error("Error ['\(localizedMessage)']: \(error.localizedDescription)")
+        Logger.main.error("Error ['\(localizedMessage)']: \(error)")
     }
 }

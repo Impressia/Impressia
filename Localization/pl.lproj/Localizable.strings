@@ -240,6 +240,8 @@
 "settings.title.showAltTextOnTimeline" = "Ikony ALT będą widonczne na osiach zdjęć";
 "settings.title.warnAboutMissingAltTitle" = "Ostrzeganie o brakującym tekście ALT";
 "settings.title.warnAboutMissingAltDescription" = "Ostrzeżenie o brakujących tekstach ALT będzie wyświetlane przed opublikowaniem nowego statusu.";
+"settings.title.enableReboostOnTimeline" = "Wyświetl podbite statusy";
+"settings.title.enableReboostOnTimelineDescription" = "Podbite statusy będą widoczne na twojej osi czasu.";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Zaloguj się do Pixelfed";

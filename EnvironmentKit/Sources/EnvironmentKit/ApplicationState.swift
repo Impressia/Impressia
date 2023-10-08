@@ -107,6 +107,9 @@ public class ApplicationState: ObservableObject {
     /// Show grid of photos on user profile.
     @Published public var showGridOnUserProfile = false
 
+    /// Show reboosted statuses on home timeline.
+    @Published public var showReboostedStatuses = false
+    
     public func changeApplicationState(accountModel: AccountModel, instance: Instance?, lastSeenStatusId: String?) {
         self.account = accountModel
         self.lastSeenStatusId = lastSeenStatusId
