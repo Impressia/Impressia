@@ -67,10 +67,21 @@ struct ImageRowItemAsync: View {
                                 BlurredImage(blurhash: attachment.blurhash)
                                 if self.showAvatar {
                                     ImageAvatar(displayName: self.statusViewModel.account.displayNameWithoutEmojis,
-                                                avatarUrl: self.statusViewModel.account.avatar) {
-                                        self.routerPath.navigate(to: .userProfile(accountId: self.statusViewModel.account.id,
-                                                                                  accountDisplayName: self.statusViewModel.account.displayNameWithoutEmojis,
-                                                                                  accountUserName: self.statusViewModel.account.acct))
+                                                avatarUrl: self.statusViewModel.account.avatar,
+                                                rebloggedAccountDisplayName: self.statusViewModel.reblogStatus?.account.displayNameWithoutEmojis,
+                                                rebloggedAccountAvatar: self.statusViewModel.reblogStatus?.account.avatar) { isAuthor in
+                                        if isAuthor {
+                                            self.routerPath.navigate(to: .userProfile(accountId: self.statusViewModel.account.id,
+                                                                                      accountDisplayName: self.statusViewModel.account.displayNameWithoutEmojis,
+                                                                                      accountUserName: self.statusViewModel.account.acct))
+                                        } else {
+                                            if let rebloggedAccountId = self.statusViewModel.reblogStatus?.account.id,
+                                               let rebloggedAccountUsername = self.statusViewModel.reblogStatus?.account.acct {
+                                                self.routerPath.navigate(to: .userProfile(accountId: rebloggedAccountId,
+                                                                                          accountDisplayName: self.statusViewModel.reblogStatus?.account.displayNameWithoutEmojis,
+                                                                                          accountUserName: rebloggedAccountUsername))
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -143,10 +154,21 @@ struct ImageRowItemAsync: View {
 
             if self.showAvatar {
                 ImageAvatar(displayName: self.statusViewModel.account.displayNameWithoutEmojis,
-                            avatarUrl: self.statusViewModel.account.avatar) {
-                    self.routerPath.navigate(to: .userProfile(accountId: self.statusViewModel.account.id,
-                                                              accountDisplayName: self.statusViewModel.account.displayNameWithoutEmojis,
-                                                              accountUserName: self.statusViewModel.account.acct))
+                            avatarUrl: self.statusViewModel.account.avatar,
+                            rebloggedAccountDisplayName: self.statusViewModel.reblogStatus?.account.displayNameWithoutEmojis,
+                            rebloggedAccountAvatar: self.statusViewModel.reblogStatus?.account.avatar) { isAuthor in
+                    if isAuthor {
+                        self.routerPath.navigate(to: .userProfile(accountId: self.statusViewModel.account.id,
+                                                                  accountDisplayName: self.statusViewModel.account.displayNameWithoutEmojis,
+                                                                  accountUserName: self.statusViewModel.account.acct))
+                    } else {
+                        if let rebloggedAccountId = self.statusViewModel.reblogStatus?.account.id,
+                           let rebloggedAccountUsername = self.statusViewModel.reblogStatus?.account.acct {
+                            self.routerPath.navigate(to: .userProfile(accountId: rebloggedAccountId,
+                                                                      accountDisplayName: self.statusViewModel.reblogStatus?.account.displayNameWithoutEmojis,
+                                                                      accountUserName: rebloggedAccountUsername))
+                        }
+                    }
                 }
             }
 

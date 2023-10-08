@@ -162,7 +162,7 @@ struct StatusView: View {
                 }
                 .padding(8)
 
-                CommentsSectionView(statusId: statusViewModel.id)
+                CommentsSectionView(statusId: statusViewModel.getOrginalStatusId())
             }
         }
         .coordinateSpace(name: "scroll")

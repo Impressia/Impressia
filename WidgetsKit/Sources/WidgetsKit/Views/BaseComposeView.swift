@@ -708,7 +708,7 @@ public struct BaseComposeView: View {
     }
 
     private func createStatus() -> Pixelfed.Statuses.Components {
-        return Pixelfed.Statuses.Components(inReplyToId: self.statusViewModel?.id,
+        return Pixelfed.Statuses.Components(inReplyToId: self.statusViewModel?.getOrginalStatusId(),
                                             text: self.textModel.text.string,
                                             spoilerText: self.isSensitive ? self.spoilerText : String.empty(),
                                             mediaIds: self.photosAttachment.getUploadedPhotoIds(),

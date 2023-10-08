@@ -11,11 +11,12 @@ public extension PixelfedClientAuthenticated {
         maxId: EntityId? = nil,
         sinceId: EntityId? = nil,
         minId: EntityId? = nil,
-        limit: Int? = nil) async throws -> [Status] {
+        limit: Int? = nil,
+        includeReblogs: Bool? = nil) async throws -> [Status] {
 
         let request = try Self.request(
             for: baseURL,
-            target: Pixelfed.Timelines.home(maxId, sinceId, minId, limit),
+            target: Pixelfed.Timelines.home(maxId, sinceId, minId, limit, includeReblogs),
             withBearerToken: token
         )
 

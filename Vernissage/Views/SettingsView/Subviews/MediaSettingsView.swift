@@ -85,6 +85,18 @@ struct MediaSettingsView: View {
             .onChange(of: self.applicationState.warnAboutMissingAlt) { newValue in
                 ApplicationSettingsHandler.shared.set(warnAboutMissingAlt: newValue)
             }
+            
+            Toggle(isOn: $applicationState.showReboostedStatuses) {
+                VStack(alignment: .leading) {
+                    Text("settings.title.enableReboostOnTimeline", comment: "Show boosted statuses")
+                    Text("settings.title.enableReboostOnTimelineDescription", comment: "Boosted statuses will be visible on your home timeline.")
+                        .font(.footnote)
+                        .foregroundColor(.customGrayColor)
+                }
+            }
+            .onChange(of: self.applicationState.showReboostedStatuses) { newValue in
+                ApplicationSettingsHandler.shared.set(showReboostedStatuses: newValue)
+            }
         }
     }
 }

@@ -11,11 +11,25 @@ import ServicesKit
 
 public extension View {
     func imageContextMenu(statusModel: StatusModel, attachmentModel: AttachmentModel, uiImage: UIImage?) -> some View {
-        modifier(ImageContextMenu(id: statusModel.id, url: statusModel.url, altText: attachmentModel.description, uiImage: uiImage))
+        modifier(
+            ImageContextMenu(
+                id: statusModel.getOrginalStatusId(),
+                url: statusModel.url,
+                altText: attachmentModel.description,
+                uiImage: uiImage
+            )
+        )
     }
 
     func imageContextMenu(statusData: StatusData, attachmentData: AttachmentData, uiImage: UIImage?) -> some View {
-        modifier(ImageContextMenu(id: statusData.id, url: statusData.url, altText: attachmentData.text, uiImage: uiImage))
+        modifier(
+            ImageContextMenu(
+                id: statusData.getOrginalStatusId(),
+                url: statusData.url,
+                altText: attachmentData.text,
+                uiImage: uiImage
+            )
+        )
     }
 }
 

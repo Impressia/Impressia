@@ -7,6 +7,8 @@
 import Foundation
 import StoreKit
 import ServicesKit
+import OSLog
+import EnvironmentKit
 
 @MainActor
 final class TipsStore: ObservableObject {
@@ -78,9 +80,9 @@ final class TipsStore: ObservableObject {
             self.status = .successful
             await transaction.finish()
         case .userCancelled:
-            print("User click cancel before their transaction started.")
+            Logger.main.warning("User click cancel before their transaction started.")
         case .pending:
-            print("User needs to complete some action on their account before their complete the purchase.")
+            Logger.main.warning("User needs to complete some action on their account before their complete the purchase.")
         default:
             break
         }

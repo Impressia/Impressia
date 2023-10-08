@@ -14,45 +14,63 @@ public struct ImageAvatar: View {
 
     private let displayName: String?
     private let avatarUrl: URL?
-    private let onTap: () -> Void
-
-    public init(displayName: String?, avatarUrl: URL?, onTap: @escaping () -> Void) {
+    private let rebloggedAccountDisplayName: String?
+    private let rebloggedAccountAvatar: URL?
+    private let onTap: (Bool) -> Void
+    
+    public init(displayName: String?, avatarUrl: URL?, rebloggedAccountDisplayName: String?, rebloggedAccountAvatar: URL?, onTap: @escaping (Bool) -> Void) {
         self.displayName = displayName
         self.avatarUrl = avatarUrl
+        self.rebloggedAccountAvatar = rebloggedAccountAvatar
+        self.rebloggedAccountDisplayName = rebloggedAccountDisplayName
         self.onTap = onTap
     }
 
     public var body: some View {
         if self.applicationState.showAvatarsOnTimeline {
-            VStack(alignment: .leading) {
-                HStack(alignment: .center) {
-                    HStack(alignment: .center) {
-                        LazyImage(url: avatarUrl) { state in
-                            if let image = state.image {
-                                self.buildAvatar(image: image)
-                            } else if state.isLoading {
-                                self.buildAvatar()
-                            } else {
-                                self.buildAvatar()
-                            }
-                        }
-
+            VStack(alignment: .leading, spacing: 0){
+                HStack(alignment: .center, spacing: 0) {
+                    HStack(alignment: .center, spacing: 4) {
+                        UserAvatar(accountAvatar: avatarUrl, size: .mini)
                         Text(displayName ?? "")
-                            .font(.system(size: 15))
-                            .foregroundColor(.white.opacity(0.8))
                             .fontWeight(.semibold)
-                            .shadow(color: .black, radius: 2)
+                            .lineLimit(1)
+                            .padding(.trailing, 8)
                     }
-                    .padding(8)
+                    .font(.footnote)
+                    .foregroundColor(.white.opacity(0.8))
+                    .background(.black.opacity(0.6))
+                    .clipShape(Capsule())
+                    .padding(.leading, 8)
+                    .padding(.top, 8)
                     .onTapGesture {
-                        self.onTap()
+                        self.onTap(true)
                     }
-
+                    
+                    if let rebloggedAccountAvatar = self.rebloggedAccountAvatar,
+                       let rebloggedAccountDisplayName = self.rebloggedAccountDisplayName {
+                        HStack(alignment: .center, spacing: 4) {
+                            UserAvatar(accountAvatar: rebloggedAccountAvatar, size: .mini)
+                            Text(rebloggedAccountDisplayName)
+                                .lineLimit(1)
+                            Image("custom.rocket")
+                                .padding(.trailing, 8)
+                        }
+                        .font(.footnote)
+                        .foregroundColor(.white.opacity(0.8))
+                        .background(.black.opacity(0.6))
+                        .clipShape(Capsule())
+                        .padding(.leading, 8)
+                        .padding(.top, 8)
+                        .onTapGesture {
+                            self.onTap(false)
+                        }
+                    }
                     Spacer()
                 }
-
                 Spacer()
             }
+            .padding(.trailing, 58)
         }
     }
 

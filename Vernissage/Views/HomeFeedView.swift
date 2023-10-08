@@ -8,6 +8,8 @@ import SwiftUI
 import ServicesKit
 import EnvironmentKit
 import WidgetsKit
+import OSLog
+import Semaphore
 
 struct HomeFeedView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -69,7 +71,7 @@ struct HomeFeedView: View {
                             .task {
                                 do {
                                     if let account = self.applicationState.account {
-                                        let newStatusesCount = try await HomeTimelineService.shared.loadOnBottom(for: account)
+                                        let newStatusesCount = try await HomeTimelineService.shared.loadOnBottom(for: account, includeReblogs: self.applicationState.showReboostedStatuses)
                                         if newStatusesCount == 0 {
                                             allItemsLoaded = true
                                         }
@@ -101,9 +103,8 @@ struct HomeFeedView: View {
     private func refreshData() async {
         do {
             if let account = self.applicationState.account {
-                let lastSeenStatusId = try await HomeTimelineService.shared.refreshTimeline(for: account, updateLastSeenStatus: true)
-
-                asyncAfter(0.35) {
+                let lastSeenStatusId = try await HomeTimelineService.shared.refreshTimeline(for: account, includeReblogs: self.applicationState.showReboostedStatuses, updateLastSeenStatus: true)
+                asyncAfter(0.75) {
                     self.applicationState.lastSeenStatusId = lastSeenStatusId
                     self.applicationState.amountOfNewStatuses = 0
                 }
@@ -125,7 +126,7 @@ struct HomeFeedView: View {
             }
 
             if let account = self.applicationState.account {
-                _ = try await HomeTimelineService.shared.refreshTimeline(for: account)
+                _ = try await HomeTimelineService.shared.refreshTimeline(for: account, includeReblogs: self.applicationState.showReboostedStatuses)
             }
 
             self.applicationState.amountOfNewStatuses = 0
@@ -173,7 +174,7 @@ struct HomeFeedView: View {
                 .resizable()
                 .frame(width: 64, height: 64)
                 .fontWeight(.ultraLight)
-                .foregroundColor(.accentColor.opacity(0.6))
+                .foregroundColor(self.applicationState.tintColor.color().opacity(0.6))
             Text("home.title.allCaughtUp", comment: "You're all caught up")
                 .font(.title2)
                 .fontWeight(.thin)

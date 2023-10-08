@@ -22,7 +22,11 @@ struct GeneralSectionView: View {
                                    "Orange-Camera",
                                    "Pride-Camera",
                                    "Yellow-Camera",
-                                   "Gradient-Camera"]
+                                   "Gradient-Camera",
+                                   "Orange-Lens",
+                                   "Pink-Lens",
+                                   "Blue-Lens",
+                                   "Brown-Lens"]
 
     private let themeNames: [(theme: Theme, name: LocalizedStringKey)] = [
         (Theme.system, "settings.title.system"),

@@ -59,6 +59,7 @@ class ApplicationSettingsHandler {
         applicationState.showAltIconOnTimeline = defaultSettings.showAltIconOnTimeline
         applicationState.warnAboutMissingAlt = defaultSettings.warnAboutMissingAlt
         applicationState.showGridOnUserProfile = defaultSettings.showGridOnUserProfile
+        applicationState.showReboostedStatuses = defaultSettings.showReboostedStatuses
 
         if let menuPosition = MenuPosition(rawValue: Int(defaultSettings.menuPosition)) {
             applicationState.menuPosition = menuPosition
@@ -194,6 +195,12 @@ class ApplicationSettingsHandler {
     func set(showGridOnUserProfile: Bool) {
         let defaultSettings = self.get()
         defaultSettings.showGridOnUserProfile = showGridOnUserProfile
+        CoreDataHandler.shared.save()
+    }
+
+    func set(showReboostedStatuses: Bool) {
+        let defaultSettings = self.get()
+        defaultSettings.showReboostedStatuses = showReboostedStatuses
         CoreDataHandler.shared.save()
     }
 
