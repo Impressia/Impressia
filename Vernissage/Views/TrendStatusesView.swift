@@ -90,7 +90,7 @@ struct TrendStatusesView: View {
                 NoDataView(imageSystemName: "photo.on.rectangle.angled", text: "trendingStatuses.title.noPhotos")
             } else {
                 if self.imageColumns > 1 {
-                    WaterfallGrid($statusViewModels, columns: $imageColumns, hideLoadMore: Binding.constant(true)) { item in
+                    WaterfallGrid($statusViewModels, refreshId: Binding.constant(""), columns: $imageColumns, hideLoadMore: Binding.constant(true)) { item in
                         ImageRowAsync(statusViewModel: item, containerWidth: $containerWidth)
                     } onLoadMore: { }
                 } else {

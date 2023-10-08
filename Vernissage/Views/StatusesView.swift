@@ -52,6 +52,7 @@ struct StatusesView: View {
     @State private var statusViewModels: [StatusModel] = []
     @State private var state: ViewState = .loading
     @State private var lastStatusId: String?
+    @State private var waterfallId: String = String.randomString(length: 8)
 
     // Gallery parameters.
     @State private var imageColumns = 3
@@ -96,7 +97,7 @@ struct StatusesView: View {
     private func list() -> some View {
         ScrollView {
             if self.imageColumns > 1 {
-                WaterfallGrid($statusViewModels, columns: $imageColumns, hideLoadMore: $allItemsLoaded) { item in
+                WaterfallGrid($statusViewModels, refreshId: $waterfallId, columns: $imageColumns, hideLoadMore: $allItemsLoaded) { item in
                     ImageRowAsync(statusViewModel: item, containerWidth: $containerWidth)
                 } onLoadMore: {
                     do {
@@ -140,6 +141,17 @@ struct StatusesView: View {
                 HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
             } catch {
                 ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
+            }
+        }
+        .onChange(of: self.applicationState.showReboostedStatuses) { _ in
+            if self.listType != .home {
+                return
+            }
+
+            Task { @MainActor in
+                HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
+                try await self.loadTopStatuses()
+                HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
             }
         }
     }
@@ -227,8 +239,12 @@ struct StatusesView: View {
         for item in statuses.getStatusesWithImagesOnly() {
             inPlaceStatuses.append(StatusModel(status: item))
         }
+        
+        // Prefetch images.
+        self.prefetch(statusModels: inPlaceStatuses)
 
         // Replace old collection with new one.
+        self.waterfallId = String.randomString(length: 8)
         self.statusViewModels = inPlaceStatuses
     }
 

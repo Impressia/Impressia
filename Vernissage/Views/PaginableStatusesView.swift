@@ -81,7 +81,7 @@ struct PaginableStatusesView: View {
     private func list() -> some View {
         ScrollView {
             if self.imageColumns > 1 {
-                WaterfallGrid($statusViewModels, columns: $imageColumns, hideLoadMore: $allItemsLoaded) { item in
+                WaterfallGrid($statusViewModels, refreshId: Binding.constant(""), columns: $imageColumns, hideLoadMore: $allItemsLoaded) { item in
                     ImageRowAsync(statusViewModel: item, containerWidth: $containerWidth)
                 } onLoadMore: {
                     do {
