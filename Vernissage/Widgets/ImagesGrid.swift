@@ -20,9 +20,9 @@ struct ImagesGrid: View {
     @EnvironmentObject var routerPath: RouterPath
 
     private let maxImages = 5
-    private let maxHeight = UIDevice.isIPad ? 240.0 : 120.0
 
     @State public var gridType: GridType
+    @State public var maxHeight = UIDevice.isIPhone ? 120.0 : 240.0
 
     @State private var photoUrls: [PhotoUrl] = [
         PhotoUrl(id: UUID().uuidString),
@@ -36,7 +36,7 @@ struct ImagesGrid: View {
         ScrollView(.horizontal) {
             LazyHGrid(rows: [GridItem(.fixed(self.maxHeight))]) {
                 ForEach(self.photoUrls) { photoUrl in
-                    ImageGrid(photoUrl: photoUrl, maxHeight: self.maxHeight)
+                    ImageGrid(photoUrl: photoUrl, maxHeight: $maxHeight)
                 }
 
                 Text("more...")
@@ -47,6 +47,9 @@ struct ImagesGrid: View {
                         self.openDetails()
                     }
             }
+        }
+        .gallery { properties in
+            self.maxHeight = properties.horizontalSize == .compact ? 120.0 : 240.0
         }
         .frame(height: self.maxHeight)
         .onFirstAppear {

@@ -29,6 +29,7 @@ public struct GalleryProperties {
     public let imageColumns: Int
     public let containerWidth: Double
     public let containerHeight: Double
+    public let horizontalSize: UserInterfaceSizeClass
 }
 
 struct DeviceImageGallery: ViewModifier {
@@ -66,7 +67,8 @@ struct DeviceImageGallery: ViewModifier {
             // View like on iPhone.
             return GalleryProperties(imageColumns: 1,
                                      containerWidth: geometry.size.width,
-                                     containerHeight: geometry.size.height)
+                                     containerHeight: geometry.size.height,
+                                     horizontalSize: horizontalSize)
         } else {
             // View like on iPad.
             let imageColumns = geometry.size.width > geometry.size.height ? 3 : 2
@@ -74,7 +76,8 @@ struct DeviceImageGallery: ViewModifier {
 
             return GalleryProperties(imageColumns: imageColumns,
                                      containerWidth: (geometry.size.width - Double(marginSpacing)) / Double(imageColumns),
-                                     containerHeight: (geometry.size.height - Double(marginSpacing)) / Double(imageColumns))
+                                     containerHeight: (geometry.size.height - Double(marginSpacing)) / Double(imageColumns),
+                                     horizontalSize: horizontalSize)
         }
     }
 }

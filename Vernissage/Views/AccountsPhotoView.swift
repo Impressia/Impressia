@@ -114,8 +114,28 @@ struct AccountsPhotoView: View {
         switch self.listType {
         case .trending:
             do {
-                let accountsFromApi = try await self.client.trends?.accounts()
-                return accountsFromApi ?? []
+                // TODO: Trending accounts API is returning almost always the same set of accounts. Thus we can take accounts from trending statuses.
+                async let trendingStatusesDaily = self.client.trends?.statuses(range: .daily)
+                async let trendingStatusesMonthly = self.client.trends?.statuses(range: .monthly)
+                async let trendingStatusesYearly = self.client.trends?.statuses(range: .yearly)
+                async let accountsFromApi = self.client.trends?.accounts()
+                
+                let trendingStatuses = try await (dailyStatuses: trendingStatusesDaily,
+                                                  monthlyStatuses: trendingStatusesMonthly,
+                                                  yearlyStatuses: trendingStatusesYearly)
+                let allTrendingStatuses = (trendingStatuses.dailyStatuses ?? []) + (trendingStatuses.monthlyStatuses ?? []) + (trendingStatuses.yearlyStatuses ?? [])
+
+                var allTrendingAccounts: [Account] = []
+                for trendingStatus in allTrendingStatuses where allTrendingAccounts.contains(where: { $0.id == trendingStatus.account.id }) == false {
+                    allTrendingAccounts.append(trendingStatus.account)
+                }
+                
+                let trendingAccounts = try await accountsFromApi ?? []
+                for account in trendingAccounts where allTrendingAccounts.contains(where: { $0.id == account.id }) == false {
+                    allTrendingAccounts.append(account)
+                }
+
+                return allTrendingAccounts
             } catch NetworkError.notSuccessResponse(let response) {
                 // TODO: This code can be removed when other Pixelfed server will support trending accounts.
                 if response.statusCode() == HTTPStatusCode.notFound {
