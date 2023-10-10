@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/omaralbeik/Drops",
       "state" : {
-        "revision" : "f4eabe3e4e5da69e5205a69a5ddc0effd4a90519",
-        "version" : "1.6.1"
+        "revision" : "a183ee6f79f21c940092a19c2cba756555422371",
+        "version" : "1.7.0"
       }
     },
     {

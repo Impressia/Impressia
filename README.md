@@ -34,7 +34,13 @@ Then you have to open files in these folders and translate them 🇯🇵🇫🇷
 From time to time you have to come back and translate lines which has been added since the last translation. 
 
 ## Technical debt
- - Use auto generated resources (Color/Images) instead static extensions (how to do this in separete Swift Packages?)
- - Enable swiftlint (https://github.com/realm/SwiftLint/issues/5053)
- - Investigate new (iOS 17) Observables
- - Check how to migrate to SwiftData (iOS 17)
+
+Things that should be implemented in version 2.0:
+
+ - [ ] Use auto generated resources (Color/Images) instead static extensions (how to do this in separete Swift Packages?)
+ - [ ] Move to xcstring (new Xcode transaction system)
+ - [ ] Move to new Observable macro (iOS 17)
+ - [ ] Migrate to SwiftData (iOS 17)
+ - [ ] Use ViewModels
+ - [ ] Add tips (new TipKit framework in iOS 17)
+ - [ ] Enable swiftlint (https://github.com/realm/SwiftLint/issues/5053)
