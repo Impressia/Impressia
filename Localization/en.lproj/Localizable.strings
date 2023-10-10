@@ -128,6 +128,8 @@
 "userProfile.title.edit" = "Edit";
 "userProfile.title.muted" = "Muted";
 "userProfile.title.blocked" = "Blocked";
+"userProfile.title.enableBoosts" = "Enable boosts";
+"userProfile.title.disableBoosts" = "Disable boosts";
 
 // Mark: Notifications view.
 "notifications.navigationBar.title" = "Notifications";
