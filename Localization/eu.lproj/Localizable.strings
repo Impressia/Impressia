@@ -130,6 +130,7 @@
 "userProfile.title.blocked" = "Blokeatuta";
 "userProfile.title.enableBoosts" = "Enable boosts";
 "userProfile.title.disableBoosts" = "Disable boosts";
+"userProfile.title.boostedStatusesMuted" = "Boosts muted";
 
 // Mark: Notifications view.
 "notifications.navigationBar.title" = "Jakinarazpenak";
@@ -244,6 +245,8 @@
 "settings.title.warnAboutMissingAltDescription" = "Irudiren batek deskribapenik ez badu, argitaratu baino lehen abisua erakutsiko da.";
 "settings.title.enableReboostOnTimeline" = "Erakutsi bultzatutako egoerak";
 "settings.title.enableReboostOnTimelineDescription" = "Besteek bultzatu dituzten egoerak zure denbora-lerroan erakutsiko dira.";
+"settings.title.hideStatusesWithoutAlt" = "Hide statuses without ALT text";
+"settings.title.hideStatusesWithoutAltDescription" = "Statuses without ALT text will not be visible on your home timeline.";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Hasi saioa Pixelfed-en";
