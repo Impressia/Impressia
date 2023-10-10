@@ -35,6 +35,7 @@ extension AccountData {
     @NSManaged public var username: String
     @NSManaged public var statuses: Set<StatusData>?
     @NSManaged public var viewedStatuses: Set<ViewedStatus>?
+    @NSManaged public var accountRelationships: Set<AccountRelationship>?
     @NSManaged public var lastSeenStatusId: String?
 }
 
@@ -64,6 +65,19 @@ extension AccountData {
 
     @objc(removeViewedStatuses:)
     @NSManaged public func removeFromViewedStatuses(_ values: NSSet)
+    
+    
+    @objc(addAccountRelationshipsObject:)
+    @NSManaged public func addToAccountRelationships(_ value: AccountRelationship)
+
+    @objc(removeAccountRelationshipsObject:)
+    @NSManaged public func removeFromVAccountRelationships(_ value: AccountRelationship)
+
+    @objc(addAccountRelationships:)
+    @NSManaged public func addToAccountRelationships(_ values: NSSet)
+
+    @objc(removeAccountRelationships:)
+    @NSManaged public func removeFromAccountRelationships(_ values: NSSet)
 }
 
 extension AccountData: Identifiable {

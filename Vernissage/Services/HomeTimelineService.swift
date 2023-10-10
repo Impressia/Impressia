@@ -131,6 +131,11 @@ public class HomeTimelineService {
                 let statusesWithImagesOnly = downloadedStatuses.getStatusesWithImagesOnly()
 
                 for status in statusesWithImagesOnly {
+                    // We shouldn't add statuses that are boosted by muted accounts.
+                    if AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: account.id, status: status, viewContext: backgroundContext) {
+                        continue
+                    }
+
                     // We should add to timeline only statuses that has not been showned to the user already.
                     guard self.hasBeenAlreadyOnTimeline(accountId: account.id, status: status, on: backgroundContext) == false else {
                         continue
@@ -366,6 +371,11 @@ public class HomeTimelineService {
                 let statusesWithImagesOnly = downloadedStatuses.getStatusesWithImagesOnly()
 
                 for status in statusesWithImagesOnly {
+                    // We shouldn't add statuses that are boosted by muted accounts.
+                    if AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: account.id, status: status, viewContext: backgroundContext) {
+                        continue
+                    }
+                    
                     // We should add to timeline only statuses that has not been showned to the user already.
                     guard self.hasBeenAlreadyOnTimeline(accountId: account.id, status: status, on: backgroundContext) == false else {
                         continue

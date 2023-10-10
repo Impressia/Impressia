@@ -185,6 +185,11 @@ struct StatusesView: View {
         // Get only statuses with images.
         var inPlaceStatuses: [StatusModel] = []
         for item in statuses.getStatusesWithImagesOnly() {
+            // We have to skip statuses that are boosted from muted accounts.
+            if let accountId = self.applicationState.account?.id, AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: accountId, status: item) {
+                continue
+            }
+            
             inPlaceStatuses.append(StatusModel(status: item))
         }
 
@@ -212,6 +217,11 @@ struct StatusesView: View {
             // Get only statuses with images.
             var inPlaceStatuses: [StatusModel] = []
             for item in previousStatuses.getStatusesWithImagesOnly() {
+                // We have to skip statuses that are boosted from muted accounts.
+                if let accountId = self.applicationState.account?.id, AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: accountId, status: item) {
+                    continue
+                }
+
                 inPlaceStatuses.append(StatusModel(status: item))
             }
 
@@ -237,6 +247,11 @@ struct StatusesView: View {
         // Get only statuses with images.
         var inPlaceStatuses: [StatusModel] = []
         for item in statuses.getStatusesWithImagesOnly() {
+            // We have to skip statuses that are boosted from muted accounts.
+            if let accountId = self.applicationState.account?.id, AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: accountId, status: item) {
+                continue
+            }
+
             inPlaceStatuses.append(StatusModel(status: item))
         }
         
