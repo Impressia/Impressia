@@ -821,7 +821,6 @@
 				F844F42429D2DC39000DD896 /* LICENSE */,
 				F8B3699A29D86EB600BE3808 /* .swiftlint.yml */,
 				F8B3699B29D86EBD00BE3808 /* .gitignore */,
-				F8CB3DF029D80B1E00CDAE5A /* Resources */,
 				F835081F29BEF88600DE3247 /* Localization */,
 				F8341F96295C6427009C8EE6 /* CoreData */,
 				F88C246A295C37B80006098B /* Vernissage */,
@@ -933,13 +932,6 @@
 				F86A4302299A9AF500DF7645 /* TipsStore.swift */,
 			);
 			path = EnvironmentObjects;
-			sourceTree = "<group>";
-		};
-		F8CB3DF029D80B1E00CDAE5A /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		F8F6E44529BCC0C90004795E /* Views */ = {
