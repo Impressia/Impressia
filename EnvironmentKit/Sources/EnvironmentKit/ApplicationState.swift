@@ -109,6 +109,9 @@ public class ApplicationState: ObservableObject {
 
     /// Show reboosted statuses on home timeline.
     @Published public var showReboostedStatuses = false
+
+    /// Hide statuses without ALT text.
+    @Published public var hideStatusesWithoutAlt = false
     
     public func changeApplicationState(accountModel: AccountModel, instance: Instance?, lastSeenStatusId: String?) {
         self.account = accountModel

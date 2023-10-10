@@ -19,6 +19,11 @@ public extension Status {
     func statusContainsImage() -> Bool {
         return getAllImageMediaAttachments().isEmpty == false
     }
+    
+    func statusContainsAltText() -> Bool {
+        let mediaAttachments = self.getAllImageMediaAttachments()
+        return mediaAttachments.contains(where: { $0.description?.isEmpty == false  })
+    }
 
     func getAllImageMediaAttachments() -> [MediaAttachment] {
         if let reblog = self.reblog {

@@ -24,7 +24,7 @@ public class HomeTimelineService {
     private let semaphore = AsyncSemaphore(value: 1)
 
     @MainActor
-    public func loadOnBottom(for account: AccountModel, includeReblogs: Bool) async throws -> Int {
+    public func loadOnBottom(for account: AccountModel, includeReblogs: Bool, hideStatusesWithoutAlt: Bool) async throws -> Int {
         // Load data from API and operate on CoreData on background context.
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
 
@@ -36,7 +36,11 @@ public class HomeTimelineService {
         }
 
         // Load data on bottom of the list.
-        let allStatusesFromApi = try await self.load(for: account, includeReblogs: includeReblogs, on: backgroundContext, maxId: oldestStatus.id)
+        let allStatusesFromApi = try await self.load(for: account,
+                                                     includeReblogs: includeReblogs,
+                                                     hideStatusesWithoutAlt: hideStatusesWithoutAlt,
+                                                     on: backgroundContext,
+                                                     maxId: oldestStatus.id)
 
         // Save data into database.
         CoreDataHandler.shared.save(viewContext: backgroundContext)
@@ -49,7 +53,7 @@ public class HomeTimelineService {
     }
 
     @MainActor
-    public func refreshTimeline(for account: AccountModel, includeReblogs: Bool, updateLastSeenStatus: Bool = false) async throws -> String? {
+    public func refreshTimeline(for account: AccountModel, includeReblogs: Bool, hideStatusesWithoutAlt: Bool, updateLastSeenStatus: Bool = false) async throws -> String? {
         await semaphore.wait()
         defer { semaphore.signal() }
 
@@ -62,7 +66,10 @@ public class HomeTimelineService {
 
         // Refresh/load home timeline (refreshing on top downloads always first 40 items).
         // When Apple introduce good way to show new items without scroll to top then we can change that method.
-        let allStatusesFromApi = try await self.refresh(for: account, includeReblogs: includeReblogs, on: backgroundContext)
+        let allStatusesFromApi = try await self.refresh(for: account,
+                                                        includeReblogs: includeReblogs,
+                                                        hideStatusesWithoutAlt: hideStatusesWithoutAlt,
+                                                        on: backgroundContext)
 
         // Update last seen status.
         if let lastSeenStatusId, updateLastSeenStatus == true {
@@ -95,7 +102,7 @@ public class HomeTimelineService {
         CoreDataHandler.shared.save()
     }
 
-    public func amountOfNewStatuses(for account: AccountModel, includeReblogs: Bool) async -> Int {
+    public func amountOfNewStatuses(for account: AccountModel, includeReblogs: Bool, hideStatusesWithoutAlt: Bool) async -> Int {
         await semaphore.wait()
         defer { semaphore.signal() }
         
@@ -131,6 +138,11 @@ public class HomeTimelineService {
                 let statusesWithImagesOnly = downloadedStatuses.getStatusesWithImagesOnly()
 
                 for status in statusesWithImagesOnly {
+                    // We have to hide statuses without ALT text.
+                    if hideStatusesWithoutAlt && status.statusContainsAltText() == false {
+                        continue
+                    }
+
                     // We shouldn't add statuses that are boosted by muted accounts.
                     if AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: account.id, status: status, viewContext: backgroundContext) {
                         continue
@@ -190,9 +202,12 @@ public class HomeTimelineService {
         return statusData
     }
     
-    private func refresh(for account: AccountModel, includeReblogs: Bool, on backgroundContext: NSManagedObjectContext) async throws -> [Status] {
+    private func refresh(for account: AccountModel, includeReblogs: Bool, hideStatusesWithoutAlt: Bool, on backgroundContext: NSManagedObjectContext) async throws -> [Status] {
         // Retrieve statuses from API.
-        let statuses = try await self.getUniqueStatusesForHomeTimeline(account: account, includeReblogs: includeReblogs, on: backgroundContext)
+        let statuses = try await self.getUniqueStatusesForHomeTimeline(account: account,
+                                                                       includeReblogs: includeReblogs,
+                                                                       hideStatusesWithoutAlt: hideStatusesWithoutAlt,
+                                                                       on: backgroundContext)
 
         // Update all existing statuses in database.
         for status in statuses {
@@ -246,11 +261,16 @@ public class HomeTimelineService {
 
     private func load(for account: AccountModel,
                       includeReblogs: Bool,
+                      hideStatusesWithoutAlt: Bool,
                       on backgroundContext: NSManagedObjectContext,
                       maxId: String? = nil
     ) async throws -> [Status] {
         // Retrieve statuses from API.
-        let statuses = try await self.getUniqueStatusesForHomeTimeline(account: account, maxId: maxId, includeReblogs: includeReblogs, on: backgroundContext)
+        let statuses = try await self.getUniqueStatusesForHomeTimeline(account: account,
+                                                                       maxId: maxId,
+                                                                       includeReblogs: includeReblogs,
+                                                                       hideStatusesWithoutAlt: hideStatusesWithoutAlt,
+                                                                       on: backgroundContext)
 
         // Save statuses in database.
         try await self.add(statuses, for: account, on: backgroundContext)
@@ -348,7 +368,11 @@ public class HomeTimelineService {
         return ViewedStatusHandler.shared.hasBeenAlreadyOnTimeline(accountId: accountId, status: status, viewContext: backgroundContext)
     }
     
-    private func getUniqueStatusesForHomeTimeline(account: AccountModel, maxId: EntityId? = nil, includeReblogs: Bool? = nil, on backgroundContext: NSManagedObjectContext) async throws -> [Status] {
+    private func getUniqueStatusesForHomeTimeline(account: AccountModel,
+                                                  maxId: EntityId? = nil,
+                                                  includeReblogs: Bool? = nil,
+                                                  hideStatusesWithoutAlt: Bool = false,
+                                                  on backgroundContext: NSManagedObjectContext) async throws -> [Status] {
             guard let accessToken = account.accessToken else {
                 return []
             }
@@ -371,6 +395,11 @@ public class HomeTimelineService {
                 let statusesWithImagesOnly = downloadedStatuses.getStatusesWithImagesOnly()
 
                 for status in statusesWithImagesOnly {
+                    // We have to hide statuses without ALT text.
+                    if hideStatusesWithoutAlt && status.statusContainsAltText() == false {
+                        continue
+                    }
+                    
                     // We shouldn't add statuses that are boosted by muted accounts.
                     if AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: account.id, status: status, viewContext: backgroundContext) {
                         continue

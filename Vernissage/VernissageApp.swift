@@ -205,7 +205,8 @@ struct VernissageApp: App {
     private func calculateNewPhotosInBackground() async {
         if let account = self.applicationState.account {
             self.applicationState.amountOfNewStatuses = await HomeTimelineService.shared.amountOfNewStatuses(for: account,
-                                                                                                             includeReblogs: self.applicationState.showReboostedStatuses)
+                                                                                                             includeReblogs: self.applicationState.showReboostedStatuses,
+                                                                                                             hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt)
         }
     }
 }

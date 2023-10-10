@@ -70,7 +70,7 @@ struct UserProfileView: View {
 
     private func accountView(account: Account) -> some View {
         ScrollView {
-            UserProfileHeaderView(account: account, relationship: relationship)
+            UserProfileHeaderView(account: account, relationship: relationship, boostsDisabled: $boostsDisabled)
                 .id(self.viewId)
 
             if self.applicationState.account?.id == account.id || self.relationship.haveAccessToPhotos(account: account) {

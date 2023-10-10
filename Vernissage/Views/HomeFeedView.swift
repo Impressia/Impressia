@@ -71,7 +71,12 @@ struct HomeFeedView: View {
                             .task {
                                 do {
                                     if let account = self.applicationState.account {
-                                        let newStatusesCount = try await HomeTimelineService.shared.loadOnBottom(for: account, includeReblogs: self.applicationState.showReboostedStatuses)
+                                        let newStatusesCount = try await HomeTimelineService.shared.loadOnBottom(
+                                            for: account,
+                                            includeReblogs: self.applicationState.showReboostedStatuses,
+                                            hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt
+                                        )
+
                                         if newStatusesCount == 0 {
                                             allItemsLoaded = true
                                         }
@@ -103,7 +108,10 @@ struct HomeFeedView: View {
     private func refreshData() async {
         do {
             if let account = self.applicationState.account {
-                let lastSeenStatusId = try await HomeTimelineService.shared.refreshTimeline(for: account, includeReblogs: self.applicationState.showReboostedStatuses, updateLastSeenStatus: true)
+                let lastSeenStatusId = try await HomeTimelineService.shared.refreshTimeline(for: account,
+                                                                                            includeReblogs: self.applicationState.showReboostedStatuses,
+                                                                                            hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt,
+                                                                                            updateLastSeenStatus: true)
                 asyncAfter(0.75) {
                     self.applicationState.lastSeenStatusId = lastSeenStatusId
                     self.applicationState.amountOfNewStatuses = 0
@@ -126,7 +134,9 @@ struct HomeFeedView: View {
             }
 
             if let account = self.applicationState.account {
-                _ = try await HomeTimelineService.shared.refreshTimeline(for: account, includeReblogs: self.applicationState.showReboostedStatuses)
+                _ = try await HomeTimelineService.shared.refreshTimeline(for: account,
+                                                                         includeReblogs: self.applicationState.showReboostedStatuses,
+                                                                         hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt)
             }
 
             self.applicationState.amountOfNewStatuses = 0

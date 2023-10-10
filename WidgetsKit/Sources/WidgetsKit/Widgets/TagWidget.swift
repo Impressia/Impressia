@@ -10,17 +10,25 @@ public struct TagWidget: View {
     private let value: LocalizedStringKey
     private let color: Color
     private let systemImage: String?
+    private let image: String?
 
-    public init(value: LocalizedStringKey, color: Color, systemImage: String? = nil) {
+    public init(value: LocalizedStringKey, color: Color, systemImage: String? = nil, image: String? = nil) {
         self.value = value
         self.color = color
         self.systemImage = systemImage
+        self.image = image
     }
 
     public var body: some View {
         HStack {
             if let systemImage {
                 Image(systemName: systemImage)
+                    .foregroundColor(.white)
+                    .font(.footnote)
+            }
+            
+            if let image {
+                Image(image)
                     .foregroundColor(.white)
                     .font(.footnote)
             }

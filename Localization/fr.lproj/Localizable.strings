@@ -130,6 +130,7 @@
 "userProfile.title.blocked" = "Bloquer";
 "userProfile.title.enableBoosts" = "Enable boosts";
 "userProfile.title.disableBoosts" = "Disable boosts";
+"userProfile.title.boostedStatusesMuted" = "Boosts muted";
 
 // Mark: Notifications view.
 "notifications.navigationBar.title" = "Notifications";
@@ -244,6 +245,8 @@
 "settings.title.warnAboutMissingAltDescription" = "Un avertissement concernant les textes ALT manquants sera affiché avant la publication d'un nouveau message.";
 "settings.title.enableReboostOnTimeline" = "Show boosted statuses";
 "settings.title.enableReboostOnTimelineDescription" = "Boosted statuses will be visible on your home timeline.";
+"settings.title.hideStatusesWithoutAlt" = "Hide statuses without ALT text";
+"settings.title.hideStatusesWithoutAltDescription" = "Statuses without ALT text will not be visible on your home timeline.";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Se connecter à Pixelfed";

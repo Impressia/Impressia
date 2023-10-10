@@ -18,7 +18,8 @@ struct UserProfileHeaderView: View {
 
     @State var account: Account
     @ObservedObject var relationship = RelationshipModel()
-
+    @Binding var boostsDisabled: Bool
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .center) {
@@ -109,7 +110,7 @@ struct UserProfileHeaderView: View {
 
     @ViewBuilder
     private func accountRelationshipPanel() -> some View {
-        if self.relationship.followedBy || self.relationship.muting || self.relationship.blocking {
+        if self.relationship.followedBy || self.relationship.muting || self.relationship.blocking || self.boostsDisabled {
             HStack(alignment: .top) {
                 if self.relationship.followedBy {
                     TagWidget(value: "userProfile.title.followsYou", color: .secondary, systemImage: "person.crop.circle.badge.checkmark")
@@ -118,13 +119,18 @@ struct UserProfileHeaderView: View {
                 if self.relationship.muting {
                     TagWidget(value: "userProfile.title.muted", color: .accentColor, systemImage: "message.and.waveform.fill")
                 }
+                
+                if self.boostsDisabled {
+                    TagWidget(value: "userProfile.title.boostedStatusesMuted", color: .accentColor, image: "custom.rocket.fill")
+                }
 
                 if self.relationship.blocking {
                     TagWidget(value: "userProfile.title.blocked", color: .dangerColor, systemImage: "hand.raised.fill")
                 }
-
+                
                 Spacer()
             }
+            .transition(.opacity)
         }
     }
 
