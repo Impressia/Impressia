@@ -20,6 +20,7 @@ public class HomeTimelineService {
     private init() { }
 
     private let defaultAmountOfDownloadedStatuses = 40
+    private let maximumAmountOfDownloadedStatuses = 80
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
     private let semaphore = AsyncSemaphore(value: 1)
 
@@ -123,11 +124,11 @@ public class HomeTimelineService {
         var statuses: [Status] = []
         var newestStatusId = newestStatus.id
 
-        // There can be more then 40 newest statuses, that's why we have to sometimes send more then one request.
+        // There can be more then 80 newest statuses, that's why we have to sometimes send more then one request.
         while true {
             do {
                 let downloadedStatuses = try await client.getHomeTimeline(minId: newestStatusId,
-                                                                          limit: self.defaultAmountOfDownloadedStatuses,
+                                                                          limit: self.maximumAmountOfDownloadedStatuses,
                                                                           includeReblogs: includeReblogs)
 
                 guard let firstStatus = downloadedStatuses.first else {
@@ -383,7 +384,7 @@ public class HomeTimelineService {
             
             while true {
                 let downloadedStatuses = try await client.getHomeTimeline(maxId: lastStatusId,
-                                                                          limit: self.defaultAmountOfDownloadedStatuses,
+                                                                          limit: self.maximumAmountOfDownloadedStatuses,
                                                                           includeReblogs: includeReblogs)
 
                 // When there is not any older statuses we have to finish.
@@ -395,6 +396,11 @@ public class HomeTimelineService {
                 let statusesWithImagesOnly = downloadedStatuses.getStatusesWithImagesOnly()
 
                 for status in statusesWithImagesOnly {
+                    // When we process default amount of statuses to show we can stop adding another ones to the list.
+                    if statuses.count == self.defaultAmountOfDownloadedStatuses {
+                        break
+                    }
+                    
                     // We have to hide statuses without ALT text.
                     if hideStatusesWithoutAlt && status.statusContainsAltText() == false {
                         continue

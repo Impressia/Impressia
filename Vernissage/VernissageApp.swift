@@ -62,7 +62,7 @@ struct VernissageApp: App {
             }
             .navigationViewStyle(.stack)
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     Task {
                         // Refresh indicator of new photos when application is become active.
                         await self.calculateNewPhotosInBackground()
@@ -135,7 +135,7 @@ struct VernissageApp: App {
                 return
             }
 
-            self.setApplicationState(accountModel: signedInAccountModel, checkNewPhotos: true)
+            self.setApplicationState(accountModel: signedInAccountModel)
         }
     }
 
