@@ -116,7 +116,7 @@
 "userProfile.title.report" = "Salatu";
 "userProfile.title.followsYou" = "Jarraitzen dizu";
 "userProfile.title.requestFollow" = "Egin jarraitzeko eskaera";
-"userProfile.title.cancelRequestFollow" = "Bertan behera utzi jarraitzeko eskaera";
+"userProfile.title.cancelRequestFollow" = "Utzi bertan behera jarraitzeko eskaera";
 "userProfile.title.followRequests" = "Jarraipen-eskaerak";
 "userProfile.title.privateProfileTitle" = "Profil hau pribatua da.";
 "userProfile.title.privateProfileSubtitle" = "Baimendutako jarraitzaileek soilik ikus ditzakete argazkiak.";
@@ -128,6 +128,9 @@
 "userProfile.title.edit" = "Editatu";
 "userProfile.title.muted" = "Mutututa";
 "userProfile.title.blocked" = "Blokeatuta";
+"userProfile.title.enableBoosts" = "Ikusi bultzadak";
+"userProfile.title.disableBoosts" = "Ezkutatu bultzadak";
+"userProfile.title.boostedStatusesMuted" = "Bultzadak mututu dira";
 
 // Mark: Notifications view.
 "notifications.navigationBar.title" = "Jakinarazpenak";
@@ -148,7 +151,7 @@
 "compose.navigationBar.title" = "Idatzi";
 "compose.title.everyone" = "Edonorentzat ikusgai";
 "compose.title.unlisted" = "Zerrendatu gabea";
-"compose.title.followers" = "Jarraitzaileentzat ikusgai";
+"compose.title.followers" = "Jarraitzaileentzat soilik";
 "compose.title.attachPhotoFull" = "Erantsi argazkia eta idatzi buruan duzuna";
 "compose.title.attachPhotoMini" = "Idatzi buruan duzuna";
 "compose.title.publish" = "Argitaratu";
@@ -172,7 +175,7 @@
 "photoEdit.navigationBar.title" = "Argazkiaren xehetasunak";
 "photoEdit.title.photo" = "Argazkia";
 "photoEdit.title.accessibility" = "Irisgarritasuna";
-"photoEdit.title.accessibilityDescription" = "Ikusmen arazoak dituztenentzat deskribapena";
+"photoEdit.title.accessibilityDescription" = "Ikusmen urritasuna dutenentzat deskribapena";
 "photoEdit.title.save" = "Gorde";
 "photoEdit.title.cancel" = "Utzi";
 "photoEdit.error.updatePhotoFailed" = "Errorea argazkia eguneratzean.";
@@ -202,7 +205,7 @@
 "settings.title.thirdParty" = "Hirugarrenak";
 "settings.title.reportBug" = "Eman errore baten berri";
 "settings.title.githubIssues" = "Erroreak Github-en";
-"settings.title.follow" = "Jarrai nazazu";
+"settings.title.follow" = "Jarraitu niri";
 "settings.title.support" = "Eman babesa";
 "settings.title.thankYouTitle" = "Eskerrik asko 💕";
 "settings.title.thankYouMessage" = "Mila esker erosketagatik. Erosketa handi eta txikiek gure bezeroei kalitatezko produkturik onenak eskaintzeko ametsari eusten laguntzen digute. Espero dugu Vernissage gustuko izatea.";
@@ -214,7 +217,7 @@
 "settings.title.hapticsAnimationFinished" = "Animazioak amaitzean";
 "settings.title.mediaSettings" = "Multimedia hobespenak";
 "settings.title.alwaysShowSensitiveTitle" = "Erakutsi beti NSFW edukia";
-"settings.title.alwaysShowSensitiveDescription" = "NSFW (Lanerako Egokia Izan Ez Daitekeen Edukia) gisa markatutako multimedia edukia ohartarazpenik gabe erakutsiko da";
+"settings.title.alwaysShowSensitiveDescription" = "NSFW (Lantokirako egokia ez den edukia) gisa markatutako multimedia edukia ohartarazpenik gabe erakutsiko da";
 "settings.title.alwaysShowAltTitle" = "Erakutsi testu alternatiboa";
 "settings.title.alwaysShowAltDescription" = "Testu alternatiboa xehetasunen pantailan erakutsiko da, baldin badago";
 "settings.title.general" = "Orokorra";
@@ -240,8 +243,10 @@
 "settings.title.showAltTextOnTimeline" = "ALT ikurra (deskribapena edo testu alternatiboa dagoenaren seinale) denbora-lerroan erakutsiko da";
 "settings.title.warnAboutMissingAltTitle" = "Abisatu ALT ahaztu bazait";
 "settings.title.warnAboutMissingAltDescription" = "Irudiren batek deskribapenik ez badu, argitaratu baino lehen abisua erakutsiko da.";
-"settings.title.enableReboostOnTimeline" = "Show boosted statuses";
-"settings.title.enableReboostOnTimelineDescription" = "Boosted statuses will be visible on your home timeline.";
+"settings.title.enableReboostOnTimeline" = "Erakutsi bultzatutako egoerak";
+"settings.title.enableReboostOnTimelineDescription" = "Besteek bultzatu dituzten egoerak denbora-lerroan erakutsiko dira.";
+"settings.title.hideStatusesWithoutAlt" = "Ezkutatu ALT gabeko egoerak";
+"settings.title.hideStatusesWithoutAltDescription" = "Deskribapen edo testu alternatiborik ez duten egoerak ez dira denbora-lerroan erakutsiko.";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Hasi saioa Pixelfed-en";

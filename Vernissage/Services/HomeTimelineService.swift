@@ -20,11 +20,12 @@ public class HomeTimelineService {
     private init() { }
 
     private let defaultAmountOfDownloadedStatuses = 40
+    private let maximumAmountOfDownloadedStatuses = 80
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
     private let semaphore = AsyncSemaphore(value: 1)
 
     @MainActor
-    public func loadOnBottom(for account: AccountModel, includeReblogs: Bool) async throws -> Int {
+    public func loadOnBottom(for account: AccountModel, includeReblogs: Bool, hideStatusesWithoutAlt: Bool) async throws -> Int {
         // Load data from API and operate on CoreData on background context.
         let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
 
@@ -36,7 +37,11 @@ public class HomeTimelineService {
         }
 
         // Load data on bottom of the list.
-        let allStatusesFromApi = try await self.load(for: account, includeReblogs: includeReblogs, on: backgroundContext, maxId: oldestStatus.id)
+        let allStatusesFromApi = try await self.load(for: account,
+                                                     includeReblogs: includeReblogs,
+                                                     hideStatusesWithoutAlt: hideStatusesWithoutAlt,
+                                                     on: backgroundContext,
+                                                     maxId: oldestStatus.id)
 
         // Save data into database.
         CoreDataHandler.shared.save(viewContext: backgroundContext)
@@ -49,7 +54,7 @@ public class HomeTimelineService {
     }
 
     @MainActor
-    public func refreshTimeline(for account: AccountModel, includeReblogs: Bool, updateLastSeenStatus: Bool = false) async throws -> String? {
+    public func refreshTimeline(for account: AccountModel, includeReblogs: Bool, hideStatusesWithoutAlt: Bool, updateLastSeenStatus: Bool = false) async throws -> String? {
         await semaphore.wait()
         defer { semaphore.signal() }
 
@@ -62,7 +67,10 @@ public class HomeTimelineService {
 
         // Refresh/load home timeline (refreshing on top downloads always first 40 items).
         // When Apple introduce good way to show new items without scroll to top then we can change that method.
-        let allStatusesFromApi = try await self.refresh(for: account, includeReblogs: includeReblogs, on: backgroundContext)
+        let allStatusesFromApi = try await self.refresh(for: account,
+                                                        includeReblogs: includeReblogs,
+                                                        hideStatusesWithoutAlt: hideStatusesWithoutAlt,
+                                                        on: backgroundContext)
 
         // Update last seen status.
         if let lastSeenStatusId, updateLastSeenStatus == true {
@@ -95,7 +103,7 @@ public class HomeTimelineService {
         CoreDataHandler.shared.save()
     }
 
-    public func amountOfNewStatuses(for account: AccountModel, includeReblogs: Bool) async -> Int {
+    public func amountOfNewStatuses(for account: AccountModel, includeReblogs: Bool, hideStatusesWithoutAlt: Bool) async -> Int {
         await semaphore.wait()
         defer { semaphore.signal() }
         
@@ -116,11 +124,11 @@ public class HomeTimelineService {
         var statuses: [Status] = []
         var newestStatusId = newestStatus.id
 
-        // There can be more then 40 newest statuses, that's why we have to sometimes send more then one request.
+        // There can be more then 80 newest statuses, that's why we have to sometimes send more then one request.
         while true {
             do {
                 let downloadedStatuses = try await client.getHomeTimeline(minId: newestStatusId,
-                                                                          limit: self.defaultAmountOfDownloadedStatuses,
+                                                                          limit: self.maximumAmountOfDownloadedStatuses,
                                                                           includeReblogs: includeReblogs)
 
                 guard let firstStatus = downloadedStatuses.first else {
@@ -131,6 +139,16 @@ public class HomeTimelineService {
                 let statusesWithImagesOnly = downloadedStatuses.getStatusesWithImagesOnly()
 
                 for status in statusesWithImagesOnly {
+                    // We have to hide statuses without ALT text.
+                    if hideStatusesWithoutAlt && status.statusContainsAltText() == false {
+                        continue
+                    }
+
+                    // We shouldn't add statuses that are boosted by muted accounts.
+                    if AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: account.id, status: status, viewContext: backgroundContext) {
+                        continue
+                    }
+
                     // We should add to timeline only statuses that has not been showned to the user already.
                     guard self.hasBeenAlreadyOnTimeline(accountId: account.id, status: status, on: backgroundContext) == false else {
                         continue
@@ -185,9 +203,12 @@ public class HomeTimelineService {
         return statusData
     }
     
-    private func refresh(for account: AccountModel, includeReblogs: Bool, on backgroundContext: NSManagedObjectContext) async throws -> [Status] {
+    private func refresh(for account: AccountModel, includeReblogs: Bool, hideStatusesWithoutAlt: Bool, on backgroundContext: NSManagedObjectContext) async throws -> [Status] {
         // Retrieve statuses from API.
-        let statuses = try await self.getUniqueStatusesForHomeTimeline(account: account, includeReblogs: includeReblogs, on: backgroundContext)
+        let statuses = try await self.getUniqueStatusesForHomeTimeline(account: account,
+                                                                       includeReblogs: includeReblogs,
+                                                                       hideStatusesWithoutAlt: hideStatusesWithoutAlt,
+                                                                       on: backgroundContext)
 
         // Update all existing statuses in database.
         for status in statuses {
@@ -241,11 +262,16 @@ public class HomeTimelineService {
 
     private func load(for account: AccountModel,
                       includeReblogs: Bool,
+                      hideStatusesWithoutAlt: Bool,
                       on backgroundContext: NSManagedObjectContext,
                       maxId: String? = nil
     ) async throws -> [Status] {
         // Retrieve statuses from API.
-        let statuses = try await self.getUniqueStatusesForHomeTimeline(account: account, maxId: maxId, includeReblogs: includeReblogs, on: backgroundContext)
+        let statuses = try await self.getUniqueStatusesForHomeTimeline(account: account,
+                                                                       maxId: maxId,
+                                                                       includeReblogs: includeReblogs,
+                                                                       hideStatusesWithoutAlt: hideStatusesWithoutAlt,
+                                                                       on: backgroundContext)
 
         // Save statuses in database.
         try await self.add(statuses, for: account, on: backgroundContext)
@@ -343,7 +369,11 @@ public class HomeTimelineService {
         return ViewedStatusHandler.shared.hasBeenAlreadyOnTimeline(accountId: accountId, status: status, viewContext: backgroundContext)
     }
     
-    private func getUniqueStatusesForHomeTimeline(account: AccountModel, maxId: EntityId? = nil, includeReblogs: Bool? = nil, on backgroundContext: NSManagedObjectContext) async throws -> [Status] {
+    private func getUniqueStatusesForHomeTimeline(account: AccountModel,
+                                                  maxId: EntityId? = nil,
+                                                  includeReblogs: Bool? = nil,
+                                                  hideStatusesWithoutAlt: Bool = false,
+                                                  on backgroundContext: NSManagedObjectContext) async throws -> [Status] {
             guard let accessToken = account.accessToken else {
                 return []
             }
@@ -354,7 +384,7 @@ public class HomeTimelineService {
             
             while true {
                 let downloadedStatuses = try await client.getHomeTimeline(maxId: lastStatusId,
-                                                                          limit: self.defaultAmountOfDownloadedStatuses,
+                                                                          limit: self.maximumAmountOfDownloadedStatuses,
                                                                           includeReblogs: includeReblogs)
 
                 // When there is not any older statuses we have to finish.
@@ -366,6 +396,21 @@ public class HomeTimelineService {
                 let statusesWithImagesOnly = downloadedStatuses.getStatusesWithImagesOnly()
 
                 for status in statusesWithImagesOnly {
+                    // When we process default amount of statuses to show we can stop adding another ones to the list.
+                    if statuses.count == self.defaultAmountOfDownloadedStatuses {
+                        break
+                    }
+                    
+                    // We have to hide statuses without ALT text.
+                    if hideStatusesWithoutAlt && status.statusContainsAltText() == false {
+                        continue
+                    }
+                    
+                    // We shouldn't add statuses that are boosted by muted accounts.
+                    if AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: account.id, status: status, viewContext: backgroundContext) {
+                        continue
+                    }
+                    
                     // We should add to timeline only statuses that has not been showned to the user already.
                     guard self.hasBeenAlreadyOnTimeline(accountId: account.id, status: status, on: backgroundContext) == false else {
                         continue

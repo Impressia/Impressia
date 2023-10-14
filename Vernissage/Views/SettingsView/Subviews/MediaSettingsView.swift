@@ -97,6 +97,18 @@ struct MediaSettingsView: View {
             .onChange(of: self.applicationState.showReboostedStatuses) { newValue in
                 ApplicationSettingsHandler.shared.set(showReboostedStatuses: newValue)
             }
+            
+            Toggle(isOn: $applicationState.hideStatusesWithoutAlt) {
+                VStack(alignment: .leading) {
+                    Text("settings.title.hideStatusesWithoutAlt", comment: "Hide statuses without ALT")
+                    Text("settings.title.hideStatusesWithoutAltDescription", comment: "Statuses without ALT text will not be visible on your home timeline.")
+                        .font(.footnote)
+                        .foregroundColor(.customGrayColor)
+                }
+            }
+            .onChange(of: self.applicationState.hideStatusesWithoutAlt) { newValue in
+                ApplicationSettingsHandler.shared.set(hideStatusesWithoutAlt: newValue)
+            }
         }
     }
 }

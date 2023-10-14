@@ -14,7 +14,12 @@ struct ImageGrid: View {
     @EnvironmentObject var routerPath: RouterPath
 
     @StateObject var photoUrl: PhotoUrl
-    @State var maxHeight = 120.0
+    @Binding var maxHeight: Double
+    
+    init(photoUrl: PhotoUrl, maxHeight: Binding<Double>) {
+        self._photoUrl = StateObject(wrappedValue: photoUrl)
+        self._maxHeight = maxHeight
+    }
 
     var body: some View {
         if self.photoUrl.sensitive && !self.applicationState.showSensitive {

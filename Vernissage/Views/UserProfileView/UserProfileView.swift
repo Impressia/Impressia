@@ -26,6 +26,7 @@ struct UserProfileView: View {
     @State private var account: Account?
     @State private var state: ViewState = .loading
     @State private var viewId = UUID().uuidString
+    @State private var boostsDisabled = false
 
     // Gallery parameters.
     @State private var imageColumns = 3
@@ -69,7 +70,7 @@ struct UserProfileView: View {
 
     private func accountView(account: Account) -> some View {
         ScrollView {
-            UserProfileHeaderView(account: account, relationship: relationship)
+            UserProfileHeaderView(account: account, relationship: relationship, boostsDisabled: $boostsDisabled)
                 .id(self.viewId)
 
             if self.applicationState.account?.id == account.id || self.relationship.haveAccessToPhotos(account: account) {
@@ -118,6 +119,10 @@ struct UserProfileView: View {
             } else {
                 self.relationship.update(relationship: RelationshipModel())
             }
+            
+            if let signedInAccountId = self.applicationState.account?.id {
+                self.boostsDisabled = AccountRelationshipHandler.shared.isBoostedStatusesMuted(for: signedInAccountId, relation: self.accountId)
+            }
 
             self.account = accountFromApi
 
@@ -165,6 +170,23 @@ struct UserProfileView: View {
                         Label(NSLocalizedString("userProfile.title.unblock", comment: "Unblock"), systemImage: "hand.raised.fill")
                     } else {
                         Label(NSLocalizedString("userProfile.title.block", comment: "Block"), systemImage: "hand.raised")
+                    }
+                }
+                
+                Button {
+                    Task {
+                        if let signedInAccoountId = self.applicationState.account?.id {
+                            self.boostsDisabled.toggle()
+                            AccountRelationshipHandler.shared.setBoostedStatusesMuted(for: signedInAccoountId,
+                                                                                      relation: self.accountId,
+                                                                                      boostedStatusesMuted: self.boostsDisabled)
+                        }
+                    }
+                } label: {
+                    if self.boostsDisabled == true {
+                        Label(NSLocalizedString("userProfile.title.enableBoosts", comment: "Enable boosts"), image: "custom.rocket.fill")
+                    } else {
+                        Label(NSLocalizedString("userProfile.title.disableBoosts", comment: "Disable boosts"), image: "custom.rocket")
                     }
                 }
 

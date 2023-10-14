@@ -60,6 +60,7 @@ class ApplicationSettingsHandler {
         applicationState.warnAboutMissingAlt = defaultSettings.warnAboutMissingAlt
         applicationState.showGridOnUserProfile = defaultSettings.showGridOnUserProfile
         applicationState.showReboostedStatuses = defaultSettings.showReboostedStatuses
+        applicationState.hideStatusesWithoutAlt = defaultSettings.hideStatusesWithoutAlt
 
         if let menuPosition = MenuPosition(rawValue: Int(defaultSettings.menuPosition)) {
             applicationState.menuPosition = menuPosition
@@ -204,6 +205,12 @@ class ApplicationSettingsHandler {
         CoreDataHandler.shared.save()
     }
 
+    func set(hideStatusesWithoutAlt: Bool) {
+        let defaultSettings = self.get()
+        defaultSettings.hideStatusesWithoutAlt = hideStatusesWithoutAlt
+        CoreDataHandler.shared.save()
+    }
+    
     private func createApplicationSettingsEntity(viewContext: NSManagedObjectContext? = nil) -> ApplicationSettings {
         let context = viewContext ?? CoreDataHandler.shared.container.viewContext
         return ApplicationSettings(context: context)

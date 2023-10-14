@@ -185,6 +185,16 @@ struct StatusesView: View {
         // Get only statuses with images.
         var inPlaceStatuses: [StatusModel] = []
         for item in statuses.getStatusesWithImagesOnly() {
+            // We have to hide statuses without ALT text.
+            if self.shouldHideStatusWithoutAlt(status: item) {
+                continue
+            }
+            
+            // We have to skip statuses that are boosted from muted accounts.
+            if let accountId = self.applicationState.account?.id, AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: accountId, status: item) {
+                continue
+            }
+            
             inPlaceStatuses.append(StatusModel(status: item))
         }
 
@@ -212,6 +222,16 @@ struct StatusesView: View {
             // Get only statuses with images.
             var inPlaceStatuses: [StatusModel] = []
             for item in previousStatuses.getStatusesWithImagesOnly() {
+                // We have to hide statuses without ALT text.
+                if self.shouldHideStatusWithoutAlt(status: item) {
+                    continue
+                }
+
+                // We have to skip statuses that are boosted from muted accounts.
+                if let accountId = self.applicationState.account?.id, AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: accountId, status: item) {
+                    continue
+                }
+
                 inPlaceStatuses.append(StatusModel(status: item))
             }
 
@@ -237,6 +257,16 @@ struct StatusesView: View {
         // Get only statuses with images.
         var inPlaceStatuses: [StatusModel] = []
         for item in statuses.getStatusesWithImagesOnly() {
+            // We have to hide statuses without ALT text.
+            if self.shouldHideStatusWithoutAlt(status: item) {
+                continue
+            }
+
+            // We have to skip statuses that are boosted from muted accounts.
+            if let accountId = self.applicationState.account?.id, AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: accountId, status: item) {
+                continue
+            }
+
             inPlaceStatuses.append(StatusModel(status: item))
         }
         
@@ -350,5 +380,17 @@ struct StatusesView: View {
 
     private func prefetch(statusModels: [StatusModel]) {
         imagePrefetcher.startPrefetching(with: statusModels.getAllImagesUrls())
+    }
+    
+    private func shouldHideStatusWithoutAlt(status: Status) -> Bool {
+        if self.applicationState.hideStatusesWithoutAlt == false {
+            return false
+        }
+        
+        if self.listType != .home && self.listType != .local && self.listType != .federated {
+            return false
+        }
+        
+        return status.statusContainsAltText() == false
     }
 }

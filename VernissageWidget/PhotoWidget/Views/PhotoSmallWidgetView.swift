@@ -12,21 +12,23 @@ struct PhotoSmallWidgetView: View {
     var entry: PhotoProvider.Entry
 
     var body: some View {
-        if let uiImage = entry.image, let uiAvatar = entry.avatar {
-            self.getWidgetBody(uiImage: Image(uiImage: uiImage), uiAvatar: Image(uiImage: uiAvatar))
+        if let uiImage = entry.image {
+            self.getWidgetBody(uiImage: Image(uiImage: uiImage), uiAvatarImage: entry.avatar)
         } else {
-            self.getWidgetBody(uiImage: Image("Placeholder"), uiAvatar: Image("Avatar"))
+            self.getWidgetBody(uiImage: Image("Placeholder"), uiAvatarImage: UIImage(named: "Avatar"))
                 .unredacted()
         }
     }
 
     @ViewBuilder
-    private func getWidgetBody(uiImage: Image, uiAvatar: Image) -> some View {
+    private func getWidgetBody(uiImage: Image, uiAvatarImage: UIImage?) -> some View {
         VStack {
             Spacer()
             HStack {
-                uiAvatar
-                    .avatar(size: 16)
+                if let uiAvatar = uiAvatarImage {
+                    Image(uiImage: uiAvatar)
+                        .avatar(size: 16)
+                }
 
                 Spacer()
             }

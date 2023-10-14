@@ -35,6 +35,7 @@ extension ApplicationSettings {
     @NSManaged public var warnAboutMissingAlt: Bool
     @NSManaged public var showGridOnUserProfile: Bool
     @NSManaged public var showReboostedStatuses: Bool
+    @NSManaged public var hideStatusesWithoutAlt: Bool
 
     @NSManaged public var customNavigationMenuItem1: Int32
     @NSManaged public var customNavigationMenuItem2: Int32

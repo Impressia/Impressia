@@ -128,6 +128,9 @@
 "userProfile.title.edit" = "Edytuj";
 "userProfile.title.muted" = "Wyciszony";
 "userProfile.title.blocked" = "Zablokowany";
+"userProfile.title.enableBoosts" = "Wyświetl podbicia";
+"userProfile.title.disableBoosts" = "Ukryj podbicia";
+"userProfile.title.boostedStatusesMuted" = "Podbicia ukryte";
 
 // Mark: Notifications view.
 "notifications.navigationBar.title" = "Powiadomienia";
@@ -242,6 +245,8 @@
 "settings.title.warnAboutMissingAltDescription" = "Ostrzeżenie o brakujących tekstach ALT będzie wyświetlane przed opublikowaniem nowego statusu.";
 "settings.title.enableReboostOnTimeline" = "Wyświetl podbite statusy";
 "settings.title.enableReboostOnTimelineDescription" = "Podbite statusy będą widoczne na twojej osi czasu.";
+"settings.title.hideStatusesWithoutAlt" = "Ukryj statusy bez tekstu ALT";
+"settings.title.hideStatusesWithoutAltDescription" = "Statusy bez tekstu ALT nie będą wyświetlane na twojej osi czasu.";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "Zaloguj się do Pixelfed";
