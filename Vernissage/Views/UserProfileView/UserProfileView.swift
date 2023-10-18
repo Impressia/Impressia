@@ -290,7 +290,7 @@ struct UserProfileView: View {
                 }
             }
         } catch {
-            ErrorService.shared.handle(error, message: "userProfile.error.mute", showToastr: true)
+            ErrorService.shared.handle(error, message: "userProfile.error.muting", showToastr: true)
         }
     }
 

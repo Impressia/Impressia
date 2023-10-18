@@ -117,7 +117,7 @@ public extension [PhotoAttachment] {
                 do {
                     try FileManager.default.removeItem(at: fileUrl)
                 } catch {
-                    ErrorService.shared.handle(error, message: "Error during removing transferred image from tmp directory.")
+                    ErrorService.shared.handle(error, message: "global.error.errorDuringRemovingTransferredImage")
                 }
             }
         }

@@ -12,14 +12,14 @@ public class ToastrService {
     public static let shared = ToastrService()
     private init() { }
 
-    public func showSuccess(_ title: String, imageSystemName: String, subtitle: String? = nil) {
+    public func showSuccess(_ title: LocalizedStringResource, imageSystemName: String, subtitle: String? = nil) {
         let image = self.createImage(systemName: imageSystemName, color: UIColor(Color.accentColor))
-        self.showSuccess(title, image: image, subtitle: subtitle)
+        self.showSuccess(title.key, image: image, subtitle: subtitle)
     }
 
-    public func showSuccess(_ title: String, imageName: String, subtitle: String? = nil) {
+    public func showSuccess(_ title: LocalizedStringResource, imageName: String, subtitle: String? = nil) {
         let image = self.createImage(name: imageName, color: UIColor(Color.accentColor))
-        self.showSuccess(title, image: image, subtitle: subtitle)
+        self.showSuccess(title.key, image: image, subtitle: subtitle)
     }
 
     private func showSuccess(_ title: String, image: UIImage?, subtitle: String? = nil) {
@@ -39,14 +39,19 @@ public class ToastrService {
         Drops.show(drop)
     }
 
-    public func showError(title: String = "global.error.unexpected", imageSystemName: String = "ant.circle.fill", subtitle: String? = nil) {
+    public func showError(title: LocalizedStringResource = LocalizedStringResource("global.error.unexpected"), imageSystemName: String = "ant.circle.fill", subtitle: String? = nil) {
         let image = self.createImage(systemName: imageSystemName, color: UIColor(Color.accentColor))
-        self.showError(title: title, image: image, subtitle: subtitle)
+        self.showError(title: title.key, image: image, subtitle: subtitle)
+    }
+    
+    public func showError(localizedMessage: String, imageSystemName: String = "ant.circle.fill", subtitle: String? = nil) {
+        let image = self.createImage(systemName: imageSystemName, color: UIColor(Color.accentColor))
+        self.showError(title: localizedMessage, image: image, subtitle: subtitle)
     }
 
-    public func showError(title: String = "global.error.unexpected", imageName: String, subtitle: String? = nil) {
+    public func showError(title: LocalizedStringResource = LocalizedStringResource("global.error.unexpected"), imageName: String, subtitle: String? = nil) {
         let image = self.createImage(name: imageName, color: UIColor(Color.accentColor))
-        self.showError(title: title, image: image, subtitle: subtitle)
+        self.showError(title: title.key, image: image, subtitle: subtitle)
     }
 
     private func showError(title: String = "global.error.unexpected", image: UIImage?, subtitle: String? = nil) {

@@ -19,11 +19,11 @@ public extension FileManager {
                 do {
                     try removeItem(atPath: fileUrl.path)
                 } catch {
-                    ErrorService.shared.handle(error, message: "Error during deleting file: '\(fileUrl.path)' from tmp directory.")
+                    ErrorService.shared.handle(error, message: "global.error.errorDuringDeletingFileFromTmpDirectory")
                 }
             }
         } catch {
-            ErrorService.shared.handle(error, message: "Error during getting tmp directory contents.")
+            ErrorService.shared.handle(error, message: "global.error.errorDuringGettingTmpDirectoryContents")
         }
     }
 }

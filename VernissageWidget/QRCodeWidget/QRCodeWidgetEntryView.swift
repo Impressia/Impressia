@@ -17,7 +17,7 @@ struct QRCodeWidgetEntryView: View {
         case .systemSmall: QRCodeSmallWidgetView(entry: entry)
         case .systemMedium: QRCodeMediumWidgetView(entry: entry)
         case .systemLarge: QRCodeLargeWidgetView(entry: entry)
-        default: Text("Not supported")
+        default: Text("widget.family.notSupported", comment: "Not supported")
         }
     }
 }

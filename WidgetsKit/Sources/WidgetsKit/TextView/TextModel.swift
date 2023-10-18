@@ -131,7 +131,7 @@ public class TextModel: NSObject, ObservableObject {
                 }
             }
         } catch {
-            ErrorService.shared.handle(error, message: "Error during composing attribute string.")
+            ErrorService.shared.handle(error, message: "compose.error.errorDuringComposingAttributeString")
         }
     }
 
@@ -158,7 +158,7 @@ public class TextModel: NSObject, ObservableObject {
                     break
                 }
             } catch {
-                ErrorService.shared.handle(error, message: "Error during downloading autocomplete.")
+                ErrorService.shared.handle(error, message: "compose.error.errorDuringDownloadingAutocomplete")
             }
         }
     }

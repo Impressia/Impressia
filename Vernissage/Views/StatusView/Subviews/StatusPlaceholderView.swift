@@ -31,10 +31,10 @@ struct StatusPlaceholderView: View {
                                 accountDisplayName: "Verylong Displayname",
                                 accountUsername: "@username")
 
-                    Text("Lorem ispum text something")
+                    Text("statusPlaceholder.title.line1", comment: "Lorem ispum text something")
                         .foregroundColor(.customGrayColor)
                         .font(.footnote)
-                    Text("Lorem ispum text something sdf sdfsdf sdfdsfsdfsdf")
+                    Text("statusPlaceholder.title.line2", comment: "Lorem ispum text something sdf sdfsdf sdfdsfsdfsdf")
                         .foregroundColor(.customGrayColor)
                         .font(.footnote)
 

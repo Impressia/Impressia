@@ -37,7 +37,7 @@ public struct PhotoEditorView: View {
                         }
 
                         Section(header: Text("photoEdit.title.accessibility")) {
-                            TextField("photoEdit.title.accessibilityDescription", text: $description, axis: .vertical)
+                            TextField(NSLocalizedString("photoEdit.title.accessibilityDescription", bundle: Bundle.module, comment: "Accesibility"), text: $description, axis: .vertical)
                                 .keyboardType(.default)
                                 .lineLimit(3...6)
                                 .multilineTextAlignment(.leading)
@@ -53,7 +53,7 @@ public struct PhotoEditorView: View {
             .onAppear {
                 self.description = self.photoAttachment.uploadedAttachment?.description ?? String.empty()
             }
-            .navigationTitle("photoEdit.navigationBar.title")
+            .navigationTitle(NSLocalizedString("photoEdit.navigationBar.title", bundle: Bundle.module, comment: "Title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 self.getTrailingToolbar()
@@ -67,12 +67,12 @@ public struct PhotoEditorView: View {
             ActionButton(showLoader: false) {
                 await self.update()
             } label: {
-                Text("photoEdit.title.save", comment: "Save")
+                Text("photoEdit.title.save", bundle: Bundle.module, comment: "Save")
             }.buttonStyle(.borderedProminent)
         }
 
         ToolbarItem(placement: .cancellationAction) {
-            Button(NSLocalizedString("photoEdit.title.cancel", comment: "Cancel"), role: .cancel) {
+            Button(NSLocalizedString("photoEdit.title.cancel", bundle: Bundle.module, comment: "Cancel"), role: .cancel) {
                 dismiss()
             }
         }

@@ -58,7 +58,7 @@ public struct ContentWarning<Content: View, Blurred: View>: View {
                     Image(systemName: "eye.slash.fill")
                         .font(.title2)
                         .shadow(color: Color.systemBackground, radius: 0.3)
-                    Text("global.title.contentWarning", comment: "Sensitive content")
+                    Text("global.title.contentWarning", bundle: Bundle.module, comment: "Sensitive content")
                         .font(.title2)
                         .shadow(color: Color.systemBackground, radius: 0.3)
                     if let spoilerText {
@@ -72,7 +72,7 @@ public struct ContentWarning<Content: View, Blurred: View>: View {
                             self.showSensitive = true
                         }
                     } label: {
-                        Text("global.title.seePost", comment: "See post")
+                        Text("global.title.seePost", bundle: Bundle.module, comment: "See post")
                             .shadow(color: Color.systemBackground, radius: 0.3)
                     }
                     .buttonStyle(.bordered)

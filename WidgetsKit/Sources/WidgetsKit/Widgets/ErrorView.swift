@@ -31,7 +31,7 @@ public struct ErrorView: View {
                         await refreshAction()
                     }
                 } label: {
-                    Text("global.title.refresh", comment: "Refresh")
+                    Text("global.title.refresh", bundle: Bundle.module, comment: "Refresh")
                 }
             }
         }

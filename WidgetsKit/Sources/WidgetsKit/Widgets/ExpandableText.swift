@@ -57,7 +57,7 @@ struct ExpandableText: View {
                     isExpanded.toggle()
                 }
             } label: {
-                Text(isExpanded ? "global.title.showLess" : "global.title.showMore", comment: "Show less/more")
+                Text(isExpanded ? "global.title.showLess" : "global.title.showMore", bundle: Bundle.module, comment: "Show less/more")
                     .foregroundColor(.accentColor)
                     .textCase(.uppercase)
             }
