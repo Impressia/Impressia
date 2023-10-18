@@ -3,6 +3,12 @@
   "strings" : {
     "" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -25,6 +31,12 @@
     },
     "@%@" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@%@"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -47,6 +59,12 @@
     },
     "#%@" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "#%@"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -69,6 +87,12 @@
     },
     "%@" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -97,6 +121,12 @@
             "value" : "%1$@, %2$@"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, %2$@"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -119,6 +149,12 @@
     },
     "%lld" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -147,6 +183,12 @@
             "value" : "Cannot load image from external library."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se puede cargar la imagen de la biblioteca externa."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -161,6 +203,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Error during composing attribute string."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Error al componer la cadena de atributos."
           }
         },
         "pl" : {
@@ -179,6 +227,12 @@
             "value" : "Error during downloading autocomplete."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Error durante la descarga de autocompletar."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -193,6 +247,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cannot retreive image from library."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se puede recuperar la imagen de la biblioteca."
           }
         },
         "eu" : {
@@ -223,6 +283,12 @@
             "value" : "Error during posting status."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al publicar el estado."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -251,6 +317,12 @@
             "value" : "Attach a photo and type what's on your mind"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adjunta una foto y escribe lo que piensas"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -277,6 +349,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Type what's on your mind"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escribe lo que piensas"
           }
         },
         "eu" : {
@@ -308,6 +386,12 @@
             "value" : "Take photo"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hacer una foto"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -335,6 +419,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancel"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
           }
         },
         "eu" : {
@@ -366,6 +456,12 @@
             "value" : "Comments will be disabled"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los comentarios estarán desactivados"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -392,6 +488,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Delete"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar"
           }
         },
         "eu" : {
@@ -422,6 +524,12 @@
             "value" : "Edit"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -448,6 +556,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Everyone"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todos"
           }
         },
         "eu" : {
@@ -479,6 +593,12 @@
             "value" : "Browse files"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explorar archivos"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -505,6 +625,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Followers"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seguidores"
           }
         },
         "eu" : {
@@ -536,6 +662,12 @@
             "value" : "Missing ALT texts"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Textos ALT faltantes"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -563,6 +695,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Not all images have been described for the visually impaired. Would you like to send photos anyway?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No todas las imágenes han sido descritas para personas con discapacidad visual. ¿Te gustaría enviar las fotos de todos modos?"
           }
         },
         "eu" : {
@@ -594,6 +732,12 @@
             "value" : "Photos library"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fototeca"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -621,6 +765,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Publish"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publicar"
           }
         },
         "eu" : {
@@ -652,6 +802,12 @@
             "value" : "Try to upload"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intentar subir"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -678,6 +834,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unlisted"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No listado"
           }
         },
         "eu" : {
@@ -709,6 +871,12 @@
             "value" : "Write content warning"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escribir aviso de contenido"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -737,6 +905,12 @@
             "value" : "Error during deleting file from tmp directory."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Error al borrar un archivo del directorio tmp."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -751,6 +925,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Error during getting tmp directory contents."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Error al obtener el contenido del directorio tmp."
           }
         },
         "pl" : {
@@ -769,6 +949,12 @@
             "value" : "Error during removing transferred image from tmp directory."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Error al eliminar la imagen transferida del directorio tmp."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -784,6 +970,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sensitive content"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contenido sensible"
           }
         },
         "eu" : {
@@ -815,6 +1007,12 @@
             "value" : "moments ago"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "hace uno momento"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -842,6 +1040,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Refresh"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualizar"
           }
         },
         "eu" : {
@@ -873,6 +1077,12 @@
             "value" : "See post"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver publicación"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -899,6 +1109,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Show less"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar menos"
           }
         },
         "eu" : {
@@ -929,6 +1145,12 @@
             "value" : "Show more"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar más"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -955,6 +1177,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Error during updating photo."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al actualizar la foto."
           }
         },
         "eu" : {
@@ -986,6 +1214,12 @@
             "value" : "Photo details"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detalles de la foto"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1012,6 +1246,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Accessibility"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accesibilidad"
           }
         },
         "eu" : {
@@ -1043,6 +1283,12 @@
             "value" : "Description for the visually impaired"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descripción para personas con discapacidad visual"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1072,6 +1318,12 @@
             "value" : "Cancel"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1098,6 +1350,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Photo"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Foto"
           }
         },
         "eu" : {
@@ -1129,6 +1387,12 @@
             "value" : "Save"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1155,6 +1419,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Loading notifications failed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al cargar las notificaciones."
           }
         },
         "eu" : {
@@ -1186,6 +1456,12 @@
             "value" : "Places"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lugares"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1213,6 +1489,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Search"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar"
           }
         },
         "eu" : {
@@ -1244,6 +1526,12 @@
             "value" : "Cancel"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1273,6 +1561,12 @@
             "value" : "Search..."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar..."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1297,6 +1591,12 @@
       "comment" : "ALT",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ALT"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ALT"

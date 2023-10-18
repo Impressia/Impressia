@@ -3,6 +3,12 @@
   "strings" : {
     "" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -25,6 +31,12 @@
     },
     "@%@" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@%@"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -47,6 +59,12 @@
     },
     "@mczachurski" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@mczachurski"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -69,6 +87,12 @@
     },
     "@vernissage" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@vernissage"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -91,6 +115,12 @@
     },
     "#%@" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "#%@"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -119,6 +149,12 @@
             "value" : "%1$@ (%2$@)"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ (%2$@)"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -141,6 +177,12 @@
     },
     "%lld" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -166,6 +208,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
+            "value" : "%1$lld/%2$lld"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
             "value" : "%1$lld/%2$lld"
           }
         },
@@ -198,6 +246,12 @@
             "value" : "Loading accounts failed."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al cargar las cuentas."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -225,6 +279,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Blocked accounts"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuentas bloqueadas"
           }
         },
         "eu" : {
@@ -256,6 +316,12 @@
             "value" : "Favourited by"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le ha gustado a"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -283,6 +349,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Followers"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seguidores"
           }
         },
         "eu" : {
@@ -314,6 +386,12 @@
             "value" : "Following"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siguiendo"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -341,6 +419,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Muted accounts"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuentas silenciadas"
           }
         },
         "eu" : {
@@ -372,6 +456,12 @@
             "value" : "Boosted by"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartido por"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -400,6 +490,12 @@
             "value" : "Unfortunately, there is no one here."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desafortunadamente, aquí no hay nadie."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -426,6 +522,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Error during posting photo."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al publicar la foto."
           }
         },
         "eu" : {
@@ -457,6 +559,12 @@
             "value" : "Compose"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Componer"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -483,6 +591,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Error during download account from server."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al cargar los datos de la cuenta desde el servidor."
           }
         },
         "eu" : {
@@ -513,6 +627,12 @@
             "value" : "Loading avatar failed."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al cargar el avatar."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -541,6 +661,12 @@
             "value" : "Profile data cannot be displayed."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pueden mostrar los datos del perfil."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -567,6 +693,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Saving profile failed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al guardar el perfil."
           }
         },
         "eu" : {
@@ -598,6 +730,12 @@
             "value" : "Edit profile"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar perfil"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -624,6 +762,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Profile has been updated."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perfil actualizado."
           }
         },
         "eu" : {
@@ -655,6 +799,12 @@
             "value" : "Bio"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Biografía"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -682,6 +832,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Display name"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre para mostrar"
           }
         },
         "eu" : {
@@ -712,6 +868,12 @@
             "value" : "The changed photo will be visible in the app and on the website with a small delay."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La foto cambiada se mostrará en la aplicación y en el sitio web con un pequeño retraso."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -738,6 +900,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Private account"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuenta privada"
           }
         },
         "eu" : {
@@ -769,6 +937,12 @@
             "value" : "When your account is private, only people you approve can see your photos and videos on Pixelfed. Your existing followers won't be affected."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuando tu cuenta es privada, sólo las personas a las que apruebas pueden ver tus fotos y vídeos en Pixelfed. Tus seguidores existentes no se verán afectados."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -796,6 +970,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Save"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar"
           }
         },
         "eu" : {
@@ -827,6 +1007,12 @@
             "value" : "Website"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sitio web"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -855,6 +1041,12 @@
             "value" : "Error during approving request."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al aprobar la solicitud."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -881,6 +1073,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Error during rejecting request."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al rechazar la solicitud."
           }
         },
         "eu" : {
@@ -912,6 +1110,12 @@
             "value" : "Following requests"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solicitudes de seguimiento"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -940,6 +1144,12 @@
             "value" : "Approve"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aprobar"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -966,6 +1176,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reject"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechazar"
           }
         },
         "eu" : {
@@ -997,6 +1213,12 @@
             "value" : "Access token not found."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Token de acceso no encontrado."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1025,6 +1247,12 @@
             "value" : "Avatar has not been downloaded."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Avatar no se ha descargado."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1040,6 +1268,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bad url to server."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "URL incorrecta del servidor."
           }
         },
         "eu" : {
@@ -1070,6 +1304,12 @@
             "value" : "Download image has been canceled."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La descarga de la imagen ha sido cancelada."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1098,6 +1338,12 @@
             "value" : "Cannot configure transaction listener."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se puede configurar el receptor de transacciones."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1114,6 +1360,12 @@
             "value" : "Cannot download in-app products."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se pueden descargar productos in-app."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1128,6 +1380,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Loading data failed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al cargar los datos."
           }
         },
         "eu" : {
@@ -1158,6 +1416,12 @@
             "value" : "Error during download tag from server."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error durante la descarga de etiquetas del servidor."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1186,6 +1450,12 @@
             "value" : "Error during downloading metadata."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Error durante la descarga de metadatos."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1200,6 +1470,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Error during downloading new statuses for amount of new statuses."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Error durante la descarga de nuevos estados para la cantidad de nuevos estados."
           }
         },
         "pl" : {
@@ -1217,6 +1493,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Error during download status from server."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error durante la descarga del estado del servidor."
           }
         },
         "eu" : {
@@ -1245,6 +1527,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Error during download statuses from server."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error durante la descarga de estados del servidor."
           }
         },
         "eu" : {
@@ -1276,6 +1564,12 @@
             "value" : "Cannot download image."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se puede descargar la imagen."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1303,6 +1597,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Purchase verification failed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fallo en la verificación de la compra."
           }
         },
         "eu" : {
@@ -1334,6 +1634,12 @@
             "value" : "Cannot retrieve user account."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se puede recuperar la cuenta de usuario."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1360,6 +1666,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hashtag does not exists."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La etiqueta no existe."
           }
         },
         "eu" : {
@@ -1390,6 +1702,12 @@
             "value" : "Purchase failed."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Compra fallida."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1404,6 +1722,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Please sign in again to Pixelfed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por favor, vuelve a iniciar sesión en Pixelfed."
           }
         },
         "eu" : {
@@ -1434,6 +1758,12 @@
             "value" : "Refreshing credentials error."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al actualizar las credenciales."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1462,6 +1792,12 @@
             "value" : "Refresh token failed."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Error en la recarga."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1476,6 +1812,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Statuses not retrieved."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudieron obtener los estados."
           }
         },
         "eu" : {
@@ -1507,6 +1849,12 @@
             "value" : "Close"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrar"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1536,6 +1884,12 @@
             "value" : "more..."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "más..."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1550,6 +1904,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "New access tokens has been retrieved."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Se han recuperado nuevos tokens de acceso."
           }
         },
         "pl" : {
@@ -1567,6 +1927,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aceptar"
           }
         },
         "eu" : {
@@ -1598,6 +1964,12 @@
             "value" : "Photo has been saved."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La foto se ha guardado."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1625,6 +1997,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Success"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Éxito"
           }
         },
         "eu" : {
@@ -1656,6 +2034,12 @@
             "value" : "You're all caught up"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estás al día"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1682,6 +2066,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unfortunately, there are no photos here."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desafortunadamente, no hay fotos aquí."
           }
         },
         "eu" : {
@@ -1712,6 +2102,12 @@
             "value" : "Error during download instance data from server."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al cargar los datos de la instancia desde el servidor."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1738,6 +2134,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instance data cannot be displayed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pueden mostrar los datos de la instancia."
           }
         },
         "eu" : {
@@ -1769,6 +2171,12 @@
             "value" : "Instance"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instancia"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1795,6 +2203,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Address"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dirección"
           }
         },
         "eu" : {
@@ -1825,6 +2239,12 @@
             "value" : "Approval required"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se requiere aprobación"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1851,6 +2271,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Contact"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contacto"
           }
         },
         "eu" : {
@@ -1881,6 +2307,12 @@
             "value" : "Domains"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dominios"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1907,6 +2339,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Email"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correo electrónico"
           }
         },
         "eu" : {
@@ -1937,6 +2375,12 @@
             "value" : "Instance info"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Información de la instancia"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1963,6 +2407,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Name"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre"
           }
         },
         "eu" : {
@@ -1994,6 +2444,12 @@
             "value" : "Pixelfed account"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuenta de Pixelfed"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2020,6 +2476,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Posts"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publicaciones"
           }
         },
         "eu" : {
@@ -2050,6 +2512,12 @@
             "value" : "Registrations"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registros"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2076,6 +2544,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instance rules"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reglas de la instancia"
           }
         },
         "eu" : {
@@ -2106,6 +2580,12 @@
             "value" : "Users"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuarios"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2132,6 +2612,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Version"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versión"
           }
         },
         "eu" : {
@@ -2163,6 +2649,12 @@
             "value" : "Cannot switch accounts."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pueden cambiar las cuentas."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2192,6 +2684,12 @@
             "value" : "Settings"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2218,6 +2716,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Federated"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Federado"
           }
         },
         "eu" : {
@@ -2249,6 +2753,12 @@
             "value" : "Home"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inicio"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2272,6 +2782,12 @@
     "mainview.tab.localTimeline" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Local"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Local"
@@ -2305,6 +2821,12 @@
             "value" : "Notifications"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notificaciones"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2331,6 +2853,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Search"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar"
           }
         },
         "eu" : {
@@ -2362,6 +2890,12 @@
             "value" : "Trending"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tendencias"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2388,6 +2922,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Accounts"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuentas"
           }
         },
         "eu" : {
@@ -2418,6 +2958,12 @@
             "value" : "Photos"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotos"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2444,6 +2990,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tags"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Etiquetas"
           }
         },
         "eu" : {
@@ -2474,6 +3026,12 @@
             "value" : "Profile"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perfil"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2500,6 +3058,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Loading notifications failed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al cargar las notificaciones."
           }
         },
         "eu" : {
@@ -2531,6 +3095,12 @@
             "value" : "Notifications"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notificaciones"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2557,6 +3127,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "boosted"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ha compartido"
           }
         },
         "eu" : {
@@ -2587,6 +3163,12 @@
             "value" : "favourited"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "le ha gustado"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2613,6 +3195,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "followed you"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "te ha seguido"
           }
         },
         "eu" : {
@@ -2643,6 +3231,12 @@
             "value" : "follow request"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "solicitud de seguimiento"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2669,6 +3263,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "mentioned you"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "te ha mencionado"
           }
         },
         "eu" : {
@@ -2699,6 +3299,12 @@
             "value" : "new report"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "nuevo informe"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2725,6 +3331,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unfortunately, there is nothing here."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desafortunadamente, aquí no hay nada."
           }
         },
         "eu" : {
@@ -2755,6 +3367,12 @@
             "value" : "poll"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "encuesta"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2781,6 +3399,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "posted status"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ha publicado un estado"
           }
         },
         "eu" : {
@@ -2811,6 +3435,12 @@
             "value" : "signed up"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "e ha registrado"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2837,6 +3467,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "updated status"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "estado actualizado"
           }
         },
         "eu" : {
@@ -2868,6 +3504,12 @@
             "value" : "Treat me to a coffee and cake."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dame un café y un pastel."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2895,6 +3537,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Coffee & cake"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Café y pastel"
           }
         },
         "eu" : {
@@ -2926,6 +3574,12 @@
             "value" : "Treat me to a coffee."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dame un café."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2955,6 +3609,12 @@
             "value" : "Coffee"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Café"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2982,6 +3642,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Treat me to a doughnut."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dame una rosquilla."
           }
         },
         "eu" : {
@@ -3014,6 +3680,12 @@
             "value" : "Donut"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rosquilla"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3040,6 +3712,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Error during sending report."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al enviar el informe."
           }
         },
         "eu" : {
@@ -3071,6 +3749,12 @@
             "value" : "Report"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informe"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3097,6 +3781,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hate speech or symbols"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discurso o símbolos de odio"
           }
         },
         "eu" : {
@@ -3128,6 +3818,12 @@
             "value" : "Close"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrar"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3154,6 +3850,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Copyright infringement"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Infracción de derechos de autor"
           }
         },
         "eu" : {
@@ -3184,6 +3886,12 @@
             "value" : "Impersonation"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suplantación de identidad"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3210,6 +3918,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Post has been reported"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La publicación ha sido denunciada"
           }
         },
         "eu" : {
@@ -3240,6 +3954,12 @@
             "value" : "Type of abuse"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tipo de abuso"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3266,6 +3986,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bullying or harassment"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acoso u hostigamiento"
           }
         },
         "eu" : {
@@ -3297,6 +4023,12 @@
             "value" : "Send"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3323,6 +4055,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nudity or sexual activity"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desnudos o actividad sexual"
           }
         },
         "eu" : {
@@ -3353,6 +4091,12 @@
             "value" : "It's a spam"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No deseado (spam)"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3379,6 +4123,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Terrorism"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terrorismo"
           }
         },
         "eu" : {
@@ -3409,6 +4159,12 @@
             "value" : "Underage account"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuenta de menor de edad\""
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3437,6 +4193,12 @@
             "value" : "User has been reported"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El usuario ha sido denunciado"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3463,6 +4225,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Violence or dangerous organisations"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Violencia u organizaciones peligrosas"
           }
         },
         "eu" : {
@@ -3494,6 +4262,12 @@
             "value" : "Search"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3521,6 +4295,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Go to hashtag %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ir a la etiqueta %@"
           }
         },
         "eu" : {
@@ -3552,6 +4332,12 @@
             "value" : "Go to user %@"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ir al usuario %@\""
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3581,6 +4367,12 @@
             "value" : "Hashtags with %@"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Etiquetas con %@"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3607,6 +4399,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Search..."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar..."
           }
         },
         "eu" : {
@@ -3638,6 +4436,12 @@
             "value" : "Users with %@"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuarios con %@"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3665,6 +4469,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Settings"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes"
           }
         },
         "eu" : {
@@ -3695,6 +4505,12 @@
             "value" : "Accent"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acento"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3721,6 +4537,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Accounts"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuentas"
           }
         },
         "eu" : {
@@ -3752,6 +4574,12 @@
             "value" : "Show alternative text if present on status details screen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar el texto alternativo si está presente en la pantalla de detalles del estado"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3779,6 +4607,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Show alternative text"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar texto alternativo"
           }
         },
         "eu" : {
@@ -3810,6 +4644,12 @@
             "value" : "Force show all NFSW (sensitive) media without warnings"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar siempre todos los medios NSFW (sensibles) sin advertencias"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3837,6 +4677,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Always show NSFW"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar siempre NSFW"
           }
         },
         "eu" : {
@@ -3868,6 +4714,12 @@
             "value" : "Application icon"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icono de la aplicación"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3891,6 +4743,12 @@
     "settings.title.avatar" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avatar"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Avatar"
@@ -3924,6 +4782,12 @@
             "value" : "Bottom left"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abajo a la izquierda"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3950,6 +4814,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bottom right"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abajo a la derecha"
           }
         },
         "eu" : {
@@ -3981,6 +4851,12 @@
             "value" : "Circle"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Círculo"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4010,6 +4886,12 @@
             "value" : "Close"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrar"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4036,6 +4918,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dark"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oscuro"
           }
         },
         "eu" : {
@@ -4067,6 +4955,12 @@
             "value" : "Show boosted statuses"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mostrar estados mejorados"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4094,6 +4988,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Boosted statuses will be visible on your home timeline."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Los estados mejorados serán visibles en tu cronología de inicio."
           }
         },
         "eu" : {
@@ -4125,6 +5025,12 @@
             "value" : "Follow me"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sígueme"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4154,6 +5060,12 @@
             "value" : "Follow Vernissage"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sígueme en Vernissage"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4177,6 +5089,12 @@
     "settings.title.general" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "General"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "General"
@@ -4210,6 +5128,12 @@
             "value" : "Haptics"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Respuesta háptica"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4236,6 +5160,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Animation finished"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animación finalizada"
           }
         },
         "eu" : {
@@ -4266,6 +5196,12 @@
             "value" : "Button press"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pulsación de botón"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4294,6 +5230,12 @@
             "value" : "List refresh"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualizar lista"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4320,6 +5262,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tab selection"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selección de pestaña"
           }
         },
         "eu" : {
@@ -4351,6 +5299,12 @@
             "value" : "Hide statuses without ALT text"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ocultar estados sin texto ALT"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4380,6 +5334,12 @@
             "value" : "Statuses without ALT text will not be visible on your home timeline."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Los estados sin texto ALT no serán visibles en tu cronología de inicio."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4406,6 +5366,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Light"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claro"
           }
         },
         "eu" : {
@@ -4437,6 +5403,12 @@
             "value" : "Mastodon account"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuenta de Mastodon"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4463,6 +5435,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Media settings"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes multimedia"
           }
         },
         "eu" : {
@@ -4494,6 +5472,12 @@
             "value" : "Menu position"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posición del menú"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4523,6 +5507,12 @@
             "value" : "New account"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nueva cuenta"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4549,6 +5539,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Other"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Otros"
           }
         },
         "eu" : {
@@ -4580,6 +5576,12 @@
             "value" : "Pixelfed account"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuenta de Pixelfed"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4606,6 +5608,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Privacy policy"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Política de privacidad"
           }
         },
         "eu" : {
@@ -4636,6 +5644,12 @@
             "value" : "Rate Vernissage"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puntúa Vernissage"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4662,6 +5676,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Report a bug"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informar de un error"
           }
         },
         "eu" : {
@@ -4693,6 +5713,12 @@
             "value" : "Rounded rectangle"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rectángulo redondeado"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4720,6 +5746,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Show ALT icon"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar icono ALT"
           }
         },
         "eu" : {
@@ -4751,6 +5783,12 @@
             "value" : "ALT icon will be displayed on timelines"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El icono ALT se mostrará en las cronologíasS"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4778,6 +5816,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Show avatars"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar avatares"
           }
         },
         "eu" : {
@@ -4809,6 +5853,12 @@
             "value" : "Avatars will be displayed on timelines"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los avatares se mostrarán en las cronologías"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4836,6 +5886,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Show favourites"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar favoritos"
           }
         },
         "eu" : {
@@ -4867,6 +5923,12 @@
             "value" : "Favourites will be displayed on timelines"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los favoritos se mostrarán en las cronologías"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4893,6 +5955,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Socials"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Redes sociales"
           }
         },
         "eu" : {
@@ -4923,6 +5991,12 @@
             "value" : "Source code"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Código fuente"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4949,6 +6023,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Support"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Soporte"
           }
         },
         "eu" : {
@@ -4979,6 +6059,12 @@
             "value" : "System"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sistema"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5005,6 +6091,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Terms & Conditions"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Términos y condiciones"
           }
         },
         "eu" : {
@@ -5036,6 +6128,12 @@
             "value" : "Close"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrar"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5063,6 +6161,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Thanks for your purchase. Purchases both big and small help us keep our dream of providing the best quality products to our customers. We hope you’re loving Vernissage."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gracias por tu compra. Tanto las compras grandes como las pequeñas nos ayudan a mantener nuestro sueño de proporcionar productos de la mejor calidad a nuestros clientes. Esperamos que estés disfrutando de Vernissage."
           }
         },
         "eu" : {
@@ -5094,6 +6198,12 @@
             "value" : "Thank you 💕"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gracias 💕"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5121,6 +6231,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Theme"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tema"
           }
         },
         "eu" : {
@@ -5151,6 +6267,12 @@
             "value" : "Third party"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terceros"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5177,6 +6299,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Navigation bar"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Barra de navegación"
           }
         },
         "eu" : {
@@ -5208,6 +6336,12 @@
             "value" : "Version"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versión"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5235,6 +6369,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "A warning about missing ALT texts will be displayed before publishing new post."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se mostrará una advertencia sobre los textos ALT faltantes antes de publicar una nueva entrada."
           }
         },
         "eu" : {
@@ -5266,6 +6406,12 @@
             "value" : "Warn of missing ALT text"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Advertir sobre el texto ALT faltante"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5292,6 +6438,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Communication with server failed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error de comunicación con el servidor."
           }
         },
         "eu" : {
@@ -5323,6 +6475,12 @@
             "value" : "Sign in to Pixelfed"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar sesión en Pixelfed"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5350,6 +6508,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%d users"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d usuarios"
           }
         },
         "eu" : {
@@ -5381,6 +6545,12 @@
             "value" : "%d statuses"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d estados"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5407,6 +6577,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Or choose Pixelfed server"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O elige un servidor Pixelfed"
           }
         },
         "eu" : {
@@ -5438,6 +6614,12 @@
             "value" : "Enter server address"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introducir la dirección del servidor"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5467,6 +6649,12 @@
             "value" : "How to join Pixelfed"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cómo unirse a Pixelfed"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5493,6 +6681,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Server address"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dirección del servidor"
           }
         },
         "eu" : {
@@ -5524,6 +6718,12 @@
             "value" : "Sign in"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar sesión"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5550,6 +6750,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bookmark action failed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al marcar."
           }
         },
         "eu" : {
@@ -5580,6 +6786,12 @@
             "value" : "Delete action failed."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al eliminar."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5606,6 +6818,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Favourite action failed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al dar me gusta."
           }
         },
         "eu" : {
@@ -5636,6 +6854,12 @@
             "value" : "Comments cannot be downloaded."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pueden cargar los comentarios."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5662,6 +6886,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Loading status failed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al cargar el estado."
           }
         },
         "eu" : {
@@ -5692,6 +6922,12 @@
             "value" : "Status not existing anymore."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El estado ya no existe."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5718,6 +6954,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Boost action failed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al compartir."
           }
         },
         "eu" : {
@@ -5749,6 +6991,12 @@
             "value" : "Details"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detalles"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5775,6 +7023,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bookmark"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcar"
           }
         },
         "eu" : {
@@ -5806,6 +7060,12 @@
             "value" : "Bookmarked"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcado"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5834,6 +7094,12 @@
             "value" : "Delete"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5860,6 +7126,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Favourite"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Me gusta"
           }
         },
         "eu" : {
@@ -5891,6 +7163,12 @@
             "value" : "Favourited"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le ha gustado"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5917,6 +7195,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Favourited by"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le ha gustado a"
           }
         },
         "eu" : {
@@ -5948,6 +7232,12 @@
             "value" : "Media description"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descripción de medios"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5976,6 +7266,12 @@
             "value" : "Open in browser"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir en el navegador"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6002,6 +7298,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Boost"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartir"
           }
         },
         "eu" : {
@@ -6033,6 +7335,12 @@
             "value" : "Boosted"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartido"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6059,6 +7367,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Boosted by"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartido por"
           }
         },
         "eu" : {
@@ -6090,6 +7404,12 @@
             "value" : "Report"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informar"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6116,6 +7436,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Save image"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar imagen"
           }
         },
         "eu" : {
@@ -6146,6 +7472,12 @@
             "value" : "Share image"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartir imagen"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6172,6 +7504,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Share status"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartir estado"
           }
         },
         "eu" : {
@@ -6202,6 +7540,12 @@
             "value" : "Show media description"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar descripción de medios"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6228,6 +7572,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Status deleted"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estado eliminado"
           }
         },
         "eu" : {
@@ -6259,6 +7609,12 @@
             "value" : "Unbookmarked"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No marcado"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6286,6 +7642,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unfavourited"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No le ha gustado"
           }
         },
         "eu" : {
@@ -6317,6 +7679,12 @@
             "value" : "Unboosted"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No compartido"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6344,6 +7712,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Uploaded"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Subido"
           }
         },
         "eu" : {
@@ -6375,6 +7749,12 @@
             "value" : "via %@"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "a través de %@"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6402,6 +7782,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Your status"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu estado"
           }
         },
         "eu" : {
@@ -6432,6 +7818,12 @@
             "value" : "Loading statuses failed."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al cargar los estados."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6458,6 +7850,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Follow tag failed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al seguir la etiqueta."
           }
         },
         "eu" : {
@@ -6488,6 +7886,12 @@
             "value" : "Unfollow tag failed."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al dejar de seguir la etiqueta."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6514,6 +7918,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bookmarks"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcadores"
           }
         },
         "eu" : {
@@ -6544,6 +7954,12 @@
             "value" : "Favourites"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoritos"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6572,6 +7988,12 @@
             "value" : "Federated"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Federado"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6596,6 +8018,12 @@
       "comment" : "Statuses timeline (local/federated/favourite/bookmarks etc.).",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Local"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Local"
@@ -6629,6 +8057,12 @@
             "value" : "Unfortunately, there are no photos here."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desafortunadamente, no hay fotos aquí."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6655,6 +8089,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "You are following the tag."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estás siguiendo la etiqueta."
           }
         },
         "eu" : {
@@ -6685,6 +8125,12 @@
             "value" : "Tag has been unfollowed."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se ha dejado de seguir la etiqueta."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6709,6 +8155,12 @@
       "comment" : "Lorem ispum text something",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lorem ipsum dolor sit amet"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lorem ipsum dolor sit amet"
@@ -6743,6 +8195,12 @@
             "value" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, ipsum nec cursus facilisis."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, ipsum nec cursus facilisis."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6769,6 +8227,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Loading tags failed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al cargar las etiquetas."
           }
         },
         "eu" : {
@@ -6799,6 +8263,12 @@
             "value" : "Followed tags"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Etiquetas seguidas"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6825,6 +8295,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tags"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Etiquetas"
           }
         },
         "eu" : {
@@ -6856,6 +8332,12 @@
             "value" : "Tags"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Etiquetas"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6883,6 +8365,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%d posts"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d publicaciones"
           }
         },
         "eu" : {
@@ -6913,6 +8401,12 @@
             "value" : "Unfortunately, there are no tags here."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desafortunadamente, no hay etiquetas aquí."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6936,6 +8430,12 @@
     "thirdparty.customemoji.address" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/divadretlaw/EmojiText"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "https://github.com/divadretlaw/EmojiText"
@@ -6970,6 +8470,12 @@
             "value" : "Render Custom Emoji in Text. Supports local and remote emojis. Remote emojis are loadad and cached using Nuke."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Renderiza Emoji personalizados en texto. Soporta emojis locales y remotos. Los emojis remotos se cargan y almacenan en caché con Nuke."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6982,6 +8488,12 @@
       "comment" : "Custom emoji section title",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "EmojiText"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "EmojiText"
@@ -7010,6 +8522,12 @@
     "thirdparty.fleur.address" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://fonts.google.com/specimen/Fleur+De+Leah"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "https://fonts.google.com/specimen/Fleur+De+Leah"
@@ -7044,6 +8562,12 @@
             "value" : "Font used in the application in the icons and in the splash screen."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fuente utilizada en la aplicación en los iconos y en la pantalla de inicio."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7056,6 +8580,12 @@
       "comment" : "Fleur De Leah section title",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fleur De Leah"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fleur De Leah"
@@ -7084,6 +8614,12 @@
     "thirdparty.htmlmarkdown.address" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://gitlab.com/mflint/HTML2Markdown"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "https://gitlab.com/mflint/HTML2Markdown"
@@ -7118,6 +8654,12 @@
             "value" : "It's a Swift Package which attempts to convert HTML into Markdown."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Es un paquete Swift que intenta convertir HTML en Markdown."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7130,6 +8672,12 @@
       "comment" : "Status body section title",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HTML2Markdown"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "HTML2Markdown"
@@ -7158,6 +8706,12 @@
     "thirdparty.htmlstring.address" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/alexisakers/HTMLString"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "https://github.com/alexisakers/HTMLString"
@@ -7192,6 +8746,12 @@
             "value" : "HTMLString is a library written in Swift that allows your program to add and remove HTML entities in Strings."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "HTMLString es una librería escrita en Swift que permite a tu programa añadir y eliminar entidades HTML en Strings."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7204,6 +8764,12 @@
       "comment" : "Section html string title",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HTMLString"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "HTMLString"
@@ -7232,6 +8798,12 @@
     "thirdparty.lazyimage.address" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/kean/Nuke"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "https://github.com/kean/Nuke"
@@ -7266,6 +8838,12 @@
             "value" : "Nuke provides an efficient way to download and display images in your app. It's easy to learn and use. Its architecture enables many powerful features while offering virtually unlimited possibilities for customization."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nuke proporciona una forma eficaz de descargar y mostrar imágenes en tu aplicación. Es fácil de aprender y utilizar. Su arquitectura permite muchas características de gran alcance al tiempo que ofrece posibilidades prácticamente ilimitadas para la personalización."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7278,6 +8856,12 @@
       "comment" : "Lazy image section title",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuke"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nuke"
@@ -7306,6 +8890,12 @@
     "thirdparty.loaders.address" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/exyte/ActivityIndicatorView"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "https://github.com/exyte/ActivityIndicatorView"
@@ -7340,6 +8930,12 @@
             "value" : "A number of preset loading indicators created with SwiftUI."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Una serie de indicadores de carga preestablecidos creados con SwiftUI."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7352,6 +8948,12 @@
       "comment" : "Loaders section title",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ActivityIndicatorView"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ActivityIndicatorView"
@@ -7386,6 +8988,12 @@
             "value" : "Third party"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terceros"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7409,6 +9017,12 @@
     "thirdparty.notifications.address" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/omaralbeik/Drops"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "https://github.com/omaralbeik/Drops"
@@ -7443,6 +9057,12 @@
             "value" : "A µFramework for showing alerts like the one used when copying from pasteboard or connecting Apple pencil."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Un µFramework para mostrar alertas como la que se utiliza al copiar desde la mesa de trabajo o al conectar el lápiz de Apple."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7455,6 +9075,12 @@
       "comment" : "Notifications (drops) section title",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drops"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Drops"
@@ -7483,6 +9109,12 @@
     "thirdparty.oauth.address" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/OAuthSwift/OAuthSwift"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "https://github.com/OAuthSwift/OAuthSwift"
@@ -7517,6 +9149,12 @@
             "value" : "Swift based OAuth library for iOS and macOS."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Librería OAuth basada en Swift para iOS y macOS."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7529,6 +9167,12 @@
       "comment" : "OAuth section title",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OAuthSwift"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OAuthSwift"
@@ -7557,6 +9201,12 @@
     "thirdparty.qrcodes.address" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/dmrschmidt/QRCode"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "https://github.com/dmrschmidt/QRCode"
@@ -7591,6 +9241,12 @@
             "value" : "A simple QR code image generator to use in your apps, written in Swift 5."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Un sencillo generador de imágenes de código QR para usar en tus aplicaciones, escrito en Swift 5."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7603,6 +9259,12 @@
       "comment" : "QR codes section title",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "QRCode"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "QRCode"
@@ -7636,6 +9298,12 @@
             "value" : "Loading accounts failed."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al cargar las cuentas."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7663,6 +9331,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Accounts"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuentas"
           }
         },
         "eu" : {
@@ -7693,6 +9367,12 @@
             "value" : "Unfortunately, there is no one here."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desafortunadamente, aquí no hay nadie."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7719,6 +9399,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Loading statuses failed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al cargar los estados."
           }
         },
         "eu" : {
@@ -7750,6 +9436,12 @@
             "value" : "Photos"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotos"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7777,6 +9469,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Daily"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diario"
           }
         },
         "eu" : {
@@ -7808,6 +9506,12 @@
             "value" : "Monthly"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mensual"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7834,6 +9538,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unfortunately, there are no photos here."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desafortunadamente, no hay fotos aquí."
           }
         },
         "eu" : {
@@ -7865,6 +9575,12 @@
             "value" : "Yearly"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anual"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7891,6 +9607,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Block/unblock action failed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al bloquear/desbloquear."
           }
         },
         "eu" : {
@@ -7921,6 +9643,12 @@
             "value" : "Error during download account from server."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al descargar la cuenta del servidor."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7947,6 +9675,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Muting/unmuting action failed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al silenciar/quitar silencio."
           }
         },
         "eu" : {
@@ -7977,6 +9711,12 @@
             "value" : "Account does not exists."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La cuenta no existe."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8003,6 +9743,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Relationship action failed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error en la acción de relación."
           }
         },
         "eu" : {
@@ -8034,6 +9780,12 @@
             "value" : "Block"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloquear"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8060,6 +9812,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Blocked"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuenta bloqueada"
           }
         },
         "eu" : {
@@ -8091,6 +9849,12 @@
             "value" : "Blocked accounts"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuentas bloqueadas"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8118,6 +9882,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bookmarks"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcadores"
           }
         },
         "eu" : {
@@ -8148,6 +9918,12 @@
             "value" : "Boosts muted"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Potencia silenciada"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8174,6 +9950,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancel request"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar solicitud"
           }
         },
         "eu" : {
@@ -8205,6 +9987,12 @@
             "value" : "Disable boosts"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Desactivar potenciadores"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8232,6 +10020,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Edit"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar"
           }
         },
         "eu" : {
@@ -8263,6 +10057,12 @@
             "value" : "Enable boosts"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Activar refuerzos"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8292,6 +10092,12 @@
             "value" : "Favourites"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoritos"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8318,6 +10124,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Follow"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seguir"
           }
         },
         "eu" : {
@@ -8349,6 +10161,12 @@
             "value" : "Followed tags"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Etiquetas seguidas"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8376,6 +10194,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Followers"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seguidores"
           }
         },
         "eu" : {
@@ -8407,6 +10231,12 @@
             "value" : "Following"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siguiendo"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8436,6 +10266,12 @@
             "value" : "Follow requests"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solicitudes de seguimiento"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8462,6 +10298,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Follows you"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Te sigue"
           }
         },
         "eu" : {
@@ -8493,6 +10335,12 @@
             "value" : "Instance information"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Información de la instancia"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8520,6 +10368,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Joined %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unido a %@"
           }
         },
         "eu" : {
@@ -8551,6 +10405,12 @@
             "value" : "Mute"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Silenciar"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8577,6 +10437,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Muted"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuenta silenciada"
           }
         },
         "eu" : {
@@ -8608,6 +10474,12 @@
             "value" : "Muted accounts"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuentas silenciadas"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8635,6 +10507,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Open in browser"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir en el navegador"
           }
         },
         "eu" : {
@@ -8666,6 +10544,12 @@
             "value" : "Posts"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publicaciones"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8693,6 +10577,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Only approved followers can see photos."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solo los seguidores aprobados pueden ver las fotos."
           }
         },
         "eu" : {
@@ -8724,6 +10614,12 @@
             "value" : "This profile is private."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este perfil es privado."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8753,6 +10649,12 @@
             "value" : "Report"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informar"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8779,6 +10681,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Request follow"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solicitar seguir"
           }
         },
         "eu" : {
@@ -8810,6 +10718,12 @@
             "value" : "Share"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartir"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8837,6 +10751,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unblock"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desbloquear"
           }
         },
         "eu" : {
@@ -8867,6 +10787,12 @@
             "value" : "Account unblocked"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuenta desbloqueada"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8893,6 +10819,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unfollow"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dejar de seguir"
           }
         },
         "eu" : {
@@ -8924,6 +10856,12 @@
             "value" : "Unmute"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quitar silencio"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8952,6 +10890,12 @@
             "value" : "Account unmuted"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuenta sin silencio"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8974,6 +10918,12 @@
     },
     "Vernissage" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vernissage"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9003,6 +10953,12 @@
             "value" : "Not supported"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se admite"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9018,6 +10974,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Widget with photos from Pixelfed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widget con fotos de Pixelfed."
           }
         },
         "eu" : {
@@ -9046,6 +11008,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Widget with QR Code to your Pixelfed profile."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widget con el código QR de tu perfil de Pixelfed."
           }
         },
         "eu" : {

@@ -9,6 +9,12 @@
             "value" : "Downloading image into cache failed."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al descargar la imagen en la caché."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23,6 +29,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unexpected error."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error inesperado."
           }
         },
         "eu" : {
