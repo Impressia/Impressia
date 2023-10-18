@@ -116,14 +116,14 @@ public struct BaseComposeView: View {
                         await self.publishStatus()
                     }
                 } label: {
-                    Text("compose.title.publish", comment: "Publish")
+                    Text("compose.title.publish", bundle: Bundle.module, comment: "Publish")
                 }
                 .disabled(self.publishDisabled)
                 .buttonStyle(.borderedProminent)
             }
 
             ToolbarItem(placement: .cancellationAction) {
-                Button(NSLocalizedString("compose.title.cancel", comment: "Cancel"), role: .cancel) {
+                Button(NSLocalizedString("compose.title.cancel", bundle: Bundle.module, comment: "Cancel"), role: .cancel) {
                     self.close()
                 }
             }
@@ -184,14 +184,14 @@ public struct BaseComposeView: View {
             .background(.black)
         })
         .alert(isPresented: $showAltAlert, content: {
-            Alert(title: Text("compose.title.missingAltTexts", comment: "Missing ALT texts"),
-                  message: Text("compose.title.missingAltTextsWarning", comment: "Missing ALT texts warning"),
-                  primaryButton: .default(Text("compose.title.publish", comment: "Publish")) {
+            Alert(title: Text("compose.title.missingAltTexts", bundle: Bundle.module, comment: "Missing ALT texts"),
+                  message: Text("compose.title.missingAltTextsWarning", bundle: Bundle.module, comment: "Missing ALT texts warning"),
+                  primaryButton: .default(Text("compose.title.publish", bundle: Bundle.module, comment: "Publish")) {
                       Task {
                           await self.sendToServer()
                       }
                   },
-                  secondaryButton: .cancel(Text("compose.title.cancel", comment: "Cancel")))
+                  secondaryButton: .cancel(Text("compose.title.cancel", bundle: Bundle.module, comment: "Cancel")))
         })
         .interactiveDismissDisabled(self.interactiveDismissDisabled)
     }
@@ -302,7 +302,7 @@ public struct BaseComposeView: View {
         TextView($textModel.text, getTextView: { textView in
             self.textModel.textView = textView
         })
-        .placeholder(self.placeholder())
+        .placeholder(LocalizedStringKey(self.placeholder()))
         .padding(.horizontal, 8)
         .focused($focusedField, equals: .content)
         .onFirstAppear {
@@ -328,7 +328,7 @@ public struct BaseComposeView: View {
     @ViewBuilder
     private func contentWarningView() -> some View {
         if self.isSensitive {
-            TextField("compose.title.writeContentWarning", text: $spoilerText, axis: .vertical)
+            TextField(NSLocalizedString("compose.title.writeContentWarning", bundle: Bundle.module, comment: "Content warning"), text: $spoilerText, axis: .vertical)
                 .padding(8)
                 .lineLimit(1...2)
                 .focused($focusedField, equals: .spoilerText)
@@ -342,7 +342,7 @@ public struct BaseComposeView: View {
         if self.commentsDisabled {
             HStack {
                 Spacer()
-                Text("compose.title.commentsWillBeDisabled")
+                Text("compose.title.commentsWillBeDisabled", bundle: Bundle.module, comment: "Comments disabled")
                     .textCase(.uppercase)
                     .font(.caption2)
                     .foregroundColor(.dangerColor)
@@ -360,7 +360,11 @@ public struct BaseComposeView: View {
                     self.visibilityText = "compose.title.everyone"
                     self.visibilityImage = "globe.europe.africa"
                 } label: {
-                    Label("compose.title.everyone", systemImage: "globe.europe.africa")
+                    Label {
+                        Text("compose.title.everyone", bundle: Bundle.module, comment: "Everyone")
+                    } icon: {
+                        Image(systemName: "globe.europe.africa")
+                    }
                 }
 
                 Button {
@@ -368,7 +372,11 @@ public struct BaseComposeView: View {
                     self.visibilityText = "compose.title.unlisted"
                     self.visibilityImage = "lock.open"
                 } label: {
-                    Label("compose.title.unlisted", systemImage: "lock.open")
+                    Label {
+                        Text("compose.title.unlisted", bundle: Bundle.module, comment: "Unlisted")
+                    } icon: {
+                        Image(systemName: "lock.open")
+                    }
                 }
 
                 Button {
@@ -376,11 +384,19 @@ public struct BaseComposeView: View {
                     self.visibilityText = "compose.title.followers"
                     self.visibilityImage = "lock"
                 } label: {
-                    Label("compose.title.followers", systemImage: "lock")
+                    Label {
+                        Text("compose.title.followers", bundle: Bundle.module, comment: "Followers")
+                    } icon: {
+                        Image(systemName: "lock")
+                    }
                 }
             } label: {
                 HStack {
-                    Label(self.visibilityText, systemImage: self.visibilityImage)
+                    Label {
+                        Text(self.visibilityText, bundle: Bundle.module, comment: "Visibility text")
+                    } icon: {
+                        Image(systemName: self.visibilityImage)
+                    }
                     Image(systemName: "chevron.down")
                 }
                 .padding(.vertical, 4)
@@ -465,7 +481,11 @@ public struct BaseComposeView: View {
                                 self.focusedField = .unknown
                                 self.photosPickerVisible = true
                             } label: {
-                                Label("compose.title.photos", systemImage: "photo")
+                                Label {
+                                    Text("compose.title.photos", bundle: Bundle.module, comment: "Photo")
+                                } icon: {
+                                    Image(systemName: "photo")
+                                }
                             }
 
                             Button {
@@ -473,7 +493,11 @@ public struct BaseComposeView: View {
                                 self.focusedField = .unknown
                                 self.isCameraPickerPresented = true
                             } label: {
-                                Label("compose.title.camera", systemImage: "camera")
+                                Label {
+                                    Text("compose.title.camera", bundle: Bundle.module, comment: "Camera")
+                                } icon: {
+                                    Image(systemName: "camera")
+                                }
                             }
 
                             Button {
@@ -481,7 +505,11 @@ public struct BaseComposeView: View {
                                 self.focusedField = .unknown
                                 isFileImporterPresented = true
                             } label: {
-                                Label("compose.title.files", systemImage: "folder")
+                                Label {
+                                    Text("compose.title.files", bundle: Bundle.module, comment: "Files")
+                                } icon: {
+                                    Image(systemName: "folder")
+                                }
                             }
                         } label: {
                             Image(systemName: self.photosAreAttached ? "photo.fill.on.rectangle.fill" : "photo.on.rectangle")
@@ -547,8 +575,8 @@ public struct BaseComposeView: View {
         .background(Color.keyboardToolbarColor)
     }
 
-    private func placeholder() -> LocalizedStringKey {
-        self.statusViewModel == nil ? "compose.title.attachPhotoFull" : "compose.title.attachPhotoMini"
+    private func placeholder() -> String {
+        self.statusViewModel == nil ? NSLocalizedString("compose.title.attachPhotoFull", bundle: Bundle.module, comment: "") : NSLocalizedString("compose.title.attachPhotoMini", bundle: Bundle.module, comment: "")
     }
 
     private func isPublishButtonDisabled() -> Bool {
@@ -643,7 +671,7 @@ public struct BaseComposeView: View {
                 photoAttachment.loadError = error
 
                 if Bundle.main.bundlePath.hasSuffix(".appex") {
-                    ErrorService.shared.handle(error, message: "Cannot load image from external library.")
+                    ErrorService.shared.handle(error, message: "compose.error.cannotLoadImageFromExternalLibrary")
                 } else {
                     ErrorService.shared.handle(error, message: "compose.error.loadingPhotosFailed", showToastr: true)
                 }

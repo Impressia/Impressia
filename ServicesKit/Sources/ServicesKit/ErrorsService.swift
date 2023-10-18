@@ -13,13 +13,27 @@ public class ErrorService {
     public static let shared = ErrorService()
     private init() { }
 
-    public func handle(_ error: Error, message: String, showToastr: Bool = false) {
-        let localizedMessage = NSLocalizedString(message, comment: "Error message")
+    public func handle(_ error: Error, message: LocalizedStringResource, showToastr: Bool = false) {
+        let localizedMessage = NSLocalizedString(message.key, comment: "Error message")
 
         if showToastr {
             switch error {
             case is LocalizedError:
                 ToastrService.shared.showError(title: message, subtitle: error.localizedDescription)
+            default:
+                ToastrService.shared.showError(subtitle: localizedMessage)
+            }
+        }
+
+        Logger.main.error("Error ['\(localizedMessage)']: \(error.localizedDescription)")
+        Logger.main.error("Error ['\(localizedMessage)']: \(error)")
+    }
+    
+    public func handle(_ error: Error, localizedMessage: String, showToastr: Bool = false) {
+        if showToastr {
+            switch error {
+            case is LocalizedError:
+                ToastrService.shared.showError(localizedMessage: localizedMessage, subtitle: error.localizedDescription)
             default:
                 ToastrService.shared.showError(subtitle: localizedMessage)
             }

@@ -41,7 +41,7 @@ public class AuthorizationService {
                 let signedInAccountModel = try await self.refreshCredentials(for: accountModel, presentationContextProvider: session)
                 result(signedInAccountModel)
             } catch {
-                ErrorService.shared.handle(error, message: "Issues during refreshing credentials.")
+                ErrorService.shared.handle(error, message: "global.error.refreshingCredentialsTitle")
                 ToastrService.shared.showError(title: "global.error.refreshingCredentialsTitle",
                                                subtitle: NSLocalizedString("global.error.refreshingCredentialsSubtitle", comment: ""))
                 result(nil)
@@ -115,7 +115,7 @@ public class AuthorizationService {
                 let avatarData = try await RemoteFileService.shared.fetchData(url: avatarUrl)
                 accountData.avatarData = avatarData
             } catch {
-                ErrorService.shared.handle(error, message: "Avatar has not been downloaded.")
+                ErrorService.shared.handle(error, message: "global.error.avatarHasNotBeenDownloaded")
             }
         }
 
@@ -143,11 +143,11 @@ public class AuthorizationService {
                         _ = try await self.refreshAccessToken(accountData: account)
 
                         #if DEBUG
-                            ToastrService.shared.showSuccess("New access tokens has been retrieved.", imageSystemName: "key.fill")
+                            ToastrService.shared.showSuccess("global.title.newAccessTokenRetrieved", imageSystemName: "key.fill")
                         #endif
                     } catch {
                         #if DEBUG
-                            ErrorService.shared.handle(error, message: "Refresh token failed: '\(account.acct)'.", showToastr: true)
+                            ErrorService.shared.handle(error, message: "global.error.refreshTokenFailed", showToastr: true)
                         #else
                             ErrorService.shared.handle(error, message: "Error during refreshing access token for account '\(account.acct)'.")
                         #endif
@@ -242,7 +242,7 @@ public class AuthorizationService {
                 let avatarData = try await RemoteFileService.shared.fetchData(url: avatarUrl)
                 dbAccount.avatarData = avatarData
             } catch {
-                ErrorService.shared.handle(error, message: "Avatar has not been downloaded.")
+                ErrorService.shared.handle(error, message: "global.error.avatarHasNotBeenDownloaded")
             }
         }
 

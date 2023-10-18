@@ -169,7 +169,7 @@ public class HomeTimelineService {
                 
                 newestStatusId = firstStatus.id
             } catch {
-                ErrorService.shared.handle(error, message: "Error during downloading new statuses for amount of new statuses.")
+                ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadingNewStatuses")
                 break
             }
         }

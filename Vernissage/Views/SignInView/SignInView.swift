@@ -103,7 +103,7 @@ struct SignInView: View {
                     }
                 }
             } catch let error as AuthorisationError {
-                ErrorService.shared.handle(error, message: error.localizedDescription, showToastr: true)
+                ErrorService.shared.handle(error, localizedMessage: error.localizedDescription, showToastr: true)
             } catch {
                 ErrorService.shared.handle(error, message: "signin.error.communicationFailed", showToastr: true)
             }

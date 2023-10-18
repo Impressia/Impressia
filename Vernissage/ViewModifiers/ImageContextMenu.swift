@@ -125,7 +125,7 @@ private struct ImageContextMenu: ViewModifier {
     private func reboost() async {
         do {
             _ = try await self.client.statuses?.boost(statusId: self.id)
-            ToastrService.shared.showSuccess(NSLocalizedString("status.title.reboosted", comment: "Reboosted"), imageName: "custom.rocket.fill")
+            ToastrService.shared.showSuccess("status.title.reboosted", imageName: "custom.rocket.fill")
         } catch {
             ErrorService.shared.handle(error, message: "status.error.reboostFailed", showToastr: true)
         }
@@ -134,7 +134,7 @@ private struct ImageContextMenu: ViewModifier {
     private func favourite() async {
         do {
             _ = try await self.client.statuses?.favourite(statusId: self.id)
-            ToastrService.shared.showSuccess(NSLocalizedString("status.title.favourited", comment: "Favourited"), imageSystemName: "star.fill")
+            ToastrService.shared.showSuccess("status.title.favourited", imageSystemName: "star.fill")
         } catch {
             ErrorService.shared.handle(error, message: "status.error.favouriteFailed", showToastr: true)
         }
@@ -143,7 +143,7 @@ private struct ImageContextMenu: ViewModifier {
     private func bookmark() async {
         do {
             _ = try await self.client.statuses?.bookmark(statusId: self.id)
-            ToastrService.shared.showSuccess(NSLocalizedString("status.title.bookmarked", comment: "Bookmarked"), imageSystemName: "bookmark.fill")
+            ToastrService.shared.showSuccess("status.title.bookmarked", imageSystemName: "bookmark.fill")
         } catch {
             ErrorService.shared.handle(error, message: "status.error.bookmarkFailed", showToastr: true)
         }

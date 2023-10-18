@@ -62,7 +62,7 @@ final class TipsStore: ObservableObject {
             try await self.handlePurchase(from: result)
         } catch {
             self.status = .failed(.system(error))
-            ErrorService.shared.handle(error, message: "Purchase failed.", showToastr: false)
+            ErrorService.shared.handle(error, message: "global.error.purchaseFailed", showToastr: false)
         }
     }
 
@@ -109,7 +109,7 @@ final class TipsStore: ObservableObject {
                 }
             } catch {
                 self?.status = .failed(.system(error))
-                ErrorService.shared.handle(error, message: "Cannot configure transaction listener.", showToastr: false)
+                ErrorService.shared.handle(error, message: "global.error.cannotConfigureTransactionListener", showToastr: false)
             }
         }
     }
@@ -123,7 +123,7 @@ final class TipsStore: ObservableObject {
             self.items = products
         } catch {
             self.status = .failed(.system(error))
-            ErrorService.shared.handle(error, message: "Cannot download in-app products.", showToastr: false)
+            ErrorService.shared.handle(error, message: "global.error.cannotDownloadInAppProducts", showToastr: false)
         }
     }
 }

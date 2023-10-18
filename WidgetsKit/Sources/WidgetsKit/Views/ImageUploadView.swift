@@ -39,7 +39,7 @@ public struct ImageUploadView: View {
                         HapticService.shared.fireHaptic(of: .buttonPress)
                         self.upload()
                     } label: {
-                        Text("compose.title.tryToUpload", comment: "Try to upload")
+                        Text("compose.title.tryToUpload", bundle: Bundle.module, comment: "Try to upload")
                             .font(.caption)
                     }.buttonStyle(.borderedProminent)
                 } else {
@@ -113,7 +113,7 @@ public struct ImageUploadView: View {
                                             .foregroundStyle(Color.white, Color.systemGreen)
                                     }
 
-                                    Text("status.title.altText", comment: "ALT")
+                                    Text("status.title.altText", bundle: Bundle.module, comment: "ALT")
                                         .foregroundStyle(Color.white)
                                 }
                                 .font(.system(size: 12))

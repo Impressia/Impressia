@@ -1,0 +1,62 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "global.error.downloadingImageFailed" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downloading image into cache failed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al descargar la imagen en la caché."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Błąd podczas pobieranie obrazków do pamięci podręcznej."
+          }
+        }
+      }
+    },
+    "global.error.unexpected" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unexpected error."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error inesperado."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Espero ez zen errorea."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur inattendue."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wystąpił nieoczekiwany błąd."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

@@ -23,11 +23,3 @@ public struct BottomRight<Content: View>: View {
         }
     }
 }
-
-struct BottomRight_Previews: PreviewProvider {
-    static var previews: some View {
-        BottomRight {
-            Text("1/2")
-        }
-    }
-}

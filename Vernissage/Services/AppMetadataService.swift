@@ -33,7 +33,7 @@ public class AppMetadataService {
             self.memoryCacheData[metadataCacheKey] = metadata
             return metadata
         } catch {
-            ErrorService.shared.handle(error, message: "Error during downloading metadata.")
+            ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadingMetadata")
             return AppMetadata()
         }
     }

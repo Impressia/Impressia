@@ -316,7 +316,7 @@ struct StatusesView: View {
         case .hashtag(let tag):
             let hashtagsFromApi = try await self.client.search?.search(query: tag, resultsType: .hashtags)
             guard let hashtagsFromApi = hashtagsFromApi, hashtagsFromApi.hashtags.isEmpty == false else {
-                ToastrService.shared.showError(title: "global.error.hashtagNotExists", imageSystemName: "exclamationmark.octagon")
+                ToastrService.shared.showError(title: LocalizedStringResource("global.error.hashtagNotExists"), imageSystemName: "exclamationmark.octagon")
                 dismiss()
 
                 return []

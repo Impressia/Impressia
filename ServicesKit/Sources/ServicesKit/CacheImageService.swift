@@ -28,7 +28,7 @@ public class CacheImageService {
                 self.add(data: imageData, for: url)
             }
         } catch {
-            ErrorService.shared.handle(error, message: "Downloading image into cache failed.")
+            ErrorService.shared.handle(error, message: "global.error.downloadingImageFailed")
         }
     }
 

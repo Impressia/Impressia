@@ -39,7 +39,7 @@ struct ImagesGrid: View {
                     ImageGrid(photoUrl: photoUrl, maxHeight: $maxHeight)
                 }
 
-                Text("more...")
+                Text("global.title.more", comment: "more...")
                     .foregroundColor(.accentColor)
                     .fontWeight(.bold)
                     .padding(10)
