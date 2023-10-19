@@ -143,7 +143,7 @@ struct StatusesView: View {
                 ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
             }
         }
-        .onChange(of: self.applicationState.showReboostedStatuses) { _ in
+        .onChange(of: self.applicationState.showReboostedStatuses) {
             if self.listType != .home {
                 return
             }

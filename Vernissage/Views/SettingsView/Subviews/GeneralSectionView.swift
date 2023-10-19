@@ -57,9 +57,9 @@ struct GeneralSectionView: View {
                 Text("settings.title.applicationIcon", comment: "Application icon")
             }
             .pickerStyle(.navigationLink)
-            .onChange(of: self.applicationState.activeIcon) { iconName in
-                ApplicationSettingsHandler.shared.set(activeIcon: iconName)
-                UIApplication.shared.setAlternateIconName(iconName == "Default" ? nil : iconName)
+            .onChange(of: self.applicationState.activeIcon) { oldIncomeName, newIconName in
+                ApplicationSettingsHandler.shared.set(activeIcon: newIconName)
+                UIApplication.shared.setAlternateIconName(newIconName == "Default" ? nil : newIconName)
             }
 
             // Application theme.
@@ -71,8 +71,8 @@ struct GeneralSectionView: View {
             } label: {
                 Text("settings.title.theme", comment: "Theme")
             }
-            .onChange(of: self.applicationState.theme) { theme in
-                ApplicationSettingsHandler.shared.set(theme: theme)
+            .onChange(of: self.applicationState.theme) { oldTheme, newTheme in
+                ApplicationSettingsHandler.shared.set(theme: newTheme)
             }
 
             // Menu position.
@@ -84,8 +84,8 @@ struct GeneralSectionView: View {
             } label: {
                 Text("settings.title.menuPosition", comment: "Menu position")
             }
-            .onChange(of: self.applicationState.menuPosition) { menuPosition in
-                ApplicationSettingsHandler.shared.set(menuPosition: menuPosition)
+            .onChange(of: self.applicationState.menuPosition) { oldMenuPosition, newMenuPosition in
+                ApplicationSettingsHandler.shared.set(menuPosition: newMenuPosition)
             }
         }
     }

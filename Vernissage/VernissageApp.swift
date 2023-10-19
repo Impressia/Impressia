@@ -78,24 +78,24 @@ struct VernissageApp: App {
                     await self.calculateNewPhotosInBackground()
                 }
             }
-            .onChange(of: applicationState.theme) { newValue in
+            .onChange(of: applicationState.theme) { oldValue, newValue in
                 self.theme = newValue.colorScheme()
             }
-            .onChange(of: applicationState.tintColor) { newValue in
+            .onChange(of: applicationState.tintColor) { oldValue, newValue in
                 self.tintColor = newValue.color()
             }
-            .onChange(of: applicationState.account) { newValue in
+            .onChange(of: applicationState.account) { oldValue, newValue in
                 if newValue == nil {
                     self.applicationViewMode = .signIn
                 }
             }
-            .onChange(of: applicationState.showStatusId) { newValue in
+            .onChange(of: applicationState.showStatusId) { oldValue, newValue in
                 if let statusId = newValue {
                     self.routerPath.navigate(to: .status(id: statusId))
                     self.applicationState.showStatusId = nil
                 }
             }
-            .onChange(of: applicationState.showAccountId) { newValue in
+            .onChange(of: applicationState.showAccountId) { oldValue, newValue in
                 if let accountId = newValue {
                     self.routerPath.navigate(to: .userProfile(accountId: accountId, accountDisplayName: nil, accountUserName: ""))
                     self.applicationState.showAccountId = nil

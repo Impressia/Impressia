@@ -102,8 +102,8 @@ struct MainView: View {
                     self.getTrailingToolbar()
                 }
             }
-            .onChange(of: tipsStore.status) { status in
-                if status == .successful {
+            .onChange(of: tipsStore.status) { oldStatus, newStatus in
+                if newStatus == .successful {
                     withAnimation(.spring()) {
                         self.routerPath.presentedOverlay = .successPayment
                         self.tipsStore.reset()

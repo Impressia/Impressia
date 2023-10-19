@@ -33,7 +33,7 @@ struct AnimatePlaceholderModifier: AnimatableModifier {
             guard isLoading else { return }
             isAnim.toggle()
         }
-        .onChange(of: isLoading) { _ in
+        .onChange(of: isLoading) {
             isAnim.toggle()
         }
     }

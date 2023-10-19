@@ -21,25 +21,25 @@ struct HapticsSectionView: View {
         Section("settings.title.haptics") {
 
             Toggle("settings.title.hapticsTabSelection", isOn: $hapticTabSelectionEnabled)
-                .onChange(of: hapticTabSelectionEnabled) { newValue in
+                .onChange(of: hapticTabSelectionEnabled) { oldValue, newValue in
                     self.applicationState.hapticTabSelectionEnabled = newValue
                     ApplicationSettingsHandler.shared.set(hapticTabSelectionEnabled: newValue)
                 }
 
             Toggle("settings.title.hapticsButtonPress", isOn: $hapticButtonPressEnabled)
-                .onChange(of: hapticButtonPressEnabled) { newValue in
+                .onChange(of: hapticButtonPressEnabled) { oldValue, newValue in
                     self.applicationState.hapticButtonPressEnabled = newValue
                     ApplicationSettingsHandler.shared.set(hapticButtonPressEnabled: newValue)
                 }
 
             Toggle("settings.title.hapticsListRefresh", isOn: $hapticRefreshEnabled)
-                .onChange(of: hapticRefreshEnabled) { newValue in
+                .onChange(of: hapticRefreshEnabled) { oldValue, newValue in
                     self.applicationState.hapticRefreshEnabled = newValue
                     ApplicationSettingsHandler.shared.set(hapticRefreshEnabled: newValue)
                 }
 
             Toggle("settings.title.hapticsAnimationFinished", isOn: $hapticAnimationEnabled)
-                .onChange(of: hapticAnimationEnabled) { newValue in
+                .onChange(of: hapticAnimationEnabled) { oldValue, newValue in
                     self.applicationState.hapticAnimationEnabled = newValue
                     ApplicationSettingsHandler.shared.set(hapticAnimationEnabled: newValue)
                 }

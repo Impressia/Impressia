@@ -22,7 +22,7 @@ struct MediaSettingsView: View {
                         .foregroundColor(.customGrayColor)
                 }
             }
-            .onChange(of: self.applicationState.showSensitive) { newValue in
+            .onChange(of: self.applicationState.showSensitive) { oldValue, newValue in
                 ApplicationSettingsHandler.shared.set(showSensitive: newValue)
             }
 
@@ -34,7 +34,7 @@ struct MediaSettingsView: View {
                         .foregroundColor(.customGrayColor)
                 }
             }
-            .onChange(of: self.applicationState.showPhotoDescription) { newValue in
+            .onChange(of: self.applicationState.showPhotoDescription) { oldValue, newValue in
                 ApplicationSettingsHandler.shared.set(showPhotoDescription: newValue)
             }
 
@@ -46,7 +46,7 @@ struct MediaSettingsView: View {
                         .foregroundColor(.customGrayColor)
                 }
             }
-            .onChange(of: self.applicationState.showAvatarsOnTimeline) { newValue in
+            .onChange(of: self.applicationState.showAvatarsOnTimeline) { oldValue, newValue in
                 ApplicationSettingsHandler.shared.set(showAvatarsOnTimeline: newValue)
             }
 
@@ -58,7 +58,7 @@ struct MediaSettingsView: View {
                         .foregroundColor(.customGrayColor)
                 }
             }
-            .onChange(of: self.applicationState.showFavouritesOnTimeline) { newValue in
+            .onChange(of: self.applicationState.showFavouritesOnTimeline) { oldValue, newValue in
                 ApplicationSettingsHandler.shared.set(showFavouritesOnTimeline: newValue)
             }
 
@@ -70,7 +70,7 @@ struct MediaSettingsView: View {
                         .foregroundColor(.customGrayColor)
                 }
             }
-            .onChange(of: self.applicationState.showAltIconOnTimeline) { newValue in
+            .onChange(of: self.applicationState.showAltIconOnTimeline) { oldValue, newValue in
                 ApplicationSettingsHandler.shared.set(showAltIconOnTimeline: newValue)
             }
 
@@ -82,7 +82,7 @@ struct MediaSettingsView: View {
                         .foregroundColor(.customGrayColor)
                 }
             }
-            .onChange(of: self.applicationState.warnAboutMissingAlt) { newValue in
+            .onChange(of: self.applicationState.warnAboutMissingAlt) { oldValue, newValue in
                 ApplicationSettingsHandler.shared.set(warnAboutMissingAlt: newValue)
             }
             
@@ -94,7 +94,7 @@ struct MediaSettingsView: View {
                         .foregroundColor(.customGrayColor)
                 }
             }
-            .onChange(of: self.applicationState.showReboostedStatuses) { newValue in
+            .onChange(of: self.applicationState.showReboostedStatuses) { oldValue, newValue in
                 ApplicationSettingsHandler.shared.set(showReboostedStatuses: newValue)
             }
             
@@ -106,7 +106,7 @@ struct MediaSettingsView: View {
                         .foregroundColor(.customGrayColor)
                 }
             }
-            .onChange(of: self.applicationState.hideStatusesWithoutAlt) { newValue in
+            .onChange(of: self.applicationState.hideStatusesWithoutAlt) { oldValue, newValue in
                 ApplicationSettingsHandler.shared.set(hideStatusesWithoutAlt: newValue)
             }
         }

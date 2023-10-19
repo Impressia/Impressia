@@ -134,10 +134,10 @@ public struct BaseComposeView: View {
                 await self.loadPhotos()
             }
         }
-        .onChange(of: self.textModel.text) { _ in
+        .onChange(of: self.textModel.text) {
             self.refreshScreenState()
         }
-        .onChange(of: self.selectedItems) { _ in
+        .onChange(of: self.selectedItems) {
             Task {
                 await self.loadPhotos()
             }

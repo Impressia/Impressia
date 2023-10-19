@@ -36,7 +36,7 @@ struct TrendStatusesView: View {
             }
             .padding()
             .pickerStyle(SegmentedPickerStyle())
-            .onChange(of: tabSelectedValue) { _ in
+            .onChange(of: tabSelectedValue) {
                 Task {
                     do {
                         self.state = .loading

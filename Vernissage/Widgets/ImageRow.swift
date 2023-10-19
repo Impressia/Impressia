@@ -74,8 +74,8 @@ struct ImageRow: View {
             .onFirstAppear {
                 self.selected = self.attachmentsData.first?.id ?? String.empty()
             }
-            .onChange(of: selected, perform: { attachmentId in
-                if let attachment = attachmentsData.first(where: { item in item.id == attachmentId }) {
+            .onChange(of: selected) { oldAttachmentId, newAttachmentId in
+                if let attachment = attachmentsData.first(where: { item in item.id == newAttachmentId }) {
                     let size = ImageSizeService.shared.calculate(width: Double(attachment.metaImageWidth),
                                                                  height: Double(attachment.metaImageHeight),
                                                                  andContainerWidth: UIScreen.main.bounds.size.width)
@@ -87,7 +87,7 @@ struct ImageRow: View {
                         }
                     }
                 }
-            })
+            }
             .frame(width: self.imageWidth, height: self.imageHeight)
             .tabViewStyle(.page(indexDisplayMode: .never))
             .overlay(CustomPageTabViewStyleView(pages: self.attachmentsData, currentId: $selected))

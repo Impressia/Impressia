@@ -93,7 +93,7 @@ struct EditProfileView: View {
                 }
             }
         }
-        .onChange(of: self.selectedItems) { _ in
+        .onChange(of: self.selectedItems) {
             Task {
                 await self.getAvatar()
             }
@@ -168,9 +168,9 @@ struct EditProfileView: View {
     private func formView() -> some View {
         Section {
             TextField("", text: $displayName)
-                .onChange(of: self.displayName, perform: { _ in
+                .onChange(of: self.displayName) {
                     self.displayName = String(self.displayName.prefix(self.displayNameMaxLength))
-                })
+                }
         } header: {
             Text("editProfile.title.displayName", comment: "Display name")
         } footer: {
@@ -183,9 +183,9 @@ struct EditProfileView: View {
         Section {
             TextField("", text: $bio, axis: .vertical)
                 .lineLimit(5, reservesSpace: true)
-                .onChange(of: self.bio, perform: { _ in
+                .onChange(of: self.bio) {
                     self.bio = String(self.bio.prefix(self.bioMaxLength))
-                })
+                }
         } header: {
             Text("editProfile.title.bio", comment: "Bio")
         } footer: {
@@ -200,9 +200,9 @@ struct EditProfileView: View {
                 .autocapitalization(.none)
                 .keyboardType(.URL)
                 .autocorrectionDisabled()
-                .onChange(of: self.website, perform: { _ in
+                .onChange(of: self.website) {
                     self.website = String(self.website.prefix(self.websiteMaxLength))
-                })
+                }
         } header: {
             Text("editProfile.title.website", comment: "Website")
         } footer: {

@@ -48,10 +48,10 @@ struct WaterfallGrid<Data, ID, Content>: View where Data: RandomAccessCollection
         .onFirstAppear {
             self.recalculateArrays()
         }
-        .onChange(of: self.refreshId) { _ in
+        .onChange(of: self.refreshId) {
             self.shouldRecalculate = true
         }
-        .onChange(of: self.data) { _ in
+        .onChange(of: self.data) {
             if self.shouldRecalculate {
                 self.recalculateArrays()
                 self.shouldRecalculate = false
@@ -59,7 +59,7 @@ struct WaterfallGrid<Data, ID, Content>: View where Data: RandomAccessCollection
                 self.appendToArrays()
             }
         }
-        .onChange(of: self.columns) { _ in
+        .onChange(of: self.columns) {
             self.recalculateArrays()
         }
     }

@@ -75,17 +75,17 @@ struct SettingsView: View {
             .withAppRouteur()
             .withOverlayDestinations(overlayDestinations: $routerPath.presentedOverlay)
         }
-        .onChange(of: self.applicationState.theme) { _ in
+        .onChange(of: self.applicationState.theme) {
             // Change theme of current modal screen (unformtunatelly it's not changed autmatically.
             self.theme = self.applicationState.theme.colorScheme() ?? self.getSystemColorScheme()
         }
-        .onChange(of: applicationState.account) { newValue in
+        .onChange(of: applicationState.account) { oldValue, newValue in
             if newValue == nil {
                 self.dismiss()
             }
         }
-        .onChange(of: tipsStore.status) { status in
-            if status == .successful {
+        .onChange(of: tipsStore.status) { oldStatus, newStatus in
+            if newStatus == .successful {
                 withAnimation(.spring()) {
                     self.routerPath.presentedOverlay = .successPayment
                     self.tipsStore.reset()

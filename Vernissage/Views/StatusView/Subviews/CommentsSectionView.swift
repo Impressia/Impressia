@@ -54,7 +54,7 @@ struct CommentsSectionView: View {
                 }
             }
         }
-        .onChange(of: self.applicationState.newComment) { _ in
+        .onChange(of: self.applicationState.newComment) {
             self.commentViewModels = nil
             Task {
                 await self.loadComments()
