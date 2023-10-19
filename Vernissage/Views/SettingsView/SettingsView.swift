@@ -7,10 +7,11 @@
 import SwiftUI
 import EnvironmentKit
 
+@MainActor
 struct SettingsView: View {
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var routerPath: RouterPath
-    @EnvironmentObject var tipsStore: TipsStore
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(RouterPath.self) var routerPath
+    @Environment(TipsStore.self) var tipsStore
 
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) private var dismiss
@@ -20,6 +21,9 @@ struct SettingsView: View {
     @State private var appBundleVersion: String?
 
     var body: some View {
+        @Bindable var routerPath = routerPath
+        @Bindable var tipsStore = tipsStore
+
         NavigationStack {
             NavigationView {
                 List {

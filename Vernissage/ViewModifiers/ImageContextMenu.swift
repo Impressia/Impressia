@@ -34,8 +34,8 @@ public extension View {
 }
 
 private struct ImageContextMenu: ViewModifier {
-    @EnvironmentObject var client: Client
-    @EnvironmentObject var routerPath: RouterPath
+    @Environment(Client.self) var client
+    @Environment(RouterPath.self) var routerPath
 
     private let id: String
     private let url: URL?

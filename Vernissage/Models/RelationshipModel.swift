@@ -8,7 +8,7 @@ import SwiftUI
 import Foundation
 import PixelfedKit
 
-public class RelationshipModel: ObservableObject {
+@Observable public class RelationshipModel {
     enum RelationshipAction {
         case follow
         case unfollow
@@ -17,46 +17,46 @@ public class RelationshipModel: ObservableObject {
     }
 
     /// The account ID.
-    @Published public var id: EntityId
+    public var id: EntityId
 
     /// Are you followed by this user?
-    @Published public var followedBy: Bool
+    public var followedBy: Bool
 
     /// Is this user blocking you?
-    @Published public var blockedBy: Bool
+    public var blockedBy: Bool
 
     /// Are you muting notifications from this user?
-    @Published public var mutingNotifications: Bool
+    public var mutingNotifications: Bool
 
     /// Do you have a pending follow request for this user?
-    @Published public var requested: Bool
+    public var requested: Bool
 
     /// Are you receiving this user’s boosts in your home timeline?
-    @Published public var showingReblogs: Bool
+    public var showingReblogs: Bool
 
     /// Have you enabled notifications for this user?
-    @Published public var notifying: Bool
+    public var notifying: Bool
 
     /// Are you blocking this user’s domain?
-    @Published public var domainBlocking: Bool
+    public var domainBlocking: Bool
 
     /// Are you featuring this user on your profile?
-    @Published public var endorsed: Bool
+    public var endorsed: Bool
 
     /// Which languages are you following from this user? Array of String (ISO 639-1 language two-letter code).
-    @Published public var languages: [String]?
+    public var languages: [String]?
 
     /// This user’s profile bio.
-    @Published public var note: String?
+    public var note: String?
 
     /// Are you following this user?
-    @Published public var following: Bool
+    public var following: Bool
 
     /// Are you blocking this user?
-    @Published public var blocking: Bool
+    public var blocking: Bool
 
     /// Are you muting this user?
-    @Published public var muting: Bool
+    public var muting: Bool
 
     public init() {
         self.id = ""

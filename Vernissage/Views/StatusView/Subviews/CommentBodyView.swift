@@ -11,8 +11,8 @@ import EnvironmentKit
 import WidgetsKit
 
 struct CommentBodyView: View {
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var routerPath: RouterPath
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(RouterPath.self) var routerPath
 
     @State var statusViewModel: StatusModel
 

@@ -10,8 +10,8 @@ import EnvironmentKit
 import WidgetsKit
 
 struct AccountsSectionView: View {
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var client: Client
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
 
     @State private var accounts: [AccountModel] = []
     @State private var dbAccounts: [AccountData] = []

@@ -8,7 +8,7 @@ import SwiftUI
 import EnvironmentKit
 
 struct AccentsSectionView: View {
-    @EnvironmentObject var applicationState: ApplicationState
+    @Environment(ApplicationState.self) var applicationState
 
     private let accentColors1: [TintColor] = [.accentColor1, .accentColor2, .accentColor3, .accentColor4, .accentColor5]
     private let accentColors2: [TintColor] = [.accentColor6, .accentColor7, .accentColor8, .accentColor9, .accentColor10]

@@ -11,8 +11,7 @@ import ServicesKit
 import ClientKit
 import EnvironmentKit
 
-@MainActor
-public class TextModel: NSObject, ObservableObject {
+@MainActor @Observable public class TextModel: NSObject {
     public var client: Client?
     public var textView: UITextView?
 
@@ -37,10 +36,10 @@ public class TextModel: NSObject, ObservableObject {
         return textView.markedTextRange
     }
 
-    @Published public var mentionsSuggestions: [Account] = []
-    @Published public var tagsSuggestions: [Tag] = []
+    public var mentionsSuggestions: [Account] = []
+    public var tagsSuggestions: [Tag] = []
 
-    @Published public var text = NSMutableAttributedString(string: "") {
+    public var text = NSMutableAttributedString(string: "") {
         didSet {
             let range = selectedRange
             processText()
@@ -135,6 +134,7 @@ public class TextModel: NSObject, ObservableObject {
         }
     }
 
+    @MainActor
     private func loadAutoCompleteResults(query: String) {
         guard let client, query.utf8.count > 1 else { return }
         var query = query

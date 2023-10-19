@@ -12,6 +12,7 @@ import ServicesKit
 import EnvironmentKit
 import WidgetsKit
 
+@MainActor
 struct StatusesView: View {
     public enum ListType: Hashable {
         case home
@@ -39,9 +40,9 @@ struct StatusesView: View {
         }
     }
 
-    @EnvironmentObject private var applicationState: ApplicationState
-    @EnvironmentObject private var client: Client
-    @EnvironmentObject private var routerPath: RouterPath
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
+    @Environment(RouterPath.self) var routerPath
 
     @Environment(\.dismiss) private var dismiss
 

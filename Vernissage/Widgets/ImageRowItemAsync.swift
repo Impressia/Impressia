@@ -13,10 +13,11 @@ import ServicesKit
 import EnvironmentKit
 import WidgetsKit
 
+@MainActor
 struct ImageRowItemAsync: View {
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var client: Client
-    @EnvironmentObject var routerPath: RouterPath
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
+    @Environment(RouterPath.self) var routerPath
 
     private var statusViewModel: StatusModel
     private var attachment: AttachmentModel

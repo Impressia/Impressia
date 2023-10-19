@@ -6,6 +6,7 @@
 
 import SwiftUI
 
+@MainActor
 struct ThirdPartyView: View {
     var body: some View {
         List {

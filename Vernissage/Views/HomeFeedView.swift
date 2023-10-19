@@ -11,11 +11,12 @@ import WidgetsKit
 import OSLog
 import Semaphore
 
+@MainActor
 struct HomeFeedView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var routerPath: RouterPath
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(RouterPath.self) var routerPath
 
     @State private var allItemsLoaded = false
     @State private var state: ViewState = .loading

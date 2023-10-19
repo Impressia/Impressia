@@ -6,13 +6,13 @@
 
 import Foundation
 
-public class PhotoUrl: ObservableObject, Identifiable {
+@Observable public class PhotoUrl: Identifiable {
     public var id: String
 
-    @Published public var statusId: String?
-    @Published public var url: URL?
-    @Published public var blurhash: String?
-    @Published public var sensitive = false
+    public var statusId: String?
+    public var url: URL?
+    public var blurhash: String?
+    public var sensitive = false
 
     init(id: String) {
         self.id = id

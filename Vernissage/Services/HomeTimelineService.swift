@@ -90,7 +90,6 @@ public class HomeTimelineService {
         return lastSeenStatusId
     }
 
-    @MainActor
     public func update(attachment: AttachmentData, withData imageData: Data, imageWidth: Double, imageHeight: Double) {
         attachment.data = imageData
         attachment.metaImageWidth = Int32(imageWidth)

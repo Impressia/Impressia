@@ -7,7 +7,7 @@
 import Foundation
 import PixelfedKit
 
-public class StatusModel: ObservableObject {
+@Observable public class StatusModel {
     public let id: EntityId
     public let rebloggedStatusId: EntityId?
     public let content: Html
@@ -38,8 +38,8 @@ public class StatusModel: ObservableObject {
 
     public let reblogStatus: Status?
 
-    @Published public var favourited: Bool
-    @Published public var mediaAttachments: [AttachmentModel]
+    public var favourited: Bool
+    public var mediaAttachments: [AttachmentModel]
 
     public init(status: Status) {
         self.id = status.id

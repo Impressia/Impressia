@@ -13,8 +13,8 @@ import EnvironmentKit
 import WidgetsKit
 
 struct UserProfileStatusesView: View {
-    @EnvironmentObject private var applicationState: ApplicationState
-    @EnvironmentObject private var client: Client
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
 
     @State public var accountId: String
 
@@ -40,6 +40,8 @@ struct UserProfileStatusesView: View {
     }
 
     var body: some View {
+        @Bindable var applicationState = applicationState
+
         if firstLoadFinished == true {
             if self.imageColumns > 1 {
                 WaterfallGrid($statusViewModels, refreshId: Binding.constant(""), columns: $imageColumns, hideLoadMore: $allItemsLoaded) { item in

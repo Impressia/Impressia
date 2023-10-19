@@ -45,8 +45,8 @@ class ShareViewController: UIViewController {
 
         // Create view.
         let view = ComposeView(attachments: attachments)
-            .environmentObject(applicationState)
-            .environmentObject(client)
+            .environment(applicationState)
+            .environment(client)
             .tint(applicationState.tintColor.color())
 
         // Add view to current UIViewController.

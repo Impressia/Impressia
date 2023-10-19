@@ -12,6 +12,7 @@ import ServicesKit
 import WidgetsKit
 import EnvironmentKit
 
+@MainActor
 struct StatusView: View {
     struct TappedAttachment: Identifiable {
         public let id: String
@@ -19,9 +20,9 @@ struct StatusView: View {
         public let imagePosition: Double
     }
 
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var client: Client
-    @EnvironmentObject var routerPath: RouterPath
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
+    @Environment(RouterPath.self) var routerPath
 
     @Environment(\.dismiss) private var dismiss
 

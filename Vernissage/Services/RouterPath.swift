@@ -69,13 +69,13 @@ enum AlertDestinations: Identifiable {
 }
 
 @MainActor
-class RouterPath: ObservableObject {
+@Observable class RouterPath {
     public var urlHandler: ((URL) -> OpenURLAction.Result)?
 
-    @Published public var path: [RouteurDestinations] = []
-    @Published public var presentedSheet: SheetDestinations?
-    @Published public var presentedOverlay: OverlayDestinations?
-    @Published public var presentedAlert: AlertDestinations?
+    public var path: [RouteurDestinations] = []
+    public var presentedSheet: SheetDestinations?
+    public var presentedOverlay: OverlayDestinations?
+    public var presentedAlert: AlertDestinations?
 
     public init() {}
 

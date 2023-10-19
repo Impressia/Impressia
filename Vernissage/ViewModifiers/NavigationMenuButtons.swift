@@ -9,6 +9,7 @@ import SwiftUI
 import EnvironmentKit
 import ServicesKit
 
+@MainActor
 extension View {
     func navigationMenuButtons(menuPosition: Binding<MenuPosition>,
                                onViewModeIconTap: @escaping (MainView.ViewMode) -> Void) -> some View {
@@ -16,8 +17,9 @@ extension View {
     }
 }
 
+@MainActor
 private struct NavigationMenuButtons: ViewModifier {
-    @EnvironmentObject var routerPath: RouterPath
+    @Environment(RouterPath.self) var routerPath
 
     private let onViewModeIconTap: (MainView.ViewMode) -> Void
     private let imageFontSize = 20.0

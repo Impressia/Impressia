@@ -8,12 +8,13 @@ import SwiftUI
 import ClientKit
 import ServicesKit
 
+@MainActor
 public struct PhotoEditorView: View {
-    @EnvironmentObject var client: Client
+    @Environment(Client.self) var client
     @Environment(\.dismiss) private var dismiss
 
     @State private var description: String = String.empty()
-    @ObservedObject public var photoAttachment: PhotoAttachment
+    public var photoAttachment: PhotoAttachment
 
     public init(photoAttachment: PhotoAttachment) {
         self.photoAttachment = photoAttachment

@@ -11,9 +11,10 @@ import ServicesKit
 import EnvironmentKit
 import WidgetsKit
 
+@MainActor
 struct TrendStatusesView: View {
-    @EnvironmentObject private var applicationState: ApplicationState
-    @EnvironmentObject private var client: Client
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
 
     @State public var accountId: String
 

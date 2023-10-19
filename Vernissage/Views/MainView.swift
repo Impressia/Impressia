@@ -12,13 +12,14 @@ import ClientKit
 import ServicesKit
 import EnvironmentKit
 
+@MainActor
 struct MainView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var client: Client
-    @EnvironmentObject var routerPath: RouterPath
-    @EnvironmentObject var tipsStore: TipsStore
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
+    @Environment(RouterPath.self) var routerPath
+    @Environment(TipsStore.self) var tipsStore
 
     @State private var navBarTitle: LocalizedStringKey = ViewMode.home.title
     @State private var viewMode: ViewMode = .home {
@@ -88,28 +89,33 @@ struct MainView: View {
     }
 
     var body: some View {
-        self.getMainView()
-            .navigationMenuButtons(menuPosition: $applicationState.menuPosition) { viewMode in
-                self.switchView(to: viewMode)
-            }
-            .navigationTitle(navBarTitle)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                self.getLeadingToolbar()
+        @Bindable var applicationState = applicationState
+        @Bindable var routerPath = routerPath
 
-                if self.applicationState.menuPosition == .top {
-                    self.getPrincipalToolbar()
-                    self.getTrailingToolbar()
+        NavigationStack(path: $routerPath.path) {
+            self.getMainView()
+                .navigationMenuButtons(menuPosition: $applicationState.menuPosition) { viewMode in
+                    self.switchView(to: viewMode)
                 }
-            }
-            .onChange(of: tipsStore.status) { oldStatus, newStatus in
-                if newStatus == .successful {
-                    withAnimation(.spring()) {
-                        self.routerPath.presentedOverlay = .successPayment
-                        self.tipsStore.reset()
+                .navigationTitle(navBarTitle)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    self.getLeadingToolbar()
+                    
+                    if self.applicationState.menuPosition == .top {
+                        self.getPrincipalToolbar()
+                        self.getTrailingToolbar()
                     }
                 }
-            }
+                .onChange(of: tipsStore.status) { oldStatus, newStatus in
+                    if newStatus == .successful {
+                        withAnimation(.spring()) {
+                            self.routerPath.presentedOverlay = .successPayment
+                            self.tipsStore.reset()
+                        }
+                    }
+                }
+        }
     }
 
     @ViewBuilder

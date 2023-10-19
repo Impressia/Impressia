@@ -11,10 +11,11 @@ import ServicesKit
 import EnvironmentKit
 import WidgetsKit
 
+@MainActor
 struct UserProfileView: View {
-    @EnvironmentObject private var applicationState: ApplicationState
-    @EnvironmentObject private var client: Client
-    @EnvironmentObject private var routerPath: RouterPath
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
+    @Environment(RouterPath.self) var routerPath
 
     @Environment(\.dismiss) private var dismiss
 
@@ -22,7 +23,7 @@ struct UserProfileView: View {
     @State public var accountDisplayName: String?
     @State public var accountUserName: String
 
-    @StateObject private var relationship = RelationshipModel()
+    @State private var relationship = RelationshipModel()
     @State private var account: Account?
     @State private var state: ViewState = .loading
     @State private var viewId = UUID().uuidString

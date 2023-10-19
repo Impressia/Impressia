@@ -8,7 +8,7 @@ import SwiftUI
 import EnvironmentKit
 
 public struct ImageAlternativeText: View {
-    @EnvironmentObject var applicationState: ApplicationState
+    @Environment(ApplicationState.self) var applicationState
 
     private let text: String?
     private let open: (String) -> Void

@@ -7,11 +7,11 @@
 import Foundation
 import SwiftUI
 
-class NavigationMenuItemDetails: ObservableObject, Identifiable {
-    @Published var title: LocalizedStringKey
-    @Published var image: String
+@Observable class NavigationMenuItemDetails: Identifiable {
+    var title: LocalizedStringKey
+    var image: String
 
-    @Published var viewMode: MainView.ViewMode {
+    var viewMode: MainView.ViewMode {
         didSet {
             self.title = viewMode.title
             self.image = viewMode.image

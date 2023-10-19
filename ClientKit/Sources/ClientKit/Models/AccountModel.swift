@@ -6,7 +6,7 @@
 
 import Foundation
 
-public class AccountModel: ObservableObject, Identifiable {
+@Observable public class AccountModel: Identifiable {
     public let id: String
     public let accessToken: String?
     public let refreshToken: String?
@@ -28,7 +28,7 @@ public class AccountModel: ObservableObject, Identifiable {
     public let username: String
     public let lastSeenStatusId: String?
 
-    @Published public var avatarData: Data?
+    public var avatarData: Data?
 
     public init(id: String,
                 accessToken: String?,

@@ -12,6 +12,7 @@ import ServicesKit
 import EnvironmentKit
 import WidgetsKit
 
+@MainActor
 struct AccountsView: View {
     public enum ListType: Hashable {
         case followers(entityId: String)
@@ -42,8 +43,8 @@ struct AccountsView: View {
         }
     }
 
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var client: Client
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
 
     @State var listType: ListType
 

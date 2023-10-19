@@ -8,7 +8,7 @@ import SwiftUI
 import EnvironmentKit
 
 struct HapticsSectionView: View {
-    @EnvironmentObject var applicationState: ApplicationState
+    @Environment(ApplicationState.self) var applicationState
     @Environment(\.colorScheme) var colorScheme
 
     @State var hapticTabSelectionEnabled = true

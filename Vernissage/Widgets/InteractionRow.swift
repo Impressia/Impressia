@@ -15,9 +15,9 @@ import WidgetsKit
 struct InteractionRow: View {
     typealias DeleteAction = () -> Void
 
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var client: Client
-    @EnvironmentObject var routerPath: RouterPath
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
+    @Environment(RouterPath.self) var routerPath
 
     @State var statusModel: StatusModel
 

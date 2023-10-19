@@ -17,10 +17,10 @@ struct VernissageApp: App {
 
     let coreDataHandler = CoreDataHandler.shared
 
-    @StateObject var applicationState = ApplicationState.shared
-    @StateObject var client = Client.shared
-    @StateObject var routerPath = RouterPath()
-    @StateObject var tipsStore = TipsStore()
+    @State var applicationState = ApplicationState.shared
+    @State var client = Client.shared
+    @State var routerPath = RouterPath()
+    @State var tipsStore = TipsStore()
 
     @State var applicationViewMode: ApplicationViewMode = .loading
     @State var tintColor = ApplicationState.shared.tintColor.color()
@@ -30,7 +30,7 @@ struct VernissageApp: App {
 
     var body: some Scene {
         WindowGroup {
-            NavigationStack(path: $routerPath.path) {
+            NavigationStack {
                 switch applicationViewMode {
                 case .loading:
                     LoadingView()
@@ -51,16 +51,15 @@ struct VernissageApp: App {
                 }
             }
             .environment(\.managedObjectContext, coreDataHandler.container.viewContext)
-            .environmentObject(applicationState)
-            .environmentObject(client)
-            .environmentObject(routerPath)
-            .environmentObject(tipsStore)
+            .environment(applicationState)
+            .environment(client)
+            .environment(routerPath)
+            .environment(tipsStore)
             .tint(self.tintColor)
             .preferredColorScheme(self.theme)
             .task {
                 await self.onApplicationStart()
             }
-            .navigationViewStyle(.stack)
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                     Task {

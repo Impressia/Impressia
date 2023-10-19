@@ -8,7 +8,7 @@ import SwiftUI
 import EnvironmentKit
 
 struct AvatarShapesSectionView: View {
-    @EnvironmentObject var applicationState: ApplicationState
+    @Environment(ApplicationState.self) var applicationState
 
     var body: some View {
         Section("settings.title.avatar") {

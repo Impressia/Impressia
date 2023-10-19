@@ -10,14 +10,15 @@ import ClientKit
 import NukeUI
 import ServicesKit
 
+@MainActor
 struct ImagesGrid: View {
     public enum GridType: Hashable {
         case account(accountId: String, accountDisplayName: String?, accountUserName: String)
         case hashtag(name: String)
     }
 
-    @EnvironmentObject var client: Client
-    @EnvironmentObject var routerPath: RouterPath
+    @Environment(Client.self) var client
+    @Environment(RouterPath.self) var routerPath
 
     private let maxImages = 5
 

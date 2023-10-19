@@ -13,9 +13,10 @@ import ServicesKit
 import WidgetsKit
 import EnvironmentKit
 
+@MainActor
 struct EditProfileView: View {
-    @EnvironmentObject private var applicationState: ApplicationState
-    @EnvironmentObject private var client: Client
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
     @Environment(\.dismiss) private var dismiss
 
     @State private var account: Account?

@@ -12,12 +12,12 @@ import WidgetsKit
 import EnvironmentKit
 
 struct UserProfileHeaderView: View {
-    @EnvironmentObject private var applicationState: ApplicationState
-    @EnvironmentObject private var client: Client
-    @EnvironmentObject private var routerPath: RouterPath
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
+    @Environment(RouterPath.self) var routerPath
 
     @State var account: Account
-    @ObservedObject var relationship = RelationshipModel()
+    @State var relationship = RelationshipModel()
     @Binding var boostsDisabled: Bool
     
     var body: some View {

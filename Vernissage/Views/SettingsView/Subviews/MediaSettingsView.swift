@@ -8,10 +8,12 @@ import SwiftUI
 import EnvironmentKit
 
 struct MediaSettingsView: View {
-    @EnvironmentObject var applicationState: ApplicationState
+    @Environment(ApplicationState.self) var applicationState
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
+        @Bindable var applicationState = applicationState
+
         Section("settings.title.mediaSettings") {
 
             Toggle(isOn: $applicationState.showSensitive) {

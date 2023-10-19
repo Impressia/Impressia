@@ -6,8 +6,9 @@
 
 import SwiftUI
 
+@MainActor
 struct SearchView: View {
-    @EnvironmentObject var routerPath: RouterPath
+    @Environment(RouterPath.self) var routerPath
 
     @State private var query = String.empty()
 

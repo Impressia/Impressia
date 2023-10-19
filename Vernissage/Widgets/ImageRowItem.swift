@@ -11,10 +11,11 @@ import ServicesKit
 import EnvironmentKit
 import WidgetsKit
 
+@MainActor
 struct ImageRowItem: View {
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var client: Client
-    @EnvironmentObject var routerPath: RouterPath
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
+    @Environment(RouterPath.self) var routerPath
 
     private let status: StatusData
     private let attachmentData: AttachmentData
@@ -267,7 +268,7 @@ struct ImageRowItem: View {
         self.cancelled = false
     }
 
-    private func navigateToStatus() {
+    private func navigateToStatus() {        
         self.routerPath.navigate(to: .status(
             id: status.id,
             blurhash: status.attachments().first?.blurhash,

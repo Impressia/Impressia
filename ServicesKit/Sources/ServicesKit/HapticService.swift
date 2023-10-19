@@ -28,7 +28,6 @@ public class HapticService {
         impactGenerator.prepare()
     }
 
-    @MainActor
     public func fireHaptic(of type: HapticType) {
         guard supportsHaptics else { return }
 

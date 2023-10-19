@@ -10,9 +10,10 @@ import ClientKit
 import ServicesKit
 import EnvironmentKit
 
+@MainActor
 public struct PlaceSelectorView: View {
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var client: Client
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
     @Environment(\.dismiss) private var dismiss
 
     @State private var places: [Place] = []

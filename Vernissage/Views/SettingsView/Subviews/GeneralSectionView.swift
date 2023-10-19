@@ -8,7 +8,7 @@ import SwiftUI
 import EnvironmentKit
 
 struct GeneralSectionView: View {
-    @EnvironmentObject var applicationState: ApplicationState
+    @Environment(ApplicationState.self) var applicationState
 
     private let customIconNames = ["Default",
                                    "Blue",
@@ -41,8 +41,9 @@ struct GeneralSectionView: View {
     ]
 
     var body: some View {
+        @Bindable var applicationState = applicationState
+ 
         Section("settings.title.general") {
-
             // Application icon.
             Picker(selection: $applicationState.activeIcon) {
                 ForEach(self.customIconNames, id: \.self) { icon in
