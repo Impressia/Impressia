@@ -168,12 +168,16 @@ struct HomeTimelineView: View {
     }
 
     private func loadFirstStatuses() async throws {
-        guard let accountId = self.applicationState.account?.id else {
+        guard let accountId = self.applicationState.account?.id,
+              let accountData = AccountDataHandler.shared.getAccountData(accountId: accountId, modelContext: modelContext) else {
             return
         }
         
-        // Download statuses from API.
-        let statuses = try await self.loadFromApi()
+        // We have to download one newer status Id.
+        let newerStatusId = try await self.getNewerStatusId(from: accountData.lastLoadedStatusId)
+        
+        // Download statuses from API (which are older then last visible status).
+        let statuses = try await self.loadFromApi(maxId: newerStatusId)
 
         if statuses.isEmpty {
             self.allItemsLoaded = true
@@ -324,5 +328,18 @@ struct HomeTimelineView: View {
     
     private func shouldUpToDateBeVisible(statusId: String) -> Bool {
         return self.applicationState.lastSeenStatusId != statusViewModels.first?.id && self.applicationState.lastSeenStatusId == statusId
+    }
+    
+    private func getNewerStatusId(from statusId: String?) async throws -> String? {
+        guard let statusId else {
+            return nil
+        }
+        
+        let statuses = try await self.client.publicTimeline?.getHomeTimeline(
+            minId: statusId,
+            limit: 1,
+            includeReblogs: self.applicationState.showReboostedStatuses) ?? []
+        
+        return statuses.first?.id
     }
 }

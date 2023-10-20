@@ -103,7 +103,6 @@ public class HomeTimelineService {
             visibleStatuses.append(status)
         }
         
-        print("statuses: \(statuses.count), withImages: \(statusesWithImagesOnly.count), visible: \(visibleStatuses.count)")
         return visibleStatuses
     }
     
