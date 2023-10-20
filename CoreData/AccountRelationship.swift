@@ -8,7 +8,7 @@ import Foundation
 import SwiftData
 
 @Model final public class AccountRelationship {
-    public var accountId: String
+    @Attribute(.unique) public var accountId: String
     public var boostedStatusesMuted: Bool
     public var pixelfedAccount: AccountData?
     

@@ -215,7 +215,6 @@ struct StatusView: View {
             self.state = .loaded
         } catch NetworkError.notSuccessResponse(let response) {
             if response.statusCode() == HTTPStatusCode.notFound, let accountId = self.applicationState.account?.id {
-                StatusDataHandler.shared.remove(accountId: accountId, statusId: self.statusId, modelContext: modelContext)
                 ErrorService.shared.handle(NetworkError.notSuccessResponse(response), message: "status.error.notFound", showToastr: true)
                 self.dismiss()
             }
@@ -227,13 +226,6 @@ struct StatusView: View {
                 ErrorService.shared.handle(error, message: "status.error.loadingStatusFailed", showToastr: false)
             }
         }
-    }
-
-    private func setAttachment(_ attachmentData: AttachmentData) {
-        exifCamera = attachmentData.exifCamera
-        exifExposure = attachmentData.exifExposure
-        exifCreatedDate = attachmentData.exifCreatedDate
-        exifLens = attachmentData.exifLens
     }
 
     private func getImageHeight() -> Double {

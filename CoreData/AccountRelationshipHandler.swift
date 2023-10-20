@@ -35,9 +35,9 @@ class AccountRelationshipHandler {
             }
             
             let newAccountRelationship = AccountRelationship(accountId: relationAccountId, boostedStatusesMuted: false, pixelfedAccount: accountDataFromDb)
-            accountDataFromDb.accountRelationships.append(newAccountRelationship)
             modelContext.insert(newAccountRelationship)
-            
+            accountDataFromDb.accountRelationships.append(newAccountRelationship)
+
             accountRelationship = newAccountRelationship
         }
         
@@ -52,9 +52,9 @@ class AccountRelationshipHandler {
     
     private func getAccountRelationship(for accountId: String, relation relationAccountId: String, modelContext: ModelContext) -> AccountRelationship? {
         do {
-            var fetchDescriptor = FetchDescriptor<AccountRelationship>(predicate: #Predicate { accountRelationship in
-                accountRelationship.accountId == relationAccountId && accountRelationship.pixelfedAccount?.id == accountId
-            })
+            var fetchDescriptor = FetchDescriptor<AccountRelationship>(
+                predicate: #Predicate { $0.accountId == relationAccountId && $0.pixelfedAccount?.id == accountId }
+            )
             fetchDescriptor.fetchLimit = 1
             fetchDescriptor.includePendingChanges = true
             

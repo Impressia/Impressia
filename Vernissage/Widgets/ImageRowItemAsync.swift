@@ -125,16 +125,17 @@ struct ImageRowItemAsync: View {
                 }
             } else if state.error != nil {
                 ZStack {
-                    Rectangle()
-                        .fill(Color.placeholderText)
-                        .scaledToFill()
+                    BlurredImage(blurhash: attachment.blurhash)
 
                     VStack(alignment: .center) {
                         Spacer()
                         Text("global.error.errorDuringImageDownload", comment: "Cannot download image")
-                            .foregroundColor(.systemBackground)
+                            .foregroundColor(.white)
                         Spacer()
                     }
+                }
+                .onTapGesture {
+                    self.navigateToStatus()
                 }
             } else {
                 VStack(alignment: .center) {

@@ -13,8 +13,6 @@ public class SwiftDataHandler {
 
     lazy var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            AttachmentData.self,
-            StatusData.self,
             ApplicationSettings.self,
             AccountData.self,
             ViewedStatus.self,

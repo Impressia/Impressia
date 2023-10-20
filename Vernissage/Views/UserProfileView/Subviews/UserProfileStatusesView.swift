@@ -97,7 +97,7 @@ struct UserProfileStatusesView: View {
                                     do {
                                         try await self.loadMoreStatuses()
                                     } catch {
-                                        ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadStatuses", showToastr: true)
+                                        ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadStatuses", showToastr: !Task.isCancelled)
                                     }
                                 }
                             Spacer()

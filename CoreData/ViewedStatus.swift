@@ -8,7 +8,7 @@ import Foundation
 import SwiftData
 
 @Model final public class ViewedStatus {
-    public var id: String
+    @Attribute(.unique) public var id: String
     public var reblogId: String?
     public var date: Date
     public var pixelfedAccount: AccountData?

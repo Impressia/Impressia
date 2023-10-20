@@ -123,7 +123,7 @@ struct MainView: View {
         switch self.viewMode {
         case .home:
             if UIDevice.isIPhone {
-                HomeFeedView(accountId: applicationState.account?.id ?? String.empty())
+                HomeTimelineView()
                     .id(applicationState.account?.id ?? String.empty())
             } else {
                 StatusesView(listType: .home)
@@ -292,7 +292,7 @@ struct MainView: View {
                                                             accountModel: accountModel,
                                                             modelContext: modelContext) { signedInAccountModel in
                 guard let signedInAccountModel else {
-                    ToastrService.shared.showError(subtitle: NSLocalizedString("mainview.error.switchAccounts", comment: "Cannot switch accounts."))
+                    ToastrService.shared.showError(title: "", subtitle: NSLocalizedString("mainview.error.switchAccounts", comment: "Cannot switch accounts."))
                     return
                 }
 

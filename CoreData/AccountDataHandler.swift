@@ -40,9 +40,9 @@ class AccountDataHandler {
 
     func getAccountData(accountId: String, modelContext: ModelContext) -> AccountData? {
         do {
-            var fetchDescriptor = FetchDescriptor<AccountData>(predicate: #Predicate { accountData in
-                accountData.id == accountId
-            })
+            var fetchDescriptor = FetchDescriptor<AccountData>(
+                predicate: #Predicate { $0.id == accountId}
+            )
             fetchDescriptor.fetchLimit = 1
             fetchDescriptor.includePendingChanges = true
             
@@ -60,5 +60,21 @@ class AccountDataHandler {
         } catch {
             CoreDataError.shared.handle(error, message: "Error during deleting account data (remove).")
         }
+    }
+    
+    func update(lastSeenStatusId: String?, lastLoadedStatusId: String?, accountId: String, modelContext: ModelContext) throws {
+        guard let accountDataFromDb = self.getAccountData(accountId: accountId, modelContext: modelContext) else {
+            return
+        }
+        
+        if (accountDataFromDb.lastSeenStatusId ?? "0") < (lastSeenStatusId ?? "0") {
+            accountDataFromDb.lastSeenStatusId = lastSeenStatusId
+        }
+
+        if (accountDataFromDb.lastLoadedStatusId ?? "0") < (lastLoadedStatusId ?? "0") {
+            accountDataFromDb.lastLoadedStatusId = lastLoadedStatusId
+        }
+        
+        try modelContext.save()
     }
 }

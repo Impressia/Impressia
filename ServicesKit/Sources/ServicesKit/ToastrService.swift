@@ -39,7 +39,7 @@ public class ToastrService {
         Drops.show(drop)
     }
 
-    public func showError(title: LocalizedStringResource = LocalizedStringResource("global.error.unexpected"), imageSystemName: String = "ant.circle.fill", subtitle: String? = nil) {
+    public func showError(title: LocalizedStringResource, imageSystemName: String = "ant.circle.fill", subtitle: String? = nil) {
         let image = self.createImage(systemName: imageSystemName, color: UIColor(Color.accentColor))
         self.showError(title: title.key, image: image, subtitle: subtitle)
     }
@@ -49,12 +49,12 @@ public class ToastrService {
         self.showError(title: localizedMessage, image: image, subtitle: subtitle)
     }
 
-    public func showError(title: LocalizedStringResource = LocalizedStringResource("global.error.unexpected"), imageName: String, subtitle: String? = nil) {
+    public func showError(title: LocalizedStringResource, imageName: String, subtitle: String? = nil) {
         let image = self.createImage(name: imageName, color: UIColor(Color.accentColor))
         self.showError(title: title.key, image: image, subtitle: subtitle)
     }
 
-    private func showError(title: String = "global.error.unexpected", image: UIImage?, subtitle: String? = nil) {
+    private func showError(title: String, image: UIImage?, subtitle: String? = nil) {
         let drop = Drop(
             title: NSLocalizedString(title, comment: "Error displayed to the user."),
             subtitle: subtitle,

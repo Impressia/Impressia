@@ -1296,40 +1296,6 @@
         }
       }
     },
-    "global.error.canceledImageDownload" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Download image has been canceled."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La descarga de la imagen ha sido cancelada."
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Irudiaren deskarga bertan behera utzi da."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le téléchargement de l'image a été annulé."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pobieranie zdjęcia zostało anulowane."
-          }
-        }
-      }
-    },
     "global.error.cannotConfigureTransactionListener" : {
       "localizations" : {
         "en" : {
@@ -1806,40 +1772,6 @@
         }
       }
     },
-    "global.error.statusesNotRetrieved" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Statuses not retrieved."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No se pudieron obtener los estados."
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ez dira egoerak eskuratu."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Statuts non récupérés."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Statusy nie zostały pobrane."
-          }
-        }
-      }
-    },
     "global.title.close" : {
       "comment" : "Close",
       "localizations" : {
@@ -2056,40 +1988,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jesteś na bieżąco"
-          }
-        }
-      }
-    },
-    "home.title.noPhotos" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unfortunately, there are no photos here."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Desafortunadamente, no hay fotos aquí."
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Argazkirik ez."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Malheureusement, il n'y a pas de photos ici."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Niestety nie ma jeszcze żadnych zdjęć."
           }
         }
       }

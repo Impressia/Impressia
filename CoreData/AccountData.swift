@@ -29,10 +29,16 @@ import ClientKit
     public var statusesCount: Int32
     public var url: URL?
     public var username: String
-    @Relationship(deleteRule: .cascade, inverse: \StatusData.pixelfedAccount) public var statuses: [StatusData]
+    
+    /// Last status seen on home timeline by the user.
+    public var lastSeenStatusId: String?
+    
+    /// Last status loaded on home timeline.
+    public var lastLoadedStatusId: String?
+    
     @Relationship(deleteRule: .cascade, inverse: \ViewedStatus.pixelfedAccount) public var viewedStatuses: [ViewedStatus]
     @Relationship(deleteRule: .cascade, inverse: \AccountRelationship.pixelfedAccount) public var accountRelationships: [AccountRelationship]
-    public var lastSeenStatusId: String?
+    
     
     init(
         accessToken: String? = nil,
@@ -55,7 +61,6 @@ import ClientKit
         statusesCount: Int32 = .zero,
         url: URL? = nil,
         username: String = "",
-        statuses: [StatusData] = [],
         viewedStatuses: [ViewedStatus] = [],
         accountRelationships: [AccountRelationship] = [],
         lastSeenStatusId: String? = nil
@@ -80,7 +85,6 @@ import ClientKit
         self.statusesCount = statusesCount
         self.url = url
         self.username = username
-        self.statuses = statuses
         self.viewedStatuses = viewedStatuses
         self.accountRelationships = accountRelationships
         self.lastSeenStatusId = lastSeenStatusId
