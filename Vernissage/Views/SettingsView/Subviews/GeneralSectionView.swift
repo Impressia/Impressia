@@ -9,6 +9,7 @@ import EnvironmentKit
 
 struct GeneralSectionView: View {
     @Environment(ApplicationState.self) var applicationState
+    @Environment(\.modelContext) private var modelContext
 
     private let customIconNames = ["Default",
                                    "Blue",
@@ -59,7 +60,7 @@ struct GeneralSectionView: View {
             }
             .pickerStyle(.navigationLink)
             .onChange(of: self.applicationState.activeIcon) { oldIncomeName, newIconName in
-                ApplicationSettingsHandler.shared.set(activeIcon: newIconName)
+                ApplicationSettingsHandler.shared.set(activeIcon: newIconName, modelContext: modelContext)
                 UIApplication.shared.setAlternateIconName(newIconName == "Default" ? nil : newIconName)
             }
 
@@ -73,7 +74,7 @@ struct GeneralSectionView: View {
                 Text("settings.title.theme", comment: "Theme")
             }
             .onChange(of: self.applicationState.theme) { oldTheme, newTheme in
-                ApplicationSettingsHandler.shared.set(theme: newTheme)
+                ApplicationSettingsHandler.shared.set(theme: newTheme, modelContext: modelContext)
             }
 
             // Menu position.
@@ -86,7 +87,7 @@ struct GeneralSectionView: View {
                 Text("settings.title.menuPosition", comment: "Menu position")
             }
             .onChange(of: self.applicationState.menuPosition) { oldMenuPosition, newMenuPosition in
-                ApplicationSettingsHandler.shared.set(menuPosition: newMenuPosition)
+                ApplicationSettingsHandler.shared.set(menuPosition: newMenuPosition, modelContext: modelContext)
             }
         }
     }

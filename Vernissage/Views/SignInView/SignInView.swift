@@ -14,7 +14,7 @@ import WidgetsKit
 
 @MainActor
 struct SignInView: View {
-    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
 
     @Environment(ApplicationState.self) var applicationState
@@ -97,12 +97,11 @@ struct SignInView: View {
         Task {
             do {
                 let authorizationSession = AuthorizationSession()
-                try await AuthorizationService.shared.sign(in: baseAddress, session: authorizationSession) { accountModel in
+                try await AuthorizationService.shared.sign(in: baseAddress,
+                                                           session: authorizationSession,
+                                                           modelContext: modelContext) { accountModel in
                     onSignedIn?(accountModel)
-
-                    DispatchQueue.main.sync {
-                        dismiss()
-                    }
+                    dismiss()
                 }
             } catch let error as AuthorisationError {
                 ErrorService.shared.handle(error, localizedMessage: error.localizedDescription, showToastr: true)

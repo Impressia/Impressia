@@ -10,11 +10,11 @@ import EnvironmentKit
 import WidgetsKit
 import OSLog
 import Semaphore
+import SwiftData
 
 @MainActor
 struct HomeFeedView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
+    @Environment(\.modelContext) private var modelContext
     @Environment(ApplicationState.self) var applicationState
     @Environment(RouterPath.self) var routerPath
 
@@ -24,12 +24,12 @@ struct HomeFeedView: View {
     @State private var opacity = 0.0
     @State private var offset = -50.0
 
-    @FetchRequest var dbStatuses: FetchedResults<StatusData>
+    @Query var dbStatuses: [StatusData]
 
     init(accountId: String) {
-        _dbStatuses = FetchRequest<StatusData>(
-            sortDescriptors: [SortDescriptor(\.id, order: .reverse)],
-            predicate: NSPredicate(format: "pixelfedAccount.id = %@", accountId))
+        _dbStatuses = Query(filter: #Predicate<StatusData> { statusData in
+            statusData.pixelfedAccount?.id == accountId
+        }, sort: [SortDescriptor(\.id, order: .reverse)])
     }
 
     var body: some View {
@@ -75,7 +75,8 @@ struct HomeFeedView: View {
                                         let newStatusesCount = try await HomeTimelineService.shared.loadOnBottom(
                                             for: account,
                                             includeReblogs: self.applicationState.showReboostedStatuses,
-                                            hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt
+                                            hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt,
+                                            modelContext: modelContext
                                         )
 
                                         if newStatusesCount == 0 {
@@ -109,10 +110,12 @@ struct HomeFeedView: View {
     private func refreshData() async {
         do {
             if let account = self.applicationState.account {
-                let lastSeenStatusId = try await HomeTimelineService.shared.refreshTimeline(for: account,
-                                                                                            includeReblogs: self.applicationState.showReboostedStatuses,
-                                                                                            hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt,
-                                                                                            updateLastSeenStatus: true)
+                let lastSeenStatusId = try await HomeTimelineService.shared.refreshTimeline(
+                    for: account,
+                    includeReblogs: self.applicationState.showReboostedStatuses,
+                    hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt,
+                    updateLastSeenStatus: true,
+                    modelContext: modelContext)
                 asyncAfter(0.75) {
                     self.applicationState.lastSeenStatusId = lastSeenStatusId
                     self.applicationState.amountOfNewStatuses = 0
@@ -135,9 +138,11 @@ struct HomeFeedView: View {
             }
 
             if let account = self.applicationState.account {
-                _ = try await HomeTimelineService.shared.refreshTimeline(for: account,
-                                                                         includeReblogs: self.applicationState.showReboostedStatuses,
-                                                                         hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt)
+                _ = try await HomeTimelineService.shared.refreshTimeline(
+                    for: account,
+                    includeReblogs: self.applicationState.showReboostedStatuses,
+                    hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt,
+                    modelContext: modelContext)
             }
 
             self.applicationState.amountOfNewStatuses = 0

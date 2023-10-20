@@ -24,6 +24,7 @@ struct StatusView: View {
     @Environment(Client.self) var client
     @Environment(RouterPath.self) var routerPath
 
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
 
     @State var statusId: String
@@ -214,7 +215,7 @@ struct StatusView: View {
             self.state = .loaded
         } catch NetworkError.notSuccessResponse(let response) {
             if response.statusCode() == HTTPStatusCode.notFound, let accountId = self.applicationState.account?.id {
-                StatusDataHandler.shared.remove(accountId: accountId, statusId: self.statusId)
+                StatusDataHandler.shared.remove(accountId: accountId, statusId: self.statusId, modelContext: modelContext)
                 ErrorService.shared.handle(NetworkError.notSuccessResponse(response), message: "status.error.notFound", showToastr: true)
                 self.dismiss()
             }

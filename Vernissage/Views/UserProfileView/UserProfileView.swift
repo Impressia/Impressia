@@ -17,6 +17,7 @@ struct UserProfileView: View {
     @Environment(Client.self) var client
     @Environment(RouterPath.self) var routerPath
 
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
 
     @State public var accountId: String
@@ -122,7 +123,7 @@ struct UserProfileView: View {
             }
             
             if let signedInAccountId = self.applicationState.account?.id {
-                self.boostsDisabled = AccountRelationshipHandler.shared.isBoostedStatusesMuted(for: signedInAccountId, relation: self.accountId)
+                self.boostsDisabled = AccountRelationshipHandler.shared.isBoostedStatusesMuted(for: signedInAccountId, relation: self.accountId, modelContext: modelContext)
             }
 
             self.account = accountFromApi
@@ -180,7 +181,8 @@ struct UserProfileView: View {
                             self.boostsDisabled.toggle()
                             AccountRelationshipHandler.shared.setBoostedStatusesMuted(for: signedInAccoountId,
                                                                                       relation: self.accountId,
-                                                                                      boostedStatusesMuted: self.boostsDisabled)
+                                                                                      boostedStatusesMuted: self.boostsDisabled,
+                                                                                      modelContext: modelContext)
                         }
                     }
                 } label: {

@@ -5,7 +5,7 @@
 //
 
 import Foundation
-import CoreData
+import SwiftData
 import PixelfedKit
 import ClientKit
 import ServicesKit
@@ -15,6 +15,7 @@ import EnvironmentKit
 import Semaphore
 
 /// Service responsible for managing home timeline.
+@MainActor
 public class HomeTimelineService {
     public static let shared = HomeTimelineService()
     private init() { }
@@ -24,13 +25,11 @@ public class HomeTimelineService {
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
     private let semaphore = AsyncSemaphore(value: 1)
 
-    @MainActor
-    public func loadOnBottom(for account: AccountModel, includeReblogs: Bool, hideStatusesWithoutAlt: Bool) async throws -> Int {
-        // Load data from API and operate on CoreData on background context.
-        let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
+    
+    public func loadOnBottom(for account: AccountModel, includeReblogs: Bool, hideStatusesWithoutAlt: Bool, modelContext: ModelContext) async throws -> Int {
 
         // Get minimum downloaded stauts id.
-        let oldestStatus = StatusDataHandler.shared.getMinimumStatus(accountId: account.id, viewContext: backgroundContext)
+        let oldestStatus = StatusDataHandler.shared.getMinimumStatus(accountId: account.id, modelContext: modelContext)
 
         guard let oldestStatus = oldestStatus else {
             return 0
@@ -40,11 +39,11 @@ public class HomeTimelineService {
         let allStatusesFromApi = try await self.load(for: account,
                                                      includeReblogs: includeReblogs,
                                                      hideStatusesWithoutAlt: hideStatusesWithoutAlt,
-                                                     on: backgroundContext,
+                                                     modelContext: modelContext,
                                                      maxId: oldestStatus.id)
 
         // Save data into database.
-        CoreDataHandler.shared.save(viewContext: backgroundContext)
+        try modelContext.save()
 
         // Start prefetching images.
         self.prefetch(statuses: allStatusesFromApi)
@@ -53,16 +52,16 @@ public class HomeTimelineService {
         return allStatusesFromApi.count
     }
 
-    @MainActor
-    public func refreshTimeline(for account: AccountModel, includeReblogs: Bool, hideStatusesWithoutAlt: Bool, updateLastSeenStatus: Bool = false) async throws -> String? {
+    public func refreshTimeline(for account: AccountModel,
+                                includeReblogs: Bool,
+                                hideStatusesWithoutAlt: Bool,
+                                updateLastSeenStatus: Bool = false,
+                                modelContext: ModelContext) async throws -> String? {
         await semaphore.wait()
         defer { semaphore.signal() }
 
-        // Load data from API and operate on CoreData on background context.
-        let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
-
         // Retrieve newest visible status (last visible by user).
-        let dbNewestStatus = StatusDataHandler.shared.getMaximumStatus(accountId: account.id, viewContext: backgroundContext)
+        let dbNewestStatus = StatusDataHandler.shared.getMaximumStatus(accountId: account.id, modelContext: modelContext)
         let lastSeenStatusId = dbNewestStatus?.id
 
         // Refresh/load home timeline (refreshing on top downloads always first 40 items).
@@ -70,27 +69,27 @@ public class HomeTimelineService {
         let allStatusesFromApi = try await self.refresh(for: account,
                                                         includeReblogs: includeReblogs,
                                                         hideStatusesWithoutAlt: hideStatusesWithoutAlt,
-                                                        on: backgroundContext)
+                                                        modelContext: modelContext)
 
         // Update last seen status.
         if let lastSeenStatusId, updateLastSeenStatus == true {
-            try self.update(lastSeenStatusId: lastSeenStatusId, for: account, on: backgroundContext)
+            try self.update(lastSeenStatusId: lastSeenStatusId, for: account, modelContext: modelContext)
         }
         
         // Delete old viewed statuses from database.
-        ViewedStatusHandler.shared.deleteOldViewedStatuses(viewContext: backgroundContext)
+        ViewedStatusHandler.shared.deleteOldViewedStatuses(modelContext: modelContext)
 
         // Start prefetching images.
         self.prefetch(statuses: allStatusesFromApi)
 
         // Save data into database.
-        CoreDataHandler.shared.save(viewContext: backgroundContext)
+        try modelContext.save()
 
         // Return id of last seen status.
         return lastSeenStatusId
     }
 
-    public func update(attachment: AttachmentData, withData imageData: Data, imageWidth: Double, imageHeight: Double) {
+    public func update(attachment: AttachmentData, withData imageData: Data, imageWidth: Double, imageHeight: Double, modelContext: ModelContext) {
         attachment.data = imageData
         attachment.metaImageWidth = Int32(imageWidth)
         attachment.metaImageHeight = Int32(imageHeight)
@@ -99,10 +98,10 @@ public class HomeTimelineService {
         // self.setExifProperties(in: attachment, from: imageData)
 
         // Save data into database.
-        CoreDataHandler.shared.save()
+        try? modelContext.save()
     }
 
-    public func amountOfNewStatuses(for account: AccountModel, includeReblogs: Bool, hideStatusesWithoutAlt: Bool) async -> Int {
+    public func amountOfNewStatuses(for account: AccountModel, includeReblogs: Bool, hideStatusesWithoutAlt: Bool, modelContext: ModelContext) async -> Int {
         await semaphore.wait()
         defer { semaphore.signal() }
         
@@ -110,11 +109,8 @@ public class HomeTimelineService {
             return 0
         }
 
-        // Load data from API and operate on CoreData on background context.
-        let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
-
         // Get maximimum downloaded stauts id.
-        let newestStatus = StatusDataHandler.shared.getMaximumStatus(accountId: account.id, viewContext: backgroundContext)
+        let newestStatus = StatusDataHandler.shared.getMaximumStatus(accountId: account.id, modelContext: modelContext)
         guard let newestStatus else {
             return 0
         }
@@ -144,12 +140,12 @@ public class HomeTimelineService {
                     }
 
                     // We shouldn't add statuses that are boosted by muted accounts.
-                    if AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: account.id, status: status, viewContext: backgroundContext) {
+                    if AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: account.id, status: status, modelContext: modelContext) {
                         continue
                     }
 
                     // We should add to timeline only statuses that has not been showned to the user already.
-                    guard self.hasBeenAlreadyOnTimeline(accountId: account.id, status: status, on: backgroundContext) == false else {
+                    guard self.hasBeenAlreadyOnTimeline(accountId: account.id, status: status, modelContext: modelContext) == false else {
                         continue
                     }
                     
@@ -180,38 +176,35 @@ public class HomeTimelineService {
         return statuses.count
     }
 
-    private func update(lastSeenStatusId: String, for account: AccountModel, on backgroundContext: NSManagedObjectContext) throws {
+    private func update(lastSeenStatusId: String, for account: AccountModel, modelContext: ModelContext) throws {
         // Save information about last seen status.
-        guard let accountDataFromDb = AccountDataHandler.shared.getAccountData(accountId: account.id, viewContext: backgroundContext) else {
+        guard let accountDataFromDb = AccountDataHandler.shared.getAccountData(accountId: account.id, modelContext: modelContext) else {
             throw DatabaseError.cannotDownloadAccount
         }
 
         accountDataFromDb.lastSeenStatusId = lastSeenStatusId
     }
     
-    private func update(status statusData: StatusData, basedOn status: Status, for account: AccountModel) async throws -> StatusData? {
-        // Load data from API and operate on CoreData on background context.
-        let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
-
+    private func update(status statusData: StatusData, basedOn status: Status, for account: AccountModel, modelContext: ModelContext) async throws -> StatusData? {
         // Update status data in database.
-        self.copy(from: status, to: statusData, on: backgroundContext)
+        self.copy(from: status, to: statusData, modelContext: modelContext)
 
         // Save data into database.
-        CoreDataHandler.shared.save(viewContext: backgroundContext)
+        try modelContext.save()
 
         return statusData
     }
     
-    private func refresh(for account: AccountModel, includeReblogs: Bool, hideStatusesWithoutAlt: Bool, on backgroundContext: NSManagedObjectContext) async throws -> [Status] {
+    private func refresh(for account: AccountModel, includeReblogs: Bool, hideStatusesWithoutAlt: Bool, modelContext: ModelContext) async throws -> [Status] {
         // Retrieve statuses from API.
         let statuses = try await self.getUniqueStatusesForHomeTimeline(account: account,
                                                                        includeReblogs: includeReblogs,
                                                                        hideStatusesWithoutAlt: hideStatusesWithoutAlt,
-                                                                       on: backgroundContext)
+                                                                       modelContext: modelContext)
 
         // Update all existing statuses in database.
         for status in statuses {
-            if let dbStatus = StatusDataHandler.shared.getStatusData(accountId: account.id, statusId: status.id, viewContext: backgroundContext) {
+            if let dbStatus = StatusDataHandler.shared.getStatusData(accountId: account.id, statusId: status.id, modelContext: modelContext) {
                 dbStatus.updateFrom(status)
             }
         }
@@ -220,13 +213,13 @@ public class HomeTimelineService {
         var statusesToAdd: [Status] = []
         for status in statuses where StatusDataHandler.shared.getStatusData(accountId: account.id,
                                                                             statusId: status.id,
-                                                                            viewContext: backgroundContext) == nil {
+                                                                            modelContext: modelContext) == nil {
             statusesToAdd.append(status)
         }
 
         // Collection with statuses to remove from database.
         var dbStatusesToRemove: [StatusData] = []
-        let allDbStatuses = StatusDataHandler.shared.getAllStatuses(accountId: account.id, viewContext: backgroundContext)
+        let allDbStatuses = StatusDataHandler.shared.getAllStatuses(accountId: account.id, modelContext: modelContext)
 
         // Find statuses to delete (not exiting in the API results).
         for dbStatus in allDbStatuses where !statuses.contains(where: { status in status.id == dbStatus.id }) {
@@ -246,13 +239,13 @@ public class HomeTimelineService {
         // Delete statuses from database.
         if !dbStatusesToRemove.isEmpty {
             for dbStatusToRemove in dbStatusesToRemove {
-                backgroundContext.delete(dbStatusToRemove)
+                modelContext.delete(dbStatusToRemove)
             }
         }
 
         // Save statuses in database.
         if !statusesToAdd.isEmpty {
-            _ = try await self.add(statusesToAdd, for: account, on: backgroundContext)
+            _ = try await self.add(statusesToAdd, for: account, modelContext: modelContext)
         }
 
         // Return all statuses downloaded from API.
@@ -262,7 +255,7 @@ public class HomeTimelineService {
     private func load(for account: AccountModel,
                       includeReblogs: Bool,
                       hideStatusesWithoutAlt: Bool,
-                      on backgroundContext: NSManagedObjectContext,
+                      modelContext: ModelContext,
                       maxId: String? = nil
     ) async throws -> [Status] {
         // Retrieve statuses from API.
@@ -270,21 +263,17 @@ public class HomeTimelineService {
                                                                        maxId: maxId,
                                                                        includeReblogs: includeReblogs,
                                                                        hideStatusesWithoutAlt: hideStatusesWithoutAlt,
-                                                                       on: backgroundContext)
+                                                                       modelContext: modelContext)
 
         // Save statuses in database.
-        try await self.add(statuses, for: account, on: backgroundContext)
+        try await self.add(statuses, for: account, modelContext: modelContext)
 
         // Return all statuses downloaded from API.
         return statuses
     }
 
-    private func add(_ statuses: [Status],
-                     for account: AccountModel,
-                     on backgroundContext: NSManagedObjectContext
-    ) async throws {
-
-        guard let accountDataFromDb = AccountDataHandler.shared.getAccountData(accountId: account.id, viewContext: backgroundContext) else {
+    private func add(_ statuses: [Status], for account: AccountModel, modelContext: ModelContext) async throws {
+        guard let accountDataFromDb = AccountDataHandler.shared.getAccountData(accountId: account.id, modelContext: modelContext) else {
             throw DatabaseError.cannotDownloadAccount
         }
 
@@ -294,42 +283,39 @@ public class HomeTimelineService {
         // Save all data to database.
         for status in statusesWithImages {
             // Save status to database.
-            let statusData = StatusDataHandler.shared.createStatusDataEntity(viewContext: backgroundContext)
-            self.copy(from: status, to: statusData, on: backgroundContext)
-            
-            statusData.pixelfedAccount = accountDataFromDb
-            accountDataFromDb.addToStatuses(statusData)
+            let statusData = StatusData()
+            self.copy(from: status, to: statusData, modelContext: modelContext)
 
-            // Save statusId to viewed statuses.
-            let viewedStatus = ViewedStatusHandler.shared.createViewedStatusEntity(viewContext: backgroundContext)
+            accountDataFromDb.statuses.append(statusData)
+            statusData.pixelfedAccount = accountDataFromDb
+            modelContext.insert(statusData)
             
-            viewedStatus.id = status.id
-            viewedStatus.reblogId = status.reblog?.id
-            viewedStatus.date = Date()
-            viewedStatus.pixelfedAccount = accountDataFromDb
-            accountDataFromDb.addToViewedStatuses(viewedStatus)
+            // Save statusId to viewed statuses.
+            let viewedStatus = ViewedStatus(id: status.id, reblogId: status.reblog?.id, date: Date(), pixelfedAccount: accountDataFromDb)
+            accountDataFromDb.viewedStatuses.append(viewedStatus)
+            modelContext.insert(viewedStatus)
         }
     }
 
-    private func copy(from status: Status,
-                      to statusData: StatusData,
-                      on backgroundContext: NSManagedObjectContext
-    ) {
+    private func copy(from status: Status, to statusData: StatusData, modelContext: ModelContext) {
         statusData.copyFrom(status)
 
         for (index, attachment) in status.getAllImageMediaAttachments().enumerated() {
 
             // Save attachment in database.
-            let attachmentData = statusData.attachments().first { item in item.id == attachment.id }
-                ?? AttachmentDataHandler.shared.createAttachmnentDataEntity(viewContext: backgroundContext)
+            if let attachmentData = statusData.attachments().first(where: { item in item.id == attachment.id }) {
+                attachmentData.copyFrom(attachment)
+                attachmentData.statusId = statusData.id
+                attachmentData.order = Int32(index)
+            } else {
+                let attachmentData = AttachmentData(id: attachment.id, statusId: statusData.id, url: attachment.url)
+                attachmentData.copyFrom(attachment)
+                attachmentData.statusId = statusData.id
+                attachmentData.order = Int32(index)
 
-            attachmentData.copyFrom(attachment)
-            attachmentData.statusId = statusData.id
-            attachmentData.order = Int32(index)
-
-            if attachmentData.isInserted {
                 attachmentData.statusRelation = statusData
-                statusData.addToAttachmentsRelation(attachmentData)
+                statusData.attachmentsRelation.append(attachmentData)
+                modelContext.insert(attachmentData)
             }
         }
     }
@@ -364,15 +350,15 @@ public class HomeTimelineService {
         imagePrefetcher.startPrefetching(with: statusModels.getAllImagesUrls())
     }
     
-    private func hasBeenAlreadyOnTimeline(accountId: String, status: Status, on backgroundContext: NSManagedObjectContext) -> Bool {
-        return ViewedStatusHandler.shared.hasBeenAlreadyOnTimeline(accountId: accountId, status: status, viewContext: backgroundContext)
+    private func hasBeenAlreadyOnTimeline(accountId: String, status: Status, modelContext: ModelContext) -> Bool {
+        return ViewedStatusHandler.shared.hasBeenAlreadyOnTimeline(accountId: accountId, status: status, modelContext: modelContext)
     }
     
     private func getUniqueStatusesForHomeTimeline(account: AccountModel,
                                                   maxId: EntityId? = nil,
                                                   includeReblogs: Bool? = nil,
                                                   hideStatusesWithoutAlt: Bool = false,
-                                                  on backgroundContext: NSManagedObjectContext) async throws -> [Status] {
+                                                  modelContext: ModelContext) async throws -> [Status] {
             guard let accessToken = account.accessToken else {
                 return []
             }
@@ -406,12 +392,12 @@ public class HomeTimelineService {
                     }
                     
                     // We shouldn't add statuses that are boosted by muted accounts.
-                    if AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: account.id, status: status, viewContext: backgroundContext) {
+                    if AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: account.id, status: status, modelContext: modelContext) {
                         continue
                     }
                     
                     // We should add to timeline only statuses that has not been showned to the user already.
-                    guard self.hasBeenAlreadyOnTimeline(accountId: account.id, status: status, on: backgroundContext) == false else {
+                    guard self.hasBeenAlreadyOnTimeline(accountId: account.id, status: status, modelContext: modelContext) == false else {
                         continue
                     }
                     

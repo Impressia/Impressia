@@ -44,6 +44,7 @@ struct StatusesView: View {
     @Environment(Client.self) var client
     @Environment(RouterPath.self) var routerPath
 
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
 
     @State public var listType: ListType
@@ -192,7 +193,7 @@ struct StatusesView: View {
             }
             
             // We have to skip statuses that are boosted from muted accounts.
-            if let accountId = self.applicationState.account?.id, AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: accountId, status: item) {
+            if let accountId = self.applicationState.account?.id, AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: accountId, status: item, modelContext: modelContext) {
                 continue
             }
             
@@ -229,7 +230,7 @@ struct StatusesView: View {
                 }
 
                 // We have to skip statuses that are boosted from muted accounts.
-                if let accountId = self.applicationState.account?.id, AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: accountId, status: item) {
+                if let accountId = self.applicationState.account?.id, AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: accountId, status: item, modelContext: modelContext) {
                     continue
                 }
 
@@ -264,7 +265,7 @@ struct StatusesView: View {
             }
 
             // We have to skip statuses that are boosted from muted accounts.
-            if let accountId = self.applicationState.account?.id, AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: accountId, status: item) {
+            if let accountId = self.applicationState.account?.id, AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: accountId, status: item, modelContext: modelContext) {
                 continue
             }
 

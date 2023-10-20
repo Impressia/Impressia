@@ -20,6 +20,7 @@ extension View {
 @MainActor
 private struct NavigationMenuButtons: ViewModifier {
     @Environment(RouterPath.self) var routerPath
+    @Environment(\.modelContext) private var modelContext
 
     private let onViewModeIconTap: (MainView.ViewMode) -> Void
     private let imageFontSize = 20.0
@@ -183,11 +184,11 @@ private struct NavigationMenuButtons: ViewModifier {
                 // Saving in core data.
                 switch displayedCustomMenuItem.position {
                 case 1:
-                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem1: item.viewMode.rawValue)
+                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem1: item.viewMode.rawValue, modelContext: modelContext)
                 case 2:
-                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem2: item.viewMode.rawValue)
+                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem2: item.viewMode.rawValue, modelContext: modelContext)
                 case 3:
-                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem3: item.viewMode.rawValue)
+                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem3: item.viewMode.rawValue, modelContext: modelContext)
                 default:
                     break
                 }
@@ -200,7 +201,7 @@ private struct NavigationMenuButtons: ViewModifier {
     }
 
     private func loadCustomMenuItems() {
-        let applicationSettings = ApplicationSettingsHandler.shared.get()
+        let applicationSettings = ApplicationSettingsHandler.shared.get(modelContext: modelContext)
 
         self.setCustomMenuItem(position: 1, viewMode: MainView.ViewMode(rawValue: Int(applicationSettings.customNavigationMenuItem1)) ?? .home)
         self.setCustomMenuItem(position: 2, viewMode: MainView.ViewMode(rawValue: Int(applicationSettings.customNavigationMenuItem2)) ?? .local)

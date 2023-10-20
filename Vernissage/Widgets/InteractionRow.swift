@@ -18,6 +18,7 @@ struct InteractionRow: View {
     @Environment(ApplicationState.self) var applicationState
     @Environment(Client.self) var client
     @Environment(RouterPath.self) var routerPath
+    @Environment(\.modelContext) private var modelContext
 
     @State var statusModel: StatusModel
 
@@ -201,7 +202,7 @@ struct InteractionRow: View {
                 try await self.client.statuses?.delete(statusId: self.statusModel.id)
 
                 // Remove from database.
-                StatusDataHandler.shared.remove(accountId: self.statusModel.account.id, statusId: self.statusModel.id)
+                StatusDataHandler.shared.remove(accountId: self.statusModel.account.id, statusId: self.statusModel.id, modelContext: modelContext)
 
                 ToastrService.shared.showSuccess("status.title.statusDeleted", imageSystemName: "checkmark.circle.fill")
                 self.delete?()

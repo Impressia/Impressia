@@ -5,31 +5,21 @@
 //
 
 import Foundation
-import CoreData
+import SwiftData
 
 class AttachmentDataHandler {
     public static let shared = AttachmentDataHandler()
     private init() { }
-
-    func createAttachmnentDataEntity(viewContext: NSManagedObjectContext? = nil) -> AttachmentData {
-        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
-        return AttachmentData(context: context)
-    }
     
-    func getDownloadedAttachmentData(accountId: String, length: Int, viewContext: NSManagedObjectContext? = nil) -> [AttachmentData] {
-        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
-        let fetchRequest = AttachmentData.fetchRequest()
-        fetchRequest.fetchLimit = length
-
-        let sortDescriptor = NSSortDescriptor(key: "statusRelation.id", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        let predicate1 = NSPredicate(format: "statusRelation.pixelfedAccount.id = %@", accountId)
-        let predicate2 = NSPredicate(format: "data != nil")
-        fetchRequest.predicate = NSCompoundPredicate.init(type: .and, subpredicates: [predicate1, predicate2])
-
+    func getDownloadedAttachmentData(accountId: String, length: Int, modelContext: ModelContext) -> [AttachmentData] {
         do {
-            return try context.fetch(fetchRequest)
+            var fetchDescriptor = FetchDescriptor<AttachmentData>(predicate: #Predicate { attachmentData in
+                attachmentData.statusRelation?.pixelfedAccount?.id == accountId && attachmentData.data != nil
+            }, sortBy: [SortDescriptor(\.statusRelation?.id, order: .forward)])
+            fetchDescriptor.fetchLimit = length
+            fetchDescriptor.includePendingChanges = true
+            
+            return try modelContext.fetch(fetchDescriptor)
         } catch {
             CoreDataError.shared.handle(error, message: "Error during fetching attachment data (getDownloadedAttachmentData).")
             return []

@@ -10,6 +10,7 @@ import EnvironmentKit
 struct MediaSettingsView: View {
     @Environment(ApplicationState.self) var applicationState
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.modelContext) private var modelContext
 
     var body: some View {
         @Bindable var applicationState = applicationState
@@ -25,7 +26,7 @@ struct MediaSettingsView: View {
                 }
             }
             .onChange(of: self.applicationState.showSensitive) { oldValue, newValue in
-                ApplicationSettingsHandler.shared.set(showSensitive: newValue)
+                ApplicationSettingsHandler.shared.set(showSensitive: newValue, modelContext: modelContext)
             }
 
             Toggle(isOn: $applicationState.showPhotoDescription) {
@@ -37,7 +38,7 @@ struct MediaSettingsView: View {
                 }
             }
             .onChange(of: self.applicationState.showPhotoDescription) { oldValue, newValue in
-                ApplicationSettingsHandler.shared.set(showPhotoDescription: newValue)
+                ApplicationSettingsHandler.shared.set(showPhotoDescription: newValue, modelContext: modelContext)
             }
 
             Toggle(isOn: $applicationState.showAvatarsOnTimeline) {
@@ -49,7 +50,7 @@ struct MediaSettingsView: View {
                 }
             }
             .onChange(of: self.applicationState.showAvatarsOnTimeline) { oldValue, newValue in
-                ApplicationSettingsHandler.shared.set(showAvatarsOnTimeline: newValue)
+                ApplicationSettingsHandler.shared.set(showAvatarsOnTimeline: newValue, modelContext: modelContext)
             }
 
             Toggle(isOn: $applicationState.showFavouritesOnTimeline) {
@@ -61,7 +62,7 @@ struct MediaSettingsView: View {
                 }
             }
             .onChange(of: self.applicationState.showFavouritesOnTimeline) { oldValue, newValue in
-                ApplicationSettingsHandler.shared.set(showFavouritesOnTimeline: newValue)
+                ApplicationSettingsHandler.shared.set(showFavouritesOnTimeline: newValue, modelContext: modelContext)
             }
 
             Toggle(isOn: $applicationState.showAltIconOnTimeline) {
@@ -73,7 +74,7 @@ struct MediaSettingsView: View {
                 }
             }
             .onChange(of: self.applicationState.showAltIconOnTimeline) { oldValue, newValue in
-                ApplicationSettingsHandler.shared.set(showAltIconOnTimeline: newValue)
+                ApplicationSettingsHandler.shared.set(showAltIconOnTimeline: newValue, modelContext: modelContext)
             }
 
             Toggle(isOn: $applicationState.warnAboutMissingAlt) {
@@ -85,7 +86,7 @@ struct MediaSettingsView: View {
                 }
             }
             .onChange(of: self.applicationState.warnAboutMissingAlt) { oldValue, newValue in
-                ApplicationSettingsHandler.shared.set(warnAboutMissingAlt: newValue)
+                ApplicationSettingsHandler.shared.set(warnAboutMissingAlt: newValue, modelContext: modelContext)
             }
             
             Toggle(isOn: $applicationState.showReboostedStatuses) {
@@ -97,7 +98,7 @@ struct MediaSettingsView: View {
                 }
             }
             .onChange(of: self.applicationState.showReboostedStatuses) { oldValue, newValue in
-                ApplicationSettingsHandler.shared.set(showReboostedStatuses: newValue)
+                ApplicationSettingsHandler.shared.set(showReboostedStatuses: newValue, modelContext: modelContext)
             }
             
             Toggle(isOn: $applicationState.hideStatusesWithoutAlt) {
@@ -109,7 +110,7 @@ struct MediaSettingsView: View {
                 }
             }
             .onChange(of: self.applicationState.hideStatusesWithoutAlt) { oldValue, newValue in
-                ApplicationSettingsHandler.shared.set(hideStatusesWithoutAlt: newValue)
+                ApplicationSettingsHandler.shared.set(hideStatusesWithoutAlt: newValue, modelContext: modelContext)
             }
         }
     }

@@ -9,6 +9,7 @@ import EnvironmentKit
 
 struct AccentsSectionView: View {
     @Environment(ApplicationState.self) var applicationState
+    @Environment(\.modelContext) private var modelContext
 
     private let accentColors1: [TintColor] = [.accentColor1, .accentColor2, .accentColor3, .accentColor4, .accentColor5]
     private let accentColors2: [TintColor] = [.accentColor6, .accentColor7, .accentColor8, .accentColor9, .accentColor10]
@@ -24,7 +25,7 @@ struct AccentsSectionView: View {
                                 .frame(width: 36, height: 36)
                                 .onTapGesture {
                                     self.applicationState.tintColor = color
-                                    ApplicationSettingsHandler.shared.set(tintColor: color)
+                                    ApplicationSettingsHandler.shared.set(tintColor: color, modelContext: modelContext)
                                 }
                             if color == self.applicationState.tintColor {
                                 Image(systemName: "checkmark")
@@ -48,7 +49,7 @@ struct AccentsSectionView: View {
                                 .frame(width: 36, height: 36)
                                 .onTapGesture {
                                     self.applicationState.tintColor = color
-                                    ApplicationSettingsHandler.shared.set(tintColor: color)
+                                    ApplicationSettingsHandler.shared.set(tintColor: color, modelContext: modelContext)
                                 }
                             if color == self.applicationState.tintColor {
                                 Image(systemName: "checkmark")

@@ -17,6 +17,8 @@ import EnvironmentKit
 struct EditProfileView: View {
     @Environment(ApplicationState.self) var applicationState
     @Environment(Client.self) var client
+    
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
 
     @State private var account: Account?
@@ -246,10 +248,10 @@ struct EditProfileView: View {
             if let avatarData = self.avatarData {
                 _ = try await self.client.accounts?.avatar(image: avatarData)
 
-                if let accountData = AccountDataHandler.shared.getAccountData(accountId: account.id) {
+                if let accountData = AccountDataHandler.shared.getAccountData(accountId: account.id, modelContext: modelContext) {
                     accountData.avatarData = avatarData
                     self.applicationState.account?.avatarData = avatarData
-                    CoreDataHandler.shared.save()
+                    try modelContext.save()
                 }
             }
 

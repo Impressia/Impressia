@@ -5,79 +5,65 @@
 //
 
 import Foundation
-import CoreData
+import SwiftData
 import PixelfedKit
 
 class StatusDataHandler {
     public static let shared = StatusDataHandler()
     private init() { }
 
-    func getAllStatuses(accountId: String, viewContext: NSManagedObjectContext? = nil) -> [StatusData] {
-        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
-        let fetchRequest = StatusData.fetchRequest()
-
-        let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        fetchRequest.predicate = NSPredicate(format: "pixelfedAccount.id = %@", accountId)
-
+    func getAllStatuses(accountId: String, modelContext: ModelContext) -> [StatusData] {
         do {
-            return try context.fetch(fetchRequest)
+            var fetchDescriptor = FetchDescriptor<StatusData>(predicate: #Predicate { statusData in
+                statusData.pixelfedAccount?.id == accountId
+            }, sortBy: [SortDescriptor(\.id, order: .reverse)])
+            fetchDescriptor.includePendingChanges = true
+
+            return try modelContext.fetch(fetchDescriptor)
         } catch {
             CoreDataError.shared.handle(error, message: "Error during fetching status (getStatusData).")
             return []
         }
     }
 
-    func getAllOlderStatuses(accountId: String, statusId: String, viewContext: NSManagedObjectContext? = nil) -> [StatusData] {
-        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
-        let fetchRequest = StatusData.fetchRequest()
-
-        let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-
-        let predicate1 = NSPredicate(format: "id < %@", statusId)
-        let predicate2 = NSPredicate(format: "pixelfedAccount.id = %@", accountId)
-
-        fetchRequest.predicate = NSCompoundPredicate.init(type: .and, subpredicates: [predicate1, predicate2])
-
+    func getAllOlderStatuses(accountId: String, statusId: String, modelContext: ModelContext) -> [StatusData] {
         do {
-            return try context.fetch(fetchRequest)
+            var fetchDescriptor = FetchDescriptor<StatusData>(predicate: #Predicate { statusData in
+                statusData.pixelfedAccount?.id == accountId && statusData.id < statusId
+            }, sortBy: [SortDescriptor(\.id, order: .reverse)])
+            fetchDescriptor.includePendingChanges = true
+
+            return try modelContext.fetch(fetchDescriptor)
         } catch {
             CoreDataError.shared.handle(error, message: "Error during fetching status (getStatusData).")
             return []
         }
     }
 
-    func getStatusData(accountId: String, statusId: String, viewContext: NSManagedObjectContext? = nil) -> StatusData? {
-        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
-        let fetchRequest = StatusData.fetchRequest()
-
-        fetchRequest.fetchLimit = 1
-        let predicate1 = NSPredicate(format: "id = %@", statusId)
-        let predicate2 = NSPredicate(format: "pixelfedAccount.id = %@", accountId)
-
-        fetchRequest.predicate = NSCompoundPredicate.init(type: .and, subpredicates: [predicate1, predicate2])
-
+    func getStatusData(accountId: String, statusId: String, modelContext: ModelContext) -> StatusData? {
         do {
-            return try context.fetch(fetchRequest).first
+            var fetchDescriptor = FetchDescriptor<StatusData>(predicate: #Predicate { statusData in
+                statusData.pixelfedAccount?.id == accountId && statusData.id == statusId
+            })
+            fetchDescriptor.fetchLimit = 1
+            fetchDescriptor.includePendingChanges = true
+            
+            return try modelContext.fetch(fetchDescriptor).first
         } catch {
             CoreDataError.shared.handle(error, message: "Error during fetching status (getStatusData).")
             return nil
         }
     }
 
-    func getMaximumStatus(accountId: String, viewContext: NSManagedObjectContext? = nil) -> StatusData? {
-        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
-        let fetchRequest = StatusData.fetchRequest()
-
-        fetchRequest.fetchLimit = 1
-
-        let sortDescriptor = NSSortDescriptor(key: "id", ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        fetchRequest.predicate = NSPredicate(format: "pixelfedAccount.id = %@", accountId)
-
+    func getMaximumStatus(accountId: String, modelContext: ModelContext) -> StatusData? {
         do {
-            let statuses = try context.fetch(fetchRequest)
+            var fetchDescriptor = FetchDescriptor<StatusData>(predicate: #Predicate { statusData in
+                statusData.pixelfedAccount?.id == accountId
+            }, sortBy: [SortDescriptor(\.id, order: .reverse)])
+            fetchDescriptor.fetchLimit = 1
+            fetchDescriptor.includePendingChanges = true
+            
+            let statuses = try modelContext.fetch(fetchDescriptor)
             return statuses.first
         } catch {
             CoreDataError.shared.handle(error, message: "Error during fetching maximum status (getMaximumStatus).")
@@ -85,18 +71,15 @@ class StatusDataHandler {
         }
     }
 
-    func getMinimumStatus(accountId: String, viewContext: NSManagedObjectContext? = nil) -> StatusData? {
-        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
-        let fetchRequest = StatusData.fetchRequest()
-
-        fetchRequest.fetchLimit = 1
-
-        let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        fetchRequest.predicate = NSPredicate(format: "pixelfedAccount.id = %@", accountId)
-
+    func getMinimumStatus(accountId: String, modelContext: ModelContext) -> StatusData? {
         do {
-            let statuses = try context.fetch(fetchRequest)
+            var fetchDescriptor = FetchDescriptor<StatusData>(predicate: #Predicate { statusData in
+                statusData.pixelfedAccount?.id == accountId
+            }, sortBy: [SortDescriptor(\.id, order: .forward)])
+            fetchDescriptor.fetchLimit = 1
+            fetchDescriptor.includePendingChanges = true
+            
+            let statuses = try modelContext.fetch(fetchDescriptor)
             return statuses.first
         } catch {
             CoreDataError.shared.handle(error, message: "Error during fetching minimum status (getMinimumtatus).")
@@ -104,33 +87,29 @@ class StatusDataHandler {
         }
     }
 
-    func remove(accountId: String, statusId: String, viewContext: NSManagedObjectContext? = nil) {
-        let status = self.getStatusData(accountId: accountId, statusId: statusId)
+    func remove(accountId: String, statusId: String, modelContext: ModelContext) {
+        let status = self.getStatusData(accountId: accountId, statusId: statusId, modelContext: modelContext)
         guard let status else {
             return
         }
 
-        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
-        context.delete(status)
-
         do {
-            try context.save()
+            modelContext.delete(status)
+            try modelContext.save()
         } catch {
             CoreDataError.shared.handle(error, message: "Error during deleting status (remove).")
         }
     }
 
-    func setFavourited(accountId: String, statusId: String) {
-        let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
-
-        if let statusData = self.getStatusData(accountId: accountId, statusId: statusId, viewContext: backgroundContext) {
+    func setFavourited(accountId: String, statusId: String, modelContext: ModelContext) {
+        if let statusData = self.getStatusData(accountId: accountId, statusId: statusId, modelContext: modelContext) {
             statusData.favourited = true
-            CoreDataHandler.shared.save(viewContext: backgroundContext)
-        }
-    }
 
-    func createStatusDataEntity(viewContext: NSManagedObjectContext? = nil) -> StatusData {
-        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
-        return StatusData(context: context)
+            do {
+                try modelContext.save()
+            } catch {
+                CoreDataError.shared.handle(error, message: "Error during deleting status (setFavourited).")
+            }
+        }
     }
 }

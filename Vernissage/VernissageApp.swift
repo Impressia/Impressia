@@ -10,12 +10,11 @@ import NukeUI
 import ClientKit
 import EnvironmentKit
 import WidgetKit
+import SwiftData
 
 @main
 struct VernissageApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-
-    let coreDataHandler = CoreDataHandler.shared
 
     @State var applicationState = ApplicationState.shared
     @State var client = Client.shared
@@ -26,6 +25,7 @@ struct VernissageApp: App {
     @State var tintColor = ApplicationState.shared.tintColor.color()
     @State var theme = ApplicationState.shared.theme.colorScheme()
 
+    let modelContainer = SwiftDataHandler.shared.sharedModelContainer
     let timer = Timer.publish(every: 120, on: .main, in: .common).autoconnect()
 
     var body: some Scene {
@@ -50,7 +50,7 @@ struct VernissageApp: App {
                         .withAlertDestinations(alertDestinations: $routerPath.presentedAlert)
                 }
             }
-            .environment(\.managedObjectContext, coreDataHandler.container.viewContext)
+            .modelContainer(modelContainer)
             .environment(applicationState)
             .environment(client)
             .environment(routerPath)
@@ -118,7 +118,8 @@ struct VernissageApp: App {
         await self.refreshAccessTokens()
 
         // When user doesn't exists then we have to open sign in view.
-        guard let currentAccount = AccountDataHandler.shared.getCurrentAccountData() else {
+        let modelContext = self.modelContainer.mainContext
+        guard let currentAccount = AccountDataHandler.shared.getCurrentAccountData(modelContext: modelContext) else {
             self.applicationViewMode = .signIn
             return
         }
@@ -128,7 +129,9 @@ struct VernissageApp: App {
 
         // Verify access token correctness.
         let authorizationSession = AuthorizationSession()
-        await AuthorizationService.shared.verifyAccount(session: authorizationSession, accountModel: accountModel) { signedInAccountModel in
+        await AuthorizationService.shared.verifyAccount(session: authorizationSession,
+                                                        accountModel: accountModel,
+                                                        modelContext: modelContext) { signedInAccountModel in
             guard let signedInAccountModel else {
                 self.applicationViewMode = .signIn
                 return
@@ -161,7 +164,8 @@ struct VernissageApp: App {
     }
 
     private func loadUserPreferences() {
-        ApplicationSettingsHandler.shared.update(applicationState: self.applicationState)
+        let modelContext =  self.modelContainer.mainContext
+        ApplicationSettingsHandler.shared.update(applicationState: self.applicationState, modelContext: modelContext)
 
         self.tintColor = self.applicationState.tintColor.color()
         self.theme = self.applicationState.theme.colorScheme()
@@ -186,7 +190,8 @@ struct VernissageApp: App {
     }
 
     private func refreshAccessTokens() async {
-        let defaultSettings = ApplicationSettingsHandler.shared.get()
+        let modelContext =  self.modelContainer.mainContext
+        let defaultSettings = ApplicationSettingsHandler.shared.get(modelContext: modelContext)
 
         // Run refreshing access tokens once per day.
         guard let refreshTokenDate = Calendar.current.date(byAdding: .day, value: 1, to: defaultSettings.lastRefreshTokens), refreshTokenDate < Date.now else {
@@ -194,18 +199,23 @@ struct VernissageApp: App {
         }
 
         // Refresh access tokens.
-        await AuthorizationService.shared.refreshAccessTokens()
+        await AuthorizationService.shared.refreshAccessTokens(modelContext: modelContext)
 
         // Update time when refresh tokens has been updated.
         defaultSettings.lastRefreshTokens = Date.now
-        CoreDataHandler.shared.save()
+        try? modelContext.save()
     }
 
     private func calculateNewPhotosInBackground() async {
+        let modelContext =  self.modelContainer.mainContext
+
         if let account = self.applicationState.account {
-            self.applicationState.amountOfNewStatuses = await HomeTimelineService.shared.amountOfNewStatuses(for: account,
-                                                                                                             includeReblogs: self.applicationState.showReboostedStatuses,
-                                                                                                             hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt)
+            self.applicationState.amountOfNewStatuses = await HomeTimelineService.shared.amountOfNewStatuses(
+                for: account,
+                includeReblogs: self.applicationState.showReboostedStatuses,
+                hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt,
+                modelContext: modelContext
+            )
         }
     }
 }

@@ -12,6 +12,7 @@ import WidgetsKit
 struct AccountsSectionView: View {
     @Environment(ApplicationState.self) var applicationState
     @Environment(Client.self) var client
+    @Environment(\.modelContext) private var modelContext
 
     @State private var accounts: [AccountModel] = []
     @State private var dbAccounts: [AccountData] = []
@@ -43,7 +44,7 @@ struct AccountsSectionView: View {
             }
         }
         .onAppear {
-            self.dbAccounts = AccountDataHandler.shared.getAccountsData()
+            self.dbAccounts = AccountDataHandler.shared.getAccountsData(modelContext: modelContext)
             self.accounts = self.dbAccounts.map({ $0.toAccountModel() })
         }
     }
@@ -64,7 +65,7 @@ struct AccountsSectionView: View {
             }
 
             if let dbAccount = self.dbAccounts.first(where: {$0.id == account.id }) {
-                AccountDataHandler.shared.remove(accountData: dbAccount)
+                AccountDataHandler.shared.remove(accountData: dbAccount, modelContext: modelContext)
             }
         }
 
@@ -75,7 +76,7 @@ struct AccountsSectionView: View {
         if shouldClearApplicationState {
             // We have to do this after animation of deleting row is ended.
             self.asyncAfter(0.5) {
-                ApplicationSettingsHandler.shared.set(accountId: nil)
+                ApplicationSettingsHandler.shared.set(accountId: nil, modelContext: modelContext)
                 self.applicationState.clearApplicationState()
                 self.client.clearAccount()
             }

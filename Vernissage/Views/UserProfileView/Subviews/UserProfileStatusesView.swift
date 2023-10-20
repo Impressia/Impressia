@@ -15,6 +15,7 @@ import WidgetsKit
 struct UserProfileStatusesView: View {
     @Environment(ApplicationState.self) var applicationState
     @Environment(Client.self) var client
+    @Environment(\.modelContext) private var modelContext
 
     @State public var accountId: String
 
@@ -59,7 +60,7 @@ struct UserProfileStatusesView: View {
                     Button {
                         withAnimation {
                             self.applicationState.showGridOnUserProfile = false
-                            ApplicationSettingsHandler.shared.set(showGridOnUserProfile: false)
+                            ApplicationSettingsHandler.shared.set(showGridOnUserProfile: false, modelContext: modelContext)
                         }
                     } label: {
                         Image(systemName: "rectangle.grid.1x2.fill")
@@ -70,7 +71,7 @@ struct UserProfileStatusesView: View {
                     Button {
                         withAnimation {
                             self.applicationState.showGridOnUserProfile = true
-                            ApplicationSettingsHandler.shared.set(showGridOnUserProfile: true)
+                            ApplicationSettingsHandler.shared.set(showGridOnUserProfile: true, modelContext: modelContext)
                         }
                     } label: {
                         Image(systemName: "rectangle.grid.2x2.fill")

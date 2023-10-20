@@ -16,6 +16,7 @@ struct ImageRowItem: View {
     @Environment(ApplicationState.self) var applicationState
     @Environment(Client.self) var client
     @Environment(RouterPath.self) var routerPath
+    @Environment(\.modelContext) private var modelContext
 
     private let status: StatusData
     private let attachmentData: AttachmentData
@@ -210,7 +211,7 @@ struct ImageRowItem: View {
 
                     // Update favourite in local cache (core data).
                     if let accountId = self.applicationState.account?.id {
-                        StatusDataHandler.shared.setFavourited(accountId: accountId, statusId: self.status.id)
+                        StatusDataHandler.shared.setFavourited(accountId: accountId, statusId: self.status.id, modelContext: modelContext)
                     }
                 }
 
@@ -263,7 +264,8 @@ struct ImageRowItem: View {
         HomeTimelineService.shared.update(attachment: attachmentData,
                                           withData: imageData,
                                           imageWidth: downloadedImage.size.width,
-                                          imageHeight: downloadedImage.size.height)
+                                          imageHeight: downloadedImage.size.height,
+                                          modelContext: modelContext)
         self.error = nil
         self.cancelled = false
     }

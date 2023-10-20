@@ -9,12 +9,13 @@ import EnvironmentKit
 
 struct AvatarShapesSectionView: View {
     @Environment(ApplicationState.self) var applicationState
+    @Environment(\.modelContext) private var modelContext
 
     var body: some View {
         Section("settings.title.avatar") {
             Button {
                 self.applicationState.avatarShape = .circle
-                ApplicationSettingsHandler.shared.set(avatarShape: .circle)
+                ApplicationSettingsHandler.shared.set(avatarShape: .circle, modelContext: modelContext)
             } label: {
                 HStack {
                     Image("Avatar")
@@ -36,7 +37,7 @@ struct AvatarShapesSectionView: View {
 
             Button {
                 self.applicationState.avatarShape = .roundedRectangle
-                ApplicationSettingsHandler.shared.set(avatarShape: .roundedRectangle)
+                ApplicationSettingsHandler.shared.set(avatarShape: .roundedRectangle, modelContext: modelContext)
             } label: {
                 HStack {
                     Image("Avatar")

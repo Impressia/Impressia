@@ -6,7 +6,7 @@
 
 import SwiftUI
 import UIKit
-import CoreData
+import SwiftData
 import PixelfedKit
 import ClientKit
 import ServicesKit
@@ -14,7 +14,7 @@ import EnvironmentKit
 
 @MainActor
 struct MainView: View {
-    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.modelContext) private var modelContext
 
     @Environment(ApplicationState.self) var applicationState
     @Environment(Client.self) var client
@@ -27,8 +27,8 @@ struct MainView: View {
             self.navBarTitle = viewMode.title
         }
     }
-
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.acct, order: .forward)]) var dbAccounts: FetchedResults<AccountData>
+    
+    @Query(sort: \AccountData.acct, order: .forward) var dbAccounts: [AccountData]
 
     public enum ViewMode: Int {
         case home = 1
@@ -288,7 +288,9 @@ struct MainView: View {
             let authorizationSession = AuthorizationSession()
             let accountModel = account.toAccountModel()
 
-            await AuthorizationService.shared.verifyAccount(session: authorizationSession, accountModel: accountModel) { signedInAccountModel in
+            await AuthorizationService.shared.verifyAccount(session: authorizationSession,
+                                                            accountModel: accountModel,
+                                                            modelContext: modelContext) { signedInAccountModel in
                 guard let signedInAccountModel else {
                     ToastrService.shared.showError(subtitle: NSLocalizedString("mainview.error.switchAccounts", comment: "Cannot switch accounts."))
                     return
@@ -306,7 +308,7 @@ struct MainView: View {
                                                                  lastSeenStatusId: signedInAccountModel.lastSeenStatusId)
 
                     // Set account as default (application will open this account after restart).
-                    ApplicationSettingsHandler.shared.set(accountId: signedInAccountModel.id)
+                    ApplicationSettingsHandler.shared.set(accountId: signedInAccountModel.id, modelContext: modelContext)
                 }
             }
         }

@@ -7,18 +7,22 @@
 import Foundation
 import SwiftUI
 import PixelfedKit
+import SwiftData
 
 public class StatusFetcher {
     public static let shared = StatusFetcher()
     private init() { }
 
+    @MainActor
     func fetchWidgetEntriesFromServer(length: Int) async throws -> [PhotoWidgetEntry] {
-        let defaultSettings = ApplicationSettingsHandler.shared.get()
+        let modelContext = SwiftDataHandler.shared.sharedModelContainer.mainContext
+
+        let defaultSettings = ApplicationSettingsHandler.shared.get(modelContext: modelContext)
         guard let accountId = defaultSettings.currentAccount else {
             return [self.placeholder()]
         }
 
-        guard let account = AccountDataHandler.shared.getAccountData(accountId: accountId) else {
+        guard let account = AccountDataHandler.shared.getAccountData(accountId: accountId, modelContext: modelContext) else {
             return [self.placeholder()]
         }
 
@@ -68,13 +72,18 @@ public class StatusFetcher {
         return widgetEntries.shuffled()
     }
     
+    @MainActor
     func fetchWidgetEntriesFromDatabase(length: Int) async -> [PhotoWidgetEntry] {
-        let defaultSettings = ApplicationSettingsHandler.shared.get()
+        let modelContext = SwiftDataHandler.shared.sharedModelContainer.mainContext
+
+        let defaultSettings = ApplicationSettingsHandler.shared.get(modelContext: modelContext)
         guard let accountId = defaultSettings.currentAccount else {
             return [self.placeholder()]
         }
         
-        let attachmentDatas = AttachmentDataHandler.shared.getDownloadedAttachmentData(accountId: accountId, length: length)
+        let attachmentDatas = AttachmentDataHandler.shared.getDownloadedAttachmentData(accountId: accountId,
+                                                                                       length: length,
+                                                                                       modelContext: modelContext)
         
         var widgetEntries: [PhotoWidgetEntry] = []
         for attachmentData in attachmentDatas {
