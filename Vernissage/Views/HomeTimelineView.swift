@@ -194,7 +194,10 @@ struct HomeTimelineView: View {
                                                                             modelContext: modelContext)
         
         // Remeber first status returned by API in user context (when it's newer then remembered).
-        try AccountDataHandler.shared.update(lastSeenStatusId: nil, lastLoadedStatusId: statuses.first?.id, accountId: accountId, modelContext: modelContext)
+        try HomeTimelineService.shared.update(lastSeenStatusId: nil,
+                                              lastLoadedStatusId: statuses.first?.id,
+                                              applicationState: self.applicationState,
+                                              modelContext: modelContext)
         
         // Append statuses to viewed.
         try ViewedStatusHandler.shared.append(contentsOf: statuses, accountId: accountId, modelContext: modelContext)
@@ -268,7 +271,10 @@ struct HomeTimelineView: View {
                                                                             modelContext: modelContext)
 
         // Remeber first status returned by API in user context (when it's newer then remembered).
-        try AccountDataHandler.shared.update(lastSeenStatusId: self.statusViewModels.first?.id, lastLoadedStatusId: statuses.first?.id, accountId: accountId, modelContext: modelContext)
+        try HomeTimelineService.shared.update(lastSeenStatusId: self.statusViewModels.first?.id,
+                                              lastLoadedStatusId: statuses.first?.id,
+                                              applicationState: self.applicationState,
+                                              modelContext: modelContext)
         
         // Append statuses to viewed.
         try ViewedStatusHandler.shared.append(contentsOf: statuses, accountId: accountId, modelContext: modelContext)
@@ -281,6 +287,9 @@ struct HomeTimelineView: View {
 
         // Replace old collection with new one.
         self.statusViewModels = statusModels
+        
+        // Set that all statuses has been downloaded.
+        self.applicationState.amountOfNewStatuses = 0
     }
 
     private func loadFromApi(maxId: String? = nil, sinceId: String? = nil, minId: String? = nil) async throws -> [Status] {

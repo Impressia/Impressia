@@ -37,7 +37,7 @@ import ClientKit
 
     /// Last status seen by the user.
     public var lastSeenStatusId: String?
-
+    
     /// Amount of new statuses which are not displayed yet to the user.
     public var amountOfNewStatuses = 0
 

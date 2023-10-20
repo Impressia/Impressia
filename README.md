@@ -47,8 +47,8 @@ Things that should be implemented in version 2.0:
 
  - [ ] Use auto generated resources (Color/Images) instead static extensions (how to do this in separete Swift Packages?)
  - [x] Move to xcstring (new Xcode transaction system)
- - [ ] Move to new Observable macro (iOS 17)
- - [ ] Migrate to SwiftData (iOS 17)
+ - [x] Move to new Observable macro (iOS 17)
+ - [x] Migrate to SwiftData (iOS 17)
  - [ ] Use ViewModels
  - [ ] Add tips (new TipKit framework in iOS 17)
  - [ ] Enable swiftlint (https://github.com/realm/SwiftLint/issues/5053)
