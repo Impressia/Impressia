@@ -11,18 +11,20 @@ import ServicesKit
 import EnvironmentKit
 import WidgetsKit
 
+@MainActor
 struct UserProfileView: View {
-    @EnvironmentObject private var applicationState: ApplicationState
-    @EnvironmentObject private var client: Client
-    @EnvironmentObject private var routerPath: RouterPath
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
+    @Environment(RouterPath.self) var routerPath
 
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
 
     @State public var accountId: String
     @State public var accountDisplayName: String?
     @State public var accountUserName: String
 
-    @StateObject private var relationship = RelationshipModel()
+    @State private var relationship = RelationshipModel()
     @State private var account: Account?
     @State private var state: ViewState = .loading
     @State private var viewId = UUID().uuidString
@@ -121,7 +123,7 @@ struct UserProfileView: View {
             }
             
             if let signedInAccountId = self.applicationState.account?.id {
-                self.boostsDisabled = AccountRelationshipHandler.shared.isBoostedStatusesMuted(for: signedInAccountId, relation: self.accountId)
+                self.boostsDisabled = AccountRelationshipHandler.shared.isBoostedStatusesMuted(for: signedInAccountId, relation: self.accountId, modelContext: modelContext)
             }
 
             self.account = accountFromApi
@@ -179,7 +181,8 @@ struct UserProfileView: View {
                             self.boostsDisabled.toggle()
                             AccountRelationshipHandler.shared.setBoostedStatusesMuted(for: signedInAccoountId,
                                                                                       relation: self.accountId,
-                                                                                      boostedStatusesMuted: self.boostsDisabled)
+                                                                                      boostedStatusesMuted: self.boostsDisabled,
+                                                                                      modelContext: modelContext)
                         }
                     }
                 } label: {

@@ -9,6 +9,7 @@ import UIKit
 import Social
 import ClientKit
 import EnvironmentKit
+import SwiftData
 
 class ShareViewController: UIViewController {
     override func viewDidLoad() {
@@ -27,7 +28,8 @@ class ShareViewController: UIViewController {
         let client = Client.shared
 
         // Get curret signed in user.
-        guard let currentAccount = AccountDataHandler.shared.getCurrentAccountData() else {
+        let modelContext = SwiftDataHandler.shared.sharedModelContainer.mainContext
+        guard let currentAccount = AccountDataHandler.shared.getCurrentAccountData(modelContext: modelContext) else {
             return
         }
 
@@ -41,12 +43,12 @@ class ShareViewController: UIViewController {
                                                 lastSeenStatusId: accountModel.lastSeenStatusId)
 
         // Update application settings from database.
-        ApplicationSettingsHandler.shared.update(applicationState: applicationState)
+        ApplicationSettingsHandler.shared.update(applicationState: applicationState, modelContext: modelContext)
 
         // Create view.
         let view = ComposeView(attachments: attachments)
-            .environmentObject(applicationState)
-            .environmentObject(client)
+            .environment(applicationState)
+            .environment(client)
             .tint(applicationState.tintColor.color())
 
         // Add view to current UIViewController.

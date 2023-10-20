@@ -11,9 +11,10 @@ import ServicesKit
 import EnvironmentKit
 import WidgetsKit
 
+@MainActor
 struct TrendStatusesView: View {
-    @EnvironmentObject private var applicationState: ApplicationState
-    @EnvironmentObject private var client: Client
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
 
     @State public var accountId: String
 
@@ -36,7 +37,7 @@ struct TrendStatusesView: View {
             }
             .padding()
             .pickerStyle(SegmentedPickerStyle())
-            .onChange(of: tabSelectedValue) { _ in
+            .onChange(of: tabSelectedValue) {
                 Task {
                     do {
                         self.state = .loading

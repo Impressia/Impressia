@@ -12,11 +12,12 @@ import ClientKit
 import EnvironmentKit
 import ServicesKit
 
+@MainActor
 public struct BaseComposeView: View {
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var client: Client
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
 
-    @StateObject private var textModel: TextModel
+    @State private var textModel: TextModel
 
     @State private var isKeyboardPresented = true
     @State private var isSensitive = false
@@ -93,7 +94,7 @@ public struct BaseComposeView: View {
         self.onUpload = onUpload
         self.draggedItem = nil
 
-        _textModel = StateObject(wrappedValue: .init())
+        self._textModel = .init(initialValue: .init())
     }
 
     public var body: some View {
@@ -134,10 +135,10 @@ public struct BaseComposeView: View {
                 await self.loadPhotos()
             }
         }
-        .onChange(of: self.textModel.text) { _ in
+        .onChange(of: self.textModel.text) {
             self.refreshScreenState()
         }
-        .onChange(of: self.selectedItems) { _ in
+        .onChange(of: self.selectedItems) {
             Task {
                 await self.loadPhotos()
             }

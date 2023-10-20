@@ -21,7 +21,7 @@ public class ErrorService {
             case is LocalizedError:
                 ToastrService.shared.showError(title: message, subtitle: error.localizedDescription)
             default:
-                ToastrService.shared.showError(subtitle: localizedMessage)
+                ToastrService.shared.showError(title: "", subtitle: localizedMessage)
             }
         }
 
@@ -35,7 +35,7 @@ public class ErrorService {
             case is LocalizedError:
                 ToastrService.shared.showError(localizedMessage: localizedMessage, subtitle: error.localizedDescription)
             default:
-                ToastrService.shared.showError(subtitle: localizedMessage)
+                ToastrService.shared.showError(title: "", subtitle: localizedMessage)
             }
         }
 

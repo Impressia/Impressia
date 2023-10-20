@@ -9,7 +9,7 @@ import ActivityIndicatorView
 import EnvironmentKit
 
 public struct LoadingIndicator: View {
-    @EnvironmentObject var applicationState: ApplicationState
+    @Environment(ApplicationState.self) var applicationState
     @Binding var isVisible: Bool
 
     public init(isVisible: Binding<Bool> = .constant(true)) {

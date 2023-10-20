@@ -13,8 +13,9 @@ import EnvironmentKit
 import WidgetsKit
 
 struct UserProfileStatusesView: View {
-    @EnvironmentObject private var applicationState: ApplicationState
-    @EnvironmentObject private var client: Client
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
+    @Environment(\.modelContext) private var modelContext
 
     @State public var accountId: String
 
@@ -40,6 +41,8 @@ struct UserProfileStatusesView: View {
     }
 
     var body: some View {
+        @Bindable var applicationState = applicationState
+
         if firstLoadFinished == true {
             if self.imageColumns > 1 {
                 WaterfallGrid($statusViewModels, refreshId: Binding.constant(""), columns: $imageColumns, hideLoadMore: $allItemsLoaded) { item in
@@ -57,7 +60,7 @@ struct UserProfileStatusesView: View {
                     Button {
                         withAnimation {
                             self.applicationState.showGridOnUserProfile = false
-                            ApplicationSettingsHandler.shared.set(showGridOnUserProfile: false)
+                            ApplicationSettingsHandler.shared.set(showGridOnUserProfile: false, modelContext: modelContext)
                         }
                     } label: {
                         Image(systemName: "rectangle.grid.1x2.fill")
@@ -68,7 +71,7 @@ struct UserProfileStatusesView: View {
                     Button {
                         withAnimation {
                             self.applicationState.showGridOnUserProfile = true
-                            ApplicationSettingsHandler.shared.set(showGridOnUserProfile: true)
+                            ApplicationSettingsHandler.shared.set(showGridOnUserProfile: true, modelContext: modelContext)
                         }
                     } label: {
                         Image(systemName: "rectangle.grid.2x2.fill")
@@ -94,7 +97,7 @@ struct UserProfileStatusesView: View {
                                     do {
                                         try await self.loadMoreStatuses()
                                     } catch {
-                                        ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadStatuses", showToastr: true)
+                                        ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadStatuses", showToastr: !Task.isCancelled)
                                     }
                                 }
                             Spacer()

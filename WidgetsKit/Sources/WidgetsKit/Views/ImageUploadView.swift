@@ -8,9 +8,10 @@ import SwiftUI
 import ServicesKit
 import EnvironmentKit
 
+@MainActor
 public struct ImageUploadView: View {
-    @EnvironmentObject var applicationState: ApplicationState
-    @ObservedObject public var photoAttachment: PhotoAttachment
+    @Environment(ApplicationState.self) var applicationState
+    public var photoAttachment: PhotoAttachment
 
     private let size: Double
     private let delete: () -> Void

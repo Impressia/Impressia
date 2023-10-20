@@ -10,27 +10,27 @@ import NukeUI
 import ClientKit
 import EnvironmentKit
 import WidgetKit
+import SwiftData
 
 @main
 struct VernissageApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
-    let coreDataHandler = CoreDataHandler.shared
-
-    @StateObject var applicationState = ApplicationState.shared
-    @StateObject var client = Client.shared
-    @StateObject var routerPath = RouterPath()
-    @StateObject var tipsStore = TipsStore()
+    @State var applicationState = ApplicationState.shared
+    @State var client = Client.shared
+    @State var routerPath = RouterPath()
+    @State var tipsStore = TipsStore()
 
     @State var applicationViewMode: ApplicationViewMode = .loading
     @State var tintColor = ApplicationState.shared.tintColor.color()
     @State var theme = ApplicationState.shared.theme.colorScheme()
 
+    let modelContainer = SwiftDataHandler.shared.sharedModelContainer
     let timer = Timer.publish(every: 120, on: .main, in: .common).autoconnect()
 
     var body: some Scene {
         WindowGroup {
-            NavigationStack(path: $routerPath.path) {
+            NavigationStack {
                 switch applicationViewMode {
                 case .loading:
                     LoadingView()
@@ -50,17 +50,16 @@ struct VernissageApp: App {
                         .withAlertDestinations(alertDestinations: $routerPath.presentedAlert)
                 }
             }
-            .environment(\.managedObjectContext, coreDataHandler.container.viewContext)
-            .environmentObject(applicationState)
-            .environmentObject(client)
-            .environmentObject(routerPath)
-            .environmentObject(tipsStore)
+            .modelContainer(modelContainer)
+            .environment(applicationState)
+            .environment(client)
+            .environment(routerPath)
+            .environment(tipsStore)
             .tint(self.tintColor)
             .preferredColorScheme(self.theme)
             .task {
                 await self.onApplicationStart()
             }
-            .navigationViewStyle(.stack)
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                     Task {
@@ -78,24 +77,24 @@ struct VernissageApp: App {
                     await self.calculateNewPhotosInBackground()
                 }
             }
-            .onChange(of: applicationState.theme) { newValue in
+            .onChange(of: applicationState.theme) { oldValue, newValue in
                 self.theme = newValue.colorScheme()
             }
-            .onChange(of: applicationState.tintColor) { newValue in
+            .onChange(of: applicationState.tintColor) { oldValue, newValue in
                 self.tintColor = newValue.color()
             }
-            .onChange(of: applicationState.account) { newValue in
+            .onChange(of: applicationState.account) { oldValue, newValue in
                 if newValue == nil {
                     self.applicationViewMode = .signIn
                 }
             }
-            .onChange(of: applicationState.showStatusId) { newValue in
+            .onChange(of: applicationState.showStatusId) { oldValue, newValue in
                 if let statusId = newValue {
                     self.routerPath.navigate(to: .status(id: statusId))
                     self.applicationState.showStatusId = nil
                 }
             }
-            .onChange(of: applicationState.showAccountId) { newValue in
+            .onChange(of: applicationState.showAccountId) { oldValue, newValue in
                 if let accountId = newValue {
                     self.routerPath.navigate(to: .userProfile(accountId: accountId, accountDisplayName: nil, accountUserName: ""))
                     self.applicationState.showAccountId = nil
@@ -119,7 +118,8 @@ struct VernissageApp: App {
         await self.refreshAccessTokens()
 
         // When user doesn't exists then we have to open sign in view.
-        guard let currentAccount = AccountDataHandler.shared.getCurrentAccountData() else {
+        let modelContext = self.modelContainer.mainContext
+        guard let currentAccount = AccountDataHandler.shared.getCurrentAccountData(modelContext: modelContext) else {
             self.applicationViewMode = .signIn
             return
         }
@@ -129,7 +129,9 @@ struct VernissageApp: App {
 
         // Verify access token correctness.
         let authorizationSession = AuthorizationSession()
-        await AuthorizationService.shared.verifyAccount(session: authorizationSession, accountModel: accountModel) { signedInAccountModel in
+        await AuthorizationService.shared.verifyAccount(session: authorizationSession,
+                                                        accountModel: accountModel,
+                                                        modelContext: modelContext) { signedInAccountModel in
             guard let signedInAccountModel else {
                 self.applicationViewMode = .signIn
                 return
@@ -162,7 +164,8 @@ struct VernissageApp: App {
     }
 
     private func loadUserPreferences() {
-        ApplicationSettingsHandler.shared.update(applicationState: self.applicationState)
+        let modelContext =  self.modelContainer.mainContext
+        ApplicationSettingsHandler.shared.update(applicationState: self.applicationState, modelContext: modelContext)
 
         self.tintColor = self.applicationState.tintColor.color()
         self.theme = self.applicationState.theme.colorScheme()
@@ -187,7 +190,8 @@ struct VernissageApp: App {
     }
 
     private func refreshAccessTokens() async {
-        let defaultSettings = ApplicationSettingsHandler.shared.get()
+        let modelContext =  self.modelContainer.mainContext
+        let defaultSettings = ApplicationSettingsHandler.shared.get(modelContext: modelContext)
 
         // Run refreshing access tokens once per day.
         guard let refreshTokenDate = Calendar.current.date(byAdding: .day, value: 1, to: defaultSettings.lastRefreshTokens), refreshTokenDate < Date.now else {
@@ -195,18 +199,23 @@ struct VernissageApp: App {
         }
 
         // Refresh access tokens.
-        await AuthorizationService.shared.refreshAccessTokens()
+        await AuthorizationService.shared.refreshAccessTokens(modelContext: modelContext)
 
         // Update time when refresh tokens has been updated.
         defaultSettings.lastRefreshTokens = Date.now
-        CoreDataHandler.shared.save()
+        try? modelContext.save()
     }
 
     private func calculateNewPhotosInBackground() async {
+        let modelContext =  self.modelContainer.mainContext
+
         if let account = self.applicationState.account {
-            self.applicationState.amountOfNewStatuses = await HomeTimelineService.shared.amountOfNewStatuses(for: account,
-                                                                                                             includeReblogs: self.applicationState.showReboostedStatuses,
-                                                                                                             hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt)
+            self.applicationState.amountOfNewStatuses = await HomeTimelineService.shared.amountOfNewStatuses(
+                for: account,
+                includeReblogs: self.applicationState.showReboostedStatuses,
+                hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt,
+                modelContext: modelContext
+            )
         }
     }
 }

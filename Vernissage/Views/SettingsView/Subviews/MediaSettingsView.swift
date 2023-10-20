@@ -8,10 +8,13 @@ import SwiftUI
 import EnvironmentKit
 
 struct MediaSettingsView: View {
-    @EnvironmentObject var applicationState: ApplicationState
+    @Environment(ApplicationState.self) var applicationState
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.modelContext) private var modelContext
 
     var body: some View {
+        @Bindable var applicationState = applicationState
+
         Section("settings.title.mediaSettings") {
 
             Toggle(isOn: $applicationState.showSensitive) {
@@ -22,8 +25,8 @@ struct MediaSettingsView: View {
                         .foregroundColor(.customGrayColor)
                 }
             }
-            .onChange(of: self.applicationState.showSensitive) { newValue in
-                ApplicationSettingsHandler.shared.set(showSensitive: newValue)
+            .onChange(of: self.applicationState.showSensitive) { oldValue, newValue in
+                ApplicationSettingsHandler.shared.set(showSensitive: newValue, modelContext: modelContext)
             }
 
             Toggle(isOn: $applicationState.showPhotoDescription) {
@@ -34,8 +37,8 @@ struct MediaSettingsView: View {
                         .foregroundColor(.customGrayColor)
                 }
             }
-            .onChange(of: self.applicationState.showPhotoDescription) { newValue in
-                ApplicationSettingsHandler.shared.set(showPhotoDescription: newValue)
+            .onChange(of: self.applicationState.showPhotoDescription) { oldValue, newValue in
+                ApplicationSettingsHandler.shared.set(showPhotoDescription: newValue, modelContext: modelContext)
             }
 
             Toggle(isOn: $applicationState.showAvatarsOnTimeline) {
@@ -46,8 +49,8 @@ struct MediaSettingsView: View {
                         .foregroundColor(.customGrayColor)
                 }
             }
-            .onChange(of: self.applicationState.showAvatarsOnTimeline) { newValue in
-                ApplicationSettingsHandler.shared.set(showAvatarsOnTimeline: newValue)
+            .onChange(of: self.applicationState.showAvatarsOnTimeline) { oldValue, newValue in
+                ApplicationSettingsHandler.shared.set(showAvatarsOnTimeline: newValue, modelContext: modelContext)
             }
 
             Toggle(isOn: $applicationState.showFavouritesOnTimeline) {
@@ -58,8 +61,8 @@ struct MediaSettingsView: View {
                         .foregroundColor(.customGrayColor)
                 }
             }
-            .onChange(of: self.applicationState.showFavouritesOnTimeline) { newValue in
-                ApplicationSettingsHandler.shared.set(showFavouritesOnTimeline: newValue)
+            .onChange(of: self.applicationState.showFavouritesOnTimeline) { oldValue, newValue in
+                ApplicationSettingsHandler.shared.set(showFavouritesOnTimeline: newValue, modelContext: modelContext)
             }
 
             Toggle(isOn: $applicationState.showAltIconOnTimeline) {
@@ -70,8 +73,8 @@ struct MediaSettingsView: View {
                         .foregroundColor(.customGrayColor)
                 }
             }
-            .onChange(of: self.applicationState.showAltIconOnTimeline) { newValue in
-                ApplicationSettingsHandler.shared.set(showAltIconOnTimeline: newValue)
+            .onChange(of: self.applicationState.showAltIconOnTimeline) { oldValue, newValue in
+                ApplicationSettingsHandler.shared.set(showAltIconOnTimeline: newValue, modelContext: modelContext)
             }
 
             Toggle(isOn: $applicationState.warnAboutMissingAlt) {
@@ -82,8 +85,8 @@ struct MediaSettingsView: View {
                         .foregroundColor(.customGrayColor)
                 }
             }
-            .onChange(of: self.applicationState.warnAboutMissingAlt) { newValue in
-                ApplicationSettingsHandler.shared.set(warnAboutMissingAlt: newValue)
+            .onChange(of: self.applicationState.warnAboutMissingAlt) { oldValue, newValue in
+                ApplicationSettingsHandler.shared.set(warnAboutMissingAlt: newValue, modelContext: modelContext)
             }
             
             Toggle(isOn: $applicationState.showReboostedStatuses) {
@@ -94,8 +97,8 @@ struct MediaSettingsView: View {
                         .foregroundColor(.customGrayColor)
                 }
             }
-            .onChange(of: self.applicationState.showReboostedStatuses) { newValue in
-                ApplicationSettingsHandler.shared.set(showReboostedStatuses: newValue)
+            .onChange(of: self.applicationState.showReboostedStatuses) { oldValue, newValue in
+                ApplicationSettingsHandler.shared.set(showReboostedStatuses: newValue, modelContext: modelContext)
             }
             
             Toggle(isOn: $applicationState.hideStatusesWithoutAlt) {
@@ -106,8 +109,8 @@ struct MediaSettingsView: View {
                         .foregroundColor(.customGrayColor)
                 }
             }
-            .onChange(of: self.applicationState.hideStatusesWithoutAlt) { newValue in
-                ApplicationSettingsHandler.shared.set(hideStatusesWithoutAlt: newValue)
+            .onChange(of: self.applicationState.hideStatusesWithoutAlt) { oldValue, newValue in
+                ApplicationSettingsHandler.shared.set(hideStatusesWithoutAlt: newValue, modelContext: modelContext)
             }
         }
     }

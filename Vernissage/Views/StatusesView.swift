@@ -12,6 +12,7 @@ import ServicesKit
 import EnvironmentKit
 import WidgetsKit
 
+@MainActor
 struct StatusesView: View {
     public enum ListType: Hashable {
         case home
@@ -39,10 +40,11 @@ struct StatusesView: View {
         }
     }
 
-    @EnvironmentObject private var applicationState: ApplicationState
-    @EnvironmentObject private var client: Client
-    @EnvironmentObject private var routerPath: RouterPath
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
+    @Environment(RouterPath.self) var routerPath
 
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
 
     @State public var listType: ListType
@@ -59,7 +61,7 @@ struct StatusesView: View {
     @State private var containerWidth: Double = UIDevice.isIPad ? UIScreen.main.bounds.width / 3 : UIScreen.main.bounds.width
     @State private var containerHeight: Double = UIDevice.isIPad ? UIScreen.main.bounds.height / 3 : UIScreen.main.bounds.height
 
-    private let defaultLimit = 40
+    private let defaultLimit = 80
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
 
     var body: some View {
@@ -137,20 +139,20 @@ struct StatusesView: View {
         .refreshable {
             do {
                 HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
-                try await self.loadTopStatuses()
+                try await self.refreshStatuses()
                 HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
             } catch {
                 ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
             }
         }
-        .onChange(of: self.applicationState.showReboostedStatuses) { _ in
+        .onChange(of: self.applicationState.showReboostedStatuses) {
             if self.listType != .home {
                 return
             }
 
             Task { @MainActor in
                 HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
-                try await self.loadTopStatuses()
+                try await self.refreshStatuses()
                 HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
             }
         }
@@ -172,6 +174,10 @@ struct StatusesView: View {
     }
 
     private func loadStatuses() async throws {
+        guard let accountId = self.applicationState.account?.id else {
+            return
+        }
+
         let statuses = try await self.loadFromApi()
 
         if statuses.isEmpty {
@@ -182,68 +188,71 @@ struct StatusesView: View {
         // Remember last status id returned by API.
         self.lastStatusId = statuses.last?.id
 
-        // Get only statuses with images.
-        var inPlaceStatuses: [StatusModel] = []
-        for item in statuses.getStatusesWithImagesOnly() {
-            // We have to hide statuses without ALT text.
-            if self.shouldHideStatusWithoutAlt(status: item) {
-                continue
-            }
-            
-            // We have to skip statuses that are boosted from muted accounts.
-            if let accountId = self.applicationState.account?.id, AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: accountId, status: item) {
-                continue
-            }
-            
-            inPlaceStatuses.append(StatusModel(status: item))
-        }
+        // Get only visible statuses.
+        let visibleStatuses = HomeTimelineService.shared.getVisibleStatuses(accountId: accountId,
+                                                                            statuses: statuses,
+                                                                            hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt,
+                                                                            modelContext: modelContext)
 
+        if self.listType == .home {
+            // Remeber first status returned by API in user context (when it's newer then remembered).
+            try AccountDataHandler.shared.update(lastSeenStatusId: nil, lastLoadedStatusId: statuses.first?.id, accountId: accountId, modelContext: modelContext)
+            
+            // Append statuses to viewed.
+            try ViewedStatusHandler.shared.append(contentsOf: statuses, accountId: accountId, modelContext: modelContext)
+        }
+        
+        // Map to view models.
+        let statusModels = visibleStatuses.map({ StatusModel(status: $0) })
+        
         // Prefetch images.
-        self.prefetch(statusModels: inPlaceStatuses)
+        self.prefetch(statusModels: statusModels)
 
         // Append to empty list.
-        self.statusViewModels.append(contentsOf: inPlaceStatuses)
+        self.statusViewModels.append(contentsOf: statusModels)
     }
 
     private func loadMoreStatuses() async throws {
-        if let lastStatusId = self.lastStatusId {
-            let previousStatuses = try await self.loadFromApi(maxId: lastStatusId)
+        if let lastStatusId = self.lastStatusId, let accountId = self.applicationState.account?.id {
+            let statuses = try await self.loadFromApi(maxId: lastStatusId)
 
-            if previousStatuses.isEmpty {
+            if statuses.isEmpty {
                 self.allItemsLoaded = true
                 return
             }
 
             // Now we have new last status.
-            if let lastStatusId = previousStatuses.last?.id {
+            if let lastStatusId = statuses.last?.id {
                 self.lastStatusId = lastStatusId
             }
 
-            // Get only statuses with images.
-            var inPlaceStatuses: [StatusModel] = []
-            for item in previousStatuses.getStatusesWithImagesOnly() {
-                // We have to hide statuses without ALT text.
-                if self.shouldHideStatusWithoutAlt(status: item) {
-                    continue
-                }
+            // Get only visible statuses.
+            let visibleStatuses = HomeTimelineService.shared.getVisibleStatuses(accountId: accountId,
+                                                                                statuses: statuses,
+                                                                                hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt,
+                                                                                modelContext: modelContext)
 
-                // We have to skip statuses that are boosted from muted accounts.
-                if let accountId = self.applicationState.account?.id, AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: accountId, status: item) {
-                    continue
-                }
-
-                inPlaceStatuses.append(StatusModel(status: item))
+            if self.listType == .home {
+                // Append statuses to viewed.
+                try ViewedStatusHandler.shared.append(contentsOf: statuses, accountId: accountId, modelContext: modelContext)
             }
-
+            
+            // Map to view models.
+            let statusModels = visibleStatuses.map({ StatusModel(status: $0) })
+            
             // Prefetch images.
-            self.prefetch(statusModels: inPlaceStatuses)
+            self.prefetch(statusModels: statusModels)
 
             // Append statuses to existing array of statuses (at the end).
-            self.statusViewModels.append(contentsOf: inPlaceStatuses)
+            self.statusViewModels.append(contentsOf: statusModels)
         }
     }
 
-    private func loadTopStatuses() async throws {
+    private func refreshStatuses() async throws {
+        guard let accountId = self.applicationState.account?.id else {
+            return
+        }
+
         let statuses = try await self.loadFromApi()
 
         if statuses.isEmpty {
@@ -254,28 +263,29 @@ struct StatusesView: View {
         // Remember last status id returned by API.
         self.lastStatusId = statuses.last?.id
 
-        // Get only statuses with images.
-        var inPlaceStatuses: [StatusModel] = []
-        for item in statuses.getStatusesWithImagesOnly() {
-            // We have to hide statuses without ALT text.
-            if self.shouldHideStatusWithoutAlt(status: item) {
-                continue
-            }
-
-            // We have to skip statuses that are boosted from muted accounts.
-            if let accountId = self.applicationState.account?.id, AccountRelationshipHandler.shared.isBoostedStatusesMuted(accountId: accountId, status: item) {
-                continue
-            }
-
-            inPlaceStatuses.append(StatusModel(status: item))
+        // Get only visible statuses.
+        let visibleStatuses = HomeTimelineService.shared.getVisibleStatuses(accountId: accountId,
+                                                                            statuses: statuses,
+                                                                            hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt,
+                                                                            modelContext: modelContext)
+        
+        if self.listType == .home {
+            // Remeber first status returned by API in user context (when it's newer then remembered).
+            try AccountDataHandler.shared.update(lastSeenStatusId: self.statusViewModels.first?.id, lastLoadedStatusId: statuses.first?.id, accountId: accountId, modelContext: modelContext)
+            
+            // Append statuses to viewed.
+            try ViewedStatusHandler.shared.append(contentsOf: statuses, accountId: accountId, modelContext: modelContext)
         }
         
+        // Map to view models.
+        let statusModels = visibleStatuses.map({ StatusModel(status: $0) })
+        
         // Prefetch images.
-        self.prefetch(statusModels: inPlaceStatuses)
+        self.prefetch(statusModels: statusModels)
 
         // Replace old collection with new one.
         self.waterfallId = String.randomString(length: 8)
-        self.statusViewModels = inPlaceStatuses
+        self.statusViewModels = statusModels
     }
 
     private func loadFromApi(maxId: String? = nil, sinceId: String? = nil, minId: String? = nil) async throws -> [Status] {

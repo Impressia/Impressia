@@ -8,6 +8,7 @@ import Foundation
 import UIKit
 import SwiftUI
 
+@MainActor
 struct ActivityView: UIViewControllerRepresentable {
     let image: UIImage
 

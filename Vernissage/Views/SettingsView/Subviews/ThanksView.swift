@@ -8,7 +8,7 @@ import SwiftUI
 import ServicesKit
 
 struct ThanksView: View {
-    @EnvironmentObject var routerPath: RouterPath
+    @Environment(RouterPath.self) var routerPath
 
     var body: some View {
         VStack {

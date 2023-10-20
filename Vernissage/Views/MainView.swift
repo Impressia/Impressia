@@ -6,19 +6,20 @@
 
 import SwiftUI
 import UIKit
-import CoreData
+import SwiftData
 import PixelfedKit
 import ClientKit
 import ServicesKit
 import EnvironmentKit
 
+@MainActor
 struct MainView: View {
-    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.modelContext) private var modelContext
 
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var client: Client
-    @EnvironmentObject var routerPath: RouterPath
-    @EnvironmentObject var tipsStore: TipsStore
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
+    @Environment(RouterPath.self) var routerPath
+    @Environment(TipsStore.self) var tipsStore
 
     @State private var navBarTitle: LocalizedStringKey = ViewMode.home.title
     @State private var viewMode: ViewMode = .home {
@@ -26,8 +27,8 @@ struct MainView: View {
             self.navBarTitle = viewMode.title
         }
     }
-
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.acct, order: .forward)]) var dbAccounts: FetchedResults<AccountData>
+    
+    @Query(sort: \AccountData.acct, order: .forward) var dbAccounts: [AccountData]
 
     public enum ViewMode: Int {
         case home = 1
@@ -88,28 +89,33 @@ struct MainView: View {
     }
 
     var body: some View {
-        self.getMainView()
-            .navigationMenuButtons(menuPosition: $applicationState.menuPosition) { viewMode in
-                self.switchView(to: viewMode)
-            }
-            .navigationTitle(navBarTitle)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                self.getLeadingToolbar()
+        @Bindable var applicationState = applicationState
+        @Bindable var routerPath = routerPath
 
-                if self.applicationState.menuPosition == .top {
-                    self.getPrincipalToolbar()
-                    self.getTrailingToolbar()
+        NavigationStack(path: $routerPath.path) {
+            self.getMainView()
+                .navigationMenuButtons(menuPosition: $applicationState.menuPosition) { viewMode in
+                    self.switchView(to: viewMode)
                 }
-            }
-            .onChange(of: tipsStore.status) { status in
-                if status == .successful {
-                    withAnimation(.spring()) {
-                        self.routerPath.presentedOverlay = .successPayment
-                        self.tipsStore.reset()
+                .navigationTitle(navBarTitle)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    self.getLeadingToolbar()
+                    
+                    if self.applicationState.menuPosition == .top {
+                        self.getPrincipalToolbar()
+                        self.getTrailingToolbar()
                     }
                 }
-            }
+                .onChange(of: tipsStore.status) { oldStatus, newStatus in
+                    if newStatus == .successful {
+                        withAnimation(.spring()) {
+                            self.routerPath.presentedOverlay = .successPayment
+                            self.tipsStore.reset()
+                        }
+                    }
+                }
+        }
     }
 
     @ViewBuilder
@@ -117,7 +123,7 @@ struct MainView: View {
         switch self.viewMode {
         case .home:
             if UIDevice.isIPhone {
-                HomeFeedView(accountId: applicationState.account?.id ?? String.empty())
+                HomeTimelineView()
                     .id(applicationState.account?.id ?? String.empty())
             } else {
                 StatusesView(listType: .home)
@@ -282,9 +288,11 @@ struct MainView: View {
             let authorizationSession = AuthorizationSession()
             let accountModel = account.toAccountModel()
 
-            await AuthorizationService.shared.verifyAccount(session: authorizationSession, accountModel: accountModel) { signedInAccountModel in
+            await AuthorizationService.shared.verifyAccount(session: authorizationSession,
+                                                            accountModel: accountModel,
+                                                            modelContext: modelContext) { signedInAccountModel in
                 guard let signedInAccountModel else {
-                    ToastrService.shared.showError(subtitle: NSLocalizedString("mainview.error.switchAccounts", comment: "Cannot switch accounts."))
+                    ToastrService.shared.showError(title: "", subtitle: NSLocalizedString("mainview.error.switchAccounts", comment: "Cannot switch accounts."))
                     return
                 }
 
@@ -300,7 +308,7 @@ struct MainView: View {
                                                                  lastSeenStatusId: signedInAccountModel.lastSeenStatusId)
 
                     // Set account as default (application will open this account after restart).
-                    ApplicationSettingsHandler.shared.set(accountId: signedInAccountModel.id)
+                    ApplicationSettingsHandler.shared.set(accountId: signedInAccountModel.id, modelContext: modelContext)
                 }
             }
         }

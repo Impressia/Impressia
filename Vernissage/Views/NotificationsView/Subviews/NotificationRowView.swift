@@ -13,9 +13,9 @@ import EnvironmentKit
 import WidgetsKit
 
 struct NotificationRowView: View {
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var routerPath: RouterPath
-    @EnvironmentObject var client: Client
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(RouterPath.self) var routerPath
+    @Environment(Client.self) var client
 
     @State private var image: SwiftUI.Image?
 

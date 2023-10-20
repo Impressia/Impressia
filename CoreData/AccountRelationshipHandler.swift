@@ -5,65 +5,60 @@
 //
 
 import Foundation
-import CoreData
 import PixelfedKit
+import SwiftData
 
 class AccountRelationshipHandler {
     public static let shared = AccountRelationshipHandler()
     private init() { }
-    
-    func createAccountRelationshipEntity(viewContext: NSManagedObjectContext? = nil) -> AccountRelationship {
-        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
-        return AccountRelationship(context: context)
-    }
-    
+        
     /// Check if boosted statuses from given account are muted.
-    func isBoostedStatusesMuted(accountId: String, status: Status, viewContext: NSManagedObjectContext? = nil) -> Bool {
+    func isBoostedStatusesMuted(accountId: String, status: Status, modelContext: ModelContext) -> Bool {
         if status.reblog == nil {
             return false
         }
 
-        let accountRelationship = self.getAccountRelationship(for: accountId, relation: status.account.id, viewContext: viewContext)
+        let accountRelationship = self.getAccountRelationship(for: accountId, relation: status.account.id, modelContext: modelContext)
         return accountRelationship?.boostedStatusesMuted ?? false
     }
     
-    func isBoostedStatusesMuted(for accountId: String, relation relationAccountId: String, viewContext: NSManagedObjectContext? = nil) -> Bool {
-        let accountRelationship = self.getAccountRelationship(for: accountId, relation: relationAccountId, viewContext: viewContext)
+    func isBoostedStatusesMuted(for accountId: String, relation relationAccountId: String, modelContext: ModelContext) -> Bool {
+        let accountRelationship = self.getAccountRelationship(for: accountId, relation: relationAccountId, modelContext: modelContext)
         return accountRelationship?.boostedStatusesMuted ?? false
     }
     
-    func setBoostedStatusesMuted(for accountId: String, relation relationAccountId: String, boostedStatusesMuted: Bool, viewContext: NSManagedObjectContext? = nil) {
-        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
-
-        var accountRelationship = self.getAccountRelationship(for: accountId, relation: relationAccountId, viewContext: context)
+    func setBoostedStatusesMuted(for accountId: String, relation relationAccountId: String, boostedStatusesMuted: Bool, modelContext: ModelContext) {
+        var accountRelationship = self.getAccountRelationship(for: accountId, relation: relationAccountId, modelContext: modelContext)
         if accountRelationship == nil {
-            guard let accountDataFromDb = AccountDataHandler.shared.getAccountData(accountId: accountId, viewContext: context) else {
+            guard let accountDataFromDb = AccountDataHandler.shared.getAccountData(accountId: accountId, modelContext: modelContext) else {
                 return
             }
             
-            let newAccountRelationship = AccountRelationshipHandler.shared.createAccountRelationshipEntity(viewContext: context)
-            newAccountRelationship.accountId = relationAccountId
-            newAccountRelationship.pixelfedAccount = accountDataFromDb
-            accountDataFromDb.addToAccountRelationships(newAccountRelationship)
-            
+            let newAccountRelationship = AccountRelationship(accountId: relationAccountId, boostedStatusesMuted: false, pixelfedAccount: accountDataFromDb)
+            modelContext.insert(newAccountRelationship)
+            accountDataFromDb.accountRelationships.append(newAccountRelationship)
+
             accountRelationship = newAccountRelationship
         }
         
         accountRelationship?.boostedStatusesMuted = boostedStatusesMuted
-        CoreDataHandler.shared.save(viewContext: context)
+        
+        do {
+            try modelContext.save()
+        } catch {
+            CoreDataError.shared.handle(error, message: "Error during saving boosted muted statuses.")
+        }
     }
     
-    private func getAccountRelationship(for accountId: String, relation relationAccountId: String, viewContext: NSManagedObjectContext? = nil) -> AccountRelationship? {
-        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
-        let fetchRequest = AccountRelationship.fetchRequest()
-
-        fetchRequest.fetchLimit = 1
-        let statusAccountIddPredicate = NSPredicate(format: "accountId = %@", relationAccountId)
-        let accountPredicate = NSPredicate(format: "pixelfedAccount.id = %@", accountId)
-        fetchRequest.predicate = NSCompoundPredicate.init(type: .and, subpredicates: [statusAccountIddPredicate, accountPredicate])
-
+    private func getAccountRelationship(for accountId: String, relation relationAccountId: String, modelContext: ModelContext) -> AccountRelationship? {
         do {
-            return try context.fetch(fetchRequest).first
+            var fetchDescriptor = FetchDescriptor<AccountRelationship>(
+                predicate: #Predicate { $0.accountId == relationAccountId && $0.pixelfedAccount?.id == accountId }
+            )
+            fetchDescriptor.fetchLimit = 1
+            fetchDescriptor.includePendingChanges = true
+            
+            return try modelContext.fetch(fetchDescriptor).first
         } catch {
             CoreDataError.shared.handle(error, message: "Error during fetching account relationship (isBoostedMutedForAccount).")
             return nil

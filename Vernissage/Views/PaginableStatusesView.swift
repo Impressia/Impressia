@@ -12,6 +12,7 @@ import ServicesKit
 import EnvironmentKit
 import WidgetsKit
 
+@MainActor
 struct PaginableStatusesView: View {
     public enum ListType: Hashable {
         case favourites
@@ -27,9 +28,9 @@ struct PaginableStatusesView: View {
         }
     }
 
-    @EnvironmentObject private var applicationState: ApplicationState
-    @EnvironmentObject private var client: Client
-    @EnvironmentObject private var routerPath: RouterPath
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
+    @Environment(RouterPath.self) var routerPath
 
     @State public var listType: ListType
 

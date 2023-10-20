@@ -9,7 +9,7 @@ import SwiftUI
 import PixelfedKit
 import ClientKit
 
-public class ApplicationState: ObservableObject {
+@Observable public class ApplicationState {
     public static let shared = ApplicationState()
     private init() { }
 
@@ -24,94 +24,94 @@ public class ApplicationState: ObservableObject {
     private static let defaults = Defaults()
 
     /// Actual signed in account.
-    @Published public private(set) var account: AccountModel?
+    public private(set) var account: AccountModel?
 
     /// The maximum number of allowed characters per status.
-    @Published public private(set) var statusMaxCharacters = defaults.statusMaxCharacters
+    public private(set) var statusMaxCharacters = defaults.statusMaxCharacters
 
     /// The maximum number of media attachments that can be added to a status.
-    @Published public private(set) var statusMaxMediaAttachments = defaults.statusMaxMediaAttachments
+    public private(set) var statusMaxMediaAttachments = defaults.statusMaxMediaAttachments
 
     /// Each URL in a status will be assumed to be exactly this many characters.
-    @Published public private(set) var statusCharactersReservedPerUrl = defaults.statusCharactersReservedPerUrl
+    public private(set) var statusCharactersReservedPerUrl = defaults.statusCharactersReservedPerUrl
 
     /// Last status seen by the user.
-    @Published public var lastSeenStatusId: String?
+    public var lastSeenStatusId: String?
 
     /// Amount of new statuses which are not displayed yet to the user.
-    @Published public var amountOfNewStatuses = 0
+    public var amountOfNewStatuses = 0
 
     /// Model for newly created comment.
-    @Published public var newComment: CommentModel?
+    public var newComment: CommentModel?
 
     /// Active icon name.
-    @Published public var activeIcon = "Default"
+    public var activeIcon = "Default"
 
     /// Tint color in whole application.
-    @Published public var tintColor = TintColor.accentColor2
+    public var tintColor = TintColor.accentColor2
 
     /// Application theme.
-    @Published public var theme = Theme.system
+    public var theme = Theme.system
 
     /// Avatar shape.
-    @Published public var avatarShape = AvatarShape.circle
+    public var avatarShape = AvatarShape.circle
 
     /// Status id for showed interaction row.
-    @Published public var showInteractionStatusId = ""
+    public var showInteractionStatusId = ""
 
     /// Should we fire haptic when user change tabs.
-    @Published public var hapticTabSelectionEnabled = true
+    public var hapticTabSelectionEnabled = true
 
     /// Should we fire haptic when user refresh list.
-    @Published public var hapticRefreshEnabled = true
+    public var hapticRefreshEnabled = true
 
     /// Should we fire haptic when user tap button.
-    @Published public var hapticButtonPressEnabled = true
+    public var hapticButtonPressEnabled = true
 
     /// Should we fire haptic when animation is finished.
-    @Published public var hapticAnimationEnabled = true
+    public var hapticAnimationEnabled = true
 
     /// Should we fire haptic when notification occures.
-    @Published public var hapticNotificationEnabled = true
+    public var hapticNotificationEnabled = true
 
     /// Should sensitive photos without mask.
-    @Published public var showSensitive = false
+    public var showSensitive = false
 
     /// Should photo description for visually impaired be displayed.
-    @Published public var showPhotoDescription = false
+    public var showPhotoDescription = false
 
     /// Status which should be shown from URL.
-    @Published public var showStatusId: String?
+    public var showStatusId: String?
 
     /// Account which should be shown from URL.
-    @Published public var showAccountId: String?
+    public var showAccountId: String?
 
     /// Updated user profile.
-    @Published public var updatedProfile: Account?
+    public var updatedProfile: Account?
 
     /// Information which menu should be shown (top or bottom).
-    @Published public var menuPosition = MenuPosition.top
+    public var menuPosition = MenuPosition.top
 
     /// Should avatars be visible on timelines.
-    @Published public var showAvatarsOnTimeline = false
+    public var showAvatarsOnTimeline = false
 
     /// Should favourites be visible on timelines.
-    @Published public var showFavouritesOnTimeline = false
+    public var showFavouritesOnTimeline = false
 
     /// Should ALT icon be visible on timelines.
-    @Published public var showAltIconOnTimeline = false
+    public var showAltIconOnTimeline = false
 
     /// Show warning about missing ALT texts on compose screen.
-    @Published public var warnAboutMissingAlt = true
+    public var warnAboutMissingAlt = true
 
     /// Show grid of photos on user profile.
-    @Published public var showGridOnUserProfile = false
+    public var showGridOnUserProfile = false
 
     /// Show reboosted statuses on home timeline.
-    @Published public var showReboostedStatuses = false
+    public var showReboostedStatuses = false
 
     /// Hide statuses without ALT text.
-    @Published public var hideStatusesWithoutAlt = false
+    public var hideStatusesWithoutAlt = false
     
     public func changeApplicationState(accountModel: AccountModel, instance: Instance?, lastSeenStatusId: String?) {
         self.account = accountModel

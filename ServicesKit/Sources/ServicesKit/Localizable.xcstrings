@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     "global.error.downloadingImageFailed" : {
       "localizations" : {
         "en" : {
@@ -24,6 +27,7 @@
       }
     },
     "global.error.unexpected" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

@@ -13,8 +13,8 @@ import WidgetsKit
 
 struct CommentsSectionView: View {
     @Environment(\.colorScheme) var colorScheme
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var client: Client
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
 
     @State public var statusId: String
     @State private var commentViewModels: [CommentModel]?
@@ -54,7 +54,7 @@ struct CommentsSectionView: View {
                 }
             }
         }
-        .onChange(of: self.applicationState.newComment) { _ in
+        .onChange(of: self.applicationState.newComment) {
             self.commentViewModels = nil
             Task {
                 await self.loadComments()

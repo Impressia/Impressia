@@ -25,7 +25,9 @@ struct ExpandableText: View {
             }
         }
         // Re-calculate isTruncated for the new text
-        .onChange(of: text, perform: { _ in isTruncated = nil })
+        .onChange(of: text) {
+            isTruncated = nil
+        }
     }
 
     func calculateTruncation(text: String) -> some View {

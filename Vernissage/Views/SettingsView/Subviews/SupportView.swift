@@ -9,7 +9,7 @@ import StoreKit
 import ServicesKit
 
 struct SupportView: View {
-    @EnvironmentObject var tipsStore: TipsStore
+    @Environment(TipsStore.self) var tipsStore
 
     var body: some View {
         Section("settings.title.support") {

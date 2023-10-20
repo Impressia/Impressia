@@ -7,18 +7,22 @@
 import Foundation
 import SwiftUI
 import PixelfedKit
+import SwiftData
 
 public class StatusFetcher {
     public static let shared = StatusFetcher()
     private init() { }
 
+    @MainActor
     func fetchWidgetEntriesFromServer(length: Int) async throws -> [PhotoWidgetEntry] {
-        let defaultSettings = ApplicationSettingsHandler.shared.get()
+        let modelContext = SwiftDataHandler.shared.sharedModelContainer.mainContext
+
+        let defaultSettings = ApplicationSettingsHandler.shared.get(modelContext: modelContext)
         guard let accountId = defaultSettings.currentAccount else {
             return [self.placeholder()]
         }
 
-        guard let account = AccountDataHandler.shared.getAccountData(accountId: accountId) else {
+        guard let account = AccountDataHandler.shared.getAccountData(accountId: accountId, modelContext: modelContext) else {
             return [self.placeholder()]
         }
 
@@ -68,37 +72,6 @@ public class StatusFetcher {
         return widgetEntries.shuffled()
     }
     
-    func fetchWidgetEntriesFromDatabase(length: Int) async -> [PhotoWidgetEntry] {
-        let defaultSettings = ApplicationSettingsHandler.shared.get()
-        guard let accountId = defaultSettings.currentAccount else {
-            return [self.placeholder()]
-        }
-        
-        let attachmentDatas = AttachmentDataHandler.shared.getDownloadedAttachmentData(accountId: accountId, length: length)
-        
-        var widgetEntries: [PhotoWidgetEntry] = []
-        for attachmentData in attachmentDatas {
-            guard let imageData = attachmentData.data, let uiImage = UIImage(data: imageData) else {
-                continue
-            }
-        
-            let uiAvatar = await FileFetcher.shared.getImage(url: attachmentData.statusRelation?.accountAvatar)
-            let displayDate = Calendar.current.date(byAdding: .minute, value: widgetEntries.count * 20, to: Date())
-
-            widgetEntries.append(PhotoWidgetEntry(date: displayDate ?? Date(),
-                                                  image: uiImage,
-                                                  avatar: uiAvatar,
-                                                  displayName: attachmentData.statusRelation?.accountDisplayName,
-                                                  statusId: attachmentData.statusId))
-        }
-
-        if widgetEntries.isEmpty {
-            widgetEntries.append(self.placeholder())
-        }
-
-        return widgetEntries.shuffled()
-    }
-
     func placeholder() -> PhotoWidgetEntry {
         PhotoWidgetEntry(date: Date(), image: nil, avatar: nil, displayName: "Caroline Rick", statusId: "")
     }

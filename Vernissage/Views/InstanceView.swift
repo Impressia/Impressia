@@ -12,10 +12,11 @@ import ServicesKit
 import EnvironmentKit
 import WidgetsKit
 
+@MainActor
 struct InstanceView: View {
-    @EnvironmentObject private var applicationState: ApplicationState
-    @EnvironmentObject private var routerPath: RouterPath
-    @EnvironmentObject private var client: Client
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(RouterPath.self) var routerPath
+    @Environment(Client.self) var client
 
     @State private var state: ViewState = .loading
     @State private var instance: Instance?

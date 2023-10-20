@@ -6,6 +6,7 @@
 
 import SwiftUI
 
+@MainActor
 struct LoadingView: View {
     var body: some View {
         VStack(alignment: .center) {

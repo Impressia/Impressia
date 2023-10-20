@@ -9,7 +9,7 @@ import SwiftUI
 import EnvironmentKit
 
 public struct ImageFavourite: View {
-    @EnvironmentObject var applicationState: ApplicationState
+    @Environment(ApplicationState.self) var applicationState
     @Binding private var isFavourited: Bool
 
     public init(isFavourited: Binding<Bool>) {

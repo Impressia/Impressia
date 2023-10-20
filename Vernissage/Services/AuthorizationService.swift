@@ -7,18 +7,19 @@
 import Foundation
 import PixelfedKit
 import ClientKit
-import CoreData
+import SwiftData
 import AuthenticationServices
 import ServicesKit
 import EnvironmentKit
 
 /// Srvice responsible for login user into the Pixelfed account.
+@MainActor
 public class AuthorizationService {
     public static let shared = AuthorizationService()
     private init() { }
 
     /// Access token verification.
-    public func verifyAccount(session: AuthorizationSession, accountModel: AccountModel, _ result: @escaping (AccountModel?) -> Void) async {
+    public func verifyAccount(session: AuthorizationSession, accountModel: AccountModel, modelContext: ModelContext, _ result: @escaping (AccountModel?) -> Void) async {
         // When we dont have even one account stored in database then we have to ask user to enter server and sign in.
         guard let accessToken = accountModel.accessToken else {
             result(nil)
@@ -33,12 +34,15 @@ public class AuthorizationService {
             let signedInAccountModel = await self.update(accountId: accountModel.id,
                                                          basedOn: account,
                                                          accessToken: accessToken,
-                                                         refreshToken: accountModel.refreshToken)
+                                                         refreshToken: accountModel.refreshToken,
+                                                         modelContext: modelContext)
 
             result(signedInAccountModel)
         } catch {
             do {
-                let signedInAccountModel = try await self.refreshCredentials(for: accountModel, presentationContextProvider: session)
+                let signedInAccountModel = try await self.refreshCredentials(for: accountModel,
+                                                                             presentationContextProvider: session,
+                                                                             modelContext: modelContext)
                 result(signedInAccountModel)
             } catch {
                 ErrorService.shared.handle(error, message: "global.error.refreshingCredentialsTitle")
@@ -50,7 +54,10 @@ public class AuthorizationService {
     }
 
     /// Sign in to the Pixelfed server.
-    public func sign(in serverAddress: String, session: AuthorizationSession, _ result: @escaping (AccountModel) -> Void) async throws {
+    public func sign(in serverAddress: String,
+                     session:AuthorizationSession,
+                     modelContext: ModelContext,
+                     _ result: @escaping (AccountModel) -> Void) async throws {
 
         guard let baseUrl = URL(string: serverAddress) else {
             throw AuthorisationError.badServerUrl
@@ -82,8 +89,7 @@ public class AuthorizationService {
         let account = try await authenticatedClient.verifyCredentials()
 
         // Get/create account object in database.
-        let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
-        let accountData = self.getAccountData(account: account, backgroundContext: backgroundContext)
+        let accountData = self.getAccountData(account: account, serverUrl: baseUrl, modelContext: modelContext)
 
         accountData.id = account.id
         accountData.username = account.username
@@ -120,27 +126,27 @@ public class AuthorizationService {
         }
 
         // Set newly created account as current (only when we create a first account).
-        let defaultSettings = ApplicationSettingsHandler.shared.get(viewContext: backgroundContext)
+        let defaultSettings = ApplicationSettingsHandler.shared.get(modelContext: modelContext)
         if defaultSettings.currentAccount == nil {
             defaultSettings.currentAccount = accountData.id
         }
 
         // Save account/settings data in database.
-        CoreDataHandler.shared.save(viewContext: backgroundContext)
+        try modelContext.save()
 
         // Return account data.
         let accountModel = accountData.toAccountModel()
         result(accountModel)
     }
 
-    public func refreshAccessTokens() async {
-        let accounts = AccountDataHandler.shared.getAccountsData()
+    public func refreshAccessTokens(modelContext: ModelContext) async {
+        let accounts = AccountDataHandler.shared.getAccountsData(modelContext: modelContext)
 
         await withTaskGroup(of: Void.self) { group in
             for account in accounts {
-                group.addTask {
+                group.addTask { @MainActor in
                     do {
-                        _ = try await self.refreshAccessToken(accountData: account)
+                        _ = try await self.refreshAccessToken(accountData: account, modelContext: modelContext)
 
                         #if DEBUG
                             ToastrService.shared.showSuccess("global.title.newAccessTokenRetrieved", imageSystemName: "key.fill")
@@ -157,7 +163,7 @@ public class AuthorizationService {
         }
     }
 
-    private func refreshAccessToken(accountData: AccountData) async throws -> AccountModel? {
+    private func refreshAccessToken(accountData: AccountData, modelContext: ModelContext) async throws -> AccountModel? {
         let client = PixelfedClient(baseURL: accountData.serverUrl)
 
         guard let refreshToken = accountData.refreshToken else {
@@ -177,11 +183,13 @@ public class AuthorizationService {
         return await self.update(accountId: accountData.id,
                                  basedOn: account,
                                  accessToken: oAuthSwiftCredential.oauthToken,
-                                 refreshToken: oAuthSwiftCredential.oauthRefreshToken)
+                                 refreshToken: oAuthSwiftCredential.oauthRefreshToken,
+                                 modelContext: modelContext)
     }
 
     private func refreshCredentials(for accountModel: AccountModel,
-                                    presentationContextProvider: ASWebAuthenticationPresentationContextProviding
+                                    presentationContextProvider: ASWebAuthenticationPresentationContextProviding,
+                                    modelContext: ModelContext
     ) async throws -> AccountModel? {
 
         let client = PixelfedClient(baseURL: accountModel.serverUrl)
@@ -206,16 +214,17 @@ public class AuthorizationService {
         return await self.update(accountId: accountModel.id,
                                  basedOn: account,
                                  accessToken: oAuthSwiftCredential.oauthToken,
-                                 refreshToken: oAuthSwiftCredential.oauthRefreshToken)
+                                 refreshToken: oAuthSwiftCredential.oauthRefreshToken,
+                                 modelContext: modelContext)
     }
 
     private func update(accountId: String,
                         basedOn account: Account,
                         accessToken: String,
-                        refreshToken: String?
+                        refreshToken: String?,
+                        modelContext: ModelContext
     ) async -> AccountModel? {
-        let backgroundContext = CoreDataHandler.shared.newBackgroundContext()
-        guard let dbAccount = AccountDataHandler.shared.getAccountData(accountId: accountId, viewContext: backgroundContext) else {
+        guard let dbAccount = AccountDataHandler.shared.getAccountData(accountId: accountId, modelContext: modelContext) else {
             return nil
         }
 
@@ -247,16 +256,19 @@ public class AuthorizationService {
         }
 
         // Save account data in database and in application state.
-        CoreDataHandler.shared.save(viewContext: backgroundContext)
+        try? modelContext.save()
 
         return dbAccount.toAccountModel()
     }
 
-    private func getAccountData(account: Account, backgroundContext: NSManagedObjectContext) -> AccountData {
-        if let accountFromDb = AccountDataHandler.shared.getAccountData(accountId: account.id, viewContext: backgroundContext) {
+    private func getAccountData(account: Account, serverUrl: URL, modelContext: ModelContext) -> AccountData {
+        if let accountFromDb = AccountDataHandler.shared.getAccountData(accountId: account.id, modelContext: modelContext) {
             return accountFromDb
         }
 
-        return AccountDataHandler.shared.createAccountDataEntity(viewContext: backgroundContext)
+        let accountData =  AccountData(serverUrl: serverUrl)
+        modelContext.insert(accountData)
+        
+        return accountData
     }
 }

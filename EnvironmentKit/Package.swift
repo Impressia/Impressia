@@ -7,9 +7,7 @@ let package = Package(
     name: "EnvironmentKit",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v16),
-        .macOS(.v12),
-        .watchOS(.v8)
+        .iOS(.v17)
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.

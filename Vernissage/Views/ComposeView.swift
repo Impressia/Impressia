@@ -13,9 +13,10 @@ import ServicesKit
 import EnvironmentKit
 import WidgetsKit
 
+@MainActor
 struct ComposeView: View {
-    @EnvironmentObject var routerPath: RouterPath
-    @EnvironmentObject var client: Client
+    @Environment(RouterPath.self) var routerPath
+    @Environment(Client.self) var client
 
     @Environment(\.dismiss) private var dismiss
 
@@ -26,6 +27,8 @@ struct ComposeView: View {
     }
 
     var body: some View {
+        @Bindable var routerPath = routerPath
+        
         NavigationView {
             BaseComposeView(statusViewModel: self.statusViewModel) {
                 dismiss()

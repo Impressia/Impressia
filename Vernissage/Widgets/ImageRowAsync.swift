@@ -77,7 +77,7 @@ struct ImageRowAsync: View {
             }
             .frame(width: self.clipToRectangle ? self.containerWidth : self.imageWidth,
                    height: self.clipToRectangle ? self.containerWidth : self.imageHeight)
-            .onChange(of: self.containerWidth) { newContainerWidth in
+            .onChange(of: self.containerWidth) { oldContainerWidth, newContainerWidth in
                 let calculatedSize = ImageSizeService.shared.calculate(width: self.imageWidth,
                                                              height: self.imageHeight,
                                                              andContainerWidth: newContainerWidth)
@@ -109,7 +109,7 @@ struct ImageRowAsync: View {
                     .tag(attachment.id)
                 }
             }
-            .onChange(of: self.containerWidth) { newContainerWidth in
+            .onChange(of: self.containerWidth) { oldContainerWidth, newContainerWidth in
                 let calculatedSize = ImageSizeService.shared.calculate(width: self.imageWidth,
                                                              height: self.imageHeight,
                                                              andContainerWidth: newContainerWidth)
@@ -119,8 +119,8 @@ struct ImageRowAsync: View {
             .onFirstAppear {
                 self.selected = self.statusViewModel.mediaAttachments.first?.id ?? String.empty()
             }
-            .onChange(of: selected, perform: { attachmentId in
-                if let attachment = self.statusViewModel.mediaAttachments.first(where: { item in item.id == attachmentId }) {
+            .onChange(of: selected) { oldAttachmentId, newAttachmentId in
+                if let attachment = self.statusViewModel.mediaAttachments.first(where: { item in item.id == newAttachmentId }) {
                     if let size = ImageSizeService.shared.get(for: attachment.url) {
                         let calculatedSize = ImageSizeService.shared.calculate(width: size.width,
                                                                                height: size.height,
@@ -134,7 +134,7 @@ struct ImageRowAsync: View {
                         }
                     }
                 }
-            })
+            }
             .frame(width: self.clipToRectangle ? self.containerWidth : self.imageWidth,
                    height: self.clipToRectangle ? self.containerWidth : self.imageHeight)
             .tabViewStyle(.page(indexDisplayMode: .never))

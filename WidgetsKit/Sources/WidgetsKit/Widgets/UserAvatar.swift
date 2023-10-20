@@ -10,7 +10,7 @@ import ServicesKit
 import EnvironmentKit
 
 public struct UserAvatar: View {
-    @EnvironmentObject var applicationState: ApplicationState
+    @Environment(ApplicationState.self) var applicationState
 
     public enum Size {
         case mini, list, comment, profile, large

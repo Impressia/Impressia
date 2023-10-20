@@ -20,22 +20,11 @@ public extension View {
             )
         )
     }
-
-    func imageContextMenu(statusData: StatusData, attachmentData: AttachmentData, uiImage: UIImage?) -> some View {
-        modifier(
-            ImageContextMenu(
-                id: statusData.getOrginalStatusId(),
-                url: statusData.url,
-                altText: attachmentData.text,
-                uiImage: uiImage
-            )
-        )
-    }
 }
 
 private struct ImageContextMenu: ViewModifier {
-    @EnvironmentObject var client: Client
-    @EnvironmentObject var routerPath: RouterPath
+    @Environment(Client.self) var client
+    @Environment(RouterPath.self) var routerPath
 
     private let id: String
     private let url: URL?
