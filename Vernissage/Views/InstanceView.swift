@@ -131,7 +131,9 @@ struct InstanceView: View {
                 self.instance = try await self.client.instances.instance(url: serverUrl)
             }
 
-            self.state = .loaded
+            withAnimation {
+                self.state = .loaded
+            }
         } catch {
             if !Task.isCancelled {
                 ErrorService.shared.handle(error, message: "instance.error.loadingDataFailed", showToastr: true)

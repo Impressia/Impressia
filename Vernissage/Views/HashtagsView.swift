@@ -99,7 +99,10 @@ struct HashtagsView: View {
     private func loadData() async {
         do {
             self.tags = try await self.loadTags()
-            self.state = .loaded
+            
+            withAnimation {
+                self.state = .loaded
+            }
         } catch {
             if !Task.isCancelled {
                 ErrorService.shared.handle(error, message: "tags.error.loadingTagsFailed", showToastr: true)

@@ -166,7 +166,9 @@ struct StatusesView: View {
                 await self.loadTag(hashtag: hashtag)
             }
 
-            self.state = .loaded
+            withAnimation {
+                self.state = .loaded
+            }
         } catch {
             ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
             self.state = .error(error)

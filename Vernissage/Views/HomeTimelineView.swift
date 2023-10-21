@@ -160,7 +160,9 @@ struct HomeTimelineView: View {
             try await self.loadFirstStatuses()
             try ViewedStatusHandler.shared.deleteOldViewedStatuses(modelContext: modelContext)
 
-            self.state = .loaded
+            withAnimation {
+                self.state = .loaded
+            }
         } catch {
             ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
             self.state = .error(error)
@@ -173,11 +175,8 @@ struct HomeTimelineView: View {
             return
         }
         
-        // We have to download one newer status Id.
-        let newerStatusId = try await self.getNewerStatusId(from: accountData.lastLoadedStatusId)
-        
         // Download statuses from API (which are older then last visible status).
-        let statuses = try await self.loadFromApi(maxId: newerStatusId)
+        let statuses = try await self.loadFromCacheOrApi(timelineCache: accountData.timelineCache)
 
         if statuses.isEmpty {
             self.allItemsLoaded = true
@@ -273,6 +272,7 @@ struct HomeTimelineView: View {
         // Remeber first status returned by API in user context (when it's newer then remembered).
         try HomeTimelineService.shared.update(lastSeenStatusId: self.statusViewModels.first?.id,
                                               lastLoadedStatusId: statuses.first?.id,
+                                              statuses: statuses,
                                               applicationState: self.applicationState,
                                               modelContext: modelContext)
         
@@ -292,6 +292,17 @@ struct HomeTimelineView: View {
         self.applicationState.amountOfNewStatuses = 0
     }
 
+    private func loadFromCacheOrApi(timelineCache: String?) async throws -> [Status] {
+        if let timelineCache, let timelineCacheData = timelineCache.data(using: .utf8) {
+            let statusesFromCache = try? JSONDecoder().decode([Status].self, from: timelineCacheData)
+            if let statusesFromCache {
+                return statusesFromCache
+            }
+        }
+        
+        return try await self.loadFromApi()
+    }
+    
     private func loadFromApi(maxId: String? = nil, sinceId: String? = nil, minId: String? = nil) async throws -> [Status] {
         return try await self.client.publicTimeline?.getHomeTimeline(
             maxId: maxId,
@@ -337,18 +348,5 @@ struct HomeTimelineView: View {
     
     private func shouldUpToDateBeVisible(statusId: String) -> Bool {
         return self.applicationState.lastSeenStatusId != statusViewModels.first?.id && self.applicationState.lastSeenStatusId == statusId
-    }
-    
-    private func getNewerStatusId(from statusId: String?) async throws -> String? {
-        guard let statusId else {
-            return nil
-        }
-        
-        let statuses = try await self.client.publicTimeline?.getHomeTimeline(
-            minId: statusId,
-            limit: 1,
-            includeReblogs: self.applicationState.showReboostedStatuses) ?? []
-        
-        return statuses.first?.id
     }
 }

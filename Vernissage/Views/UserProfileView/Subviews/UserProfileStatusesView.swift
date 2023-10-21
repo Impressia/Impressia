@@ -128,11 +128,15 @@ struct UserProfileStatusesView: View {
         // Prefetch images.
         self.prefetch(statusModels: inPlaceStatuses)
 
-        self.firstLoadFinished = true
+        // Append downloaded statuses to the list.
         self.statusViewModels.append(contentsOf: inPlaceStatuses)
 
         if statuses.count < self.defaultLimit {
             self.allItemsLoaded = true
+        }
+        
+        withAnimation {
+            self.firstLoadFinished = true
         }
     }
 

@@ -124,7 +124,10 @@ struct PaginableStatusesView: View {
     private func loadData() async {
         do {
             try await self.loadStatuses()
-            self.state = .loaded
+            
+            withAnimation {
+                self.state = .loaded
+            }
         } catch {
             ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
             self.state = .error(error)

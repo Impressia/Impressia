@@ -128,7 +128,9 @@ struct UserProfileView: View {
 
             self.account = accountFromApi
 
-            self.state = .loaded
+            withAnimation {
+                self.state = .loaded
+            }
         } catch {
             ErrorService.shared.handle(error, message: "userProfile.error.loadingAccountFailed", showToastr: !Task.isCancelled)
             self.state = .error(error)

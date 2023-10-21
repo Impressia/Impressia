@@ -201,20 +201,13 @@ struct StatusView: View {
                 }
 
                 self.statusViewModel = statusModel
-
-                // If we have status in database then we can update data.
-                // TODO: It seems that Pixelfed didn't support status edit, thus we don't need to update status.
-                /*
-                if let accountData = self.applicationState.account,
-                   let statusDataFromDatabase = StatusDataHandler.shared.getStatusData(accountId: accountData.id, statusId: self.statusId) {
-                    _ = try await HomeTimelineService.shared.update(status: statusDataFromDatabase, basedOn: status, for: accountData)
-                }
-                */
             }
 
-            self.state = .loaded
+            withAnimation {
+                self.state = .loaded
+            }
         } catch NetworkError.notSuccessResponse(let response) {
-            if response.statusCode() == HTTPStatusCode.notFound, let accountId = self.applicationState.account?.id {
+            if response.statusCode() == HTTPStatusCode.notFound {
                 ErrorService.shared.handle(NetworkError.notSuccessResponse(response), message: "status.error.notFound", showToastr: true)
                 self.dismiss()
             }

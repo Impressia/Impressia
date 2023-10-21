@@ -106,13 +106,14 @@ public class HomeTimelineService {
         return visibleStatuses
     }
     
-    public func update(lastSeenStatusId: String?, lastLoadedStatusId: String?, applicationState: ApplicationState, modelContext: ModelContext) throws {
+    public func update(lastSeenStatusId: String?, lastLoadedStatusId: String?, statuses: [Status]? = nil, applicationState: ApplicationState, modelContext: ModelContext) throws {
         guard let accountId = applicationState.account?.id else {
             return
         }
         
         try AccountDataHandler.shared.update(lastSeenStatusId: lastSeenStatusId,
                                              lastLoadedStatusId: lastLoadedStatusId,
+                                             statuses: statuses,
                                              accountId: accountId,
                                              modelContext: modelContext)
         

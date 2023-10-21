@@ -100,7 +100,10 @@ struct AccountsPhotoView: View {
     private func loadData() async {
         do {
             self.accounts = try await self.loadAccounts()
-            self.state = .loaded
+
+            withAnimation {
+                self.state = .loaded
+            }
         } catch {
             if !Task.isCancelled {
                 ErrorService.shared.handle(error, message: "trendingAccounts.error.loadingAccountsFailed", showToastr: true)

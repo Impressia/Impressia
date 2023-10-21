@@ -92,7 +92,9 @@ struct NotificationsView: View {
                     self.allItemsLoaded = true
                 }
 
-                self.state = .loaded
+                withAnimation {
+                    self.state = .loaded
+                }
             }
         } catch {
             if !Task.isCancelled {

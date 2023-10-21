@@ -127,7 +127,10 @@ struct FollowRequestsView: View {
     private func loadData(page: Int) async {
         do {
             try await self.loadAccounts(page: page)
-            self.state = .loaded
+            
+            withAnimation {
+                self.state = .loaded
+            }
         } catch {
             if !Task.isCancelled {
                 ErrorService.shared.handle(error, message: "accounts.error.loadingAccountsFailed", showToastr: true)

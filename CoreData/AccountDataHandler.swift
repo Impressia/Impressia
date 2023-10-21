@@ -6,6 +6,7 @@
 
 import Foundation
 import SwiftData
+import PixelfedKit
 
 class AccountDataHandler {
     public static let shared = AccountDataHandler()
@@ -62,7 +63,7 @@ class AccountDataHandler {
         }
     }
     
-    func update(lastSeenStatusId: String?, lastLoadedStatusId: String?, accountId: String, modelContext: ModelContext) throws {
+    func update(lastSeenStatusId: String?, lastLoadedStatusId: String?, statuses: [Status]? = nil, accountId: String, modelContext: ModelContext) throws {
         guard let accountDataFromDb = self.getAccountData(accountId: accountId, modelContext: modelContext) else {
             return
         }
@@ -73,6 +74,10 @@ class AccountDataHandler {
 
         if (accountDataFromDb.lastLoadedStatusId ?? "0") < (lastLoadedStatusId ?? "0") {
             accountDataFromDb.lastLoadedStatusId = lastLoadedStatusId
+        }
+        
+        if let statuses, let statusesJsonData = try? JSONEncoder().encode(statuses) {
+            accountDataFromDb.timelineCache = String(data: statusesJsonData, encoding: .utf8)
         }
         
         try modelContext.save()

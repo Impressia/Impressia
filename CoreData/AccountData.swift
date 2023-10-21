@@ -36,6 +36,9 @@ import ClientKit
     /// Last status loaded on home timeline.
     public var lastLoadedStatusId: String?
     
+    /// JSON string with last objects loaded into home timeline.
+    public var timelineCache: String?
+    
     @Relationship(deleteRule: .cascade, inverse: \ViewedStatus.pixelfedAccount) public var viewedStatuses: [ViewedStatus]
     @Relationship(deleteRule: .cascade, inverse: \AccountRelationship.pixelfedAccount) public var accountRelationships: [AccountRelationship]
     
