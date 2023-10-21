@@ -11,6 +11,7 @@ import ClientKit
 import EnvironmentKit
 import WidgetKit
 import SwiftData
+import TipKit
 
 @main
 struct VernissageApp: App {
@@ -108,6 +109,9 @@ struct VernissageApp: App {
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.white.withAlphaComponent(0.7)
         UIPageControl.appearance().pageIndicatorTintColor = UIColor.white.withAlphaComponent(0.4)
 
+        // Configure TipKit.
+        try? Tips.configure([.displayFrequency(.daily), .datastoreLocation(.applicationDefault)])
+        
         // Set custom configurations for Nuke image/data loaders.
         self.setImagePipelines()
 

@@ -11,6 +11,7 @@ import ClientKit
 import ServicesKit
 import EnvironmentKit
 import WidgetsKit
+import TipKit
 
 @MainActor
 struct HomeTimelineView: View {
@@ -28,6 +29,7 @@ struct HomeTimelineView: View {
     
     private let defaultLimit = 80
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
+    private let timelineDoubleTapTip = TimelineDoubleTapTip()
 
     var body: some View {
         switch state {
@@ -56,6 +58,8 @@ struct HomeTimelineView: View {
         ZStack {
             ScrollView {
                 LazyVStack(alignment: .center) {
+                    TipView(timelineDoubleTapTip)
+
                     ForEach(self.statusViewModels, id: \.id) { item in
                         if self.shouldUpToDateBeVisible(statusId: item.id) {
                             self.upToDatePlaceholder()
@@ -80,7 +84,7 @@ struct HomeTimelineView: View {
                     }
                 }
             }
-            
+                        
             self.newPhotosView()
                 .offset(y: self.offset)
                 .opacity(self.opacity)

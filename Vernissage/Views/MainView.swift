@@ -11,6 +11,7 @@ import PixelfedKit
 import ClientKit
 import ServicesKit
 import EnvironmentKit
+import WidgetsKit
 
 @MainActor
 struct MainView: View {
@@ -27,6 +28,8 @@ struct MainView: View {
             self.navBarTitle = viewMode.title
         }
     }
+
+    private let mainNavigationTip = MainNavigationTip()
     
     @Query(sort: \AccountData.acct, order: .forward) var dbAccounts: [AccountData]
 
@@ -179,6 +182,7 @@ struct MainView: View {
                 }
                 .frame(width: 150)
                 .foregroundColor(.mainTextColor)
+                .popoverTip(self.mainNavigationTip)
             }
         }
     }

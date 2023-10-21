@@ -1621,6 +1621,108 @@
           }
         }
       }
+    },
+    "tip.mainNavigation.message" : {
+      "comment" : "Main navigation tip message.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can customize the position of main naviagation menu in the app settings."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Położenie głównego menu nawigacyjnego można dostosować w ustawieniach aplikacji."
+          }
+        }
+      }
+    },
+    "tip.mainNavigation.title" : {
+      "comment" : "Main navigation tip title.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menu position"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pozycja menu"
+          }
+        }
+      }
+    },
+    "tip.menuCustomizable.message" : {
+      "comment" : "Menu customizable tip message.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can change default option in the menu by long press on the specific option."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Domyślną opcję w menu można zmienić poprzez długie naciśnięcie określonej opcji."
+          }
+        }
+      }
+    },
+    "tip.menuCustomizable.title" : {
+      "comment" : "Menu customizable tip title.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Changing the default options"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zmiana domyślnych opcji"
+          }
+        }
+      }
+    },
+    "tip.timelineDoubleTap.message" : {
+      "comment" : "Timeline double tip message.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Double-tapping on a photo will result in it being favourited."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dwukrotne dotknięcie zdjęcia spowoduje jego polubienie."
+          }
+        }
+      }
+    },
+    "tip.timelineDoubleTap.title" : {
+      "comment" : "Timeline double tip title.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mark as favorite"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oznacz jako ulubione"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

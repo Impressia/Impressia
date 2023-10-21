@@ -207,6 +207,9 @@ struct ImageRowItemAsync: View {
                 // Run adnimation and haptic feedback.
                 self.showThumbImage = true
                 HapticService.shared.fireHaptic(of: .buttonPress)
+                
+                // Mark that user performed specific action.
+                TimelineDoubleTapTip().invalidate(reason: .actionPerformed)
 
                 // Mark favourite booleans used to show star in the timeline view.
                 self.statusViewModel.favourited = true

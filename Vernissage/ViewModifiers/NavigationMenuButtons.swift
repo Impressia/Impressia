@@ -8,6 +8,8 @@ import Foundation
 import SwiftUI
 import EnvironmentKit
 import ServicesKit
+import TipKit
+import WidgetsKit
 
 @MainActor
 extension View {
@@ -22,6 +24,7 @@ private struct NavigationMenuButtons: ViewModifier {
     @Environment(RouterPath.self) var routerPath
     @Environment(\.modelContext) private var modelContext
 
+    private let menuCustomizableTip = MenuCustomizableTip()
     private let onViewModeIconTap: (MainView.ViewMode) -> Void
     private let imageFontSize = 20.0
 
@@ -102,6 +105,7 @@ private struct NavigationMenuButtons: ViewModifier {
                     .background(.ultraThinMaterial)
                     .clipShape(Circle())
             }
+            .popoverTip(menuCustomizableTip, arrowEdge: .bottom)
         } else {
             HStack(alignment: .center) {
                 self.composeImageView()
@@ -119,6 +123,7 @@ private struct NavigationMenuButtons: ViewModifier {
                 .background(.ultraThinMaterial)
                 .clipShape(Capsule())
             }
+            .popoverTip(menuCustomizableTip, arrowEdge: .bottom)
         }
     }
 
