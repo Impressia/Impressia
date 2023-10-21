@@ -50,5 +50,5 @@ Things that should be implemented in version 2.0:
  - [x] Move to new Observable macro (iOS 17)
  - [x] Migrate to SwiftData (iOS 17)
  - [ ] Use ViewModels
- - [ ] Add tips (new TipKit framework in iOS 17)
+ - [x] Add tips (new TipKit framework in iOS 17)
  - [ ] Enable swiftlint (https://github.com/realm/SwiftLint/issues/5053)

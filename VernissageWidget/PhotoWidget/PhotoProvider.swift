@@ -34,7 +34,7 @@ struct PhotoProvider: TimelineProvider {
     }
     
     func getWidgetEntriesForSnapshot() async -> PhotoWidgetEntry {
-        let entriesFromDatabase = await self.getWidgetEntriesFromServer(length: 1)
+        let entriesFromDatabase = await self.getWidgetEntriesFromDatabase(length: 1)
         if let firstEntry = entriesFromDatabase.first {
             return firstEntry
         }
@@ -48,6 +48,11 @@ struct PhotoProvider: TimelineProvider {
             return entriesFromServer
         }
         
+        let entriesFromDatabase = await self.getWidgetEntriesFromDatabase(length: 3)
+         if entriesFromDatabase.isEmpty == false {
+             return entriesFromDatabase
+         }
+        
         return [StatusFetcher.shared.placeholder()]
     }
 
@@ -58,4 +63,8 @@ struct PhotoProvider: TimelineProvider {
             return []
         }
     }
+    
+    func getWidgetEntriesFromDatabase(length: Int) async -> [PhotoWidgetEntry] {
+         return await StatusFetcher.shared.fetchWidgetEntriesFromDatabase(length: length)
+     }
 }

@@ -12,12 +12,14 @@ public extension PixelfedClientAuthenticated {
         sinceId: EntityId? = nil,
         minId: EntityId? = nil,
         limit: Int? = nil,
-        includeReblogs: Bool? = nil) async throws -> [Status] {
+        includeReblogs: Bool? = nil,
+        timeoutInterval: Double? = nil) async throws -> [Status] {
 
         let request = try Self.request(
             for: baseURL,
             target: Pixelfed.Timelines.home(maxId, sinceId, minId, limit, includeReblogs),
-            withBearerToken: token
+            withBearerToken: token,
+            timeoutInterval: timeoutInterval
         )
 
         return try await downloadJson([Status].self, request: request)

@@ -31,7 +31,37 @@ public class StatusFetcher {
         }
 
         let client = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
-        let statuses = try await client.getHomeTimeline(limit: 20, includeReblogs: defaultSettings.showReboostedStatuses)
+        let statuses = try await client.getHomeTimeline(limit: 20, includeReblogs: defaultSettings.showReboostedStatuses, timeoutInterval: 5.0)
+        
+        let widgetEntries =  await self.prepare(statuses: statuses, length: length)
+        return widgetEntries
+    }
+    
+    @MainActor
+    func fetchWidgetEntriesFromDatabase(length: Int) async -> [PhotoWidgetEntry] {
+        let modelContext = SwiftDataHandler.shared.sharedModelContainer.mainContext
+
+        let defaultSettings = ApplicationSettingsHandler.shared.get(modelContext: modelContext)
+        guard let accountId = defaultSettings.currentAccount else {
+            return [self.placeholder()]
+        }
+
+        let accountData = AccountDataHandler.shared.getAccountData(accountId: accountId, modelContext: modelContext)
+        guard let timelineCache = accountData?.timelineCache,
+              let timelineCacheData = timelineCache.data(using: .utf8),
+              let statusesFromCache = try? JSONDecoder().decode([Status].self, from: timelineCacheData) else {
+            return [self.placeholder()]
+        }
+         
+        let widgetEntries = await self.prepare(statuses: statusesFromCache, length: length)
+        return widgetEntries
+    }
+    
+    func placeholder() -> PhotoWidgetEntry {
+        PhotoWidgetEntry(date: Date(), image: nil, avatar: nil, displayName: "Caroline Rick", statusId: "")
+    }
+    
+    private func prepare(statuses: [Status], length: Int) async -> [PhotoWidgetEntry] {
         var widgetEntries: [PhotoWidgetEntry] = []
 
         for status in statuses {
@@ -70,9 +100,5 @@ public class StatusFetcher {
         }
 
         return widgetEntries.shuffled()
-    }
-    
-    func placeholder() -> PhotoWidgetEntry {
-        PhotoWidgetEntry(date: Date(), image: nil, avatar: nil, displayName: "Caroline Rick", statusId: "")
     }
 }
