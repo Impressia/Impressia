@@ -64,8 +64,8 @@ struct VernissageApp: App {
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                     Task {
-                        // Refresh indicator of new photos when application is become active.
-                        await self.calculateNewPhotosInBackground()
+                        // Refresh indicator of new photos and new statuses when application is become active.
+                        _ = await (self.calculateNewPhotosInBackground(), self.calculateNewNotificationsInBackground())
                     }
                 }
 
@@ -74,8 +74,8 @@ struct VernissageApp: App {
             }
             .onReceive(timer) { _ in
                 Task {
-                    // Refresh indicator of new photos each two minutes (when application is in the foreground)..
-                    await self.calculateNewPhotosInBackground()
+                    // Refresh indicator of new photos and new notifications each two minutes (when application is in the foreground)..
+                    _ = await (self.calculateNewPhotosInBackground(), self.calculateNewNotificationsInBackground())
                 }
             }
             .onChange(of: applicationState.theme) { oldValue, newValue in
@@ -155,14 +155,15 @@ struct VernissageApp: App {
             // Refresh application state.
             self.applicationState.changeApplicationState(accountModel: accountModel,
                                                          instance: instance,
-                                                         lastSeenStatusId: accountModel.lastSeenStatusId)
+                                                         lastSeenStatusId: accountModel.lastSeenStatusId,
+                                                         lastSeenNotificationId: accountModel.lastSeenNotificationId)
 
             // Change view displayed by application.
             self.applicationViewMode = .mainView
 
             // Check amount of newly added photos.
             if checkNewPhotos {
-                await self.calculateNewPhotosInBackground()
+                _ = await (self.calculateNewPhotosInBackground(), self.calculateNewNotificationsInBackground())
             }
         }
     }
@@ -211,7 +212,7 @@ struct VernissageApp: App {
     }
 
     private func calculateNewPhotosInBackground() async {
-        let modelContext =  self.modelContainer.mainContext
+        let modelContext = self.modelContainer.mainContext
 
         if let account = self.applicationState.account {
             self.applicationState.amountOfNewStatuses = await HomeTimelineService.shared.amountOfNewStatuses(
@@ -220,6 +221,14 @@ struct VernissageApp: App {
                 hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt,
                 modelContext: modelContext
             )
+        }
+    }
+    
+    private func calculateNewNotificationsInBackground() async {
+        let modelContext = self.modelContainer.mainContext
+
+        if let account = self.applicationState.account {
+            self.applicationState.newNotificationsHasBeenAdded = await NotificationsService.shared.newNotificationsHasBeenAdded(for: account, modelContext: modelContext)
         }
     }
 }

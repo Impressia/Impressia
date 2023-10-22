@@ -77,7 +77,6 @@
 		F8705A7B29FF872F00DA818A /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8705A7A29FF872F00DA818A /* QRCodeGenerator.swift */; };
 		F8705A7E29FF880600DA818A /* FileFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8705A7D29FF880600DA818A /* FileFetcher.swift */; };
 		F870EE5229F1645C00A2D43B /* MainNavigationOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F870EE5129F1645C00A2D43B /* MainNavigationOptions.swift */; };
-		F871F21D29EF0D7000A351EF /* NavigationMenuItemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = F871F21C29EF0D7000A351EF /* NavigationMenuItemDetails.swift */; };
 		F8742FC429990AFB00E9642B /* ClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8742FC329990AFB00E9642B /* ClientError.swift */; };
 		F8764187298ABB520057D362 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8764186298ABB520057D362 /* ViewState.swift */; };
 		F876418D298AE5020057D362 /* PaginableStatusesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F876418C298AE5020057D362 /* PaginableStatusesView.swift */; };
@@ -159,6 +158,7 @@
 		F8D8E0CF2ACC23B300AA1374 /* ViewedStatusHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0CE2ACC23B300AA1374 /* ViewedStatusHandler.swift */; };
 		F8D8E0D02ACC23B300AA1374 /* ViewedStatusHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0CE2ACC23B300AA1374 /* ViewedStatusHandler.swift */; };
 		F8D8E0D12ACC23B300AA1374 /* ViewedStatusHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0CE2ACC23B300AA1374 /* ViewedStatusHandler.swift */; };
+		F8DE749F2AE4F7B500ACD188 /* NotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DE749E2AE4F7B500ACD188 /* NotificationsService.swift */; };
 		F8DF38E429DD68820047F1AA /* ViewOffsetKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DF38E329DD68820047F1AA /* ViewOffsetKey.swift */; };
 		F8DF38E629DDB98A0047F1AA /* SocialsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DF38E529DDB98A0047F1AA /* SocialsSectionView.swift */; };
 		F8E36E462AB8745300769C55 /* Sizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E36E452AB8745300769C55 /* Sizable.swift */; };
@@ -274,7 +274,6 @@
 		F8705A7A29FF872F00DA818A /* QRCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
 		F8705A7D29FF880600DA818A /* FileFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileFetcher.swift; sourceTree = "<group>"; };
 		F870EE5129F1645C00A2D43B /* MainNavigationOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationOptions.swift; sourceTree = "<group>"; };
-		F871F21C29EF0D7000A351EF /* NavigationMenuItemDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationMenuItemDetails.swift; sourceTree = "<group>"; };
 		F8742FC329990AFB00E9642B /* ClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientError.swift; sourceTree = "<group>"; };
 		F8764186298ABB520057D362 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		F876418C298AE5020057D362 /* PaginableStatusesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginableStatusesView.swift; sourceTree = "<group>"; };
@@ -341,6 +340,7 @@
 		F8D5444229D4066C002225D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8D8E0CA2ACC237000AA1374 /* ViewedStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewedStatus.swift; sourceTree = "<group>"; };
 		F8D8E0CE2ACC23B300AA1374 /* ViewedStatusHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewedStatusHandler.swift; sourceTree = "<group>"; };
+		F8DE749E2AE4F7B500ACD188 /* NotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsService.swift; sourceTree = "<group>"; };
 		F8DF38E329DD68820047F1AA /* ViewOffsetKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOffsetKey.swift; sourceTree = "<group>"; };
 		F8DF38E529DDB98A0047F1AA /* SocialsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialsSectionView.swift; sourceTree = "<group>"; };
 		F8E36E452AB8745300769C55 /* Sizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizable.swift; sourceTree = "<group>"; };
@@ -479,7 +479,6 @@
 				F85D4DFD29B78C8400345267 /* HashtagModel.swift */,
 				F89F57AF29D1C11200001EE3 /* RelationshipModel.swift */,
 				F8DF38E329DD68820047F1AA /* ViewOffsetKey.swift */,
-				F871F21C29EF0D7000A351EF /* NavigationMenuItemDetails.swift */,
 				F8624D3C29F2D3AC00204986 /* SelectedMenuItemDetails.swift */,
 				F8E36E452AB8745300769C55 /* Sizable.swift */,
 				F8B758DD2AB9DD85000C8068 /* ColumnData.swift */,
@@ -773,6 +772,7 @@
 				F878842129A4A4E3003CFAD2 /* AppMetadataService.swift */,
 				F86BC9E829EBBB66009415EC /* ImageSaver.swift */,
 				F8D0E5232AE2A88A0061C561 /* HomeTimelineService.swift */,
+				F8DE749E2AE4F7B500ACD188 /* NotificationsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1084,7 +1084,6 @@
 				F87AEB972986D16D00434FB6 /* AuthorisationError.swift in Sources */,
 				F8742FC429990AFB00E9642B /* ClientError.swift in Sources */,
 				F883402029B62AE900C3E096 /* SearchView.swift in Sources */,
-				F871F21D29EF0D7000A351EF /* NavigationMenuItemDetails.swift in Sources */,
 				F8E36E462AB8745300769C55 /* Sizable.swift in Sources */,
 				F85DBF8F296732E20069BF89 /* AccountsView.swift in Sources */,
 				F805DCF129DBEF83006A1FD9 /* ReportView.swift in Sources */,
@@ -1109,6 +1108,7 @@
 				F8A93D7E2965FD89001D8331 /* UserProfileView.swift in Sources */,
 				F88C246E295C37B80006098B /* MainView.swift in Sources */,
 				F8AFF7C429B25EF40087D083 /* ImagesGrid.swift in Sources */,
+				F8DE749F2AE4F7B500ACD188 /* NotificationsService.swift in Sources */,
 				F8AFF7C129B259150087D083 /* HashtagsView.swift in Sources */,
 				F8DF38E429DD68820047F1AA /* ViewOffsetKey.swift in Sources */,
 				F89A46DE296EABA20062125F /* StatusPlaceholderView.swift in Sources */,

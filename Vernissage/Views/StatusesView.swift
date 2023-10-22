@@ -198,10 +198,10 @@ struct StatusesView: View {
 
         if self.listType == .home {
             // Remeber first status returned by API in user context (when it's newer then remembered).
-            try HomeTimelineService.shared.update(lastSeenStatusId: nil,
-                                                  lastLoadedStatusId: statuses.first?.id,
-                                                  applicationState: self.applicationState,
-                                                  modelContext: modelContext)
+            try AccountDataHandler.shared.update(lastSeenStatusId: nil,
+                                                 lastLoadedStatusId: statuses.first?.id,
+                                                 applicationState: self.applicationState,
+                                                 modelContext: modelContext)
             
             // Append statuses to viewed.
             try ViewedStatusHandler.shared.append(contentsOf: statuses, accountId: accountId, modelContext: modelContext)
@@ -276,10 +276,10 @@ struct StatusesView: View {
         
         if self.listType == .home {
             // Remeber first status returned by API in user context (when it's newer then remembered).
-            try HomeTimelineService.shared.update(lastSeenStatusId: self.statusViewModels.first?.id,
-                                                  lastLoadedStatusId: statuses.first?.id,
-                                                  applicationState: self.applicationState,
-                                                  modelContext: modelContext)
+            try AccountDataHandler.shared.update(lastSeenStatusId: self.statusViewModels.first?.id,
+                                                 lastLoadedStatusId: statuses.first?.id,
+                                                 applicationState: self.applicationState,
+                                                 modelContext: modelContext)
             
             // Append statuses to viewed.
             try ViewedStatusHandler.shared.append(contentsOf: statuses, accountId: accountId, modelContext: modelContext)

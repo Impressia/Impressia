@@ -21,6 +21,7 @@ extension View {
 
 @MainActor
 private struct NavigationMenuButtons: ViewModifier {
+    @Environment(ApplicationState.self) var applicationState
     @Environment(RouterPath.self) var routerPath
     @Environment(\.modelContext) private var modelContext
 
@@ -28,13 +29,13 @@ private struct NavigationMenuButtons: ViewModifier {
     private let onViewModeIconTap: (MainView.ViewMode) -> Void
     private let imageFontSize = 20.0
 
-    private let customMenuItems = [
-        NavigationMenuItemDetails(viewMode: .home),
-        NavigationMenuItemDetails(viewMode: .local),
-        NavigationMenuItemDetails(viewMode: .federated),
-        NavigationMenuItemDetails(viewMode: .search),
-        NavigationMenuItemDetails(viewMode: .profile),
-        NavigationMenuItemDetails(viewMode: .notifications)
+    private let customMenuItems: [MainView.ViewMode] = [
+        .home,
+        .local,
+        .federated,
+        .search,
+        .profile,
+        .notifications
     ]
 
     @State private var displayedCustomMenuItems = [
@@ -168,7 +169,7 @@ private struct NavigationMenuButtons: ViewModifier {
         Button {
             self.onViewModeIconTap(displayedCustomMenuItem.viewMode)
         } label: {
-            Image(systemName: displayedCustomMenuItem.image)
+            displayedCustomMenuItem.viewMode.getImage(applicationState: applicationState)
                 .font(.system(size: self.imageFontSize))
                 .foregroundColor(.mainTextColor.opacity(0.75))
                 .padding(.vertical, 10)
@@ -183,24 +184,28 @@ private struct NavigationMenuButtons: ViewModifier {
         ForEach(self.customMenuItems) { item in
             Button {
                 withAnimation {
-                    displayedCustomMenuItem.viewMode = item.viewMode
+                    displayedCustomMenuItem.viewMode = item
                 }
 
-                // Saving in core data.
+                // Saving in database.
                 switch displayedCustomMenuItem.position {
                 case 1:
-                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem1: item.viewMode.rawValue, modelContext: modelContext)
+                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem1: item.rawValue, modelContext: modelContext)
                 case 2:
-                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem2: item.viewMode.rawValue, modelContext: modelContext)
+                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem2: item.rawValue, modelContext: modelContext)
                 case 3:
-                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem3: item.viewMode.rawValue, modelContext: modelContext)
+                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem3: item.rawValue, modelContext: modelContext)
                 default:
                     break
                 }
 
                 self.hiddenMenuItems = self.displayedCustomMenuItems.map({ $0.viewMode })
             } label: {
-                Label(item.title, systemImage: item.image)
+                Label {
+                    Text(item.title, comment: "Menu item")
+                } icon: {
+                    item.getImage(applicationState: applicationState)
+                }
             }
         }
     }
@@ -217,10 +222,8 @@ private struct NavigationMenuButtons: ViewModifier {
 
     private func setCustomMenuItem(position: Int, viewMode: MainView.ViewMode) {
         if let displayedCustomMenuItem = self.displayedCustomMenuItems.first(where: { $0.position == position }),
-           let customMenuItem = self.customMenuItems.first(where: { $0.viewMode == viewMode }) {
-            displayedCustomMenuItem.title = customMenuItem.title
-            displayedCustomMenuItem.viewMode = customMenuItem.viewMode
-            displayedCustomMenuItem.image = customMenuItem.image
+           let customMenuItem = self.customMenuItems.first(where: { $0 == viewMode }) {
+            displayedCustomMenuItem.viewMode = customMenuItem
         }
     }
 }

@@ -35,9 +35,15 @@ import ClientKit
     /// Each URL in a status will be assumed to be exactly this many characters.
     public private(set) var statusCharactersReservedPerUrl = defaults.statusCharactersReservedPerUrl
 
+    /// Last notification seen by the user.
+    public var lastSeenNotificationId: String?
+    
+    /// Information about new notifications.
+    public var newNotificationsHasBeenAdded = false
+    
     /// Last status seen by the user.
     public var lastSeenStatusId: String?
-    
+
     /// Amount of new statuses which are not displayed yet to the user.
     public var amountOfNewStatuses = 0
 
@@ -113,10 +119,12 @@ import ClientKit
     /// Hide statuses without ALT text.
     public var hideStatusesWithoutAlt = false
     
-    public func changeApplicationState(accountModel: AccountModel, instance: Instance?, lastSeenStatusId: String?) {
+    public func changeApplicationState(accountModel: AccountModel, instance: Instance?, lastSeenStatusId: String?, lastSeenNotificationId: String?) {
         self.account = accountModel
+        self.lastSeenNotificationId = lastSeenNotificationId
         self.lastSeenStatusId = lastSeenStatusId
         self.amountOfNewStatuses = 0
+        self.newNotificationsHasBeenAdded = false
 
         if let statusesConfiguration = instance?.configuration?.statuses {
             self.statusMaxCharacters = statusesConfiguration.maxCharacters
@@ -132,7 +140,9 @@ import ClientKit
     public func clearApplicationState() {
         self.account = nil
         self.lastSeenStatusId = nil
+        self.lastSeenNotificationId = nil
         self.amountOfNewStatuses = 0
+        self.newNotificationsHasBeenAdded = false
 
         self.statusMaxCharacters = ApplicationState.defaults.statusMaxCharacters
         self.statusMaxMediaAttachments = ApplicationState.defaults.statusMaxMediaAttachments

@@ -7,6 +7,7 @@
 import Foundation
 import SwiftData
 import PixelfedKit
+import EnvironmentKit
 
 class AccountDataHandler {
     public static let shared = AccountDataHandler()
@@ -63,13 +64,18 @@ class AccountDataHandler {
         }
     }
     
-    func update(lastSeenStatusId: String?, lastLoadedStatusId: String?, statuses: [Status]? = nil, accountId: String, modelContext: ModelContext) throws {
+    func update(lastSeenStatusId: String?, lastLoadedStatusId: String?, statuses: [Status]? = nil, applicationState: ApplicationState, modelContext: ModelContext) throws {
+        guard let accountId = applicationState.account?.id else {
+            return
+        }
+        
         guard let accountDataFromDb = self.getAccountData(accountId: accountId, modelContext: modelContext) else {
             return
         }
         
         if (accountDataFromDb.lastSeenStatusId ?? "0") < (lastSeenStatusId ?? "0") {
             accountDataFromDb.lastSeenStatusId = lastSeenStatusId
+            applicationState.lastSeenStatusId = lastSeenStatusId
         }
 
         if (accountDataFromDb.lastLoadedStatusId ?? "0") < (lastLoadedStatusId ?? "0") {
@@ -78,6 +84,23 @@ class AccountDataHandler {
         
         if let statuses, let statusesJsonData = try? JSONEncoder().encode(statuses) {
             accountDataFromDb.timelineCache = String(data: statusesJsonData, encoding: .utf8)
+        }
+        
+        try modelContext.save()
+    }
+    
+    func update(lastSeenNotificationId: String?, applicationState: ApplicationState, modelContext: ModelContext) throws {
+        guard let accountId = applicationState.account?.id else {
+            return
+        }
+
+        guard let accountDataFromDb = self.getAccountData(accountId: accountId, modelContext: modelContext) else {
+            return
+        }
+        
+        if (accountDataFromDb.lastSeenNotificationId ?? "0") < (lastSeenNotificationId ?? "0") {
+            accountDataFromDb.lastSeenNotificationId = lastSeenNotificationId
+            applicationState.lastSeenNotificationId = lastSeenNotificationId
         }
         
         try modelContext.save()

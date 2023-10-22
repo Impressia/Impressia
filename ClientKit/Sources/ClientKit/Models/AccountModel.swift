@@ -27,7 +27,8 @@ import Foundation
     public let url: URL?
     public let username: String
     public let lastSeenStatusId: String?
-
+    public let lastSeenNotificationId: String?
+    
     public var avatarData: Data?
 
     public init(id: String,
@@ -50,6 +51,7 @@ import Foundation
                 url: URL?,
                 username: String,
                 lastSeenStatusId: String?,
+                lastSeenNotificationId: String?,
                 avatarData: Data? = nil) {
         self.id = id
         self.accessToken = accessToken
@@ -72,6 +74,7 @@ import Foundation
         self.username = username
         self.lastSeenStatusId = lastSeenStatusId
         self.avatarData = avatarData
+        self.lastSeenNotificationId = lastSeenNotificationId
     }
 }
 

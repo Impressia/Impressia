@@ -33,7 +33,7 @@ struct MainView: View {
     
     @Query(sort: \AccountData.acct, order: .forward) var dbAccounts: [AccountData]
 
-    public enum ViewMode: Int {
+    public enum ViewMode: Int, Identifiable {
         case home = 1
         case local = 2
         case federated = 3
@@ -44,6 +44,10 @@ struct MainView: View {
         case trendingTags = 8
         case trendingAccounts = 9
 
+        var id: Self {
+            return self
+        }
+        
         public var title: LocalizedStringKey {
             switch self {
             case .home:
@@ -67,26 +71,36 @@ struct MainView: View {
             }
         }
 
-        public var image: String {
+        @ViewBuilder
+        public func getImage(applicationState: ApplicationState) -> some View {
             switch self {
             case .home:
-                return "house"
+                Image(systemName: "house")
             case .trendingPhotos:
-                return "photo.stack"
+                Image(systemName: "photo.stack")
             case .trendingTags:
-                return "tag"
+                Image(systemName: "tag")
             case .trendingAccounts:
-                return "person.3"
+                Image(systemName: "person.3")
             case .local:
-                return "building"
+                Image(systemName: "building")
             case .federated:
-                return "globe.europe.africa"
+                Image(systemName: "globe.europe.africa")
             case .profile:
-                return "person.crop.circle"
+                Image(systemName: "person.crop.circle")
             case .notifications:
-                return "bell.badge"
+                if applicationState.menuPosition == .top {
+                    applicationState.newNotificationsHasBeenAdded ? Image(systemName: "bell.badge") : Image(systemName: "bell")
+                } else {
+                    applicationState.newNotificationsHasBeenAdded
+                    ? AnyView(
+                        Image(systemName: "bell.badge")
+                            .symbolRenderingMode(.palette)
+                            .foregroundStyle(applicationState.tintColor.color().opacity(0.75), Color.mainTextColor.opacity(0.75)))
+                    : AnyView(Image(systemName: "bell"))
+                }
             case .search:
-                return "magnifyingglass"
+                Image(systemName: "magnifyingglass")
             }
         }
     }
@@ -309,7 +323,8 @@ struct MainView: View {
                     // Refresh application state.
                     self.applicationState.changeApplicationState(accountModel: signedInAccountModel,
                                                                  instance: instance,
-                                                                 lastSeenStatusId: signedInAccountModel.lastSeenStatusId)
+                                                                 lastSeenStatusId: signedInAccountModel.lastSeenStatusId,
+                                                                 lastSeenNotificationId: signedInAccountModel.lastSeenNotificationId)
 
                     // Set account as default (application will open this account after restart).
                     ApplicationSettingsHandler.shared.set(accountId: signedInAccountModel.id, modelContext: modelContext)

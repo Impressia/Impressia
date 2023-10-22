@@ -15,6 +15,7 @@ import WidgetsKit
 struct NotificationsView: View {
     @Environment(ApplicationState.self) var applicationState
     @Environment(Client.self) var client
+    @Environment(\.modelContext) private var modelContext
 
     @State var accountId: String
     @State private var notifications: [PixelfedKit.Notification] = []
@@ -76,7 +77,7 @@ struct NotificationsView: View {
         .listStyle(PlainListStyle())
         .refreshable {
             HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
-            await self.loadNewNotifications()
+            await self.refreshNotifications()
             HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
         }
     }
@@ -95,6 +96,9 @@ struct NotificationsView: View {
                 withAnimation {
                     self.state = .loaded
                 }
+                
+                try AccountDataHandler.shared.update(lastSeenNotificationId: linkable.data.first?.id, applicationState: self.applicationState, modelContext: modelContext)
+                self.applicationState.newNotificationsHasBeenAdded = false
             }
         } catch {
             if !Task.isCancelled {
@@ -122,13 +126,16 @@ struct NotificationsView: View {
         }
     }
 
-    private func loadNewNotifications() async {
+    private func refreshNotifications() async {
         do {
             if let linkable = try await self.client.notifications?.notifications(minId: self.minId, limit: self.defaultPageSize) {
                 if let first = linkable.data.first, self.notifications.contains(where: { notification in notification.id == first.id }) {
                     // We have all notifications, we don't have to do anything.
                     return
                 }
+
+                try AccountDataHandler.shared.update(lastSeenNotificationId: linkable.data.first?.id, applicationState: self.applicationState, modelContext: modelContext)
+                self.applicationState.newNotificationsHasBeenAdded = false
 
                 self.minId = linkable.link?.minId
                 self.notifications.insert(contentsOf: linkable.data, at: 0)

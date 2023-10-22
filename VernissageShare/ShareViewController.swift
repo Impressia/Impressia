@@ -40,7 +40,8 @@ class ShareViewController: UIViewController {
         // Set application state (with default instance settings).
         applicationState.changeApplicationState(accountModel: accountModel,
                                                 instance: nil,
-                                                lastSeenStatusId: accountModel.lastSeenStatusId)
+                                                lastSeenStatusId: accountModel.lastSeenStatusId,
+                                                lastSeenNotificationId: accountModel.lastSeenNotificationId)
 
         // Update application settings from database.
         ApplicationSettingsHandler.shared.update(applicationState: applicationState, modelContext: modelContext)
