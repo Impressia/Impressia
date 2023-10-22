@@ -82,6 +82,7 @@ struct VernissageApp: App {
                 self.theme = newValue.colorScheme()
             }
             .onChange(of: applicationState.tintColor) { oldValue, newValue in
+                UIRefreshControl.appearance().tintColor = self.applicationState.tintColor.uiColor()
                 self.tintColor = newValue.color()
             }
             .onChange(of: applicationState.account) { oldValue, newValue in
@@ -108,6 +109,7 @@ struct VernissageApp: App {
     private func onApplicationStart() async {
         UIPageControl.appearance().currentPageIndicatorTintColor = UIColor.white.withAlphaComponent(0.7)
         UIPageControl.appearance().pageIndicatorTintColor = UIColor.white.withAlphaComponent(0.4)
+        UIRefreshControl.appearance().tintColor = self.applicationState.tintColor.uiColor()
 
         // Configure TipKit.
         try? Tips.configure([.displayFrequency(.daily), .datastoreLocation(.applicationDefault)])

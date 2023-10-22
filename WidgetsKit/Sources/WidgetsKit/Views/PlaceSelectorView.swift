@@ -62,7 +62,7 @@ public struct PlaceSelectorView: View {
                         if self.showLoader {
                             HStack(alignment: .center) {
                                 Spacer()
-                                LoadingIndicator(isVisible: Binding.constant(true))
+                                LoadingIndicator()
                                 Spacer()
                             }
                         }

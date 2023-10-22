@@ -51,7 +51,7 @@ public struct ImageUploadView: View {
         } else if photoAttachment.uploadedAttachment == nil {
             ZStack {
                 self.imageView(showAccessories: false, blur: true)
-                LoadingIndicator(isVisible: Binding.constant(true))
+                LoadingIndicator()
             }
         } else {
             self.imageView(showAccessories: true, blur: false)

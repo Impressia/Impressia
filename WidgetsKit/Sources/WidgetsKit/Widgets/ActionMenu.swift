@@ -25,7 +25,7 @@ public struct ActionMenu<Label: View, Content: View>: View {
             content()
         } label: {
             if isDuringAction {
-                LoadingIndicator(isVisible: .constant(true))
+                LoadingIndicator()
                     .transition(.opacity)
             } else {
                 label()

@@ -61,16 +61,6 @@ struct ThirdPartyView: View {
                 .font(.footnote)
             }
 
-            Section("thirdparty.loaders.title") {
-                VStack(alignment: .leading) {
-                    Link("thirdparty.loaders.address",
-                         destination: URL(string: "https://github.com/exyte/ActivityIndicatorView")!)
-                    .padding(.bottom, 4)
-                    Text("thirdparty.loaders.description", comment: "A number of preset loading indicators created with SwiftUI.")
-                }
-                .font(.footnote)
-            }
-
             Section("thirdparty.htmlstring.title") {
                 VStack(alignment: .leading) {
                     Link("thirdparty.htmlstring.address",

@@ -123,7 +123,9 @@ struct EditProfileView: View {
                         UserAvatar(accountAvatar: account.avatar, size: .large)
                     }
 
-                    LoadingIndicator(isVisible: $saveDisabled)
+                    if saveDisabled {
+                        LoadingIndicator()
+                    }
 
                     BottomRight {
                         Button {
