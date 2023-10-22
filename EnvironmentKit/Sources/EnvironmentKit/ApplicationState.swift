@@ -47,8 +47,8 @@ import ClientKit
     /// Amount of new statuses which are not displayed yet to the user.
     public var amountOfNewStatuses = 0
 
-    /// Model for newly created comment.
-    public var newComment: CommentModel?
+    /// Id of latest published status by the user.
+    public var latestPublishedStatusId: String?
 
     /// Active icon name.
     public var activeIcon = "Default"
