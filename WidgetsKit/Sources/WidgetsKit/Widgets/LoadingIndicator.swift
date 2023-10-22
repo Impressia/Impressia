@@ -18,13 +18,7 @@ public struct LoadingIndicator: View {
 
     public var body: some View {
         ProgressView()
-            .tint(applicationState.tintColor.color())
+            .tint(.gray)
             .controlSize(self.controlSize)
-    }
-}
-
-struct LoadingIndicator_Previews: PreviewProvider {
-    static var previews: some View {
-        LoadingIndicator()
     }
 }
