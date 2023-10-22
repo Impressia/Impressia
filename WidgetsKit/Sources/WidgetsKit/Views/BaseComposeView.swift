@@ -728,7 +728,11 @@ public struct BaseComposeView: View {
     private func sendToServer() async {
         do {
             let status = self.createStatus()
-            if try await self.client.statuses?.new(status: status) != nil {
+            if let status = try await self.client.statuses?.new(status: status) {
+                print("Status: \(status.id)")
+                self.applicationState.latestPublishedStatusId = status.id
+                self.applicationState.showInteractionStatusId = String.empty()
+
                 self.close()
             }
         } catch {
