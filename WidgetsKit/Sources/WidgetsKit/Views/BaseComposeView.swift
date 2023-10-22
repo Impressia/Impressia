@@ -581,11 +581,6 @@ public struct BaseComposeView: View {
     }
 
     private func isPublishButtonDisabled() -> Bool {
-        // Publish always disabled when there is not status text.
-        if self.textModel.text.string.isEmpty {
-            return true
-        }
-
         // When application is during uploading photos we cannot send new status.
         if self.photosAreUploading == true {
             return true
@@ -593,6 +588,11 @@ public struct BaseComposeView: View {
 
         // When status is not a comment, then photo is required.
         if self.statusViewModel == nil && self.photosAttachment.hasUploadedPhotos() == false {
+            return true
+        }
+        
+        // When status is a comment, then text is required.
+        if self.statusViewModel != nil && self.textModel.text.string.isEmpty {
             return true
         }
 
