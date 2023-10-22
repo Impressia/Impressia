@@ -328,8 +328,28 @@ struct MainView: View {
 
                     // Set account as default (application will open this account after restart).
                     ApplicationSettingsHandler.shared.set(accountId: signedInAccountModel.id, modelContext: modelContext)
+                    
+                    // Refresh new photos and notifications.
+                    _ = await (self.calculateNewPhotosInBackground(), self.calculateNewNotificationsInBackground())
                 }
             }
+        }
+    }
+    
+    private func calculateNewPhotosInBackground() async {
+        if let account = self.applicationState.account {
+            self.applicationState.amountOfNewStatuses = await HomeTimelineService.shared.amountOfNewStatuses(
+                for: account,
+                includeReblogs: self.applicationState.showReboostedStatuses,
+                hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt,
+                modelContext: modelContext
+            )
+        }
+    }
+    
+    private func calculateNewNotificationsInBackground() async {
+        if let account = self.applicationState.account {
+            self.applicationState.newNotificationsHasBeenAdded = await NotificationsService.shared.newNotificationsHasBeenAdded(for: account, modelContext: modelContext)
         }
     }
 }
