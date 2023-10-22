@@ -196,7 +196,7 @@ struct InteractionRow: View {
     }
 
     private func deleteStatus() {
-        Task {
+        Task { @MainActor in
             do {
                 // Remove from server.
                 try await self.client.statuses?.delete(statusId: self.statusModel.id)
