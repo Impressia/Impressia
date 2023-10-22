@@ -5,7 +5,9 @@
 //
 
 import SwiftUI
+import TipKit
 import EnvironmentKit
+import WidgetsKit
 
 struct GeneralSectionView: View {
     @Environment(ApplicationState.self) var applicationState
@@ -87,6 +89,7 @@ struct GeneralSectionView: View {
                 Text("settings.title.menuPosition", comment: "Menu position")
             }
             .onChange(of: self.applicationState.menuPosition) { oldMenuPosition, newMenuPosition in
+                MainNavigationTip().invalidate(reason: .actionPerformed)
                 ApplicationSettingsHandler.shared.set(menuPosition: newMenuPosition, modelContext: modelContext)
             }
         }

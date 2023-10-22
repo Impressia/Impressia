@@ -200,6 +200,7 @@ private struct NavigationMenuButtons: ViewModifier {
                 }
 
                 self.hiddenMenuItems = self.displayedCustomMenuItems.map({ $0.viewMode })
+                MenuCustomizableTip().invalidate(reason: .actionPerformed)
             } label: {
                 Label {
                     Text(item.title, comment: "Menu item")
