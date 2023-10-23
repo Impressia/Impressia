@@ -307,6 +307,29 @@
         }
       }
     },
+    "accounts.navigationBar.disabledBoosts" : {
+      "comment" : "Disabled boosts",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disabled boosts"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Potenciadores desactivados"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ukryte podbicia"
+          }
+        }
+      }
+    },
     "accounts.navigationBar.favouritedBy" : {
       "comment" : "Favourited by",
       "localizations" : {
@@ -9815,6 +9838,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ukryj podbicia"
+          }
+        }
+      }
+    },
+    "userProfile.title.disabledBoosts" : {
+      "comment" : "Disabled boosts",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disabled boosts"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Potenciadores desactivados"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ukryte podbicia"
           }
         }
       }

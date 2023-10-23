@@ -12,6 +12,20 @@ class AccountRelationshipHandler {
     public static let shared = AccountRelationshipHandler()
     private init() { }
         
+    func getAccountRelationships(for accountId: String, modelContext: ModelContext) -> [AccountRelationship] {
+        do {
+            var fetchDescriptor = FetchDescriptor<AccountRelationship>(
+                predicate: #Predicate { $0.pixelfedAccount?.id == accountId }
+            )
+            fetchDescriptor.includePendingChanges = true
+            
+            return try modelContext.fetch(fetchDescriptor)
+        } catch {
+            CoreDataError.shared.handle(error, message: "Error during fetching account relationship (isBoostedMutedForAccount).")
+            return []
+        }
+    }
+    
     /// Check if boosted statuses from given account are muted.
     func isBoostedStatusesMuted(accountId: String, status: Status, modelContext: ModelContext) -> Bool {
         if status.reblog == nil {

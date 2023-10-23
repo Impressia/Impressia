@@ -270,6 +270,10 @@ struct UserProfileView: View {
             Label(NSLocalizedString("userProfile.title.mutes", comment: "Muted accounts"), systemImage: "message.and.waveform.fill")
         }
 
+        NavigationLink(value: RouteurDestinations.accounts(listType: .disabledBoosts)) {
+            Label(NSLocalizedString("userProfile.title.disabledBoosts", comment: "Disabled boosts"), image: "custom.rocket.fill")
+        }
+        
         if account.locked {
             NavigationLink(value: RouteurDestinations.followRequests) {
                 Label(NSLocalizedString("userProfile.title.followRequests", comment: "FollowRequests"), systemImage: "person.crop.circle.badge.checkmark")

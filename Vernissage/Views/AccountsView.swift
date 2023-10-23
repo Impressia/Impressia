@@ -22,6 +22,7 @@ struct AccountsView: View {
         case blocks
         case mutes
         case search(query: String)
+        case disabledBoosts
 
         public var title: String {
             switch self {
@@ -37,6 +38,8 @@ struct AccountsView: View {
                 return NSLocalizedString("accounts.navigationBar.blocked", comment: "Blocked")
             case .mutes:
                 return NSLocalizedString("accounts.navigationBar.mutes", comment: "Mutes")
+            case .disabledBoosts:
+                return NSLocalizedString("accounts.navigationBar.disabledBoosts", comment: "Disabled boosts")
             case .search(let query):
                 return query
             }
@@ -45,6 +48,7 @@ struct AccountsView: View {
 
     @Environment(ApplicationState.self) var applicationState
     @Environment(Client.self) var client
+    @Environment(\.modelContext) private var modelContext
 
     @State var listType: ListType
 
@@ -185,6 +189,25 @@ struct AccountsView: View {
             if page == 1 {
                 let results = try await self.client.search?.search(query: query, resultsType: .accounts, limit: 40, page: page)
                 return results?.accounts ?? []
+            } else {
+                return []
+            }
+        case .disabledBoosts:
+            if let accountId = self.applicationState.account?.id, self.downloadedPage == 1 {
+                let accountRelationships = AccountRelationshipHandler.shared.getAccountRelationships(for: accountId, modelContext: modelContext)
+                
+                var downloadedAccounts: [Account] = []
+                for accountRelationship in accountRelationships {
+                    do {
+                        if let account = try await self.client.accounts?.account(withId: accountRelationship.accountId) {
+                            downloadedAccounts.append(account)
+                        }
+                    } catch {
+                        ErrorService.shared.handle(error, message: "accounts.error.loadingAccountsFailed", showToastr: false)
+                    }
+                }
+                
+                return downloadedAccounts
             } else {
                 return []
             }
