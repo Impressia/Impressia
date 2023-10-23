@@ -81,7 +81,7 @@ struct MainView: View {
             case .trendingTags:
                 Image(systemName: "tag")
             case .trendingAccounts:
-                Image(systemName: "person.3")
+                Image(systemName: "person.crop.rectangle.stack")
             case .local:
                 Image(systemName: "building")
             case .federated:
