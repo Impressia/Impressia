@@ -95,8 +95,13 @@ public class HomeTimelineService {
                 continue
             }
             
-            // Same rebloged status has been already visible in current portion of data.
+            // Same rebloged status has been already visible in already processed (visible) portion of data.
             if let reblog = status.reblog, visibleStatuses.contains(where: { $0.reblog?.id == reblog.id || $0.id == reblog.id }) {
+                continue
+            }
+            
+            // Same rebloged (orginal) status will be added to visible in same portion of data.
+            if let reblog = status.reblog, statusesWithImagesOnly.contains(where: { $0.id == reblog.id }) {
                 continue
             }
             
