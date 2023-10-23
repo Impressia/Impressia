@@ -29,15 +29,6 @@ private struct NavigationMenuButtons: ViewModifier {
     private let onViewModeIconTap: (MainView.ViewMode) -> Void
     private let imageFontSize = 20.0
 
-    private let customMenuItems: [MainView.ViewMode] = [
-        .home,
-        .local,
-        .federated,
-        .search,
-        .profile,
-        .notifications
-    ]
-
     @State private var displayedCustomMenuItems = [
         SelectedMenuItemDetails(position: 1, viewMode: .home),
         SelectedMenuItemDetails(position: 2, viewMode: .local),
@@ -141,6 +132,7 @@ private struct NavigationMenuButtons: ViewModifier {
                 .padding(.vertical, 10)
                 .padding(.horizontal, 8)
         }
+        .environment(\.menuOrder, .fixed)
     }
 
     @ViewBuilder
@@ -175,38 +167,25 @@ private struct NavigationMenuButtons: ViewModifier {
                 .padding(.vertical, 10)
                 .padding(.horizontal, 8)
         }.contextMenu {
-            self.listOfIconsView(displayedCustomMenuItem)
-        }
-    }
-
-    @ViewBuilder
-    private func listOfIconsView(_ displayedCustomMenuItem: SelectedMenuItemDetails) -> some View {
-        ForEach(self.customMenuItems) { item in
-            Button {
+            MainNavigationOptions(hiddenMenuItems: Binding.constant([])) { viewMode in
                 withAnimation {
-                    displayedCustomMenuItem.viewMode = item
+                    displayedCustomMenuItem.viewMode = viewMode
                 }
 
                 // Saving in database.
                 switch displayedCustomMenuItem.position {
                 case 1:
-                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem1: item.rawValue, modelContext: modelContext)
+                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem1: viewMode.rawValue, modelContext: modelContext)
                 case 2:
-                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem2: item.rawValue, modelContext: modelContext)
+                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem2: viewMode.rawValue, modelContext: modelContext)
                 case 3:
-                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem3: item.rawValue, modelContext: modelContext)
+                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem3: viewMode.rawValue, modelContext: modelContext)
                 default:
                     break
                 }
 
                 self.hiddenMenuItems = self.displayedCustomMenuItems.map({ $0.viewMode })
                 MenuCustomizableTip().invalidate(reason: .actionPerformed)
-            } label: {
-                Label {
-                    Text(item.title, comment: "Menu item")
-                } icon: {
-                    item.getImage(applicationState: applicationState)
-                }
             }
         }
     }
@@ -222,9 +201,8 @@ private struct NavigationMenuButtons: ViewModifier {
     }
 
     private func setCustomMenuItem(position: Int, viewMode: MainView.ViewMode) {
-        if let displayedCustomMenuItem = self.displayedCustomMenuItems.first(where: { $0.position == position }),
-           let customMenuItem = self.customMenuItems.first(where: { $0 == viewMode }) {
-            displayedCustomMenuItem.viewMode = customMenuItem
+        if let displayedCustomMenuItem = self.displayedCustomMenuItems.first(where: { $0.position == position }) {
+            displayedCustomMenuItem.viewMode = viewMode
         }
     }
 }
