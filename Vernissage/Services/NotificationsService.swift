@@ -67,16 +67,20 @@ public class NotificationsService {
         // There can be more then 80 newest notifications, that's why we have to sometimes send more then one request.
         while true {
             do {
-                let downloadedNotifications = try await client.notifications(minId: newestNotificationId, limit: 80)
+                let linkable = try await client.notifications(minId: newestNotificationId, limit: 80)
+                let visibleNotifications = linkable.data.filter({ $0.id != lastSeenNotificationId })
                 
-                guard let firstNotification = downloadedNotifications.data.first else {
+                guard let firstNotification = visibleNotifications.first else {
+                    break
+                }
+
+                notifications.append(contentsOf: visibleNotifications)
+                
+                guard let minId = linkable.link?.minId else {
                     break
                 }
                 
-                let visibleNotifications = downloadedNotifications.data.filter({ $0.id != lastSeenNotificationId })
-
-                notifications.append(contentsOf: visibleNotifications)
-                newestNotificationId = firstNotification.id
+                newestNotificationId = minId
             } catch {
                 ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadingNewStatuses")
                 break
