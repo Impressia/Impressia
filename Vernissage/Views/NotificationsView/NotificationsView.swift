@@ -107,7 +107,7 @@ struct NotificationsView: View {
 
                 // Refresh infomation about viewed notifications.
                 self.applicationState.amountOfNewNotifications = 0
-                try? await NotificationsService.shared.setBadgeCount(0)
+                try? await NotificationsService.shared.setBadgeCount(0, modelContext: modelContext)
             }
         } catch {
             if !Task.isCancelled {
@@ -152,7 +152,7 @@ struct NotificationsView: View {
                 
                 // Refresh infomation about viewed notifications.
                 self.applicationState.amountOfNewNotifications = 0
-                try? await NotificationsService.shared.setBadgeCount(0)
+                try? await NotificationsService.shared.setBadgeCount(0, modelContext: modelContext)
 
                 self.minId = linkable.link?.minId
                 self.notifications.insert(contentsOf: linkable.data, at: 0)

@@ -92,12 +92,22 @@ public class NotificationsService {
     }
     
     /// Function sets application badge counts when notifications (and badge) are enabled.
-    public func setBadgeCount(_ count: Int) async throws {
+    public func setBadgeCount(_ count: Int, modelContext: ModelContext) async throws {
+        // Badge have to enabled in system settings.
+        let applicationSettings = ApplicationSettingsHandler.shared.get(modelContext: modelContext)
+        guard applicationSettings.showApplicationBadge else {
+            return
+        }
+        
+        // Notifications have to be enabled.
         let center = UNUserNotificationCenter.current()
         let settings = await center.notificationSettings()
         
-        guard (settings.authorizationStatus == .authorized) || (settings.authorizationStatus == .provisional) else { return }
+        guard (settings.authorizationStatus == .authorized) || (settings.authorizationStatus == .provisional) else {
+            return
+        }
 
+        // Badge notification have to be enabled.
         if settings.badgeSetting == .enabled {
             try await center.setBadgeCount(count)
         }

@@ -34,7 +34,7 @@ struct NotificationView: View {
                             let center = UNUserNotificationCenter.current()
                             _ = try await center.requestAuthorization(options: [.alert, .sound, .badge])
                         } else {
-                            try await NotificationsService.shared.setBadgeCount(0)
+                            try await NotificationsService.shared.setBadgeCount(0, modelContext: modelContext)
                         }
                     } catch {
                         ErrorService.shared.handle(error, message: "settings.error.notificationEnableFailed", showToastr: false)

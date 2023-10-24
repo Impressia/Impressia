@@ -242,9 +242,9 @@ struct VernissageApp: App {
 
         if let account = self.applicationState.account {
             self.applicationState.amountOfNewNotifications = await NotificationsService.shared.amountOfNewNotifications(for: account, modelContext: modelContext)
-            try? await NotificationsService.shared.setBadgeCount(self.applicationState.amountOfNewStatuses)
+            try? await NotificationsService.shared.setBadgeCount(self.applicationState.amountOfNewStatuses, modelContext: modelContext)
         } else {
-            try? await NotificationsService.shared.setBadgeCount(0)
+            try? await NotificationsService.shared.setBadgeCount(0, modelContext: modelContext)
         }
     }
     
