@@ -20,10 +20,12 @@ struct NotificationRowView: View {
     @State private var image: SwiftUI.Image?
 
     private var attachment: MediaAttachment?
-    private var notification: PixelfedKit.Notification
+    private let isNewNotification: Bool
+    private let notification: PixelfedKit.Notification
 
-    public init(notification: PixelfedKit.Notification) {
+    public init(notification: PixelfedKit.Notification, isNewNotification: Bool) {
         self.notification = notification
+        self.isNewNotification = isNewNotification
         self.attachment = notification.status?.getAllImageMediaAttachments().first
 
         if let attachment, let previewUrl = attachment.previewUrl, let imageFromCache = CacheImageService.shared.get(for: previewUrl) {
@@ -48,7 +50,7 @@ struct NotificationRowView: View {
             .frame(width: 56, height: 56)
 
             VStack(alignment: .leading, spacing: 0) {
-                HStack(alignment: .top) {
+                HStack(alignment: .center) {
                     Text(self.notification.account.displayNameWithoutEmojis)
                         .foregroundColor(.mainTextColor)
                         .font(.footnote)
@@ -61,6 +63,10 @@ struct NotificationRowView: View {
                             .foregroundColor(.customGrayColor)
                             .font(.footnote)
                     }
+                    
+                    Circle()
+                        .foregroundStyle(self.isNewNotification ? self.applicationState.tintColor.color() : Color.clear)
+                        .frame(width: 8.0, height: 8.0)
                 }
 
                 Text(self.getTitle(), comment: "Notification type")
