@@ -12,10 +12,12 @@ import EnvironmentKit
 import WidgetKit
 import SwiftData
 import TipKit
+import BackgroundTasks
 
 @main
 struct VernissageApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @Environment(\.scenePhase) private var phase
 
     @State var applicationState = ApplicationState.shared
     @State var client = Client.shared
@@ -102,6 +104,17 @@ struct VernissageApp: App {
                 }
             }
         }
+        .onChange(of: phase) { oldValue, newValue in
+            switch newValue {
+            case .background: scheduleAppRefresh()
+            default: break
+            }
+        }
+        .backgroundTask(.appRefresh(AppConstants.backgroundFetcherName)) {
+            Task { @MainActor in
+                await self.setBadgeCount()
+            }
+        }
     }
 
     @MainActor
@@ -127,7 +140,7 @@ struct VernissageApp: App {
             self.applicationViewMode = .signIn
             return
         }
-
+        
         // Create model based on core data entity.
         let accountModel = currentAccount.toAccountModel()
 
@@ -228,7 +241,21 @@ struct VernissageApp: App {
         let modelContext = self.modelContainer.mainContext
 
         if let account = self.applicationState.account {
-            self.applicationState.newNotificationsHasBeenAdded = await NotificationsService.shared.newNotificationsHasBeenAdded(for: account, modelContext: modelContext)
+            self.applicationState.amountOfNewStatuses = await NotificationsService.shared.amountOfNewNotifications(for: account, modelContext: modelContext)
+            try? await NotificationsService.shared.setBadgeCount(self.applicationState.amountOfNewStatuses)
+        } else {
+            try? await NotificationsService.shared.setBadgeCount(0)
         }
+    }
+    
+    private func scheduleAppRefresh() {
+        let request = BGAppRefreshTaskRequest(identifier: AppConstants.backgroundFetcherName)
+        request.earliestBeginDate = .now.addingTimeInterval(3600)
+        try? BGTaskScheduler.shared.submit(request)
+    }
+    
+    private func setBadgeCount() async {
+        await self.calculateNewNotificationsInBackground()
+        scheduleAppRefresh()
     }
 }

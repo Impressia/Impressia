@@ -90,9 +90,9 @@ struct MainView: View {
                 Image(systemName: "person.crop.circle")
             case .notifications:
                 if applicationState.menuPosition == .top {
-                    applicationState.newNotificationsHasBeenAdded ? Image(systemName: "bell.badge") : Image(systemName: "bell")
+                    applicationState.amountOfNewNotifications > 0 ? Image(systemName: "bell.badge") : Image(systemName: "bell")
                 } else {
-                    applicationState.newNotificationsHasBeenAdded
+                    applicationState.amountOfNewNotifications > 0
                     ? AnyView(
                         Image(systemName: "bell.badge")
                             .symbolRenderingMode(.palette)
@@ -349,7 +349,7 @@ struct MainView: View {
     
     private func calculateNewNotificationsInBackground() async {
         if let account = self.applicationState.account {
-            self.applicationState.newNotificationsHasBeenAdded = await NotificationsService.shared.newNotificationsHasBeenAdded(for: account, modelContext: modelContext)
+            self.applicationState.amountOfNewNotifications = await NotificationsService.shared.amountOfNewNotifications(for: account, modelContext: modelContext)
         }
     }
 }

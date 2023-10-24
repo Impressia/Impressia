@@ -84,6 +84,7 @@
 		F87AEB922986C44E00434FB6 /* AuthorizationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87AEB912986C44E00434FB6 /* AuthorizationSession.swift */; };
 		F87AEB972986D16D00434FB6 /* AuthorisationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87AEB962986D16D00434FB6 /* AuthorisationError.swift */; };
 		F883402029B62AE900C3E096 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F883401F29B62AE900C3E096 /* SearchView.swift */; };
+		F886BBAC2AE7CF510083152B /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F886BBAB2AE7CF510083152B /* NotificationView.swift */; };
 		F88AB05329B3613900345EDE /* PhotoUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88AB05229B3613900345EDE /* PhotoUrl.swift */; };
 		F88AB05529B3626300345EDE /* ImageGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88AB05429B3626300345EDE /* ImageGrid.swift */; };
 		F88AB05829B36B8200345EDE /* AccountsPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88AB05729B36B8200345EDE /* AccountsPhotoView.swift */; };
@@ -281,6 +282,7 @@
 		F87AEB912986C44E00434FB6 /* AuthorizationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSession.swift; sourceTree = "<group>"; };
 		F87AEB962986D16D00434FB6 /* AuthorisationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorisationError.swift; sourceTree = "<group>"; };
 		F883401F29B62AE900C3E096 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		F886BBAB2AE7CF510083152B /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		F88AB05229B3613900345EDE /* PhotoUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoUrl.swift; sourceTree = "<group>"; };
 		F88AB05429B3626300345EDE /* ImageGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGrid.swift; sourceTree = "<group>"; };
 		F88AB05729B36B8200345EDE /* AccountsPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsPhotoView.swift; sourceTree = "<group>"; };
@@ -634,6 +636,7 @@
 				F8B05ACA29B489B100857221 /* HapticsSectionView.swift */,
 				F8B05ACD29B48E2F00857221 /* MediaSettingsView.swift */,
 				F8DF38E529DDB98A0047F1AA /* SocialsSectionView.swift */,
+				F886BBAB2AE7CF510083152B /* NotificationView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -1162,6 +1165,7 @@
 				F89A46DC296EAACE0062125F /* SettingsView.swift in Sources */,
 				F866F6AE29606367002E8F88 /* ApplicationViewMode.swift in Sources */,
 				F8675DD02A1FA40500A89959 /* WaterfallGrid.swift in Sources */,
+				F886BBAC2AE7CF510083152B /* NotificationView.swift in Sources */,
 				F85D4DFE29B78C8400345267 /* HashtagModel.swift in Sources */,
 				F866F6AA29605AFA002E8F88 /* SceneDelegate.swift in Sources */,
 			);

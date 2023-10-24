@@ -38,8 +38,8 @@ import ClientKit
     /// Last notification seen by the user.
     public var lastSeenNotificationId: String?
     
-    /// Information about new notifications.
-    public var newNotificationsHasBeenAdded = false
+    /// Amount of new notifications.
+    public var amountOfNewNotifications = 0
     
     /// Last status seen by the user.
     public var lastSeenStatusId: String?
@@ -119,12 +119,15 @@ import ClientKit
     /// Hide statuses without ALT text.
     public var hideStatusesWithoutAlt = false
     
+    /// Should show application badge.
+    public var showApplicationBadge = false
+    
     public func changeApplicationState(accountModel: AccountModel, instance: Instance?, lastSeenStatusId: String?, lastSeenNotificationId: String?) {
         self.account = accountModel
         self.lastSeenNotificationId = lastSeenNotificationId
         self.lastSeenStatusId = lastSeenStatusId
         self.amountOfNewStatuses = 0
-        self.newNotificationsHasBeenAdded = false
+        self.amountOfNewNotifications = 0
 
         if let statusesConfiguration = instance?.configuration?.statuses {
             self.statusMaxCharacters = statusesConfiguration.maxCharacters
@@ -142,7 +145,7 @@ import ClientKit
         self.lastSeenStatusId = nil
         self.lastSeenNotificationId = nil
         self.amountOfNewStatuses = 0
-        self.newNotificationsHasBeenAdded = false
+        self.amountOfNewNotifications = 0
 
         self.statusMaxCharacters = ApplicationState.defaults.statusMaxCharacters
         self.statusMaxMediaAttachments = ApplicationState.defaults.statusMaxMediaAttachments

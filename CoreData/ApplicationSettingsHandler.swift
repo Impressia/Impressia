@@ -67,6 +67,7 @@ class ApplicationSettingsHandler {
         applicationState.showGridOnUserProfile = defaultSettings.showGridOnUserProfile
         applicationState.showReboostedStatuses = defaultSettings.showReboostedStatuses
         applicationState.hideStatusesWithoutAlt = defaultSettings.hideStatusesWithoutAlt
+        applicationState.showApplicationBadge = defaultSettings.showApplicationBadge
 
         if let menuPosition = MenuPosition(rawValue: Int(defaultSettings.menuPosition)) {
             applicationState.menuPosition = menuPosition
@@ -136,6 +137,12 @@ class ApplicationSettingsHandler {
     func set(showSensitive: Bool, modelContext: ModelContext) {
         let defaultSettings = self.get(modelContext: modelContext)
         defaultSettings.showSensitive = showSensitive
+        try? modelContext.save()
+    }
+    
+    func set(showApplicationBadge: Bool, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
+        defaultSettings.showApplicationBadge = showApplicationBadge
         try? modelContext.save()
     }
 

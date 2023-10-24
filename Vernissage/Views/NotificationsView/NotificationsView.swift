@@ -98,7 +98,10 @@ struct NotificationsView: View {
                 }
                 
                 try AccountDataHandler.shared.update(lastSeenNotificationId: linkable.data.first?.id, applicationState: self.applicationState, modelContext: modelContext)
-                self.applicationState.newNotificationsHasBeenAdded = false
+
+                // Refresh infomation about viewed notifications.
+                self.applicationState.amountOfNewNotifications = 0
+                try? await NotificationsService.shared.setBadgeCount(0)
             }
         } catch {
             if !Task.isCancelled {
@@ -135,7 +138,10 @@ struct NotificationsView: View {
                 }
 
                 try AccountDataHandler.shared.update(lastSeenNotificationId: linkable.data.first?.id, applicationState: self.applicationState, modelContext: modelContext)
-                self.applicationState.newNotificationsHasBeenAdded = false
+                
+                // Refresh infomation about viewed notifications.
+                self.applicationState.amountOfNewNotifications = 0
+                try? await NotificationsService.shared.setBadgeCount(0)
 
                 self.minId = linkable.link?.minId
                 self.notifications.insert(contentsOf: linkable.data, at: 0)

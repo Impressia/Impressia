@@ -39,6 +39,9 @@ struct SettingsView: View {
                     // Avatar shapes.
                     AvatarShapesSectionView()
 
+                    // Notifications.
+                    NotificationView()
+                    
                     // Media settings view.
                     MediaSettingsView()
 

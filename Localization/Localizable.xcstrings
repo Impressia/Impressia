@@ -4383,6 +4383,22 @@
         }
       }
     },
+    "settings.error.notificationEnableFailed" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error during enabling notifications."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Błąd podczas włączania powiadomień."
+          }
+        }
+      }
+    },
     "settings.navigationBar.title" : {
       "comment" : "Settings view.",
       "localizations" : {
@@ -5450,6 +5466,56 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dodaj konto"
+          }
+        }
+      }
+    },
+    "settings.title.notifications" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Powiadomienia"
+          }
+        }
+      }
+    },
+    "settings.title.notificationsDescription" : {
+      "comment" : "Application badge with amount of new notifications will be visible near the app icon.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Application badge with amount of new notifications will be visible new the app icon."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Licznik z ilością nowych powiadomień będzie wyświetlany obok ikony aplikacji."
+          }
+        }
+      }
+    },
+    "settings.title.notificationsTitle" : {
+      "comment" : "Show application badge",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show application badge"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wyświetl ilość powiadomień"
           }
         }
       }

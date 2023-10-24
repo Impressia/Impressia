@@ -13,6 +13,7 @@ import Nuke
 import OSLog
 import EnvironmentKit
 import Semaphore
+import UserNotifications
 
 /// Service responsible for managing notifications.
 @MainActor
@@ -43,6 +44,58 @@ public class NotificationsService {
         } catch {
             ErrorService.shared.handle(error, message: "notifications.error.loadingNotificationsFailed")
             return false
+        }
+    }
+    
+    public func amountOfNewNotifications(for account: AccountModel, modelContext: ModelContext) async -> Int {
+        await semaphore.wait()
+        defer { semaphore.signal() }
+        
+        guard let accessToken = account.accessToken else {
+            return 0
+        }
+                
+        // Get maximimum downloaded stauts id.
+        guard let lastSeenNotificationId = self.getLastSeenNotificationId(accountId: account.id, modelContext: modelContext)  else {
+            return 0
+        }
+        
+        let client = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
+        var notifications: [PixelfedKit.Notification] = []
+        var newestNotificationId = lastSeenNotificationId
+        
+        // There can be more then 80 newest notifications, that's why we have to sometimes send more then one request.
+        while true {
+            do {
+                let downloadedNotifications = try await client.notifications(minId: newestNotificationId, limit: 80)
+                
+                guard let firstNotification = downloadedNotifications.data.first else {
+                    break
+                }
+                
+                let visibleNotifications = downloadedNotifications.data.filter({ $0.id != lastSeenNotificationId })
+
+                notifications.append(contentsOf: visibleNotifications)
+                newestNotificationId = firstNotification.id
+            } catch {
+                ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadingNewStatuses")
+                break
+            }
+        }
+        
+        // Return number of new notifications not visible yet on the timeline.
+        return notifications.count
+    }
+    
+    /// Function sets application badge counts when notifications (and badge) are enabled.
+    public func setBadgeCount(_ count: Int) async throws {
+        let center = UNUserNotificationCenter.current()
+        let settings = await center.notificationSettings()
+        
+        guard (settings.authorizationStatus == .authorized) || (settings.authorizationStatus == .provisional) else { return }
+
+        if settings.badgeSetting == .enabled {
+            try await center.setBadgeCount(count)
         }
     }
     

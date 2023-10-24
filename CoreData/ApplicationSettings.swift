@@ -9,33 +9,34 @@ import SwiftData
 import EnvironmentKit
 
 @Model final public class ApplicationSettings {
-    public var currentAccount: String?
-    public var theme: Int32
-    public var tintColor: Int32
-    public var avatarShape: Int32
-    public var activeIcon: String
-    public var lastRefreshTokens: Date
+    public var currentAccount: String? = nil
+    public var theme: Int32 = Int32(Theme.system.rawValue)
+    public var tintColor: Int32 = Int32(TintColor.accentColor2.rawValue)
+    public var avatarShape: Int32 = Int32(AvatarShape.circle.rawValue)
+    public var activeIcon: String = "Default"
+    public var lastRefreshTokens: Date = Date.distantPast
 
-    public var hapticTabSelectionEnabled: Bool
-    public var hapticRefreshEnabled: Bool
-    public var hapticButtonPressEnabled: Bool
-    public var hapticAnimationEnabled: Bool
-    public var hapticNotificationEnabled: Bool
+    public var hapticTabSelectionEnabled: Bool = true
+    public var hapticRefreshEnabled: Bool = true
+    public var hapticButtonPressEnabled: Bool = true
+    public var hapticAnimationEnabled: Bool = true
+    public var hapticNotificationEnabled: Bool = true
 
-    public var showSensitive: Bool
-    public var showPhotoDescription: Bool
-    public var menuPosition: Int32
-    public var showAvatarsOnTimeline: Bool
-    public var showFavouritesOnTimeline: Bool
-    public var showAltIconOnTimeline: Bool
-    public var warnAboutMissingAlt: Bool
-    public var showGridOnUserProfile: Bool
-    public var showReboostedStatuses: Bool
-    public var hideStatusesWithoutAlt: Bool
+    public var showSensitive: Bool = false
+    public var showApplicationBadge: Bool = false
+    public var showPhotoDescription: Bool = false
+    public var menuPosition: Int32 = Int32(MenuPosition.top.rawValue)
+    public var showAvatarsOnTimeline: Bool = false
+    public var showFavouritesOnTimeline: Bool = false
+    public var showAltIconOnTimeline: Bool = false
+    public var warnAboutMissingAlt: Bool = true
+    public var showGridOnUserProfile: Bool = false
+    public var showReboostedStatuses: Bool = false
+    public var hideStatusesWithoutAlt: Bool = false
 
-    public var customNavigationMenuItem1: Int32
-    public var customNavigationMenuItem2: Int32
-    public var customNavigationMenuItem3: Int32
+    public var customNavigationMenuItem1: Int32 = 1
+    public var customNavigationMenuItem2: Int32 = 2
+    public var customNavigationMenuItem3: Int32 = 5
     
     init(
         currentAccount: String? = nil,
@@ -50,6 +51,7 @@ import EnvironmentKit
         hapticAnimationEnabled: Bool = true,
         hapticNotificationEnabled: Bool = true,
         showSensitive: Bool = false,
+        showApplicationBadge: Bool = false,
         showPhotoDescription: Bool = false,
         menuPosition: Int32 = Int32(MenuPosition.top.rawValue),
         showAvatarsOnTimeline: Bool = false,
@@ -75,6 +77,7 @@ import EnvironmentKit
         self.hapticAnimationEnabled = hapticAnimationEnabled
         self.hapticNotificationEnabled = hapticNotificationEnabled
         self.showSensitive = showSensitive
+        self.showApplicationBadge = showApplicationBadge
         self.showPhotoDescription = showPhotoDescription
         self.menuPosition = menuPosition
         self.showAvatarsOnTimeline = showAvatarsOnTimeline
