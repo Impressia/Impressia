@@ -62,25 +62,42 @@ public class NotificationsService {
         
         let client = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
         var notifications: [PixelfedKit.Notification] = []
-        var newestNotificationId = lastSeenNotificationId
+        var maxId: String? = nil
+        var allItemsProcessed = false
         
-        // There can be more then 80 newest notifications, that's why we have to sometimes send more then one request.
+        // There can be more then 40 newest notifications, that's why we have to sometimes send more then one request.
         while true {
             do {
-                let linkable = try await client.notifications(minId: newestNotificationId, limit: 80)
-                let visibleNotifications = linkable.data.filter({ $0.id != lastSeenNotificationId })
-                
-                guard let firstNotification = visibleNotifications.first else {
-                    break
-                }
-
-                notifications.append(contentsOf: visibleNotifications)
-                
-                guard let minId = linkable.link?.minId else {
+                let linkable = try await client.notifications(maxId: maxId, limit: 40)
+                guard linkable.data.first != nil else {
                     break
                 }
                 
-                newestNotificationId = minId
+                for item in linkable.data {
+                    // We have to stop when we go to already seen notification.
+                    if item.id == lastSeenNotificationId {
+                        allItemsProcessed = true
+                        break
+                    }
+                    
+                    notifications.append(item)
+                    
+                    // We have to stop when we already count 99 notifications (it's maximum number which we want to show in the badge).
+                    if notifications.count == 99 {
+                        allItemsProcessed = true
+                        break
+                    }
+                }
+                
+                if allItemsProcessed {
+                    break
+                }
+                
+                guard let linkedMaxId = linkable.link?.maxId else {
+                    break
+                }
+                
+                maxId = linkedMaxId
             } catch {
                 ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadingNewStatuses")
                 break
