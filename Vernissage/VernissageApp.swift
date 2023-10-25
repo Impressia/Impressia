@@ -226,28 +226,21 @@ struct VernissageApp: App {
     private func calculateNewPhotosInBackground() async {
         let modelContext = self.modelContainer.mainContext
 
-        if let account = self.applicationState.account {
-            self.applicationState.amountOfNewStatuses = await HomeTimelineService.shared.amountOfNewStatuses(
-                for: account,
-                includeReblogs: self.applicationState.showReboostedStatuses,
-                hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt,
-                modelContext: modelContext
-            )
-        }
+        self.applicationState.amountOfNewStatuses = await HomeTimelineService.shared.amountOfNewStatuses(
+            includeReblogs: self.applicationState.showReboostedStatuses,
+            hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt,
+            modelContext: modelContext
+        )
     }
     
     private func calculateNewNotificationsInBackground() async {
         Logger.main.info("Calculating new notifications started.")
 
         let modelContext = self.modelContainer.mainContext
+        let amountOfNewNotifications = await NotificationsService.shared.amountOfNewNotifications(modelContext: modelContext)
+        self.applicationState.amountOfNewNotifications = amountOfNewNotifications
 
-        var amountOfNewNotifications = 0
-        if let account = self.applicationState.account {
-            amountOfNewNotifications = await NotificationsService.shared.amountOfNewNotifications(for: account, modelContext: modelContext)
-        }
-        
         do {
-            self.applicationState.amountOfNewNotifications = amountOfNewNotifications
             try await NotificationsService.shared.setBadgeCount(amountOfNewNotifications, modelContext: modelContext)
             Logger.main.info("New notifications (\(amountOfNewNotifications)) calculated successfully.")
         } catch {

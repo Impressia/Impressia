@@ -337,19 +337,14 @@ struct MainView: View {
     }
     
     private func calculateNewPhotosInBackground() async {
-        if let account = self.applicationState.account {
-            self.applicationState.amountOfNewStatuses = await HomeTimelineService.shared.amountOfNewStatuses(
-                for: account,
-                includeReblogs: self.applicationState.showReboostedStatuses,
-                hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt,
-                modelContext: modelContext
-            )
-        }
+        self.applicationState.amountOfNewStatuses = await HomeTimelineService.shared.amountOfNewStatuses(
+            includeReblogs: self.applicationState.showReboostedStatuses,
+            hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt,
+            modelContext: modelContext
+        )
     }
     
     private func calculateNewNotificationsInBackground() async {
-        if let account = self.applicationState.account {
-            self.applicationState.amountOfNewNotifications = await NotificationsService.shared.amountOfNewNotifications(for: account, modelContext: modelContext)
-        }
+        self.applicationState.amountOfNewNotifications = await NotificationsService.shared.amountOfNewNotifications(modelContext: modelContext)
     }
 }

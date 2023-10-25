@@ -47,20 +47,24 @@ public class NotificationsService {
         }
     }
     
-    public func amountOfNewNotifications(for account: AccountModel, modelContext: ModelContext) async -> Int {
+    public func amountOfNewNotifications(modelContext: ModelContext) async -> Int {
         await semaphore.wait()
         defer { semaphore.signal() }
         
-        guard let accessToken = account.accessToken else {
+        guard let accountData = AccountDataHandler.shared.getCurrentAccountData(modelContext: modelContext) else {
+            return 0
+        }
+        
+        guard let accessToken = accountData.accessToken else {
             return 0
         }
                 
         // Get maximimum downloaded stauts id.
-        guard let lastSeenNotificationId = self.getLastSeenNotificationId(accountId: account.id, modelContext: modelContext)  else {
+        guard let lastSeenNotificationId = self.getLastSeenNotificationId(accountId: accountData.id, modelContext: modelContext)  else {
             return 0
         }
         
-        let client = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
+        let client = PixelfedClient(baseURL: accountData.serverUrl).getAuthenticated(token: accessToken)
         var notifications: [PixelfedKit.Notification] = []
         var maxId: String? = nil
         var allItemsProcessed = false

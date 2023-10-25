@@ -24,20 +24,24 @@ public class HomeTimelineService {
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
     private let semaphore = AsyncSemaphore(value: 1)
     
-    public func amountOfNewStatuses(for account: AccountModel, includeReblogs: Bool, hideStatusesWithoutAlt: Bool, modelContext: ModelContext) async -> Int {
+    public func amountOfNewStatuses(includeReblogs: Bool, hideStatusesWithoutAlt: Bool, modelContext: ModelContext) async -> Int {
         await semaphore.wait()
         defer { semaphore.signal() }
         
-        guard let accessToken = account.accessToken else {
+        guard let accountData = AccountDataHandler.shared.getCurrentAccountData(modelContext: modelContext) else {
+            return 0
+        }
+        
+        guard let accessToken = accountData.accessToken else {
             return 0
         }
                 
         // Get maximimum downloaded stauts id.
-        guard let lastSeenStatusId = self.getLastLoadedStatusId(accountId: account.id, modelContext: modelContext)  else {
+        guard let lastSeenStatusId = self.getLastLoadedStatusId(accountId: accountData.id, modelContext: modelContext)  else {
             return 0
         }
         
-        let client = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
+        let client = PixelfedClient(baseURL: accountData.serverUrl).getAuthenticated(token: accessToken)
         var statuses: [Status] = []
         var newestStatusId = lastSeenStatusId
         
@@ -52,7 +56,7 @@ public class HomeTimelineService {
                     break
                 }
                                 
-                let visibleStatuses = self.getVisibleStatuses(accountId: account.id,
+                let visibleStatuses = self.getVisibleStatuses(accountId: accountData.id,
                                                               statuses: downloadedStatuses,
                                                               hideStatusesWithoutAlt: hideStatusesWithoutAlt,
                                                               modelContext: modelContext)
