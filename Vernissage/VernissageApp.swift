@@ -12,6 +12,7 @@ import EnvironmentKit
 import WidgetKit
 import SwiftData
 import TipKit
+import OSLog
 import BackgroundTasks
 
 @main
@@ -63,17 +64,6 @@ struct VernissageApp: App {
             .task {
                 await self.onApplicationStart()
             }
-            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    Task {
-                        // Refresh indicator of new photos and new statuses when application is become active.
-                        _ = await (self.calculateNewPhotosInBackground(), self.calculateNewNotificationsInBackground())
-                    }
-                }
-
-                // Reload widget content when application become active.
-                WidgetCenter.shared.reloadAllTimelines()
-            }
             .onReceive(timer) { _ in
                 Task {
                     // Refresh indicator of new photos and new notifications each two minutes (when application is in the foreground)..
@@ -106,14 +96,23 @@ struct VernissageApp: App {
         }
         .onChange(of: phase) { oldValue, newValue in
             switch newValue {
-            case .background: scheduleAppRefresh()
+            case .background:
+                scheduleAppRefresh()
+            case .active:
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    Task {
+                        // Refresh indicator of new photos and new statuses when application is become active.
+                        _ = await (self.calculateNewPhotosInBackground(), self.calculateNewNotificationsInBackground())
+                    }
+                }
+
+                // Reload widget content when application become active.
+                WidgetCenter.shared.reloadAllTimelines()
             default: break
             }
         }
         .backgroundTask(.appRefresh(AppConstants.backgroundFetcherName)) {
-            Task { @MainActor in
-                await self.setBadgeCount()
-            }
+            await self.setBadgeCount()
         }
     }
 
@@ -238,24 +237,38 @@ struct VernissageApp: App {
     }
     
     private func calculateNewNotificationsInBackground() async {
+        Logger.main.info("Calculating new notifications started.")
+
         let modelContext = self.modelContainer.mainContext
 
+        var amountOfNewNotifications = 0
         if let account = self.applicationState.account {
-            self.applicationState.amountOfNewNotifications = await NotificationsService.shared.amountOfNewNotifications(for: account, modelContext: modelContext)
-            try? await NotificationsService.shared.setBadgeCount(self.applicationState.amountOfNewNotifications, modelContext: modelContext)
-        } else {
-            try? await NotificationsService.shared.setBadgeCount(0, modelContext: modelContext)
+            amountOfNewNotifications = await NotificationsService.shared.amountOfNewNotifications(for: account, modelContext: modelContext)
+        }
+        
+        do {
+            self.applicationState.amountOfNewNotifications = amountOfNewNotifications
+            try await NotificationsService.shared.setBadgeCount(amountOfNewNotifications, modelContext: modelContext)
+            Logger.main.info("New notifications (\(amountOfNewNotifications)) calculated successfully.")
+        } catch {
+            Logger.main.error("Error ['Set badge count failed']: \(error.localizedDescription)")
         }
     }
     
     private func scheduleAppRefresh() {
         let request = BGAppRefreshTaskRequest(identifier: AppConstants.backgroundFetcherName)
-        request.earliestBeginDate = .now.addingTimeInterval(3600)
-        try? BGTaskScheduler.shared.submit(request)
+        request.earliestBeginDate = .now.addingTimeInterval(20 * 60)
+
+        do {
+            try BGTaskScheduler.shared.submit(request)
+            Logger.main.info("Background task scheduled successfully.")
+        } catch {
+            Logger.main.error("Error ['Registering background task failed']: \(error.localizedDescription)")
+        }
     }
     
     private func setBadgeCount() async {
-        await self.calculateNewNotificationsInBackground()
         scheduleAppRefresh()
+        await self.calculateNewNotificationsInBackground()
     }
 }

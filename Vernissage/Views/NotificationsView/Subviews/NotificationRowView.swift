@@ -58,15 +58,17 @@ struct NotificationRowView: View {
 
                     Spacer()
 
+                    if self.isNewNotification {
+                        Circle()
+                            .foregroundStyle(self.applicationState.tintColor.color())
+                            .frame(width: 8.0, height: 8.0)
+                    }
+                    
                     if let createdAt = self.notification.createdAt.toDate(.isoDateTimeMilliSec) {
                         RelativeTime(date: createdAt)
                             .foregroundColor(.customGrayColor)
                             .font(.footnote)
                     }
-                    
-                    Circle()
-                        .foregroundStyle(self.isNewNotification ? self.applicationState.tintColor.color() : Color.clear)
-                        .frame(width: 8.0, height: 8.0)
                 }
 
                 Text(self.getTitle(), comment: "Notification type")
