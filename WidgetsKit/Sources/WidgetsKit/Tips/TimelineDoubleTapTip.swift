@@ -10,7 +10,7 @@ import TipKit
 
 public struct TimelineDoubleTapTip: Tip {
     public var options: [TipOption] {
-        Tips.MaxDisplayCount(5)
+        Tips.MaxDisplayCount(2)
     }
     
     public var title: Text {

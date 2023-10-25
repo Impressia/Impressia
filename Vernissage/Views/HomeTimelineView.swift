@@ -59,6 +59,7 @@ struct HomeTimelineView: View {
             ScrollView {
                 LazyVStack(alignment: .center) {
                     TipView(timelineDoubleTapTip)
+                        .padding(8)
 
                     ForEach(self.statusViewModels, id: \.id) { item in
                         if self.shouldUpToDateBeVisible(statusId: item.id) {

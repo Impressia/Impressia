@@ -10,7 +10,7 @@ import TipKit
 
 public struct MainNavigationTip: Tip {
     public var options: [TipOption] {
-        Tips.MaxDisplayCount(2)
+        Tips.MaxDisplayCount(1)
     }
     
     public var title: Text {
