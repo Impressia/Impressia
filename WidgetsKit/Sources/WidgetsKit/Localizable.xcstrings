@@ -1241,6 +1241,7 @@
       }
     },
     "photoEdit.title.accessibility" : {
+      "comment" : "Accessibility",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1345,6 +1346,7 @@
       }
     },
     "photoEdit.title.photo" : {
+      "comment" : "Photo",
       "localizations" : {
         "en" : {
           "stringUnit" : {

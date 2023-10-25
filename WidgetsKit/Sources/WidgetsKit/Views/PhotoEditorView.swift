@@ -25,7 +25,7 @@ public struct PhotoEditorView: View {
             VStack(alignment: .leading) {
                 if let data = photoAttachment.photoData, let uiImage = UIImage(data: data) {
                     List {
-                        Section(header: Text("photoEdit.title.photo")) {
+                        Section(header: Text("photoEdit.title.photo", bundle: Bundle.module, comment: "Photo")) {
                             HStack {
                                 Spacer()
                                 Image(uiImage: uiImage)
@@ -37,7 +37,7 @@ public struct PhotoEditorView: View {
                             }
                         }
 
-                        Section(header: Text("photoEdit.title.accessibility")) {
+                        Section(header: Text("photoEdit.title.accessibility", bundle: Bundle.module, comment: "Accessibility")) {
                             TextField(NSLocalizedString("photoEdit.title.accessibilityDescription", bundle: Bundle.module, comment: "Accesibility"), text: $description, axis: .vertical)
                                 .keyboardType(.default)
                                 .lineLimit(3...6)
