@@ -41,8 +41,11 @@ class ViewedStatusHandler {
 
         do {
             let reblogId = reblog.id
+            let statusId = status.id
+
             var fetchDescriptor = FetchDescriptor<ViewedStatus>(
-                predicate: #Predicate { $0.pixelfedAccount?.id == accountId && $0.id != status.id && ($0.id == reblogId || $0.reblogId == reblogId) }
+                // Here we are finding status which is other then checked status AND orginal status has been visible OR same reblogged by different user status has been visible.
+                predicate: #Predicate { $0.pixelfedAccount?.id == accountId && $0.id != statusId && ($0.id == reblogId || $0.reblogId == reblogId) }
             )
             fetchDescriptor.fetchLimit = 1
             fetchDescriptor.includePendingChanges = true
@@ -50,16 +53,8 @@ class ViewedStatusHandler {
             guard let first = try modelContext.fetch(fetchDescriptor).first else {
                 return false
             }
-            
-            if first.reblogId == nil {
-                return true
-            }
-            
-            if first.id != status.id {
-                return true
-            }
-            
-            return false
+                        
+            return true
         } catch {
             CoreDataError.shared.handle(error, message: "Error during fetching viewed statuses (hasBeenAlreadyOnTimeline).")
             return false
