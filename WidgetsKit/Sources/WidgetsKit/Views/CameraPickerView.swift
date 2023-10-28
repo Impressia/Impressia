@@ -8,6 +8,7 @@ import Foundation
 import UIKit
 import SwiftUI
 
+@MainActor
 struct CameraPickerView: UIViewControllerRepresentable {
     @Environment(\.presentationMode) var isPresented
     @Binding var selectedImage: UIImage?

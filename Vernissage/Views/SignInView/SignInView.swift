@@ -12,12 +12,14 @@ import ServicesKit
 import EnvironmentKit
 import WidgetsKit
 
+@MainActor
 struct SignInView: View {
-    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
 
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var client: Client
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(RouterPath.self) var routerPath
+    @Environment(Client.self) var client
 
     @State private var serverAddress = String.empty()
     @State private var instructionsUrlString: String?
@@ -39,10 +41,10 @@ struct SignInView: View {
                             .keyboardType(.URL)
                             .disableAutocorrection(true)
                             .clearButton(text: $serverAddress)
-
+                        
                         Button(NSLocalizedString("signin.title.signIn", comment: "Sign in")) {
                             HapticService.shared.fireHaptic(of: .buttonPress)
-
+                            
                             let baseAddress = self.getServerAddress(uri: self.serverAddress)
                             self.signIn(baseAddress: baseAddress)
                         }
@@ -51,7 +53,7 @@ struct SignInView: View {
                     }
                 }
                 .buttonStyle(PlainButtonStyle())
-
+                
             } header: {
                 Text("signin.title.enterServerAddress", comment: "Enter server address")
             } footer: {
@@ -64,7 +66,7 @@ struct SignInView: View {
                     }
                 }
             }
-
+            
             Section("signin.title.chooseServer") {
                 if self.instances.isEmpty {
                     HStack {
@@ -73,7 +75,7 @@ struct SignInView: View {
                         Spacer()
                     }
                 }
-
+                
                 ForEach(self.instances.filter { self.serverAddress.isEmpty || $0.uri.contains(self.serverAddress) }, id: \.uri) { instance in
                     InstanceRowView(instance: instance) { uri in
                         let baseAddress = self.getServerAddress(uri: uri)
@@ -95,15 +97,14 @@ struct SignInView: View {
         Task {
             do {
                 let authorizationSession = AuthorizationSession()
-                try await AuthorizationService.shared.sign(in: baseAddress, session: authorizationSession) { accountModel in
+                try await AuthorizationService.shared.sign(in: baseAddress,
+                                                           session: authorizationSession,
+                                                           modelContext: modelContext) { accountModel in
                     onSignedIn?(accountModel)
-
-                    DispatchQueue.main.sync {
-                        dismiss()
-                    }
+                    dismiss()
                 }
             } catch let error as AuthorisationError {
-                ErrorService.shared.handle(error, message: error.localizedDescription, showToastr: true)
+                ErrorService.shared.handle(error, localizedMessage: error.localizedDescription, showToastr: true)
             } catch {
                 ErrorService.shared.handle(error, message: "signin.error.communicationFailed", showToastr: true)
             }

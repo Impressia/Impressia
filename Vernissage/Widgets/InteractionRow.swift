@@ -15,9 +15,10 @@ import WidgetsKit
 struct InteractionRow: View {
     typealias DeleteAction = () -> Void
 
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var client: Client
-    @EnvironmentObject var routerPath: RouterPath
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
+    @Environment(RouterPath.self) var routerPath
+    @Environment(\.modelContext) private var modelContext
 
     @State var statusModel: StatusModel
 
@@ -155,9 +156,7 @@ struct InteractionRow: View {
                 self.reblogged = status.reblogged
             }
 
-            ToastrService.shared.showSuccess(self.reblogged
-                                             ? NSLocalizedString("status.title.reboosted", comment: "Reboosted")
-                                             : NSLocalizedString("status.title.unreboosted", comment: "Unreboosted"), imageName: "custom.rocket.fill")
+            ToastrService.shared.showSuccess(self.reblogged ? "status.title.reboosted" : "status.title.unreboosted", imageName: "custom.rocket.fill")
         } catch {
             ErrorService.shared.handle(error, message: "status.error.reboostFailed", showToastr: true)
         }
@@ -177,9 +176,7 @@ struct InteractionRow: View {
                 self.favourited = status.favourited
             }
 
-            ToastrService.shared.showSuccess(self.favourited
-                                             ? NSLocalizedString("status.title.favourited", comment: "Favourited")
-                                             : NSLocalizedString("status.title.unfavourited", comment: "Unfavourited"), imageSystemName: "star.fill")
+            ToastrService.shared.showSuccess(self.favourited ? "status.title.favourited" : "status.title.unfavourited", imageSystemName: "star.fill")
         } catch {
             ErrorService.shared.handle(error, message: "status.error.favouriteFailed", showToastr: true)
         }
@@ -192,22 +189,17 @@ struct InteractionRow: View {
             : try await self.client.statuses?.bookmark(statusId: self.statusModel.getOrginalStatusId())
 
             self.bookmarked.toggle()
-            ToastrService.shared.showSuccess(self.bookmarked
-                                             ? NSLocalizedString("status.title.bookmarked", comment: "Bookmarked")
-                                             : NSLocalizedString("status.title.unbookmarked", comment: "Unbookmarked"), imageSystemName: "bookmark.fill")
+            ToastrService.shared.showSuccess(self.bookmarked ? "status.title.bookmarked" : "status.title.unbookmarked", imageSystemName: "bookmark.fill")
         } catch {
             ErrorService.shared.handle(error, message: "status.error.bookmarkFailed", showToastr: true)
         }
     }
 
     private func deleteStatus() {
-        Task {
+        Task { @MainActor in
             do {
                 // Remove from server.
                 try await self.client.statuses?.delete(statusId: self.statusModel.id)
-
-                // Remove from database.
-                StatusDataHandler.shared.remove(accountId: self.statusModel.account.id, statusId: self.statusModel.id)
 
                 ToastrService.shared.showSuccess("status.title.statusDeleted", imageSystemName: "checkmark.circle.fill")
                 self.delete?()

@@ -12,10 +12,11 @@ import ServicesKit
 import EnvironmentKit
 import WidgetsKit
 
+@MainActor
 struct InstanceView: View {
-    @EnvironmentObject private var applicationState: ApplicationState
-    @EnvironmentObject private var routerPath: RouterPath
-    @EnvironmentObject private var client: Client
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(RouterPath.self) var routerPath
+    @Environment(Client.self) var client
 
     @State private var state: ViewState = .loading
     @State private var instance: Instance?
@@ -130,7 +131,9 @@ struct InstanceView: View {
                 self.instance = try await self.client.instances.instance(url: serverUrl)
             }
 
-            self.state = .loaded
+            withAnimation {
+                self.state = .loaded
+            }
         } catch {
             if !Task.isCancelled {
                 ErrorService.shared.handle(error, message: "instance.error.loadingDataFailed", showToastr: true)

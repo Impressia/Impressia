@@ -24,12 +24,20 @@ Thank you in advance for any, even the smallest help, with the development of th
 
 ## Translations
 
-Creating new translation is pretty easy, all you need to do is to copy two folders:
- - `Vernissage/Localization/en.lproj`
- - `Vernissage/PixelfedKit/Sources/PixelfedKit/Resources/en.lproj`
+Application is using new translation mechanism introduced in XCode 15 (xcstring). Here you can find description how this mechanism is working: [https://www.youtube.com/watch?v=jNbnwwLrJE8](https://www.youtube.com/watch?v=jNbnwwLrJE8).
 
-In the name of the folders you have to put the code of the new language ([here](https://stackoverflow.com/a/13360348) you can find the languages codes).
-Then you have to open files in these folders and translate them 🇯🇵🇫🇷🇨🇮🇧🇪. After translation create a Pull Request 👍.
+In the applications we have several string catalogs:
+ - Localization/Localizable
+ - EnvironmentKit/Source/EnvironmentKit/Localizable
+ - WidgetKit/Source/WidgetKit/Localizable
+ - ServicesKit/Source/ServicesKit/Localizable
+ - PixelfedKit/Source/PixelfedKit/Localizable
+ - ClientKit/Source/ClientKit/Localizable
+
+Right now it's very easy to find new (not translated yet) titles. Also you can mark titles which need some review.
+However you need to have XCode 15 installed. There isn't right now good external tool that have similar features.
+
+![translations](Resources/translations.png) 
 
 From time to time you have to come back and translate lines which has been added since the last translation. 
 
@@ -38,9 +46,5 @@ From time to time you have to come back and translate lines which has been added
 Things that should be implemented in version 2.0:
 
  - [ ] Use auto generated resources (Color/Images) instead static extensions (how to do this in separete Swift Packages?)
- - [ ] Move to xcstring (new Xcode transaction system)
- - [ ] Move to new Observable macro (iOS 17)
- - [ ] Migrate to SwiftData (iOS 17)
- - [ ] Use ViewModels
- - [ ] Add tips (new TipKit framework in iOS 17)
+ - [ ] Use ViewModels?
  - [ ] Enable swiftlint (https://github.com/realm/SwiftLint/issues/5053)

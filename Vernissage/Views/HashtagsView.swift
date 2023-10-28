@@ -12,6 +12,7 @@ import ServicesKit
 import EnvironmentKit
 import WidgetsKit
 
+@MainActor
 struct HashtagsView: View {
     public enum ListType: Hashable {
         case trending
@@ -30,9 +31,9 @@ struct HashtagsView: View {
         }
     }
 
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var client: Client
-    @EnvironmentObject var routerPath: RouterPath
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
+    @Environment(RouterPath.self) var routerPath
 
     @State public var listType: ListType
 
@@ -98,7 +99,10 @@ struct HashtagsView: View {
     private func loadData() async {
         do {
             self.tags = try await self.loadTags()
-            self.state = .loaded
+            
+            withAnimation {
+                self.state = .loaded
+            }
         } catch {
             if !Task.isCancelled {
                 ErrorService.shared.handle(error, message: "tags.error.loadingTagsFailed", showToastr: true)

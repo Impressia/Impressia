@@ -7,18 +7,22 @@
 import Foundation
 import SwiftUI
 import PixelfedKit
+import SwiftData
 
 public class AccountFetcher {
     public static let shared = AccountFetcher()
     private init() { }
 
+    @MainActor
     func fetchWidgetEntry() async throws -> [QRCodeWidgetEntry] {
-        let defaultSettings = ApplicationSettingsHandler.shared.get()
+        let modelContext = SwiftDataHandler.shared.sharedModelContainer.mainContext
+
+        let defaultSettings = ApplicationSettingsHandler.shared.get(modelContext: modelContext)
         guard let accountId = defaultSettings.currentAccount else {
             return [self.placeholder()]
         }
 
-        guard let account = AccountDataHandler.shared.getAccountData(accountId: accountId) else {
+        guard let account = AccountDataHandler.shared.getAccountData(accountId: accountId, modelContext: modelContext) else {
             return [self.placeholder()]
         }
 

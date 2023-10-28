@@ -47,9 +47,9 @@ struct DeviceImageGallery: ViewModifier {
                         self.action(galleryProperties)
                     }
                 }
-                .onChange(of: self.horizontalSizeClass) { horizontalSize in
+                .onChange(of: self.horizontalSizeClass) { oldHorizontalSize, newHorizontalSize in
                     asyncAfter(0.1) {
-                        let galleryProperties = self.getGalleryProperties(geometry: geometry, horizontalSize: horizontalSize ?? .compact)
+                        let galleryProperties = self.getGalleryProperties(geometry: geometry, horizontalSize: newHorizontalSize ?? .compact)
                         self.action(galleryProperties)
                     }
                 }

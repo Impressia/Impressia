@@ -13,17 +13,19 @@ import EnvironmentKit
 import WidgetsKit
 
 struct NotificationRowView: View {
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var routerPath: RouterPath
-    @EnvironmentObject var client: Client
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(RouterPath.self) var routerPath
+    @Environment(Client.self) var client
 
     @State private var image: SwiftUI.Image?
 
     private var attachment: MediaAttachment?
-    private var notification: PixelfedKit.Notification
+    private let isNewNotification: Bool
+    private let notification: PixelfedKit.Notification
 
-    public init(notification: PixelfedKit.Notification) {
+    public init(notification: PixelfedKit.Notification, isNewNotification: Bool) {
         self.notification = notification
+        self.isNewNotification = isNewNotification
         self.attachment = notification.status?.getAllImageMediaAttachments().first
 
         if let attachment, let previewUrl = attachment.previewUrl, let imageFromCache = CacheImageService.shared.get(for: previewUrl) {
@@ -48,7 +50,7 @@ struct NotificationRowView: View {
             .frame(width: 56, height: 56)
 
             VStack(alignment: .leading, spacing: 0) {
-                HStack(alignment: .top) {
+                HStack(alignment: .center) {
                     Text(self.notification.account.displayNameWithoutEmojis)
                         .foregroundColor(.mainTextColor)
                         .font(.footnote)
@@ -56,6 +58,12 @@ struct NotificationRowView: View {
 
                     Spacer()
 
+                    if self.isNewNotification {
+                        Circle()
+                            .foregroundStyle(self.applicationState.tintColor.color())
+                            .frame(width: 8.0, height: 8.0)
+                    }
+                    
                     if let createdAt = self.notification.createdAt.toDate(.isoDateTimeMilliSec) {
                         RelativeTime(date: createdAt)
                             .foregroundColor(.customGrayColor)

@@ -17,7 +17,7 @@ struct PhotoWidgetEntryView: View {
         case .systemSmall: PhotoSmallWidgetView(entry: entry)
         case .systemMedium: PhotoMediumWidgetView(entry: entry)
         case .systemLarge: PhotoLargeWidgetView(entry: entry)
-        default: Text("Not supported")
+        default: Text("widget.family.notSupported", comment: "Not supported")
         }
     }
 }

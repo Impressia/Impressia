@@ -6,8 +6,11 @@
 
 import Foundation
 import SwiftUI
+import EnvironmentKit
 
 struct MainNavigationOptions: View {
+    @Environment(ApplicationState.self) var applicationState
+
     let onViewModeIconTap: (MainView.ViewMode) -> Void
 
     @Binding var hiddenMenuItems: [MainView.ViewMode]
@@ -24,7 +27,7 @@ struct MainNavigationOptions: View {
             } label: {
                 HStack {
                     Text(MainView.ViewMode.home.title)
-                    Image(systemName: MainView.ViewMode.home.image)
+                    MainView.ViewMode.home.getImage(applicationState: applicationState)
                 }
             }
         }
@@ -35,7 +38,7 @@ struct MainNavigationOptions: View {
             } label: {
                 HStack {
                     Text(MainView.ViewMode.local.title)
-                    Image(systemName: MainView.ViewMode.local.image)
+                    MainView.ViewMode.local.getImage(applicationState: applicationState)
                 }
             }
         }
@@ -46,7 +49,7 @@ struct MainNavigationOptions: View {
             } label: {
                 HStack {
                     Text(MainView.ViewMode.federated.title)
-                    Image(systemName: MainView.ViewMode.federated.image)
+                    MainView.ViewMode.federated.getImage(applicationState: applicationState)
                 }
             }
         }
@@ -57,7 +60,7 @@ struct MainNavigationOptions: View {
             } label: {
                 HStack {
                     Text(MainView.ViewMode.search.title)
-                    Image(systemName: MainView.ViewMode.search.image)
+                    MainView.ViewMode.search.getImage(applicationState: applicationState)
                 }
             }
         }
@@ -70,7 +73,7 @@ struct MainNavigationOptions: View {
             } label: {
                 HStack {
                     Text(MainView.ViewMode.trendingPhotos.title)
-                    Image(systemName: MainView.ViewMode.trendingPhotos.image)
+                    MainView.ViewMode.trendingPhotos.getImage(applicationState: applicationState)
                 }
             }
 
@@ -79,7 +82,7 @@ struct MainNavigationOptions: View {
             } label: {
                 HStack {
                     Text(MainView.ViewMode.trendingTags.title)
-                    Image(systemName: MainView.ViewMode.trendingTags.image)
+                    MainView.ViewMode.trendingTags.getImage(applicationState: applicationState)
                 }
             }
 
@@ -88,7 +91,7 @@ struct MainNavigationOptions: View {
             } label: {
                 HStack {
                     Text(MainView.ViewMode.trendingAccounts.title)
-                    Image(systemName: MainView.ViewMode.trendingAccounts.image)
+                    MainView.ViewMode.trendingAccounts.getImage(applicationState: applicationState)
                 }
             }
         } label: {
@@ -106,7 +109,7 @@ struct MainNavigationOptions: View {
             } label: {
                 HStack {
                     Text(MainView.ViewMode.profile.title)
-                    Image(systemName: MainView.ViewMode.profile.image)
+                    MainView.ViewMode.profile.getImage(applicationState: applicationState)
                 }
             }
         }
@@ -117,7 +120,7 @@ struct MainNavigationOptions: View {
             } label: {
                 HStack {
                     Text(MainView.ViewMode.notifications.title)
-                    Image(systemName: MainView.ViewMode.notifications.image)
+                    MainView.ViewMode.notifications.getImage(applicationState: applicationState)
                 }
             }
         }

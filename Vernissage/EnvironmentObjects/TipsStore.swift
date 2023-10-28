@@ -10,14 +10,13 @@ import ServicesKit
 import OSLog
 import EnvironmentKit
 
-@MainActor
-final class TipsStore: ObservableObject {
+@Observable final class TipsStore {
 
     /// Products are registered in AppStore connect (and for development in InAppPurchaseStoreKitConfiguration.storekit file).
-    @Published private(set) var items = [Product]()
+    private(set) var items = [Product]()
 
     /// Status of the purchase.
-    @Published private(set) var status: ActionStatus? {
+    private(set) var status: ActionStatus? {
         didSet {
             switch status {
             case .failed:
@@ -29,7 +28,7 @@ final class TipsStore: ObservableObject {
     }
 
     /// True when error during purchase occures.
-    @Published var hasError = false
+    var hasError = false
 
     /// Error during purchase.
     var error: PurchaseError? {
@@ -62,7 +61,7 @@ final class TipsStore: ObservableObject {
             try await self.handlePurchase(from: result)
         } catch {
             self.status = .failed(.system(error))
-            ErrorService.shared.handle(error, message: "Purchase failed.", showToastr: false)
+            ErrorService.shared.handle(error, message: "global.error.purchaseFailed", showToastr: false)
         }
     }
 
@@ -109,7 +108,7 @@ final class TipsStore: ObservableObject {
                 }
             } catch {
                 self?.status = .failed(.system(error))
-                ErrorService.shared.handle(error, message: "Cannot configure transaction listener.", showToastr: false)
+                ErrorService.shared.handle(error, message: "global.error.cannotConfigureTransactionListener", showToastr: false)
             }
         }
     }
@@ -123,7 +122,7 @@ final class TipsStore: ObservableObject {
             self.items = products
         } catch {
             self.status = .failed(.system(error))
-            ErrorService.shared.handle(error, message: "Cannot download in-app products.", showToastr: false)
+            ErrorService.shared.handle(error, message: "global.error.cannotDownloadInAppProducts", showToastr: false)
         }
     }
 }

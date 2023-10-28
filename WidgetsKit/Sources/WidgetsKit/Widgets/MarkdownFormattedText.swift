@@ -10,7 +10,7 @@ import EmojiText
 import EnvironmentKit
 
 public struct MarkdownFormattedText: View {
-    @EnvironmentObject var applicationState: ApplicationState
+    @Environment(ApplicationState.self) var applicationState
 
     private let markdown: String
     private let textView = UITextView()

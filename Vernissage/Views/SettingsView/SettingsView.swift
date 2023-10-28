@@ -7,10 +7,11 @@
 import SwiftUI
 import EnvironmentKit
 
+@MainActor
 struct SettingsView: View {
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var routerPath: RouterPath
-    @EnvironmentObject var tipsStore: TipsStore
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(RouterPath.self) var routerPath
+    @Environment(TipsStore.self) var tipsStore
 
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) private var dismiss
@@ -20,6 +21,9 @@ struct SettingsView: View {
     @State private var appBundleVersion: String?
 
     var body: some View {
+        @Bindable var routerPath = routerPath
+        @Bindable var tipsStore = tipsStore
+
         NavigationStack {
             NavigationView {
                 List {
@@ -35,6 +39,9 @@ struct SettingsView: View {
                     // Avatar shapes.
                     AvatarShapesSectionView()
 
+                    // Notifications.
+                    NotificationView()
+                    
                     // Media settings view.
                     MediaSettingsView()
 
@@ -75,17 +82,17 @@ struct SettingsView: View {
             .withAppRouteur()
             .withOverlayDestinations(overlayDestinations: $routerPath.presentedOverlay)
         }
-        .onChange(of: self.applicationState.theme) { _ in
+        .onChange(of: self.applicationState.theme) {
             // Change theme of current modal screen (unformtunatelly it's not changed autmatically.
             self.theme = self.applicationState.theme.colorScheme() ?? self.getSystemColorScheme()
         }
-        .onChange(of: applicationState.account) { newValue in
+        .onChange(of: applicationState.account) { oldValue, newValue in
             if newValue == nil {
                 self.dismiss()
             }
         }
-        .onChange(of: tipsStore.status) { status in
-            if status == .successful {
+        .onChange(of: tipsStore.status) { oldStatus, newStatus in
+            if newStatus == .successful {
                 withAnimation(.spring()) {
                     self.routerPath.presentedOverlay = .successPayment
                     self.tipsStore.reset()

@@ -10,32 +10,32 @@ import SwiftUI
 import PixelfedKit
 import ServicesKit
 
-public class PhotoAttachment: ObservableObject, Identifiable, Equatable, Hashable {
+@Observable public class PhotoAttachment: Identifiable, Equatable, Hashable {
     public let id: String
 
     /// Information about image from photos picker.
-    public let photosPickerItem: PhotosPickerItem?
+    @ObservationIgnored public let photosPickerItem: PhotosPickerItem?
 
     /// Information about image from share extension.
-    public let nsItemProvider: NSItemProvider?
+    @ObservationIgnored public let nsItemProvider: NSItemProvider?
 
     /// Information about image from camera sheet.
-    public let uiImage: UIImage?
+    @ObservationIgnored public let uiImage: UIImage?
 
     /// Variable used for presentation layer.
-    @Published public var photoData: Data?
+    public var photoData: Data?
 
     /// Property which stores orginal image file copied from Photos to tmp folder.
-    @Published public var photoUrl: URL?
+    public var photoUrl: URL?
 
     /// Property stores information after upload to Pixelfed.
-    @Published public var uploadedAttachment: UploadedAttachment?
+    public var uploadedAttachment: UploadedAttachment?
 
     /// Error from Pixelfed.
-    @Published public var uploadError: Error?
+    public var uploadError: Error?
 
     /// Error from device.
-    @Published public var loadError: Error?
+    public var loadError: Error?
 
     public init(photosPickerItem: PhotosPickerItem? = nil, nsItemProvider: NSItemProvider? = nil, uiImage: UIImage? = nil) {
         self.id = UUID().uuidString
@@ -117,7 +117,7 @@ public extension [PhotoAttachment] {
                 do {
                     try FileManager.default.removeItem(at: fileUrl)
                 } catch {
-                    ErrorService.shared.handle(error, message: "Error during removing transferred image from tmp directory.")
+                    ErrorService.shared.handle(error, message: "global.error.errorDuringRemovingTransferredImage")
                 }
             }
         }

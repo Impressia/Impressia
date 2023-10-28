@@ -7,7 +7,7 @@
 import Foundation
 import PixelfedKit
 
-public class AttachmentModel: ObservableObject, Identifiable {
+@Observable public class AttachmentModel: Identifiable {
     public let id: String
     public let type: MediaAttachment.MediaAttachmentType
     public let url: URL
@@ -21,11 +21,11 @@ public class AttachmentModel: ObservableObject, Identifiable {
     public let metaImageWidth: Int32?
     public let metaImageHeight: Int32?
 
-    @Published public var exifCamera: String?
-    @Published public var exifCreatedDate: String?
-    @Published public var exifExposure: String?
-    @Published public var exifLens: String?
-    @Published public var data: Data?
+    public var exifCamera: String?
+    public var exifCreatedDate: String?
+    public var exifExposure: String?
+    public var exifLens: String?
+    public var data: Data?
 
     public init(id: String,
                 type: MediaAttachment.MediaAttachmentType,

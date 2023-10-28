@@ -12,6 +12,7 @@ import ServicesKit
 import WidgetsKit
 import EnvironmentKit
 
+@MainActor
 struct StatusView: View {
     struct TappedAttachment: Identifiable {
         public let id: String
@@ -19,10 +20,11 @@ struct StatusView: View {
         public let imagePosition: Double
     }
 
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var client: Client
-    @EnvironmentObject var routerPath: RouterPath
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
+    @Environment(RouterPath.self) var routerPath
 
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
 
     @State var statusId: String
@@ -199,21 +201,13 @@ struct StatusView: View {
                 }
 
                 self.statusViewModel = statusModel
-
-                // If we have status in database then we can update data.
-                // TODO: It seems that Pixelfed didn't support status edit, thus we don't need to update status.
-                /*
-                if let accountData = self.applicationState.account,
-                   let statusDataFromDatabase = StatusDataHandler.shared.getStatusData(accountId: accountData.id, statusId: self.statusId) {
-                    _ = try await HomeTimelineService.shared.update(status: statusDataFromDatabase, basedOn: status, for: accountData)
-                }
-                */
             }
 
-            self.state = .loaded
+            withAnimation {
+                self.state = .loaded
+            }
         } catch NetworkError.notSuccessResponse(let response) {
-            if response.statusCode() == HTTPStatusCode.notFound, let accountId = self.applicationState.account?.id {
-                StatusDataHandler.shared.remove(accountId: accountId, statusId: self.statusId)
+            if response.statusCode() == HTTPStatusCode.notFound {
                 ErrorService.shared.handle(NetworkError.notSuccessResponse(response), message: "status.error.notFound", showToastr: true)
                 self.dismiss()
             }
@@ -225,13 +219,6 @@ struct StatusView: View {
                 ErrorService.shared.handle(error, message: "status.error.loadingStatusFailed", showToastr: false)
             }
         }
-    }
-
-    private func setAttachment(_ attachmentData: AttachmentData) {
-        exifCamera = attachmentData.exifCamera
-        exifExposure = attachmentData.exifExposure
-        exifCreatedDate = attachmentData.exifCreatedDate
-        exifLens = attachmentData.exifLens
     }
 
     private func getImageHeight() -> Double {

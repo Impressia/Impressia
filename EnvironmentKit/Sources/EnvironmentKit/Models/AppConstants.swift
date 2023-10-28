@@ -22,5 +22,6 @@ public struct AppConstants {
     public static let accountUri = "\(AppConstants.accountScheme)://\(accountCallbackPart)"
 
     public static let imagePipelineCacheName = "dev.mczachurski.Vernissage.DataCache"
+    public static let backgroundFetcherName = "dev.mczachurski.Vernissage.NotificationFetcher"
     public static let coreDataPersistantContainerName = "Vernissage"
 }

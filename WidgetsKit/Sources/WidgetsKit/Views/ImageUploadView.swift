@@ -8,9 +8,10 @@ import SwiftUI
 import ServicesKit
 import EnvironmentKit
 
+@MainActor
 public struct ImageUploadView: View {
-    @EnvironmentObject var applicationState: ApplicationState
-    @ObservedObject public var photoAttachment: PhotoAttachment
+    @Environment(ApplicationState.self) var applicationState
+    public var photoAttachment: PhotoAttachment
 
     private let size: Double
     private let delete: () -> Void
@@ -39,7 +40,7 @@ public struct ImageUploadView: View {
                         HapticService.shared.fireHaptic(of: .buttonPress)
                         self.upload()
                     } label: {
-                        Text("compose.title.tryToUpload", comment: "Try to upload")
+                        Text("compose.title.tryToUpload", bundle: Bundle.module, comment: "Try to upload")
                             .font(.caption)
                     }.buttonStyle(.borderedProminent)
                 } else {
@@ -50,7 +51,7 @@ public struct ImageUploadView: View {
         } else if photoAttachment.uploadedAttachment == nil {
             ZStack {
                 self.imageView(showAccessories: false, blur: true)
-                LoadingIndicator(isVisible: Binding.constant(true))
+                LoadingIndicator()
             }
         } else {
             self.imageView(showAccessories: true, blur: false)
@@ -113,7 +114,7 @@ public struct ImageUploadView: View {
                                             .foregroundStyle(Color.white, Color.systemGreen)
                                     }
 
-                                    Text("status.title.altText", comment: "ALT")
+                                    Text("status.title.altText", bundle: Bundle.module, comment: "ALT")
                                         .foregroundStyle(Color.white)
                                 }
                                 .font(.system(size: 12))

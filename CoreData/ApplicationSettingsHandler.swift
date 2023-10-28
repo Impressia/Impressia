@@ -5,20 +5,21 @@
 //
 
 import Foundation
-import CoreData
 import EnvironmentKit
+import SwiftData
 
 class ApplicationSettingsHandler {
     public static let shared = ApplicationSettingsHandler()
     private init() { }
 
-    func get(viewContext: NSManagedObjectContext? = nil) -> ApplicationSettings {
+    func get(modelContext: ModelContext) -> ApplicationSettings {
         var settingsList: [ApplicationSettings] = []
 
-        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
-        let fetchRequest = ApplicationSettings.fetchRequest()
         do {
-            settingsList = try context.fetch(fetchRequest)
+            var fetchDescriptor = FetchDescriptor<ApplicationSettings>()
+            fetchDescriptor.includePendingChanges = true
+            
+            settingsList = try modelContext.fetch(fetchDescriptor)
         } catch {
             CoreDataError.shared.handle(error, message: "Error during fetching application settings.")
         }
@@ -26,18 +27,23 @@ class ApplicationSettingsHandler {
         if let settings = settingsList.first {
             return settings
         } else {
-            let settings = self.createApplicationSettingsEntity(viewContext: context)
-            settings.avatarShape = Int32(AvatarShape.circle.rawValue)
-            settings.theme = Int32(Theme.system.rawValue)
-            settings.tintColor = Int32(TintColor.accentColor2.rawValue)
-            CoreDataHandler.shared.save(viewContext: context)
+            do {
+                let settings = ApplicationSettings()
+                modelContext.insert(settings)
 
-            return settings
+                try modelContext.save()
+                return settings
+            } catch {
+                CoreDataError.shared.handle(error, message: "Error during saving new application settings.")
+                
+                let settings = ApplicationSettings()
+                return settings
+            }
         }
     }
 
-    func update(applicationState: ApplicationState) {
-        let defaultSettings = ApplicationSettingsHandler.shared.get()
+    func update(applicationState: ApplicationState, modelContext: ModelContext) {
+        let defaultSettings = ApplicationSettingsHandler.shared.get(modelContext: modelContext)
 
         if let tintColor = TintColor(rawValue: Int(defaultSettings.tintColor)) {
             applicationState.tintColor = tintColor
@@ -61,6 +67,7 @@ class ApplicationSettingsHandler {
         applicationState.showGridOnUserProfile = defaultSettings.showGridOnUserProfile
         applicationState.showReboostedStatuses = defaultSettings.showReboostedStatuses
         applicationState.hideStatusesWithoutAlt = defaultSettings.hideStatusesWithoutAlt
+        applicationState.showApplicationBadge = defaultSettings.showApplicationBadge
 
         if let menuPosition = MenuPosition(rawValue: Int(defaultSettings.menuPosition)) {
             applicationState.menuPosition = menuPosition
@@ -73,146 +80,147 @@ class ApplicationSettingsHandler {
         applicationState.hapticNotificationEnabled = defaultSettings.hapticNotificationEnabled
     }
 
-    func set(accountId: String?) {
-        let defaultSettings = self.get()
+    func set(accountId: String?, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
         defaultSettings.currentAccount = accountId
-        CoreDataHandler.shared.save()
+        try? modelContext.save()
     }
 
-    func set(tintColor: TintColor) {
-        let defaultSettings = self.get()
+    func set(tintColor: TintColor, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
         defaultSettings.tintColor = Int32(tintColor.rawValue)
-        CoreDataHandler.shared.save()
+        try? modelContext.save()
     }
 
-    func set(theme: Theme) {
-        let defaultSettings = self.get()
+    func set(theme: Theme, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
         defaultSettings.theme = Int32(theme.rawValue)
-        CoreDataHandler.shared.save()
+        try? modelContext.save()
     }
 
-    func set(avatarShape: AvatarShape) {
-        let defaultSettings = self.get()
+    func set(avatarShape: AvatarShape, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
         defaultSettings.avatarShape = Int32(avatarShape.rawValue)
-        CoreDataHandler.shared.save()
+        try? modelContext.save()
     }
 
-    func set(hapticTabSelectionEnabled: Bool) {
-        let defaultSettings = self.get()
+    func set(hapticTabSelectionEnabled: Bool, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
         defaultSettings.hapticTabSelectionEnabled = hapticTabSelectionEnabled
-        CoreDataHandler.shared.save()
+        try? modelContext.save()
     }
 
-    func set(hapticRefreshEnabled: Bool) {
-        let defaultSettings = self.get()
+    func set(hapticRefreshEnabled: Bool, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
         defaultSettings.hapticRefreshEnabled = hapticRefreshEnabled
-        CoreDataHandler.shared.save()
+        try? modelContext.save()
     }
 
-    func set(hapticAnimationEnabled: Bool) {
-        let defaultSettings = self.get()
+    func set(hapticAnimationEnabled: Bool, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
         defaultSettings.hapticAnimationEnabled = hapticAnimationEnabled
-        CoreDataHandler.shared.save()
+        try? modelContext.save()
     }
 
-    func set(hapticNotificationEnabled: Bool) {
-        let defaultSettings = self.get()
+    func set(hapticNotificationEnabled: Bool, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
         defaultSettings.hapticNotificationEnabled = hapticNotificationEnabled
-        CoreDataHandler.shared.save()
+        try? modelContext.save()
     }
 
-    func set(hapticButtonPressEnabled: Bool) {
-        let defaultSettings = self.get()
+    func set(hapticButtonPressEnabled: Bool, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
         defaultSettings.hapticButtonPressEnabled = hapticButtonPressEnabled
-        CoreDataHandler.shared.save()
+        try? modelContext.save()
     }
 
-    func set(showSensitive: Bool) {
-        let defaultSettings = self.get()
+    func set(showSensitive: Bool, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
         defaultSettings.showSensitive = showSensitive
-        CoreDataHandler.shared.save()
-    }
-
-    func set(showPhotoDescription: Bool) {
-        let defaultSettings = self.get()
-        defaultSettings.showPhotoDescription = showPhotoDescription
-        CoreDataHandler.shared.save()
-    }
-
-    func set(activeIcon: String) {
-        let defaultSettings = self.get()
-        defaultSettings.activeIcon = activeIcon
-        CoreDataHandler.shared.save()
-    }
-
-    func set(menuPosition: MenuPosition) {
-        let defaultSettings = self.get()
-        defaultSettings.menuPosition = Int32(menuPosition.rawValue)
-        CoreDataHandler.shared.save()
-    }
-
-    func set(showAvatarsOnTimeline: Bool) {
-        let defaultSettings = self.get()
-        defaultSettings.showAvatarsOnTimeline = showAvatarsOnTimeline
-        CoreDataHandler.shared.save()
-    }
-
-    func set(showFavouritesOnTimeline: Bool) {
-        let defaultSettings = self.get()
-        defaultSettings.showFavouritesOnTimeline = showFavouritesOnTimeline
-        CoreDataHandler.shared.save()
-    }
-
-    func set(showAltIconOnTimeline: Bool) {
-        let defaultSettings = self.get()
-        defaultSettings.showAltIconOnTimeline = showAltIconOnTimeline
-        CoreDataHandler.shared.save()
-    }
-
-    func set(warnAboutMissingAlt: Bool) {
-        let defaultSettings = self.get()
-        defaultSettings.warnAboutMissingAlt = warnAboutMissingAlt
-        CoreDataHandler.shared.save()
-    }
-
-    func set(customNavigationMenuItem1: Int) {
-        let defaultSettings = self.get()
-        defaultSettings.customNavigationMenuItem1 = Int32(customNavigationMenuItem1)
-        CoreDataHandler.shared.save()
-    }
-
-    func set(customNavigationMenuItem2: Int) {
-        let defaultSettings = self.get()
-        defaultSettings.customNavigationMenuItem2 = Int32(customNavigationMenuItem2)
-        CoreDataHandler.shared.save()
-    }
-
-    func set(customNavigationMenuItem3: Int) {
-        let defaultSettings = self.get()
-        defaultSettings.customNavigationMenuItem3 = Int32(customNavigationMenuItem3)
-        CoreDataHandler.shared.save()
-    }
-
-    func set(showGridOnUserProfile: Bool) {
-        let defaultSettings = self.get()
-        defaultSettings.showGridOnUserProfile = showGridOnUserProfile
-        CoreDataHandler.shared.save()
-    }
-
-    func set(showReboostedStatuses: Bool) {
-        let defaultSettings = self.get()
-        defaultSettings.showReboostedStatuses = showReboostedStatuses
-        CoreDataHandler.shared.save()
-    }
-
-    func set(hideStatusesWithoutAlt: Bool) {
-        let defaultSettings = self.get()
-        defaultSettings.hideStatusesWithoutAlt = hideStatusesWithoutAlt
-        CoreDataHandler.shared.save()
+        try? modelContext.save()
     }
     
-    private func createApplicationSettingsEntity(viewContext: NSManagedObjectContext? = nil) -> ApplicationSettings {
-        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
-        return ApplicationSettings(context: context)
+    func set(showApplicationBadge: Bool, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
+        defaultSettings.showApplicationBadge = showApplicationBadge
+        try? modelContext.save()
+    }
+
+    func set(showPhotoDescription: Bool, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
+        defaultSettings.showPhotoDescription = showPhotoDescription
+        try? modelContext.save()
+    }
+
+    func set(activeIcon: String, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
+        defaultSettings.activeIcon = activeIcon
+        try? modelContext.save()
+    }
+
+    func set(menuPosition: MenuPosition, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
+        defaultSettings.menuPosition = Int32(menuPosition.rawValue)
+        try? modelContext.save()
+    }
+
+    func set(showAvatarsOnTimeline: Bool, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
+        defaultSettings.showAvatarsOnTimeline = showAvatarsOnTimeline
+        try? modelContext.save()
+    }
+
+    func set(showFavouritesOnTimeline: Bool, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
+        defaultSettings.showFavouritesOnTimeline = showFavouritesOnTimeline
+        try? modelContext.save()
+    }
+
+    func set(showAltIconOnTimeline: Bool, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
+        defaultSettings.showAltIconOnTimeline = showAltIconOnTimeline
+        try? modelContext.save()
+    }
+
+    func set(warnAboutMissingAlt: Bool, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
+        defaultSettings.warnAboutMissingAlt = warnAboutMissingAlt
+        try? modelContext.save()
+    }
+
+    func set(customNavigationMenuItem1: Int, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
+        defaultSettings.customNavigationMenuItem1 = Int32(customNavigationMenuItem1)
+        try? modelContext.save()
+    }
+
+    func set(customNavigationMenuItem2: Int, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
+        defaultSettings.customNavigationMenuItem2 = Int32(customNavigationMenuItem2)
+        try? modelContext.save()
+    }
+
+    func set(customNavigationMenuItem3: Int, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
+        defaultSettings.customNavigationMenuItem3 = Int32(customNavigationMenuItem3)
+        try? modelContext.save()
+    }
+
+    func set(showGridOnUserProfile: Bool, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
+        defaultSettings.showGridOnUserProfile = showGridOnUserProfile
+        try? modelContext.save()
+    }
+
+    func set(showReboostedStatuses: Bool, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
+        defaultSettings.showReboostedStatuses = showReboostedStatuses
+        try? modelContext.save()
+    }
+
+    func set(hideStatusesWithoutAlt: Bool, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
+        defaultSettings.hideStatusesWithoutAlt = hideStatusesWithoutAlt
+        try? modelContext.save()
     }
 }

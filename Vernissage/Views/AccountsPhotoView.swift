@@ -12,6 +12,7 @@ import ServicesKit
 import EnvironmentKit
 import WidgetsKit
 
+@MainActor
 struct AccountsPhotoView: View {
     public enum ListType: Hashable {
         case trending
@@ -27,9 +28,9 @@ struct AccountsPhotoView: View {
         }
     }
 
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var client: Client
-    @EnvironmentObject var routerPath: RouterPath
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
+    @Environment(RouterPath.self) var routerPath
 
     @State public var listType: ListType
 
@@ -99,7 +100,10 @@ struct AccountsPhotoView: View {
     private func loadData() async {
         do {
             self.accounts = try await self.loadAccounts()
-            self.state = .loaded
+
+            withAnimation {
+                self.state = .loaded
+            }
         } catch {
             if !Task.isCancelled {
                 ErrorService.shared.handle(error, message: "trendingAccounts.error.loadingAccountsFailed", showToastr: true)

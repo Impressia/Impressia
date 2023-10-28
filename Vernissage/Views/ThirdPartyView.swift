@@ -6,97 +6,87 @@
 
 import SwiftUI
 
+@MainActor
 struct ThirdPartyView: View {
     var body: some View {
         List {
-            Section("Lazy image & cache") {
+            Section("thirdparty.lazyimage.title") {
                 VStack(alignment: .leading) {
-                    Link("https://github.com/kean/Nuke",
+                    Link("thirdparty.lazyimage.address",
                          destination: URL(string: "https://github.com/kean/Nuke")!)
                     .padding(.bottom, 4)
 
-                    // swiftlint:disable:next line_length
-                    Text("Nuke provides an efficient way to download and display images in your app. It's easy to learn and use. Its architecture enables many powerful features while offering virtually unlimited possibilities for customization.")
+                    Text("thirdparty.lazyimage.description", comment: "Lazy image section description.")
                 }
                 .font(.footnote)
             }
 
-            Section("Custom emoji") {
+            Section("thirdparty.customemoji.title") {
                 VStack(alignment: .leading) {
-                    Link("https://github.com/divadretlaw/EmojiText",
+                    Link("thirdparty.customemoji.address",
                          destination: URL(string: "https://github.com/divadretlaw/EmojiText")!)
                     .padding(.bottom, 4)
-                    Text("Render Custom Emoji in Text. Supports local and remote emojis. Remote emojis are loadad and cached using Nuke.")
+                    Text("thirdparty.customemoji.description", comment: "Render Custom Emoji in Text. Supports local and remote emojis. Remote emojis are loadad and cached using Nuke.")
                 }
                 .font(.footnote)
             }
 
-            Section("Status body") {
+            Section("thirdparty.htmlmarkdown.title") {
                 VStack(alignment: .leading) {
-                    Link("https://gitlab.com/mflint/HTML2Markdown",
+                    Link("thirdparty.htmlmarkdown.address",
                          destination: URL(string: "https://gitlab.com/mflint/HTML2Markdown")!)
                     .padding(.bottom, 4)
-                    Text("It's a Swift Package which attempts to convert HTML into Markdown.")
+                    Text("thirdparty.htmlmarkdown.description", comment: "It's a Swift Package which attempts to convert HTML into Markdown.")
                 }
                 .font(.footnote)
             }
 
-            Section("OAuth authorization") {
+            Section("thirdparty.oauth.title") {
                 VStack(alignment: .leading) {
-                    Link("https://github.com/OAuthSwift/OAuthSwift",
+                    Link("thirdparty.oauth.address",
                          destination: URL(string: "https://github.com/OAuthSwift/OAuthSwift")!)
                     .padding(.bottom, 4)
-                    Text("Swift based OAuth library for iOS and macOS.")
+                    Text("thirdparty.oauth.description", comment: "Swift based OAuth library for iOS and macOS.")
                 }
                 .font(.footnote)
             }
 
-            Section("Notifications") {
+            Section("thirdparty.notifications.title") {
                 VStack(alignment: .leading) {
-                    Link("https://github.com/omaralbeik/Drops",
+                    Link("thirdparty.notifications.address",
                          destination: URL(string: "https://github.com/omaralbeik/Drops")!)
                     .padding(.bottom, 4)
-                    Text("A µFramework for showing alerts like the one used when copying from pasteboard or connecting Apple pencil.")
+                    Text("thirdparty.notifications.description", comment: "A µFramework for showing alerts like the one used when copying from pasteboard or connecting Apple pencil.")
                 }
                 .font(.footnote)
             }
 
-            Section("Loaders") {
+            Section("thirdparty.htmlstring.title") {
                 VStack(alignment: .leading) {
-                    Link("https://github.com/exyte/ActivityIndicatorView",
-                         destination: URL(string: "https://github.com/exyte/ActivityIndicatorView")!)
-                    .padding(.bottom, 4)
-                    Text("A number of preset loading indicators created with SwiftUI.")
-                }
-                .font(.footnote)
-            }
-
-            Section("HTML String") {
-                VStack(alignment: .leading) {
-                    Link("https://github.com/alexisakers/HTMLString",
+                    Link("thirdparty.htmlstring.address",
                          destination: URL(string: "https://github.com/alexisakers/HTMLString")!)
                     .padding(.bottom, 4)
-                    Text("HTMLString is a library written in Swift that allows your program to add and remove HTML entities in Strings.")
+                    Text("thirdparty.htmlstring.description", comment: "HTMLString is a library written in Swift that allows your program to add and remove HTML entities in Strings.")
                 }
                 .font(.footnote)
             }
 
-            Section("Fleur De Leah") {
+            Section("thirdparty.fleur.title") {
                 VStack(alignment: .leading) {
-                    Link("https://fonts.google.com/specimen/Fleur+De+Leah",
+                    Link("thirdparty.fleur.address",
                          destination: URL(string: "https://fonts.google.com/specimen/Fleur+De+Leah")!)
                     .padding(.bottom, 4)
-                    Text("Font used in the application in the icons and in the splash screen.")
+                    Text("thirdparty.fleur.description", comment: "Font used in the application in the icons and in the splash screen.")
                 }
                 .font(.footnote)
             }
 
-            Section("QR codes") {
+            Section("thirdparty.qrcodes.title") {
                 VStack(alignment: .leading) {
-                    Link("https://github.com/dmrschmidt/QRCode",
+                    Link("thirdparty.qrcodes.address",
                          destination: URL(string: "https://github.com/dmrschmidt/QRCode")!)
                     .padding(.bottom, 4)
-                    Text("A simple QR code image generator to use in your apps, written in Swift 5.")
+                    Text("thirdparty.qrcodes.description", comment: "A simple QR code image generator to use in your apps, written in Swift 5.")
                 }
                 .font(.footnote)
             }

@@ -5,26 +5,20 @@
 //
 
 import SwiftUI
-import ActivityIndicatorView
 import EnvironmentKit
 
 public struct LoadingIndicator: View {
-    @EnvironmentObject var applicationState: ApplicationState
-    @Binding var isVisible: Bool
+    @Environment(ApplicationState.self) var applicationState
 
-    public init(isVisible: Binding<Bool> = .constant(true)) {
-        self._isVisible = isVisible
+    private let controlSize: ControlSize
+
+    public init(controlSize: ControlSize = .regular) {
+        self.controlSize = controlSize
     }
 
     public var body: some View {
-        ActivityIndicatorView(isVisible: $isVisible, type: .equalizer(count: 5))
-            .frame(width: 24.0, height: 16.0)
-            .foregroundColor(applicationState.tintColor.color())
-    }
-}
-
-struct LoadingIndicator_Previews: PreviewProvider {
-    static var previews: some View {
-        LoadingIndicator(isVisible: .constant(true))
+        ProgressView()
+            .tint(.gray)
+            .controlSize(self.controlSize)
     }
 }

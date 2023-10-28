@@ -11,9 +11,11 @@ import ServicesKit
 import EnvironmentKit
 import WidgetsKit
 
+@MainActor
 struct NotificationsView: View {
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var client: Client
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
+    @Environment(\.modelContext) private var modelContext
 
     @State var accountId: String
     @State private var notifications: [PixelfedKit.Notification] = []
@@ -22,6 +24,7 @@ struct NotificationsView: View {
 
     @State private var minId: String?
     @State private var maxId: String?
+    @State private var lastSeenNotificationId: String?
 
     private let defaultPageSize = 40
 
@@ -57,7 +60,7 @@ struct NotificationsView: View {
     private func list() -> some View {
         List {
             ForEach(notifications, id: \.id) { notification in
-                NotificationRowView(notification: notification)
+                NotificationRowView(notification: notification, isNewNotification: self.isNewNotification(notification: notification))
             }
 
             if allItemsLoaded == false {
@@ -75,13 +78,18 @@ struct NotificationsView: View {
         .listStyle(PlainListStyle())
         .refreshable {
             HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
-            await self.loadNewNotifications()
+            await self.refreshNotifications()
             HapticService.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
         }
     }
 
     func loadNotifications() async {
         do {
+            if let accountId = applicationState.account?.id {
+                let accountData = AccountDataHandler.shared.getAccountData(accountId: accountId, modelContext: modelContext)
+                self.lastSeenNotificationId = accountData?.lastSeenNotificationId
+            }
+            
             if let linkable = try await self.client.notifications?.notifications(maxId: maxId, minId: minId, limit: 5) {
                 self.minId = linkable.link?.minId
                 self.maxId = linkable.link?.maxId
@@ -91,7 +99,15 @@ struct NotificationsView: View {
                     self.allItemsLoaded = true
                 }
 
-                self.state = .loaded
+                withAnimation {
+                    self.state = .loaded
+                }
+                
+                try AccountDataHandler.shared.update(lastSeenNotificationId: linkable.data.first?.id, applicationState: self.applicationState, modelContext: modelContext)
+
+                // Refresh infomation about viewed notifications.
+                self.applicationState.amountOfNewNotifications = 0
+                try? await NotificationsService.shared.setBadgeCount(0, modelContext: modelContext)
             }
         } catch {
             if !Task.isCancelled {
@@ -119,13 +135,24 @@ struct NotificationsView: View {
         }
     }
 
-    private func loadNewNotifications() async {
+    private func refreshNotifications() async {
         do {
+            if let accountId = applicationState.account?.id {
+                let accountData = AccountDataHandler.shared.getAccountData(accountId: accountId, modelContext: modelContext)
+                self.lastSeenNotificationId = accountData?.lastSeenNotificationId
+            }
+            
             if let linkable = try await self.client.notifications?.notifications(minId: self.minId, limit: self.defaultPageSize) {
                 if let first = linkable.data.first, self.notifications.contains(where: { notification in notification.id == first.id }) {
                     // We have all notifications, we don't have to do anything.
                     return
                 }
+
+                try AccountDataHandler.shared.update(lastSeenNotificationId: linkable.data.first?.id, applicationState: self.applicationState, modelContext: modelContext)
+                
+                // Refresh infomation about viewed notifications.
+                self.applicationState.amountOfNewNotifications = 0
+                try? await NotificationsService.shared.setBadgeCount(0, modelContext: modelContext)
 
                 self.minId = linkable.link?.minId
                 self.notifications.insert(contentsOf: linkable.data, at: 0)
@@ -133,5 +160,13 @@ struct NotificationsView: View {
         } catch {
             ErrorService.shared.handle(error, message: "notifications.error.loadingNotificationsFailed", showToastr: !Task.isCancelled)
         }
+    }
+    
+    private func isNewNotification(notification: PixelfedKit.Notification) -> Bool {
+        guard let lastSeenNotificationId = self.lastSeenNotificationId else {
+            return false
+        }
+        
+        return notification.id > lastSeenNotificationId
     }
 }

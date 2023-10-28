@@ -8,7 +8,10 @@ import Foundation
 import SwiftUI
 import EnvironmentKit
 import ServicesKit
+import TipKit
+import WidgetsKit
 
+@MainActor
 extension View {
     func navigationMenuButtons(menuPosition: Binding<MenuPosition>,
                                onViewModeIconTap: @escaping (MainView.ViewMode) -> Void) -> some View {
@@ -16,20 +19,15 @@ extension View {
     }
 }
 
+@MainActor
 private struct NavigationMenuButtons: ViewModifier {
-    @EnvironmentObject var routerPath: RouterPath
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(RouterPath.self) var routerPath
+    @Environment(\.modelContext) private var modelContext
 
+    private let menuCustomizableTip = MenuCustomizableTip()
     private let onViewModeIconTap: (MainView.ViewMode) -> Void
     private let imageFontSize = 20.0
-
-    private let customMenuItems = [
-        NavigationMenuItemDetails(viewMode: .home),
-        NavigationMenuItemDetails(viewMode: .local),
-        NavigationMenuItemDetails(viewMode: .federated),
-        NavigationMenuItemDetails(viewMode: .search),
-        NavigationMenuItemDetails(viewMode: .profile),
-        NavigationMenuItemDetails(viewMode: .notifications)
-    ]
 
     @State private var displayedCustomMenuItems = [
         SelectedMenuItemDetails(position: 1, viewMode: .home),
@@ -99,6 +97,7 @@ private struct NavigationMenuButtons: ViewModifier {
                     .background(.ultraThinMaterial)
                     .clipShape(Circle())
             }
+            .popoverTip(menuCustomizableTip, arrowEdge: .bottom)
         } else {
             HStack(alignment: .center) {
                 self.composeImageView()
@@ -116,6 +115,7 @@ private struct NavigationMenuButtons: ViewModifier {
                 .background(.ultraThinMaterial)
                 .clipShape(Capsule())
             }
+            .popoverTip(menuCustomizableTip, arrowEdge: .bottom)
         }
     }
 
@@ -132,6 +132,7 @@ private struct NavigationMenuButtons: ViewModifier {
                 .padding(.vertical, 10)
                 .padding(.horizontal, 8)
         }
+        .environment(\.menuOrder, .fixed)
     }
 
     @ViewBuilder
@@ -160,45 +161,37 @@ private struct NavigationMenuButtons: ViewModifier {
         Button {
             self.onViewModeIconTap(displayedCustomMenuItem.viewMode)
         } label: {
-            Image(systemName: displayedCustomMenuItem.image)
+            displayedCustomMenuItem.viewMode.getImage(applicationState: applicationState)
                 .font(.system(size: self.imageFontSize))
                 .foregroundColor(.mainTextColor.opacity(0.75))
                 .padding(.vertical, 10)
                 .padding(.horizontal, 8)
         }.contextMenu {
-            self.listOfIconsView(displayedCustomMenuItem)
-        }
-    }
-
-    @ViewBuilder
-    private func listOfIconsView(_ displayedCustomMenuItem: SelectedMenuItemDetails) -> some View {
-        ForEach(self.customMenuItems) { item in
-            Button {
+            MainNavigationOptions(hiddenMenuItems: Binding.constant([])) { viewMode in
                 withAnimation {
-                    displayedCustomMenuItem.viewMode = item.viewMode
+                    displayedCustomMenuItem.viewMode = viewMode
                 }
 
-                // Saving in core data.
+                // Saving in database.
                 switch displayedCustomMenuItem.position {
                 case 1:
-                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem1: item.viewMode.rawValue)
+                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem1: viewMode.rawValue, modelContext: modelContext)
                 case 2:
-                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem2: item.viewMode.rawValue)
+                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem2: viewMode.rawValue, modelContext: modelContext)
                 case 3:
-                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem3: item.viewMode.rawValue)
+                    ApplicationSettingsHandler.shared.set(customNavigationMenuItem3: viewMode.rawValue, modelContext: modelContext)
                 default:
                     break
                 }
 
                 self.hiddenMenuItems = self.displayedCustomMenuItems.map({ $0.viewMode })
-            } label: {
-                Label(item.title, systemImage: item.image)
+                MenuCustomizableTip().invalidate(reason: .actionPerformed)
             }
         }
     }
 
     private func loadCustomMenuItems() {
-        let applicationSettings = ApplicationSettingsHandler.shared.get()
+        let applicationSettings = ApplicationSettingsHandler.shared.get(modelContext: modelContext)
 
         self.setCustomMenuItem(position: 1, viewMode: MainView.ViewMode(rawValue: Int(applicationSettings.customNavigationMenuItem1)) ?? .home)
         self.setCustomMenuItem(position: 2, viewMode: MainView.ViewMode(rawValue: Int(applicationSettings.customNavigationMenuItem2)) ?? .local)
@@ -208,11 +201,8 @@ private struct NavigationMenuButtons: ViewModifier {
     }
 
     private func setCustomMenuItem(position: Int, viewMode: MainView.ViewMode) {
-        if let displayedCustomMenuItem = self.displayedCustomMenuItems.first(where: { $0.position == position }),
-           let customMenuItem = self.customMenuItems.first(where: { $0.viewMode == viewMode }) {
-            displayedCustomMenuItem.title = customMenuItem.title
-            displayedCustomMenuItem.viewMode = customMenuItem.viewMode
-            displayedCustomMenuItem.image = customMenuItem.image
+        if let displayedCustomMenuItem = self.displayedCustomMenuItems.first(where: { $0.position == position }) {
+            displayedCustomMenuItem.viewMode = viewMode
         }
     }
 }

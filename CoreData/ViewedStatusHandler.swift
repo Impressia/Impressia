@@ -5,49 +5,56 @@
 //
 
 import Foundation
-import CoreData
+import SwiftData
 import PixelfedKit
 
 class ViewedStatusHandler {
     public static let shared = ViewedStatusHandler()
     private init() { }
+    
+    /// Append new visible statuses to database.
+    func append(contentsOf statuses: [Status], accountId: String, modelContext: ModelContext) throws {
+        guard let accountDataFromDb = AccountDataHandler.shared.getAccountData(accountId: accountId, modelContext: modelContext) else {
+            return
+        }
+        
+        for status in statuses {
+            guard self.getViewedStatus(accountId: accountId, statusId: status.id, modelContext: modelContext) == nil else {
+                continue
+            }
+            
+            let viewedStatus = ViewedStatus(id: status.id, reblogId: status.reblog?.id, date: Date())
+            modelContext.insert(viewedStatus)
 
-    func createViewedStatusEntity(viewContext: NSManagedObjectContext? = nil) -> ViewedStatus {
-        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
-        return ViewedStatus(context: context)
+            viewedStatus.pixelfedAccount = accountDataFromDb
+            accountDataFromDb.viewedStatuses.append(viewedStatus)
+        }
+        
+        try modelContext.save()
     }
     
     /// Check if given status (real picture) has been already visible on the timeline (during last month).
-    func hasBeenAlreadyOnTimeline(accountId: String, status: Status, viewContext: NSManagedObjectContext? = nil) -> Bool {
+    func hasBeenAlreadyOnTimeline(accountId: String, status: Status, modelContext: ModelContext) -> Bool {
         guard let reblog = status.reblog else {
             return false
         }
 
-        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
-        let fetchRequest = ViewedStatus.fetchRequest()
-
-        fetchRequest.fetchLimit = 1
-        let statusIdPredicate = NSPredicate(format: "id = %@", reblog.id)
-        let reblogIdPredicate = NSPredicate(format: "reblogId = %@", reblog.id)
-        let idPredicates = NSCompoundPredicate.init(type: .or, subpredicates: [statusIdPredicate, reblogIdPredicate])
-        
-        let accountPredicate = NSPredicate(format: "pixelfedAccount.id = %@", accountId)
-        fetchRequest.predicate = NSCompoundPredicate.init(type: .and, subpredicates: [idPredicates, accountPredicate])
-
         do {
-            guard let first = try context.fetch(fetchRequest).first else {
+            let reblogId = reblog.id
+            let statusId = status.id
+
+            var fetchDescriptor = FetchDescriptor<ViewedStatus>(
+                // Here we are finding status which is other then checked status AND orginal status has been visible OR same reblogged by different user status has been visible.
+                predicate: #Predicate { $0.pixelfedAccount?.id == accountId && $0.id != statusId && ($0.id == reblogId || $0.reblogId == reblogId) }
+            )
+            fetchDescriptor.fetchLimit = 1
+            fetchDescriptor.includePendingChanges = true
+            
+            guard let first = try modelContext.fetch(fetchDescriptor).first else {
                 return false
             }
-            
-            if first.reblogId == nil {
-                return true
-            }
-            
-            if first.id != status.id {
-                return true
-            }
-            
-            return false
+                        
+            return true
         } catch {
             CoreDataError.shared.handle(error, message: "Error during fetching viewed statuses (hasBeenAlreadyOnTimeline).")
             return false
@@ -55,25 +62,42 @@ class ViewedStatusHandler {
     }
     
     /// Mark to delete statuses older then one month.
-    func deleteOldViewedStatuses(viewContext: NSManagedObjectContext? = nil) {
-        let oldViewedStatuses = self.getOldViewedStatuses(viewContext: viewContext)
+    func deleteOldViewedStatuses(modelContext: ModelContext) throws {
+        let oldViewedStatuses = self.getOldViewedStatuses(modelContext: modelContext)
         for status in oldViewedStatuses {
-            viewContext?.delete(status)
+            modelContext.delete(status)
+        }
+        
+        try modelContext.save()
+    }
+    
+    private func getViewedStatus(accountId: String, statusId: String, modelContext: ModelContext) -> ViewedStatus? {
+        do {
+            var fetchDescriptor = FetchDescriptor<ViewedStatus>(
+                predicate: #Predicate { $0.id == statusId && $0.pixelfedAccount?.id == accountId }
+            )
+            fetchDescriptor.fetchLimit = 1
+            fetchDescriptor.includePendingChanges = true
+            
+            return try modelContext.fetch(fetchDescriptor).first
+        } catch {
+            CoreDataError.shared.handle(error, message: "Error during fetching viewed statuses (getOldViewedStatuses).")
+            return nil
         }
     }
     
-    private func getOldViewedStatuses(viewContext: NSManagedObjectContext? = nil) -> [ViewedStatus] {
-        let context = viewContext ?? CoreDataHandler.shared.container.viewContext
-        
+    private func getOldViewedStatuses(modelContext: ModelContext) -> [ViewedStatus] {
         guard let date = Calendar.current.date(byAdding: .month, value: -1, to: Date()) else {
             return []
         }
         
         do {
-            let fetchRequest = ViewedStatus.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "date < %@", date as NSDate)
-
-            return try context.fetch(fetchRequest)
+            var fetchDescriptor = FetchDescriptor<ViewedStatus>(
+                predicate: #Predicate { $0.date < date }
+            )
+            fetchDescriptor.includePendingChanges = true
+            
+            return try modelContext.fetch(fetchDescriptor)
         } catch {
             CoreDataError.shared.handle(error, message: "Error during fetching viewed statuses (getOldViewedStatuses).")
             return []

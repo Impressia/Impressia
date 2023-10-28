@@ -10,14 +10,14 @@ import EnvironmentKit
 import WidgetsKit
 
 struct ImageGrid: View {
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var routerPath: RouterPath
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(RouterPath.self) var routerPath
 
-    @StateObject var photoUrl: PhotoUrl
+    var photoUrl: PhotoUrl
     @Binding var maxHeight: Double
     
     init(photoUrl: PhotoUrl, maxHeight: Binding<Double>) {
-        self._photoUrl = StateObject(wrappedValue: photoUrl)
+        self.photoUrl = photoUrl
         self._maxHeight = maxHeight
     }
 

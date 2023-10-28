@@ -46,7 +46,7 @@ public struct ActionButton<Label>: View where Label: View {
     @ViewBuilder
     private func withLoader() -> some View {
         if isDuringAction {
-            LoadingIndicator(isVisible: .constant(true))
+            LoadingIndicator()
                 .transition(.opacity)
         } else {
             label()

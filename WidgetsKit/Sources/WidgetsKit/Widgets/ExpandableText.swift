@@ -25,7 +25,9 @@ struct ExpandableText: View {
             }
         }
         // Re-calculate isTruncated for the new text
-        .onChange(of: text, perform: { _ in isTruncated = nil })
+        .onChange(of: text) {
+            isTruncated = nil
+        }
     }
 
     func calculateTruncation(text: String) -> some View {
@@ -57,7 +59,7 @@ struct ExpandableText: View {
                     isExpanded.toggle()
                 }
             } label: {
-                Text(isExpanded ? "global.title.showLess" : "global.title.showMore", comment: "Show less/more")
+                Text(isExpanded ? "global.title.showLess" : "global.title.showMore", bundle: Bundle.module, comment: "Show less/more")
                     .foregroundColor(.accentColor)
                     .textCase(.uppercase)
             }

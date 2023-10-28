@@ -6,11 +6,12 @@
 
 import Foundation
 
-class SelectedMenuItemDetails: NavigationMenuItemDetails {
+class SelectedMenuItemDetails: Identifiable {
     public let position: Int
-
+    public var viewMode: MainView.ViewMode
+    
     init(position: Int, viewMode: MainView.ViewMode) {
         self.position = position
-        super.init(viewMode: viewMode)
+        self.viewMode = viewMode
     }
 }

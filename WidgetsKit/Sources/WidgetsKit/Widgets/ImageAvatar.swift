@@ -10,7 +10,7 @@ import NukeUI
 import EnvironmentKit
 
 public struct ImageAvatar: View {
-    @EnvironmentObject var applicationState: ApplicationState
+    @Environment(ApplicationState.self) var applicationState
 
     private let displayName: String?
     private let avatarUrl: URL?

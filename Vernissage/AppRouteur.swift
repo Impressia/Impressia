@@ -8,8 +8,8 @@ import Foundation
 import SwiftUI
 import WidgetsKit
 
+@MainActor
 extension View {
-
     func withAppRouteur() -> some View {
         self.navigationDestination(for: RouteurDestinations.self) { destination in
             switch destination {

@@ -13,8 +13,8 @@ import WidgetsKit
 
 struct CommentsSectionView: View {
     @Environment(\.colorScheme) var colorScheme
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var client: Client
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
 
     @State public var statusId: String
     @State private var commentViewModels: [CommentModel]?
@@ -36,10 +36,12 @@ struct CommentsSectionView: View {
 
                         if self.applicationState.showInteractionStatusId == commentViewModel.status.id {
                             VStack(alignment: .leading, spacing: 0) {
-                                InteractionRow(statusModel: commentViewModel.status)
-                                    .foregroundColor(self.getInteractionRowTextColor())
-                                    .padding(.horizontal, 16)
-                                    .padding(.vertical, 8)
+                                InteractionRow(statusModel: commentViewModel.status) {
+                                    self.reloadComments()
+                                }
+                                .foregroundColor(self.getInteractionRowTextColor())
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 8)
                             }
                             .background(Color.customGrayColor.opacity(0.5))
                             .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
@@ -54,11 +56,8 @@ struct CommentsSectionView: View {
                 }
             }
         }
-        .onChange(of: self.applicationState.newComment) { _ in
-            self.commentViewModels = nil
-            Task {
-                await self.loadComments()
-            }
+        .onChange(of: self.applicationState.latestPublishedStatusId) {
+            self.reloadComments()
         }
         .task {
             await self.loadComments()
@@ -71,9 +70,25 @@ struct CommentsSectionView: View {
 
     private func loadComments() async {
         do {
-            self.commentViewModels = try await self.client.statuses?.comments(to: statusId) ?? []
+            let comments = try await self.client.statuses?.comments(to: statusId) ?? []
+            withAnimation {
+                self.commentViewModels = comments
+            }
         } catch {
             ErrorService.shared.handle(error, message: "status.error.loadingCommentsFailed", showToastr: !Task.isCancelled)
+        }
+    }
+    
+    private func reloadComments() {
+        withAnimation {
+            self.commentViewModels = nil
+        }
+
+        // We have to download status after some time (when we ask strigt away we don't have ne comment in the list).
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            Task { @MainActor in
+                await self.loadComments()
+            }
         }
     }
 }

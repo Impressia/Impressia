@@ -7,22 +7,25 @@
 import SwiftUI
 import PixelfedKit
 import ClientKit
+import Nuke
 import NukeUI
 import ServicesKit
 
+@MainActor
 struct ImagesGrid: View {
     public enum GridType: Hashable {
         case account(accountId: String, accountDisplayName: String?, accountUserName: String)
         case hashtag(name: String)
     }
 
-    @EnvironmentObject var client: Client
-    @EnvironmentObject var routerPath: RouterPath
+    @Environment(Client.self) var client
+    @Environment(RouterPath.self) var routerPath
 
     private let maxImages = 5
+    private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
 
     @State public var gridType: GridType
-    @State public var maxHeight = UIDevice.isIPhone ? 120.0 : 240.0
+    @State public var maxHeight = UIDevice.isIPhone ? 160.0 : 240.0
 
     @State private var photoUrls: [PhotoUrl] = [
         PhotoUrl(id: UUID().uuidString),
@@ -39,7 +42,7 @@ struct ImagesGrid: View {
                     ImageGrid(photoUrl: photoUrl, maxHeight: $maxHeight)
                 }
 
-                Text("more...")
+                Text("global.title.more", comment: "more...")
                     .foregroundColor(.accentColor)
                     .fontWeight(.bold)
                     .padding(10)
@@ -49,7 +52,7 @@ struct ImagesGrid: View {
             }
         }
         .gallery { properties in
-            self.maxHeight = properties.horizontalSize == .compact ? 120.0 : 240.0
+            self.maxHeight = properties.horizontalSize == .compact ? 160.0 : 240.0
         }
         .frame(height: self.maxHeight)
         .onFirstAppear {
@@ -73,6 +76,10 @@ struct ImagesGrid: View {
             let statusesFromApi = try await self.loadStatuses()
 
             let statusesWithImages = statusesFromApi.getStatusesWithImagesOnly()
+            
+            let photoUrls = self.getPhotoUrls(statuses: statusesWithImages)
+            self.prefetch(photoUrls: photoUrls)
+            
             self.updatePhotos(statusesWithImages: statusesWithImages)
         } catch {
             ErrorService.shared.handle(error, message: "global.error.errorDuringDataLoad", showToastr: !Task.isCancelled)
@@ -122,5 +129,20 @@ struct ImagesGrid: View {
         case .account(let accountId, _, _):
             return try await self.client.accounts?.statuses(createdBy: accountId, onlyMedia: true, limit: 10) ?? []
         }
+    }
+    
+    private func getPhotoUrls(statuses: [Status]) -> [URL] {
+        var photoUrls: [URL] = []
+        for status in statuses {
+            if let photoUrl = status.getAllImageMediaAttachments().first?.url {
+                photoUrls.append(photoUrl)
+            }
+        }
+        
+        return photoUrls
+    }
+    
+    private func prefetch(photoUrls: [URL]) {
+        imagePrefetcher.startPrefetching(with: photoUrls)
     }
 }

@@ -8,7 +8,7 @@ import SwiftUI
 import EnvironmentKit
 
 public struct ImageAlternativeText: View {
-    @EnvironmentObject var applicationState: ApplicationState
+    @Environment(ApplicationState.self) var applicationState
 
     private let text: String?
     private let open: (String) -> Void
@@ -29,7 +29,7 @@ public struct ImageAlternativeText: View {
                     Button {
                         self.open(text)
                     } label: {
-                        Text("status.title.altText", comment: "ALT")
+                        Text("status.title.altText", bundle: Bundle.module, comment: "ALT")
                             .font(.system(size: 12))
                             .shadow(color: .black, radius: 4)
                             .foregroundColor(.white.opacity(0.8))

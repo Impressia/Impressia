@@ -5,10 +5,13 @@
 //
 
 import SwiftUI
+import TipKit
 import EnvironmentKit
+import WidgetsKit
 
 struct GeneralSectionView: View {
-    @EnvironmentObject var applicationState: ApplicationState
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(\.modelContext) private var modelContext
 
     private let customIconNames = ["Default",
                                    "Blue",
@@ -41,8 +44,9 @@ struct GeneralSectionView: View {
     ]
 
     var body: some View {
+        @Bindable var applicationState = applicationState
+ 
         Section("settings.title.general") {
-
             // Application icon.
             Picker(selection: $applicationState.activeIcon) {
                 ForEach(self.customIconNames, id: \.self) { icon in
@@ -57,9 +61,9 @@ struct GeneralSectionView: View {
                 Text("settings.title.applicationIcon", comment: "Application icon")
             }
             .pickerStyle(.navigationLink)
-            .onChange(of: self.applicationState.activeIcon) { iconName in
-                ApplicationSettingsHandler.shared.set(activeIcon: iconName)
-                UIApplication.shared.setAlternateIconName(iconName == "Default" ? nil : iconName)
+            .onChange(of: self.applicationState.activeIcon) { oldIncomeName, newIconName in
+                ApplicationSettingsHandler.shared.set(activeIcon: newIconName, modelContext: modelContext)
+                UIApplication.shared.setAlternateIconName(newIconName == "Default" ? nil : newIconName)
             }
 
             // Application theme.
@@ -71,8 +75,8 @@ struct GeneralSectionView: View {
             } label: {
                 Text("settings.title.theme", comment: "Theme")
             }
-            .onChange(of: self.applicationState.theme) { theme in
-                ApplicationSettingsHandler.shared.set(theme: theme)
+            .onChange(of: self.applicationState.theme) { oldTheme, newTheme in
+                ApplicationSettingsHandler.shared.set(theme: newTheme, modelContext: modelContext)
             }
 
             // Menu position.
@@ -84,8 +88,9 @@ struct GeneralSectionView: View {
             } label: {
                 Text("settings.title.menuPosition", comment: "Menu position")
             }
-            .onChange(of: self.applicationState.menuPosition) { menuPosition in
-                ApplicationSettingsHandler.shared.set(menuPosition: menuPosition)
+            .onChange(of: self.applicationState.menuPosition) { oldMenuPosition, newMenuPosition in
+                MainNavigationTip().invalidate(reason: .actionPerformed)
+                ApplicationSettingsHandler.shared.set(menuPosition: newMenuPosition, modelContext: modelContext)
             }
         }
     }

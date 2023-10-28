@@ -8,12 +8,13 @@ import SwiftUI
 import ClientKit
 import ServicesKit
 
+@MainActor
 public struct PhotoEditorView: View {
-    @EnvironmentObject var client: Client
+    @Environment(Client.self) var client
     @Environment(\.dismiss) private var dismiss
 
     @State private var description: String = String.empty()
-    @ObservedObject public var photoAttachment: PhotoAttachment
+    public var photoAttachment: PhotoAttachment
 
     public init(photoAttachment: PhotoAttachment) {
         self.photoAttachment = photoAttachment
@@ -24,7 +25,7 @@ public struct PhotoEditorView: View {
             VStack(alignment: .leading) {
                 if let data = photoAttachment.photoData, let uiImage = UIImage(data: data) {
                     List {
-                        Section(header: Text("photoEdit.title.photo")) {
+                        Section(header: Text("photoEdit.title.photo", bundle: Bundle.module, comment: "Photo")) {
                             HStack {
                                 Spacer()
                                 Image(uiImage: uiImage)
@@ -36,8 +37,8 @@ public struct PhotoEditorView: View {
                             }
                         }
 
-                        Section(header: Text("photoEdit.title.accessibility")) {
-                            TextField("photoEdit.title.accessibilityDescription", text: $description, axis: .vertical)
+                        Section(header: Text("photoEdit.title.accessibility", bundle: Bundle.module, comment: "Accessibility")) {
+                            TextField(NSLocalizedString("photoEdit.title.accessibilityDescription", bundle: Bundle.module, comment: "Accesibility"), text: $description, axis: .vertical)
                                 .keyboardType(.default)
                                 .lineLimit(3...6)
                                 .multilineTextAlignment(.leading)
@@ -53,7 +54,7 @@ public struct PhotoEditorView: View {
             .onAppear {
                 self.description = self.photoAttachment.uploadedAttachment?.description ?? String.empty()
             }
-            .navigationTitle("photoEdit.navigationBar.title")
+            .navigationTitle(NSLocalizedString("photoEdit.navigationBar.title", bundle: Bundle.module, comment: "Title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 self.getTrailingToolbar()
@@ -67,12 +68,12 @@ public struct PhotoEditorView: View {
             ActionButton(showLoader: false) {
                 await self.update()
             } label: {
-                Text("photoEdit.title.save", comment: "Save")
+                Text("photoEdit.title.save", bundle: Bundle.module, comment: "Save")
             }.buttonStyle(.borderedProminent)
         }
 
         ToolbarItem(placement: .cancellationAction) {
-            Button(NSLocalizedString("photoEdit.title.cancel", comment: "Cancel"), role: .cancel) {
+            Button(NSLocalizedString("photoEdit.title.cancel", bundle: Bundle.module, comment: "Cancel"), role: .cancel) {
                 dismiss()
             }
         }

@@ -12,10 +12,11 @@ import ServicesKit
 import EnvironmentKit
 import WidgetsKit
 
+@MainActor
 struct FollowRequestsView: View {
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var routerPath: RouterPath
-    @EnvironmentObject var client: Client
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(RouterPath.self) var routerPath
+    @Environment(Client.self) var client
 
     @State private var accounts: [Account] = []
     @State private var downloadedPage = 1
@@ -126,7 +127,10 @@ struct FollowRequestsView: View {
     private func loadData(page: Int) async {
         do {
             try await self.loadAccounts(page: page)
-            self.state = .loaded
+            
+            withAnimation {
+                self.state = .loaded
+            }
         } catch {
             if !Task.isCancelled {
                 ErrorService.shared.handle(error, message: "accounts.error.loadingAccountsFailed", showToastr: true)

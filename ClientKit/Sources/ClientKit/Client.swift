@@ -7,7 +7,7 @@
 import Foundation
 import PixelfedKit
 
-public class Client: ObservableObject {
+@Observable public class Client {
     public static let shared = Client()
     private init() { }
 

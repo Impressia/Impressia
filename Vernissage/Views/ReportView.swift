@@ -10,8 +10,9 @@ import ClientKit
 import ServicesKit
 import WidgetsKit
 
+@MainActor
 struct ReportView: View {
-    @EnvironmentObject private var client: Client
+    @Environment(Client.self) var client
     @Environment(\.dismiss) private var dismiss
 
     @State private var publishDisabled = false

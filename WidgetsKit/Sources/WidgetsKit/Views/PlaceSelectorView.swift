@@ -10,9 +10,10 @@ import ClientKit
 import ServicesKit
 import EnvironmentKit
 
+@MainActor
 public struct PlaceSelectorView: View {
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var client: Client
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
     @Environment(\.dismiss) private var dismiss
 
     @State private var places: [Place] = []
@@ -37,7 +38,7 @@ public struct PlaceSelectorView: View {
                 List {
                     Section {
                         HStack {
-                            TextField("placeSelector.title.search", text: $query)
+                            TextField(NSLocalizedString("placeSelector.title.search", bundle: Bundle.module, comment: "Search"), text: $query)
                                 .padding(8)
                                 .focused($focusedField, equals: .search)
                                 .keyboardType(.default)
@@ -50,7 +51,7 @@ public struct PlaceSelectorView: View {
                                     await self.searchPlaces()
                                 }
                             } label: {
-                                Text("placeSelector.title.buttonSearch", comment: "Search")
+                                Text("placeSelector.title.buttonSearch", bundle: Bundle.module, comment: "Search")
 
                             }
                             .buttonStyle(.bordered)
@@ -61,7 +62,7 @@ public struct PlaceSelectorView: View {
                         if self.showLoader {
                             HStack(alignment: .center) {
                                 Spacer()
-                                LoadingIndicator(isVisible: Binding.constant(true))
+                                LoadingIndicator()
                                 Spacer()
                             }
                         }
@@ -93,7 +94,7 @@ public struct PlaceSelectorView: View {
                     }
                 }
             }
-            .navigationTitle("placeSelector.navigationBar.title")
+            .navigationTitle(NSLocalizedString("placeSelector.navigationBar.title", bundle: Bundle.module, comment: "Title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 self.getTrailingToolbar()
@@ -104,7 +105,7 @@ public struct PlaceSelectorView: View {
     @ToolbarContentBuilder
     private func getTrailingToolbar() -> some ToolbarContent {
         ToolbarItem(placement: .cancellationAction) {
-            Button(NSLocalizedString("placeSelector.title.cancel", comment: "Cancel"), role: .cancel) {
+            Button(NSLocalizedString("placeSelector.title.cancel", bundle: Bundle.module, comment: "Cancel"), role: .cancel) {
                 self.dismiss()
             }
         }

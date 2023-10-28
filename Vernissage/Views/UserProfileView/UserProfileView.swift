@@ -11,18 +11,20 @@ import ServicesKit
 import EnvironmentKit
 import WidgetsKit
 
+@MainActor
 struct UserProfileView: View {
-    @EnvironmentObject private var applicationState: ApplicationState
-    @EnvironmentObject private var client: Client
-    @EnvironmentObject private var routerPath: RouterPath
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
+    @Environment(RouterPath.self) var routerPath
 
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
 
     @State public var accountId: String
     @State public var accountDisplayName: String?
     @State public var accountUserName: String
 
-    @StateObject private var relationship = RelationshipModel()
+    @State private var relationship = RelationshipModel()
     @State private var account: Account?
     @State private var state: ViewState = .loading
     @State private var viewId = UUID().uuidString
@@ -121,12 +123,14 @@ struct UserProfileView: View {
             }
             
             if let signedInAccountId = self.applicationState.account?.id {
-                self.boostsDisabled = AccountRelationshipHandler.shared.isBoostedStatusesMuted(for: signedInAccountId, relation: self.accountId)
+                self.boostsDisabled = AccountRelationshipHandler.shared.isBoostedStatusesMuted(for: signedInAccountId, relation: self.accountId, modelContext: modelContext)
             }
 
             self.account = accountFromApi
 
-            self.state = .loaded
+            withAnimation {
+                self.state = .loaded
+            }
         } catch {
             ErrorService.shared.handle(error, message: "userProfile.error.loadingAccountFailed", showToastr: !Task.isCancelled)
             self.state = .error(error)
@@ -179,7 +183,8 @@ struct UserProfileView: View {
                             self.boostsDisabled.toggle()
                             AccountRelationshipHandler.shared.setBoostedStatusesMuted(for: signedInAccoountId,
                                                                                       relation: self.accountId,
-                                                                                      boostedStatusesMuted: self.boostsDisabled)
+                                                                                      boostedStatusesMuted: self.boostsDisabled,
+                                                                                      modelContext: modelContext)
                         }
                     }
                 } label: {
@@ -265,6 +270,10 @@ struct UserProfileView: View {
             Label(NSLocalizedString("userProfile.title.mutes", comment: "Muted accounts"), systemImage: "message.and.waveform.fill")
         }
 
+        NavigationLink(value: RouteurDestinations.accounts(listType: .disabledBoosts)) {
+            Label(NSLocalizedString("userProfile.title.disabledBoosts", comment: "Disabled boosts"), image: "custom.rocket.fill")
+        }
+        
         if account.locked {
             NavigationLink(value: RouteurDestinations.followRequests) {
                 Label(NSLocalizedString("userProfile.title.followRequests", comment: "FollowRequests"), systemImage: "person.crop.circle.badge.checkmark")
@@ -290,7 +299,7 @@ struct UserProfileView: View {
                 }
             }
         } catch {
-            ErrorService.shared.handle(error, message: "userProfile.error.mute", showToastr: true)
+            ErrorService.shared.handle(error, message: "userProfile.error.muting", showToastr: true)
         }
     }
 

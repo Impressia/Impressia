@@ -49,9 +49,9 @@ struct PhotoProvider: TimelineProvider {
         }
         
         let entriesFromDatabase = await self.getWidgetEntriesFromDatabase(length: 3)
-        if entriesFromDatabase.isEmpty == false {
-            return entriesFromDatabase
-        }
+         if entriesFromDatabase.isEmpty == false {
+             return entriesFromDatabase
+         }
         
         return [StatusFetcher.shared.placeholder()]
     }
@@ -65,6 +65,6 @@ struct PhotoProvider: TimelineProvider {
     }
     
     func getWidgetEntriesFromDatabase(length: Int) async -> [PhotoWidgetEntry] {
-        return await StatusFetcher.shared.fetchWidgetEntriesFromDatabase(length: length)
-    }
+         return await StatusFetcher.shared.fetchWidgetEntriesFromDatabase(length: length)
+     }
 }

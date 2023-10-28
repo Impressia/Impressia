@@ -14,7 +14,7 @@ import WidgetsKit
 import ServicesKit
 
 struct ComposeView: View {
-    @EnvironmentObject var client: Client
+    @Environment(Client.self) var client
 
     private let attachments: [NSItemProvider]
 

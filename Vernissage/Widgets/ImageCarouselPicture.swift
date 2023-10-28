@@ -10,7 +10,7 @@ import ServicesKit
 import WidgetsKit
 
 struct ImageCarouselPicture: View {
-    @ObservedObject public var attachment: AttachmentModel
+    public var attachment: AttachmentModel
 
     @State private var blurredImageHeight: Double
     @State private var blurredImageWidth: Double

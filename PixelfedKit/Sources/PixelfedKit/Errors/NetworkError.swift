@@ -16,7 +16,7 @@ extension NetworkError: LocalizedError {
         switch self {
         case .notSuccessResponse(let response):
             let statusCode = response.statusCode()
-
+            
             let localizedString = NSLocalizedString("global.error.notSuccessResponse",
                                                     bundle: Bundle.module,
                                                     comment: "It's error returned from remote server. Request URL: '\(response.url?.string ?? "unknown")'.")

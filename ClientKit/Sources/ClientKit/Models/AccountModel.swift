@@ -6,7 +6,7 @@
 
 import Foundation
 
-public class AccountModel: ObservableObject, Identifiable {
+@Observable public class AccountModel: Identifiable {
     public let id: String
     public let accessToken: String?
     public let refreshToken: String?
@@ -27,8 +27,9 @@ public class AccountModel: ObservableObject, Identifiable {
     public let url: URL?
     public let username: String
     public let lastSeenStatusId: String?
-
-    @Published public var avatarData: Data?
+    public let lastSeenNotificationId: String?
+    
+    public var avatarData: Data?
 
     public init(id: String,
                 accessToken: String?,
@@ -50,6 +51,7 @@ public class AccountModel: ObservableObject, Identifiable {
                 url: URL?,
                 username: String,
                 lastSeenStatusId: String?,
+                lastSeenNotificationId: String?,
                 avatarData: Data? = nil) {
         self.id = id
         self.accessToken = accessToken
@@ -72,6 +74,7 @@ public class AccountModel: ObservableObject, Identifiable {
         self.username = username
         self.lastSeenStatusId = lastSeenStatusId
         self.avatarData = avatarData
+        self.lastSeenNotificationId = lastSeenNotificationId
     }
 }
 

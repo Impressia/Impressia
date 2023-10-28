@@ -7,6 +7,7 @@
 import Foundation
 import SwiftUI
 
+@MainActor
 public struct CustomPageTabViewStyleView<T>: View where T: Identifiable<String> {
     @Binding var currentId: String
 

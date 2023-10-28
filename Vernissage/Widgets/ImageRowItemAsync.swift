@@ -13,10 +13,11 @@ import ServicesKit
 import EnvironmentKit
 import WidgetsKit
 
+@MainActor
 struct ImageRowItemAsync: View {
-    @EnvironmentObject var applicationState: ApplicationState
-    @EnvironmentObject var client: Client
-    @EnvironmentObject var routerPath: RouterPath
+    @Environment(ApplicationState.self) var applicationState
+    @Environment(Client.self) var client
+    @Environment(RouterPath.self) var routerPath
 
     private var statusViewModel: StatusModel
     private var attachment: AttachmentModel
@@ -124,16 +125,17 @@ struct ImageRowItemAsync: View {
                 }
             } else if state.error != nil {
                 ZStack {
-                    Rectangle()
-                        .fill(Color.placeholderText)
-                        .scaledToFill()
+                    BlurredImage(blurhash: attachment.blurhash)
 
                     VStack(alignment: .center) {
                         Spacer()
                         Text("global.error.errorDuringImageDownload", comment: "Cannot download image")
-                            .foregroundColor(.systemBackground)
+                            .foregroundColor(.white)
                         Spacer()
                     }
+                }
+                .onTapGesture {
+                    self.navigateToStatus()
                 }
             } else {
                 VStack(alignment: .center) {
@@ -205,6 +207,9 @@ struct ImageRowItemAsync: View {
                 // Run adnimation and haptic feedback.
                 self.showThumbImage = true
                 HapticService.shared.fireHaptic(of: .buttonPress)
+                
+                // Mark that user performed specific action.
+                TimelineDoubleTapTip().invalidate(reason: .actionPerformed)
 
                 // Mark favourite booleans used to show star in the timeline view.
                 self.statusViewModel.favourited = true

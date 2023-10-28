@@ -89,8 +89,8 @@ struct ImagesCarousel: View {
             .padding(0)
             .frame(height: self.imageHeight)
             .tabViewStyle(PageTabViewStyle())
-            .onChange(of: selected, perform: { index in
-                if let attachment = attachments.first(where: { item in item.id == index }) {
+            .onChange(of: selected) { oldIndex, newIndex in
+                if let attachment = attachments.first(where: { item in item.id == newIndex }) {
                     self.selectedAttachment = attachment
                     self.exifCamera = attachment.exifCamera
                     self.exifExposure = attachment.exifExposure
@@ -98,7 +98,7 @@ struct ImagesCarousel: View {
                     self.exifLens = attachment.exifLens
                     self.description = attachment.description
                 }
-            })
+            }
             Spacer(minLength: 0)
         }
         .padding(0)

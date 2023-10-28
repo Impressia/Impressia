@@ -11,7 +11,7 @@ import ServicesKit
 import WidgetsKit
 
 struct InstanceRowView: View {
-    @EnvironmentObject var routerPath: RouterPath
+    @Environment(RouterPath.self) var routerPath
 
     private let instance: Instance
     private let action: (String) -> Void
