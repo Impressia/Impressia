@@ -5478,6 +5478,12 @@
             "value" : "Notifications"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jakinarazpenak"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5495,6 +5501,12 @@
             "value" : "The application badge with the number of new notifications will be visible near the application icon."
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ikurrak jakinarazpen-kopurua erakutsiko du aplikazioaren ikonoaren aldamenean."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5510,6 +5522,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Show application badge"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erakutsi jakinarazpen-ikurra"
           }
         },
         "pl" : {
