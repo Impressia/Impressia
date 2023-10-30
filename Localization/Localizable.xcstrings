@@ -5478,6 +5478,12 @@
             "value" : "Notifications"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jakinarazpenak"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5495,6 +5501,12 @@
             "value" : "The application badge with the number of new notifications will be visible near the application icon."
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ikurrak jakinarazpen-kopurua erakutsiko du aplikazioaren ikonoaren aldamenean."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5510,6 +5522,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Show application badge"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erakutsi jakinarazpen-ikurra"
           }
         },
         "pl" : {
@@ -8457,6 +8475,12 @@
             "value" : "Render Custom Emoji in Text. Supports local and remote emojis. Remote emojis are loadad and cached using Nuke."
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emoji pertsonalizatuak testu bihurtzen ditu. Lokaleko eta urruneko zerbitzarietako emojiekin da bateragarria. Urruneko emojiak Nuke erabiliz kargatzen eta katxean gordetzen dira."
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
@@ -8547,6 +8571,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Font used in the application in the icons and in the splash screen."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aplikazioaren ikonoetan eta harrerako pantailan erabiltzen da letra-tipoa."
           }
         },
         "es" : {
@@ -8641,6 +8671,12 @@
             "value" : "It's a Swift Package which attempts to convert HTML into Markdown."
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HTML hizkera Markdownera itzultzen saiatzen den Swift paketea da."
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
@@ -8733,6 +8769,12 @@
             "value" : "HTMLString is a library written in Swift that allows your program to add and remove HTML entities in Strings."
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HTMLString Swift lengoaian idatzitako liburutegia da, programak Strings-en HTML entitateak gehitzea eta kentzea ahalbidetzen duena."
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
@@ -8823,6 +8865,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nuke provides an efficient way to download and display images in your app. It's easy to learn and use. Its architecture enables many powerful features while offering virtually unlimited possibilities for customization."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuke-ek aplikazioan irudiak deskargatu eta erakusteko modu erakingor bat eskaintzen du. Erraza da ikastea eta erabiltzea. Bere arkitekturak ezaugarri ahaltsu asko ematen ditu, eta pertsonalizaziorako ia mugarik gabeko aukerak eskaintzen ditu."
           }
         },
         "es" : {
@@ -8952,6 +9000,12 @@
             "value" : "A µFramework for showing alerts like the one used when copying from pasteboard or connecting Apple pencil."
           }
         },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "µFramework bat, arbeletik kopiatzean edo Appleren arkatza konektatzean erabiltzen den bezalako alertak erakusteko."
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
@@ -9044,6 +9098,12 @@
             "value" : "Swift based OAuth library for iOS and macOS."
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Swift-en oinarritutako OAuth liburutegi bat iOS eta macOS-erako."
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
@@ -9134,6 +9194,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "A simple QR code image generator to use in your apps, written in Swift 5."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aplikazioetan erabiltzeko QR kode sorgailu samur bat, Swift 5 erabiliz idatzitakoa."
           }
         },
         "es" : {
@@ -9915,6 +9981,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Disabled boosts"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bultzadak ezkutatuta"
           }
         },
         "es" : {
