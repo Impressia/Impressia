@@ -27,7 +27,7 @@ struct HomeTimelineView: View {
     @State private var opacity = 0.0
     @State private var offset = -50.0
     
-    private let defaultLimit = 80
+    private let defaultLimit = 40
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
     private let timelineDoubleTapTip = TimelineDoubleTapTip()
 

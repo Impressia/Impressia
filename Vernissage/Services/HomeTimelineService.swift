@@ -20,7 +20,7 @@ public class HomeTimelineService {
     public static let shared = HomeTimelineService()
     private init() { }
     
-    private let maximumAmountOfDownloadedStatuses = 80
+    private let maximumAmountOfDownloadedStatuses = 40
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
     private let semaphore = AsyncSemaphore(value: 1)
     
@@ -45,7 +45,7 @@ public class HomeTimelineService {
         var statuses: [Status] = []
         var newestStatusId = lastSeenStatusId
         
-        // There can be more then 80 newest statuses, that's why we have to sometimes send more then one request.
+        // There can be more then 40 newest statuses, that's why we have to sometimes send more then one request.
         while true {
             do {
                 let downloadedStatuses = try await client.getHomeTimeline(minId: newestStatusId,

@@ -61,7 +61,7 @@ struct StatusesView: View {
     @State private var containerWidth: Double = UIDevice.isIPad ? UIScreen.main.bounds.width / 3 : UIScreen.main.bounds.width
     @State private var containerHeight: Double = UIDevice.isIPad ? UIScreen.main.bounds.height / 3 : UIScreen.main.bounds.height
 
-    private let defaultLimit = 80
+    private let defaultLimit = 40
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
 
     var body: some View {

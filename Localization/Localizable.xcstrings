@@ -322,6 +322,18 @@
             "value" : "Potenciadores desactivados"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Desgaitutako bultzadak"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boosters désactivés"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1250,7 +1262,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Le jeton d'accès n'est pas trouvé."
           }
         },
@@ -1274,6 +1286,18 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Avatar no se ha descargado."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Avatarra ez da deskargatu."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'avatar n'a pas été téléchargé."
           }
         },
         "pl" : {
@@ -1333,6 +1357,18 @@
             "value" : "No se puede configurar el receptor de transacciones."
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ezin da transakzio-entzulea konfiguratu."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Impossible de configurer l'auditeur de transactions."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1353,6 +1389,18 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "No se pueden descargar productos in-app."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ezin dira deskargatu aplikazioko produktuak."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de télécharger des produits in-app."
           }
         },
         "pl" : {
@@ -1445,6 +1493,18 @@
             "value" : "Error durante la descarga de metadatos."
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Errore bat gertatu da metadatuak deskargatzean."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erreur lors du téléchargement des métadonnées."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1465,6 +1525,18 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Error durante la descarga de nuevos estados para la cantidad de nuevos estados."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Errore bat gertatu da egoera berriak deskargatzean egoera berrien kopuruagatik."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erreur lors du téléchargement des nouveaux statuts pour le nombre de nouveaux statuts."
           }
         },
         "pl" : {
@@ -1697,6 +1769,18 @@
             "value" : "Compra fallida."
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erosketak huts egin du."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "L'achat a échoué."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1787,6 +1871,18 @@
             "value" : "Error en la recarga."
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ezin izan da freskatu tokena."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Le jeton de rafraîchissement a échoué."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1845,6 +1941,18 @@
             "value" : "más..."
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "gehiago..."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "plus..."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1865,6 +1973,18 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Se han recuperado nuevos tokens de acceso."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sarbide-token berriak berreskuratu dira."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "De nouveaux jetons d'accès ont été récupérés."
           }
         },
         "pl" : {
@@ -4391,6 +4511,24 @@
             "value" : "Error during enabling notifications."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Error al activar las notificaciones."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Errore bat gertatu da jakinarazpenak gaitzean."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erreur lors de l'activation des notifications."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5478,6 +5616,24 @@
             "value" : "Notifications"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Notificaciones"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jakinarazpenak"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5495,6 +5651,24 @@
             "value" : "The application badge with the number of new notifications will be visible near the application icon."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La insignia de la aplicación con el número de nuevas notificaciones será visible cerca del icono de la aplicación."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jakinarazpen berrien kopurua duen aplikazioaren bereizgarria aplikazioaren ikonoaren ondoan egongo da ikusgai."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Le badge de l'application indiquant le nombre de nouvelles notifications sera visible près de l'icône de l'application."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5510,6 +5684,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Show application badge"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mostrar distintivo de solicitud"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erakutsi aplikazioaren bereizgarria"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Afficher le badge d'application"
           }
         },
         "pl" : {
@@ -8463,6 +8655,18 @@
             "value" : "Renderiza Emoji personalizados en texto. Soporta emojis locales y remotos. Los emojis remotos se cargan y almacenan en caché con Nuke."
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Errendatu Emoji pertsonalizatua testuan. Tokiko eta urruneko emojiak onartzen ditu. Urruneko emojiak kargatu eta cachean gordetzen dira Nuke erabiliz."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Rendu des Emoji personnalisés dans le texte. Supporte les emojis locaux et distants. Les emojis distants sont chargés et mis en cache à l'aide de Nuke."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8553,6 +8757,18 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Fuente utilizada en la aplicación en los iconos y en la pantalla de inicio."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Aplikazioan erabiltzen den letra-tipoa ikonoetan eta harrera-pantailan."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Police utilisée dans l'application dans les icônes et dans l'écran d'accueil."
           }
         },
         "pl" : {
@@ -8647,6 +8863,18 @@
             "value" : "Es un paquete Swift que intenta convertir HTML en Markdown."
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "HTML Markdown bihurtzen saiatzen den Swift pakete bat da."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Il s'agit d'un paquet Swift qui tente de convertir HTML en Markdown."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8739,6 +8967,18 @@
             "value" : "HTMLString es una librería escrita en Swift que permite a tu programa añadir y eliminar entidades HTML en Strings."
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "HTMLString Swift-en idatzitako liburutegi bat da, zure programari Strings-en HTML entitateak gehitzeko eta kentzeko aukera ematen diona."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "HTMLString est une bibliothèque écrite en Swift qui permet à votre programme d'ajouter et de supprimer des entités HTML dans des chaînes de caractères."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8829,6 +9069,18 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Nuke proporciona una forma eficaz de descargar y mostrar imágenes en tu aplicación. Es fácil de aprender y utilizar. Su arquitectura permite muchas características de gran alcance al tiempo que ofrece posibilidades prácticamente ilimitadas para la personalización."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nuke-k zure aplikazioan irudiak deskargatzeko eta bistaratzeko modu eraginkorra eskaintzen du. Ikasteko eta erabiltzeko erraza da. Bere arkitekturak ezaugarri indartsu asko ahalbidetzen ditu pertsonalizatzeko aukera ia mugagabeak eskaintzen dituen bitartean."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nuke offre un moyen efficace de télécharger et d'afficher des images dans votre application. Il est facile à apprendre et à utiliser. Son architecture permet de nombreuses fonctionnalités puissantes tout en offrant des possibilités de personnalisation pratiquement illimitées."
           }
         },
         "pl" : {
@@ -8958,6 +9210,18 @@
             "value" : "Un µFramework para mostrar alertas como la que se utiliza al copiar desde la mesa de trabajo o al conectar el lápiz de Apple."
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pasteboardetik kopiatzerakoan edo Apple pencil konektatzean erabiltzen den bezalako alertak erakusteko µFramework."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Un µFramework pour afficher des alertes comme celles utilisées lors de la copie à partir d'un tableau ou de la connexion d'un crayon Apple."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9050,6 +9314,18 @@
             "value" : "Librería OAuth basada en Swift para iOS y macOS."
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Swift-en oinarritutako OAuth liburutegia iOS eta macOSentzat."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bibliothèque OAuth basée sur Swift pour iOS et macOS."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9140,6 +9416,18 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Un sencillo generador de imágenes de código QR para usar en tus aplicaciones, escrito en Swift 5."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zure aplikazioetan erabiltzeko QR kode irudi-sorgailu soil bat, Swift 5-en idatzia."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Un simple générateur d'image de code QR à utiliser dans vos applications, écrit en Swift 5."
           }
         },
         "pl" : {
@@ -9921,6 +10209,18 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Potenciadores desactivados"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Desgaitutako bultzadak"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Boosters désactivés"
           }
         },
         "pl" : {
@@ -10875,6 +11175,18 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "No se admite"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ez da onartzen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Non pris en charge"
           }
         },
         "pl" : {

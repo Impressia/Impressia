@@ -50,7 +50,7 @@ class ViewedStatusHandler {
             fetchDescriptor.fetchLimit = 1
             fetchDescriptor.includePendingChanges = true
             
-            guard let first = try modelContext.fetch(fetchDescriptor).first else {
+            guard try modelContext.fetch(fetchDescriptor).first != nil else {
                 return false
             }
                         
