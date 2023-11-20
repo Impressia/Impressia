@@ -75,7 +75,7 @@ struct ImagesGrid: View {
         do {
             let statusesFromApi = try await self.loadStatuses()
 
-            let statusesWithImages = statusesFromApi.getStatusesWithImagesOnly()
+            let statusesWithImages = statusesFromApi.data.getStatusesWithImagesOnly()
             
             let photoUrls = self.getPhotoUrls(statuses: statusesWithImages)
             self.prefetch(photoUrls: photoUrls)
@@ -119,15 +119,21 @@ struct ImagesGrid: View {
         }
     }
 
-    private func loadStatuses() async throws -> [Status] {
+    private func loadStatuses() async throws -> Linkable<[Status]> {
         switch self.gridType {
         case .hashtag(let name):
             return try await self.client.publicTimeline?.getTagStatuses(
                 tag: name,
                 local: true,
-                limit: 10) ?? []
+                limit: 10) ?? Linkable(data: [])
         case .account(let accountId, _, _):
-            return try await self.client.accounts?.statuses(createdBy: accountId, onlyMedia: true, limit: 10) ?? []
+            let accountStatuses = try await self.client.accounts?.statuses(
+                createdBy: accountId,
+                onlyMedia: true,
+                limit: 10
+            ) ?? []
+            
+            return Linkable(data: accountStatuses)
         }
     }
     

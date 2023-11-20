@@ -33,7 +33,7 @@ public class StatusFetcher {
         let client = PixelfedClient(baseURL: account.serverUrl).getAuthenticated(token: accessToken)
         let statuses = try await client.getHomeTimeline(limit: 20, includeReblogs: defaultSettings.showReboostedStatuses, timeoutInterval: 5.0)
         
-        let widgetEntries =  await self.prepare(statuses: statuses, length: length)
+        let widgetEntries =  await self.prepare(statuses: statuses.data, length: length)
         return widgetEntries
     }
     
@@ -49,11 +49,11 @@ public class StatusFetcher {
         let accountData = AccountDataHandler.shared.getAccountData(accountId: accountId, modelContext: modelContext)
         guard let timelineCache = accountData?.timelineCache,
               let timelineCacheData = timelineCache.data(using: .utf8),
-              let statusesFromCache = try? JSONDecoder().decode([Status].self, from: timelineCacheData) else {
+              let statusesFromCache = try? JSONDecoder().decode(Linkable<[Status]>.self, from: timelineCacheData) else {
             return [self.placeholder()]
         }
          
-        let widgetEntries = await self.prepare(statuses: statusesFromCache, length: length)
+        let widgetEntries = await self.prepare(statuses: statusesFromCache.data, length: length)
         return widgetEntries
     }
     

@@ -237,6 +237,34 @@
         }
       }
     },
+    "+99" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+99"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+99"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+99"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+99"
+          }
+        }
+      }
+    },
     "accounts.error.loadingAccountsFailed" : {
       "comment" : "Information message when loading account failed",
       "localizations" : {
