@@ -102,9 +102,10 @@ public class HomeTimelineService {
     public func getVisibleStatuses(accountId: String, statuses: [Status], hideStatusesWithoutAlt: Bool, modelContext: ModelContext) -> [Status] {
         // We have to include in the counter only statuses with images.
         let statusesWithImagesOnly = statuses.getStatusesWithImagesOnly()
+        let statusesFromOldestToNewest = statusesWithImagesOnly.reversed()
         var visibleStatuses: [Status] = []
         
-        for status in statusesWithImagesOnly {
+        for status in statusesFromOldestToNewest {
             
             // We have to hide statuses without ALT text.
             if hideStatusesWithoutAlt && status.statusContainsAltText() == false {
@@ -134,7 +135,8 @@ public class HomeTimelineService {
             visibleStatuses.append(status)
         }
         
-        return visibleStatuses
+        // Return statuses from newest to oldest.
+        return visibleStatuses.reversed()
     }
         
     private func hasBeenAlreadyOnTimeline(accountId: String, status: Status, modelContext: ModelContext) -> Bool {

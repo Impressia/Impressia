@@ -44,8 +44,8 @@ class ViewedStatusHandler {
             let statusId = status.id
 
             var fetchDescriptor = FetchDescriptor<ViewedStatus>(
-                // Here we are finding status which is other then checked status AND orginal status has been visible OR same reblogged by different user status has been visible.
-                predicate: #Predicate { $0.pixelfedAccount?.id == accountId && $0.id != statusId && ($0.id == reblogId || $0.reblogId == reblogId) }
+                // Here we are finding status which is older then checked status AND orginal status has been visible OR same reblogged by different user status has been visible.
+                predicate: #Predicate { $0.pixelfedAccount?.id == accountId && $0.id < statusId && ($0.id == reblogId || $0.reblogId == reblogId) }
             )
             fetchDescriptor.fetchLimit = 1
             fetchDescriptor.includePendingChanges = true
