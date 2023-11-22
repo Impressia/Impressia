@@ -1,5 +1,5 @@
 // MARK: Common strings.
-"global.title.contentWarning" = "Delikater Inhalt";
+"global.title.contentWarning" = "Inhaltswarnung";
 "global.title.seePost" = "Beitrag ansehen";
 "global.title.refresh" = "Aktualisieren";
 "global.title.momentsAgo" = "gerade eben";
@@ -9,19 +9,19 @@
 "global.title.showMore" = "Mehr anzeigen";
 "global.title.showLess" = "Weniger anzeigen";
 "global.title.close" = "Schließen";
-"global.error.refreshingCredentialsTitle" = "Zugangsdaten konnten nicht erneuert werden.";
+"global.error.refreshingCredentialsTitle" = "Zugangsdaten konnten nicht bestätigt werden.";
 "global.error.refreshingCredentialsSubtitle" = "Bitte erneut in Pixelfed einloggen.";
 
 // MARK: Global errors.
-"global.error.unexpected" = "Überraschender Fehler.";
+"global.error.unexpected" = "Unerwarteter Fehler.";
 "global.error.statusesNotRetrieved" = "Beiträge nicht geladen.";
 "global.error.errorDuringDownloadStatuses" = "Fehler beim Laden der Beiträge vom Server.";
-"global.error.errorDuringDownloadHashtag" = "Fehler beim Laden des Tags vom Server.";
+"global.error.errorDuringDownloadHashtag" = "Fehler beim Laden des Hashtags vom Server.";
 "global.error.hashtagNotExists" = "Hashtag existiert nicht.";
 "global.error.errorDuringImageDownload" = "Bild kann nicht geladen werden.";
 "global.error.canceledImageDownload" = "Laden der Bildes abgebrochen.";
 "global.error.errorDuringDataLoad" = "Laden von Daten fehlgeschlagen.";
-"global.error.errorDuringUserRead" = "Nutzer kann nicht geladen werden.";
+"global.error.errorDuringUserRead" = "Benutzer kann nicht geladen werden.";
 "global.error.badUrlServer" = "Ungültige Server-URL.";
 "global.error.accessTokenNotFound" = "Zugangstoken nicht gefunden.";
 "global.error.errorDuringDownloadStatus" = "Fehler beim Laden vom Server.";
@@ -32,8 +32,8 @@
 "mainview.tab.localTimeline" = "Lokal";
 "mainview.tab.federatedTimeline" = "Föderiert";
 "mainview.tab.trendingPhotos" = "Fotos";
-"mainview.tab.trendingTags" = "Tags";
-"mainview.tab.trendingAccounts" = "Accounts";
+"mainview.tab.trendingTags" = "Hashtags";
+"mainview.tab.trendingAccounts" = "Benutzer";
 "mainview.tab.userProfile" = "Profil";
 "mainview.tab.notifications" = "Benachrichtigungen";
 "mainview.tab.search" = "Suche";
@@ -43,10 +43,10 @@
 "mainview.menu.settings" = "Einstellungen";
 
 // MARK: Main view (error notifications).
-"mainview.error.switchAccounts" = "Konnte Accounts nicht wechseln.";
+"mainview.error.switchAccounts" = "Konnte Benutzer nicht wechseln.";
 
 // MARK: Home timeline.
-"home.title.allCaughtUp" = "Alles gesehen";
+"home.title.allCaughtUp" = "Das war's, alles gesehen";
 "home.title.noPhotos" = "Hier sind leider keine Bilder.";
 
 // MARK: Statuses timeline (local/federated/favourite/bookmarks etc.).
@@ -55,11 +55,11 @@
 "statuses.navigationBar.favourites" = "Favoriten";
 "statuses.navigationBar.bookmarks" = "Lesezeichen";
 "statuses.title.noPhotos" = "Hier sind leider keine Bilder.";
-"statuses.title.tagFollowed" = "Du folgst dem Tag.";
-"statuses.title.tagUnfollowed" = "Du folgst dem Tag nicht mehr.";
+"statuses.title.tagFollowed" = "Du folgst dem Hashtag.";
+"statuses.title.tagUnfollowed" = "Du folgst dem Hashtag nicht mehr.";
 "statuses.error.loadingStatusesFailed" = "Laden der Beiträge fehlgeschlagen.";
-"statuses.error.tagFollowFailed" = "Das Folgen des Tags ist fehlgeschlagen.";
-"statuses.error.tagUnfollowFailed" = "Das nicht mehr Folgen des Tags ist fehlgeschlagen.";
+"statuses.error.tagFollowFailed" = "Das Folgen des Hashtags ist fehlgeschlagen.";
+"statuses.error.tagUnfollowFailed" = "Das nicht mehr Folgen des Hashtags ist fehlgeschlagen.";
 
 // Mark: Search view.
 "search.navigationBar.title" = "Suche";
@@ -78,12 +78,12 @@
 "trendingStatuses.title.noPhotos" = "Hier sind leider keine Bilder.";
 
 // Mark: Trending tags.
-"tags.navigationBar.trendingTitle" = "Tags";
-"tags.navigationBar.searchTitle" = "Tags";
-"tags.navigationBar.followedTitle" = "Tags denen Du folgst";
-"tags.title.noTags" = "Hier sind leider keine Tags.";
+"tags.navigationBar.trendingTitle" = "Hashtags";
+"tags.navigationBar.searchTitle" = "Hashtags";
+"tags.navigationBar.followedTitle" = "Hashtags denen Du folgst";
+"tags.title.noTags" = "Hier sind leider keine Hashtags.";
 "tags.title.amountOfPosts" = "%d Beiträge";
-"tags.error.loadingTagsFailed" = "Laden der Tags fehlgeschlagen.";
+"tags.error.loadingTagsFailed" = "Laden der Hashtags fehlgeschlagen.";
 
 // Mark: Trending accounts.
 "trendingAccounts.navigationBar.title" = "Konten";
@@ -99,7 +99,7 @@
 "userProfile.title.block" = "Blockieren";
 "userProfile.title.favourites" = "Favoriten";
 "userProfile.title.bookmarks" = "Lesezeichen";
-"userProfile.title.followedTags" = "Tags denen Du folgst";
+"userProfile.title.followedTags" = "Hashtags denen Du folgst";
 "userProfile.title.posts" = "Beiträge";
 "userProfile.title.followers" = "Leute die Dir folgen";
 "userProfile.title.following" = "Leute denen Du folgst";
@@ -119,7 +119,7 @@
 "userProfile.title.cancelRequestFollow" = "Anfrage abbrechen";
 "userProfile.title.followRequests" = "Anfragen";
 "userProfile.title.privateProfileTitle" = "Dieses Profil ist privat.";
-"userProfile.title.privateProfileSubtitle" = "Nur freigeschaltete folgende können Beiträge sehen.";
+"userProfile.title.privateProfileSubtitle" = "Nur Freigeschaltete können Beiträge sehen.";
 "userProfile.error.notExists" = "Konto existiert nicht.";
 "userProfile.error.loadingAccountFailed" = "Fehler beim Laden vom Server.";
 "userProfile.error.muting" = "(Nicht mehr) Stummschalten fehlgeschlagen.";
@@ -234,141 +234,141 @@
 "settings.title.bottomLeftMenu" = "Unten links";
 "settings.title.showAvatars" = "Avatare anzeigen";
 "settings.title.showAvatarsOnTimeline" = "Avatare werden in Listen angezeigt";
-"settings.title.showFavourite" = "Show favourites";
-"settings.title.showFavouriteOnTimeline" = "Favourites will be displayed on timelines";
-"settings.title.showAltText" = "Show ALT icon";
-"settings.title.showAltTextOnTimeline" = "ALT icon will be displayed on timelines";
-"settings.title.warnAboutMissingAltTitle" = "Warn of missing ALT text";
-"settings.title.warnAboutMissingAltDescription" = "A warning about missing ALT texts will be displayed before publishing new post.";
+"settings.title.showFavourite" = "Favoriten anzeigen";
+"settings.title.showFavouriteOnTimeline" = "Favoriten werden in der Zeitleiste angezeigt";
+"settings.title.showAltText" = "ALT Icon anzeigen";
+"settings.title.showAltTextOnTimeline" = "ALT Icons werden in der Zeitleiste angezeigt";
+"settings.title.warnAboutMissingAltTitle" = "Warne mich bei fehlenden ALT Texten";
+"settings.title.warnAboutMissingAltDescription" = "Eine Warnung wird bei fehlenden ALT Texten angezeigt bevor ein Beitrag veröffentlicht wird.";
 
 // Mark: Signin view.
-"signin.navigationBar.title" = "Sign in to Pixelfed";
-"signin.title.serverAddress" = "Server address";
-"signin.title.signIn" = "Sign in";
-"signin.title.enterServerAddress" = "Enter server address";
-"signin.title.howToJoinLink" = "How to join Pixelfed";
-"signin.title.chooseServer" = "Or choose Pixelfed server";
-"signin.title.amountOfUsers" = "%d users";
-"signin.title.amountOStatuses" = "%d statuses";
-"signin.error.communicationFailed" = "Communication with server failed.";
+"signin.navigationBar.title" = "In Pixelfed einloggen";
+"signin.title.serverAddress" = "Server Adresse";
+"signin.title.signIn" = "Einloggen";
+"signin.title.enterServerAddress" = "Server Adresse eingeben";
+"signin.title.howToJoinLink" = "Wie man Pixelfed beitritt";
+"signin.title.chooseServer" = "oder wähle einen Pixelfed Server";
+"signin.title.amountOfUsers" = "%d Benutzer";
+"signin.title.amountOStatuses" = "%d Beiträge";
+"signin.error.communicationFailed" = "Kommunikation mit dem Server fehlgeschlagen.";
 
 // Mark: Status view.
 "status.navigationBar.title" = "Details";
-"status.title.uploaded" = "Uploaded";
+"status.title.uploaded" = "Hochgeladen";
 "status.title.via" = "via %@";
 "status.title.reboostedBy" = "Boosted by";
-"status.title.favouritedBy" = "Favourited by";
-"status.title.openInBrowser" = "Open in browser";
-"status.title.shareStatus" = "Share status";
-"status.title.yourStatus" = "Your status";
-"status.title.delete" = "Delete";
+"status.title.favouritedBy" = "Favorisiert von";
+"status.title.openInBrowser" = "Im Browser öffnen";
+"status.title.shareStatus" = "Beitrag teilen";
+"status.title.yourStatus" = "Dein Beitrag";
+"status.title.delete" = "Löschen";
 "status.title.reboosted" = "Boosted";
-"status.title.unreboosted" = "Unboosted";
-"status.title.favourited" = "Favourited";
-"status.title.unfavourited" = "Unfavourited";
-"status.title.bookmarked" = "Bookmarked";
-"status.title.unbookmarked" = "Unbookmarked";
-"status.title.statusDeleted" = "Status deleted";
+"status.title.unreboosted" = "Boot rückgängig gemacht";
+"status.title.favourited" = "Favorisiert";
+"status.title.unfavourited" = "Favorisieren rückgängig gemacht";
+"status.title.bookmarked" = "Lesezeichen gesetzt";
+"status.title.unbookmarked" = "Lesezeichen gelöscht";
+"status.title.statusDeleted" = "Beitrag gelöscht";
 "status.title.reboost" = "Boost";
-"status.title.unreboost" = "Unboost";
-"status.title.favourite" = "Favourite";
-"status.title.unfavourite" = "Unfavourite";
-"status.title.bookmark" = "Bookmark";
-"status.title.unbookmark" = "Unbookmark";
-"status.title.comment" = "Comment";
-"status.title.report" = "Report";
-"status.title.saveImage" = "Save image";
-"status.title.showMediaDescription" = "Show media description";
-"status.title.mediaDescription" = "Media description";
-"status.title.shareImage" = "Share image";
+"status.title.unreboost" = "Boost rückgängig machen";
+"status.title.favourite" = "Favorisieren";
+"status.title.unfavourite" = "Nicht mehr favorisieren";
+"status.title.bookmark" = "Lesezeichen";
+"status.title.unbookmark" = "Lesezeichen löschen";
+"status.title.comment" = "Kommentieren";
+"status.title.report" = "Melden";
+"status.title.saveImage" = "Bild speichern";
+"status.title.showMediaDescription" = "Medienbeschreibung anzeigen";
+"status.title.mediaDescription" = "Medienbeschreibung";
+"status.title.shareImage" = "Bild teilen";
 "status.title.altText" = "ALT";
-"status.error.loadingStatusFailed" = "Loading status failed.";
-"status.error.notFound" = "Status not existing anymore.";
-"status.error.loadingCommentsFailed" = "Comments cannot be downloaded.";
-"status.error.reboostFailed" = "Boost action failed.";
-"status.error.favouriteFailed" = "Favourite action failed.";
-"status.error.bookmarkFailed" = "Bookmark action failed.";
-"status.error.deleteFailed" = "Delete action failed.";
+"status.error.loadingStatusFailed" = "Beitrag laden fehlgeschlagen.";
+"status.error.notFound" = "Beitrag existiert nicht mehr.";
+"status.error.loadingCommentsFailed" = "Kommentare können nicht geladen werden.";
+"status.error.reboostFailed" = "Boost fehlgeschlagen.";
+"status.error.favouriteFailed" = "Favorisieren fehlgeschlagen.";
+"status.error.bookmarkFailed" = "Lesezeichen setzen fehlgeschlagen.";
+"status.error.deleteFailed" = "Löschen fehlgeschlagen.";
 
 // Mark: Accounts view.
-"accounts.navigationBar.followers" = "Followers";
-"accounts.navigationBar.following" = "Following";
-"accounts.navigationBar.favouritedBy" = "Favourited by";
-"accounts.navigationBar.reboostedBy" = "Boosted by";
-"accounts.navigationBar.blocked" = "Blocked accounts";
-"accounts.navigationBar.mutes" = "Muted accounts";
-"accounts.title.noAccounts" = "Unfortunately, there is no one here.";
-"accounts.error.loadingAccountsFailed" = "Loading accounts failed.";
+"accounts.navigationBar.followers" = "Folgende";
+"accounts.navigationBar.following" = "Folge";
+"accounts.navigationBar.favouritedBy" = "Favorisiert";
+"accounts.navigationBar.reboostedBy" = "Boosted";
+"accounts.navigationBar.blocked" = "Blockierte Benutzer";
+"accounts.navigationBar.mutes" = "Stummgeschaltete Benutzer";
+"accounts.title.noAccounts" = "Hier ist leider niemand.";
+"accounts.error.loadingAccountsFailed" = "Benutzer laden fehlgeschlagen.";
 
 // Mark: Third party view.
-"thirdParty.navigationBar.title" = "Third party";
+"thirdParty.navigationBar.title" = "Dritte";
 
 // Mark: Widget view.
-"widget.title.photoDescription" = "Widget with photos from Pixelfed.";
-"widget.title.qrCodeDescription" = "Widget with QR Code to your Pixelfed profile.";
+"widget.title.photoDescription" = "Widget mit Fotos aus Pixelfed.";
+"widget.title.qrCodeDescription" = "Widget mit QR Code zu Deinem Pixelfed Profil.";
 
 // Mark: In-app purchases.
 "purchase.donut.title" = "Donut";
-"purchase.donut.description" = "Treat me to a doughnut.";
-"purchase.coffee.title" = "Coffee";
-"purchase.coffee.description" = "Treat me to a coffee.";
-"purchase.cake.title" = "Coffee & cake";
-"purchase.cake.description" = "Treat me to a coffee and cake.";
+"purchase.donut.description" = "Gib mir einen Donut aus.";
+"purchase.coffee.title" = "Kaffee";
+"purchase.coffee.description" = "Gib mir einen Kaffee.";
+"purchase.cake.title" = "Kaffee und Kuchen";
+"purchase.cake.description" = "Lade mich zu Kaffee und Kuchen ein.";
 
 // Mark: Edit profile.
-"editProfile.navigationBar.title" = "Edit profile";
-"editProfile.title.displayName" = "Display name";
-"editProfile.title.bio" = "Bio";
-"editProfile.title.website" = "Website";
-"editProfile.title.save" = "Save";
-"editProfile.title.accountSaved" = "Profile has been updated.";
-"editProfile.title.photoInfo" = "The changed photo will be visible in the app and on the website with a small delay.";
-"editProfile.title.privateAccount" = "Private account";
-"editProfile.title.privateAccountInfo" = "When your account is private, only people you approve can see your photos and videos on Pixelfed. Your existing followers won't be affected.";
-"editProfile.error.saveAccountFailed" = "Saving profile failed.";
-"editProfile.error.loadingAvatarFailed" = "Loading avatar failed.";
-"editProfile.error.noProfileData" = "Profile data cannot be displayed.";
-"editProfile.error.loadingAccountFailed" = "Error during download account from server.";
+"editProfile.navigationBar.title" = "Profil bearbeiten";
+"editProfile.title.displayName" = "Anzeigename";
+"editProfile.title.bio" = "Biografie";
+"editProfile.title.website" = "Webseite";
+"editProfile.title.save" = "Speichern";
+"editProfile.title.accountSaved" = "Profil wurde aktualisiert.";
+"editProfile.title.photoInfo" = "Das geänderte Profilbild wird mit einer kurzen Verzögerung in der App und auf der Webseite sichtbar sein.";
+"editProfile.title.privateAccount" = "Privater Account";
+"editProfile.title.privateAccountInfo" = "Wenn Dein Account privat ist, können nur Nutzer die Du bestätigst Deine Fotos und Videos auf Pixelfed sehen. Benutzer die Dir jetzt schon folgen sind nicht betroffen.";
+"editProfile.error.saveAccountFailed" = "Profil speichern fehlgeschlagen.";
+"editProfile.error.loadingAvatarFailed" = "Avatar laden fehlgeschlagen.";
+"editProfile.error.noProfileData" = "Profildaten können nicht angezeigt werden.";
+"editProfile.error.loadingAccountFailed" = "Fehler beim Laden des Profils vom Server.";
 
 // Mark: Instance information.
-"instance.navigationBar.title" = "Instance";
-"instance.title.instanceInfo" = "Instance info";
+"instance.navigationBar.title" = "Instanz";
+"instance.title.instanceInfo" = "Instanz Info";
 "instance.title.name" = "Name";
-"instance.title.address" = "Address";
+"instance.title.address" = "Addresse";
 "instance.title.email" = "Email";
 "instance.title.version" = "Version";
-"instance.title.users" = "Users";
-"instance.title.posts" = "Posts";
+"instance.title.users" = "Benutzer";
+"instance.title.posts" = "Beiträge";
 "instance.title.domains" = "Domains";
-"instance.title.registrations" = "Registrations";
-"instance.title.approvalRequired" = "Approval required";
-"instance.title.rules" = "Instance rules";
-"instance.title.contact" = "Contact";
-"instance.title.pixelfedAccount" = "Pixelfed account";
-"instance.error.noInstanceData" = "Instance data cannot be displayed.";
-"instance.error.loadingDataFailed" = "Error during download instance data from server.";
+"instance.title.registrations" = "Registrierungen";
+"instance.title.approvalRequired" = "Genehmigung erforderlich";
+"instance.title.rules" = "Instanzregeln";
+"instance.title.contact" = "Kontact";
+"instance.title.pixelfedAccount" = "Pixelfed Konto";
+"instance.error.noInstanceData" = "Instanzdaten können nicht angezeigt werden.";
+"instance.error.loadingDataFailed" = "Fehler beim Laden der Instanzdaten vom Server.";
 
 // Mark: Report screen.
-"report.navigationBar.title" = "Report";
-"report.title.close" = "Close";
-"report.title.send" = "Send";
-"report.title.userReported" = "User has been reported";
-"report.title.postReported" = "Post has been reported";
-"report.title.reportType" = "Type of abuse";
-"report.title.spam" = "It's a spam";
-"report.title.sensitive" = "Nudity or sexual activity";
-"report.title.abusive" = "Hate speech or symbols";
-"report.title.underage" = "Underage account";
-"report.title.violence" = "Violence or dangerous organisations";
-"report.title.copyright" = "Copyright infringement";
-"report.title.impersonation" = "Impersonation";
-"report.title.scam" = "Bullying or harassment";
-"report.title.terrorism" = "Terrorism";
-"report.error.notReported" = "Error during sending report.";
+"report.navigationBar.title" = "Melden";
+"report.title.close" = "Schließen";
+"report.title.send" = "Senden";
+"report.title.userReported" = "Benutzer wurde gemeldet";
+"report.title.postReported" = "Beitrag wurde gemeldet";
+"report.title.reportType" = "Art des Mißbrauchs";
+"report.title.spam" = "Spam";
+"report.title.sensitive" = "Nacktheit oder Sex";
+"report.title.abusive" = "Hassrede oder Symbole";
+"report.title.underage" = "Minderjähriger Benutzer";
+"report.title.violence" = "Gewalt oder gefährliche Organisationen";
+"report.title.copyright" = "Urheberrechtsverletzung";
+"report.title.impersonation" = "Identitätsdiebstahl";
+"report.title.scam" = "Beleidigung";
+"report.title.terrorism" = "Terrorismus";
+"report.error.notReported" = "Fehler beim Melden.";
 
 // Mark: Following requests.
-"followingRequests.navigationBar.title" = "Following requests";
-"followingRequests.title.approve" = "Approve";
-"followingRequests.title.reject" = "Reject";
-"followingRequests.error.approve" = "Error during approving request.";
-"followingRequests.error.reject" = "Error during rejecting request.";
+"followingRequests.navigationBar.title" = "Folgeanfragen";
+"followingRequests.title.approve" = "Genehmigen";
+"followingRequests.title.reject" = "Ablehnen";
+"followingRequests.error.approve" = "Fehler beim Genehmigen.";
+"followingRequests.error.reject" = "Fehler beim Ablehnen.";
