@@ -245,7 +245,7 @@
 "signin.navigationBar.title" = "In Pixelfed einloggen";
 "signin.title.serverAddress" = "Serveradresse";
 "signin.title.signIn" = "Einloggen";
-"signin.title.enterServerAddress" = "Server Adresse eingeben";
+"signin.title.enterServerAddress" = "Serveradresse eingeben";
 "signin.title.howToJoinLink" = "Wie man Pixelfed beitritt";
 "signin.title.chooseServer" = "oder wähle einen Pixelfed Server";
 "signin.title.amountOfUsers" = "%d Benutzer";
