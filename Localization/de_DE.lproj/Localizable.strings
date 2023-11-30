@@ -63,7 +63,7 @@
 
 // Mark: Search view.
 "search.navigationBar.title" = "Suche";
-"search.title.placeholder" = "Suche...";
+"search.title.placeholder" = "Suche …";
 "search.title.usersWith" = "Nutzer mit %@";
 "search.title.goToUser" = "Gehe zu Nutzer %@";
 "search.title.hashtagWith" = "Hashtags mit %@";
