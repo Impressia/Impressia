@@ -159,7 +159,7 @@
 "compose.title.tryToUpload" = "Versuche hochzuladen";
 "compose.title.delete" = "Löschen";
 "compose.title.edit" = "Bearbeiten";
-"compose.title.photos" = "Foto Bibliothek";
+"compose.title.photos" = "Fotobibliothek";
 "compose.title.camera" = "Foto aufnehmen";
 "compose.title.files" = "Dateien durchsuchen";
 "compose.title.missingAltTexts" = "Fehlende ALT Texte";
