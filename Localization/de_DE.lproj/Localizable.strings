@@ -103,7 +103,7 @@
 "userProfile.title.posts" = "Beiträge";
 "userProfile.title.followers" = "Leute, die Dir folgen";
 "userProfile.title.following" = "Leute, denen Du folgst";
-"userProfile.title.joined" = "%@ beigetreten";
+"userProfile.title.joined" = "Am %@ beigetreten";
 "userProfile.title.unfollow" = "Nicht mehr folgen";
 "userProfile.title.follow" = "Folgen";
 "userProfile.title.instance" = "Instanzinformation";
