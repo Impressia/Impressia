@@ -263,7 +263,7 @@
 "status.title.yourStatus" = "Dein Beitrag";
 "status.title.delete" = "Löschen";
 "status.title.reboosted" = "Geboostet";
-"status.title.unreboosted" = "Boot rückgängig gemacht";
+"status.title.unreboosted" = "Boost rückgängig gemacht";
 "status.title.favourited" = "Favorisiert";
 "status.title.unfavourited" = "Favorisieren rückgängig gemacht";
 "status.title.bookmarked" = "Lesezeichen gesetzt";
