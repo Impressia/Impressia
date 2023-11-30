@@ -142,7 +142,7 @@
 "notifications.title.updatedStatus" = "Beitrag bearbeitet";
 "notifications.title.signedUp" = "registriert";
 "notifications.title.newReport" = "neue Meldung";
-"notifications.error.loadingNotificationsFailed" = "Benachrichtigungen laden fehlgeschlagen.";
+"notifications.error.loadingNotificationsFailed" = "Benachrichtigungen konnten nicht geladen werden.";
 
 // Mark: Compose view.
 "compose.navigationBar.title" = "Beitrag erstellen";
