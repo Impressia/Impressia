@@ -208,7 +208,7 @@
 "settings.title.thankYouMessage" = "Danke für die Unterstützung! Kleine und große Einkäufe helfen uns, unseren Traum eines hochqualitativen Produkts für unsere Nutzer aufrecht zu erhalten. Wir hoffen, Du liebst Vernissage!";
 "settings.title.thankYouClose" = "Schließen";
 "settings.title.haptics" = "Haptik";
-"settings.title.hapticsTabSelection" = "Tab Auswahl";
+"settings.title.hapticsTabSelection" = "Tabauswahl";
 "settings.title.hapticsButtonPress" = "Knopfdruck";
 "settings.title.hapticsListRefresh" = "Liste aktualisieren";
 "settings.title.hapticsAnimationFinished" = "Animation beendet";
