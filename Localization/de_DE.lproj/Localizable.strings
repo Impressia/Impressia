@@ -247,7 +247,7 @@
 "signin.title.signIn" = "Einloggen";
 "signin.title.enterServerAddress" = "Serveradresse eingeben";
 "signin.title.howToJoinLink" = "Wie man Pixelfed beitritt";
-"signin.title.chooseServer" = "oder wähle einen Pixelfed Server";
+"signin.title.chooseServer" = "oder wähle einen Pixelfed-Server";
 "signin.title.amountOfUsers" = "%d Benutzer";
 "signin.title.amountOStatuses" = "%d Beiträge";
 "signin.error.communicationFailed" = "Kommunikation mit dem Server fehlgeschlagen.";
