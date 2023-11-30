@@ -25,7 +25,7 @@
 "global.error.badUrlServer" = "Ungültige Server-URL.";
 "global.error.accessTokenNotFound" = "Zugangstoken nicht gefunden.";
 "global.error.errorDuringDownloadStatus" = "Fehler beim Laden vom Server.";
-"global.error.errorDuringPurchaseVerification" = "Verifikation des Einkaufs fehlgeschlagen.";
+"global.error.errorDuringPurchaseVerification" = "Konnte Einkauf nicht verifizieren.";
 
 // MARK: Main view (main navigation bar).
 "mainview.tab.homeTimeline" = "Zuhause";
