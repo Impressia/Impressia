@@ -80,7 +80,7 @@
 // Mark: Trending tags.
 "tags.navigationBar.trendingTitle" = "Hashtags";
 "tags.navigationBar.searchTitle" = "Hashtags";
-"tags.navigationBar.followedTitle" = "Hashtags denen Du folgst";
+"tags.navigationBar.followedTitle" = "Hashtags, denen Du folgst";
 "tags.title.noTags" = "Hier sind leider keine Hashtags.";
 "tags.title.amountOfPosts" = "%d Beiträge";
 "tags.error.loadingTagsFailed" = "Laden der Hashtags fehlgeschlagen.";
