@@ -19,7 +19,7 @@
 "global.error.errorDuringDownloadHashtag" = "Fehler beim Laden des Hashtags vom Server.";
 "global.error.hashtagNotExists" = "Hashtag existiert nicht.";
 "global.error.errorDuringImageDownload" = "Bild kann nicht geladen werden.";
-"global.error.canceledImageDownload" = "Laden der Bildes abgebrochen.";
+"global.error.canceledImageDownload" = "Laden des Bildes abgebrochen.";
 "global.error.errorDuringDataLoad" = "Laden von Daten fehlgeschlagen.";
 "global.error.errorDuringUserRead" = "Benutzer kann nicht geladen werden.";
 "global.error.badUrlServer" = "Ungültige Server-URL.";
