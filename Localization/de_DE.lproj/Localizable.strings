@@ -99,7 +99,7 @@
 "userProfile.title.block" = "Blockieren";
 "userProfile.title.favourites" = "Favoriten";
 "userProfile.title.bookmarks" = "Lesezeichen";
-"userProfile.title.followedTags" = "Hashtags denen Du folgst";
+"userProfile.title.followedTags" = "Hashtags, denen Du folgst";
 "userProfile.title.posts" = "Beiträge";
 "userProfile.title.followers" = "Leute die Dir folgen";
 "userProfile.title.following" = "Leute denen Du folgst";
