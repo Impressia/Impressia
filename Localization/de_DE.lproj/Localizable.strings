@@ -239,7 +239,7 @@
 "settings.title.showAltText" = "ALT-Icon anzeigen";
 "settings.title.showAltTextOnTimeline" = "ALT-Icons werden in der Zeitleiste angezeigt";
 "settings.title.warnAboutMissingAltTitle" = "Warne mich bei fehlenden ALT-Texten";
-"settings.title.warnAboutMissingAltDescription" = "Eine Warnung wird bei fehlenden ALT Texten angezeigt bevor ein Beitrag veröffentlicht wird.";
+"settings.title.warnAboutMissingAltDescription" = "Vernissage wird Dich warnen, wenn Du einen Beitrag mit fehlendem ALT-Text veröffentlichen möchtest.";
 
 // Mark: Signin view.
 "signin.navigationBar.title" = "In Pixelfed einloggen";
