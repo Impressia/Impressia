@@ -218,7 +218,7 @@
 "settings.title.alwaysShowAltTitle" = "ALT-Text anzeigen";
 "settings.title.alwaysShowAltDescription" = "ALT-Text in der Detailansicht anzeigen";
 "settings.title.general" = "Generell";
-"settings.title.applicationIcon" = "Anwendungs-Icon";
+"settings.title.applicationIcon" = "App-Icon";
 "settings.title.followVernissage" = "Vernissage folgen";
 "settings.title.mastodonAccount" = "Mastodon";
 "settings.title.pixelfedAccount" = "Pixelfed";
