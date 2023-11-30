@@ -282,7 +282,7 @@
 "status.title.mediaDescription" = "Medienbeschreibung";
 "status.title.shareImage" = "Bild teilen";
 "status.title.altText" = "ALT";
-"status.error.loadingStatusFailed" = "Beitrag laden fehlgeschlagen.";
+"status.error.loadingStatusFailed" = "Konnte Beitrag nicht laden.";
 "status.error.notFound" = "Beitrag existiert nicht mehr.";
 "status.error.loadingCommentsFailed" = "Kommentare können nicht geladen werden.";
 "status.error.reboostFailed" = "Boost fehlgeschlagen.";
