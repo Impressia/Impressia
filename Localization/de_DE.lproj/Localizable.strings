@@ -293,19 +293,19 @@
 // Mark: Accounts view.
 "accounts.navigationBar.followers" = "Folgende";
 "accounts.navigationBar.following" = "Folge";
-"accounts.navigationBar.favouritedBy" = "Favorisiert";
-"accounts.navigationBar.reboostedBy" = "Boosted";
+"accounts.navigationBar.favouritedBy" = "Favorisiert von";
+"accounts.navigationBar.reboostedBy" = "Geboostet von";
 "accounts.navigationBar.blocked" = "Blockierte Benutzer";
 "accounts.navigationBar.mutes" = "Stummgeschaltete Benutzer";
 "accounts.title.noAccounts" = "Hier ist leider niemand.";
-"accounts.error.loadingAccountsFailed" = "Benutzer laden fehlgeschlagen.";
+"accounts.error.loadingAccountsFailed" = "Konnte Benutzer nicht laden.";
 
 // Mark: Third party view.
 "thirdParty.navigationBar.title" = "Dritte";
 
 // Mark: Widget view.
 "widget.title.photoDescription" = "Widget mit Fotos aus Pixelfed.";
-"widget.title.qrCodeDescription" = "Widget mit QR Code zu Deinem Pixelfed Profil.";
+"widget.title.qrCodeDescription" = "Widget mit QR-Code zu Deinem Pixelfed-Profil.";
 
 // Mark: In-app purchases.
 "purchase.donut.title" = "Donut";
@@ -324,24 +324,24 @@
 "editProfile.title.accountSaved" = "Profil wurde aktualisiert.";
 "editProfile.title.photoInfo" = "Das geänderte Profilbild wird mit einer kurzen Verzögerung in der App und auf der Webseite sichtbar sein.";
 "editProfile.title.privateAccount" = "Privater Account";
-"editProfile.title.privateAccountInfo" = "Wenn Dein Account privat ist, können nur Nutzer die Du bestätigst Deine Fotos und Videos auf Pixelfed sehen. Benutzer die Dir jetzt schon folgen sind nicht betroffen.";
-"editProfile.error.saveAccountFailed" = "Profil speichern fehlgeschlagen.";
-"editProfile.error.loadingAvatarFailed" = "Avatar laden fehlgeschlagen.";
+"editProfile.title.privateAccountInfo" = "Wenn Dein Account privat ist, können nur Nutzer die Du bestätigst Deine Fotos und Videos auf Pixelfed sehen. Benutzer, die Dir jetzt schon folgen, sind nicht betroffen.";
+"editProfile.error.saveAccountFailed" = "Konnte Profil nicht speichern.";
+"editProfile.error.loadingAvatarFailed" = "Konnte Avatar nicht laden.";
 "editProfile.error.noProfileData" = "Profildaten können nicht angezeigt werden.";
 "editProfile.error.loadingAccountFailed" = "Fehler beim Laden des Profils vom Server.";
 
 // Mark: Instance information.
 "instance.navigationBar.title" = "Instanz";
-"instance.title.instanceInfo" = "Instanz Info";
+"instance.title.instanceInfo" = "Instanzinfo";
 "instance.title.name" = "Name";
 "instance.title.address" = "Addresse";
-"instance.title.email" = "Email";
+"instance.title.email" = "E-Mail";
 "instance.title.version" = "Version";
 "instance.title.users" = "Benutzer";
 "instance.title.posts" = "Beiträge";
 "instance.title.domains" = "Domains";
 "instance.title.registrations" = "Registrierungen";
-"instance.title.approvalRequired" = "Genehmigung erforderlich";
+"instance.title.approvalRequired" = "Bestätigung erforderlich";
 "instance.title.rules" = "Instanzregeln";
 "instance.title.contact" = "Kontact";
 "instance.title.pixelfedAccount" = "Pixelfed-Konto";
