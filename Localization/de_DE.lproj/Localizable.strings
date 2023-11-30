@@ -256,7 +256,7 @@
 "status.navigationBar.title" = "Details";
 "status.title.uploaded" = "Hochgeladen";
 "status.title.via" = "über %@";
-"status.title.reboostedBy" = "Boosted by";
+"status.title.reboostedBy" = "Geboostet von";
 "status.title.favouritedBy" = "Favorisiert von";
 "status.title.openInBrowser" = "Im Browser öffnen";
 "status.title.shareStatus" = "Beitrag teilen";
