@@ -162,7 +162,7 @@
 "compose.title.photos" = "Fotobibliothek";
 "compose.title.camera" = "Foto aufnehmen";
 "compose.title.files" = "Dateien durchsuchen";
-"compose.title.missingAltTexts" = "Fehlende ALT Texte";
+"compose.title.missingAltTexts" = "Fehlende ALT-Texte";
 "compose.title.missingAltTextsWarning" = "Es haben nicht alle Fotos eine Beschreibung für Sehbehinderte. Möchtest Du trotzdem senden?";
 "compose.error.loadingPhotosFailed" = "Kann das Foto nicht aus der Bibliothek laden.";
 "compose.error.postingPhotoFailed" = "Fehler beim Veröffentlichen des Fotos.";
