@@ -46,7 +46,7 @@
 "mainview.error.switchAccounts" = "Konnte Benutzer nicht wechseln.";
 
 // MARK: Home timeline.
-"home.title.allCaughtUp" = "Das war's, alles gesehen";
+"home.title.allCaughtUp" = "Das war’s, alles gesehen";
 "home.title.noPhotos" = "Hier sind leider keine Bilder.";
 
 // MARK: Statuses timeline (local/federated/favourite/bookmarks etc.).
