@@ -368,7 +368,7 @@
 
 // Mark: Following requests.
 "followingRequests.navigationBar.title" = "Folgeanfragen";
-"followingRequests.title.approve" = "Genehmigen";
+"followingRequests.title.approve" = "Bestätigen";
 "followingRequests.title.reject" = "Ablehnen";
 "followingRequests.error.approve" = "Fehler beim Genehmigen.";
 "followingRequests.error.reject" = "Fehler beim Ablehnen.";
