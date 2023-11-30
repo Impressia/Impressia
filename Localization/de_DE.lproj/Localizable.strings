@@ -101,8 +101,8 @@
 "userProfile.title.bookmarks" = "Lesezeichen";
 "userProfile.title.followedTags" = "Hashtags, denen Du folgst";
 "userProfile.title.posts" = "Beiträge";
-"userProfile.title.followers" = "Leute die Dir folgen";
-"userProfile.title.following" = "Leute denen Du folgst";
+"userProfile.title.followers" = "Leute, die Dir folgen";
+"userProfile.title.following" = "Leute, denen Du folgst";
 "userProfile.title.joined" = "%@ beigetreten";
 "userProfile.title.unfollow" = "Nicht mehr folgen";
 "userProfile.title.follow" = "Folgen";
