@@ -1,5 +1,5 @@
 // MARK: Network errors.
-"global.error.notSuccessResponse" = "Antwort vom Server: %@.";
+"global.error.notSuccessResponse" = "Serverantwort: %@.";
 "global.error.unknownError" = "Unbekannter Fehler.";
 
 // Mark: Report errors.
