@@ -255,7 +255,7 @@
 // Mark: Status view.
 "status.navigationBar.title" = "Details";
 "status.title.uploaded" = "Hochgeladen";
-"status.title.via" = "via %@";
+"status.title.via" = "über %@";
 "status.title.reboostedBy" = "Boosted by";
 "status.title.favouritedBy" = "Favorisiert von";
 "status.title.openInBrowser" = "Im Browser öffnen";
