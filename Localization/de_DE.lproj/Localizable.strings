@@ -269,7 +269,7 @@
 "status.title.bookmarked" = "Lesezeichen gesetzt";
 "status.title.unbookmarked" = "Lesezeichen gelöscht";
 "status.title.statusDeleted" = "Beitrag gelöscht";
-"status.title.reboost" = "Boost";
+"status.title.reboost" = "Boosten";
 "status.title.unreboost" = "Boost rückgängig machen";
 "status.title.favourite" = "Favorisieren";
 "status.title.unfavourite" = "Nicht mehr favorisieren";
