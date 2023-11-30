@@ -169,7 +169,7 @@
 "compose.error.postingStatusFailed" = "Fehler beim Veröffentlichen des Beitrags.";
 
 // Mark: Photo editor view.
-"photoEdit.navigationBar.title" = "Foto Details";
+"photoEdit.navigationBar.title" = "Fotodetails";
 "photoEdit.title.photo" = "Foto";
 "photoEdit.title.accessibility" = "Barrierefreiheit";
 "photoEdit.title.accessibilityDescription" = "Beschreibung für Sehbehinderte";
