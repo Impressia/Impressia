@@ -179,7 +179,7 @@
 
 // Mark: Place selector view.
 "placeSelector.navigationBar.title" = "Orte";
-"placeSelector.title.search" = "Suchen...";
+"placeSelector.title.search" = "Suchen …";
 "placeSelector.title.buttonSearch" = "Suchen";
 "placeSelector.title.cancel" = "Abbrechen";
 "placeSelector.error.loadingPlacesFailed" = "Benachrichtigungen laden fehlgeschlagen.";
