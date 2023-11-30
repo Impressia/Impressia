@@ -354,7 +354,7 @@
 "report.title.send" = "Senden";
 "report.title.userReported" = "Benutzer wurde gemeldet";
 "report.title.postReported" = "Beitrag wurde gemeldet";
-"report.title.reportType" = "Art des Mißbrauchs";
+"report.title.reportType" = "Art des Missbrauchs";
 "report.title.spam" = "Spam";
 "report.title.sensitive" = "Nacktheit oder Sex";
 "report.title.abusive" = "Hassrede oder Symbole";
