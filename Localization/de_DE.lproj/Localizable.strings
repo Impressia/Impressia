@@ -182,7 +182,7 @@
 "placeSelector.title.search" = "Suchen …";
 "placeSelector.title.buttonSearch" = "Suchen";
 "placeSelector.title.cancel" = "Abbrechen";
-"placeSelector.error.loadingPlacesFailed" = "Benachrichtigungen laden fehlgeschlagen.";
+"placeSelector.error.loadingPlacesFailed" = "Benachrichtigungen konnten nicht geladen werden.";
 
 // Mark: Settings view.
 "settings.navigationBar.title" = "Einstellungen";
