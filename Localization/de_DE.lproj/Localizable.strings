@@ -344,7 +344,7 @@
 "instance.title.approvalRequired" = "Genehmigung erforderlich";
 "instance.title.rules" = "Instanzregeln";
 "instance.title.contact" = "Kontact";
-"instance.title.pixelfedAccount" = "Pixelfed Konto";
+"instance.title.pixelfedAccount" = "Pixelfed-Konto";
 "instance.error.noInstanceData" = "Instanzdaten können nicht angezeigt werden.";
 "instance.error.loadingDataFailed" = "Fehler beim Laden der Instanzdaten vom Server.";
 
