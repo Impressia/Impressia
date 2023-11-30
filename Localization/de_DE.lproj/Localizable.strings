@@ -270,7 +270,7 @@
 "status.title.unbookmarked" = "Lesezeichen gelöscht";
 "status.title.statusDeleted" = "Beitrag gelöscht";
 "status.title.reboost" = "Boosten";
-"status.title.unreboost" = "Boost rückgängig machen";
+"status.title.unreboost" = "Nicht mehr boosten";
 "status.title.favourite" = "Favorisieren";
 "status.title.unfavourite" = "Nicht mehr favorisieren";
 "status.title.bookmark" = "Lesezeichen";
