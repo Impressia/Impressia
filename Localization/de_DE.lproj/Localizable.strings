@@ -101,8 +101,8 @@
 "userProfile.title.bookmarks" = "Lesezeichen";
 "userProfile.title.followedTags" = "Hashtags, denen Du folgst";
 "userProfile.title.posts" = "Beiträge";
-"userProfile.title.followers" = "Leute, die Dir folgen";
-"userProfile.title.following" = "Leute, denen Du folgst";
+"userProfile.title.followers" = "Follower";
+"userProfile.title.following" = "werden gefolgt";
 "userProfile.title.joined" = "Am %@ beigetreten";
 "userProfile.title.unfollow" = "Nicht mehr folgen";
 "userProfile.title.follow" = "Folgen";
@@ -114,7 +114,7 @@
 "userProfile.title.blocked" = "Konto blockiert";
 "userProfile.title.unblocked" = "Konto nicht mehr blockiert";
 "userProfile.title.report" = "Melden";
-"userProfile.title.followsYou" = "Folgt Dir";
+"userProfile.title.followsYou" = "folgt Dir";
 "userProfile.title.requestFollow" = "Folgen anfragen";
 "userProfile.title.cancelRequestFollow" = "Anfrage abbrechen";
 "userProfile.title.followRequests" = "Anfragen";
@@ -148,7 +148,7 @@
 "compose.navigationBar.title" = "Beitrag erstellen";
 "compose.title.everyone" = "Öffentlich";
 "compose.title.unlisted" = "nicht gelistet";
-"compose.title.followers" = "für Folgende";
+"compose.title.followers" = "für Follower";
 "compose.title.attachPhotoFull" = "Füge ein Foto hinzu und beschreibe, was Du denkst.";
 "compose.title.attachPhotoMini" = "Beschreibe was Du denkst.";
 "compose.title.publish" = "Veröffentlichen";
@@ -291,8 +291,8 @@
 "status.error.deleteFailed" = "Löschen fehlgeschlagen.";
 
 // Mark: Accounts view.
-"accounts.navigationBar.followers" = "Folgende";
-"accounts.navigationBar.following" = "Folge";
+"accounts.navigationBar.followers" = "Follower";
+"accounts.navigationBar.following" = "werden gefolgt";
 "accounts.navigationBar.favouritedBy" = "Favorisiert von";
 "accounts.navigationBar.reboostedBy" = "Geboostet von";
 "accounts.navigationBar.blocked" = "Blockierte Benutzer";
