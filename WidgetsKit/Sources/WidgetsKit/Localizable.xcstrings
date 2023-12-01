@@ -3,6 +3,12 @@
   "strings" : {
     "" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -31,6 +37,12 @@
     },
     "@%@" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@%@"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -59,6 +71,12 @@
     },
     "#%@" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "#%@"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -87,6 +105,12 @@
     },
     "%@" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -115,6 +139,12 @@
     },
     "%@, %@" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, %2$@"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -149,6 +179,12 @@
     },
     "%lld" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -177,6 +213,12 @@
     },
     "compose.error.cannotLoadImageFromExternalLibrary" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bild kann nicht aus externer Bibliothek geladen werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -199,6 +241,12 @@
     },
     "compose.error.errorDuringComposingAttributeString" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fehler beim Zusammenstellen der Attributzeichenfolge."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -221,6 +269,12 @@
     },
     "compose.error.errorDuringDownloadingAutocomplete" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fehler beim Herunterladen von Autocomplete."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -243,6 +297,12 @@
     },
     "compose.error.loadingPhotosFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kann das Foto nicht aus der Bibliothek laden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -277,6 +337,12 @@
     },
     "compose.error.postingStatusFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehler beim Veröffentlichen des Beitrags."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -311,6 +377,12 @@
     },
     "compose.title.attachPhotoFull" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Füge ein Foto hinzu und beschreibe, was Du denkst."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -345,6 +417,12 @@
     },
     "compose.title.attachPhotoMini" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beschreibe was Du denkst."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -380,6 +458,12 @@
     "compose.title.camera" : {
       "comment" : "Camera",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Foto aufnehmen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -415,6 +499,12 @@
     "compose.title.cancel" : {
       "comment" : "Cancel",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abbrechen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -450,6 +540,12 @@
     "compose.title.commentsWillBeDisabled" : {
       "comment" : "Comments disabled",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kommentare werden nicht möglich sein"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -484,6 +580,12 @@
     },
     "compose.title.delete" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Löschen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -518,6 +620,12 @@
     },
     "compose.title.edit" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bearbeiten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -552,6 +660,12 @@
     },
     "compose.title.everyone" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öffentlich"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -587,6 +701,12 @@
     "compose.title.files" : {
       "comment" : "Files",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dateien durchsuchen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -621,6 +741,12 @@
     },
     "compose.title.followers" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "für Follower"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -656,6 +782,12 @@
     "compose.title.missingAltTexts" : {
       "comment" : "Missing ALT texts",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehlende ALT-Texte"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -691,6 +823,12 @@
     "compose.title.missingAltTextsWarning" : {
       "comment" : "Missing ALT texts warning",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Es haben nicht alle Fotos eine Beschreibung für Sehbehinderte. Möchtest Du trotzdem senden?"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -726,6 +864,12 @@
     "compose.title.photos" : {
       "comment" : "Photo",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotobibliothek"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -761,6 +905,12 @@
     "compose.title.publish" : {
       "comment" : "Publish",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Veröffentlichen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -796,6 +946,12 @@
     "compose.title.tryToUpload" : {
       "comment" : "Try to upload",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versuche hochzuladen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -830,6 +986,12 @@
     },
     "compose.title.unlisted" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "nicht gelistet"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -865,6 +1027,12 @@
     "compose.title.writeContentWarning" : {
       "comment" : "Content warning",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inhaltswarnung hinzufügen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -899,6 +1067,12 @@
     },
     "global.error.errorDuringDeletingFileFromTmpDirectory" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fehler beim Löschen einer Datei aus dem tmp-Verzeichnis."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -921,6 +1095,12 @@
     },
     "global.error.errorDuringGettingTmpDirectoryContents" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fehler beim Abrufen des Inhalts des tmp-Verzeichnisses."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -943,6 +1123,12 @@
     },
     "global.error.errorDuringRemovingTransferredImage" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fehler beim Entfernen des übertragenen Bildes aus dem tmp-Verzeichnis."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -966,6 +1152,12 @@
     "global.title.contentWarning" : {
       "comment" : "Sensitive content",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inhaltswarnung"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1001,6 +1193,12 @@
     "global.title.momentsAgo" : {
       "comment" : "moments ago",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "gerade eben"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1036,6 +1234,12 @@
     "global.title.refresh" : {
       "comment" : "Refresh",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktualisieren"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1071,6 +1275,12 @@
     "global.title.seePost" : {
       "comment" : "See post",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beitrag ansehen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1105,6 +1315,12 @@
     },
     "global.title.showLess" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weniger anzeigen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1139,6 +1355,12 @@
     },
     "global.title.showMore" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mehr anzeigen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1173,6 +1395,12 @@
     },
     "photoEdit.error.updatePhotoFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehler beim Aktualisieren des Fotos."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1208,6 +1436,12 @@
     "photoEdit.navigationBar.title" : {
       "comment" : "Title",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotodetails"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1243,6 +1477,12 @@
     "photoEdit.title.accessibility" : {
       "comment" : "Accessibility",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Barrierefreiheit"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1278,6 +1518,12 @@
     "photoEdit.title.accessibilityDescription" : {
       "comment" : "Accesibility",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beschreibung für Sehbehinderte"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1313,6 +1559,12 @@
     "photoEdit.title.cancel" : {
       "comment" : "Cancel",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abbrechen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1348,6 +1600,12 @@
     "photoEdit.title.photo" : {
       "comment" : "Photo",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Foto"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1383,6 +1641,12 @@
     "photoEdit.title.save" : {
       "comment" : "Save",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speichern"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1417,6 +1681,12 @@
     },
     "placeSelector.error.loadingPlacesFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benachrichtigungen konnten nicht geladen werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1452,6 +1722,12 @@
     "placeSelector.navigationBar.title" : {
       "comment" : "Title",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Orte"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1487,6 +1763,12 @@
     "placeSelector.title.buttonSearch" : {
       "comment" : "Search",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suchen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1522,6 +1804,12 @@
     "placeSelector.title.cancel" : {
       "comment" : "Cancel",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abbrechen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1557,6 +1845,12 @@
     "placeSelector.title.search" : {
       "comment" : "Search",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suchen..."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1592,6 +1886,12 @@
     "status.title.altText" : {
       "comment" : "ALT",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ALT"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1627,6 +1927,12 @@
     "tip.mainNavigation.message" : {
       "comment" : "Main navigation tip message.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sie können die Position des Hauptnavigationsmenüs in den Einstellungen der App anpassen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1644,6 +1950,12 @@
     "tip.mainNavigation.title" : {
       "comment" : "Main navigation tip title.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Position im Menü"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1661,6 +1973,12 @@
     "tip.menuCustomizable.message" : {
       "comment" : "Menu customizable tip message.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sie können die Standardoptionen im Menü ändern, indem Sie lange auf die jeweilige Option drücken."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1678,6 +1996,12 @@
     "tip.menuCustomizable.title" : {
       "comment" : "Menu customizable tip title.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ändern der Standardoptionen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1695,6 +2019,12 @@
     "tip.timelineDoubleTap.message" : {
       "comment" : "Timeline double tip message.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ein Doppeltippen auf ein Foto führt dazu, dass es favorisiert wird."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1712,6 +2042,12 @@
     "tip.timelineDoubleTap.title" : {
       "comment" : "Timeline double tip title.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Als Favorit markieren"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",

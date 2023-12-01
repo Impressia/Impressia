@@ -4,6 +4,12 @@
     "global.error.notSuccessResponse" : {
       "comment" : "It's error returned from remote server. Request URL: '(response.url?.string ?? \"unknown\")'.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Serverantwort: %@."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -39,6 +45,12 @@
     "global.error.unknownError" : {
       "comment" : "Response doesn't contains any information about request status.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unbekannter Fehler."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -74,6 +86,12 @@
     "report.error.duplicate" : {
       "comment" : "The report has already been sent.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Bericht wurde bereits gesendet."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -109,6 +127,12 @@
     "report.error.invalidObject" : {
       "comment" : "Invalid object type.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ungültiges Objekt."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -144,6 +168,12 @@
     "report.error.invalidObjectId" : {
       "comment" : "Incorrect object Id.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehlerhafte ID."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -179,6 +209,12 @@
     "report.error.invalidParameters" : {
       "comment" : "Invalid report parameters.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ungültige Parameter."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -214,6 +250,12 @@
     "report.error.invalidType" : {
       "comment" : "Invalid report type.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ungültiger Berichtstyp."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -249,6 +291,12 @@
     "report.error.noSelfReports" : {
       "comment" : "Self-reporting is not allowed.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du darfst Dich nicht selbst melden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",

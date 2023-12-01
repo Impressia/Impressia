@@ -3,6 +3,12 @@
   "strings" : {
     "" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -31,6 +37,12 @@
     },
     "@%@" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@%@"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -59,6 +71,12 @@
     },
     "@mczachurski" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@mczachurski"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -87,6 +105,12 @@
     },
     "@vernissage" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@vernissage"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -115,6 +139,12 @@
     },
     "#%@" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "#%@"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -143,6 +173,12 @@
     },
     "%@ (%@)" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ (%2$@)"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -177,6 +213,12 @@
     },
     "%lld" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -205,6 +247,12 @@
     },
     "%lld/%lld" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld/%2$lld"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -239,6 +287,12 @@
     },
     "+99" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+99"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -268,6 +322,12 @@
     "accounts.error.loadingAccountsFailed" : {
       "comment" : "Information message when loading account failed",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laden der Konten fehlgeschlagen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -303,6 +363,12 @@
     "accounts.navigationBar.blocked" : {
       "comment" : "Blocked",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blockierte Benutzer"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -338,6 +404,12 @@
     "accounts.navigationBar.disabledBoosts" : {
       "comment" : "Disabled boosts",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Deaktivierte Boosts"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -373,6 +445,12 @@
     "accounts.navigationBar.favouritedBy" : {
       "comment" : "Favourited by",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favorisiert von"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -408,6 +486,12 @@
     "accounts.navigationBar.followers" : {
       "comment" : "Followers",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Follower"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -443,6 +527,12 @@
     "accounts.navigationBar.following" : {
       "comment" : "Following",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "werden gefolgt"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -478,6 +568,12 @@
     "accounts.navigationBar.mutes" : {
       "comment" : "Mutes",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stummgeschaltete Benutzer"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -513,6 +609,12 @@
     "accounts.navigationBar.reboostedBy" : {
       "comment" : "Reboosted by",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geboostet von"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -547,6 +649,12 @@
     },
     "accounts.title.noAccounts" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hier ist leider niemand."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -581,6 +689,12 @@
     },
     "compose.error.postingPhotoFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehler beim Veröffentlichen des Fotos."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -616,6 +730,12 @@
     "compose.navigationBar.title" : {
       "comment" : " Compose view.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beitrag erstellen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -650,6 +770,12 @@
     },
     "editProfile.error.loadingAccountFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehler beim Laden des Profils vom Server."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -684,6 +810,12 @@
     },
     "editProfile.error.loadingAvatarFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konnte Avatar nicht laden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -718,6 +850,12 @@
     },
     "editProfile.error.noProfileData" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profildaten können nicht angezeigt werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -752,6 +890,12 @@
     },
     "editProfile.error.saveAccountFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konnte Profil nicht speichern."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -787,6 +931,12 @@
     "editProfile.navigationBar.title" : {
       "comment" : "Edit profile.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profil bearbeiten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -821,6 +971,12 @@
     },
     "editProfile.title.accountSaved" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profil wurde aktualisiert."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -856,6 +1012,12 @@
     "editProfile.title.bio" : {
       "comment" : "Bio",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Biografie"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -891,6 +1053,12 @@
     "editProfile.title.displayName" : {
       "comment" : "Display name",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anzeigename"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -925,6 +1093,12 @@
     },
     "editProfile.title.photoInfo" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das geänderte Profilbild wird mit einer kurzen Verzögerung in der App und auf der Webseite sichtbar sein."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -959,6 +1133,12 @@
     },
     "editProfile.title.privateAccount" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privater Account"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -994,6 +1174,12 @@
     "editProfile.title.privateAccountInfo" : {
       "comment" : "Private account info",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wenn Dein Account privat ist, können nur Nutzer die Du bestätigst Deine Fotos und Videos auf Pixelfed sehen. Benutzer, die Dir jetzt schon folgen, sind nicht betroffen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1029,6 +1215,12 @@
     "editProfile.title.save" : {
       "comment" : "Save",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speichern"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1064,6 +1256,12 @@
     "editProfile.title.website" : {
       "comment" : "Website",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Webseite"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1098,6 +1296,12 @@
     },
     "followingRequests.error.approve" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehler beim Bestätigen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1132,6 +1336,12 @@
     },
     "followingRequests.error.reject" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehler beim Ablehnen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1167,6 +1377,12 @@
     "followingRequests.navigationBar.title" : {
       "comment" : "Following requests.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folgeanfragen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1201,6 +1417,12 @@
     },
     "followingRequests.title.approve" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bestätigen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1235,6 +1457,12 @@
     },
     "followingRequests.title.reject" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ablehnen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1270,6 +1498,12 @@
     "global.error.accessTokenNotFound" : {
       "comment" : "Access token is not saved in account model.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zugangstoken nicht gefunden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1304,6 +1538,12 @@
     },
     "global.error.avatarHasNotBeenDownloaded" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Avatar wurde noch nicht heruntergeladen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1339,6 +1579,12 @@
     "global.error.badUrlServer" : {
       "comment" : "User enter bad URL to server.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ungültige Server-URL."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1373,6 +1619,12 @@
     },
     "global.error.cannotConfigureTransactionListener" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Der Transaktions-Listener kann nicht konfiguriert werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1407,6 +1659,12 @@
     },
     "global.error.cannotDownloadInAppProducts" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "In-App-Produkte können nicht heruntergeladen werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1441,6 +1699,12 @@
     },
     "global.error.errorDuringDataLoad" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laden von Daten fehlgeschlagen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1475,6 +1739,12 @@
     },
     "global.error.errorDuringDownloadHashtag" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehler beim Laden des Hashtags vom Server."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1509,6 +1779,12 @@
     },
     "global.error.errorDuringDownloadingMetadata" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehler beim Herunterladen von Metadaten."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1543,6 +1819,12 @@
     },
     "global.error.errorDuringDownloadingNewStatuses" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fehler beim Herunterladen neuer Status für die Menge der neuen Status."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1578,6 +1860,12 @@
     "global.error.errorDuringDownloadStatus" : {
       "comment" : "Status cannot be downloaded from server.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehler beim Laden vom Server."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1612,6 +1900,12 @@
     },
     "global.error.errorDuringDownloadStatuses" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehler beim Laden der Beiträge vom Server."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1647,6 +1941,12 @@
     "global.error.errorDuringImageDownload" : {
       "comment" : "Cannot download image",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bild kann nicht geladen werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1682,6 +1982,12 @@
     "global.error.errorDuringPurchaseVerification" : {
       "comment" : "Something went wrong during purchase verification.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konnte Einkauf nicht verifizieren."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1717,6 +2023,12 @@
     "global.error.errorDuringUserRead" : {
       "comment" : "User acount cannot be downloaded from Core Data.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benutzer kann nicht geladen werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1751,6 +2063,12 @@
     },
     "global.error.hashtagNotExists" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hashtag existiert nicht."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1785,6 +2103,12 @@
     },
     "global.error.purchaseFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Der Kauf ist gescheitert."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1819,6 +2143,12 @@
     },
     "global.error.refreshingCredentialsSubtitle" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bitte erneut in Pixelfed einloggen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1853,6 +2183,12 @@
     },
     "global.error.refreshingCredentialsTitle" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zugangsdaten konnten nicht bestätigt werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1887,6 +2223,12 @@
     },
     "global.error.refreshTokenFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Aktualisierungs-Token fehlgeschlagen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1922,6 +2264,12 @@
     "global.title.close" : {
       "comment" : "Close",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schließen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1957,6 +2305,12 @@
     "global.title.more" : {
       "comment" : "more...",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "mehr..."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1991,6 +2345,12 @@
     },
     "global.title.newAccessTokenRetrieved" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Es wurden neue Zugangstoken abgerufen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2026,6 +2386,12 @@
     "global.title.ok" : {
       "comment" : "OK",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2061,6 +2427,12 @@
     "global.title.photoSaved" : {
       "comment" : "Photo has been saved",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Foto wurde gespeichert."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2096,6 +2468,12 @@
     "global.title.success" : {
       "comment" : "Success",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erfolgreich"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2131,6 +2509,12 @@
     "home.title.allCaughtUp" : {
       "comment" : "You're all caught up",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das war’s, alles gesehen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2165,6 +2549,12 @@
     },
     "instance.error.loadingDataFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehler beim Laden der Instanzdaten vom Server."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2199,6 +2589,12 @@
     },
     "instance.error.noInstanceData" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instanzdaten können nicht angezeigt werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2234,6 +2630,12 @@
     "instance.navigationBar.title" : {
       "comment" : "Instance information.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instanz"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2268,6 +2670,12 @@
     },
     "instance.title.address" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Addresse"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2302,6 +2710,12 @@
     },
     "instance.title.approvalRequired" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bestätigung erforderlich"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2336,6 +2750,12 @@
     },
     "instance.title.contact" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kontact"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2370,6 +2790,12 @@
     },
     "instance.title.domains" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Domains"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2404,6 +2830,12 @@
     },
     "instance.title.email" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E-Mail"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2438,6 +2870,12 @@
     },
     "instance.title.instanceInfo" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instanzinfo"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2472,6 +2910,12 @@
     },
     "instance.title.name" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2507,6 +2951,12 @@
     "instance.title.pixelfedAccount" : {
       "comment" : "Pixelfed account",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pixelfed-Konto"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2541,6 +2991,12 @@
     },
     "instance.title.posts" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beiträge"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2575,6 +3031,12 @@
     },
     "instance.title.registrations" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registrierungen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2609,6 +3071,12 @@
     },
     "instance.title.rules" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instanzregeln"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2643,6 +3111,12 @@
     },
     "instance.title.users" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benutzer"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2677,6 +3151,12 @@
     },
     "instance.title.version" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2712,6 +3192,12 @@
     "mainview.error.switchAccounts" : {
       "comment" : "Cannot switch accounts.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konnte Benutzer nicht wechseln."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2747,6 +3233,12 @@
     "mainview.menu.settings" : {
       "comment" : "Main view (leading navigation bar).",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2781,6 +3273,12 @@
     },
     "mainview.tab.federatedTimeline" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Föderiert"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2816,6 +3314,12 @@
     "mainview.tab.homeTimeline" : {
       "comment" : "Main view (main navigation bar).",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zuhause"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2850,6 +3354,12 @@
     },
     "mainview.tab.localTimeline" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lokal"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2884,6 +3394,12 @@
     },
     "mainview.tab.notifications" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benachrichtigungen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2918,6 +3434,12 @@
     },
     "mainview.tab.search" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suche"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2953,6 +3475,12 @@
     "mainview.tab.trending" : {
       "comment" : "Trending menu section",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Im Trend"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2987,6 +3515,12 @@
     },
     "mainview.tab.trendingAccounts" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benutzer"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3021,6 +3555,12 @@
     },
     "mainview.tab.trendingPhotos" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotos"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3055,6 +3595,12 @@
     },
     "mainview.tab.trendingTags" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hashtags"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3089,6 +3635,12 @@
     },
     "mainview.tab.userProfile" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profil"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3123,6 +3675,12 @@
     },
     "notifications.error.loadingNotificationsFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benachrichtigungen konnten nicht geladen werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3158,6 +3716,12 @@
     "notifications.navigationBar.title" : {
       "comment" : "Notifications view.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benachrichtigungen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3192,6 +3756,12 @@
     },
     "notifications.title.boosted" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geboostet"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3226,6 +3796,12 @@
     },
     "notifications.title.favourited" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "favorisiert"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3260,6 +3836,12 @@
     },
     "notifications.title.followedYou" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "folgt Dir"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3294,6 +3876,12 @@
     },
     "notifications.title.followRequest" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folgeanfrage"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3328,6 +3916,12 @@
     },
     "notifications.title.mentionedYou" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "hat Dich erwähnt"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3362,6 +3956,12 @@
     },
     "notifications.title.newReport" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "neue Meldung"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3396,6 +3996,12 @@
     },
     "notifications.title.noNotifications" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hier ist leider nichts."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3430,6 +4036,12 @@
     },
     "notifications.title.poll" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Umfrage"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3464,6 +4076,12 @@
     },
     "notifications.title.postedStatus" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beitrag veröffentlicht"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3498,6 +4116,12 @@
     },
     "notifications.title.signedUp" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "registriert"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3532,6 +4156,12 @@
     },
     "notifications.title.updatedStatus" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beitrag bearbeitet"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3567,6 +4197,12 @@
     "purchase.cake.description" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lade mich zu Kaffee und Kuchen ein."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3602,6 +4238,12 @@
     "purchase.cake.title" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kaffee und Kuchen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3637,6 +4279,12 @@
     "purchase.coffee.description" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gib mir einen Kaffee."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3672,6 +4320,12 @@
     "purchase.coffee.title" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kaffee"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3707,6 +4361,12 @@
     "purchase.donut.description" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gib mir einen Donut aus."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3743,6 +4403,12 @@
       "comment" : "In-app purchases.",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Donut"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3777,6 +4443,12 @@
     },
     "report.error.notReported" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehler beim Melden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3812,6 +4484,12 @@
     "report.navigationBar.title" : {
       "comment" : "Report screen.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Melden"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3846,6 +4524,12 @@
     },
     "report.title.abusive" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hassrede oder Symbole"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3881,6 +4565,12 @@
     "report.title.close" : {
       "comment" : "Close",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schließen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3915,6 +4605,12 @@
     },
     "report.title.copyright" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Urheberrechtsverletzung"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3949,6 +4645,12 @@
     },
     "report.title.impersonation" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Identitätsdiebstahl"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3983,6 +4685,12 @@
     },
     "report.title.postReported" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beitrag wurde gemeldet"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4017,6 +4725,12 @@
     },
     "report.title.reportType" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Art des Missbrauchs"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4051,6 +4765,12 @@
     },
     "report.title.scam" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beleidigung"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4086,6 +4806,12 @@
     "report.title.send" : {
       "comment" : "Send",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Senden"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4120,6 +4846,12 @@
     },
     "report.title.sensitive" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nacktheit oder Sex"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4154,6 +4886,12 @@
     },
     "report.title.spam" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spam"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4188,6 +4926,12 @@
     },
     "report.title.terrorism" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terrorismus"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4222,6 +4966,12 @@
     },
     "report.title.underage" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minderjähriger Benutzer"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4256,6 +5006,12 @@
     },
     "report.title.userReported" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benutzer wurde gemeldet"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4290,6 +5046,12 @@
     },
     "report.title.violence" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gewalt oder gefährliche Organisationen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4325,6 +5087,12 @@
     "search.navigationBar.title" : {
       "comment" : "Search view.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suche"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4360,6 +5128,12 @@
     "search.title.goToHashtag" : {
       "comment" : "Go to hashtag ",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gehe zu Hashtag %@"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4395,6 +5169,12 @@
     "search.title.goToUser" : {
       "comment" : "Go to user ",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gehe zu Nutzer %@"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4430,6 +5210,12 @@
     "search.title.hashtagWith" : {
       "comment" : "Hashtags with ",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hashtags mit %@"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4464,6 +5250,12 @@
     },
     "search.title.placeholder" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suche..."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4499,6 +5291,12 @@
     "search.title.usersWith" : {
       "comment" : "Users with ",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nutzer mit %@"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4533,6 +5331,12 @@
     },
     "settings.error.notificationEnableFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehler bei der Aktivierung von Benachrichtigungen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4568,6 +5372,12 @@
     "settings.navigationBar.title" : {
       "comment" : "Settings view.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4602,6 +5412,12 @@
     },
     "settings.title.accent" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Akzent"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4636,6 +5452,12 @@
     },
     "settings.title.accounts" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4671,6 +5493,12 @@
     "settings.title.alwaysShowAltDescription" : {
       "comment" : "Show alternative text if present on status details screen",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ALT-Text in der Detailansicht anzeigen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4706,6 +5534,12 @@
     "settings.title.alwaysShowAltTitle" : {
       "comment" : "Show alternative text",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ALT-Text anzeigen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4741,6 +5575,12 @@
     "settings.title.alwaysShowSensitiveDescription" : {
       "comment" : "Force show all NFSW (sensitive) media without warnings",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anstößige Inhalte immer ohne Warnung anzeigen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4776,6 +5616,12 @@
     "settings.title.alwaysShowSensitiveTitle" : {
       "comment" : "Always show NSFW",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anstößige Inhalte immer zeigen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4811,6 +5657,12 @@
     "settings.title.applicationIcon" : {
       "comment" : "Application icon",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App-Icon"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4845,6 +5697,12 @@
     },
     "settings.title.avatar" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avatar"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4879,6 +5737,12 @@
     },
     "settings.title.bottomLeftMenu" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unten links"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4913,6 +5777,12 @@
     },
     "settings.title.bottomRightMenu" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unten rechts"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4948,6 +5818,12 @@
     "settings.title.circle" : {
       "comment" : "Circle",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kreis"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4983,6 +5859,12 @@
     "settings.title.close" : {
       "comment" : "Close",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schließen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5017,6 +5899,12 @@
     },
     "settings.title.dark" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dunkel"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5052,6 +5940,12 @@
     "settings.title.enableReboostOnTimeline" : {
       "comment" : "Show boosted statuses",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erhöhte Zustände anzeigen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5087,6 +5981,12 @@
     "settings.title.enableReboostOnTimelineDescription" : {
       "comment" : "Boosted statuses will be visible on your home timeline.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Erhöhte Status werden auf Ihrer privaten Zeitleiste angezeigt."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5122,6 +6022,12 @@
     "settings.title.follow" : {
       "comment" : "Follow me",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folge mir"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5157,6 +6063,12 @@
     "settings.title.followVernissage" : {
       "comment" : "Follow Vernissage",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vernissage folgen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5191,6 +6103,12 @@
     },
     "settings.title.general" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generell"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5225,6 +6143,12 @@
     },
     "settings.title.haptics" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haptik"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5259,6 +6183,12 @@
     },
     "settings.title.hapticsAnimationFinished" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animation beendet"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5293,6 +6223,12 @@
     },
     "settings.title.hapticsButtonPress" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Knopfdruck"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5327,6 +6263,12 @@
     },
     "settings.title.hapticsListRefresh" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liste aktualisieren"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5361,6 +6303,12 @@
     },
     "settings.title.hapticsTabSelection" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tabauswahl"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5396,6 +6344,12 @@
     "settings.title.hideStatusesWithoutAlt" : {
       "comment" : "Hide statuses without ALT",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Status ohne ALT-Text ausblenden"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5431,6 +6385,12 @@
     "settings.title.hideStatusesWithoutAltDescription" : {
       "comment" : "Statuses without ALT text will not be visible on your home timeline.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Statusmeldungen ohne ALT-Text werden nicht auf der eigenen Zeitleiste angezeigt."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5465,6 +6425,12 @@
     },
     "settings.title.light" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hell"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5500,6 +6466,12 @@
     "settings.title.mastodonAccount" : {
       "comment" : "Mastodon account",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodon"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5534,6 +6506,12 @@
     },
     "settings.title.mediaSettings" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medieneinstellungen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5569,6 +6547,12 @@
     "settings.title.menuPosition" : {
       "comment" : "Menu position",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menüposition"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5604,6 +6588,12 @@
     "settings.title.newAccount" : {
       "comment" : "New account",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neues Konto"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5638,6 +6628,12 @@
     },
     "settings.title.notifications" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Benachrichtigungen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5673,6 +6669,12 @@
     "settings.title.notificationsDescription" : {
       "comment" : "Application badge with amount of new notifications will be visible near the app icon.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Der Anwendungs-Badge mit der Anzahl der neuen Benachrichtigungen wird in der Nähe des Anwendungssymbols angezeigt."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5708,6 +6710,12 @@
     "settings.title.notificationsTitle" : {
       "comment" : "Show application badge",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Anwendungsbadge anzeigen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5742,6 +6750,12 @@
     },
     "settings.title.other" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anderes"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5777,6 +6791,12 @@
     "settings.title.pixelfedAccount" : {
       "comment" : "Pixelfed account",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pixelfed"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5811,6 +6831,12 @@
     },
     "settings.title.privacyPolicy" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datenschutzrichtlinie"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5845,6 +6871,12 @@
     },
     "settings.title.rate" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vernissage bewerten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5879,6 +6911,12 @@
     },
     "settings.title.reportBug" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehler melden"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5914,6 +6952,12 @@
     "settings.title.rounderRectangle" : {
       "comment" : "Rounded rectangle",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abgerundetes Rechteck"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5949,6 +6993,12 @@
     "settings.title.showAltText" : {
       "comment" : "Show ALT icon",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ALT-Icon anzeigen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5984,6 +7034,12 @@
     "settings.title.showAltTextOnTimeline" : {
       "comment" : "ALT icon will be displayed on timelines",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ALT-Icons werden in der Zeitleiste angezeigt"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6019,6 +7075,12 @@
     "settings.title.showAvatars" : {
       "comment" : "Show avatars",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avatare anzeigen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6054,6 +7116,12 @@
     "settings.title.showAvatarsOnTimeline" : {
       "comment" : "Show avatars on timeline",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avatare werden in Listen angezeigt"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6089,6 +7157,12 @@
     "settings.title.showFavourite" : {
       "comment" : "Show favourites",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoriten anzeigen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6124,6 +7198,12 @@
     "settings.title.showFavouriteOnTimeline" : {
       "comment" : "Show favourites on timeline",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoriten werden in der Zeitleiste angezeigt"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6158,6 +7238,12 @@
     },
     "settings.title.socials" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Soziale Netzwerke"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6192,6 +7278,12 @@
     },
     "settings.title.sourceCode" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quellcode"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6226,6 +7318,12 @@
     },
     "settings.title.support" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Support"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6260,6 +7358,12 @@
     },
     "settings.title.system" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6294,6 +7398,12 @@
     },
     "settings.title.terms" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nutzungsbedingungen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6329,6 +7439,12 @@
     "settings.title.thankYouClose" : {
       "comment" : "Close",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schließen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6364,6 +7480,12 @@
     "settings.title.thankYouMessage" : {
       "comment" : "Thank you message",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Danke für die Unterstützung! Kleine und große Einkäufe helfen uns, unseren Traum eines hochqualitativen Produkts für unsere Nutzer aufrecht zu erhalten. Wir hoffen, Du liebst Vernissage!"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6399,6 +7521,12 @@
     "settings.title.thankYouTitle" : {
       "comment" : "Thank you 💕",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Danke schön 💕"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6434,6 +7562,12 @@
     "settings.title.theme" : {
       "comment" : "Theme",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Theme"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6468,6 +7602,12 @@
     },
     "settings.title.thirdParty" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verwendete Software"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6502,6 +7642,12 @@
     },
     "settings.title.topMenu" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Navigationsleiste"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6537,6 +7683,12 @@
     "settings.title.version" : {
       "comment" : "Version",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6572,6 +7724,12 @@
     "settings.title.warnAboutMissingAltDescription" : {
       "comment" : "A warning about missing ALT texts will be displayed before publishing new post.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vernissage wird Dich warnen, wenn Du einen Beitrag mit fehlendem ALT-Text veröffentlichen möchtest."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6607,6 +7765,12 @@
     "settings.title.warnAboutMissingAltTitle" : {
       "comment" : "Warn of missing ALT text",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warne mich bei fehlenden ALT-Texten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6641,6 +7805,12 @@
     },
     "signin.error.communicationFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kommunikation mit dem Server fehlgeschlagen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6676,6 +7846,12 @@
     "signin.navigationBar.title" : {
       "comment" : "Signin view.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In Pixelfed einloggen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6711,6 +7887,12 @@
     "signin.title.amountOfUsers" : {
       "comment" : "users",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d Benutzer"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6746,6 +7928,12 @@
     "signin.title.amountOStatuses" : {
       "comment" : "statuses",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d Beiträge"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6780,6 +7968,12 @@
     },
     "signin.title.chooseServer" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "oder wähle einen Pixelfed-Server"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6815,6 +8009,12 @@
     "signin.title.enterServerAddress" : {
       "comment" : "Enter server address",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Serveradresse eingeben"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6850,6 +8050,12 @@
     "signin.title.howToJoinLink" : {
       "comment" : "How to join Pixelfed",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wie man Pixelfed beitritt"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6884,6 +8090,12 @@
     },
     "signin.title.serverAddress" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Serveradresse"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6919,6 +8131,12 @@
     "signin.title.signIn" : {
       "comment" : "Sign in",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einloggen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6953,6 +8171,12 @@
     },
     "status.error.bookmarkFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lesezeichen setzen fehlgeschlagen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6987,6 +8211,12 @@
     },
     "status.error.deleteFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Löschen fehlgeschlagen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7021,6 +8251,12 @@
     },
     "status.error.favouriteFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favorisieren fehlgeschlagen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7055,6 +8291,12 @@
     },
     "status.error.loadingCommentsFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kommentare können nicht geladen werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7089,6 +8331,12 @@
     },
     "status.error.loadingStatusFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konnte Beitrag nicht laden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7123,6 +8371,12 @@
     },
     "status.error.notFound" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beitrag existiert nicht mehr."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7157,6 +8411,12 @@
     },
     "status.error.reboostFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boost fehlgeschlagen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7192,6 +8452,12 @@
     "status.navigationBar.title" : {
       "comment" : "Status view.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Details"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7226,6 +8492,12 @@
     },
     "status.title.bookmark" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lesezeichen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7261,6 +8533,12 @@
     "status.title.bookmarked" : {
       "comment" : "Bookmarked",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lesezeichen gesetzt"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7295,6 +8573,12 @@
     },
     "status.title.delete" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Löschen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7329,6 +8613,12 @@
     },
     "status.title.favourite" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favorisieren"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7364,6 +8654,12 @@
     "status.title.favourited" : {
       "comment" : "Favourited",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favorisiert"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7398,6 +8694,12 @@
     },
     "status.title.favouritedBy" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favorisiert von"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7433,6 +8735,12 @@
     "status.title.mediaDescription" : {
       "comment" : "Media description",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medienbeschreibung"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7467,6 +8775,12 @@
     },
     "status.title.openInBrowser" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Im Browser öffnen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7501,6 +8815,12 @@
     },
     "status.title.reboost" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boosten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7536,6 +8856,12 @@
     "status.title.reboosted" : {
       "comment" : "Reboosted",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geboostet"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7570,6 +8896,12 @@
     },
     "status.title.reboostedBy" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geboostet von"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7605,6 +8937,12 @@
     "status.title.report" : {
       "comment" : "Report",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Melden"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7639,6 +8977,12 @@
     },
     "status.title.saveImage" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bild speichern"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7673,6 +9017,12 @@
     },
     "status.title.shareImage" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bild teilen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7707,6 +9057,12 @@
     },
     "status.title.shareStatus" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beitrag teilen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7741,6 +9097,12 @@
     },
     "status.title.showMediaDescription" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medienbeschreibung anzeigen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7775,6 +9137,12 @@
     },
     "status.title.statusDeleted" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beitrag gelöscht"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7810,6 +9178,12 @@
     "status.title.unbookmarked" : {
       "comment" : "Unbookmarked",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lesezeichen gelöscht"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7845,6 +9219,12 @@
     "status.title.unfavourited" : {
       "comment" : "Unfavourited",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favorisieren rückgängig gemacht"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7880,6 +9260,12 @@
     "status.title.unreboosted" : {
       "comment" : "Unreboosted",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boost rückgängig gemacht"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7915,6 +9301,12 @@
     "status.title.uploaded" : {
       "comment" : "Uploaded",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hochgeladen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7950,6 +9342,12 @@
     "status.title.via" : {
       "comment" : "via",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "über %@"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7985,6 +9383,12 @@
     "status.title.yourStatus" : {
       "comment" : "Your post",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dein Beitrag"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8019,6 +9423,12 @@
     },
     "statuses.error.loadingStatusesFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laden der Beiträge fehlgeschlagen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8053,6 +9463,12 @@
     },
     "statuses.error.tagFollowFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das Folgen des Hashtags ist fehlgeschlagen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8087,6 +9503,12 @@
     },
     "statuses.error.tagUnfollowFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das nicht mehr Folgen des Hashtags ist fehlgeschlagen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8121,6 +9543,12 @@
     },
     "statuses.navigationBar.bookmarks" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lesezeichen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8155,6 +9583,12 @@
     },
     "statuses.navigationBar.favourites" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoriten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8189,6 +9623,12 @@
     },
     "statuses.navigationBar.federatedTimeline" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Föderiert"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8224,6 +9664,12 @@
     "statuses.navigationBar.localTimeline" : {
       "comment" : "Statuses timeline (local/federated/favourite/bookmarks etc.).",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lokal"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8258,6 +9704,12 @@
     },
     "statuses.title.noPhotos" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hier sind leider keine Bilder."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8292,6 +9744,12 @@
     },
     "statuses.title.tagFollowed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du folgst dem Hashtag."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8326,6 +9784,12 @@
     },
     "statuses.title.tagUnfollowed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du folgst dem Hashtag nicht mehr."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8361,6 +9825,12 @@
     "statusPlaceholder.title.line1" : {
       "comment" : "Lorem ispum text something",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lorem ipsum dolor sit amet"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8396,6 +9866,12 @@
     "statusPlaceholder.title.line2" : {
       "comment" : "Lorem ispum text something sdf sdfsdf sdfdsfsdfsdf",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, ipsum nec cursus facilisis."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8430,6 +9906,12 @@
     },
     "tags.error.loadingTagsFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laden der Hashtags fehlgeschlagen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8464,6 +9946,12 @@
     },
     "tags.navigationBar.followedTitle" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hashtags, denen Du folgst"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8498,6 +9986,12 @@
     },
     "tags.navigationBar.searchTitle" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hashtags"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8533,6 +10027,12 @@
     "tags.navigationBar.trendingTitle" : {
       "comment" : "Trending tags.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hashtags"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8568,6 +10068,12 @@
     "tags.title.amountOfPosts" : {
       "comment" : "Amount of posts",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d Beiträge"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8602,6 +10108,12 @@
     },
     "tags.title.noTags" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hier sind leider keine Hashtags."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8636,6 +10148,12 @@
     },
     "thirdparty.customemoji.address" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/divadretlaw/EmojiText"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8671,6 +10189,12 @@
     "thirdparty.customemoji.description" : {
       "comment" : "Render Custom Emoji in Text. Supports local and remote emojis. Remote emojis are loadad and cached using Nuke.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Benutzerdefinierte Emoji in Text rendern. Unterstützt lokale und entfernte Emojis. Entfernte Emojis werden mit Nuke geladen und zwischengespeichert."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8706,6 +10230,12 @@
     "thirdparty.customemoji.title" : {
       "comment" : "Custom emoji section title",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "EmojiText"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8740,6 +10270,12 @@
     },
     "thirdparty.fleur.address" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://fonts.google.com/specimen/Fleur+De+Leah"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8775,6 +10311,12 @@
     "thirdparty.fleur.description" : {
       "comment" : "Font used in the application in the icons and in the splash screen.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Schriftart, die in der Anwendung in den Symbolen und auf dem Startbildschirm verwendet wird."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8810,6 +10352,12 @@
     "thirdparty.fleur.title" : {
       "comment" : "Fleur De Leah section title",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fleur De Leah"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8844,6 +10392,12 @@
     },
     "thirdparty.htmlmarkdown.address" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://gitlab.com/mflint/HTML2Markdown"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8879,6 +10433,12 @@
     "thirdparty.htmlmarkdown.description" : {
       "comment" : "It's a Swift Package which attempts to convert HTML into Markdown.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Es ist ein Swift-Paket, das versucht, HTML in Markdown zu konvertieren."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8914,6 +10474,12 @@
     "thirdparty.htmlmarkdown.title" : {
       "comment" : "Status body section title",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HTML2Markdown"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8948,6 +10514,12 @@
     },
     "thirdparty.htmlstring.address" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/alexisakers/HTMLString"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8983,6 +10555,12 @@
     "thirdparty.htmlstring.description" : {
       "comment" : "HTMLString is a library written in Swift that allows your program to add and remove HTML entities in Strings.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "HTMLString ist eine in Swift geschriebene Bibliothek, die es Ihrem Programm ermöglicht, HTML-Entitäten in Strings hinzuzufügen und zu entfernen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9018,6 +10596,12 @@
     "thirdparty.htmlstring.title" : {
       "comment" : "Section html string title",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HTMLString"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9052,6 +10636,12 @@
     },
     "thirdparty.lazyimage.address" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/kean/Nuke"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9087,6 +10677,12 @@
     "thirdparty.lazyimage.description" : {
       "comment" : "Lazy image section description.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nuke bietet eine effiziente Möglichkeit zum Herunterladen und Anzeigen von Bildern in Ihrer Anwendung. Es ist einfach zu erlernen und zu verwenden. Seine Architektur ermöglicht viele leistungsstarke Funktionen und bietet praktisch unbegrenzte Möglichkeiten zur Anpassung."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9122,6 +10718,12 @@
     "thirdparty.lazyimage.title" : {
       "comment" : "Lazy image section title",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuke"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9157,6 +10759,12 @@
     "thirdParty.navigationBar.title" : {
       "comment" : "Third party view.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verwendete Software"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9191,6 +10799,12 @@
     },
     "thirdparty.notifications.address" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/omaralbeik/Drops"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9226,6 +10840,12 @@
     "thirdparty.notifications.description" : {
       "comment" : "A µFramework for showing alerts like the one used when copying from pasteboard or connecting Apple pencil.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ein µFramework zur Anzeige von Warnungen, wie sie beim Kopieren von der Papptafel oder beim Anschluss des Apple Pencil verwendet werden."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9261,6 +10881,12 @@
     "thirdparty.notifications.title" : {
       "comment" : "Notifications (drops) section title",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drops"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9295,6 +10921,12 @@
     },
     "thirdparty.oauth.address" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/OAuthSwift/OAuthSwift"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9330,6 +10962,12 @@
     "thirdparty.oauth.description" : {
       "comment" : "Swift based OAuth library for iOS and macOS.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Swift-basierte OAuth-Bibliothek für iOS und macOS."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9365,6 +11003,12 @@
     "thirdparty.oauth.title" : {
       "comment" : "OAuth section title",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OAuthSwift"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9399,6 +11043,12 @@
     },
     "thirdparty.qrcodes.address" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/dmrschmidt/QRCode"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9434,6 +11084,12 @@
     "thirdparty.qrcodes.description" : {
       "comment" : "A simple QR code image generator to use in your apps, written in Swift 5.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ein einfacher QR-Code-Generator zur Verwendung in Ihren Anwendungen, geschrieben in Swift 5."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9469,6 +11125,12 @@
     "thirdparty.qrcodes.title" : {
       "comment" : "QR codes section title",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "QRCode"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9503,6 +11165,12 @@
     },
     "trendingAccounts.error.loadingAccountsFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laden der Konten fehlgeschlagen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9538,6 +11206,12 @@
     "trendingAccounts.navigationBar.title" : {
       "comment" : "Trending accounts.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9572,6 +11246,12 @@
     },
     "trendingAccounts.title.noAccounts" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hier ist leider niemand."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9606,6 +11286,12 @@
     },
     "trendingStatuses.error.loadingStatusesFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laden der Beiträge fehlgeschlagen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9641,6 +11327,12 @@
     "trendingStatuses.navigationBar.title" : {
       "comment" : "Trending statuses.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotos"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9676,6 +11368,12 @@
     "trendingStatuses.title.daily" : {
       "comment" : "Daily",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Täglich"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9711,6 +11409,12 @@
     "trendingStatuses.title.monthly" : {
       "comment" : "Monthly",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monatlich"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9745,6 +11449,12 @@
     },
     "trendingStatuses.title.noPhotos" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hier sind leider keine Bilder."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9780,6 +11490,12 @@
     "trendingStatuses.title.yearly" : {
       "comment" : "Yearly",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jährlich"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9814,6 +11530,12 @@
     },
     "userProfile.error.block" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "(Nicht mehr) Blockieren fehlgeschlagen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9848,6 +11570,12 @@
     },
     "userProfile.error.loadingAccountFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehler beim Laden vom Server."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9882,6 +11610,12 @@
     },
     "userProfile.error.muting" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "(Nicht mehr) Stummschalten fehlgeschlagen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9916,6 +11650,12 @@
     },
     "userProfile.error.notExists" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konto existiert nicht."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9950,6 +11690,12 @@
     },
     "userProfile.error.relationship" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beziehungsaktion fehlgeschlagen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9985,6 +11731,12 @@
     "userProfile.title.block" : {
       "comment" : "Block",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blockiert"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10019,6 +11771,12 @@
     },
     "userProfile.title.blocked" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konto blockiert"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10054,6 +11812,12 @@
     "userProfile.title.blocks" : {
       "comment" : "Blocked accounts",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blockierte Konten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10089,6 +11853,12 @@
     "userProfile.title.bookmarks" : {
       "comment" : "Bookmarks",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lesezeichen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10123,6 +11893,12 @@
     },
     "userProfile.title.boostedStatusesMuted" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Boosts gedämpft"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10157,6 +11933,12 @@
     },
     "userProfile.title.cancelRequestFollow" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anfrage abbrechen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10192,6 +11974,12 @@
     "userProfile.title.disableBoosts" : {
       "comment" : "Disable boosts",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Boosts deaktivieren"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10227,6 +12015,12 @@
     "userProfile.title.disabledBoosts" : {
       "comment" : "Disabled boosts",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Deaktivierte Boosts"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10262,6 +12056,12 @@
     "userProfile.title.edit" : {
       "comment" : "Edit profile",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bearbeiten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10297,6 +12097,12 @@
     "userProfile.title.enableBoosts" : {
       "comment" : "Enable boosts",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Aktivieren von Boosts"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10332,6 +12138,12 @@
     "userProfile.title.favourites" : {
       "comment" : "Favourites",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoriten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10366,6 +12178,12 @@
     },
     "userProfile.title.follow" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folgen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10401,6 +12219,12 @@
     "userProfile.title.followedTags" : {
       "comment" : "Followed tags",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hashtags, denen Du folgst"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10436,6 +12260,12 @@
     "userProfile.title.followers" : {
       "comment" : "Followers",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Follower"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10471,6 +12301,12 @@
     "userProfile.title.following" : {
       "comment" : "Following",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "werden gefolgt"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10506,6 +12342,12 @@
     "userProfile.title.followRequests" : {
       "comment" : "FollowRequests",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anfragen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10540,6 +12382,12 @@
     },
     "userProfile.title.followsYou" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "folgt Dir"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10575,6 +12423,12 @@
     "userProfile.title.instance" : {
       "comment" : "Instance information",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instanzinformation"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10610,6 +12464,12 @@
     "userProfile.title.joined" : {
       "comment" : "Joined",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Am %@ beigetreten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10645,6 +12505,12 @@
     "userProfile.title.mute" : {
       "comment" : "Mute",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stummschalten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10679,6 +12545,12 @@
     },
     "userProfile.title.muted" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konto stummgeschaltet"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10714,6 +12586,12 @@
     "userProfile.title.mutes" : {
       "comment" : "Muted accounts",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stummgeschaltete Konten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10749,6 +12627,12 @@
     "userProfile.title.openInBrowser" : {
       "comment" : "Open in browser",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Im Browser öffnen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10784,6 +12668,12 @@
     "userProfile.title.posts" : {
       "comment" : "Posts",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beiträge"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10819,6 +12709,12 @@
     "userProfile.title.privateProfileSubtitle" : {
       "comment" : "Only approved followers can see photos.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nur Freigeschaltete können Beiträge sehen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10854,6 +12750,12 @@
     "userProfile.title.privateProfileTitle" : {
       "comment" : "This profile is private.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dieses Profil ist privat."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10889,6 +12791,12 @@
     "userProfile.title.report" : {
       "comment" : "Report",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Melden"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10923,6 +12831,12 @@
     },
     "userProfile.title.requestFollow" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folgen anfragen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10958,6 +12872,12 @@
     "userProfile.title.share" : {
       "comment" : "Share",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teilen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10993,6 +12913,12 @@
     "userProfile.title.unblock" : {
       "comment" : "Unblock",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blockierung aufheben"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11027,6 +12953,12 @@
     },
     "userProfile.title.unblocked" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konto nicht mehr blockiert"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11061,6 +12993,12 @@
     },
     "userProfile.title.unfollow" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nicht mehr folgen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11096,6 +13034,12 @@
     "userProfile.title.unmute" : {
       "comment" : "Unute",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stummschaltung aufheben"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11130,6 +13074,12 @@
     },
     "userProfile.title.unmuted" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stummschaltung des Kontos aufgehoben"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11164,6 +13114,12 @@
     },
     "Vernissage" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vernissage"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11193,6 +13149,12 @@
     "widget.family.notSupported" : {
       "comment" : "Not supported",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nicht unterstützt"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11228,6 +13190,12 @@
     "widget.title.photoDescription" : {
       "comment" : "Widget view.",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widget mit Fotos aus Pixelfed."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11262,6 +13230,12 @@
     },
     "widget.title.qrCodeDescription" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widget mit QR-Code zu Deinem Pixelfed-Profil."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
