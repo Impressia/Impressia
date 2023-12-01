@@ -199,7 +199,7 @@
 "settings.title.circle" = "Kreis";
 "settings.title.rounderRectangle" = "Abgerundetes Rechteck";
 "settings.title.other" = "Anderes";
-"settings.title.thirdParty" = "Dritthersteller";
+"settings.title.thirdParty" = "Verwendete Software";
 "settings.title.reportBug" = "Fehler melden";
 "settings.title.githubIssues" = "Issues auf Github";
 "settings.title.follow" = "Folge mir";
