@@ -301,7 +301,7 @@
 "accounts.error.loadingAccountsFailed" = "Konnte Benutzer nicht laden.";
 
 // Mark: Third party view.
-"thirdParty.navigationBar.title" = "Dritte";
+"thirdParty.navigationBar.title" = "Verwendete Software";
 
 // Mark: Widget view.
 "widget.title.photoDescription" = "Widget mit Fotos aus Pixelfed.";
