@@ -424,8 +424,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Desgaitutako bultzadak"
+            "state" : "translated",
+            "value" : "Ezgaitutako bultzadak"
           }
         },
         "fr" : {
@@ -1558,8 +1558,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Avatarra ez da deskargatu."
+            "state" : "translated",
+            "value" : "Abatarra ez da deskargatu."
           }
         },
         "fr" : {
@@ -1639,7 +1639,7 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Ezin da transakzio-entzulea konfiguratu."
           }
         },
@@ -1679,8 +1679,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Ezin dira deskargatu aplikazioko produktuak."
+            "state" : "translated",
+            "value" : "Ezin dira aplikazioko produktuak deskargatu."
           }
         },
         "fr" : {
@@ -1799,8 +1799,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Errore bat gertatu da metadatuak deskargatzean."
+            "state" : "translated",
+            "value" : "Errorea metadatuak deskargatzean."
           }
         },
         "fr" : {
@@ -1839,8 +1839,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Errore bat gertatu da egoera berriak deskargatzean egoera berrien kopuruagatik."
+            "state" : "translated",
+            "value" : "Errorea egoera berriak deskargatzean, kopurua dela-eta."
           }
         },
         "fr" : {
@@ -2123,7 +2123,7 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Erosketak huts egin du."
           }
         },
@@ -2243,8 +2243,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Ezin izan da freskatu tokena."
+            "state" : "translated",
+            "value" : "Ezin izan da tokena freskatu."
           }
         },
         "fr" : {
@@ -2325,7 +2325,7 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "gehiago..."
           }
         },
@@ -2365,8 +2365,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Sarbide-token berriak berreskuratu dira."
+            "state" : "translated",
+            "value" : "Sarbide-token berria berreskuratu da."
           }
         },
         "fr" : {
@@ -5351,8 +5351,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Errore bat gertatu da jakinarazpenak gaitzean."
+            "state" : "translated",
+            "value" : "Errorea jakinarazpenak gaitzean."
           }
         },
         "fr" : {
@@ -6648,7 +6648,7 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Jakinarazpenak"
           }
         },
@@ -6689,8 +6689,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Jakinarazpen berrien kopurua duen aplikazioaren bereizgarria aplikazioaren ikonoaren ondoan egongo da ikusgai."
+            "state" : "translated",
+            "value" : "Jakinarazpen berrien kopurua duen ikurra aplikazioaren ikonoaren ondoan egongo da ikusgai."
           }
         },
         "fr" : {
@@ -6730,8 +6730,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Erakutsi aplikazioaren bereizgarria"
+            "state" : "translated",
+            "value" : "Erakutsi ikurra aplikazioan"
           }
         },
         "fr" : {
@@ -9281,7 +9281,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bultzada kendua"
+            "value" : "Bultzada kenduta"
           }
         },
         "fr" : {
@@ -9321,7 +9321,7 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : ">"
           }
         },
@@ -10209,8 +10209,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Errendatu Emoji pertsonalizatua testuan. Tokiko eta urruneko emojiak onartzen ditu. Urruneko emojiak kargatu eta cachean gordetzen dira Nuke erabiliz."
+            "state" : "translated",
+            "value" : "Errendatu Emoji pertsonalizatua testuan. Zerbitzari propioko eta besteetako emojiak onartzen ditu. Urruneko emojiak kargatu eta katxean gordetzen dira Nuke erabiliz."
           }
         },
         "fr" : {
@@ -10331,8 +10331,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Aplikazioan erabiltzen den letra-tipoa ikonoetan eta harrera-pantailan."
+            "state" : "translated",
+            "value" : "Aplikazioaren ikonoan eta harrera-pantailan erabiltzen den letra-tipoa."
           }
         },
         "fr" : {
@@ -10453,7 +10453,7 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "HTML Markdown bihurtzen saiatzen den Swift pakete bat da."
           }
         },
@@ -10575,7 +10575,7 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "HTMLString Swift-en idatzitako liburutegi bat da, zure programari Strings-en HTML entitateak gehitzeko eta kentzeko aukera ematen diona."
           }
         },
@@ -10697,7 +10697,7 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Nuke-k zure aplikazioan irudiak deskargatzeko eta bistaratzeko modu eraginkorra eskaintzen du. Ikasteko eta erabiltzeko erraza da. Bere arkitekturak ezaugarri indartsu asko ahalbidetzen ditu pertsonalizatzeko aukera ia mugagabeak eskaintzen dituen bitartean."
           }
         },
@@ -10860,8 +10860,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Pasteboardetik kopiatzerakoan edo Apple pencil konektatzean erabiltzen den bezalako alertak erakusteko µFramework."
+            "state" : "translated",
+            "value" : "Pasteboardetik kopiatzerakoan edo Apple pencil konektatzean erabiltzen den bezalako alertak erakusteko µFrameworka."
           }
         },
         "fr" : {
@@ -10982,7 +10982,7 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Swift-en oinarritutako OAuth liburutegia iOS eta macOSentzat."
           }
         },
@@ -11104,7 +11104,7 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Zure aplikazioetan erabiltzeko QR kode irudi-sorgailu soil bat, Swift 5-en idatzia."
           }
         },
@@ -11914,7 +11914,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bultzadak mututu dira"
+            "value" : "Bultzadak ezkutatu dira"
           }
         },
         "fr" : {
@@ -12035,8 +12035,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Desgaitutako bultzadak"
+            "state" : "translated",
+            "value" : "Ezgaitutako bultzadak"
           }
         },
         "fr" : {
@@ -13169,8 +13169,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Ez da onartzen"
+            "state" : "translated",
+            "value" : "Ez da bateragarria"
           }
         },
         "fr" : {
