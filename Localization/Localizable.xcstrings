@@ -7906,9 +7906,21 @@
           }
         },
         "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%d erabiltzaile"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Erabiltzaile %d"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d erabiltzaile"
+                }
+              }
+            }
           }
         },
         "fr" : {
@@ -7947,9 +7959,21 @@
           }
         },
         "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%d egoera"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Egoera %d"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d egoera"
+                }
+              }
+            }
           }
         },
         "fr" : {
@@ -10087,9 +10111,21 @@
           }
         },
         "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%d bidalketa"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Bidalketa %d"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d bidalketa"
+                }
+              }
+            }
           }
         },
         "fr" : {
