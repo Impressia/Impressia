@@ -6388,7 +6388,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Statusmeldungen ohne ALT-Text werden nicht auf der eigenen Zeitleiste angezeigt."
+            "value" : "Statusmeldungen ohne ALT-Text werden nicht auf Deiner Timeline angezeigt."
           }
         },
         "en" : {
@@ -7037,7 +7037,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ALT-Icons werden in der Zeitleiste angezeigt"
+            "value" : "ALT-Icons werden in der Timeline angezeigt"
           }
         },
         "en" : {
@@ -7201,7 +7201,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Favoriten werden in der Zeitleiste angezeigt"
+            "value" : "Favoriten werden in der Timeline angezeigt"
           }
         },
         "en" : {
