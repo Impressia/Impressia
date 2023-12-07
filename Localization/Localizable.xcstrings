@@ -466,7 +466,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Honek gogoko egina"
+            "value" : "Gogoko dute"
           }
         },
         "fr" : {
@@ -630,7 +630,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Honek bultzatua"
+            "value" : "Bultzatu dute"
           }
         },
         "fr" : {
@@ -2366,7 +2366,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sarbide-token berria berreskuratu da."
+            "value" : "Sarbide-token berriak berreskuratu dira."
           }
         },
         "fr" : {
@@ -2530,7 +2530,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Egunean zaude"
+            "value" : "Zaharrak berri!"
           }
         },
         "fr" : {
@@ -6690,7 +6690,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jakinarazpen berrien kopurua duen ikurra aplikazioaren ikonoaren ondoan egongo da ikusgai."
+            "value" : "Jakinarazpen berrien kopurua duen ikurra aplikazioaren ikonoaren ondoan erakutsiko da"
           }
         },
         "fr" : {
@@ -7745,7 +7745,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Irudiren batek deskribapenik ez badu, argitaratu baino lehen abisua erakutsiko da."
+            "value" : "Irudiren batek deskribapenik ez badu, argitaratu baino lehen abisua erakutsiko da"
           }
         },
         "fr" : {
@@ -8699,7 +8699,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gogoko egina"
+            "value" : "Gogoko eginda"
           }
         },
         "fr" : {
@@ -8901,7 +8901,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bultzatua"
+            "value" : "Bultzatuta"
           }
         },
         "fr" : {
@@ -9182,7 +9182,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Egoera ezabatua"
+            "value" : "Egoera ezabatuta"
           }
         },
         "fr" : {
@@ -9223,7 +9223,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Laster-marka kendua"
+            "value" : "Laster-marka kenduta"
           }
         },
         "fr" : {
@@ -9264,7 +9264,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gogoko egiteari utzia"
+            "value" : "Gogoko egiteari utzita"
           }
         },
         "fr" : {
@@ -11587,7 +11587,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Blokeatu/Blokeatzeari uzteak huts egin du."
+            "value" : "Blokeatzeak / Blokeatzeari uzteak huts egin du."
           }
         },
         "fr" : {
@@ -11667,7 +11667,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mututu/Mututzeari uzteak huts egin du."
+            "value" : "Mututzeak / Mututzeari uzteak huts egin du."
           }
         },
         "fr" : {
@@ -12031,7 +12031,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ezkutatu bultzadak"
+            "value" : "Ezgaitu bultzadak"
           }
         },
         "fr" : {
@@ -12154,7 +12154,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ikusi bultzadak"
+            "value" : "Gaitu bultzadak"
           }
         },
         "fr" : {
@@ -12276,7 +12276,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Traolak"
+            "value" : "Jarraitutako traolak"
           }
         },
         "fr" : {
@@ -12317,7 +12317,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jarraitzaile"
+            "value" : "jarraitzaile"
           }
         },
         "fr" : {
@@ -12358,7 +12358,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jarraitzen"
+            "value" : "jarraitzen"
           }
         },
         "fr" : {
@@ -12725,7 +12725,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bidalketa"
+            "value" : "bidalketa"
           }
         },
         "fr" : {
