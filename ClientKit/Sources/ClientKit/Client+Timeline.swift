@@ -13,7 +13,7 @@ extension Client {
                                     sinceId: String? = nil,
                                     minId: String? = nil,
                                     limit: Int = 40,
-                                    includeReblogs: Bool? = nil) async throws -> [Status] {
+                                    includeReblogs: Bool? = nil) async throws -> Linkable<[Status]> {
             return try await pixelfedClient.getHomeTimeline(maxId: maxId, sinceId: sinceId, minId: minId, limit: limit, includeReblogs: includeReblogs)
         }
 
@@ -22,7 +22,7 @@ extension Client {
                                 maxId: String? = nil,
                                 sinceId: String? = nil,
                                 minId: String? = nil,
-                                limit: Int = 40) async throws -> [Status] {
+                                limit: Int = 40) async throws -> Linkable<[Status]> {
             return try await pixelfedClient.getPublicTimeline(local: local,
                                                               remote: remote,
                                                               onlyMedia: true,
@@ -38,7 +38,7 @@ extension Client {
                                    maxId: String? = nil,
                                    sinceId: String? = nil,
                                    minId: String? = nil,
-                                   limit: Int = 40) async throws -> [Status] {
+                                   limit: Int = 40) async throws -> Linkable<[Status]> {
             return try await pixelfedClient.getTagTimeline(tag: tag,
                                                            local: local,
                                                            remote: remote,

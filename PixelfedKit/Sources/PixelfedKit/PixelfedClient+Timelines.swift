@@ -13,7 +13,7 @@ public extension PixelfedClientAuthenticated {
         minId: EntityId? = nil,
         limit: Int? = nil,
         includeReblogs: Bool? = nil,
-        timeoutInterval: Double? = nil) async throws -> [Status] {
+        timeoutInterval: Double? = nil) async throws -> Linkable<[Status]> {
 
         let request = try Self.request(
             for: baseURL,
@@ -22,7 +22,7 @@ public extension PixelfedClientAuthenticated {
             timeoutInterval: timeoutInterval
         )
 
-        return try await downloadJson([Status].self, request: request)
+        return try await downloadJsonWithLink([Status].self, request: request)
     }
 
     func getPublicTimeline(local: Bool? = nil,
@@ -31,7 +31,7 @@ public extension PixelfedClientAuthenticated {
                            maxId: EntityId? = nil,
                            sinceId: EntityId? = nil,
                            minId: EntityId? = nil,
-                           limit: Limit? = nil) async throws -> [Status] {
+                           limit: Limit? = nil) async throws -> Linkable<[Status]> {
 
         let request = try Self.request(
             for: baseURL,
@@ -39,7 +39,7 @@ public extension PixelfedClientAuthenticated {
             withBearerToken: token
         )
 
-        return try await downloadJson([Status].self, request: request)
+        return try await downloadJsonWithLink([Status].self, request: request)
     }
 
     func getTagTimeline(tag: String,
@@ -49,7 +49,7 @@ public extension PixelfedClientAuthenticated {
                         maxId: EntityId? = nil,
                         sinceId: EntityId? = nil,
                         minId: EntityId? = nil,
-                        limit: Int? = nil) async throws -> [Status] {
+                        limit: Int? = nil) async throws -> Linkable<[Status]> {
 
         let request = try Self.request(
             for: baseURL,
@@ -57,7 +57,7 @@ public extension PixelfedClientAuthenticated {
             withBearerToken: token
         )
 
-        return try await downloadJson([Status].self, request: request)
+        return try await downloadJsonWithLink([Status].self, request: request)
     }
 
     func setMarkers(_ markers: [Pixelfed.Markers.Timeline: EntityId]) async throws -> Markers {

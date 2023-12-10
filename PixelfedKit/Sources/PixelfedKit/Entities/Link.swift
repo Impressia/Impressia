@@ -8,7 +8,7 @@ import Foundation
 import RegexBuilder
 
 /// Link returned in header for paging feature/
-public struct Link {
+public struct Link: Codable {
 
     /// Raw value of header link.
     public let rawLink: String

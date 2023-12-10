@@ -64,7 +64,7 @@ class AccountDataHandler {
         }
     }
     
-    func update(lastSeenStatusId: String?, lastLoadedStatusId: String?, statuses: [Status]? = nil, applicationState: ApplicationState, modelContext: ModelContext) throws {
+    func update(lastSeenStatusId: String?, lastLoadedStatusId: String?, statuses: Linkable<[Status]>? = nil, applicationState: ApplicationState, modelContext: ModelContext) throws {
         guard let accountId = applicationState.account?.id else {
             return
         }

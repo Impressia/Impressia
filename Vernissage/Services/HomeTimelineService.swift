@@ -20,7 +20,7 @@ public class HomeTimelineService {
     public static let shared = HomeTimelineService()
     private init() { }
     
-    private let maximumAmountOfDownloadedStatuses = 80
+    private let maximumAmountOfDownloadedStatuses = 40
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
     private let semaphore = AsyncSemaphore(value: 1)
     
@@ -43,27 +43,49 @@ public class HomeTimelineService {
         
         let client = PixelfedClient(baseURL: accountData.serverUrl).getAuthenticated(token: accessToken)
         var statuses: [Status] = []
-        var newestStatusId = lastSeenStatusId
+        var latestStatusId: String? = nil
+        var breakProcesssing = false;
         
-        // There can be more then 80 newest statuses, that's why we have to sometimes send more then one request.
+        // There can be more then 40 newest statuses, that's why we have to sometimes send more then one request.
         while true {
             do {
-                let downloadedStatuses = try await client.getHomeTimeline(minId: newestStatusId,
+                // Download statuses from the top or the list.
+                let downloadedStatuses = try await client.getHomeTimeline(maxId: latestStatusId,
                                                                           limit: self.maximumAmountOfDownloadedStatuses,
                                                                           includeReblogs: includeReblogs)
                 
-                guard let firstStatus = downloadedStatuses.first else {
-                    break
+                // Iterate througt the list until we go to already visible status by the user.
+                var temporaryList: [Status] = []
+                for downloadedStatus in downloadedStatuses.data {
+                    guard downloadedStatus.id != lastSeenStatusId else {
+                        breakProcesssing = true
+                        break
+                    }
+
+                    temporaryList.append(downloadedStatus)
                 }
-                                
+                
+                // Remove from the list duplicated statuses.
                 let visibleStatuses = self.getVisibleStatuses(accountId: accountData.id,
-                                                              statuses: downloadedStatuses,
+                                                              statuses: temporaryList,
                                                               hideStatusesWithoutAlt: hideStatusesWithoutAlt,
                                                               modelContext: modelContext)
-
+                
+                // Add statuses to the list.
                 statuses.append(contentsOf: visibleStatuses)
                 
-                newestStatusId = firstStatus.id
+                // Break when we go to the already visible status.
+                if breakProcesssing {
+                    break
+                }
+                
+                // When we discovered more then 100 statuses we can break.
+                if statuses.count > 100 {
+                    break
+                }
+                
+                // Set status Id which should be used to download next portion of the statuses.
+                latestStatusId = downloadedStatuses.getMaxId()
             } catch {
                 ErrorService.shared.handle(error, message: "global.error.errorDuringDownloadingNewStatuses")
                 break
@@ -80,9 +102,10 @@ public class HomeTimelineService {
     public func getVisibleStatuses(accountId: String, statuses: [Status], hideStatusesWithoutAlt: Bool, modelContext: ModelContext) -> [Status] {
         // We have to include in the counter only statuses with images.
         let statusesWithImagesOnly = statuses.getStatusesWithImagesOnly()
+        let statusesFromOldestToNewest = statusesWithImagesOnly.reversed()
         var visibleStatuses: [Status] = []
         
-        for status in statusesWithImagesOnly {
+        for status in statusesFromOldestToNewest {
             
             // We have to hide statuses without ALT text.
             if hideStatusesWithoutAlt && status.statusContainsAltText() == false {
@@ -112,7 +135,8 @@ public class HomeTimelineService {
             visibleStatuses.append(status)
         }
         
-        return visibleStatuses
+        // Return statuses from newest to oldest.
+        return visibleStatuses.reversed()
     }
         
     private func hasBeenAlreadyOnTimeline(accountId: String, status: Status, modelContext: ModelContext) -> Bool {

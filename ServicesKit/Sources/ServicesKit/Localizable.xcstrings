@@ -2,10 +2,47 @@
   "sourceLanguage" : "en",
   "strings" : {
     "" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "global.error.downloadingImageFailed" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Das Herunterladen des Bildes in den Cache ist fehlgeschlagen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18,45 +55,22 @@
             "value" : "Error al descargar la imagen en la caché."
           }
         },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Błąd podczas pobieranie obrazków do pamięci podręcznej."
-          }
-        }
-      }
-    },
-    "global.error.unexpected" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unexpected error."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Error inesperado."
-          }
-        },
         "eu" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Espero ez zen errorea."
+            "state" : "needs_review",
+            "value" : "Ezin izan da irudia cachean deskargatu."
           }
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erreur inattendue."
+            "state" : "needs_review",
+            "value" : "Le téléchargement de l'image dans le cache a échoué."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wystąpił nieoczekiwany błąd."
+            "value" : "Błąd podczas pobieranie obrazków do pamięci podręcznej."
           }
         }
       }

@@ -27,7 +27,7 @@ struct HomeTimelineView: View {
     @State private var opacity = 0.0
     @State private var offset = -50.0
     
-    private let defaultLimit = 80
+    private let defaultLimit = 40
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
     private let timelineDoubleTapTip = TimelineDoubleTapTip()
 
@@ -143,8 +143,14 @@ struct HomeTimelineView: View {
                 HStack {
                     Image(systemName: "arrow.up")
                         .fontWeight(.light)
-                    Text("\(self.applicationState.amountOfNewStatuses)")
-                        .fontWeight(.semibold)
+                    
+                    if self.applicationState.amountOfNewStatuses < 100 {
+                        Text("\(self.applicationState.amountOfNewStatuses)")
+                            .fontWeight(.semibold)
+                    } else {
+                        Text("+99")
+                            .fontWeight(.semibold)
+                    }
                 }
                 .padding(.vertical, 12)
                 .padding(.horizontal, 18)
@@ -183,28 +189,28 @@ struct HomeTimelineView: View {
         // Download statuses from API (which are older then last visible status).
         let statuses = try await self.loadFromCacheOrApi(timelineCache: accountData.timelineCache)
 
-        if statuses.isEmpty {
+        if statuses.data.isEmpty {
             self.allItemsLoaded = true
             return
         }
 
         // Remember last status id returned by API.
-        self.lastStatusId = statuses.last?.id
+        self.lastStatusId = statuses.getMaxId()
         
         // Get only visible statuses.
         let visibleStatuses = HomeTimelineService.shared.getVisibleStatuses(accountId: accountId,
-                                                                            statuses: statuses,
+                                                                            statuses: statuses.data,
                                                                             hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt,
                                                                             modelContext: modelContext)
         
         // Remeber first status returned by API in user context (when it's newer then remembered).
         try AccountDataHandler.shared.update(lastSeenStatusId: nil,
-                                             lastLoadedStatusId: statuses.first?.id,
+                                             lastLoadedStatusId: statuses.getMinId(),
                                              applicationState: self.applicationState,
                                              modelContext: modelContext)
         
         // Append statuses to viewed.
-        try ViewedStatusHandler.shared.append(contentsOf: statuses, accountId: accountId, modelContext: modelContext)
+        try ViewedStatusHandler.shared.append(contentsOf: statuses.data, accountId: accountId, modelContext: modelContext)
         
         // Map to view models.
         let statusModels = visibleStatuses.map({ StatusModel(status: $0) })
@@ -222,24 +228,24 @@ struct HomeTimelineView: View {
             // Download statuses from API.
             let statuses = try await self.loadFromApi(maxId: lastStatusId)
 
-            if statuses.isEmpty {
+            if statuses.data.isEmpty {
                 self.allItemsLoaded = true
                 return
             }
 
             // Now we have new last status.
-            if let lastStatusId = statuses.last?.id {
+            if let lastStatusId = statuses.getMaxId() {
                 self.lastStatusId = lastStatusId
             }
 
             // Get only visible statuses.
             let visibleStatuses = HomeTimelineService.shared.getVisibleStatuses(accountId: accountId,
-                                                                                statuses: statuses,
+                                                                                statuses: statuses.data,
                                                                                 hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt,
                                                                                 modelContext: modelContext)
             
             // Append statuses to viewed.
-            try ViewedStatusHandler.shared.append(contentsOf: statuses, accountId: accountId, modelContext: modelContext)
+            try ViewedStatusHandler.shared.append(contentsOf: statuses.data, accountId: accountId, modelContext: modelContext)
             
             // Map to view models.
             let statusModels = visibleStatuses.map({ StatusModel(status: $0) })
@@ -260,29 +266,29 @@ struct HomeTimelineView: View {
         // Download statuses from API.
         let statuses = try await self.loadFromApi()
 
-        if statuses.isEmpty {
+        if statuses.data.isEmpty {
             self.allItemsLoaded = true
             return
         }
 
         // Remember last status id returned by API.
-        self.lastStatusId = statuses.last?.id
+        self.lastStatusId = statuses.getMaxId()
         
         // Get only visible statuses.
         let visibleStatuses = HomeTimelineService.shared.getVisibleStatuses(accountId: accountId,
-                                                                            statuses: statuses,
+                                                                            statuses: statuses.data,
                                                                             hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt,
                                                                             modelContext: modelContext)
 
         // Remeber first status returned by API in user context (when it's newer then remembered).
         try AccountDataHandler.shared.update(lastSeenStatusId: self.statusViewModels.first?.id,
-                                             lastLoadedStatusId: statuses.first?.id,
+                                             lastLoadedStatusId: statuses.getMinId(),
                                              statuses: statuses,
                                              applicationState: self.applicationState,
                                              modelContext: modelContext)
         
         // Append statuses to viewed.
-        try ViewedStatusHandler.shared.append(contentsOf: statuses, accountId: accountId, modelContext: modelContext)
+        try ViewedStatusHandler.shared.append(contentsOf: statuses.data, accountId: accountId, modelContext: modelContext)
         
         // Map to view models.
         let statusModels = visibleStatuses.map({ StatusModel(status: $0) })
@@ -297,24 +303,22 @@ struct HomeTimelineView: View {
         self.applicationState.amountOfNewStatuses = 0
     }
 
-    private func loadFromCacheOrApi(timelineCache: String?) async throws -> [Status] {
-        if let timelineCache, let timelineCacheData = timelineCache.data(using: .utf8) {
-            let statusesFromCache = try? JSONDecoder().decode([Status].self, from: timelineCacheData)
-            if let statusesFromCache {
-                return statusesFromCache
-            }
+    private func loadFromCacheOrApi(timelineCache: String?) async throws -> Linkable<[Status]> {
+        if let timelineCache, let timelineCacheData = timelineCache.data(using: .utf8),
+           let statusesFromCache = try? JSONDecoder().decode(Linkable<[Status]>.self, from: timelineCacheData) {
+            return statusesFromCache
         }
         
         return try await self.loadFromApi()
     }
     
-    private func loadFromApi(maxId: String? = nil, sinceId: String? = nil, minId: String? = nil) async throws -> [Status] {
+    private func loadFromApi(maxId: String? = nil, sinceId: String? = nil, minId: String? = nil) async throws -> Linkable<[Status]> {
         return try await self.client.publicTimeline?.getHomeTimeline(
             maxId: maxId,
             sinceId: sinceId,
             minId: minId,
             limit: self.defaultLimit,
-            includeReblogs: self.applicationState.showReboostedStatuses) ?? []
+            includeReblogs: self.applicationState.showReboostedStatuses) ?? Linkable(data: [])
     }
 
     private func calculateOffset() {

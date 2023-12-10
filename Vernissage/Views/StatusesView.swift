@@ -61,7 +61,7 @@ struct StatusesView: View {
     @State private var containerWidth: Double = UIDevice.isIPad ? UIScreen.main.bounds.width / 3 : UIScreen.main.bounds.width
     @State private var containerHeight: Double = UIDevice.isIPad ? UIScreen.main.bounds.height / 3 : UIScreen.main.bounds.height
 
-    private let defaultLimit = 80
+    private let defaultLimit = 40
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
 
     var body: some View {
@@ -182,29 +182,29 @@ struct StatusesView: View {
 
         let statuses = try await self.loadFromApi()
 
-        if statuses.isEmpty {
+        if statuses.data.isEmpty {
             self.allItemsLoaded = true
             return
         }
 
         // Remember last status id returned by API.
-        self.lastStatusId = statuses.last?.id
+        self.lastStatusId = statuses.getMaxId()
 
         // Get only visible statuses.
         let visibleStatuses = HomeTimelineService.shared.getVisibleStatuses(accountId: accountId,
-                                                                            statuses: statuses,
+                                                                            statuses: statuses.data,
                                                                             hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt,
                                                                             modelContext: modelContext)
 
         if self.listType == .home {
             // Remeber first status returned by API in user context (when it's newer then remembered).
             try AccountDataHandler.shared.update(lastSeenStatusId: nil,
-                                                 lastLoadedStatusId: statuses.first?.id,
+                                                 lastLoadedStatusId: statuses.getMinId(),
                                                  applicationState: self.applicationState,
                                                  modelContext: modelContext)
             
             // Append statuses to viewed.
-            try ViewedStatusHandler.shared.append(contentsOf: statuses, accountId: accountId, modelContext: modelContext)
+            try ViewedStatusHandler.shared.append(contentsOf: statuses.data, accountId: accountId, modelContext: modelContext)
         }
         
         // Map to view models.
@@ -221,25 +221,25 @@ struct StatusesView: View {
         if let lastStatusId = self.lastStatusId, let accountId = self.applicationState.account?.id {
             let statuses = try await self.loadFromApi(maxId: lastStatusId)
 
-            if statuses.isEmpty {
+            if statuses.data.isEmpty {
                 self.allItemsLoaded = true
                 return
             }
 
             // Now we have new last status.
-            if let lastStatusId = statuses.last?.id {
+            if let lastStatusId = statuses.getMaxId() {
                 self.lastStatusId = lastStatusId
             }
 
             // Get only visible statuses.
             let visibleStatuses = HomeTimelineService.shared.getVisibleStatuses(accountId: accountId,
-                                                                                statuses: statuses,
+                                                                                statuses: statuses.data,
                                                                                 hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt,
                                                                                 modelContext: modelContext)
 
             if self.listType == .home {
                 // Append statuses to viewed.
-                try ViewedStatusHandler.shared.append(contentsOf: statuses, accountId: accountId, modelContext: modelContext)
+                try ViewedStatusHandler.shared.append(contentsOf: statuses.data, accountId: accountId, modelContext: modelContext)
             }
             
             // Map to view models.
@@ -260,29 +260,29 @@ struct StatusesView: View {
 
         let statuses = try await self.loadFromApi()
 
-        if statuses.isEmpty {
+        if statuses.data.isEmpty {
             self.allItemsLoaded = true
             return
         }
 
         // Remember last status id returned by API.
-        self.lastStatusId = statuses.last?.id
+        self.lastStatusId = statuses.getMaxId()
 
         // Get only visible statuses.
         let visibleStatuses = HomeTimelineService.shared.getVisibleStatuses(accountId: accountId,
-                                                                            statuses: statuses,
+                                                                            statuses: statuses.data,
                                                                             hideStatusesWithoutAlt: self.applicationState.hideStatusesWithoutAlt,
                                                                             modelContext: modelContext)
         
         if self.listType == .home {
             // Remeber first status returned by API in user context (when it's newer then remembered).
             try AccountDataHandler.shared.update(lastSeenStatusId: self.statusViewModels.first?.id,
-                                                 lastLoadedStatusId: statuses.first?.id,
+                                                 lastLoadedStatusId: statuses.getMinId(),
                                                  applicationState: self.applicationState,
                                                  modelContext: modelContext)
             
             // Append statuses to viewed.
-            try ViewedStatusHandler.shared.append(contentsOf: statuses, accountId: accountId, modelContext: modelContext)
+            try ViewedStatusHandler.shared.append(contentsOf: statuses.data, accountId: accountId, modelContext: modelContext)
         }
         
         // Map to view models.
@@ -296,7 +296,7 @@ struct StatusesView: View {
         self.statusViewModels = statusModels
     }
 
-    private func loadFromApi(maxId: String? = nil, sinceId: String? = nil, minId: String? = nil) async throws -> [Status] {
+    private func loadFromApi(maxId: String? = nil, sinceId: String? = nil, minId: String? = nil) async throws -> Linkable<[Status]> {
         switch self.listType {
         case .home:
             return try await self.client.publicTimeline?.getHomeTimeline(
@@ -304,40 +304,44 @@ struct StatusesView: View {
                 sinceId: sinceId,
                 minId: minId,
                 limit: self.defaultLimit,
-                includeReblogs: self.applicationState.showReboostedStatuses) ?? []
+                includeReblogs: self.applicationState.showReboostedStatuses) ?? Linkable(data: [])
         case .local:
             return try await self.client.publicTimeline?.getStatuses(
                 local: true,
                 maxId: maxId,
                 sinceId: sinceId,
                 minId: minId,
-                limit: self.defaultLimit) ?? []
+                limit: self.defaultLimit) ?? Linkable(data: [])
         case .federated:
             return try await self.client.publicTimeline?.getStatuses(
                 remote: true,
                 maxId: maxId,
                 sinceId: sinceId,
                 minId: minId,
-                limit: self.defaultLimit) ?? []
+                limit: self.defaultLimit) ?? Linkable(data: [])
         case .favourites:
-            return try await self.client.accounts?.favourites(
+            let favourites = try await self.client.accounts?.favourites(
                 maxId: maxId,
                 sinceId: sinceId,
                 minId: minId,
                 limit: self.defaultLimit) ?? []
+            
+            return Linkable(data: favourites)
         case .bookmarks:
-            return try await self.client.accounts?.bookmarks(
+            let bookmarks = try await self.client.accounts?.bookmarks(
                 maxId: maxId,
                 sinceId: sinceId,
                 minId: minId,
                 limit: self.defaultLimit) ?? []
+            
+            return Linkable(data: bookmarks)
         case .hashtag(let tag):
             let hashtagsFromApi = try await self.client.search?.search(query: tag, resultsType: .hashtags)
             guard let hashtagsFromApi = hashtagsFromApi, hashtagsFromApi.hashtags.isEmpty == false else {
                 ToastrService.shared.showError(title: LocalizedStringResource("global.error.hashtagNotExists"), imageSystemName: "exclamationmark.octagon")
                 dismiss()
 
-                return []
+                return Linkable(data: [])
             }
 
             return try await self.client.publicTimeline?.getTagStatuses(
@@ -345,7 +349,7 @@ struct StatusesView: View {
                 maxId: maxId,
                 sinceId: sinceId,
                 minId: minId,
-                limit: self.defaultLimit) ?? []
+                limit: self.defaultLimit) ?? Linkable(data: [])
         }
     }
 
