@@ -1231,6 +1231,47 @@
         }
       }
     },
+    "global.title.noSearchResult" : {
+      "comment" : "There is nothing here",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Es gibt hier nichts"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There is nothing here"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Aquí no hay nada"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hemen ez dago ezer"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Il n'y a rien ici"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nic tutaj nie ma"
+          }
+        }
+      }
+    },
     "global.title.refresh" : {
       "comment" : "Refresh",
       "localizations" : {
