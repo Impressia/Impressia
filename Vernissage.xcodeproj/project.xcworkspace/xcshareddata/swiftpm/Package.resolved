@@ -91,15 +91,6 @@
       }
     },
     {
-      "identity" : "qrcode",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/dmrschmidt/QRCode",
-      "state" : {
-        "revision" : "a23c2d2b77483c5ce20ffaf4e68fef2d1a0bbca9",
-        "version" : "1.1.0"
-      }
-    },
-    {
       "identity" : "semaphore",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/groue/Semaphore",
