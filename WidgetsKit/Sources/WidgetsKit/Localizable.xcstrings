@@ -231,6 +231,12 @@
             "value" : "No se puede cargar la imagen de la biblioteca externa."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de charger l'image depuis la bibliothèque externe."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -259,6 +265,12 @@
             "value" : "Error al componer la cadena de atributos."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur durant la composition de paramètres."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -285,6 +297,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Error durante la descarga de autocompletar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur durant le téléchargement de l'autocomplétion."
           }
         },
         "pl" : {
@@ -364,7 +382,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erreur pendant le post du statut."
+            "value" : "Erreur pendant la publication du statut."
           }
         },
         "pl" : {
@@ -404,7 +422,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Joignez une photo et écrivez ce qui vous convient"
+            "value" : "Ajoutez une photo et écrivez ce qui vous convient"
           }
         },
         "pl" : {
@@ -647,7 +665,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Editer"
+            "value" : "Éditer"
           }
         },
         "pl" : {
@@ -1085,6 +1103,12 @@
             "value" : "Error al borrar un archivo del directorio tmp."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur durant la suppression d'un fichier depuis le dossier temporaire."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1113,6 +1137,12 @@
             "value" : "Error al obtener el contenido del directorio tmp."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur durant la récupération de données temporaires."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1139,6 +1169,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Error al eliminar la imagen transferida del directorio tmp."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur durant la suppression des images transférées depuis le dossier temporaire."
           }
         },
         "pl" : {
@@ -1260,7 +1296,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Il n'y a rien ici"
           }
         },
@@ -1980,6 +2016,12 @@
             "value" : "You can customize the position of main naviagation menu in the app settings."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous pouvez personnaliser la position du menu principal dans les réglages de l'application."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2001,6 +2043,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Menu position"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Position du menu"
           }
         },
         "pl" : {
@@ -2026,6 +2074,12 @@
             "value" : "You can change default option in the menu by long press on the specific option."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous pouvant l'option par défaut dans le menu en faisant un long appui sur l'option que vous voulez."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2047,6 +2101,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Changing the default options"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Changer les options par défaut"
           }
         },
         "pl" : {
@@ -2072,6 +2132,12 @@
             "value" : "Double-tapping on a photo will result in it being favourited."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appuyer deux fois sur une photo la mettra en favoris."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2093,6 +2159,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mark as favorite"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marquer comme favoris"
           }
         },
         "pl" : {
