@@ -63,7 +63,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Le téléchargement de l'image dans le cache a échoué."
           }
         },
