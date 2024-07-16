@@ -14,11 +14,11 @@ public struct TimelineDoubleTapTip: Tip {
     }
     
     public var title: Text {
-        Text("tip.timelineDoubleTap.title", bundle: Bundle.module, comment: "Timeline double tip title.")
+        Text(NSLocalizedString("tip.timelineDoubleTap.title", bundle: Bundle.module, comment: "Timeline double tip title."))
     }
 
     public var message: Text? {
-        Text("tip.timelineDoubleTap.message", bundle: Bundle.module, comment: "Timeline double tip message.")
+        Text(NSLocalizedString("tip.timelineDoubleTap.message", bundle: Bundle.module, comment: "Timeline double tip message."))
     }
 
     public var image: Image? {

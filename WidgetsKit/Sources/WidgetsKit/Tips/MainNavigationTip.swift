@@ -14,11 +14,11 @@ public struct MainNavigationTip: Tip {
     }
     
     public var title: Text {
-        Text("tip.mainNavigation.title", bundle: Bundle.module, comment: "Main navigation tip title.")
+        Text(NSLocalizedString("tip.mainNavigation.title", bundle: Bundle.module, comment: "Main navigation tip title."))
     }
 
     public var message: Text? {
-        Text("tip.mainNavigation.message", bundle: Bundle.module, comment: "Main navigation tip message.")
+        Text(NSLocalizedString("tip.mainNavigation.message", bundle: Bundle.module, comment: "Main navigation tip message."))
     }
 
     public var image: Image? {
