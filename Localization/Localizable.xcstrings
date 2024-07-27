@@ -69,6 +69,46 @@
         }
       }
     },
+    "@impressia" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@impressia"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@impressia"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@impressia"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@impressia"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@impressia"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@impressia"
+          }
+        }
+      }
+    },
     "@mczachurski" : {
       "localizations" : {
         "de" : {
@@ -99,40 +139,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "@mczachurski"
-          }
-        }
-      }
-    },
-    "@vernissage" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "@vernissage"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "@vernissage"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "@vernissage"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "@vernissage"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "@vernissage"
           }
         }
       }
@@ -2543,6 +2549,46 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jesteś na bieżąco"
+          }
+        }
+      }
+    },
+    "Impressia" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impressia"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impressia"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impressia"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impressia"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impressia"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impressia"
           }
         }
       }
@@ -6060,43 +6106,43 @@
         }
       }
     },
-    "settings.title.followVernissage" : {
-      "comment" : "Follow Vernissage",
+    "settings.title.followImpressia" : {
+      "comment" : "Follow Impressia",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vernissage folgen"
+            "value" : "Impressia folgen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Follow Vernissage"
+            "value" : "Follow Impressia"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sígueme en Vernissage"
+            "value" : "Sígueme en Impressia"
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jarraitu Vernissage-ri"
+            "value" : "Jarraitu Impressia-ri"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suivre Vernissage"
+            "value" : "Suivre Impressia"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Obserwuj Vernissage"
+            "value" : "Obserwuj Impressia"
           }
         }
       }
@@ -6873,38 +6919,38 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vernissage bewerten"
+            "state" : "needs_review",
+            "value" : "Impressia bewerten"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rate Vernissage"
+            "value" : "Rate Impressia"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Puntúa Vernissage"
+            "state" : "needs_review",
+            "value" : "Puntúa Impressia"
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Baloratu Vernissage"
+            "value" : "Baloratu Impressia"
           }
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Noter Vernissage"
+            "state" : "needs_review",
+            "value" : "Noter Impressia"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Oceń Vernissage"
+            "value" : "Oceń Impressia"
           }
         }
       }
@@ -7482,38 +7528,38 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Danke für die Unterstützung! Kleine und große Einkäufe helfen uns, unseren Traum eines hochqualitativen Produkts für unsere Nutzer aufrecht zu erhalten. Wir hoffen, Du liebst Vernissage!"
+            "state" : "needs_review",
+            "value" : "Danke für die Unterstützung! Kleine und große Einkäufe helfen uns, unseren Traum eines hochqualitativen Produkts für unsere Nutzer aufrecht zu erhalten. Wir hoffen, Du liebst Impressia!"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Thanks for your purchase. Purchases both big and small help us keep our dream of providing the best quality products to our customers. We hope you’re loving Vernissage."
+            "value" : "Thanks for your purchase. Purchases both big and small help us keep our dream of providing the best quality products to our customers. We hope you’re loving Impressia."
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gracias por tu compra. Tanto las compras grandes como las pequeñas nos ayudan a mantener nuestro sueño de proporcionar productos de la mejor calidad a nuestros clientes. Esperamos que estés disfrutando de Vernissage."
+            "state" : "needs_review",
+            "value" : "Gracias por tu compra. Tanto las compras grandes como las pequeñas nos ayudan a mantener nuestro sueño de proporcionar productos de la mejor calidad a nuestros clientes. Esperamos que estés disfrutando de Impressia."
           }
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mila esker erosketagatik. Erosketa handi eta txikiek gure bezeroei kalitatezko produkturik onenak eskaintzeko ametsari eusten laguntzen digute. Espero dugu Vernissage gustuko izatea."
+            "state" : "needs_review",
+            "value" : "Mila esker erosketagatik. Erosketa handi eta txikiek gure bezeroei kalitatezko produkturik onenak eskaintzeko ametsari eusten laguntzen digute. Espero dugu Impressia gustuko izatea."
           }
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Merci pour votre achat. Les achats, petits et grands, nous aident à réaliser notre rêve de fournir des produits de la meilleure qualité à nos clients. Nous espérons que vous aimez Vernissage."
+            "state" : "needs_review",
+            "value" : "Merci pour votre achat. Les achats, petits et grands, nous aident à réaliser notre rêve de fournir des produits de la meilleure qualité à nos clients. Nous espérons que vous aimez Impressia."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dziękujemy za twój zakup. Zakupy zarówno te duże, jak i te małe pomagają nam w realizacji marzenia o dostarczaniu naszym klientom produktów najwyższej jakości. Mamy nadzieję, że Vernissage spełnia Twoje oczekiwania."
+            "value" : "Dziękujemy za twój zakup. Zakupy zarówno te duże, jak i te małe pomagają nam w realizacji marzenia o dostarczaniu naszym klientom produktów najwyższej jakości. Mamy nadzieję, że Impressia spełnia Twoje oczekiwania."
           }
         }
       }
@@ -7726,8 +7772,8 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vernissage wird Dich warnen, wenn Du einen Beitrag mit fehlendem ALT-Text veröffentlichen möchtest."
+            "state" : "needs_review",
+            "value" : "Impressia wird Dich warnen, wenn Du einen Beitrag mit fehlendem ALT-Text veröffentlichen möchtest."
           }
         },
         "en" : {
@@ -13108,40 +13154,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wyciszenie wyłączone"
-          }
-        }
-      }
-    },
-    "Vernissage" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vernissage"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vernissage"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vernissage"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vernissage"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vernissage"
           }
         }
       }
