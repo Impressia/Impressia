@@ -1466,7 +1466,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vernissage/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Vernissage;
+				INFOPLIST_KEY_CFBundleDisplayName = Impressia;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Uploading photos to Pixelfed";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Saving photos from Pixelfed";
@@ -1510,7 +1510,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vernissage/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Vernissage;
+				INFOPLIST_KEY_CFBundleDisplayName = Impressia;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Uploading photos to Pixelfed";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Saving photos from Pixelfed";
