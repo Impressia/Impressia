@@ -7,8 +7,8 @@
 import Foundation
 
 public struct AppConstants {
-    public static let oauthApplicationName = "Impressia"
-    public static let oauthScheme = "oauth-impressia"
+    public static let oauthApplicationName = "Vernissage"
+    public static let oauthScheme = "oauth-vernissage"
     public static let oauthCallbackPart = "oauth-callback"
     public static let oauthRedirectUri = "\(AppConstants.oauthScheme)://\(oauthCallbackPart)/pixelfed"
     public static let oauthScopes = ["read", "write", "follow", "push"]
