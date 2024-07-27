@@ -14,7 +14,7 @@ struct QRCodeWidget: Widget {
         StaticConfiguration(kind: kind, provider: QRCodeProvider()) { entry in
             QRCodeWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("Vernissage")
+        .configurationDisplayName("Impressia")
         .description("widget.title.qrCodeDescription")
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
         .contentMarginsDisabled()

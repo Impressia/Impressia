@@ -11,14 +11,14 @@ struct SocialsSectionView: View {
         Section("settings.title.socials") {
             HStack {
                 VStack(alignment: .leading) {
-                    Text("settings.title.followVernissage", comment: "Follow Vernissage")
+                    Text("settings.title.followImpressia", comment: "Follow Impressia")
                     Text("settings.title.mastodonAccount", comment: "Mastodon account")
                         .font(.footnote)
                         .foregroundColor(.customGrayColor)
                 }
 
                 Spacer()
-                Link("@vernissage", destination: URL(string: "https://mastodon.social/@vernissage")!)
+                Link("@impressia", destination: URL(string: "https://mastodon.social/@impressia")!)
                     .font(.footnote)
             }
 
