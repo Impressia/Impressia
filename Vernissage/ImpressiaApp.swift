@@ -16,7 +16,7 @@ import OSLog
 import BackgroundTasks
 
 @main
-struct VernissageApp: App {
+struct ImpressiaApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Environment(\.scenePhase) private var phase
 

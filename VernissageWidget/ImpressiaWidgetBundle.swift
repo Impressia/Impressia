@@ -8,7 +8,7 @@ import WidgetKit
 import SwiftUI
 
 @main
-struct VernissageWidgetBundle: WidgetBundle {
+struct ImpressiaWidgetBundle: WidgetBundle {
 
     @WidgetBundleBuilder
     var body: some Widget {
