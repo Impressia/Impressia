@@ -13,18 +13,15 @@ struct QRCodeSmallWidgetView: View {
 
     var entry: QRCodeProvider.Entry
 
-    private let qrCodeLightImage: UIImage?
-    private let qrCodeDarkImage: UIImage?
+    private let qrCodeImage: UIImage?
 
     init(entry: QRCodeProvider.Entry) {
         self.entry = entry
 
         if let profileUrl = entry.profileUrl {
-            self.qrCodeLightImage = QRCodeGenerator.shared.generateQRCode(from: profileUrl.absoluteString, scheme: .light)
-            self.qrCodeDarkImage = QRCodeGenerator.shared.generateQRCode(from: profileUrl.absoluteString, scheme: .dark)
+            self.qrCodeImage = QRCodeGenerator.shared.generateQRCode(from: profileUrl.absoluteString)
         } else {
-            self.qrCodeLightImage = QRCodeGenerator.shared.generateQRCode(from: "https://pixelfed.org", scheme: .light)
-            self.qrCodeDarkImage = QRCodeGenerator.shared.generateQRCode(from: "https://pixelfed.org", scheme: .dark)
+            self.qrCodeImage = QRCodeGenerator.shared.generateQRCode(from: "https://pixelfed.org")
         }
     }
 
@@ -37,16 +34,16 @@ struct QRCodeSmallWidgetView: View {
         }
     }
 
-    var qrCodeImage: UIImage? {
-        colorScheme == .dark ? qrCodeDarkImage : qrCodeLightImage
-    }
-
     @ViewBuilder
     private func getWidgetBody(uiAvatar: Image, uiQRCode: Image) -> some View {
         VStack(spacing: 0) {
             uiQRCode
                 .resizable()
+                .interpolation(.none)
                 .widgetURL(URL(string: "\(AppConstants.accountUri)/\(entry.accountId)"))
+                .if(colorScheme == .dark) {
+                    $0.padding(4)
+                }
 
             HStack {
                 uiAvatar

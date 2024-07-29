@@ -6,19 +6,24 @@
 
 import Foundation
 import SwiftUI
-import QRCode
+import CoreImage.CIFilterBuiltins
 
-public class QRCodeGenerator {
+struct QRCodeGenerator {
     public static let shared = QRCodeGenerator()
     private init() { }
+    
+    let context = CIContext()
 
-    func generateQRCode(from string: String, scheme: ColorScheme) -> UIImage? {
-        let qrCode = QRCode(string: string,
-                            color: scheme == .light ? Color.black.toUIColor() : Color.white.toUIColor(),
-                            backgroundColor: scheme == .light ? Color.white.toUIColor() : Color.black.toUIColor(),
-                            size: CGSize(width: 150, height: 150),
-                            scale: 4.0,
-                            inputCorrection: .medium)
-        return try? qrCode?.image()
+    func generateQRCode(from text: String) -> UIImage? {
+        let filter  = CIFilter.qrCodeGenerator()
+        filter.message = Data(text.utf8)
+
+        if let outputImage = filter.outputImage {
+            if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
+                return UIImage(cgImage: cgimg)
+            }
+        }
+
+        return nil
     }
 }

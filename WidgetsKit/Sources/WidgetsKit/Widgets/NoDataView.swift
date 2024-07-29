@@ -7,7 +7,6 @@
 import SwiftUI
 
 public struct NoDataView: View {
-
     private let imageSystemName: String
     private let text: LocalizedStringKey
 
@@ -17,14 +16,10 @@ public struct NoDataView: View {
     }
 
     public var body: some View {
-        VStack {
-            Image(systemName: self.imageSystemName)
-                .font(.largeTitle)
-                .padding(.bottom, 4)
+        ContentUnavailableView {
+            Label(NSLocalizedString("global.title.noSearchResult", bundle: Bundle.module, comment: "There is nothing here"), systemImage: self.imageSystemName)
+        } description: {
             Text(self.text, comment: "No data message")
-                .font(.title3)
         }
-        .foregroundColor(.customGrayColor)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     }
 }

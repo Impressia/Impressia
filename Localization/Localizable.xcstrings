@@ -69,6 +69,46 @@
         }
       }
     },
+    "@impressia" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@impressia"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@impressia"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@impressia"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@impressia"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@impressia"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@impressia"
+          }
+        }
+      }
+    },
     "@mczachurski" : {
       "localizations" : {
         "de" : {
@@ -99,40 +139,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "@mczachurski"
-          }
-        }
-      }
-    },
-    "@vernissage" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "@vernissage"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "@vernissage"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "@vernissage"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "@vernissage"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "@vernissage"
           }
         }
       }
@@ -389,7 +395,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Comptes bloqués"
           }
         },
@@ -431,7 +437,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Boosters désactivés"
+            "value" : "Boosts désactivés"
           }
         },
         "pl" : {
@@ -466,13 +472,13 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Honek gogoko egina"
+            "value" : "Gogoko dute"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Favorisé par"
+            "value" : "Mis en favoris par"
           }
         },
         "pl" : {
@@ -630,13 +636,13 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Honek bultzatua"
+            "value" : "Bultzatu dute"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Partagé par"
+            "value" : "Boosté par"
           }
         },
         "pl" : {
@@ -716,7 +722,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erreur pendant le post de la photo."
+            "value" : "Erreur pendant la publication de la photo."
           }
         },
         "pl" : {
@@ -958,7 +964,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Editer le profil"
+            "value" : "Éditer le profil"
           }
         },
         "pl" : {
@@ -1524,7 +1530,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Le jeton d'accès n'est pas trouvé."
           }
         },
@@ -1645,7 +1651,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Impossible de configurer l'auditeur de transactions."
           }
         },
@@ -1805,7 +1811,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Erreur lors du téléchargement des métadonnées."
           }
         },
@@ -1845,7 +1851,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Erreur lors du téléchargement des nouveaux statuts pour le nombre de nouveaux statuts."
           }
         },
@@ -1927,7 +1933,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erreur pendant le téléchargerment des statuts du serveur."
+            "value" : "Erreur pendant le téléchargement des statuts du serveur."
           }
         },
         "pl" : {
@@ -2009,7 +2015,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vérification d'achat échoué."
+            "value" : "Vérification d'achat échouée."
           }
         },
         "pl" : {
@@ -2129,7 +2135,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "L'achat a échoué."
           }
         },
@@ -2249,7 +2255,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Le jeton de rafraîchissement a échoué."
           }
         },
@@ -2331,7 +2337,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "plus..."
           }
         },
@@ -2366,12 +2372,12 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sarbide-token berria berreskuratu da."
+            "value" : "Sarbide-token berriak berreskuratu dira."
           }
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "De nouveaux jetons d'accès ont été récupérés."
           }
         },
@@ -2530,7 +2536,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Egunean zaude"
+            "value" : "Zaharrak berri!"
           }
         },
         "fr" : {
@@ -2543,6 +2549,46 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jesteś na bieżąco"
+          }
+        }
+      }
+    },
+    "Impressia" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impressia"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impressia"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impressia"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impressia"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impressia"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impressia"
           }
         }
       }
@@ -3317,7 +3363,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zuhause"
+            "value" : "Deine Timeline"
           }
         },
         "en" : {
@@ -4953,7 +4999,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Le terrorisme"
+            "value" : "Terrorisme"
           }
         },
         "pl" : {
@@ -5357,7 +5403,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Erreur lors de l'activation des notifications."
           }
         },
@@ -5602,7 +5648,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Forcer l'affichage de tous les media NFSW (contenu sensible) sans avertissement"
+            "value" : "Forcer l'affichage de tous les médias NFSW (contenu sensible) sans avertissement"
           }
         },
         "pl" : {
@@ -5943,7 +5989,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Erhöhte Zustände anzeigen"
+            "value" : "Boosts anzeigen"
           }
         },
         "en" : {
@@ -5967,7 +6013,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show boosted statuses"
+            "value" : "Afficher les statuts boostés"
           }
         },
         "pl" : {
@@ -5984,7 +6030,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Erhöhte Status werden auf Ihrer privaten Zeitleiste angezeigt."
+            "value" : "Geboostete Statusmeldungen werden in Deiner Timeline angezeigt."
           }
         },
         "en" : {
@@ -6008,7 +6054,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Boosted statuses will be visible on your home timeline."
+            "value" : "Les statuts boostés seront visibles sur votre timeline d'accueil."
           }
         },
         "pl" : {
@@ -6060,43 +6106,43 @@
         }
       }
     },
-    "settings.title.followVernissage" : {
-      "comment" : "Follow Vernissage",
+    "settings.title.followImpressia" : {
+      "comment" : "Follow Impressia",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vernissage folgen"
+            "value" : "Impressia folgen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Follow Vernissage"
+            "value" : "Follow Impressia"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sígueme en Vernissage"
+            "value" : "Sígueme en Impressia"
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jarraitu Vernissage-ri"
+            "value" : "Jarraitu Impressia-ri"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suivre Vernissage"
+            "value" : "Suivre Impressia"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Obserwuj Vernissage"
+            "value" : "Obserwuj Impressia"
           }
         }
       }
@@ -6210,7 +6256,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Animation finie"
+            "value" : "Animation terminée"
           }
         },
         "pl" : {
@@ -6371,7 +6417,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide statuses without ALT text"
+            "value" : "Cacher les status qui n'ont pas de texte alternatif (ALT)"
           }
         },
         "pl" : {
@@ -6388,7 +6434,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Statusmeldungen ohne ALT-Text werden nicht auf der eigenen Zeitleiste angezeigt."
+            "value" : "Statusmeldungen ohne ALT-Text werden nicht auf Deiner Timeline angezeigt."
           }
         },
         "en" : {
@@ -6412,7 +6458,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Statuses without ALT text will not be visible on your home timeline."
+            "value" : "Les statuts qui n'ont pas de texte alternatif (ALT) ne seront pas visibles sur votre timeline d'accueil."
           }
         },
         "pl" : {
@@ -6690,12 +6736,12 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jakinarazpen berrien kopurua duen ikurra aplikazioaren ikonoaren ondoan egongo da ikusgai."
+            "value" : "Jakinarazpen berrien kopurua duen ikurra aplikazioaren ikonoaren ondoan erakutsiko da"
           }
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Le badge de l'application indiquant le nombre de nouvelles notifications sera visible près de l'icône de l'application."
           }
         },
@@ -6736,7 +6782,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Afficher le badge d'application"
           }
         },
@@ -6873,38 +6919,38 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vernissage bewerten"
+            "state" : "needs_review",
+            "value" : "Impressia bewerten"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rate Vernissage"
+            "value" : "Rate Impressia"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Puntúa Vernissage"
+            "state" : "needs_review",
+            "value" : "Puntúa Impressia"
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Baloratu Vernissage"
+            "value" : "Baloratu Impressia"
           }
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Noter Vernissage"
+            "state" : "needs_review",
+            "value" : "Noter Impressia"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Oceń Vernissage"
+            "value" : "Oceń Impressia"
           }
         }
       }
@@ -7037,7 +7083,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ALT-Icons werden in der Zeitleiste angezeigt"
+            "value" : "ALT-Icons werden in der Timeline angezeigt"
           }
         },
         "en" : {
@@ -7201,7 +7247,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Favoriten werden in der Zeitleiste angezeigt"
+            "value" : "Favoriten werden in der Timeline angezeigt"
           }
         },
         "en" : {
@@ -7482,38 +7528,38 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Danke für die Unterstützung! Kleine und große Einkäufe helfen uns, unseren Traum eines hochqualitativen Produkts für unsere Nutzer aufrecht zu erhalten. Wir hoffen, Du liebst Vernissage!"
+            "state" : "needs_review",
+            "value" : "Danke für die Unterstützung! Kleine und große Einkäufe helfen uns, unseren Traum eines hochqualitativen Produkts für unsere Nutzer aufrecht zu erhalten. Wir hoffen, Du liebst Impressia!"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Thanks for your purchase. Purchases both big and small help us keep our dream of providing the best quality products to our customers. We hope you’re loving Vernissage."
+            "value" : "Thanks for your purchase. Purchases both big and small help us keep our dream of providing the best quality products to our customers. We hope you’re loving Impressia."
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gracias por tu compra. Tanto las compras grandes como las pequeñas nos ayudan a mantener nuestro sueño de proporcionar productos de la mejor calidad a nuestros clientes. Esperamos que estés disfrutando de Vernissage."
+            "state" : "needs_review",
+            "value" : "Gracias por tu compra. Tanto las compras grandes como las pequeñas nos ayudan a mantener nuestro sueño de proporcionar productos de la mejor calidad a nuestros clientes. Esperamos que estés disfrutando de Impressia."
           }
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mila esker erosketagatik. Erosketa handi eta txikiek gure bezeroei kalitatezko produkturik onenak eskaintzeko ametsari eusten laguntzen digute. Espero dugu Vernissage gustuko izatea."
+            "state" : "needs_review",
+            "value" : "Mila esker erosketagatik. Erosketa handi eta txikiek gure bezeroei kalitatezko produkturik onenak eskaintzeko ametsari eusten laguntzen digute. Espero dugu Impressia gustuko izatea."
           }
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Merci pour votre achat. Les achats, petits et grands, nous aident à réaliser notre rêve de fournir des produits de la meilleure qualité à nos clients. Nous espérons que vous aimez Vernissage."
+            "state" : "needs_review",
+            "value" : "Merci pour votre achat. Les achats, petits et grands, nous aident à réaliser notre rêve de fournir des produits de la meilleure qualité à nos clients. Nous espérons que vous aimez Impressia."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dziękujemy za twój zakup. Zakupy zarówno te duże, jak i te małe pomagają nam w realizacji marzenia o dostarczaniu naszym klientom produktów najwyższej jakości. Mamy nadzieję, że Vernissage spełnia Twoje oczekiwania."
+            "value" : "Dziękujemy za twój zakup. Zakupy zarówno te duże, jak i te małe pomagają nam w realizacji marzenia o dostarczaniu naszym klientom produktów najwyższej jakości. Mamy nadzieję, że Impressia spełnia Twoje oczekiwania."
           }
         }
       }
@@ -7629,7 +7675,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tiers"
+            "value" : "Composants tiers"
           }
         },
         "pl" : {
@@ -7726,8 +7772,8 @@
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vernissage wird Dich warnen, wenn Du einen Beitrag mit fehlendem ALT-Text veröffentlichen möchtest."
+            "state" : "needs_review",
+            "value" : "Impressia wird Dich warnen, wenn Du einen Beitrag mit fehlendem ALT-Text veröffentlichen möchtest."
           }
         },
         "en" : {
@@ -7745,13 +7791,13 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Irudiren batek deskribapenik ez badu, argitaratu baino lehen abisua erakutsiko da."
+            "value" : "Irudiren batek deskribapenik ez badu, argitaratu baino lehen abisua erakutsiko da"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Un avertissement concernant les textes ALT manquants sera affiché avant la publication d'un nouveau message."
+            "value" : "Un avertissement concernant les textes alternatifs (ALT) manquants sera affiché avant la publication d'un nouveau message."
           }
         },
         "pl" : {
@@ -7792,7 +7838,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avertir de l'absence de texte ALT"
+            "value" : "Avertir de l'absence de texte alternatif (ALT)"
           }
         },
         "pl" : {
@@ -7906,9 +7952,21 @@
           }
         },
         "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%d erabiltzaile"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Erabiltzaile %d"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d erabiltzaile"
+                }
+              }
+            }
           }
         },
         "fr" : {
@@ -7947,9 +8005,21 @@
           }
         },
         "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%d egoera"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Egoera %d"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d egoera"
+                }
+              }
+            }
           }
         },
         "fr" : {
@@ -7995,7 +8065,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ou choisissez un sereveur Pixelfed"
+            "value" : "Ou choisissez un serveur Pixelfed"
           }
         },
         "pl" : {
@@ -8036,7 +8106,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Entrer l'adresse du server"
+            "value" : "Entrer l'adresse du serveur"
           }
         },
         "pl" : {
@@ -8198,7 +8268,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "L'action de marque-pages a échoué."
+            "value" : "L'action de mise en marque-pages a échoué."
           }
         },
         "pl" : {
@@ -8278,7 +8348,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "L'action de favoris a échoué."
+            "value" : "L'action de mise en favoris a échoué."
           }
         },
         "pl" : {
@@ -8675,13 +8745,13 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gogoko egina"
+            "value" : "Gogoko eginda"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Favorisé"
+            "value" : "Mis en favoris"
           }
         },
         "pl" : {
@@ -8762,7 +8832,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Description du media"
+            "value" : "Description du média"
           }
         },
         "pl" : {
@@ -8842,7 +8912,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Partagé"
+            "value" : "Partager"
           }
         },
         "pl" : {
@@ -8877,7 +8947,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bultzatua"
+            "value" : "Bultzatuta"
           }
         },
         "fr" : {
@@ -9084,7 +9154,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Partger le statut"
+            "value" : "Partager le statut"
           }
         },
         "pl" : {
@@ -9124,7 +9194,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Afficher la description du media"
+            "value" : "Afficher la description du média"
           }
         },
         "pl" : {
@@ -9158,7 +9228,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Egoera ezabatua"
+            "value" : "Egoera ezabatuta"
           }
         },
         "fr" : {
@@ -9199,7 +9269,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Laster-marka kendua"
+            "value" : "Laster-marka kenduta"
           }
         },
         "fr" : {
@@ -9240,7 +9310,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gogoko egiteari utzia"
+            "value" : "Gogoko egiteari utzita"
           }
         },
         "fr" : {
@@ -10087,9 +10157,21 @@
           }
         },
         "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%d bidalketa"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Bidalketa %d"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d bidalketa"
+                }
+              }
+            }
           }
         },
         "fr" : {
@@ -10215,7 +10297,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Rendu des Emoji personnalisés dans le texte. Supporte les emojis locaux et distants. Les emojis distants sont chargés et mis en cache à l'aide de Nuke."
           }
         },
@@ -10337,7 +10419,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Police utilisée dans l'application dans les icônes et dans l'écran d'accueil."
           }
         },
@@ -10459,8 +10541,8 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Il s'agit d'un paquet Swift qui tente de convertir HTML en Markdown."
+            "state" : "translated",
+            "value" : "Il s'agit d'un paquet Swift qui tente de convertir le HTML en Markdown."
           }
         },
         "pl" : {
@@ -10581,7 +10663,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "HTMLString est une bibliothèque écrite en Swift qui permet à votre programme d'ajouter et de supprimer des entités HTML dans des chaînes de caractères."
           }
         },
@@ -10703,7 +10785,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Nuke offre un moyen efficace de télécharger et d'afficher des images dans votre application. Il est facile à apprendre et à utiliser. Son architecture permet de nombreuses fonctionnalités puissantes tout en offrant des possibilités de personnalisation pratiquement illimitées."
           }
         },
@@ -10786,7 +10868,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tiers"
+            "value" : "Composants tiers"
           }
         },
         "pl" : {
@@ -10866,7 +10948,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Un µFramework pour afficher des alertes comme celles utilisées lors de la copie à partir d'un tableau ou de la connexion d'un crayon Apple."
           }
         },
@@ -10988,7 +11070,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Bibliothèque OAuth basée sur Swift pour iOS et macOS."
           }
         },
@@ -11110,7 +11192,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Un simple générateur d'image de code QR à utiliser dans vos applications, écrit en Swift 5."
           }
         },
@@ -11551,7 +11633,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Blokeatu/Blokeatzeari uzteak huts egin du."
+            "value" : "Blokeatzeak / Blokeatzeari uzteak huts egin du."
           }
         },
         "fr" : {
@@ -11631,7 +11713,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mututu/Mututzeari uzteak huts egin du."
+            "value" : "Mututzeak / Mututzeari uzteak huts egin du."
           }
         },
         "fr" : {
@@ -11920,7 +12002,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Boosts muted"
+            "value" : "Boosts silenciés"
           }
         },
         "pl" : {
@@ -11995,13 +12077,13 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ezkutatu bultzadak"
+            "value" : "Ezgaitu bultzadak"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Disable boosts"
+            "value" : "Désactiver les boosts"
           }
         },
         "pl" : {
@@ -12041,8 +12123,8 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Boosters désactivés"
+            "state" : "translated",
+            "value" : "Boosts désactivés"
           }
         },
         "pl" : {
@@ -12083,7 +12165,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Editer"
+            "value" : "Éditer"
           }
         },
         "pl" : {
@@ -12118,13 +12200,13 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ikusi bultzadak"
+            "value" : "Gaitu bultzadak"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enable boosts"
+            "value" : "Activer les boosts"
           }
         },
         "pl" : {
@@ -12240,7 +12322,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Traolak"
+            "value" : "Jarraitutako traolak"
           }
         },
         "fr" : {
@@ -12281,7 +12363,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jarraitzaile"
+            "value" : "jarraitzaile"
           }
         },
         "fr" : {
@@ -12322,7 +12404,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jarraitzen"
+            "value" : "jarraitzen"
           }
         },
         "fr" : {
@@ -12467,7 +12549,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Am %@ beigetreten"
+            "value" : "Beigetreten %@"
           }
         },
         "en" : {
@@ -12689,7 +12771,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bidalketa"
+            "value" : "bidalketa"
           }
         },
         "fr" : {
@@ -12940,7 +13022,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Déblouer"
+            "value" : "Débloquer"
           }
         },
         "pl" : {
@@ -13061,7 +13143,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Désactiver"
+            "value" : "Désilencié"
           }
         },
         "pl" : {
@@ -13101,47 +13183,13 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Compte remis en actif"
+            "value" : "Compte désilencié"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wyciszenie wyłączone"
-          }
-        }
-      }
-    },
-    "Vernissage" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vernissage"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vernissage"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vernissage"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vernissage"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vernissage"
           }
         }
       }
@@ -13175,7 +13223,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Non pris en charge"
           }
         },

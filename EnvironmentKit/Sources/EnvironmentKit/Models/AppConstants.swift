@@ -13,15 +13,15 @@ public struct AppConstants {
     public static let oauthRedirectUri = "\(AppConstants.oauthScheme)://\(oauthCallbackPart)/pixelfed"
     public static let oauthScopes = ["read", "write", "follow", "push"]
 
-    public static let statusScheme = "status-vernissage"
+    public static let statusScheme = "status-impressia"
     public static let statusCallbackPart = "statuses"
     public static let statusUri = "\(AppConstants.statusScheme)://\(statusCallbackPart)"
 
-    public static let accountScheme = "account-vernissage"
+    public static let accountScheme = "account-impressia"
     public static let accountCallbackPart = "accounts"
     public static let accountUri = "\(AppConstants.accountScheme)://\(accountCallbackPart)"
 
-    public static let imagePipelineCacheName = "dev.mczachurski.Vernissage.DataCache"
-    public static let backgroundFetcherName = "dev.mczachurski.Vernissage.NotificationFetcher"
+    public static let imagePipelineCacheName = "dev.mczachurski.Impressia.DataCache"
+    public static let backgroundFetcherName = "dev.mczachurski.Impressia.NotificationFetcher"
     public static let coreDataPersistantContainerName = "Vernissage"
 }

@@ -14,11 +14,11 @@ public struct MenuCustomizableTip: Tip {
     }
 
     public var title: Text {
-        Text("tip.menuCustomizable.title", bundle: Bundle.module, comment: "Menu customizable tip title.")
+        Text(NSLocalizedString("tip.menuCustomizable.title", bundle: Bundle.module, comment: "Menu customizable tip title."))
     }
 
     public var message: Text? {
-        Text("tip.menuCustomizable.message", bundle: Bundle.module, comment: "Menu customizable tip message.")
+        Text(NSLocalizedString("tip.menuCustomizable.message", bundle: Bundle.module, comment: "Menu customizable tip message."))
     }
 
     public var image: Image? {
