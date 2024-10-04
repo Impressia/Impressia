@@ -78,7 +78,6 @@
 		F870EE5229F1645C00A2D43B /* MainNavigationOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F870EE5129F1645C00A2D43B /* MainNavigationOptions.swift */; };
 		F8742FC429990AFB00E9642B /* ClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8742FC329990AFB00E9642B /* ClientError.swift */; };
 		F8764187298ABB520057D362 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8764186298ABB520057D362 /* ViewState.swift */; };
-		F876418D298AE5020057D362 /* PaginableStatusesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F876418C298AE5020057D362 /* PaginableStatusesView.swift */; };
 		F878842229A4A4E3003CFAD2 /* AppMetadataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F878842129A4A4E3003CFAD2 /* AppMetadataService.swift */; };
 		F87AEB922986C44E00434FB6 /* AuthorizationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87AEB912986C44E00434FB6 /* AuthorizationSession.swift */; };
 		F87AEB972986D16D00434FB6 /* AuthorisationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87AEB962986D16D00434FB6 /* AuthorisationError.swift */; };
@@ -277,7 +276,6 @@
 		F870EE5129F1645C00A2D43B /* MainNavigationOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationOptions.swift; sourceTree = "<group>"; };
 		F8742FC329990AFB00E9642B /* ClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientError.swift; sourceTree = "<group>"; };
 		F8764186298ABB520057D362 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
-		F876418C298AE5020057D362 /* PaginableStatusesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginableStatusesView.swift; sourceTree = "<group>"; };
 		F878842129A4A4E3003CFAD2 /* AppMetadataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMetadataService.swift; sourceTree = "<group>"; };
 		F87AEB912986C44E00434FB6 /* AuthorizationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSession.swift; sourceTree = "<group>"; };
 		F87AEB962986D16D00434FB6 /* AuthorisationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorisationError.swift; sourceTree = "<group>"; };
@@ -458,7 +456,6 @@
 				F883401F29B62AE900C3E096 /* SearchView.swift */,
 				F8AFF7C029B259150087D083 /* HashtagsView.swift */,
 				F88E4D41297E69FD0057491A /* StatusesView.swift */,
-				F876418C298AE5020057D362 /* PaginableStatusesView.swift */,
 				F85DBF8E296732E20069BF89 /* AccountsView.swift */,
 				F897978E29684BCB00B22335 /* LoadingView.swift */,
 				F8B0885D29942E31002AB40A /* ThirdPartyView.swift */,
@@ -1124,7 +1121,6 @@
 				F8B0885E29942E31002AB40A /* ThirdPartyView.swift in Sources */,
 				F8E6D03329CDD52500416CCA /* EditProfileView.swift in Sources */,
 				F858906B29E1CC7A00D4BDED /* UIApplication+Window.swift in Sources */,
-				F876418D298AE5020057D362 /* PaginableStatusesView.swift in Sources */,
 				F8764187298ABB520057D362 /* ViewState.swift in Sources */,
 				F870EE5229F1645C00A2D43B /* MainNavigationOptions.swift in Sources */,
 				F88ABD9429687CA4004EF61E /* ComposeView.swift in Sources */,
@@ -1210,7 +1206,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1245,7 +1241,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1279,7 +1275,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1312,7 +1308,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1479,7 +1475,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1523,7 +1519,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.1;
+				MARKETING_VERSION = 3.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

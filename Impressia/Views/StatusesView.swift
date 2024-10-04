@@ -188,7 +188,8 @@ struct StatusesView: View {
         }
 
         // Remember last status id returned by API.
-        self.lastStatusId = statuses.getMaxId()
+        self.lastStatusId = statuses.link?.maxId
+        self.allItemsLoaded = self.lastStatusId == nil
 
         // Get only visible statuses.
         let visibleStatuses = HomeTimelineService.shared.getVisibleStatuses(accountId: accountId,
@@ -227,8 +228,10 @@ struct StatusesView: View {
             }
 
             // Now we have new last status.
-            if let lastStatusId = statuses.getMaxId() {
+            if let lastStatusId = statuses.link?.maxId {
                 self.lastStatusId = lastStatusId
+            } else {
+                self.allItemsLoaded = true
             }
 
             // Get only visible statuses.
@@ -267,6 +270,7 @@ struct StatusesView: View {
 
         // Remember last status id returned by API.
         self.lastStatusId = statuses.getMaxId()
+        self.allItemsLoaded = self.lastStatusId == nil
 
         // Get only visible statuses.
         let visibleStatuses = HomeTimelineService.shared.getVisibleStatuses(accountId: accountId,
@@ -320,21 +324,17 @@ struct StatusesView: View {
                 minId: minId,
                 limit: self.defaultLimit) ?? Linkable(data: [])
         case .favourites:
-            let favourites = try await self.client.accounts?.favourites(
+            return try await self.client.accounts?.favourites(
                 maxId: maxId,
                 sinceId: sinceId,
                 minId: minId,
-                limit: self.defaultLimit) ?? []
-            
-            return Linkable(data: favourites)
+                limit: self.defaultLimit) ?? Linkable(data: [])
         case .bookmarks:
-            let bookmarks = try await self.client.accounts?.bookmarks(
+            return try await self.client.accounts?.bookmarks(
                 maxId: maxId,
                 sinceId: sinceId,
                 minId: minId,
-                limit: self.defaultLimit) ?? []
-            
-            return Linkable(data: bookmarks)
+                limit: self.defaultLimit) ?? Linkable(data: [])
         case .hashtag(let tag):
             let hashtagsFromApi = try await self.client.search?.search(query: tag, resultsType: .hashtags)
             guard let hashtagsFromApi = hashtagsFromApi, hashtagsFromApi.hashtags.isEmpty == false else {

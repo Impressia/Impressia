@@ -24,9 +24,9 @@ extension View {
             case .statuses(let listType):
                 StatusesView(listType: listType)
             case .bookmarks:
-                PaginableStatusesView(listType: .bookmarks)
+                StatusesView(listType: .bookmarks)
             case .favourites:
-                PaginableStatusesView(listType: .favourites)
+                StatusesView(listType: .favourites)
             case .userProfile(let accountId, let accountDisplayName, let accountUserName):
                 UserProfileView(
                     accountId: accountId,

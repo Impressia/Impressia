@@ -8,7 +8,7 @@ import Foundation
 
 extension Pixelfed {
     public enum Favourites {
-        case favourites(MaxId?, SinceId?, MinId?, Limit?, Page?)
+        case favourites(MaxId?, SinceId?, MinId?, Limit?)
     }
 }
 
@@ -39,15 +39,13 @@ extension Pixelfed.Favourites: TargetType {
         var sinceId: SinceId?
         var minId: MinId?
         var limit: Limit?
-        var page: Page?
 
         switch self {
-        case .favourites(let paramMaxId, let paramSinceId, let paramMinId, let paramLimit, let paramPage):
+        case .favourites(let paramMaxId, let paramSinceId, let paramMinId, let paramLimit):
             maxId = paramMaxId
             sinceId = paramSinceId
             minId = paramMinId
             limit = paramLimit
-            page = paramPage
         }
 
         if let maxId {
@@ -64,10 +62,6 @@ extension Pixelfed.Favourites: TargetType {
 
         if let limit {
             params.append(("limit", "\(limit)"))
-        }
-
-        if let page {
-            params.append(("page", "\(page)"))
         }
 
         return params
