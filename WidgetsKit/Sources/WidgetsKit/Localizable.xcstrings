@@ -677,6 +677,7 @@
       }
     },
     "compose.title.everyone" : {
+      "comment" : "Everyone",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -758,6 +759,7 @@
       }
     },
     "compose.title.followers" : {
+      "comment" : "Followers",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1003,6 +1005,7 @@
       }
     },
     "compose.title.unlisted" : {
+      "comment" : "Unlisted",
       "localizations" : {
         "de" : {
           "stringUnit" : {

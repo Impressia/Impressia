@@ -137,29 +137,27 @@ public extension PixelfedClientAuthenticated {
     func favourites(maxId: EntityId? = nil,
                     sinceId: EntityId? = nil,
                     minId: EntityId? = nil,
-                    limit: Int? = nil,
-                    page: Page? = nil) async throws -> [Status] {
+                    limit: Int? = nil) async throws -> Linkable<[Status]> {
         let request = try Self.request(
             for: baseURL,
-            target: Pixelfed.Favourites.favourites(maxId, sinceId, minId, limit, page),
+            target: Pixelfed.Favourites.favourites(maxId, sinceId, minId, limit),
             withBearerToken: token
         )
 
-        return try await downloadJson([Status].self, request: request)
+        return try await downloadJsonWithLink([Status].self, request: request)
     }
 
     func bookmarks(maxId: EntityId? = nil,
                    sinceId: EntityId? = nil,
                    minId: EntityId? = nil,
-                   limit: Int? = nil,
-                   page: Page? = nil) async throws -> [Status] {
+                   limit: Int? = nil) async throws -> Linkable<[Status]> {
         let request = try Self.request(
             for: baseURL,
-            target: Pixelfed.Bookmarks.bookmarks(maxId, sinceId, minId, limit, page),
+            target: Pixelfed.Bookmarks.bookmarks(maxId, sinceId, minId, limit),
             withBearerToken: token
         )
 
-        return try await downloadJson([Status].self, request: request)
+        return try await downloadJsonWithLink([Status].self, request: request)
     }
 
     func update(displayName: String, bio: String, website: String, locked: Bool, image: Data?) async throws -> Account {

@@ -2,7 +2,7 @@
   "sourceLanguage" : "en",
   "strings" : {
     "global.error.notSuccessResponse" : {
-      "comment" : "It's error returned from remote server. Request URL: '(response.url?.string ?? \"unknown\")'.",
+      "comment" : "It's error returned from remote server. Request URL: '(value)'.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
