@@ -13548,6 +13548,12 @@
             "value" : "L'action de relation a échoué."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Azione relazione fallita."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14428,6 +14434,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Joint %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iscrizione: %@"
           }
         },
         "pl" : {
