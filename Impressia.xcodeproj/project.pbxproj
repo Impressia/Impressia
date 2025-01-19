@@ -955,6 +955,7 @@
 				fr,
 				es,
 				de,
+				it,
 			);
 			mainGroup = F88C245F295C37B80006098B;
 			packageReferences = (
