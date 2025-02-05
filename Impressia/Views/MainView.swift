@@ -104,7 +104,7 @@ struct MainView: View {
 
         NavigationStack(path: $routerPath.path) {
             self.getMainView()
-                .navigationMenuButtons(menuPosition: $applicationState.menuPosition) { viewMode in
+                .navigationMenuButtons(menuPosition: $applicationState.menuPosition, viewMode: $viewMode) { viewMode in
                     self.switchView(to: viewMode)
                 }
                 .navigationTitle(navBarTitle)
@@ -196,8 +196,10 @@ struct MainView: View {
 
     @ToolbarContentBuilder
     private func getLeadingToolbar() -> some ToolbarContent {
-        ToolbarItem(placement: .navigationBarLeading) {
-            AccountAvatarMenu(viewMode: $viewMode)
+        if applicationState.menuPosition == .top {
+            ToolbarItem(placement: .navigationBarLeading) {
+                AccountAvatarMenu(viewMode: $viewMode)
+            }
         }
     }
 
