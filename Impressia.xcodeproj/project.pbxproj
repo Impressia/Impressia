@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F24D9422D53DECF0001AE15 /* AccountAvatarMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F24D9412D53DECB0001AE15 /* AccountAvatarMenu.swift */; };
 		F802884F297AEED5000BDD51 /* DatabaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F802884E297AEED5000BDD51 /* DatabaseError.swift */; };
 		F805DCF129DBEF83006A1FD9 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F805DCF029DBEF83006A1FD9 /* ReportView.swift */; };
 		F808641429756666009F035C /* NotificationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F808641329756666009F035C /* NotificationRowView.swift */; };
@@ -211,6 +212,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F24D9412D53DECB0001AE15 /* AccountAvatarMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAvatarMenu.swift; sourceTree = "<group>"; };
 		F802884E297AEED5000BDD51 /* DatabaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseError.swift; sourceTree = "<group>"; };
 		F805DCF029DBEF83006A1FD9 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		F808641329756666009F035C /* NotificationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRowView.swift; sourceTree = "<group>"; };
@@ -451,6 +453,7 @@
 				F88C246D295C37B80006098B /* MainView.swift */,
 				F88ABD9329687CA4004EF61E /* ComposeView.swift */,
 				F8D0E5212AE2A2630061C561 /* HomeTimelineView.swift */,
+				1F24D9412D53DECB0001AE15 /* AccountAvatarMenu.swift */,
 				F88AB05729B36B8200345EDE /* AccountsPhotoView.swift */,
 				F88E4D47297E90CD0057491A /* TrendStatusesView.swift */,
 				F883401F29B62AE900C3E096 /* SearchView.swift */,
@@ -1091,6 +1094,7 @@
 				F8B0886029943498002AB40A /* OtherSectionView.swift in Sources */,
 				F808641429756666009F035C /* NotificationRowView.swift in Sources */,
 				F8624D3D29F2D3AC00204986 /* SelectedMenuItemDetails.swift in Sources */,
+				1F24D9422D53DECF0001AE15 /* AccountAvatarMenu.swift in Sources */,
 				F8210DCF2966B600001D9973 /* ImageRowAsync.swift in Sources */,
 				F86A4305299AA12800DF7645 /* PurchaseError.swift in Sources */,
 				F8B05ACE29B48E2F00857221 /* MediaSettingsView.swift in Sources */,
