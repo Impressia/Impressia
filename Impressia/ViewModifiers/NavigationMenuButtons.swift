@@ -77,7 +77,7 @@ private struct NavigationMenuButtons: ViewModifier {
     private func menuContainerView() -> some View {
         if self.menuPosition == .bottomRight {
             HStack(alignment: .center) {
-                AccountAvatarMenu(viewMode: $viewMode)
+                AccountAvatarMenu(menuPosition: $menuPosition, viewMode: $viewMode)
 
                 HStack {
                     self.contextMenuView()
@@ -112,7 +112,7 @@ private struct NavigationMenuButtons: ViewModifier {
                 .background(.ultraThinMaterial)
                 .clipShape(Capsule())
 
-                AccountAvatarMenu(viewMode: $viewMode)
+                AccountAvatarMenu(menuPosition: $menuPosition, viewMode: $viewMode)
             }
             .popoverTip(menuCustomizableTip, arrowEdge: .bottom)
         }

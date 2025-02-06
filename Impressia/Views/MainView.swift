@@ -197,8 +197,10 @@ struct MainView: View {
     @ToolbarContentBuilder
     private func getLeadingToolbar() -> some ToolbarContent {
         if applicationState.menuPosition == .top {
+            @Bindable var applicationState = applicationState
+
             ToolbarItem(placement: .navigationBarLeading) {
-                AccountAvatarMenu(viewMode: $viewMode)
+                AccountAvatarMenu(menuPosition: $applicationState.menuPosition, viewMode: $viewMode)
             }
         }
     }

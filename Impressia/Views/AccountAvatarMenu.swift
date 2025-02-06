@@ -20,6 +20,7 @@ struct AccountAvatarMenu: View {
 
     @Query(sort: \AccountData.acct, order: .forward) var dbAccounts: [AccountData]
 
+    @Binding var menuPosition: MenuPosition
     @Binding var viewMode: MainView.ViewMode
 
     var body: some View {
@@ -45,8 +46,21 @@ struct AccountAvatarMenu: View {
                 Label("mainview.menu.settings", systemImage: "gear")
             }
         } label: {
+            self.avatarButton()
+        }
+    }
+
+    @ViewBuilder
+    private func avatarButton() -> some View {
+        if menuPosition == .top {
             self.getAvatarImage(avatarUrl: self.applicationState.account?.avatar,
                                 avatarData: self.applicationState.account?.avatarData)
+        } else {
+            self.getAvatarImage(avatarUrl: self.applicationState.account?.avatar,
+                                avatarData: self.applicationState.account?.avatarData)
+                .padding(9) // (menu height - avatar size) / 2
+                .background(.ultraThinMaterial)
+                .clipShape(.circle)
         }
     }
 
