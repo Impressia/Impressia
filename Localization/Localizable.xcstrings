@@ -27,6 +27,12 @@
             "value" : ""
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -56,6 +62,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@%@"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "@%@"
@@ -101,6 +113,12 @@
             "value" : "@impressia"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@impressia"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -135,6 +153,12 @@
             "value" : "@mczachurski"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@mczachurski"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -164,6 +188,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "#%@"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "#%@"
@@ -209,6 +239,12 @@
             "value" : "%1$@ (%2$@)"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ (%2$@)"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -238,6 +274,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld"
@@ -283,6 +325,12 @@
             "value" : "%1$lld/%2$lld"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld/%2$lld"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -315,6 +363,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "+99"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+39"
           }
         },
         "pl" : {
@@ -358,6 +412,12 @@
             "value" : "Le chargement des comptes a échoué."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricamento degli account fallito."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -397,6 +457,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Comptes bloqués"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account bloccati"
           }
         },
         "pl" : {
@@ -440,6 +506,12 @@
             "value" : "Boosts désactivés"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reblog disattivati"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -479,6 +551,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mis en favoris par"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apprezzato da"
           }
         },
         "pl" : {
@@ -522,6 +600,12 @@
             "value" : "Abonnés"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seguaci"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -561,6 +645,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abonnements"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seguiti"
           }
         },
         "pl" : {
@@ -604,6 +694,12 @@
             "value" : "Comptes mis en sourdine"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account silenziati"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -643,6 +739,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Boosté par"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rebloggato da"
           }
         },
         "pl" : {
@@ -685,6 +787,12 @@
             "value" : "Malheureusement, il n'y a personne ici."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purtroppo non c’è nessuno qui."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -723,6 +831,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erreur pendant la publication de la photo."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore durante la pubblicazione della foto."
           }
         },
         "pl" : {
@@ -766,6 +880,12 @@
             "value" : "Composer"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Componi"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -804,6 +924,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erreur lors du téléchargement du compte depuis le serveur."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore durante il download dell’account dal server."
           }
         },
         "pl" : {
@@ -846,6 +972,12 @@
             "value" : "Chargement de l'avatar échoué."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricamento avatar fallito."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -886,6 +1018,12 @@
             "value" : "Les données du profil ne peuvent pas être affichées."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile mostrare dati del profilo."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -924,6 +1062,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enregistrement du profil échoué."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salvataggio profilo fallito."
           }
         },
         "pl" : {
@@ -967,6 +1111,12 @@
             "value" : "Éditer le profil"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modifica profilo"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1007,6 +1157,12 @@
             "value" : "Le profil a été mis à jour."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profilo aggiornato."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1043,6 +1199,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bio"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bio"
@@ -1089,6 +1251,12 @@
             "value" : "Afficher le nom"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome visualizzato"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1129,6 +1297,12 @@
             "value" : "La photo modifiée sera visible dans l'application et sur le site web avec un petit délai."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La foto modificata sarà visibile nell’app e sul sito con un leggero ritardo."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1167,6 +1341,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Compte privé"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account privato"
           }
         },
         "pl" : {
@@ -1210,6 +1390,12 @@
             "value" : "Lorsque votre compte est privé, seules les personnes que vous autorisez peuvent voir vos photos et vidéos sur Pixelfed. Les personnes qui vous suivent déjà ne seront pas affectées."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quando il tuo account è privato solo le persone che approvi possono vedere le tue foto e i tuoi video su Pixelfed. Per chi ti segue già non cambierà nulla."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1249,6 +1435,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enregistrer"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salva"
           }
         },
         "pl" : {
@@ -1292,6 +1484,12 @@
             "value" : "Site web"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sito web"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1332,6 +1530,12 @@
             "value" : "Erreur lors de l'approbation de la demande."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore durante l’approvazione della richiesta."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1370,6 +1574,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erreur lors du rejet de la demande."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore durante il rifiuto della richiesta."
           }
         },
         "pl" : {
@@ -1413,6 +1623,12 @@
             "value" : "Suivre les demandes"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Richieste di seguire"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1453,6 +1669,12 @@
             "value" : "Approuver"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Approva"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1491,6 +1713,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rejeter"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RIfiuta"
           }
         },
         "pl" : {
@@ -1534,6 +1762,12 @@
             "value" : "Le jeton d'accès n'est pas trouvé."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Token di accesso non trovato."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1572,6 +1806,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "L'avatar n'a pas été téléchargé."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’avatar non è stato scaricato."
           }
         },
         "pl" : {
@@ -1615,6 +1855,12 @@
             "value" : "Mauvaise URL pour le serveur."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "URL server non valido."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1653,6 +1899,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible de configurer l'auditeur de transactions."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile configurare il transaction listener"
           }
         },
         "pl" : {
@@ -1695,6 +1947,12 @@
             "value" : "Impossible de télécharger des produits in-app."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile scaricare i prodotti in-app."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1733,6 +1991,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le chargement des données a échoué."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricamento dati fallito."
           }
         },
         "pl" : {
@@ -1775,6 +2039,12 @@
             "value" : "Erreur pendant le téléchargement des tags depuis le serveur."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore durante il download del tag dal server."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1815,6 +2085,12 @@
             "value" : "Erreur lors du téléchargement des métadonnées."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore durante il download dei metadati."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1853,6 +2129,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erreur lors du téléchargement des nouveaux statuts pour le nombre de nouveaux statuts."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore durante il download dei nuovi post per l’ammontare dei nuovi post."
           }
         },
         "pl" : {
@@ -1896,6 +2178,12 @@
             "value" : "Erreur durant le téléchargement du statut depuis le serveur."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore durante il download del post dal server."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1934,6 +2222,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erreur pendant le téléchargement des statuts du serveur."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore durante il download dei post dal server."
           }
         },
         "pl" : {
@@ -1977,6 +2271,12 @@
             "value" : "Impossible de télécharger l'image."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile scaricare immagine."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2016,6 +2316,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vérification d'achat échouée."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verifica dell’acquisto fallita."
           }
         },
         "pl" : {
@@ -2059,6 +2365,12 @@
             "value" : "Impossible de récupérer les données de l'utilisateur."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile recuperare l’account utente."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2097,6 +2409,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le hashtag n'existe pas."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’hashtag non esiste."
           }
         },
         "pl" : {
@@ -2139,6 +2457,12 @@
             "value" : "L'achat a échoué."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acquisto fallito."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2177,6 +2501,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Veuillez vous connecter à nouveau à Pixelfed."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accedi di nuovo a Pixelfed."
           }
         },
         "pl" : {
@@ -2219,6 +2549,12 @@
             "value" : "Erreur d'actualisation des données d'identification."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore aggiornamento credenziali."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2257,6 +2593,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le jeton de rafraîchissement a échoué."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiornamento token fallito."
           }
         },
         "pl" : {
@@ -2300,6 +2642,12 @@
             "value" : "Fermer"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiudi"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2339,6 +2687,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "plus..."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "altro…"
           }
         },
         "pl" : {
@@ -2381,6 +2735,12 @@
             "value" : "De nouveaux jetons d'accès ont été récupérés."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuovi token di accesso sono stati recuperati."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2417,6 +2777,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
@@ -2463,6 +2829,12 @@
             "value" : "La photo a été sauvegardée."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Foto salvata."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2502,6 +2874,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Succès"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Successo"
           }
         },
         "pl" : {
@@ -2545,6 +2923,12 @@
             "value" : "Tout est à jour"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nulla di nuovo"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2580,6 +2964,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impressia"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impressia"
@@ -2625,6 +3015,12 @@
             "value" : "Erreur lors du téléchargement des données d'instance depuis le serveur."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore durante il download dei dati dell’istanza dal server."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2663,6 +3059,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Les données d'instance ne peuvent pas être affichées."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile mostrare i dati dell’istanza."
           }
         },
         "pl" : {
@@ -2706,6 +3108,12 @@
             "value" : "Instance"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Istanza"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2744,6 +3152,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Addresse"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Indirizzo"
           }
         },
         "pl" : {
@@ -2786,6 +3200,12 @@
             "value" : "Approbation requise"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Approvazione richiesta"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2824,6 +3244,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Contact"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contatto"
           }
         },
         "pl" : {
@@ -2866,6 +3292,12 @@
             "value" : "Domaines"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Domini"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2901,6 +3333,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Email"
@@ -2946,6 +3384,12 @@
             "value" : "Information sur l'instance"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informazioni istanza"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2984,6 +3428,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nom"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome"
           }
         },
         "pl" : {
@@ -3027,6 +3477,12 @@
             "value" : "Compte Pixelfed"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account Pixelfed"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3065,6 +3521,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Posts"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Post"
           }
         },
         "pl" : {
@@ -3107,6 +3569,12 @@
             "value" : "Inscriptions"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registrazioni"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3145,6 +3613,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Règles de l'instance"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regole istanza"
           }
         },
         "pl" : {
@@ -3187,6 +3661,12 @@
             "value" : "Utilisateurs"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utenti"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3225,6 +3705,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Version"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versione"
           }
         },
         "pl" : {
@@ -3268,6 +3754,12 @@
             "value" : "Impossible de changer de compte."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile cambiare account."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3309,6 +3801,12 @@
             "value" : "Paramètres"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impostazioni"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3347,6 +3845,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fédéré"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Federata"
           }
         },
         "pl" : {
@@ -3390,6 +3894,12 @@
             "value" : "Accueil"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3428,6 +3938,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Local"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locale"
           }
         },
         "pl" : {
@@ -3470,6 +3986,12 @@
             "value" : "Notifications"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifiche"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3508,6 +4030,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rechercher"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerca"
           }
         },
         "pl" : {
@@ -3551,6 +4079,12 @@
             "value" : "Tendance"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In tendenza"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3589,6 +4123,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Utilisateurs"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account"
           }
         },
         "pl" : {
@@ -3631,6 +4171,12 @@
             "value" : "Photos"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Foto"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3669,6 +4215,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tags"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tag"
           }
         },
         "pl" : {
@@ -3711,6 +4263,12 @@
             "value" : "Profil"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profilo"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3749,6 +4307,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chargement des notifications échoué."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricamento notifiche fallito."
           }
         },
         "pl" : {
@@ -3792,6 +4356,12 @@
             "value" : "Notifications"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifiche"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3830,6 +4400,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "partagé"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ha rebloggato"
           }
         },
         "pl" : {
@@ -3872,6 +4448,12 @@
             "value" : "favori"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ha apprezzato"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3910,6 +4492,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "vous a suivi"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ha cominciato a seguirti"
           }
         },
         "pl" : {
@@ -3952,6 +4540,12 @@
             "value" : "demande de suivi"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "richiesta di seguire"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3990,6 +4584,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "vous a mentionné"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ti ha menzionato"
           }
         },
         "pl" : {
@@ -4032,6 +4632,12 @@
             "value" : "nouveau rapport"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "nuova segnalazione"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4070,6 +4676,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Malheureusement, il n'y a rien ici."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purtroppo non c’è niente qui."
           }
         },
         "pl" : {
@@ -4112,6 +4724,12 @@
             "value" : "sondage"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "sondaggio"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4150,6 +4768,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "statut posté"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ha pubblicato un post"
           }
         },
         "pl" : {
@@ -4192,6 +4816,12 @@
             "value" : "s'inscrire"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ha effettuato l’iscrizione"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4230,6 +4860,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "statut mis à jour"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ha aggiornato un post"
           }
         },
         "pl" : {
@@ -4273,6 +4909,12 @@
             "value" : "Offrez-moi un café et un gâteau."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Offrimi un caffè e una fetta di torta."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4312,6 +4954,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Café et gâteau"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caffè e torta"
           }
         },
         "pl" : {
@@ -4355,6 +5003,12 @@
             "value" : "Offrez-moi un café."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Offrimi un caffè"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4396,6 +5050,12 @@
             "value" : "Café"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caffè"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4435,6 +5095,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Offrez-moi un beignet."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Offrimi una ciambella"
           }
         },
         "pl" : {
@@ -4479,6 +5145,12 @@
             "value" : "Beignet"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ciambella"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4517,6 +5189,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erreur lors de l'envoi du rapport."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore durante l’invio della segnalazione."
           }
         },
         "pl" : {
@@ -4560,6 +5238,12 @@
             "value" : "Rapport"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segnalazione"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4598,6 +5282,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Discours ou symboles haineux"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Incitamento all’odio"
           }
         },
         "pl" : {
@@ -4641,6 +5331,12 @@
             "value" : "Fermer"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiudi"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4679,6 +5375,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Violation des droits d'auteur"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Violazione diritto d’autore"
           }
         },
         "pl" : {
@@ -4721,6 +5423,12 @@
             "value" : "Usurpation d'identité"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Furto d’identità"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4759,6 +5467,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le post a été signalé"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Post segnalato"
           }
         },
         "pl" : {
@@ -4801,6 +5515,12 @@
             "value" : "Type d'abus"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tipo di abuso"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4839,6 +5559,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Intimidation ou harcèlement"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bullismo o molestia"
           }
         },
         "pl" : {
@@ -4882,6 +5608,12 @@
             "value" : "Envoyer"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invia"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4920,6 +5652,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nudité ou activité sexuelle"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nudità o attività sessuale"
           }
         },
         "pl" : {
@@ -4962,6 +5700,12 @@
             "value" : "C'est un spam"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "È spam"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5000,6 +5744,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Terrorisme"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terrorismo"
           }
         },
         "pl" : {
@@ -5042,6 +5792,12 @@
             "value" : "Compte mineur"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account di minorenne"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5082,6 +5838,12 @@
             "value" : "L'utilisateur a été signalé"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utente segnalato"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5120,6 +5882,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Violence ou organisations dangereuses"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Violenza o organizzazioni pericolose"
           }
         },
         "pl" : {
@@ -5163,6 +5931,12 @@
             "value" : "Rechercher"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerca"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5202,6 +5976,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voir le hashtag %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vai all’hashtag %@"
           }
         },
         "pl" : {
@@ -5245,6 +6025,12 @@
             "value" : "Voir l'utilisateur %@"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vai all’utente %@"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5286,6 +6072,12 @@
             "value" : "Hashtags avec %@"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hashtag con %@"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5324,6 +6116,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rechercher..."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerca…"
           }
         },
         "pl" : {
@@ -5367,6 +6165,12 @@
             "value" : "Utilisateurs avec %@"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utenti con %@"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5405,6 +6209,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erreur lors de l'activation des notifications."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore durante l’attivazione delle notifiche."
           }
         },
         "pl" : {
@@ -5448,6 +6258,12 @@
             "value" : "Paramètres"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impostazioni"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5488,6 +6304,12 @@
             "value" : "Accent"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accento"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5526,6 +6348,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Compte"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account"
           }
         },
         "pl" : {
@@ -5569,6 +6397,12 @@
             "value" : "Afficher le texte alternatif si présent sur l'écran des détails des statuts"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se presente, mostra testo alternativo nella schermata dettagli del post"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5608,6 +6442,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Afficher le texte alternatif"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra testo alternativo"
           }
         },
         "pl" : {
@@ -5651,6 +6491,12 @@
             "value" : "Forcer l'affichage de tous les médias NFSW (contenu sensible) sans avertissement"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra tutti i contenuti NSFW (sensibili) senza avvisi"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5690,6 +6536,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Toujours montrer les NSFW"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra sempre NSFW"
           }
         },
         "pl" : {
@@ -5733,6 +6585,12 @@
             "value" : "Icône de l'application"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icona applicazione"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5768,6 +6626,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avatar"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Avatar"
@@ -5813,6 +6677,12 @@
             "value" : "En bas à gauche"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In basso a sinistra"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5851,6 +6721,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "En bas à droite"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In basso a destra"
           }
         },
         "pl" : {
@@ -5894,6 +6770,12 @@
             "value" : "Cercle"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerchio"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5935,6 +6817,12 @@
             "value" : "Fermer"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiudi"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5973,6 +6861,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sombre"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scuro"
           }
         },
         "pl" : {
@@ -6016,6 +6910,12 @@
             "value" : "Afficher les statuts boostés"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra post rebloggati"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6055,6 +6955,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Les statuts boostés seront visibles sur votre timeline d'accueil."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I post rebloggati saranno visibili nella home."
           }
         },
         "pl" : {
@@ -6098,6 +7004,12 @@
             "value" : "Me suivre"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seguimi"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6137,6 +7049,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Suivre Impressia"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segui Impressia"
           }
         },
         "pl" : {
@@ -6179,6 +7097,12 @@
             "value" : "Général"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generali"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6217,6 +7141,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Haptique"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feedback aptico"
           }
         },
         "pl" : {
@@ -6259,6 +7189,12 @@
             "value" : "Animation terminée"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animazione conclusa"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6297,6 +7233,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Appui sur un bouton"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pressione tasto"
           }
         },
         "pl" : {
@@ -6339,6 +7281,12 @@
             "value" : "Rafraîchir la liste"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiornamento lista"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6377,6 +7325,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sélection de l'onglet"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selezione pannello"
           }
         },
         "pl" : {
@@ -6420,6 +7374,12 @@
             "value" : "Cacher les status qui n'ont pas de texte alternatif (ALT)"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nascondi post senza ALT"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6461,6 +7421,12 @@
             "value" : "Les statuts qui n'ont pas de texte alternatif (ALT) ne seront pas visibles sur votre timeline d'accueil."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I post senza testo alternativo non saranno visibili nella home."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6499,6 +7465,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clair"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiaro"
           }
         },
         "pl" : {
@@ -6542,6 +7514,12 @@
             "value" : "Compte Mastodon"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account Mastodon"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6580,6 +7558,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Paramètres du media"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impostazioni contenuti multimediali"
           }
         },
         "pl" : {
@@ -6623,6 +7607,12 @@
             "value" : "Position du menu"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posizione menu"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6664,6 +7654,12 @@
             "value" : "Nouveau compte"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuovo account"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6702,6 +7698,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notifications"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifiche"
           }
         },
         "pl" : {
@@ -6745,6 +7747,12 @@
             "value" : "Le badge de l'application indiquant le nombre de nouvelles notifications sera visible près de l'icône de l'application."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il badge dell’applicazione con il numero di nuove notifiche verrà mostrato sull’icona dell’applicazione."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6786,6 +7794,12 @@
             "value" : "Afficher le badge d'application"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra badge"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6824,6 +7838,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Autre"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Altro"
           }
         },
         "pl" : {
@@ -6867,6 +7887,12 @@
             "value" : "Compte Pixelfed"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account Pixelfed"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6905,6 +7931,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Politique de confidentialité"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Politica sulla privacy"
           }
         },
         "pl" : {
@@ -6947,6 +7979,12 @@
             "value" : "Noter Impressia"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valuta Impressia"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6985,6 +8023,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rapporter un bogue"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segnala un bug"
           }
         },
         "pl" : {
@@ -7028,6 +8072,12 @@
             "value" : "Rectangle arrondi"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rettangolo arrotondato"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7067,6 +8117,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Afficher l'icône ALT"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra icona ALT"
           }
         },
         "pl" : {
@@ -7110,6 +8166,12 @@
             "value" : "L'icône ALT sera affichée sur la timeline"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’icona ALT verrà mostrata nelle timeline"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7149,6 +8211,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Afficher les avatars"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra avatar"
           }
         },
         "pl" : {
@@ -7192,6 +8260,12 @@
             "value" : "Les avatars sont affichés sur la timeline"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gli avatar verranno mostrati nelle timeline"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7231,6 +8305,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Afficher les favoris"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra apprezzamenti"
           }
         },
         "pl" : {
@@ -7274,6 +8354,12 @@
             "value" : "Les favoris sont affichés sur la timeline"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gli apprezzamenti saranno mostrati nelle timeline"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7309,6 +8395,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Social"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Social"
@@ -7354,6 +8446,12 @@
             "value" : "Code source"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codice sorgente"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7392,6 +8490,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Support"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supporto"
           }
         },
         "pl" : {
@@ -7434,6 +8538,12 @@
             "value" : "Système"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sistema"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7472,6 +8582,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Conditions générales d'utilisation"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Termini e condizioni"
           }
         },
         "pl" : {
@@ -7515,6 +8631,12 @@
             "value" : "Fermer"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiudi"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7554,6 +8676,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Merci pour votre achat. Les achats, petits et grands, nous aident à réaliser notre rêve de fournir des produits de la meilleure qualité à nos clients. Nous espérons que vous aimez Impressia."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grazie per l’acquisto. I contributi, grandi o piccoli che siano, ci aiutano a mantenere vivo il nostro sogno di fornire ai nostri clienti i prodotti della miglior qualità possibile. Speriamo che Impressia ti stia piacendo."
           }
         },
         "pl" : {
@@ -7597,6 +8725,12 @@
             "value" : "Merci 💕"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grazie 💕"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7636,6 +8770,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Thème"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tema"
           }
         },
         "pl" : {
@@ -7678,6 +8818,12 @@
             "value" : "Composants tiers"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terze parti"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7716,6 +8862,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Barre de navigation"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Barra di navigazione"
           }
         },
         "pl" : {
@@ -7759,6 +8911,12 @@
             "value" : "Version"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versione"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7798,6 +8956,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Un avertissement concernant les textes alternatifs (ALT) manquants sera affiché avant la publication d'un nouveau message."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un avviso che ricorda di aggiungere il testo alternativo verrà visualizzato prima di pubblicare un nuovo post."
           }
         },
         "pl" : {
@@ -7841,6 +9005,12 @@
             "value" : "Avertir de l'absence de texte alternatif (ALT)"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avviso testo ALT"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7879,6 +9049,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "La communication avec le server a échoué."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comunicazione col server fallita."
           }
         },
         "pl" : {
@@ -7920,6 +9096,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Se connecter à Pixelfed"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accedi a Pixelfed"
           }
         },
         "pl" : {
@@ -7975,6 +9157,12 @@
             "value" : "%d Utilisateurs"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d utenti"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8028,6 +9216,12 @@
             "value" : "%d statuts"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d post"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8066,6 +9260,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ou choisissez un serveur Pixelfed"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oppure scegli un server Pixelfed"
           }
         },
         "pl" : {
@@ -8109,6 +9309,12 @@
             "value" : "Entrer l'adresse du serveur"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inserire indirizzo server"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8150,6 +9356,12 @@
             "value" : "Comment rejoindre Pixelfed"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Come far parte di Pixelfed"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8188,6 +9400,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Adresse du serveur"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Indirizzo server"
           }
         },
         "pl" : {
@@ -8231,6 +9449,12 @@
             "value" : "Connecter"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accedi"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8269,6 +9493,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "L'action de mise en marque-pages a échoué."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile aggiungere ai segnalibri"
           }
         },
         "pl" : {
@@ -8311,6 +9541,12 @@
             "value" : "L'action de suppression a échoué."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminazione fallita"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8349,6 +9585,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "L'action de mise en favoris a échoué."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile apprezzare il post."
           }
         },
         "pl" : {
@@ -8391,6 +9633,12 @@
             "value" : "Les commentaires ne peuvent être téléchargés."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile caricare i commenti."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8429,6 +9677,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chargement du statut échoué."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricamento post fallito."
           }
         },
         "pl" : {
@@ -8471,6 +9725,12 @@
             "value" : "Le statut n'existe plus."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il post non esiste più."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8509,6 +9769,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "L'action de partage a échoué."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reblog fallito"
           }
         },
         "pl" : {
@@ -8552,6 +9818,12 @@
             "value" : "Détails"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dettagli"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8590,6 +9862,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Marque-pages"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiungi ai segnalibri"
           }
         },
         "pl" : {
@@ -8633,6 +9911,12 @@
             "value" : "Marque-pages effectué"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiunto ai segnalibri"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8673,6 +9957,12 @@
             "value" : "Supprimer"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8711,6 +10001,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Favoris"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apprezza"
           }
         },
         "pl" : {
@@ -8754,6 +10050,12 @@
             "value" : "Mis en favoris"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiunto ai preferiti"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8792,6 +10094,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Favoris par"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apprezzato da"
           }
         },
         "pl" : {
@@ -8835,6 +10143,12 @@
             "value" : "Description du média"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descrizione"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8875,6 +10189,12 @@
             "value" : "Ouvrir dans un navigateur"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apri in browser"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8913,6 +10233,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Partager"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reblog"
           }
         },
         "pl" : {
@@ -8956,6 +10282,12 @@
             "value" : "Partagé"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rebloggato"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8994,6 +10326,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Partagé par"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rebloggato da"
           }
         },
         "pl" : {
@@ -9037,6 +10375,12 @@
             "value" : "Rapport"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segnala"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9075,6 +10419,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enregistrer l'image"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salva immagine"
           }
         },
         "pl" : {
@@ -9117,6 +10467,12 @@
             "value" : "Partager l'image"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Condividi immagine"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9155,6 +10511,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Partager le statut"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Condividi post"
           }
         },
         "pl" : {
@@ -9197,6 +10559,12 @@
             "value" : "Afficher la description du média"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra descrizione"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9235,6 +10603,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Statut supprimé"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Post eliminato"
           }
         },
         "pl" : {
@@ -9278,6 +10652,12 @@
             "value" : "Marque-pages enlevé"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rimosso dai segnalibri"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9317,6 +10697,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enlever le favoris"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apprezzamento annullato"
           }
         },
         "pl" : {
@@ -9360,6 +10746,12 @@
             "value" : "Enlever le partage"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reblog annullato"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9401,6 +10793,12 @@
             "value" : "Envoyé"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricato"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9437,6 +10835,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "via %@"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "via %@"
@@ -9483,6 +10887,12 @@
             "value" : "Votre statut"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il tuo post"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9521,6 +10931,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chargement des statuts impossible."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricamento post fallito."
           }
         },
         "pl" : {
@@ -9563,6 +10979,12 @@
             "value" : "Suivi de tag échoué."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile seguire tag"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9601,6 +11023,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ne plus suivre le tag a échoué."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile smettere di seguire il tag."
           }
         },
         "pl" : {
@@ -9643,6 +11071,12 @@
             "value" : "Marque-pages"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segnalibri"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9683,6 +11117,12 @@
             "value" : "Favoris"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preferiti"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9721,6 +11161,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fédéré"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Federata"
           }
         },
         "pl" : {
@@ -9764,6 +11210,12 @@
             "value" : "Local"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locale"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9802,6 +11254,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Malheureusement, il n'y a pas de photos ici."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purtroppo non ci sono foto qui."
           }
         },
         "pl" : {
@@ -9844,6 +11302,12 @@
             "value" : "Vous suivez ce tag."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stai seguendo il tag."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9884,6 +11348,12 @@
             "value" : "Vous ne suivez plus ce tag."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non segui più il tag"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9920,6 +11390,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lorem ipsum dolor sit amet"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lorem ipsum dolor sit amet"
@@ -9966,6 +11442,12 @@
             "value" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, ipsum nec cursus facilisis."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, ipsum nec cursus facilisis."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10004,6 +11486,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chargement des tags échoué."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricamento tag fallito."
           }
         },
         "pl" : {
@@ -10046,6 +11534,12 @@
             "value" : "Tags"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tag seguiti"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10084,6 +11578,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tags"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tag"
           }
         },
         "pl" : {
@@ -10125,6 +11625,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tags"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tag"
           }
         },
         "pl" : {
@@ -10180,6 +11686,12 @@
             "value" : "%d posts"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d post"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10220,6 +11732,12 @@
             "value" : "Malheureusement, il n'y a pas de tags ici."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purtroppo non ci sono tag qui."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10255,6 +11773,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/divadretlaw/EmojiText"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "https://github.com/divadretlaw/EmojiText"
@@ -10301,6 +11825,12 @@
             "value" : "Rendu des Emoji personnalisés dans le texte. Supporte les emojis locaux et distants. Les emojis distants sont chargés et mis en cache à l'aide de Nuke."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Traduce emoji personalizzate in testo. Supporta emoji locali e remote. Le emoji remote sono caricate e tenute in cache tramite Nuke."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10342,6 +11872,12 @@
             "value" : "EmojiText"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "EmojiText"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10377,6 +11913,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://fonts.google.com/specimen/Fleur+De+Leah"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "https://fonts.google.com/specimen/Fleur+De+Leah"
@@ -10423,6 +11965,12 @@
             "value" : "Police utilisée dans l'application dans les icônes et dans l'écran d'accueil."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Font utilizzato nell’applicazione, nelle icone e nella schermata di benvenuto."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10464,6 +12012,12 @@
             "value" : "Fleur De Leah"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fleur De Leah"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10499,6 +12053,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://gitlab.com/mflint/HTML2Markdown"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "https://gitlab.com/mflint/HTML2Markdown"
@@ -10545,6 +12105,12 @@
             "value" : "Il s'agit d'un paquet Swift qui tente de convertir le HTML en Markdown."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "È un pacchetto Swift che cerca di convertire HTML in Markdown."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10586,6 +12152,12 @@
             "value" : "HTML2Markdown"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HTML2Markdown"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10621,6 +12193,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/alexisakers/HTMLString"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "https://github.com/alexisakers/HTMLString"
@@ -10667,6 +12245,12 @@
             "value" : "HTMLString est une bibliothèque écrite en Swift qui permet à votre programme d'ajouter et de supprimer des entités HTML dans des chaînes de caractères."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HTMLString è una libreria scritta in Swift che consente al tuo programma di aggiungere o rimuovere entità HTML in Strings."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10708,6 +12292,12 @@
             "value" : "HTMLString"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HTMLString"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10743,6 +12333,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/kean/Nuke"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "https://github.com/kean/Nuke"
@@ -10789,6 +12385,12 @@
             "value" : "Nuke offre un moyen efficace de télécharger et d'afficher des images dans votre application. Il est facile à apprendre et à utiliser. Son architecture permet de nombreuses fonctionnalités puissantes tout en offrant des possibilités de personnalisation pratiquement illimitées."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuke consente di scaricare e visualizzare immagini in modo efficiente nella tua app. È facile da imparare e utilizzare e la sua architettura comprende tante potenti funzioni offrendo possibilità virtualmente illimitate di personalizzazione."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10825,6 +12427,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuke"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nuke"
@@ -10871,6 +12479,12 @@
             "value" : "Composants tiers"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terze parti"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10906,6 +12520,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/omaralbeik/Drops"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "https://github.com/omaralbeik/Drops"
@@ -10952,6 +12572,12 @@
             "value" : "Un µFramework pour afficher des alertes comme celles utilisées lors de la copie à partir d'un tableau ou de la connexion d'un crayon Apple."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un µFramework per mostrare avvisi come quello usato quando si copia negli appunti o ci si connette ad Apple Pencil."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10993,6 +12619,12 @@
             "value" : "Drops"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drops"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11028,6 +12660,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/OAuthSwift/OAuthSwift"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "https://github.com/OAuthSwift/OAuthSwift"
@@ -11074,6 +12712,12 @@
             "value" : "Bibliothèque OAuth basée sur Swift pour iOS et macOS."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Libreria OAuth basata su Swift per iOS e macOS."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11115,6 +12759,12 @@
             "value" : "OAuthSwift"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OAuthSwift"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11150,6 +12800,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/dmrschmidt/QRCode"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "https://github.com/dmrschmidt/QRCode"
@@ -11196,6 +12852,12 @@
             "value" : "Un simple générateur d'image de code QR à utiliser dans vos applications, écrit en Swift 5."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un semplice generatore di codici QR da usare nelle tue app, scritto in Swift 5."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11232,6 +12894,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "QRCode"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "QRCode"
@@ -11277,6 +12945,12 @@
             "value" : "Chargement des comptes échoué."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricamento account fallito."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11316,6 +12990,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Utilisateurs"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account"
           }
         },
         "pl" : {
@@ -11358,6 +13038,12 @@
             "value" : "Malheureusement, il n'y a personne ici."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purtroppo non c’è nessuno qui."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11396,6 +13082,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chargement des statuts échoué."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricamento post fallito."
           }
         },
         "pl" : {
@@ -11439,6 +13131,12 @@
             "value" : "Photos"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Foto"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11478,6 +13176,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quotidien"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oggi"
           }
         },
         "pl" : {
@@ -11521,6 +13225,12 @@
             "value" : "Mensuel"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Questo mese"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11559,6 +13269,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Malheureusement, il n'y a pas de photos ici."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purtroppo non ci sono foto qui."
           }
         },
         "pl" : {
@@ -11602,6 +13318,12 @@
             "value" : "Annuel"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quest’anno"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11640,6 +13362,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "L'action bloquer / déblouquer a échoué."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blocco/sblocco fallito."
           }
         },
         "pl" : {
@@ -11682,6 +13410,12 @@
             "value" : "Erreur pendant le téléchargement du compte depuis le serveur."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore nel download dell’account dal server."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11720,6 +13454,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "L'action sourdine / réactivation a échoué."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile silenziare/riattivare."
           }
         },
         "pl" : {
@@ -11762,6 +13502,12 @@
             "value" : "Le compte n'existe pas."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’account non esiste."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11800,6 +13546,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "L'action de relation a échoué."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Azione relazione fallita."
           }
         },
         "pl" : {
@@ -11843,6 +13595,12 @@
             "value" : "Bloquer"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blocca"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11881,6 +13639,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bloquer"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloccato"
           }
         },
         "pl" : {
@@ -11924,6 +13688,12 @@
             "value" : "Comptes bloqués"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account bloccati"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11963,6 +13733,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Marque-pages"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segnalibri"
           }
         },
         "pl" : {
@@ -12005,6 +13781,12 @@
             "value" : "Boosts silenciés"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reblog silenziati"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12043,6 +13825,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuler la demande"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annulla richiesta"
           }
         },
         "pl" : {
@@ -12086,6 +13874,12 @@
             "value" : "Désactiver les boosts"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disattiva reblog"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12125,6 +13919,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Boosts désactivés"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reblog disattivati"
           }
         },
         "pl" : {
@@ -12168,6 +13968,12 @@
             "value" : "Éditer"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modifica"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12207,6 +14013,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Activer les boosts"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attiva reblog"
           }
         },
         "pl" : {
@@ -12250,6 +14062,12 @@
             "value" : "Favoris"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preferiti"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12288,6 +14106,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Suivre"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segui"
           }
         },
         "pl" : {
@@ -12331,6 +14155,12 @@
             "value" : "Tags"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tag seguiti"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12370,6 +14200,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abonnés"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seguaci"
           }
         },
         "pl" : {
@@ -12413,6 +14249,12 @@
             "value" : "Abonnements"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segui già"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12454,6 +14296,12 @@
             "value" : "Suivre les demandes"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Richieste di seguire"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12492,6 +14340,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vous suit"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ti segue"
           }
         },
         "pl" : {
@@ -12535,6 +14389,12 @@
             "value" : "Information sur l'instance"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informazioni istanza"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12574,6 +14434,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Joint %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iscrizione: %@"
           }
         },
         "pl" : {
@@ -12617,6 +14483,12 @@
             "value" : "Sourdine"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Silenzia"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12655,6 +14527,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sourdine"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Silenziato"
           }
         },
         "pl" : {
@@ -12698,6 +14576,12 @@
             "value" : "Comptes en sourdine"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account silenziati"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12737,6 +14621,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ouvrir dans un navigateur"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apri in browser"
           }
         },
         "pl" : {
@@ -12780,6 +14670,12 @@
             "value" : "Posts"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Post"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12819,6 +14715,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Seules les personnes approuvées peuvent voir les photos."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solo i seguaci approvati possono vedere le foto."
           }
         },
         "pl" : {
@@ -12862,6 +14764,12 @@
             "value" : "Ce profil est privé."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Questo profilo è privato."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12903,6 +14811,12 @@
             "value" : "Rapport"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segnala"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12941,6 +14855,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Demande de suivi"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invia richiesta"
           }
         },
         "pl" : {
@@ -12984,6 +14904,12 @@
             "value" : "Partager"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Condividi"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13023,6 +14949,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Débloquer"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sblocca"
           }
         },
         "pl" : {
@@ -13065,6 +14997,12 @@
             "value" : "Compte débloqué"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account sbloccato"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13103,6 +15041,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ne plus suivre"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Smetti di seguire"
           }
         },
         "pl" : {
@@ -13146,6 +15090,12 @@
             "value" : "Désilencié"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Riattiva"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13184,6 +15134,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Compte désilencié"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account riattivato"
           }
         },
         "pl" : {
@@ -13227,6 +15183,12 @@
             "value" : "Non pris en charge"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non supportato"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13268,6 +15230,12 @@
             "value" : "Widget avec des photos de Pixelfed."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widget con foto da Pixelfed"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13306,6 +15274,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Widget avec QR Code vers votre profil Pixelfed."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widget con codice QR del tuo profilo Pixelfed."
           }
         },
         "pl" : {
