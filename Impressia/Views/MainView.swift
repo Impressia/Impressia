@@ -36,6 +36,8 @@ struct MainView: View {
         case trendingPhotos = 7
         case trendingTags = 8
         case trendingAccounts = 9
+        case bookmarks = 10
+        case favourites = 11
 
         var id: Self {
             return self
@@ -61,6 +63,10 @@ struct MainView: View {
                 return "mainview.tab.notifications"
             case .search:
                 return "mainview.tab.search"
+            case .bookmarks:
+                return "userProfile.title.bookmarks"
+            case .favourites:
+                return "userProfile.title.favourites"
             }
         }
 
@@ -94,6 +100,10 @@ struct MainView: View {
                 }
             case .search:
                 Image(systemName: "magnifyingglass")
+            case .bookmarks:
+                Image(systemName: "bookmark")
+            case .favourites:
+                Image(systemName: "star")
             }
         }
     }
@@ -168,6 +178,12 @@ struct MainView: View {
             }
         case .search:
             SearchView()
+                .id(applicationState.account?.id ?? String.empty())
+        case .bookmarks:
+            StatusesView(listType: .bookmarks)
+                .id(applicationState.account?.id ?? String.empty())
+        case .favourites:
+            StatusesView(listType: .favourites)
                 .id(applicationState.account?.id ?? String.empty())
         }
     }
