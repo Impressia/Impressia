@@ -8,7 +8,7 @@ import Foundation
 
 public struct AppConstants {
     // OAuth names have to stay "Vernissage" because of existing users.
-    public static let oauthApplicationName = "Vernissage"
+    public static let oauthApplicationName = "Impressia"
     public static let oauthScheme = "oauth-vernissage"
     public static let oauthCallbackPart = "oauth-callback"
     public static let oauthRedirectUri = "\(AppConstants.oauthScheme)://\(oauthCallbackPart)/pixelfed"

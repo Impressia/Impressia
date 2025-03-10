@@ -53,6 +53,28 @@ struct MainNavigationOptions: View {
                 }
             }
         }
+        
+        if !self.hiddenMenuItems.contains(where: { $0 == .bookmarks }) {
+            Button {
+                self.onViewModeIconTap(.bookmarks)
+            } label: {
+                HStack {
+                    Text(MainView.ViewMode.bookmarks.title)
+                    MainView.ViewMode.bookmarks.getImage(applicationState: applicationState)
+                }
+            }
+        }
+        
+        if !self.hiddenMenuItems.contains(where: { $0 == .favourites }) {
+            Button {
+                self.onViewModeIconTap(.favourites)
+            } label: {
+                HStack {
+                    Text(MainView.ViewMode.favourites.title)
+                    MainView.ViewMode.favourites.getImage(applicationState: applicationState)
+                }
+            }
+        }
 
         if !self.hiddenMenuItems.contains(where: { $0 == .search }) {
             Button {
