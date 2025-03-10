@@ -7,7 +7,8 @@
 import Foundation
 
 public struct AppConstants {
-    public static let oauthApplicationName = "Vernissage"
+    // OAuth names have to stay "Vernissage" because of existing users.
+    public static let oauthApplicationName = "Impressia"
     public static let oauthScheme = "oauth-vernissage"
     public static let oauthCallbackPart = "oauth-callback"
     public static let oauthRedirectUri = "\(AppConstants.oauthScheme)://\(oauthCallbackPart)/pixelfed"
@@ -23,5 +24,7 @@ public struct AppConstants {
 
     public static let imagePipelineCacheName = "dev.mczachurski.Impressia.DataCache"
     public static let backgroundFetcherName = "dev.mczachurski.Impressia.NotificationFetcher"
+    
+    // Core data container have to stay "Vernissage" because of existing installations.
     public static let coreDataPersistantContainerName = "Vernissage"
 }

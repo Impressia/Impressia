@@ -27,6 +27,12 @@
             "value" : ""
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -65,6 +71,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le téléchargement de l'image dans le cache a échoué."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download dell’immagine nella cache fallito."
           }
         },
         "pl" : {

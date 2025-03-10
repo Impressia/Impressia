@@ -14,8 +14,11 @@ import WidgetsKit
 @MainActor
 extension View {
     func navigationMenuButtons(menuPosition: Binding<MenuPosition>,
+                               viewMode: Binding<MainView.ViewMode>,
                                onViewModeIconTap: @escaping (MainView.ViewMode) -> Void) -> some View {
-        modifier(NavigationMenuButtons(menuPosition: menuPosition, onViewModeIconTap: onViewModeIconTap))
+        modifier(NavigationMenuButtons(menuPosition: menuPosition,
+                                       viewMode: viewMode,
+                                       onViewModeIconTap: onViewModeIconTap))
     }
 }
 
@@ -38,10 +41,12 @@ private struct NavigationMenuButtons: ViewModifier {
     @State private var hiddenMenuItems: [MainView.ViewMode] = []
 
     @Binding var menuPosition: MenuPosition
+    @Binding var viewMode: MainView.ViewMode
 
-    init(menuPosition: Binding<MenuPosition>, onViewModeIconTap: @escaping (MainView.ViewMode) -> Void) {
+    init(menuPosition: Binding<MenuPosition>, viewMode: Binding<MainView.ViewMode>, onViewModeIconTap: @escaping (MainView.ViewMode) -> Void) {
         self.onViewModeIconTap = onViewModeIconTap
         self._menuPosition = menuPosition
+        self._viewMode = viewMode
     }
 
     func body(content: Content) -> some View {
@@ -53,22 +58,12 @@ private struct NavigationMenuButtons: ViewModifier {
 
                 VStack(alignment: .trailing) {
                     Spacer()
+
                     HStack(alignment: .center) {
-                        if self.menuPosition == .bottomRight {
-                            Spacer()
-
-                            self.menuContainerView()
-                                .padding(.trailing, 24)
-                                .padding(.bottom, 10)
-                        }
-
-                        if self.menuPosition == .bottomLeft {
-                            self.menuContainerView()
-                                .padding(.leading, 24)
-                                .padding(.bottom, 10)
-
-                            Spacer()
-                        }
+                        Spacer()
+                        self.menuContainerView()
+                            .padding(.bottom, 10)
+                        Spacer()
                     }
                 }
                 .onAppear {
@@ -82,6 +77,8 @@ private struct NavigationMenuButtons: ViewModifier {
     private func menuContainerView() -> some View {
         if self.menuPosition == .bottomRight {
             HStack(alignment: .center) {
+                AccountAvatarMenu(menuPosition: $menuPosition, viewMode: $viewMode)
+
                 HStack {
                     self.contextMenuView()
                     self.customMenuItemsView()
@@ -114,6 +111,8 @@ private struct NavigationMenuButtons: ViewModifier {
                 .padding(.horizontal, 8)
                 .background(.ultraThinMaterial)
                 .clipShape(Capsule())
+
+                AccountAvatarMenu(menuPosition: $menuPosition, viewMode: $viewMode)
             }
             .popoverTip(menuCustomizableTip, arrowEdge: .bottom)
         }

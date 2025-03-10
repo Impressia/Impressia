@@ -8,7 +8,7 @@ import Foundation
 
 extension Pixelfed {
     public enum Bookmarks {
-        case bookmarks(MaxId?, SinceId?, MinId?, Limit?, Page?)
+        case bookmarks(MaxId?, SinceId?, MinId?, Limit?)
     }
 }
 
@@ -39,15 +39,13 @@ extension Pixelfed.Bookmarks: TargetType {
         var sinceId: SinceId?
         var minId: MinId?
         var limit: Limit?
-        var page: Page?
 
         switch self {
-        case .bookmarks(let paramMaxId, let paramSinceId, let paramMinId, let paramLimit, let paramPage):
+        case .bookmarks(let paramMaxId, let paramSinceId, let paramMinId, let paramLimit):
             maxId = paramMaxId
             sinceId = paramSinceId
             minId = paramMinId
             limit = paramLimit
-            page = paramPage
         }
 
         if let maxId {
@@ -64,10 +62,6 @@ extension Pixelfed.Bookmarks: TargetType {
 
         if let limit {
             params.append(("limit", "\(limit)"))
-        }
-
-        if let page {
-            params.append(("page", "\(page)"))
         }
 
         return params

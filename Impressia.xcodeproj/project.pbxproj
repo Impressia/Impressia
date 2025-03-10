@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F24D9422D53DECF0001AE15 /* AccountAvatarMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F24D9412D53DECB0001AE15 /* AccountAvatarMenu.swift */; };
 		F802884F297AEED5000BDD51 /* DatabaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F802884E297AEED5000BDD51 /* DatabaseError.swift */; };
 		F805DCF129DBEF83006A1FD9 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F805DCF029DBEF83006A1FD9 /* ReportView.swift */; };
 		F808641429756666009F035C /* NotificationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F808641329756666009F035C /* NotificationRowView.swift */; };
@@ -38,9 +39,9 @@
 		F8624D3D29F2D3AC00204986 /* SelectedMenuItemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8624D3C29F2D3AC00204986 /* SelectedMenuItemDetails.swift */; };
 		F864F75F29BB91B400B13921 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F864F75E29BB91B400B13921 /* WidgetKit.framework */; };
 		F864F76129BB91B400B13921 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F864F76029BB91B400B13921 /* SwiftUI.framework */; };
-		F864F76429BB91B400B13921 /* VernissageWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F76329BB91B400B13921 /* VernissageWidgetBundle.swift */; };
+		F864F76429BB91B400B13921 /* ImpressiaWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F76329BB91B400B13921 /* ImpressiaWidgetBundle.swift */; };
 		F864F76629BB91B400B13921 /* PhotoWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F76529BB91B400B13921 /* PhotoWidget.swift */; };
-		F864F76C29BB91B600B13921 /* VernissageWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F864F75D29BB91B400B13921 /* VernissageWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F864F76C29BB91B600B13921 /* ImpressiaWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F864F75D29BB91B400B13921 /* ImpressiaWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F864F77529BB92CE00B13921 /* PhotoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F77329BB929A00B13921 /* PhotoProvider.swift */; };
 		F864F77629BB92CE00B13921 /* PhotoWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F77129BB924D00B13921 /* PhotoWidgetEntryView.swift */; };
 		F864F77829BB930000B13921 /* PhotoWidgetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F864F77729BB930000B13921 /* PhotoWidgetEntry.swift */; };
@@ -78,7 +79,6 @@
 		F870EE5229F1645C00A2D43B /* MainNavigationOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F870EE5129F1645C00A2D43B /* MainNavigationOptions.swift */; };
 		F8742FC429990AFB00E9642B /* ClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8742FC329990AFB00E9642B /* ClientError.swift */; };
 		F8764187298ABB520057D362 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8764186298ABB520057D362 /* ViewState.swift */; };
-		F876418D298AE5020057D362 /* PaginableStatusesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F876418C298AE5020057D362 /* PaginableStatusesView.swift */; };
 		F878842229A4A4E3003CFAD2 /* AppMetadataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F878842129A4A4E3003CFAD2 /* AppMetadataService.swift */; };
 		F87AEB922986C44E00434FB6 /* AuthorizationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87AEB912986C44E00434FB6 /* AuthorizationSession.swift */; };
 		F87AEB972986D16D00434FB6 /* AuthorisationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87AEB962986D16D00434FB6 /* AuthorisationError.swift */; };
@@ -89,7 +89,7 @@
 		F88AB05829B36B8200345EDE /* AccountsPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88AB05729B36B8200345EDE /* AccountsPhotoView.swift */; };
 		F88ABD9429687CA4004EF61E /* ComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88ABD9329687CA4004EF61E /* ComposeView.swift */; };
 		F88BC50529E02F3900CE6141 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88BC50429E02F3900CE6141 /* ShareViewController.swift */; };
-		F88BC50C29E02F3900CE6141 /* VernissageShareExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F88BC50229E02F3900CE6141 /* VernissageShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F88BC50C29E02F3900CE6141 /* ImpressiaShareExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F88BC50229E02F3900CE6141 /* ImpressiaShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F88BC51329E02FD800CE6141 /* ComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88BC51229E02FD800CE6141 /* ComposeView.swift */; };
 		F88BC51629E0307F00CE6141 /* NotificationsName.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88BC51529E0307F00CE6141 /* NotificationsName.swift */; };
 		F88BC51B29E0350300CE6141 /* ClientKit in Frameworks */ = {isa = PBXBuildFile; productRef = F88BC51A29E0350300CE6141 /* ClientKit */; };
@@ -110,7 +110,7 @@
 		F88BC54929E072C000CE6141 /* ApplicationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F866F69F296040A8002E8F88 /* ApplicationSettings.swift */; };
 		F88BC55229E0798900CE6141 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F88BC55129E0798900CE6141 /* SharedAssets.xcassets */; };
 		F88BC55429E0798900CE6141 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F88BC55129E0798900CE6141 /* SharedAssets.xcassets */; };
-		F88C246C295C37B80006098B /* VernissageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C246B295C37B80006098B /* VernissageApp.swift */; };
+		F88C246C295C37B80006098B /* ImpressiaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C246B295C37B80006098B /* ImpressiaApp.swift */; };
 		F88C246E295C37B80006098B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88C246D295C37B80006098B /* MainView.swift */; };
 		F88C2470295C37BB0006098B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F88C246F295C37BB0006098B /* Assets.xcassets */; };
 		F88C2473295C37BB0006098B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F88C2472295C37BB0006098B /* Preview Assets.xcassets */; };
@@ -185,14 +185,14 @@
 			containerPortal = F88C2460295C37B80006098B /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = F864F75C29BB91B400B13921;
-			remoteInfo = VernissageWidgetExtension;
+			remoteInfo = ImpressiaWidgetExtension;
 		};
 		F88BC50A29E02F3900CE6141 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F88C2460295C37B80006098B /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = F88BC50129E02F3900CE6141;
-			remoteInfo = VernissageShareExtension;
+			remoteInfo = ImpressiaShareExtension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -203,8 +203,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				F864F76C29BB91B600B13921 /* VernissageWidgetExtension.appex in Embed Foundation Extensions */,
-				F88BC50C29E02F3900CE6141 /* VernissageShareExtension.appex in Embed Foundation Extensions */,
+				F864F76C29BB91B600B13921 /* ImpressiaWidgetExtension.appex in Embed Foundation Extensions */,
+				F88BC50C29E02F3900CE6141 /* ImpressiaShareExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,6 +212,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F24D9412D53DECB0001AE15 /* AccountAvatarMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAvatarMenu.swift; sourceTree = "<group>"; };
 		F802884E297AEED5000BDD51 /* DatabaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseError.swift; sourceTree = "<group>"; };
 		F805DCF029DBEF83006A1FD9 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		F808641329756666009F035C /* NotificationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRowView.swift; sourceTree = "<group>"; };
@@ -240,10 +241,10 @@
 		F85DBF8E296732E20069BF89 /* AccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsView.swift; sourceTree = "<group>"; };
 		F86167C5297FE6CC004D1F67 /* AvatarShapesSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarShapesSectionView.swift; sourceTree = "<group>"; };
 		F8624D3C29F2D3AC00204986 /* SelectedMenuItemDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMenuItemDetails.swift; sourceTree = "<group>"; };
-		F864F75D29BB91B400B13921 /* VernissageWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VernissageWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F864F75D29BB91B400B13921 /* ImpressiaWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ImpressiaWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F864F75E29BB91B400B13921 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		F864F76029BB91B400B13921 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		F864F76329BB91B400B13921 /* VernissageWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VernissageWidgetBundle.swift; sourceTree = "<group>"; };
+		F864F76329BB91B400B13921 /* ImpressiaWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpressiaWidgetBundle.swift; sourceTree = "<group>"; };
 		F864F76529BB91B400B13921 /* PhotoWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoWidget.swift; sourceTree = "<group>"; };
 		F864F76929BB91B600B13921 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F864F77129BB924D00B13921 /* PhotoWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoWidgetEntryView.swift; sourceTree = "<group>"; };
@@ -277,7 +278,6 @@
 		F870EE5129F1645C00A2D43B /* MainNavigationOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationOptions.swift; sourceTree = "<group>"; };
 		F8742FC329990AFB00E9642B /* ClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientError.swift; sourceTree = "<group>"; };
 		F8764186298ABB520057D362 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
-		F876418C298AE5020057D362 /* PaginableStatusesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginableStatusesView.swift; sourceTree = "<group>"; };
 		F878842129A4A4E3003CFAD2 /* AppMetadataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMetadataService.swift; sourceTree = "<group>"; };
 		F87AEB912986C44E00434FB6 /* AuthorizationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSession.swift; sourceTree = "<group>"; };
 		F87AEB962986D16D00434FB6 /* AuthorisationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorisationError.swift; sourceTree = "<group>"; };
@@ -288,11 +288,11 @@
 		F88AB05729B36B8200345EDE /* AccountsPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsPhotoView.swift; sourceTree = "<group>"; };
 		F88ABD9329687CA4004EF61E /* ComposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeView.swift; sourceTree = "<group>"; };
 		F88ABD9529687D4D004EF61E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		F88BC50229E02F3900CE6141 /* VernissageShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VernissageShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F88BC50229E02F3900CE6141 /* ImpressiaShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ImpressiaShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F88BC50429E02F3900CE6141 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		F88BC50929E02F3900CE6141 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F88BC51229E02FD800CE6141 /* ComposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeView.swift; sourceTree = "<group>"; };
-		F88BC51429E02FEB00CE6141 /* VernissageShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VernissageShareExtension.entitlements; sourceTree = "<group>"; };
+		F88BC51429E02FEB00CE6141 /* ImpressiaShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ImpressiaShareExtension.entitlements; sourceTree = "<group>"; };
 		F88BC51529E0307F00CE6141 /* NotificationsName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsName.swift; sourceTree = "<group>"; };
 		F88BC51929E0344000CE6141 /* ClientKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ClientKit; sourceTree = "<group>"; };
 		F88BC52529E0421F00CE6141 /* ServicesKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ServicesKit; sourceTree = "<group>"; };
@@ -300,8 +300,8 @@
 		F88BC52B29E04AC200CE6141 /* EnvironmentKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = EnvironmentKit; sourceTree = "<group>"; };
 		F88BC53A29E06A5100CE6141 /* ImageContextMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageContextMenu.swift; sourceTree = "<group>"; };
 		F88BC55129E0798900CE6141 /* SharedAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SharedAssets.xcassets; sourceTree = "<group>"; };
-		F88C2468295C37B80006098B /* Vernissage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vernissage.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F88C246B295C37B80006098B /* VernissageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VernissageApp.swift; sourceTree = "<group>"; };
+		F88C2468295C37B80006098B /* Impressia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Impressia.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F88C246B295C37B80006098B /* ImpressiaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpressiaApp.swift; sourceTree = "<group>"; };
 		F88C246D295C37B80006098B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		F88C246F295C37BB0006098B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F88C2472295C37BB0006098B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -351,8 +351,8 @@
 		F8E6D03229CDD52500416CCA /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		F8E7ADFD2AD44CEB0038FFFD /* AccountRelationship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRelationship.swift; sourceTree = "<group>"; };
 		F8E7AE012AD44D600038FFFD /* AccountRelationshipHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRelationshipHandler.swift; sourceTree = "<group>"; };
-		F8F6E44329BC5CAA0004795E /* VernissageWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VernissageWidgetExtension.entitlements; sourceTree = "<group>"; };
-		F8F6E44429BC5CC50004795E /* Vernissage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Vernissage.entitlements; sourceTree = "<group>"; };
+		F8F6E44329BC5CAA0004795E /* ImpressiaWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ImpressiaWidgetExtension.entitlements; sourceTree = "<group>"; };
+		F8F6E44429BC5CC50004795E /* Impressia.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Impressia.entitlements; sourceTree = "<group>"; };
 		F8F6E44629BCC0DC0004795E /* PhotoSmallWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSmallWidgetView.swift; sourceTree = "<group>"; };
 		F8F6E44829BCC0F00004795E /* PhotoMediumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMediumWidgetView.swift; sourceTree = "<group>"; };
 		F8F6E44A29BCC0FF0004795E /* PhotoLargeWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLargeWidgetView.swift; sourceTree = "<group>"; };
@@ -453,12 +453,12 @@
 				F88C246D295C37B80006098B /* MainView.swift */,
 				F88ABD9329687CA4004EF61E /* ComposeView.swift */,
 				F8D0E5212AE2A2630061C561 /* HomeTimelineView.swift */,
+				1F24D9412D53DECB0001AE15 /* AccountAvatarMenu.swift */,
 				F88AB05729B36B8200345EDE /* AccountsPhotoView.swift */,
 				F88E4D47297E90CD0057491A /* TrendStatusesView.swift */,
 				F883401F29B62AE900C3E096 /* SearchView.swift */,
 				F8AFF7C029B259150087D083 /* HashtagsView.swift */,
 				F88E4D41297E69FD0057491A /* StatusesView.swift */,
-				F876418C298AE5020057D362 /* PaginableStatusesView.swift */,
 				F85DBF8E296732E20069BF89 /* AccountsView.swift */,
 				F897978E29684BCB00B22335 /* LoadingView.swift */,
 				F8B0885D29942E31002AB40A /* ThirdPartyView.swift */,
@@ -592,19 +592,19 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		F864F76229BB91B400B13921 /* VernissageWidget */ = {
+		F864F76229BB91B400B13921 /* ImpressiaWidget */ = {
 			isa = PBXGroup;
 			children = (
-				F8F6E44329BC5CAA0004795E /* VernissageWidgetExtension.entitlements */,
+				F8F6E44329BC5CAA0004795E /* ImpressiaWidgetExtension.entitlements */,
 				F864F76929BB91B600B13921 /* Info.plist */,
 				F8705A7C29FF87EE00DA818A /* SharedServices */,
 				F84625F029FE2B40002D3AF4 /* QRCodeWidget */,
 				F84625EE29FE2ABA002D3AF4 /* PhotoWidget */,
 				F8F6E44F29BCE9030004795E /* Extensions */,
-				F864F76329BB91B400B13921 /* VernissageWidgetBundle.swift */,
+				F864F76329BB91B400B13921 /* ImpressiaWidgetBundle.swift */,
 				F85D0C642ABA08F9002B3577 /* Assets.xcassets */,
 			);
-			path = VernissageWidget;
+			path = ImpressiaWidget;
 			sourceTree = "<group>";
 		};
 		F86B721F296C498B00EE59EC /* Styles */ = {
@@ -677,16 +677,16 @@
 			path = Subviews;
 			sourceTree = "<group>";
 		};
-		F88BC50329E02F3900CE6141 /* VernissageShare */ = {
+		F88BC50329E02F3900CE6141 /* ImpressiaShare */ = {
 			isa = PBXGroup;
 			children = (
-				F88BC51429E02FEB00CE6141 /* VernissageShareExtension.entitlements */,
+				F88BC51429E02FEB00CE6141 /* ImpressiaShareExtension.entitlements */,
 				F88BC51229E02FD800CE6141 /* ComposeView.swift */,
 				F88BC51529E0307F00CE6141 /* NotificationsName.swift */,
 				F88BC50429E02F3900CE6141 /* ShareViewController.swift */,
 				F88BC50929E02F3900CE6141 /* Info.plist */,
 			);
-			path = VernissageShare;
+			path = ImpressiaShare;
 			sourceTree = "<group>";
 		};
 		F88BC53729E068D200CE6141 /* ViewModifiers */ = {
@@ -713,9 +713,9 @@
 				F8B3699B29D86EBD00BE3808 /* .gitignore */,
 				F835081F29BEF88600DE3247 /* Localization */,
 				F8341F96295C6427009C8EE6 /* CoreData */,
-				F88C246A295C37B80006098B /* Vernissage */,
-				F864F76229BB91B400B13921 /* VernissageWidget */,
-				F88BC50329E02F3900CE6141 /* VernissageShare */,
+				F88C246A295C37B80006098B /* Impressia */,
+				F864F76229BB91B400B13921 /* ImpressiaWidget */,
+				F88BC50329E02F3900CE6141 /* ImpressiaShare */,
 				F88C2469295C37B80006098B /* Products */,
 				F89992C5296D3DF8005994BF /* Frameworks */,
 			);
@@ -724,17 +724,17 @@
 		F88C2469295C37B80006098B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F88C2468295C37B80006098B /* Vernissage.app */,
-				F864F75D29BB91B400B13921 /* VernissageWidgetExtension.appex */,
-				F88BC50229E02F3900CE6141 /* VernissageShareExtension.appex */,
+				F88C2468295C37B80006098B /* Impressia.app */,
+				F864F75D29BB91B400B13921 /* ImpressiaWidgetExtension.appex */,
+				F88BC50229E02F3900CE6141 /* ImpressiaShareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F88C246A295C37B80006098B /* Vernissage */ = {
+		F88C246A295C37B80006098B /* Impressia */ = {
 			isa = PBXGroup;
 			children = (
-				F8F6E44429BC5CC50004795E /* Vernissage.entitlements */,
+				F8F6E44429BC5CC50004795E /* Impressia.entitlements */,
 				F866F6A829604FFF002E8F88 /* Info.plist */,
 				F858906729E1CC2900D4BDED /* Extensions */,
 				F88BC53729E068D200CE6141 /* ViewModifiers */,
@@ -746,7 +746,7 @@
 				F8341F95295C640C009C8EE6 /* Models */,
 				F8B9B354298D4B88009CC69C /* EnvironmentObjects */,
 				F8341F93295C63E2009C8EE6 /* Views */,
-				F88C246B295C37B80006098B /* VernissageApp.swift */,
+				F88C246B295C37B80006098B /* ImpressiaApp.swift */,
 				F8D5444229D4066C002225D6 /* AppDelegate.swift */,
 				F88E4D55297EAD6E0057491A /* AppRouteur.swift */,
 				F86A4300299A97F500DF7645 /* ProductIdentifiers.swift */,
@@ -755,7 +755,7 @@
 				F88C2471295C37BB0006098B /* Preview Content */,
 				F86A42FE299A8C5500DF7645 /* InAppPurchaseStoreKitConfiguration.storekit */,
 			);
-			path = Vernissage;
+			path = Impressia;
 			sourceTree = "<group>";
 		};
 		F88C2471295C37BB0006098B /* Preview Content */ = {
@@ -849,9 +849,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F864F75C29BB91B400B13921 /* VernissageWidgetExtension */ = {
+		F864F75C29BB91B400B13921 /* ImpressiaWidgetExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F864F77029BB91B600B13921 /* Build configuration list for PBXNativeTarget "VernissageWidgetExtension" */;
+			buildConfigurationList = F864F77029BB91B600B13921 /* Build configuration list for PBXNativeTarget "ImpressiaWidgetExtension" */;
 			buildPhases = (
 				F864F75929BB91B400B13921 /* Sources */,
 				F864F75A29BB91B400B13921 /* Frameworks */,
@@ -861,18 +861,18 @@
 			);
 			dependencies = (
 			);
-			name = VernissageWidgetExtension;
+			name = ImpressiaWidgetExtension;
 			packageProductDependencies = (
 				F864F77929BB94A800B13921 /* PixelfedKit */,
 				F88BC52E29E04C5F00CE6141 /* EnvironmentKit */,
 			);
-			productName = VernissageWidgetExtension;
-			productReference = F864F75D29BB91B400B13921 /* VernissageWidgetExtension.appex */;
+			productName = ImpressiaWidgetExtension;
+			productReference = F864F75D29BB91B400B13921 /* ImpressiaWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		F88BC50129E02F3900CE6141 /* VernissageShareExtension */ = {
+		F88BC50129E02F3900CE6141 /* ImpressiaShareExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F88BC50F29E02F3900CE6141 /* Build configuration list for PBXNativeTarget "VernissageShareExtension" */;
+			buildConfigurationList = F88BC50F29E02F3900CE6141 /* Build configuration list for PBXNativeTarget "ImpressiaShareExtension" */;
 			buildPhases = (
 				F88BC4FE29E02F3900CE6141 /* Sources */,
 				F88BC4FF29E02F3900CE6141 /* Frameworks */,
@@ -882,20 +882,20 @@
 			);
 			dependencies = (
 			);
-			name = VernissageShareExtension;
+			name = ImpressiaShareExtension;
 			packageProductDependencies = (
 				F88BC51E29E03ED300CE6141 /* ClientKit */,
 				F88BC53129E0677000CE6141 /* EnvironmentKit */,
 				F88BC53C29E06EAD00CE6141 /* ServicesKit */,
 				F88BC53E29E06EB100CE6141 /* WidgetsKit */,
 			);
-			productName = VernissageShareExtension;
-			productReference = F88BC50229E02F3900CE6141 /* VernissageShareExtension.appex */;
+			productName = ImpressiaShareExtension;
+			productReference = F88BC50229E02F3900CE6141 /* ImpressiaShareExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		F88C2467295C37B80006098B /* Vernissage */ = {
+		F88C2467295C37B80006098B /* Impressia */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F88C247B295C37BB0006098B /* Build configuration list for PBXNativeTarget "Vernissage" */;
+			buildConfigurationList = F88C247B295C37BB0006098B /* Build configuration list for PBXNativeTarget "Impressia" */;
 			buildPhases = (
 				F88C2464295C37B80006098B /* Sources */,
 				F88C2465295C37B80006098B /* Frameworks */,
@@ -908,7 +908,7 @@
 				F864F76B29BB91B600B13921 /* PBXTargetDependency */,
 				F88BC50B29E02F3900CE6141 /* PBXTargetDependency */,
 			);
-			name = Vernissage;
+			name = Impressia;
 			packageProductDependencies = (
 				F8210DD42966BB7E001D9973 /* Nuke */,
 				F8210DD62966BB7E001D9973 /* NukeExtensions */,
@@ -921,8 +921,8 @@
 				F88BC52C29E04BB600CE6141 /* EnvironmentKit */,
 				F8A1920F2ABB322E00C2599A /* Semaphore */,
 			);
-			productName = Vernissage;
-			productReference = F88C2468295C37B80006098B /* Vernissage.app */;
+			productName = Impressia;
+			productReference = F88C2468295C37B80006098B /* Impressia.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -946,7 +946,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F88C2463295C37B80006098B /* Build configuration list for PBXProject "Vernissage" */;
+			buildConfigurationList = F88C2463295C37B80006098B /* Build configuration list for PBXProject "Impressia" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -958,6 +958,7 @@
 				fr,
 				es,
 				de,
+				it,
 			);
 			mainGroup = F88C245F295C37B80006098B;
 			packageReferences = (
@@ -970,9 +971,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F88C2467295C37B80006098B /* Vernissage */,
-				F864F75C29BB91B400B13921 /* VernissageWidgetExtension */,
-				F88BC50129E02F3900CE6141 /* VernissageShareExtension */,
+				F88C2467295C37B80006098B /* Impressia */,
+				F864F75C29BB91B400B13921 /* ImpressiaWidgetExtension */,
+				F88BC50129E02F3900CE6141 /* ImpressiaShareExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -1027,7 +1028,7 @@
 				F8F6E44D29BCC1F90004795E /* PhotoMediumWidgetView.swift in Sources */,
 				F815F60C29E49CF20044566B /* Avatar.swift in Sources */,
 				F8F6E44E29BCC1FB0004795E /* PhotoLargeWidgetView.swift in Sources */,
-				F864F76429BB91B400B13921 /* VernissageWidgetBundle.swift in Sources */,
+				F864F76429BB91B400B13921 /* ImpressiaWidgetBundle.swift in Sources */,
 				F8E7ADFF2AD44CEB0038FFFD /* AccountRelationship.swift in Sources */,
 				F8D8E0CC2ACC237000AA1374 /* ViewedStatus.swift in Sources */,
 				F8E023642B3C1EBD004F7E18 /* View+If.swift in Sources */,
@@ -1094,6 +1095,7 @@
 				F8B0886029943498002AB40A /* OtherSectionView.swift in Sources */,
 				F808641429756666009F035C /* NotificationRowView.swift in Sources */,
 				F8624D3D29F2D3AC00204986 /* SelectedMenuItemDetails.swift in Sources */,
+				1F24D9422D53DECF0001AE15 /* AccountAvatarMenu.swift in Sources */,
 				F8210DCF2966B600001D9973 /* ImageRowAsync.swift in Sources */,
 				F86A4305299AA12800DF7645 /* PurchaseError.swift in Sources */,
 				F8B05ACE29B48E2F00857221 /* MediaSettingsView.swift in Sources */,
@@ -1124,7 +1126,6 @@
 				F8B0885E29942E31002AB40A /* ThirdPartyView.swift in Sources */,
 				F8E6D03329CDD52500416CCA /* EditProfileView.swift in Sources */,
 				F858906B29E1CC7A00D4BDED /* UIApplication+Window.swift in Sources */,
-				F876418D298AE5020057D362 /* PaginableStatusesView.swift in Sources */,
 				F8764187298ABB520057D362 /* ViewState.swift in Sources */,
 				F870EE5229F1645C00A2D43B /* MainNavigationOptions.swift in Sources */,
 				F88ABD9429687CA4004EF61E /* ComposeView.swift in Sources */,
@@ -1132,7 +1133,7 @@
 				F85D497D29640D5900751DF7 /* InteractionRow.swift in Sources */,
 				F86167C6297FE6CC004D1F67 /* AvatarShapesSectionView.swift in Sources */,
 				F866F6A729604629002E8F88 /* SignInView.swift in Sources */,
-				F88C246C295C37B80006098B /* VernissageApp.swift in Sources */,
+				F88C246C295C37B80006098B /* ImpressiaApp.swift in Sources */,
 				F8121CA8298A86D600B466C7 /* InstanceRowView.swift in Sources */,
 				F8D5444329D4066C002225D6 /* AppDelegate.swift in Sources */,
 				F802884F297AEED5000BDD51 /* DatabaseError.swift in Sources */,
@@ -1177,12 +1178,12 @@
 /* Begin PBXTargetDependency section */
 		F864F76B29BB91B600B13921 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F864F75C29BB91B400B13921 /* VernissageWidgetExtension */;
+			target = F864F75C29BB91B400B13921 /* ImpressiaWidgetExtension */;
 			targetProxy = F864F76A29BB91B600B13921 /* PBXContainerItemProxy */;
 		};
 		F88BC50B29E02F3900CE6141 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F88BC50129E02F3900CE6141 /* VernissageShareExtension */;
+			target = F88BC50129E02F3900CE6141 /* ImpressiaShareExtension */;
 			targetProxy = F88BC50A29E02F3900CE6141 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1195,14 +1196,14 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = VernissageWidget/VernissageWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = ImpressiaWidget/ImpressiaWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 305;
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = VernissageWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = VernissageWidget;
+				INFOPLIST_FILE = ImpressiaWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ImpressiaWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1210,7 +1211,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1231,13 +1232,13 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = VernissageWidget/VernissageWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = ImpressiaWidget/ImpressiaWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 305;
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = VernissageWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = VernissageWidget;
+				INFOPLIST_FILE = ImpressiaWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ImpressiaWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1245,7 +1246,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1264,14 +1265,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
-				CODE_SIGN_ENTITLEMENTS = VernissageShare/VernissageShareExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = ImpressiaShare/ImpressiaShareExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 305;
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = VernissageShare/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = VernissageShareExtension;
+				INFOPLIST_FILE = ImpressiaShare/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ImpressiaShareExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1279,7 +1280,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1298,13 +1299,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
-				CODE_SIGN_ENTITLEMENTS = VernissageShare/VernissageShareExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = ImpressiaShare/ImpressiaShareExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 305;
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = VernissageShare/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = VernissageShareExtension;
+				INFOPLIST_FILE = ImpressiaShare/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ImpressiaShareExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1312,7 +1313,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1457,15 +1458,15 @@
 				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Vernissage/Vernissage.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Impressia/Impressia.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 305;
-				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Impressia/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Vernissage/Info.plist;
+				INFOPLIST_FILE = Impressia/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Impressia;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Uploading photos to Pixelfed";
@@ -1479,7 +1480,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1502,14 +1503,14 @@
 				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Vernissage/Vernissage.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Impressia/Impressia.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 305;
-				DEVELOPMENT_ASSET_PATHS = "\"Vernissage/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Impressia/Preview Content\"";
 				DEVELOPMENT_TEAM = B2U9FEKYP8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Vernissage/Info.plist;
+				INFOPLIST_FILE = Impressia/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Impressia;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Uploading photos to Pixelfed";
@@ -1523,7 +1524,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.mczachurski.vernissage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1539,7 +1540,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F864F77029BB91B600B13921 /* Build configuration list for PBXNativeTarget "VernissageWidgetExtension" */ = {
+		F864F77029BB91B600B13921 /* Build configuration list for PBXNativeTarget "ImpressiaWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F864F76E29BB91B600B13921 /* Debug */,
@@ -1548,7 +1549,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F88BC50F29E02F3900CE6141 /* Build configuration list for PBXNativeTarget "VernissageShareExtension" */ = {
+		F88BC50F29E02F3900CE6141 /* Build configuration list for PBXNativeTarget "ImpressiaShareExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F88BC50D29E02F3900CE6141 /* Debug */,
@@ -1557,7 +1558,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F88C2463295C37B80006098B /* Build configuration list for PBXProject "Vernissage" */ = {
+		F88C2463295C37B80006098B /* Build configuration list for PBXProject "Impressia" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F88C2479295C37BB0006098B /* Debug */,
@@ -1566,7 +1567,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F88C247B295C37BB0006098B /* Build configuration list for PBXNativeTarget "Vernissage" */ = {
+		F88C247B295C37BB0006098B /* Build configuration list for PBXNativeTarget "Impressia" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F88C247C295C37BB0006098B /* Debug */,

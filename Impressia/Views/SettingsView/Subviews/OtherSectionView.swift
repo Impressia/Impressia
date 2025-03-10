@@ -28,12 +28,12 @@ struct OtherSectionView: View {
             }
             .tint(.mainTextColor)
 
-            Link(destination: URL(string: "https://github.com/VernissageApp/Vernissage")!) {
+            Link(destination: URL(string: "https://github.com/Impressia/Impressia")!) {
                 Label("settings.title.sourceCode", systemImage: "swift")
             }
             .tint(.mainTextColor)
 
-            Link(destination: URL(string: "https://github.com/VernissageApp/Vernissage/issues")!) {
+            Link(destination: URL(string: "https://github.com/Impressia/Impressia/issues")!) {
                 Label("settings.title.reportBug", systemImage: "ant")
             }
             .tint(.mainTextColor)

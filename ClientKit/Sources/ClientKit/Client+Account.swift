@@ -69,17 +69,15 @@ extension Client {
         public func favourites(maxId: String? = nil,
                                sinceId: String? = nil,
                                minId: String? = nil,
-                               limit: Int = 10,
-                               page: Int? = nil) async throws -> [Status] {
-            return try await pixelfedClient.favourites(limit: limit, page: page)
+                               limit: Int = 10) async throws -> Linkable<[Status]> {
+            return try await pixelfedClient.favourites(maxId: maxId, sinceId: sinceId, minId: minId, limit: limit)
         }
 
         public func bookmarks(maxId: String? = nil,
                               sinceId: String? = nil,
                               minId: String? = nil,
-                              limit: Int = 10,
-                              page: Int? = nil) async throws -> [Status] {
-            return try await pixelfedClient.bookmarks(limit: limit, page: page)
+                              limit: Int = 10) async throws -> Linkable<[Status]> {
+            return try await pixelfedClient.bookmarks(maxId: maxId, sinceId: sinceId, minId: minId, limit: limit)
         }
 
         public func update(displayName: String, bio: String, website: String, locked: Bool, image: Data?) async throws -> Account {

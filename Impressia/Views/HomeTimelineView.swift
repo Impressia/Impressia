@@ -195,7 +195,8 @@ struct HomeTimelineView: View {
         }
 
         // Remember last status id returned by API.
-        self.lastStatusId = statuses.getMaxId()
+        self.lastStatusId = statuses.link?.maxId
+        self.allItemsLoaded = self.lastStatusId == nil
         
         // Get only visible statuses.
         let visibleStatuses = HomeTimelineService.shared.getVisibleStatuses(accountId: accountId,
@@ -234,8 +235,10 @@ struct HomeTimelineView: View {
             }
 
             // Now we have new last status.
-            if let lastStatusId = statuses.getMaxId() {
+            if let lastStatusId = statuses.link?.maxId {
                 self.lastStatusId = lastStatusId
+            } else {
+                self.allItemsLoaded = true
             }
 
             // Get only visible statuses.
@@ -272,7 +275,8 @@ struct HomeTimelineView: View {
         }
 
         // Remember last status id returned by API.
-        self.lastStatusId = statuses.getMaxId()
+        self.lastStatusId = statuses.link?.maxId
+        self.allItemsLoaded = self.lastStatusId == nil
         
         // Get only visible statuses.
         let visibleStatuses = HomeTimelineService.shared.getVisibleStatuses(accountId: accountId,

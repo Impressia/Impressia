@@ -27,6 +27,12 @@
             "value" : ""
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -56,6 +62,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "@%@"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "@%@"
@@ -95,6 +107,12 @@
             "value" : "#%@"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "#%@"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -124,6 +142,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@"
@@ -169,6 +193,12 @@
             "value" : "%1$@, %2$@"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, %2$@"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -198,6 +228,12 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld"
@@ -237,6 +273,12 @@
             "value" : "Impossible de charger l'image depuis la bibliothèque externe."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile caricare immagine da libreria esterna."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -271,6 +313,12 @@
             "value" : "Erreur durant la composition de paramètres."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore durante la composizione della stringa attributo."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -303,6 +351,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erreur durant le téléchargement de l'autocomplétion."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore durante il download dell’autocompletamento."
           }
         },
         "pl" : {
@@ -345,6 +399,12 @@
             "value" : "Impossible de récupérer l'image depuis la bibliothèque."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile recuperare immagine da libreria."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -383,6 +443,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erreur pendant la publication du statut."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore durante la pubblicazione del post."
           }
         },
         "pl" : {
@@ -425,6 +491,12 @@
             "value" : "Ajoutez une photo et écrivez ce qui vous convient"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allega una foto e scrivi cosa ti passa per la testa."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -463,6 +535,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ecrivez ce qui vous convient"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scrivi cosa ti passa per la testa"
           }
         },
         "pl" : {
@@ -506,6 +584,12 @@
             "value" : "Prendre une photo"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scatta foto"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -545,6 +629,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuler"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annulla"
           }
         },
         "pl" : {
@@ -588,6 +678,12 @@
             "value" : "Les commentaires seront désactivés"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I commenti saranno disattivati"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -626,6 +722,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Supprimer"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina"
           }
         },
         "pl" : {
@@ -668,6 +770,12 @@
             "value" : "Éditer"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modifica"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -677,6 +785,7 @@
       }
     },
     "compose.title.everyone" : {
+      "comment" : "Everyone",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -706,6 +815,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tout le monde"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tutti"
           }
         },
         "pl" : {
@@ -749,6 +864,12 @@
             "value" : "Parcourir les fichiers"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sfoglia file"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -758,6 +879,7 @@
       }
     },
     "compose.title.followers" : {
+      "comment" : "Followers",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -787,6 +909,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abonnés"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seguaci"
           }
         },
         "pl" : {
@@ -830,6 +958,12 @@
             "value" : "Manque un texte ALT"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Testo ALT mancante"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -869,6 +1003,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Toutes les images n'ont pas été décrites pour les malvoyants. Souhaitez-vous tout de même envoyer des photos ?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non tutte le immagini sono state descritte per le persone con disabilità visive. Vuoi pubblicare comunque?"
           }
         },
         "pl" : {
@@ -912,6 +1052,12 @@
             "value" : "Albums photos"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Libreria foto"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -951,6 +1097,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Publier"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pubblica"
           }
         },
         "pl" : {
@@ -994,6 +1146,12 @@
             "value" : "Essayer de télécharger"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prova a caricare"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1003,6 +1161,7 @@
       }
     },
     "compose.title.unlisted" : {
+      "comment" : "Unlisted",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1032,6 +1191,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Non listé"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non in lista"
           }
         },
         "pl" : {
@@ -1075,6 +1240,12 @@
             "value" : "Rédaction d'un avertissement sur le contenu"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scrivi avviso contenuti"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1107,6 +1278,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erreur durant la suppression d'un fichier depuis le dossier temporaire."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore durante l’eliminazione di file dalla cartella temp."
           }
         },
         "pl" : {
@@ -1143,6 +1320,12 @@
             "value" : "Erreur durant la récupération de données temporaires."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore durante il recupero di contenuto della cartella tmp."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1175,6 +1358,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erreur durant la suppression des images transférées depuis le dossier temporaire."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore durante la rimozione dell’immagine trasferita dalla cartella tmp."
           }
         },
         "pl" : {
@@ -1218,6 +1407,12 @@
             "value" : "Contenu sensible"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contenuti sensibili"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1257,6 +1452,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Il y a quelques instants"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "poco fa"
           }
         },
         "pl" : {
@@ -1300,6 +1501,12 @@
             "value" : "Il n'y a rien ici"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non c’è niente qui"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1339,6 +1546,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rafraîchir"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RIcarica"
           }
         },
         "pl" : {
@@ -1382,6 +1595,12 @@
             "value" : "Voir le post"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visualizza post"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1420,6 +1639,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Montrer moins"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra meno"
           }
         },
         "pl" : {
@@ -1462,6 +1687,12 @@
             "value" : "Montrer plus"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra altro"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1500,6 +1731,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erreur pendant la mise à jour de la photo."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore durante l’aggiornamento della foto."
           }
         },
         "pl" : {
@@ -1543,6 +1780,12 @@
             "value" : "Détails sur la photo"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dettagli foto"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1582,6 +1825,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Accessibilité"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accessibilità"
           }
         },
         "pl" : {
@@ -1625,6 +1874,12 @@
             "value" : "Description pour les malvoyants"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descrizione per persone con disabilità visive."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1664,6 +1919,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuler"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annulla"
           }
         },
         "pl" : {
@@ -1707,6 +1968,12 @@
             "value" : "Photo"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Foto"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1748,6 +2015,12 @@
             "value" : "Enregistrer"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salva"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1786,6 +2059,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chargement des notifications échoué."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricamento notifiche fallito."
           }
         },
         "pl" : {
@@ -1829,6 +2108,12 @@
             "value" : "Lieux"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posti"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1868,6 +2153,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rechercher"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerca"
           }
         },
         "pl" : {
@@ -1911,6 +2202,12 @@
             "value" : "Annuler"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annulla"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1950,6 +2247,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rechercher..."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerca…"
           }
         },
         "pl" : {
@@ -1993,6 +2296,12 @@
             "value" : "ALT"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ALT"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2020,6 +2329,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vous pouvez personnaliser la position du menu principal dans les réglages de l'application."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puoi "
           }
         },
         "pl" : {
@@ -2051,6 +2366,12 @@
             "value" : "Position du menu"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posizione menu"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2078,6 +2399,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vous pouvant l'option par défaut dans le menu en faisant un long appui sur l'option que vous voulez."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puoi cambiare l’opzione di default nel menu tenendo premuta l’azione specifica."
           }
         },
         "pl" : {
@@ -2109,6 +2436,12 @@
             "value" : "Changer les options par défaut"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambiare le opzioni di default"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2138,6 +2471,12 @@
             "value" : "Appuyer deux fois sur une photo la mettra en favoris."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tocca due volte su una foto per apprezzarla e aggiungerla ai preferiti."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2165,6 +2504,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Marquer comme favoris"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apprezza le foto"
           }
         },
         "pl" : {

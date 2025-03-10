@@ -2,7 +2,7 @@
   "sourceLanguage" : "en",
   "strings" : {
     "global.error.notSuccessResponse" : {
-      "comment" : "It's error returned from remote server. Request URL: '(response.url?.string ?? \"unknown\")'.",
+      "comment" : "It's error returned from remote server. Request URL: '(value)'.",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -32,6 +32,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Réponse du serveur : %@."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Risposta server: %@"
           }
         },
         "pl" : {
@@ -75,6 +81,12 @@
             "value" : "Erreur inattendue."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore inaspettato."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -114,6 +126,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le rapport a déjà été envoyé."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La segnalazione è già stata inviata."
           }
         },
         "pl" : {
@@ -157,6 +175,12 @@
             "value" : "Type d'objet non valide."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tipo oggetto non valido."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -196,6 +220,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Identifiant d'objet incorrect."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ID oggetto non valido."
           }
         },
         "pl" : {
@@ -239,6 +269,12 @@
             "value" : "Paramètres de rapport non valides."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parametri segnalazione non validi."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -280,6 +316,12 @@
             "value" : "Type de rapport non valide."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tipo segnalazione non valido."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -319,6 +361,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "L'autodéclaration n'est pas autorisée."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’auto-segnalazione non è consentita."
           }
         },
         "pl" : {
