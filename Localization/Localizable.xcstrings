@@ -1672,7 +1672,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Approva"
+            "value" : "Accetta"
           }
         },
         "pl" : {
@@ -1718,7 +1718,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "RIfiuta"
+            "value" : "Rifiuta"
           }
         },
         "pl" : {
@@ -6400,7 +6400,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Se presente, mostra testo alternativo nella schermata dettagli del post"
+            "value" : "Se presente, mostra il testo alternativo nella schermata dei dettagli del post"
           }
         },
         "pl" : {
@@ -7192,7 +7192,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Animazione conclusa"
+            "value" : "Fine animazione"
           }
         },
         "pl" : {
@@ -8357,7 +8357,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gli apprezzamenti saranno mostrati nelle timeline"
+            "value" : "Gli apprezzamenti verranno mostrati nelle timeline"
           }
         },
         "pl" : {
@@ -14252,7 +14252,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Segui già"
+            "value" : "Seguiti"
           }
         },
         "pl" : {
