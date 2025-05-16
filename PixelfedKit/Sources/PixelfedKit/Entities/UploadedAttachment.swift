@@ -52,7 +52,7 @@ public class UploadedAttachment: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         self.id = try container.decode(EntityId.self, forKey: .id)
-        self.type = try container.decode(UploadedAttachmentType.self, forKey: .type)
+        self.type = (try? container.decode(UploadedAttachmentType.self, forKey: .type)) ?? .unknown
         self.url = try? container.decode(URL.self, forKey: .url)
         self.previewUrl = try? container.decode(URL.self, forKey: .previewUrl)
         self.remoteUrl = try? container.decode(URL.self, forKey: .remoteUrl)
