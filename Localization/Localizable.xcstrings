@@ -1729,6 +1729,53 @@
         }
       }
     },
+    "global.copyToClipboard" : {
+      "comment" : "Global - Copy to clipboard",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy to clipboard"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy to clipboard"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy to clipboard"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy to clipboard"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copier dans le presse-papiers"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy to clipboard"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy to clipboard"
+          }
+        }
+      }
+    },
     "global.error.accessTokenNotFound" : {
       "comment" : "Access token is not saved in account model.",
       "localizations" : {
@@ -2564,6 +2611,7 @@
       }
     },
     "global.error.refreshTokenFailed" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2704,6 +2752,7 @@
       }
     },
     "global.title.newAccessTokenRetrieved" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -15291,5 +15340,5 @@
       }
     }
   },
-  "version" : "1.0"
+  "version" : "1.1"
 }
