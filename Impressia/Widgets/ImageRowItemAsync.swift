@@ -91,6 +91,8 @@ struct ImageRowItemAsync: View {
                             }
                         }
                     }
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel(self.sensitiveAccessibilityLabel)
                     .opacity(self.opacity)
                     .onAppear {
                         if let uiImage = state.imageResponse?.image {
@@ -134,6 +136,8 @@ struct ImageRowItemAsync: View {
                         Spacer()
                     }
                 }
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(Text("global.error.errorDuringImageDownload", comment: "Cannot download image"))
                 .onTapGesture {
                     self.navigateToStatus()
                 }
@@ -181,6 +185,13 @@ struct ImageRowItemAsync: View {
             ImageFavourite(isFavourited: $isFavourited)
             FavouriteTouch(showFavouriteAnimation: $showThumbImage)
         }
+        .accessibilityElement(children: .ignore)
+        .if(self.attachment.description != nil) {
+            $0.accessibilityLabel(Text(self.attachment.description!))
+        }
+        .if(self.attachment.description == nil) {
+            $0.accessibilityHidden(true)
+        }
     }
 
     @ViewBuilder
@@ -223,6 +234,15 @@ struct ImageRowItemAsync: View {
             .onAppear {
                 self.isFavourited = self.statusViewModel.favourited
             }
+    }
+
+    private var sensitiveAccessibilityLabel: Text {
+        if self.showSpoilerText,
+           let spoilerText = self.statusViewModel.spoilerText,
+           !spoilerText.isEmpty {
+            return Text(spoilerText)
+        }
+        return Text("imagerow.a11y.sensitiveContent", comment: "Sensitive content")
     }
 
     private func navigateToStatus() {
