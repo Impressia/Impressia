@@ -68,7 +68,7 @@ public struct ImageUploadView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: self.size - 6, height: self.size - 6)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .accessibilityLabel("compose.title.edit")
+                        .accessibilityLabel(Text("compose.title.edit", bundle: .module))
                         .onTapGesture {
                             HapticService.shared.fireHaptic(of: .buttonPress)
                             self.open()
@@ -93,7 +93,7 @@ public struct ImageUploadView: View {
                                     .symbolRenderingMode(.palette)
                                     .foregroundStyle(Color.white, Color.dangerColor)
                                     .opacity(0.8)
-                                    .accessibilityLabel("compose.title.delete")
+                                    .accessibilityLabel(Text("compose.title.delete", bundle: .module))
                             }
                         }
                         Spacer()
@@ -108,15 +108,18 @@ public struct ImageUploadView: View {
                                         Image(systemName: "exclamationmark.circle.fill")
                                             .symbolRenderingMode(.palette)
                                             .foregroundStyle(Color.white, Color.dangerColor)
+                                            .accessibilityHidden(true)
                                     } else {
                                         Image(systemName: "checkmark.circle.fill")
                                             .symbolRenderingMode(.palette)
                                             .foregroundStyle(Color.white, Color.systemGreen)
+                                            .accessibilityHidden(true)
                                     }
 
                                     Text("status.title.altText", bundle: Bundle.module, comment: "ALT")
                                         .foregroundStyle(Color.white)
                                 }
+                                .accessibilityValue(altStatusForPhotoAttachment)
                                 .font(.system(size: 12))
                                 .shadow(color: .black, radius: 4)
                             }
@@ -144,5 +147,12 @@ public struct ImageUploadView: View {
                     $0.blur(radius: 10)
                 }
         }
+    }
+    
+    private var altStatusForPhotoAttachment: Text {
+        guard let description = self.photoAttachment.uploadedAttachment?.description else {
+            return Text("status.title.altText.a11y.isMissing", bundle: .module)
+        }
+        return Text(description)
     }
 }

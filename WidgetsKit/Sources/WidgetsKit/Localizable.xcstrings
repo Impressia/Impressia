@@ -2310,6 +2310,54 @@
         }
       }
     },
+    "status.title.altText.a11y.isMissing" : {
+      "comment" : "Compose View - A11Y - ALT missing",
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Missing textual description of the image"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Missing textual description of the image"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Missing textual description of the image"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Missing textual description of the image"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description textuelle de l’image manquante"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Missing textual description of the image"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Missing textual description of the image"
+          }
+        }
+      }
+    },
     "tip.mainNavigation.message" : {
       "comment" : "Main navigation tip message.",
       "localizations" : {
@@ -2521,5 +2569,5 @@
       }
     }
   },
-  "version" : "1.0"
+  "version" : "1.1"
 }
