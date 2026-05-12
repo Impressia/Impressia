@@ -16,12 +16,16 @@ struct SocialsSectionView: View {
                         .font(.footnote)
                         .foregroundColor(.customGrayColor)
                 }
-
+                
                 Spacer()
                 Link("@impressia", destination: URL(string: "https://mastodon.social/@impressia")!)
                     .font(.footnote)
             }
-
+            .accessibilityElement(children: .combine)
+            .accessibilityValue("@impressia")
+            .accessibilityRemoveTraits(.isButton)
+            .accessibilityAddTraits(.isLink)
+            
             HStack {
                 VStack(alignment: .leading) {
                     Text("settings.title.follow", comment: "Follow me")
@@ -29,12 +33,16 @@ struct SocialsSectionView: View {
                         .font(.footnote)
                         .foregroundColor(.customGrayColor)
                 }
-
+                
                 Spacer()
                 Link("@mczachurski", destination: URL(string: "https://mastodon.social/@mczachurski")!)
                     .font(.footnote)
             }
-
+            .accessibilityElement(children: .combine)
+            .accessibilityValue("@mczachurski")
+            .accessibilityRemoveTraits(.isButton)
+            .accessibilityAddTraits(.isLink)
+            
             HStack {
                 VStack(alignment: .leading) {
                     Text("settings.title.follow", comment: "Follow me")
@@ -42,11 +50,15 @@ struct SocialsSectionView: View {
                         .font(.footnote)
                         .foregroundColor(.customGrayColor)
                 }
-
+                
                 Spacer()
                 Link("@mczachurski", destination: URL(string: "https://pixelfed.social/@mczachurski")!)
                     .font(.footnote)
             }
+            .accessibilityElement(children: .combine)
+            .accessibilityValue("@mczachurski")
+            .accessibilityRemoveTraits(.isButton)
+            .accessibilityAddTraits(.isLink)
         }
     }
 }

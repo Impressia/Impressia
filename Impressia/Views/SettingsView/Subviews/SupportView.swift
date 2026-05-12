@@ -17,6 +17,7 @@ struct SupportView: View {
                 HStack(alignment: .center) {
                     Text(self.getIcon(for: product))
                         .font(.title)
+                        .accessibilityHidden(true)
                     VStack(alignment: .leading) {
                         Text(product.displayName)
                         Text(product.description)
