@@ -412,7 +412,7 @@ public struct BaseComposeView: View {
 
             if let name = self.place?.name, let country = self.place?.country {
                 Group {
-                    Image(systemName: "mappin.and.ellipse")
+                    Image(systemName: "mappin.and.ellipse").accessibilityHidden(true)
                     Text("\(name), \(country)")
                 }
                 .foregroundColor(.customGrayColor)
