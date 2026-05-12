@@ -31,6 +31,7 @@ import EnvironmentKit
     public var showAltIconOnTimeline: Bool = false
     public var warnAboutMissingAlt: Bool = true
     public var showGridOnUserProfile: Bool = false
+    public var showGridOnTimeline: Bool = false
     public var showReboostedStatuses: Bool = false
     public var hideStatusesWithoutAlt: Bool = false
 
@@ -59,6 +60,7 @@ import EnvironmentKit
         showAltIconOnTimeline: Bool = false,
         warnAboutMissingAlt: Bool = true,
         showGridOnUserProfile: Bool = false,
+        showGridOnTimeline: Bool = false,
         showReboostedStatuses: Bool = false,
         hideStatusesWithoutAlt: Bool = false,
         customNavigationMenuItem1: Int32 = 1,
@@ -85,6 +87,7 @@ import EnvironmentKit
         self.showAltIconOnTimeline = showAltIconOnTimeline
         self.warnAboutMissingAlt = warnAboutMissingAlt
         self.showGridOnUserProfile = showGridOnUserProfile
+        self.showGridOnTimeline = showGridOnTimeline
         self.showReboostedStatuses = showReboostedStatuses
         self.hideStatusesWithoutAlt = hideStatusesWithoutAlt
         self.customNavigationMenuItem1 = customNavigationMenuItem1

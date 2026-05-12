@@ -30,6 +30,7 @@ struct HomeTimelineView: View {
     private let defaultLimit = 40
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
     private let timelineDoubleTapTip = TimelineDoubleTapTip()
+    private let doubleGrid = [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 0)]
 
     var body: some View {
         switch state {
@@ -57,30 +58,60 @@ struct HomeTimelineView: View {
     private func list() -> some View {
         ZStack {
             ScrollView {
-                LazyVStack(alignment: .center) {
-                    TipView(timelineDoubleTapTip)
-                        .padding(8)
+                if self.applicationState.showGridOnTimeline {
+                    LazyVGrid(columns: doubleGrid, spacing: 5) {
+                        TipView(timelineDoubleTapTip)
+                            .padding(8)
 
-                    ForEach(self.statusViewModels, id: \.id) { item in
-                        if self.shouldUpToDateBeVisible(statusId: item.id) {
-                            self.upToDatePlaceholder()
+                        ForEach(self.statusViewModels, id: \.id) { item in
+                            ImageRowAsync(statusViewModel: item,
+                                          withAvatar: false,
+                                          containerWidth: .constant(UIScreen.main.bounds.width / 2),
+                                          clipToRectangle: .constant(true))
+                        }
+
+                        if allItemsLoaded == false {
+                            HStack {
+                                Spacer()
+                                LoadingIndicator()
+                                    .task {
+                                        do {
+                                            try await self.loadMoreStatuses()
+                                        } catch {
+                                            ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
+                                        }
+                                    }
+                                Spacer()
+                            }
+                            .gridCellColumns(2)
+                        }
+                    }
+                } else {
+                    LazyVStack(alignment: .center) {
+                        TipView(timelineDoubleTapTip)
+                            .padding(8)
+
+                        ForEach(self.statusViewModels, id: \.id) { item in
+                            if self.shouldUpToDateBeVisible(statusId: item.id) {
+                                self.upToDatePlaceholder()
+                            }
+                            
+                            ImageRowAsync(statusViewModel: item, containerWidth: Binding.constant(UIScreen.main.bounds.width))
                         }
                         
-                        ImageRowAsync(statusViewModel: item, containerWidth: Binding.constant(UIScreen.main.bounds.width))
-                    }
-                    
-                    if allItemsLoaded == false {
-                        HStack {
-                            Spacer()
-                            LoadingIndicator()
-                                .task {
-                                    do {
-                                        try await self.loadMoreStatuses()
-                                    } catch {
-                                        ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
+                        if allItemsLoaded == false {
+                            HStack {
+                                Spacer()
+                                LoadingIndicator()
+                                    .task {
+                                        do {
+                                            try await self.loadMoreStatuses()
+                                        } catch {
+                                            ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
+                                        }
                                     }
-                                }
-                            Spacer()
+                                Spacer()
+                            }
                         }
                     }
                 }
