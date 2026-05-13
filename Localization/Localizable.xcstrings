@@ -9867,14 +9867,14 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "1 favourite"
+                  "state" : "translated",
+                  "value" : "1 polubienie"
                 }
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld favourites"
+                  "state" : "translated",
+                  "value" : "%lld polubień"
                 }
               }
             }
@@ -9998,14 +9998,14 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "1 boost"
+                  "state" : "translated",
+                  "value" : "1 udostępnienie"
                 }
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld boosts"
+                  "state" : "translated",
+                  "value" : "%lld udostępnień"
                 }
               }
             }
@@ -10129,14 +10129,14 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "1 reply"
+                  "state" : "translated",
+                  "value" : "1 komentarz"
                 }
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld replies"
+                  "state" : "translated",
+                  "value" : "%lld komentarzy"
                 }
               }
             }

@@ -502,7 +502,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add content warning"
+            "value" : "Dodaj ostrzeżenie o treści"
           }
         }
       }
@@ -550,7 +550,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add hashtag"
+            "value" : "Dodaj hashtag"
           }
         }
       }
@@ -598,7 +598,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add location"
+            "value" : "Dodaj lokalizację"
           }
         }
       }
@@ -646,7 +646,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add mention"
+            "value" : "Dodaj wzmiankę"
           }
         }
       }
@@ -694,7 +694,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Disable comments for the publication"
+            "value" : "Wyłącz możliwość komentowania"
           }
         }
       }
@@ -742,7 +742,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enable comments for the publication"
+            "value" : "Włącz możliwość komentoania"
           }
         }
       }
@@ -790,7 +790,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add a media"
+            "value" : "Dodaj zdjęcie"
           }
         }
       }
@@ -838,7 +838,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Remove content warning"
+            "value" : "Usuń ostrzeżenie o treści"
           }
         }
       }
@@ -886,7 +886,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Remove location"
+            "value" : "Usuń lokalizację"
           }
         }
       }
