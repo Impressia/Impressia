@@ -61,6 +61,8 @@ struct StatusesView: View {
     @State private var containerWidth: Double = UIDevice.isIPad ? UIScreen.main.bounds.width / 3 : UIScreen.main.bounds.width
     @State private var containerHeight: Double = UIDevice.isIPad ? UIScreen.main.bounds.height / 3 : UIScreen.main.bounds.height
 
+    private let doubleGrid = [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 0)]
+
     private let defaultLimit = 40
     private let imagePrefetcher = ImagePrefetcher(destination: .diskCache)
 
@@ -106,6 +108,31 @@ struct StatusesView: View {
                         try await self.loadMoreStatuses()
                     } catch {
                         ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
+                    }
+                }
+            } else if self.applicationState.showGridOnTimeline {
+                LazyVGrid(columns: doubleGrid, spacing: 5) {
+                    ForEach(self.statusViewModels, id: \.id) { item in
+                        ImageRowAsync(statusViewModel: item,
+                                      withAvatar: false,
+                                      containerWidth: .constant(self.containerWidth / 2),
+                                      clipToRectangle: .constant(true))
+                    }
+
+                    if allItemsLoaded == false {
+                        HStack {
+                            Spacer()
+                            LoadingIndicator()
+                                .task {
+                                    do {
+                                        try await self.loadMoreStatuses()
+                                    } catch {
+                                        ErrorService.shared.handle(error, message: "statuses.error.loadingStatusesFailed", showToastr: !Task.isCancelled)
+                                    }
+                                }
+                            Spacer()
+                        }
+                        .gridCellColumns(2)
                     }
                 }
             } else {
@@ -372,6 +399,7 @@ struct StatusesView: View {
                 .disabled(self.tag == nil)
             }
         }
+
     }
 
     private func loadTag(hashtag: String) async {

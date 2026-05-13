@@ -65,6 +65,7 @@ class ApplicationSettingsHandler {
         applicationState.showAltIconOnTimeline = defaultSettings.showAltIconOnTimeline
         applicationState.warnAboutMissingAlt = defaultSettings.warnAboutMissingAlt
         applicationState.showGridOnUserProfile = defaultSettings.showGridOnUserProfile
+        applicationState.showGridOnTimeline = defaultSettings.showGridOnTimeline
         applicationState.showReboostedStatuses = defaultSettings.showReboostedStatuses
         applicationState.hideStatusesWithoutAlt = defaultSettings.hideStatusesWithoutAlt
         applicationState.showApplicationBadge = defaultSettings.showApplicationBadge
@@ -209,6 +210,12 @@ class ApplicationSettingsHandler {
     func set(showGridOnUserProfile: Bool, modelContext: ModelContext) {
         let defaultSettings = self.get(modelContext: modelContext)
         defaultSettings.showGridOnUserProfile = showGridOnUserProfile
+        try? modelContext.save()
+    }
+
+    func set(showGridOnTimeline: Bool, modelContext: ModelContext) {
+        let defaultSettings = self.get(modelContext: modelContext)
+        defaultSettings.showGridOnTimeline = showGridOnTimeline
         try? modelContext.save()
     }
 

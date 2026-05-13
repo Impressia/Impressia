@@ -67,6 +67,8 @@ struct UserProfileStatusesView: View {
                             .foregroundColor(self.applicationState.showGridOnUserProfile ? .customGrayColor : applicationState.tintColor.color())
                             .padding(.trailing, 8)
                             .padding(.bottom, 8)
+                            .accessibilityLabel("global.display.style.column")
+                            .accessibilityValue(self.applicationState.showGridOnUserProfile ? "global.unselected" : "global.selected")
                     }
                     Button {
                         withAnimation {
@@ -78,6 +80,8 @@ struct UserProfileStatusesView: View {
                             .foregroundColor(self.applicationState.showGridOnUserProfile ? applicationState.tintColor.color() : .customGrayColor)
                             .padding(.trailing, 16)
                             .padding(.bottom, 8)
+                            .accessibilityLabel("global.display.style.grid")
+                            .accessibilityValue(self.applicationState.showGridOnUserProfile ? "global.selected" : "global.unselected")
                     }
                 }
 
