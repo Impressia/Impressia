@@ -124,6 +124,7 @@ struct NotificationRowView: View {
                 }
             }
         }
+        .accessibilityElement(children: .combine)
         .contentShape(Rectangle())
         .onTapGesture {
             switch notification.type {
