@@ -2564,6 +2564,7 @@
       }
     },
     "global.error.refreshTokenFailed" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2704,6 +2705,7 @@
       }
     },
     "global.title.newAccessTokenRetrieved" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2933,6 +2935,53 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jesteś na bieżąco"
+          }
+        }
+      }
+    },
+    "imagerow.a11y.sensitiveContent" : {
+      "comment" : "Sensitive content",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sensibler Inhalt"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sensitive content"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contenido sensible"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eduki sentikorra"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contenu sensible"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contenuto sensibile"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wrażliwa treść"
           }
         }
       }
