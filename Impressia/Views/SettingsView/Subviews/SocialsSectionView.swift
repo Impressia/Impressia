@@ -6,6 +6,8 @@
 
 import SwiftUI
 
+// MARK: - Socials Section View
+
 struct SocialsSectionView: View {
     var body: some View {
         Section("settings.title.socials") {
@@ -21,6 +23,7 @@ struct SocialsSectionView: View {
                 Link("@impressia", destination: URL(string: "https://mastodon.social/@impressia")!)
                     .font(.footnote)
             }
+            .modifier(CopyableTextViewModifier(copyable: "@impressia@mastodon.social"))
             .accessibilityElement(children: .combine)
             .accessibilityValue("@impressia")
             .accessibilityRemoveTraits(.isButton)
@@ -38,6 +41,7 @@ struct SocialsSectionView: View {
                 Link("@mczachurski", destination: URL(string: "https://mastodon.social/@mczachurski")!)
                     .font(.footnote)
             }
+            .modifier(CopyableTextViewModifier(copyable: "@mczachurski@mastodon.social"))
             .accessibilityElement(children: .combine)
             .accessibilityValue("@mczachurski")
             .accessibilityRemoveTraits(.isButton)
@@ -55,6 +59,7 @@ struct SocialsSectionView: View {
                 Link("@mczachurski", destination: URL(string: "https://pixelfed.social/@mczachurski")!)
                     .font(.footnote)
             }
+            .modifier(CopyableTextViewModifier(copyable: "@mczachurski@pixelfed.social"))
             .accessibilityElement(children: .combine)
             .accessibilityValue("@mczachurski")
             .accessibilityRemoveTraits(.isButton)
@@ -62,3 +67,26 @@ struct SocialsSectionView: View {
         }
     }
 }
+
+// MARK: - CopyableTextViewModifier
+
+/// `ViewModifier` to allow the user to copy in its clipboard the given value
+/// to then paste it elsewhere. Can be sueful for Fediverse accounts handles.
+private struct CopyableTextViewModifier: ViewModifier {
+
+    let copyable: String
+
+    func body(content: Content) -> some View {
+        content
+            .contextMenu {
+                Button(action: {
+                    let pasteboard = UIPasteboard.general
+                    pasteboard.string = copyable
+                }, label: {
+                    Text("global.copyToClipboard")
+                    Image(systemName: "doc.on.doc").accessibilityHidden(true)
+                })
+            }
+    }
+}
+
