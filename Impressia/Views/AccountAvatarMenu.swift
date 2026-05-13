@@ -73,9 +73,20 @@ struct AccountAvatarMenu: View {
                 .frame(width: 32.0, height: 32.0)
                 .clipShape(self.applicationState.avatarShape.shape())
         } else if let avatarUrl {
-            AsyncImage(url: avatarUrl)
-                .frame(width: 32.0, height: 32.0)
-                .clipShape(self.applicationState.avatarShape.shape())
+            AsyncImage(url: avatarUrl) { phase in
+                switch phase {
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 32.0, height: 32.0)
+                        .clipShape(self.applicationState.avatarShape.shape())
+                default:
+                    Color.customGrayColor
+                        .frame(width: 32.0, height: 32.0)
+                        .clipShape(self.applicationState.avatarShape.shape())
+                }
+            }
         } else {
             Image(systemName: "person")
                 .resizable()

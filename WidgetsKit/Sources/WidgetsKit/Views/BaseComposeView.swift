@@ -412,7 +412,7 @@ public struct BaseComposeView: View {
 
             if let name = self.place?.name, let country = self.place?.country {
                 Group {
-                    Image(systemName: "mappin.and.ellipse")
+                    Image(systemName: "mappin.and.ellipse").accessibilityHidden(true)
                     Text("\(name), \(country)")
                 }
                 .foregroundColor(.customGrayColor)
@@ -514,6 +514,7 @@ public struct BaseComposeView: View {
                             }
                         } label: {
                             Image(systemName: self.photosAreAttached ? "photo.fill.on.rectangle.fill" : "photo.on.rectangle")
+                                .accessibilityLabel(Text("compose.title.photos", bundle: .module))
                         }
 
                         Button {
@@ -527,7 +528,13 @@ public struct BaseComposeView: View {
                                 }
                             }
                         } label: {
-                            Image(systemName: self.isSensitive ? "exclamationmark.square.fill" : "exclamationmark.square")
+                            if self.isSensitive {
+                                Image(systemName: "exclamationmark.square.fill")
+                                    .accessibilityLabel(Text("compose.title.a11y.removeContentWarning", bundle: .module))
+                            } else {
+                                Image(systemName: "exclamationmark.square")
+                                    .accessibilityLabel(Text("compose.title.a11y.addContentWarning", bundle: .module))
+                            }
                         }
 
                         Button {
@@ -535,7 +542,13 @@ public struct BaseComposeView: View {
                                 self.commentsDisabled.toggle()
                             }
                         } label: {
-                            Image(systemName: self.commentsDisabled ? "person.2.slash" : "person.2.fill")
+                            if self.commentsDisabled {
+                                Image(systemName: "person.2.slash")
+                                    .accessibilityLabel(Text("compose.title.a11y.enableComment", bundle: .module))
+                            } else {
+                                Image(systemName: "person.2.fill")
+                                    .accessibilityLabel(Text("compose.title.a11y.disableComment", bundle: .module))
+                            }
                         }
 
                         Button {
@@ -547,19 +560,27 @@ public struct BaseComposeView: View {
                                 self.showSheet = .placeSelector
                             }
                         } label: {
-                            Image(systemName: self.place == nil ? "mappin.square" : "mappin.square.fill")
+                            if self.place == nil {
+                                Image(systemName: "mappin.square")
+                                    .accessibilityLabel(Text("compose.title.a11y.addLocation", bundle: .module))
+                            } else {
+                                Image(systemName: "mappin.square.fill")
+                                    .accessibilityLabel(Text("compose.title.a11y.removeLocation", bundle: .module))
+                            }
                         }
 
                         Button {
                             self.textModel.insertAtCursorPosition(content: "#")
                         } label: {
                             Image(systemName: "number")
+                                .accessibilityLabel(Text("compose.title.a11y.addHashtag", bundle: .module))
                         }
 
                         Button {
                             self.textModel.insertAtCursorPosition(content: "@")
                         } label: {
                             Image(systemName: "at")
+                                .accessibilityLabel(Text("compose.title.a11y.addMention", bundle: .module))
                         }
                     }
                 }
@@ -569,6 +590,7 @@ public struct BaseComposeView: View {
                 Text("\(self.applicationState.statusMaxCharacters - textModel.text.string.utf16.count)")
                     .foregroundColor(.customGrayColor)
                     .font(.system(size: self.keyboardFontTextSize))
+                    .accessibilityLabel("") // TODO: Add a11y label
             }
             .padding(8)
             .font(.system(size: self.keyboardFontImageSize))

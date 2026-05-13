@@ -48,6 +48,7 @@ struct InteractionRow: View {
                             .font(.caption)
                     }
                 }
+                .accessibilityLabel(Text(String.localizedStringWithFormat(NSLocalizedString("status.a11y.repliesCount", comment: "Replies count"), repliesCount)))
 
                 Spacer()
             }
@@ -61,6 +62,7 @@ struct InteractionRow: View {
                         .font(.caption)
                 }
             }
+            .accessibilityLabel(Text(String.localizedStringWithFormat(NSLocalizedString("status.a11y.reblogsCount", comment: "Boosts count"), self.reblogsCount)))
 
             Spacer()
 
@@ -73,6 +75,7 @@ struct InteractionRow: View {
                         .font(.caption)
                 }
             }
+            .accessibilityLabel(Text(String.localizedStringWithFormat(NSLocalizedString("status.a11y.favouritesCount", comment: "Favourites count"), self.favouritesCount)))
 
             Spacer()
 

@@ -16,6 +16,7 @@ struct MainView: View {
     @Environment(ApplicationState.self) var applicationState
     @Environment(RouterPath.self) var routerPath
     @Environment(TipsStore.self) var tipsStore
+    @Environment(\.modelContext) private var modelContext
 
     @State private var navBarTitle: LocalizedStringKey = ViewMode.home.title
     @State private var viewMode: ViewMode = .home {
@@ -223,6 +224,26 @@ struct MainView: View {
 
     @ToolbarContentBuilder
     private func getTrailingToolbar() -> some ToolbarContent {
+        if self.isGridToggleVisible {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    withAnimation {
+                        self.applicationState.showGridOnTimeline.toggle()
+                        ApplicationSettingsHandler.shared.set(showGridOnTimeline: self.applicationState.showGridOnTimeline,
+                                                              modelContext: modelContext)
+                    }
+                } label: {
+                    Image(systemName: self.applicationState.showGridOnTimeline
+                          ? "rectangle.grid.1x2.fill"
+                          : "rectangle.grid.2x2.fill")
+                        .foregroundColor(Color.mainTextColor)
+                        .accessibilityLabel(self.applicationState.showGridOnTimeline
+                                            ? "global.display.style.column"
+                                            : "global.display.style.grid")
+                }
+            }
+        }
+
         if viewMode == .local || viewMode == .home || viewMode == .federated || viewMode == .trendingPhotos || viewMode == .search {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
@@ -234,6 +255,17 @@ struct MainView: View {
                         .fontWeight(.semibold)
                 }
             }
+        }
+    }
+
+    private var isGridToggleVisible: Bool {
+        switch viewMode {
+        case .home:
+            return UIDevice.isIPhone
+        case .local, .federated, .bookmarks, .favourites:
+            return true
+        default:
+            return false
         }
     }
 
