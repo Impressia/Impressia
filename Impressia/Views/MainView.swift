@@ -125,7 +125,12 @@ struct MainView: View {
                     
                     if self.applicationState.menuPosition == .top {
                         self.getPrincipalToolbar()
-                        self.getTrailingToolbar()
+                    }
+                    
+                    self.getTrailingGridToggleToolbarItem()
+                    
+                    if self.applicationState.menuPosition == .top {
+                        self.getTrailingAddImageToolbarItem()
                     }
                 }
                 .onChange(of: tipsStore.status) { oldStatus, newStatus in
@@ -221,9 +226,9 @@ struct MainView: View {
             }
         }
     }
-
+    
     @ToolbarContentBuilder
-    private func getTrailingToolbar() -> some ToolbarContent {
+    private func getTrailingGridToggleToolbarItem() -> some ToolbarContent {
         if self.isGridToggleVisible {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
@@ -243,7 +248,10 @@ struct MainView: View {
                 }
             }
         }
+    }
 
+    @ToolbarContentBuilder
+    private func getTrailingAddImageToolbarItem() -> some ToolbarContent {
         if viewMode == .local || viewMode == .home || viewMode == .federated || viewMode == .trendingPhotos || viewMode == .search {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
