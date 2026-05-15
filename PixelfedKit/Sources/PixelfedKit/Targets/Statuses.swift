@@ -175,7 +175,13 @@ extension Pixelfed.Statuses: TargetType {
         var pixelfedKey: Bool?
 
         switch self {
-        case .status:
+        case .status,
+             .reblog,
+             .unreblog,
+             .favourite,
+             .unfavourite,
+             .bookmark,
+             .unbookmark:
             pixelfedKey = true
         case .favouritedBy(_, let paramMaxId, let paramSinceId, let paramMinId, let paramLimit, let paramPage):
             maxId = paramMaxId

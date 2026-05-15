@@ -134,6 +134,9 @@ struct InteractionRow: View {
         .onAppear {
             self.refreshCounters()
         }
+        .task {
+            await self.loadRepliesCount()
+        }
     }
 
     private func refreshCounters() {
@@ -143,6 +146,21 @@ struct InteractionRow: View {
         self.favourited = self.statusModel.favourited
         self.favouritesCount = self.statusModel.favouritesCount
         self.bookmarked = self.statusModel.bookmarked
+    }
+
+    private func loadRepliesCount() async {
+        // NOTE: The Pixelfed API does not reliably return replies_count for federated posts
+        // (e.g. from Mastodon instances). The count stored locally by Pixelfed only reflects
+        // replies it has received via ActivityPub federation, which may be incomplete.
+        // As a workaround, we fetch the status context and count the descendants ourselves
+        // to get a more accurate reply count. This is a hack — ideally the API would return
+        // the correct value directly.
+        // See https://github.com/Impressia/Impressia/issues/163
+        guard self.statusModel.commentsDisabled == false else { return }
+        if let comments = try? await self.client.statuses?.comments(to: self.statusModel.getOrginalStatusId()) {
+            self.repliesCount = comments.count
+            self.statusModel.repliesCount = comments.count
+        }
     }
 
     private func reboost() async {
