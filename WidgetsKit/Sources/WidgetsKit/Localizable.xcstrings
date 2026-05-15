@@ -682,7 +682,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Désactiver les commentaires pour cette publication"
+            "value" : "Désactiver les commentaires pour ce statut"
           }
         },
         "it" : {
@@ -730,7 +730,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Activer les commentaires pour cette publication"
+            "value" : "Activer les commentaires pour ce statut"
           }
         },
         "it" : {
@@ -2821,7 +2821,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Publication modifiée"
+            "value" : "Statut modifié"
           }
         },
         "it" : {
