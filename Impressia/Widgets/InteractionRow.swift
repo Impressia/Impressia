@@ -114,6 +114,7 @@ struct InteractionRow: View {
                             self.deleteStatus()
                         } label: {
                             Label("status.title.delete", systemImage: "trash")
+                                .tint(.red)
                         }
                     }
                 } else {
