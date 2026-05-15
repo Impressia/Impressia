@@ -28,6 +28,7 @@ public struct BaseComposeView: View {
     @State private var photosAreAttached = false
     @State private var publishDisabled = true
     @State private var interactiveDismissDisabled = false
+    @State private var isLoadingExistingAttachments = true
 
     @State private var photosAreUploading = false
     @State private var photosPickerVisible = false
@@ -180,6 +181,7 @@ public struct BaseComposeView: View {
                 } else {
                     self.existingAttachments = statusToEdit.mediaAttachments
                 }
+                self.isLoadingExistingAttachments = false
             }
         }
         .toolbar {
@@ -323,7 +325,16 @@ public struct BaseComposeView: View {
 
                 // Grid with images — existing attachments in edit mode, new uploads otherwise.
                 if self.statusToEdit != nil {
-                    self.existingImagesGridView()
+                    if self.isLoadingExistingAttachments {
+                        HStack {
+                            Spacer()
+                            LoadingIndicator()
+                            Spacer()
+                        }
+                        .frame(height: self.imageSize)
+                    } else {
+                        self.existingImagesGridView()
+                    }
                 } else {
                     self.imagesGridView()
                 }
@@ -1005,7 +1016,8 @@ public struct BaseComposeView: View {
                 }
             }
         } catch {
-            ErrorService.shared.handle(error, message: "compose.error.postingStatusFailed", showToastr: true)
+            // NOTE: An error 400 can be also for the 10-edits-max limitation from the API
+            ErrorService.shared.handle(error, message: "compose.error.postingStatusFailed", bundle: Bundle.module, showToastr: true)
         }
     }
 
