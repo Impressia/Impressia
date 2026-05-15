@@ -87,6 +87,15 @@ public extension PixelfedClientAuthenticated {
         return try await downloadJson(Status.self, request: request)
     }
 
+    func edit(statusId: EntityId, statusComponents: Pixelfed.Statuses.Components) async throws -> Status {
+        let request = try Self.request(
+            for: baseURL,
+            target: Pixelfed.Statuses.edit(statusId, statusComponents),
+            withBearerToken: token)
+
+        return try await downloadJson(Status.self, request: request)
+    }
+
     func new(statusComponents: Pixelfed.Statuses.Components) async throws -> Status {
         let request = try Self.request(
             for: baseURL,

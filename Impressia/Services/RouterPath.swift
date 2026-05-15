@@ -32,13 +32,14 @@ enum RouteurDestinations: Hashable {
 enum SheetDestinations: Identifiable {
     case newStatusEditor
     case replyToStatusEditor(status: StatusModel)
+    case editStatusEditor(status: StatusModel)
     case settings
     case report(objectType: Report.ObjectType, objectId: String)
     case shareImage(image: UIImage)
 
     public var id: String {
         switch self {
-        case .replyToStatusEditor, .newStatusEditor:
+        case .replyToStatusEditor, .newStatusEditor, .editStatusEditor:
             return "statusEditor"
         case .settings:
             return "settings"

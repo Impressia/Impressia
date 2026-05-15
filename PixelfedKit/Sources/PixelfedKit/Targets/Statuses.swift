@@ -20,6 +20,7 @@ extension Pixelfed {
         case rebloggedBy(EntityId, MaxId?, SinceId?, MinId?, Limit?, Page?)
         case favouritedBy(EntityId, MaxId?, SinceId?, MinId?, Limit?, Page?)
         case new(Components)
+        case edit(EntityId, Components)
         case delete(EntityId)
         case reblog(EntityId)
         case unreblog(EntityId)
@@ -41,6 +42,7 @@ extension Pixelfed.Statuses {
         public let visibility: Visibility
         public let sensitive: Bool
         public let placeId: Int?
+        public let place: Place?
         public let commentsDisabled: Bool
         public let collectionIds: [Int]?
 
@@ -52,6 +54,7 @@ extension Pixelfed.Statuses {
             visibility: Visibility = .pub,
             sensitive: Bool = false,
             placeId: Int? = nil,
+            place: Place? = nil,
             commentsDisabled: Bool = false,
             collectionIds: [Int]? = nil) {
                 self.inReplyToId = inReplyToId
@@ -61,6 +64,7 @@ extension Pixelfed.Statuses {
                 self.visibility = visibility
                 self.sensitive = sensitive
                 self.placeId = placeId
+                self.place = place
                 self.commentsDisabled = commentsDisabled
                 self.collectionIds = collectionIds
             }
@@ -105,6 +109,34 @@ extension Pixelfed.Statuses: TargetType {
         }
     }
 
+    /// Minimal request body for editing an existing status.
+    /// Uses PUT /api/v1/statuses/:id — must include existing media_ids to keep attachments.
+    /// spoiler_text and location must always be present in the JSON (even empty/null).
+    struct EditRequest: Encodable {
+        let status: String
+        let sensitive: Bool
+        let spoilerText: String
+        let mediaIds: [String]
+        let location: Place?
+
+        enum CodingKeys: String, CodingKey {
+            case status
+            case sensitive
+            case spoilerText = "spoiler_text"
+            case mediaIds = "media_ids"
+            case location
+        }
+
+        func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(status, forKey: .status)
+            try container.encode(sensitive, forKey: .sensitive)
+            try container.encode(spoilerText, forKey: .spoilerText)
+            try container.encode(mediaIds, forKey: .mediaIds)
+            try container.encode(location, forKey: .location)  // Place object or null
+        }
+    }
+
     private var apiPath: String { return "/api/v1/statuses" }
 
     /// The path to be appended to `baseURL` to form the full `URL`.
@@ -122,6 +154,8 @@ extension Pixelfed.Statuses: TargetType {
             return "\(apiPath)/\(id)/favourited_by"
         case .new:
             return "\(apiPath)"
+        case .edit(let id, _):
+            return "\(apiPath)/\(id)"
         case .delete(let id):
             return "\(apiPath)/\(id)"
         case .reblog(let id):
@@ -146,6 +180,8 @@ extension Pixelfed.Statuses: TargetType {
     /// The HTTP method used in the request.
     public var method: Method {
         switch self {
+        case .edit:
+            return .put
         case .new,
                     .reblog,
                     .unreblog,
@@ -238,6 +274,18 @@ extension Pixelfed.Statuses: TargetType {
                     placeId: components.placeId,
                     commentsDisabled: components.commentsDisabled,
                     collectionIds: components.collectionIds)
+            )
+
+        case .edit(_, let components):
+            // PUT /api/v1/statuses/:id — must include existing media_ids to keep attachments.
+            // spoiler_text and location must always be present in the JSON body.
+            return try? JSONEncoder().encode(
+                EditRequest(
+                    status: components.text,
+                    sensitive: components.sensitive,
+                    spoilerText: components.spoilerText,
+                    mediaIds: components.mediaIds,
+                    location: components.place)
             )
 
         default:

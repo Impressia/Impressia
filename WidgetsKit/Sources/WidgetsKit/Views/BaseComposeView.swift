@@ -20,9 +20,9 @@ public struct BaseComposeView: View {
     @State private var textModel: TextModel
 
     @State private var isKeyboardPresented = true
-    @State private var isSensitive = false
-    @State private var spoilerText = ""
-    @State private var commentsDisabled = false
+    @State private var isSensitive: Bool
+    @State private var spoilerText: String
+    @State private var commentsDisabled: Bool
     @State private var place: Place?
 
     @State private var photosAreAttached = false
@@ -43,7 +43,7 @@ public struct BaseComposeView: View {
     @State private var selectedItems: [PhotosPickerItem] = []
 
     /// Processed array with images.
-    @State private var photosAttachment: [PhotoAttachment] = []
+    @State private var photosAttachment: [PhotoAttachment]
 
     @State private var isCameraPickerPresented: Bool = false
     @State private var isFileImporterPresented: Bool = false
@@ -61,21 +61,39 @@ public struct BaseComposeView: View {
     }
 
     @State private var showSheet: SheetType?
+    @State private var existingAttachments: [AttachmentModel] = []
+
     enum SheetType: Identifiable {
         case photoDetails(PhotoAttachment)
+        case existingAttachmentEditor(AttachmentModel)
         case placeSelector
 
         public var id: String {
             switch self {
             case .photoDetails:
                 return "photoDetails"
+            case .existingAttachmentEditor:
+                return "existingAttachmentEditor"
             case .placeSelector:
                 return "placeSelector"
             }
         }
     }
 
+    /// Determines the rules for the publish button when editing an existing status.
+    /// Deduced automatically from `statusToEdit.inReplyToId`:
+    /// - `.comment` (inReplyToId != nil) — text required, photo optional
+    /// - `.photo`   (inReplyToId == nil) — photo required, text optional
+    public enum EditMode {
+        case comment
+        case photo
+    }
+
     private let statusViewModel: StatusModel?
+    private let statusToEdit: StatusModel?
+    private let editMode: EditMode?
+    private let initialText: String?
+    private let initialDescriptions: [String: String?]
     private let imageSize = 115.0
     private let keyboardFontImageSize = 20.0
     private let keyboardFontTextSize = 16.0
@@ -89,12 +107,56 @@ public struct BaseComposeView: View {
                 onClose: @escaping () -> Void,
                 onUpload: @escaping (PhotoAttachment) async -> Void) {
         self.statusViewModel = statusViewModel
+        self.statusToEdit = nil
+        self.editMode = nil
+        self.initialText = nil
+        self.initialDescriptions = [:]
         self.attachments = attachments
         self.onClose = onClose
         self.onUpload = onUpload
         self.draggedItem = nil
 
+        self._photosAttachment = .init(initialValue: [])
         self._textModel = .init(initialValue: .init())
+        self._isSensitive = .init(initialValue: false)
+        self._spoilerText = .init(initialValue: "")
+        self._commentsDisabled = .init(initialValue: false)
+    }
+
+    public init(statusToEdit: StatusModel,
+                onClose: @escaping () -> Void,
+                onUpload: @escaping (PhotoAttachment) async -> Void) {
+        self.statusToEdit = statusToEdit
+        self.statusViewModel = nil
+        // Deduce edit mode from inReplyToId: a reply is a comment, otherwise it's a photo post.
+        self.editMode = statusToEdit.inReplyToId != nil ? .comment : .photo
+        self.attachments = []
+        self.onClose = onClose
+        self.onUpload = onUpload
+        self.draggedItem = nil
+
+        // Pre-compute plain text from HTML to pre-fill the editor on first appear.
+        self.initialText = statusToEdit.content.htmlValue
+            .replacingOccurrences(of: "<br />", with: "\n")
+            .replacingOccurrences(of: "<br/>", with: "\n")
+            .replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
+
+        // Store initial alt text descriptions to detect changes.
+        self.initialDescriptions = Dictionary(
+            uniqueKeysWithValues: statusToEdit.mediaAttachments.map { ($0.id, $0.description) }
+        )
+
+        self._textModel = .init(initialValue: .init())
+        self._place = .init(initialValue: statusToEdit.place)
+        self._isSensitive = .init(initialValue: statusToEdit.sensitive)
+        self._spoilerText = .init(initialValue: statusToEdit.spoilerText ?? "")
+        self._commentsDisabled = .init(initialValue: statusToEdit.commentsDisabled)
+
+        // Pre-populate existing media as synthetic PhotoAttachments synchronously.
+        // Done in init (not .task) to ensure photos appear on first render.
+        self._photosAttachment = .init(initialValue: statusToEdit.mediaAttachments.map {
+            PhotoAttachment(attachmentModel: $0)
+        })
     }
 
     public var body: some View {
@@ -110,6 +172,16 @@ public struct BaseComposeView: View {
             }
         }
         .frame(alignment: .topLeading)
+        .task {
+            // Fetch fresh status to get up-to-date media attachments with their alt texts.
+            if let statusToEdit {
+                if let freshStatus = try? await self.client.statuses?.status(withId: statusToEdit.id) {
+                    self.existingAttachments = freshStatus.mediaAttachments.map { AttachmentModel(attachment: $0) }
+                } else {
+                    self.existingAttachments = statusToEdit.mediaAttachments
+                }
+            }
+        }
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button {
@@ -117,7 +189,11 @@ public struct BaseComposeView: View {
                         await self.publishStatus()
                     }
                 } label: {
-                    Text("compose.title.publish", bundle: Bundle.module, comment: "Publish")
+                    if self.statusToEdit != nil {
+                        Text("compose.title.edit", bundle: Bundle.module, comment: "Edit")
+                    } else {
+                        Text("compose.title.publish", bundle: Bundle.module, comment: "Publish")
+                    }
                 }
                 .disabled(self.publishDisabled)
                 .buttonStyle(.borderedProminent)
@@ -131,11 +207,34 @@ public struct BaseComposeView: View {
         }
         .onAppear {
             self.textModel.client = self.client
-            Task {
-                await self.loadPhotos()
+            // Pre-fill text — done here because TextModel.textView is nil until the view appears.
+            if let initialText, !initialText.isEmpty {
+                self.asyncAfter(0.1) {
+                    self.textModel.text = NSMutableAttributedString(string: initialText)
+                    self.textModel.selectedRange = NSRange(location: initialText.utf16.count, length: 0)
+                }
+            }
+            // In edit mode, photos are pre-populated from the existing status —
+            // calling loadPhotos() would erase the synthetic PhotoAttachments.
+            if self.statusToEdit == nil {
+                Task {
+                    await self.loadPhotos()
+                }
             }
         }
         .onChange(of: self.textModel.text) {
+            self.refreshScreenState()
+        }
+        .onChange(of: self.isSensitive) {
+            self.refreshScreenState()
+        }
+        .onChange(of: self.commentsDisabled) {
+            self.refreshScreenState()
+        }
+        .onChange(of: self.place?.id) {
+            self.refreshScreenState()
+        }
+        .onChange(of: self.existingAttachments.map { $0.description ?? "" }.joined()) {
             self.refreshScreenState()
         }
         .onChange(of: self.selectedItems) {
@@ -147,6 +246,12 @@ public struct BaseComposeView: View {
             switch sheetType {
             case .photoDetails(let photoAttachment):
                 PhotoEditorView(photoAttachment: photoAttachment)
+            case .existingAttachmentEditor(let attachmentModel):
+                ExistingAttachmentEditorView(attachment: attachmentModel) { newDescription in
+                    if let index = self.existingAttachments.firstIndex(where: { $0.id == attachmentModel.id }) {
+                        self.existingAttachments[index].description = newDescription
+                    }
+                }
             case .placeSelector:
                 PlaceSelectorView(place: $place)
             }
@@ -216,8 +321,12 @@ public struct BaseComposeView: View {
                 // Text area with new status.
                 self.statusTextView()
 
-                // Grid with images.
-                self.imagesGridView()
+                // Grid with images — existing attachments in edit mode, new uploads otherwise.
+                if self.statusToEdit != nil {
+                    self.existingImagesGridView()
+                } else {
+                    self.imagesGridView()
+                }
 
                 // Status when we are adding new comment.
                 self.statusModelView()
@@ -237,6 +346,9 @@ public struct BaseComposeView: View {
                     ImageUploadView(photoAttachment: photoAttachment, size: self.imageSize) {
                         self.showSheet = .photoDetails(photoAttachment)
                     } delete: {
+                        // Existing server attachments cannot be removed when editing a post.
+                        guard !photoAttachment.isExistingAttachment else { return }
+
                         self.photosAttachment = self.photosAttachment.filter({ item in
                             item != photoAttachment
                         })
@@ -270,6 +382,72 @@ public struct BaseComposeView: View {
             }
         }
         .padding(8)
+    }
+
+    @ViewBuilder
+    private func existingImagesGridView() -> some View {
+        if !existingAttachments.isEmpty {
+            HStack(alignment: .center) {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: self.imageSize))]) {
+                    ForEach(existingAttachments, id: \.id) { attachment in
+                        ZStack(alignment: .bottom) {
+                            AsyncImage(url: attachment.previewUrl ?? attachment.url) { phase in
+                                switch phase {
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: self.imageSize - 6, height: self.imageSize - 6)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                default:
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color.secondary.opacity(0.2))
+                                        .frame(width: self.imageSize - 6, height: self.imageSize - 6)
+                                }
+                            }
+                            .onTapGesture {
+                                self.showSheet = .existingAttachmentEditor(attachment)
+                            }
+
+                            // ALT badge — tappable, opens the alt text editor.
+                            HStack {
+                                Spacer()
+                                HStack {
+                                    Group {
+                                        if (attachment.description ?? "").isEmpty {
+                                            Image(systemName: "exclamationmark.circle.fill")
+                                                .symbolRenderingMode(.palette)
+                                                .foregroundStyle(Color.white, Color.dangerColor)
+                                                .accessibilityHidden(true)
+                                        } else {
+                                            Image(systemName: "checkmark.circle.fill")
+                                                .symbolRenderingMode(.palette)
+                                                .foregroundStyle(Color.white, Color.systemGreen)
+                                                .accessibilityHidden(true)
+                                        }
+                                        Text("status.title.altText", bundle: Bundle.module, comment: "ALT")
+                                            .foregroundStyle(Color.white)
+                                    }
+                                    .font(.system(size: 12))
+                                    .shadow(color: .black, radius: 4)
+                                }
+                                .padding(.vertical, 4)
+                                .padding(.horizontal, 8)
+                                .background(RoundedRectangle(cornerRadius: 8).foregroundColor(.black.opacity(0.8)))
+                                .padding(.bottom, 4)
+                                .padding(.trailing, 12)
+                                .opacity(0.75)
+                                .onTapGesture {
+                                    self.showSheet = .existingAttachmentEditor(attachment)
+                                }
+                            }
+                        }
+                        .frame(width: self.imageSize, height: self.imageSize)
+                    }
+                }
+            }
+            .padding(8)
+        }
     }
 
     @ViewBuilder
@@ -407,6 +585,7 @@ public struct BaseComposeView: View {
                         .stroke(Color.accentColor, lineWidth: 1)
                 )
             }
+            .disabled(self.statusToEdit != nil)
 
             Spacer()
 
@@ -516,6 +695,8 @@ public struct BaseComposeView: View {
                             Image(systemName: self.photosAreAttached ? "photo.fill.on.rectangle.fill" : "photo.on.rectangle")
                                 .accessibilityLabel(Text("compose.title.photos", bundle: .module))
                         }
+                        // Disabled in edit mode — existing photos cannot be added or removed.
+                        .disabled(self.statusToEdit != nil)
 
                         Button {
                             withAnimation(.easeInOut) {
@@ -550,6 +731,7 @@ public struct BaseComposeView: View {
                                     .accessibilityLabel(Text("compose.title.a11y.disableComment", bundle: .module))
                             }
                         }
+                        .disabled(self.statusToEdit != nil)
 
                         Button {
                             if self.place != nil {
@@ -602,20 +784,44 @@ public struct BaseComposeView: View {
         self.statusViewModel == nil ? NSLocalizedString("compose.title.attachPhotoFull", bundle: Bundle.module, comment: "") : NSLocalizedString("compose.title.attachPhotoMini", bundle: Bundle.module, comment: "")
     }
 
+    private var hasChanges: Bool {
+        guard let statusToEdit else { return true }
+
+        let textChanged = textModel.text.string != (initialText ?? "")
+        let sensitiveChanged = isSensitive != statusToEdit.sensitive
+        let spoilerChanged = spoilerText != (statusToEdit.spoilerText ?? "")
+        let placeChanged = place?.id != statusToEdit.place?.id
+        let commentsChanged = commentsDisabled != statusToEdit.commentsDisabled
+        let altChanged = existingAttachments.contains { attachment in
+            attachment.description != (initialDescriptions[attachment.id] ?? nil)
+        }
+
+        return textChanged || sensitiveChanged || spoilerChanged || placeChanged || commentsChanged || altChanged
+    }
+
     private func isPublishButtonDisabled() -> Bool {
         // When application is during uploading photos we cannot send new status.
         if self.photosAreUploading == true {
             return true
         }
 
-        // When status is not a comment, then photo is required.
-        if self.statusViewModel == nil && self.photosAttachment.hasUploadedPhotos() == false {
-            return true
-        }
-        
-        // When status is a comment, then text is required.
-        if self.statusViewModel != nil && self.textModel.text.string.isEmpty {
-            return true
+        switch self.editMode {
+        case .comment:
+            // Editing a comment: text is required, photo is optional.
+            if self.textModel.text.string.isEmpty { return true }
+        case .photo:
+            // Editing a photo post: disabled if nothing has changed.
+            if !self.hasChanges { return true }
+        case .none:
+            // New status (not editing).
+            // When status is not a comment, then photo is required.
+            if self.statusViewModel == nil && self.photosAttachment.hasUploadedPhotos() == false {
+                return true
+            }
+            // When status is a comment (reply), then text is required.
+            if self.statusViewModel != nil && self.textModel.text.string.isEmpty {
+                return true
+            }
         }
 
         return false
@@ -738,7 +944,15 @@ public struct BaseComposeView: View {
             return
         }
 
-        let notAllImagesHaveAltText = self.photosAttachment.contains(where: { ($0.uploadedAttachment?.description ?? "").isEmpty })
+        // In edit mode, check existing attachments for missing alt texts.
+        // In compose mode, check newly uploaded photos.
+        let notAllImagesHaveAltText: Bool
+        if self.statusToEdit != nil {
+            notAllImagesHaveAltText = self.existingAttachments.contains(where: { ($0.description ?? "").isEmpty })
+        } else {
+            notAllImagesHaveAltText = self.photosAttachment.contains(where: { ($0.uploadedAttachment?.description ?? "").isEmpty })
+        }
+
         if notAllImagesHaveAltText == false {
             await self.sendToServer()
             return
@@ -749,13 +963,46 @@ public struct BaseComposeView: View {
 
     private func sendToServer() async {
         do {
-            let status = self.createStatus()
-            if let status = try await self.client.statuses?.new(status: status) {
-                print("Status: \(status.id)")
-                self.applicationState.latestPublishedStatusId = status.id
-                self.applicationState.showInteractionStatusId = String.empty()
+            let components = self.createStatus()
 
-                self.close()
+            if let statusToEdit {
+                // Build components with existing media IDs so the server keeps the attachments.
+                let existingMediaIds = statusToEdit.mediaAttachments.map { $0.id }
+                let newMediaIds = self.photosAttachment.getUploadedPhotoIds()
+                let allMediaIds = newMediaIds.isEmpty ? existingMediaIds : newMediaIds
+                let editComponents = Pixelfed.Statuses.Components(
+                    inReplyToId: nil,
+                    text: components.text,
+                    spoilerText: components.spoilerText,
+                    mediaIds: allMediaIds,
+                    visibility: components.visibility,
+                    sensitive: components.sensitive,
+                    place: self.place
+                )
+                if let status = try await self.client.statuses?.edit(statusId: statusToEdit.id, status: editComponents) {
+                    // Update alt texts for attachments whose description changed.
+                    for attachment in self.existingAttachments {
+                        if attachment.description != (self.initialDescriptions[attachment.id] ?? nil) {
+                            _ = try? await self.client.media?.update(
+                                id: attachment.id,
+                                description: attachment.description ?? "",
+                                focus: nil
+                            )
+                        }
+                    }
+
+                    self.applicationState.latestPublishedStatusId = status.id
+                    self.applicationState.showInteractionStatusId = String.empty()
+                    ToastrService.shared.showSuccess("status.title.statusEdited", imageSystemName: "checkmark.circle.fill")
+                    self.close()
+                }
+            } else {
+                // Publish new status.
+                if let status = try await self.client.statuses?.new(status: components) {
+                    self.applicationState.latestPublishedStatusId = status.id
+                    self.applicationState.showInteractionStatusId = String.empty()
+                    self.close()
+                }
             }
         } catch {
             ErrorService.shared.handle(error, message: "compose.error.postingStatusFailed", showToastr: true)

@@ -61,6 +61,8 @@ extension View {
             switch destination {
             case .replyToStatusEditor(let status):
                 ComposeView(statusViewModel: status)
+            case .editStatusEditor(let status):
+                ComposeView(statusToEdit: status)
             case .newStatusEditor:
                 ComposeView()
             case .settings:
