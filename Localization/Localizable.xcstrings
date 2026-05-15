@@ -9406,55 +9406,43 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d Benutzer"
+            "value" : "%@ Benutzer"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d users"
+            "value" : "%@ users"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d usuarios"
+            "value" : "%@ usuarios"
           }
         },
         "eu" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Erabiltzaile %d"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%d erabiltzaile"
-                }
-              }
-            }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ erabiltzaile"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d Utilisateurs"
+            "value" : "%@ utilisateurs"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d utenti"
+            "value" : "%@ utenti"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d użytkowników"
+            "value" : "%@ użytkowników"
           }
         }
       }
@@ -9465,55 +9453,43 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d Beiträge"
+            "value" : "%@ Beiträge"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d statuses"
+            "value" : "%@ statuses"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d estados"
+            "value" : "%@ estados"
           }
         },
         "eu" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Egoera %d"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%d egoera"
-                }
-              }
-            }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ egoera"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d statuts"
+            "value" : "%@ statuts"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d post"
+            "value" : "%@ post"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d statusów"
+            "value" : "%@ statusów"
           }
         }
       }
@@ -9594,7 +9570,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Entrer l'adresse du serveur"
+            "value" : "Entrez l'adresse du serveur"
           }
         },
         "it" : {

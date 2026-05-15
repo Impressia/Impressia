@@ -16,6 +16,18 @@ struct InstanceRowView: View {
     private let instance: Instance
     private let action: (String) -> Void
 
+    private static let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
+
+    private static let spellOutFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .spellOut
+        return formatter
+    }()
+
     public init(instance: Instance, action: @escaping (String) -> Void) {
         self.instance = instance
         self.action = action
@@ -32,6 +44,7 @@ struct InstanceRowView: View {
                             .frame(width: 50, height: 50)
                             .clipShape(RoundedRectangle(cornerRadius: 4))
                             .clipped()
+                            .accessibilityHidden(true)
                     } else if state.isLoading {
                         placeholderView
                     } else {
@@ -48,7 +61,7 @@ struct InstanceRowView: View {
                             .fontWeight(.bold)
                         Text(instance.uri)
                             .font(.subheadline)
-                    }
+                    }.accessibilityElement(children: .combine)
 
                     Spacer()
 
@@ -71,12 +84,22 @@ struct InstanceRowView: View {
 
             if let stats = instance.stats {
                 HStack {
-                    Image(systemName: "person.2.fill")
-                    Text(String(format: NSLocalizedString("signin.title.amountOfUsers", comment: "users"), stats.userCount))
+                    // Display formatted figures according to locale, but keep vocalizable version for Voice Over
+                    let localizedStringForUsers = NSLocalizedString("signin.title.amountOfUsers", comment: "users")
+                    let localizedStringForStatuses = NSLocalizedString("signin.title.amountOStatuses", comment: "statuses")
+                    
+                    Image(systemName: "person.2.fill").accessibilityHidden(true)
+                    Text(String(format: localizedStringForUsers,
+                                Self.numberFormatter.string(from: NSNumber(value: stats.userCount)) ?? "\(stats.userCount)"))
+                        .accessibilityLabel(String(format: localizedStringForUsers,
+                            Self.spellOutFormatter.string(from: NSNumber(value: stats.userCount)) ?? "\(stats.userCount)"))
 
-                    Image(systemName: "photo.stack.fill")
-                    Text(String(format: NSLocalizedString("signin.title.amountOStatuses", comment: "statuses"), stats.statusCount))
-
+                    Image(systemName: "photo.stack.fill").accessibilityHidden(true)
+                    Text(String(format: localizedStringForStatuses,
+                                Self.numberFormatter.string(from: NSNumber(value: stats.statusCount)) ?? "\(stats.statusCount)"))
+                        .accessibilityLabel(String(format: localizedStringForStatuses,
+                            Self.spellOutFormatter.string(from: NSNumber(value: stats.statusCount)) ?? "\(stats.statusCount)"))
+                                            
                     Spacer()
                 }
                 .padding(.top, 4)
