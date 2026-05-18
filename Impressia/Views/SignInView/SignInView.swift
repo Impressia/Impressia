@@ -63,6 +63,7 @@ struct SignInView: View {
                         Spacer()
                         Link(NSLocalizedString("signin.title.howToJoinLink", comment: "How to join Pixelfed"), destination: instructionsUrl)
                             .font(.caption)
+                            .accessibilityRemoveTraits(.isButton)
                     }
                 }
             }
