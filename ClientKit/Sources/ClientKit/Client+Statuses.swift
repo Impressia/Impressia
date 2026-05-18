@@ -70,6 +70,10 @@ extension Client {
             return try await pixelfedClient.rebloggedBy(for: statusId, limit: limit, page: page)
         }
 
+        public func context(statusId: String) async throws -> Context {
+            return try await pixelfedClient.getContext(for: statusId)
+        }
+
         private func getCommentDescendants(to statusId: String, showDivider: Bool, to commentViewModels: inout [CommentModel]) async throws {
             let context = try await pixelfedClient.getContext(for: statusId)
 

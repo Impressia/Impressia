@@ -96,7 +96,7 @@ extension Pixelfed.Account: TargetType {
             }
 
             if let paramExcludeReplies {
-                params.append(("only_media", paramExcludeReplies.asString))
+                params.append(("exclude_replies", paramExcludeReplies.asString))
             }
 
             maxId = paramMaxId

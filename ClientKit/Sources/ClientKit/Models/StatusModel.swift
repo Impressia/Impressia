@@ -21,7 +21,7 @@ import PixelfedKit
     public let createdAt: String
     public let reblogsCount: Int
     public let favouritesCount: Int
-    public let repliesCount: Int
+    public var repliesCount: Int
     public let reblogged: Bool
     public let sensitive: Bool
     public let bookmarked: Bool
