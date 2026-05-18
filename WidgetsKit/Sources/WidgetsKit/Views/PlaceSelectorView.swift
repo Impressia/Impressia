@@ -43,6 +43,11 @@ public struct PlaceSelectorView: View {
                                 .focused($focusedField, equals: .search)
                                 .keyboardType(.default)
                                 .autocorrectionDisabled()
+                                .onSubmit {
+                                    Task {
+                                        await self.searchPlaces()
+                                    }
+                                }
                                 .onAppear {
                                     self.focusedField = .search
                                 }
