@@ -21,22 +21,39 @@ struct ComposeView: View {
     @Environment(\.dismiss) private var dismiss
 
     private let statusViewModel: StatusModel?
+    private let statusToEdit: StatusModel?
 
     public init(statusViewModel: StatusModel? = nil) {
         self.statusViewModel = statusViewModel
+        self.statusToEdit = nil
+    }
+
+    public init(statusToEdit: StatusModel) {
+        self.statusToEdit = statusToEdit
+        self.statusViewModel = nil
     }
 
     var body: some View {
         @Bindable var routerPath = routerPath
-        
+
         NavigationView {
-            BaseComposeView(statusViewModel: self.statusViewModel) {
-                dismiss()
-            } onUpload: { photoAttachment in
-                await self.upload(photoAttachment)
+            if let statusToEdit {
+                BaseComposeView(statusToEdit: statusToEdit) {
+                    dismiss()
+                } onUpload: { photoAttachment in
+                    await self.upload(photoAttachment)
+                }
+                .navigationTitle("compose.navigationBar.title")
+                .navigationBarTitleDisplayMode(.inline)
+            } else {
+                BaseComposeView(statusViewModel: self.statusViewModel) {
+                    dismiss()
+                } onUpload: { photoAttachment in
+                    await self.upload(photoAttachment)
+                }
+                .navigationTitle("compose.navigationBar.title")
+                .navigationBarTitleDisplayMode(.inline)
             }
-            .navigationTitle("compose.navigationBar.title")
-            .navigationBarTitleDisplayMode(.inline)
         }
         .withOverlayDestinations(overlayDestinations: $routerPath.presentedOverlay)
     }

@@ -682,7 +682,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Désactiver les commentaires pour cette publication"
+            "value" : "Désactiver les commentaires pour ce statut"
           }
         },
         "it" : {
@@ -730,7 +730,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Activer les commentaires pour cette publication"
+            "value" : "Activer les commentaires pour ce statut"
           }
         },
         "it" : {
@@ -1171,6 +1171,7 @@
       }
     },
     "compose.title.edit" : {
+      "comment" : "Edit",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1199,7 +1200,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Éditer"
+            "value" : "Modifier"
           }
         },
         "it" : {
@@ -2180,7 +2181,7 @@
       }
     },
     "photoEdit.navigationBar.title" : {
-      "comment" : "Title",
+      "comment" : "Photo details\nTitle",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2274,7 +2275,7 @@
       }
     },
     "photoEdit.title.accessibilityDescription" : {
-      "comment" : "Accesibility",
+      "comment" : "Accesibility\nDescription for the visually impaired",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -2786,6 +2787,53 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Missing textual description of the image"
+          }
+        }
+      }
+    },
+    "status.title.statusEdited" : {
+      "comment" : "Compose View - Edit (success)",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Status edited"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Status edited"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Status edited"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Status edited"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Statut modifié"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Status edited"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Status edited"
           }
         }
       }

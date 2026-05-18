@@ -48,6 +48,18 @@ public class UploadedAttachment: Codable {
         case blurhash
     }
 
+    /// Convenience init for creating a synthetic UploadedAttachment from an existing AttachmentModel.
+    /// Used in edit mode to allow alt text editing without re-uploading media.
+    public init(id: String, type: UploadedAttachmentType = .image, url: URL?, previewUrl: URL?, description: String?) {
+        self.id = id
+        self.type = type
+        self.url = url
+        self.previewUrl = previewUrl
+        self.remoteUrl = nil
+        self.description = description
+        self.blurhash = nil
+    }
+
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 

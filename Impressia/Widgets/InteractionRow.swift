@@ -110,6 +110,16 @@ struct InteractionRow: View {
 
                 if self.statusModel.account.id == self.applicationState.account?.id {
                     Section(header: Text("status.title.yourStatus", comment: "Your post")) {
+                        // Edit is only available for root posts (not comments).
+                        // The Pixelfed API does not support editing replies.
+                        if self.statusModel.inReplyToId == nil {
+                            Button {
+                                self.routerPath.presentedSheet = .editStatusEditor(status: statusModel)
+                            } label: {
+                                Label("status.title.edit", systemImage: "pencil")
+                            }
+                        }
+
                         Button(role: .destructive) {
                             self.deleteStatus()
                         } label: {

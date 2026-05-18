@@ -46,6 +46,10 @@ extension Client {
             return try await pixelfedClient.unbookmark(statusId: statusId)
         }
 
+        public func edit(statusId: String, status: Pixelfed.Statuses.Components) async throws -> Status? {
+            return try await pixelfedClient.edit(statusId: statusId, statusComponents: status)
+        }
+
         public func new(status: Pixelfed.Statuses.Components) async throws -> Status? {
             return try await pixelfedClient.new(statusComponents: status)
         }

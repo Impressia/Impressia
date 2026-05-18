@@ -8,6 +8,7 @@ import Foundation
 import PhotosUI
 import SwiftUI
 import PixelfedKit
+import ClientKit
 import ServicesKit
 
 @Observable public class PhotoAttachment: Identifiable, Equatable, Hashable {
@@ -43,6 +44,28 @@ import ServicesKit
         self.photosPickerItem = photosPickerItem
         self.nsItemProvider = nsItemProvider
         self.uiImage = uiImage
+    }
+
+    /// Creates a synthetic PhotoAttachment from an existing server AttachmentModel.
+    /// Used when editing a published post to allow alt text editing without re-uploading.
+    /// The user cannot delete or replace these attachments — only their alt text can be changed.
+    public init(attachmentModel: AttachmentModel) {
+        self.id = attachmentModel.id
+        self.photosPickerItem = nil
+        self.nsItemProvider = nil
+        self.uiImage = nil
+        self.uploadedAttachment = UploadedAttachment(
+            id: attachmentModel.id,
+            url: attachmentModel.url,
+            previewUrl: attachmentModel.previewUrl,
+            description: attachmentModel.description
+        )
+    }
+
+    /// True for attachments that already exist on the server (edit mode).
+    /// These cannot be deleted or re-uploaded — only their alt text can be changed.
+    public var isExistingAttachment: Bool {
+        return photosPickerItem == nil && nsItemProvider == nil && uiImage == nil
     }
 
     public static func == (lhs: PhotoAttachment, rhs: PhotoAttachment) -> Bool {

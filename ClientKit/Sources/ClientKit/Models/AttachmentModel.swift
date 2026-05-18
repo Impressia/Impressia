@@ -14,7 +14,7 @@ import PixelfedKit
 
     public let previewUrl: URL?
     public let remoteUrl: URL?
-    public let description: String?
+    public var description: String?
     public let blurhash: String?
     public let meta: Metadata?
 
@@ -27,7 +27,7 @@ import PixelfedKit
     public var exifLens: String?
     public var data: Data?
 
-    public init(id: String,
+    init(id: String,
                 type: MediaAttachment.MediaAttachmentType,
                 url: URL,
                 previewUrl: URL? = nil,
@@ -60,7 +60,7 @@ import PixelfedKit
         self.data = data
     }
 
-    init(attachment: MediaAttachment) {
+    public init(attachment: MediaAttachment) {
         self.id = attachment.id
         self.type = attachment.type
         self.url = attachment.url
