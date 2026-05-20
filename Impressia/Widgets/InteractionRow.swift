@@ -48,6 +48,7 @@ struct InteractionRow: View {
                             .font(.caption)
                     }
                 }
+                .accessibilityLabel(Text(String.localizedStringWithFormat(NSLocalizedString("status.a11y.repliesCount", comment: "Replies count"), repliesCount)))
 
                 Spacer()
             }
@@ -61,6 +62,7 @@ struct InteractionRow: View {
                         .font(.caption)
                 }
             }
+            .accessibilityLabel(Text(String.localizedStringWithFormat(NSLocalizedString("status.a11y.reblogsCount", comment: "Boosts count"), self.reblogsCount)))
 
             Spacer()
 
@@ -73,6 +75,7 @@ struct InteractionRow: View {
                         .font(.caption)
                 }
             }
+            .accessibilityLabel(Text(String.localizedStringWithFormat(NSLocalizedString("status.a11y.favouritesCount", comment: "Favourites count"), self.favouritesCount)))
 
             Spacer()
 
@@ -107,10 +110,21 @@ struct InteractionRow: View {
 
                 if self.statusModel.account.id == self.applicationState.account?.id {
                     Section(header: Text("status.title.yourStatus", comment: "Your post")) {
+                        // Edit is only available for root posts (not comments).
+                        // The Pixelfed API does not support editing replies.
+                        if self.statusModel.inReplyToId == nil {
+                            Button {
+                                self.routerPath.presentedSheet = .editStatusEditor(status: statusModel)
+                            } label: {
+                                Label("status.title.edit", systemImage: "pencil")
+                            }
+                        }
+
                         Button(role: .destructive) {
                             self.deleteStatus()
                         } label: {
                             Label("status.title.delete", systemImage: "trash")
+                                .tint(.red)
                         }
                     }
                 } else {
@@ -131,6 +145,9 @@ struct InteractionRow: View {
         .onAppear {
             self.refreshCounters()
         }
+        .task {
+            await self.loadRepliesCount()
+        }
     }
 
     private func refreshCounters() {
@@ -140,6 +157,21 @@ struct InteractionRow: View {
         self.favourited = self.statusModel.favourited
         self.favouritesCount = self.statusModel.favouritesCount
         self.bookmarked = self.statusModel.bookmarked
+    }
+
+    private func loadRepliesCount() async {
+        // NOTE: The Pixelfed API does not reliably return replies_count for federated posts
+        // (e.g. from Mastodon instances). The count stored locally by Pixelfed only reflects
+        // replies it has received via ActivityPub federation, which may be incomplete.
+        // As a workaround, we fetch the status context and count the descendants ourselves
+        // to get a more accurate reply count. This is a hack — ideally the API would return
+        // the correct value directly.
+        // See https://github.com/Impressia/Impressia/issues/163
+        guard self.statusModel.commentsDisabled == false else { return }
+        if let comments = try? await self.client.statuses?.comments(to: self.statusModel.getOrginalStatusId()) {
+            self.repliesCount = comments.count
+            self.statusModel.repliesCount = comments.count
+        }
     }
 
     private func reboost() async {

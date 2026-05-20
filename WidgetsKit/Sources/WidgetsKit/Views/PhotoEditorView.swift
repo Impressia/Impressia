@@ -23,30 +23,24 @@ public struct PhotoEditorView: View {
     public var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
-                if let data = photoAttachment.photoData, let uiImage = UIImage(data: data) {
-                    List {
-                        Section(header: Text("photoEdit.title.photo", bundle: Bundle.module, comment: "Photo")) {
-                            HStack {
-                                Spacer()
-                                Image(uiImage: uiImage)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                                    .frame(maxHeight: 300)
-                                Spacer()
-                            }
+                List {
+                    Section(header: Text("photoEdit.title.photo", bundle: Bundle.module, comment: "Photo")) {
+                        HStack {
+                            Spacer()
+                            self.photoImageView()
+                            Spacer()
                         }
+                    }
 
-                        Section(header: Text("photoEdit.title.accessibility", bundle: Bundle.module, comment: "Accessibility")) {
-                            TextField(NSLocalizedString("photoEdit.title.accessibilityDescription", bundle: Bundle.module, comment: "Accesibility"), text: $description, axis: .vertical)
-                                .keyboardType(.default)
-                                .lineLimit(3...6)
-                                .multilineTextAlignment(.leading)
-                        }
-                    }.listStyle(.grouped)
+                    Section(header: Text("photoEdit.title.accessibility", bundle: Bundle.module, comment: "Accessibility")) {
+                        TextField(NSLocalizedString("photoEdit.title.accessibilityDescription", bundle: Bundle.module, comment: "Accesibility"), text: $description, axis: .vertical)
+                            .keyboardType(.default)
+                            .lineLimit(3...6)
+                            .multilineTextAlignment(.leading)
+                    }
+                }.listStyle(.grouped)
 
-                    Spacer()
-                }
+                Spacer()
             }
             .onDisappear {
                 self.hideKeyboard()
@@ -62,13 +56,45 @@ public struct PhotoEditorView: View {
         }
     }
 
+    @ViewBuilder
+    private func photoImageView() -> some View {
+        if let data = photoAttachment.photoData, let uiImage = UIImage(data: data) {
+            // Newly picked photo — display from local data.
+            Image(uiImage: uiImage)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .frame(maxHeight: 300)
+        } else if let url = photoAttachment.uploadedAttachment?.previewUrl ?? photoAttachment.uploadedAttachment?.url {
+            // Existing server attachment (edit mode) — display from remote URL.
+            AsyncImage(url: url) { phase in
+                switch phase {
+                case .success(let image):
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .frame(maxHeight: 300)
+                default:
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.secondary.opacity(0.2))
+                        .frame(height: 200)
+                }
+            }
+        }
+    }
+
     @ToolbarContentBuilder
     private func getTrailingToolbar() -> some ToolbarContent {
         ToolbarItem(placement: .navigationBarTrailing) {
             ActionButton(showLoader: false) {
                 await self.update()
             } label: {
-                Text("photoEdit.title.save", bundle: Bundle.module, comment: "Save")
+                if photoAttachment.isExistingAttachment {
+                    Text("compose.title.edit", bundle: Bundle.module, comment: "Edit")
+                } else {
+                    Text("photoEdit.title.save", bundle: Bundle.module, comment: "Save")
+                }
             }.buttonStyle(.borderedProminent)
         }
 

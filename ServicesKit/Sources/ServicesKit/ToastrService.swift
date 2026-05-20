@@ -49,6 +49,12 @@ public class ToastrService {
         self.showError(title: localizedMessage, image: image, subtitle: subtitle)
     }
 
+    /// Shows an error toast with an already-localized title string (no further lookup performed).
+    public func showError(localizedTitle: String, imageSystemName: String = "ant.circle.fill", subtitle: String? = nil) {
+        let image = self.createImage(systemName: imageSystemName, color: UIColor(Color.accentColor))
+        self.showError(title: localizedTitle, image: image, subtitle: subtitle)
+    }
+
     public func showError(title: LocalizedStringResource, imageName: String, subtitle: String? = nil) {
         let image = self.createImage(name: imageName, color: UIColor(Color.accentColor))
         self.showError(title: title.key, image: image, subtitle: subtitle)

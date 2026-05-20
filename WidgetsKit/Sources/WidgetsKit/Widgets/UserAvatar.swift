@@ -44,20 +44,23 @@ public struct UserAvatar: View {
             if let cachedAvatar = CacheImageService.shared.get(for: accountAvatar) {
                 cachedAvatar
                     .resizable()
-                    .clipShape(applicationState.avatarShape.shape())
-                    .aspectRatio(contentMode: .fit)
+                    .scaledToFill()
                     .frame(width: size.size.width, height: size.size.height)
+                    .clipShape(applicationState.avatarShape.shape())
             } else {
                 LazyImage(url: accountAvatar) { state in
                     if let image = state.image {
                         image
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
+                            .scaledToFill()
+                            .frame(width: size.size.width, height: size.size.height)
                             .clipShape(applicationState.avatarShape.shape())
                     } else if state.isLoading {
                         placeholderView
+                            .frame(width: size.size.width, height: size.size.height)
                     } else {
                         placeholderView
+                            .frame(width: size.size.width, height: size.size.height)
                     }
                 }
                 .priority(.high)
@@ -75,7 +78,7 @@ public struct UserAvatar: View {
     @ViewBuilder private var placeholderView: some View {
         Image("Avatar")
             .resizable()
+            .scaledToFill()
             .clipShape(applicationState.avatarShape.shape())
-            .aspectRatio(contentMode: .fit)
     }
 }

@@ -46,6 +46,10 @@ extension Client {
             return try await pixelfedClient.unbookmark(statusId: statusId)
         }
 
+        public func edit(statusId: String, status: Pixelfed.Statuses.Components) async throws -> Status? {
+            return try await pixelfedClient.edit(statusId: statusId, statusComponents: status)
+        }
+
         public func new(status: Pixelfed.Statuses.Components) async throws -> Status? {
             return try await pixelfedClient.new(statusComponents: status)
         }
@@ -68,6 +72,10 @@ extension Client {
 
         public func rebloggedBy(statusId: String, limit: Int, page: Int) async throws -> [Account] {
             return try await pixelfedClient.rebloggedBy(for: statusId, limit: limit, page: page)
+        }
+
+        public func context(statusId: String) async throws -> Context {
+            return try await pixelfedClient.getContext(for: statusId)
         }
 
         private func getCommentDescendants(to statusId: String, showDivider: Bool, to commentViewModels: inout [CommentModel]) async throws {

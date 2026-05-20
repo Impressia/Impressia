@@ -52,6 +52,12 @@ struct StatusView: View {
             .fullScreenCover(item: $tappedAttachment, content: { tappedAttachment in
                 ImageViewer(attachmentModel: tappedAttachment.attachmentModel, imagePosition: tappedAttachment.imagePosition)
             })
+            .onChange(of: self.applicationState.latestPublishedStatusId) {
+                // If the currently displayed status was just edited, go back to the previous screen.
+                guard let latestId = self.applicationState.latestPublishedStatusId,
+                      latestId == self.statusId else { return }
+                self.dismiss()
+            }
     }
 
     @ViewBuilder

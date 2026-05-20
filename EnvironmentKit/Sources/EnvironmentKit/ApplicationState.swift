@@ -113,6 +113,9 @@ import ClientKit
     /// Show grid of photos on user profile.
     public var showGridOnUserProfile = false
 
+    /// Show grid of photos on timelines (home, local, federated, bookmarks, favourites).
+    public var showGridOnTimeline = false
+
     /// Show reboosted statuses on home timeline.
     public var showReboostedStatuses = false
 
