@@ -9825,14 +9825,14 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "1 favourite"
+                  "state" : "translated",
+                  "value" : "1 preferito"
                 }
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld favourites"
+                  "state" : "translated",
+                  "value" : "%lld preferiti"
                 }
               }
             }
@@ -9956,14 +9956,14 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "1 boost"
+                  "state" : "translated",
+                  "value" : "1 reblog"
                 }
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld boosts"
+                  "state" : "translated",
+                  "value" : "%lld reblog"
                 }
               }
             }
@@ -10087,14 +10087,14 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "1 reply"
+                  "state" : "translated",
+                  "value" : "1 risposta"
                 }
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld replies"
+                  "state" : "translated",
+                  "value" : "%lld risposte"
                 }
               }
             }
